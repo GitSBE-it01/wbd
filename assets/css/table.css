@@ -1,0 +1,90 @@
+.tm {
+    margin: .3rem;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tHid {
+    margin: .4rem;
+    height: auto;
+    width: 82vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thCont {
+    margin: .3rem;
+    height: 8vh;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thCont2 {
+    margin: .3rem;
+    height: 5vh;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tdCont {
+    margin: .3rem;
+    height: auto;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thSmall {
+    margin: .3rem;
+    height: 6vh;
+    width: 81vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tr {
+    margin: .3rem;
+    height: 78vh;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.td {
+    font-weight: 400;
+    font-size: 1rem;
+    padding: 1vh .3rem .5vh .3rem;
+    height: auto;
+    text-align:justify;
+}
+
+.th {
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: .9vh .2rem .4vh .2rem;
+    height: auto;
+    text-align: center;
+}
+
+.bd-black {
+    border: solid .1rem;
+    border-color: black;
+}
+
+.bd-white {
+    border: solid .1rem;
+    border-color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.main {
+    width: 85vw;
+    height: 100vh;
+    overflow-x: hidden;
+}

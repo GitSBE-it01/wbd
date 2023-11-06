@@ -1,0 +1,145 @@
+/*
+hover zoom
+*/
+.hz {
+    transform: scale(1); 
+    transition: transform 0.3s ease; 
+  }
+  .hz>span {
+    transform: scale(1); 
+    transition: transform 0.3s ease; 
+  }
+
+  .hz:hover {
+    transform: scale(1.2); 
+  }
+
+  .hz:hover>span {
+    transform: scale(1.2); 
+  }
+
+/*
+svg
+*/
+.button_plus {
+  background-image: url('../svg_file/plus min/add-plus-svgrepo-com.svg');
+  background-color: rgba(var(--gray), 0);
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: 3vh;
+  height: 3vh;
+  border: none;
+  cursor: pointer;
+  margin: 0 1em 1.5rem 0;
+}
+
+.button_minus {
+  background-image: url('../svg_file/plus min/substract-minus-svgrepo-com.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(var(--gray), 0);
+  width: 3vh;
+  height: 3vh;
+  border: none;
+  cursor: pointer;
+  margin: 0 1em 1.5rem 0;
+}
+
+.home {
+  background-image: url('../svg_file/home/home-2-svgrepo-com.svg');
+  background-size: cover;
+  background-color: rgba(var(--gray), 0);
+  width: 3vh;
+  height: 3vh;
+  border: none;
+  cursor: pointer;
+}
+
+.home2 {
+  background-image: url('../svg_file/home/home-alt-1-svgrepo-com.svg');
+  background-size: cover;
+  background-color: rgba( 255, 255, 255, 1);
+  border-radius: 30%;
+  width: 5vh;
+  height: 5vh;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+}
+
+/*========================================================
+loading view
+========================================================*/ 
+@keyframes loading {
+	0%, 100% {
+		background: url('../../assets/svg_file/solar_line/sunrise-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: bottom;
+	}
+	30%, 90% {
+		background: url('../../assets/svg_file/solar_line/sun-fog-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: center;
+	}
+	60% {
+		background: url('../../assets/svg_file/solar_line/sunset-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: top;
+	}
+}
+  
+.loading {
+	width: 4rem; 
+	height: 4rem;
+	animation: loading 2s linear infinite; 
+}
+
+@keyframes loading2 {
+	0% {
+		transform: rotate(0deg); 
+	}
+	50% {
+		transform: rotate(180deg); 
+	}
+	100% {
+		transform: rotate(360deg); 
+	}
+}
+
+.loading2 {
+	width: 3rem; 
+	height: 3rem;
+	position: center;
+	animation: loading2 2s linear infinite; 
+	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
+	background-size: cover; 
+}
+
+
+@keyframes load_txt {
+  0% {
+    content: "load";
+  }
+  25% {
+    content: "load .";
+  }
+  50% {
+    content: "load . .";
+  }
+  75% {
+    content: "load . . .";
+  }
+}
+
+.load_txt::before {
+  content: "load";
+  animation: load_txt 2s linear infinite;
+  display: inline-block;
+  color: white;
+}
+
+.load_txt {
+  color: white;
+}

@@ -1,0 +1,377 @@
+/*========================================================
+root / global
+========================================================*/  
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,400;1,500&display=swap');
+
+:root{
+	--black: 0, 0, 0;
+	--blackText: 15, 15, 15;
+	--white: 240, 240, 240;
+	--whiteText: 230, 230, 230;
+  	--red: 255, 0, 0;
+  	--blue: 0, 0, 255;
+	--neonBlue: 165, 205, 225;
+	--teal: 0, 128, 128;
+	--slate: 112, 128, 144;
+	--gray: 180, 200, 220;
+}
+
+body {
+    margin: 0;
+    font-family: 'Fira Sans', sans-serif;
+	background-color: rgba(var(--teal), .1);
+  }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/*========================================================
+layout
+========================================================*/  
+.container {
+	height: 100vh;
+	width: 100vw;
+}
+
+.main {
+	background-color: rgba(var(--teal), .2);
+	margin: 0;
+	padding: 0;
+}
+
+.nav {
+	background-color: rgba(var(--teal), .4);
+	margin: 0;
+	padding: 0;
+	height: 4vh;
+	vertical-align: middle;
+}
+
+.container2 {
+	background-color: rgba(var(--teal), .3);
+}
+
+.container4 {
+	background-color: rgba(var(--teal), .2);
+    display: flex;
+    flex-direction: column;
+	justify-content: center; /* Center horizontally */
+	align-items: center; /* Center vertically */
+	width: 100vw;
+}
+
+
+
+/*========================================================
+view
+========================================================*/  
+.hideOn {
+	display: none;
+}
+
+.hideOff {
+	display: block;
+}
+
+/*========================================================
+form view
+========================================================*/ 
+.formgroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card1 {
+	padding-top: .7rem;
+	width: 10vw;
+	margin-bottom: 1rem;
+  }
+  
+.card2 {
+	width: 30vw;
+	height: 4vh;
+	margin-bottom: 1rem;
+}
+  
+.card3 {
+	width: 15vw;
+	height: 3vh;
+}
+
+.card4 {
+	width: 15vw;
+	height: 3vh;
+	margin: 0 .5rem;
+}
+
+.card3::placeholder{
+	font-size: medium;
+	text-align: center;
+}
+
+.cardTitle {
+	background-color: rgba(var(--teal), .7);
+	text-align: center;
+	color: rgba(var(--blackText), 1);
+}
+
+.selectData {
+	text-align: left;
+	background-color: rgba(var(--teal), .2);
+	padding: 0 0 0 .1em;
+	width: 15vw;
+	height: 3vh;
+	margin: 0 .5em 1.5rem 0;
+  }
+/*========================================================
+loading view
+========================================================*/ 
+@keyframes loading {
+	0%, 100% {
+		background: url('../../assets/svg_file/solar_line/sunrise-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: bottom;
+	}
+	30%, 90% {
+		background: url('../../assets/svg_file/solar_line/sun-fog-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: center;
+	}
+	60% {
+		background: url('../../assets/svg_file/solar_line/sunset-svgrepo-com.svg')  no-repeat;
+		background-size: cover; 
+		background-position: top;
+	}
+}
+  
+.loading {
+	width: 4rem; 
+	height: 4rem;
+	animation: loading 2s linear infinite; 
+}
+
+@keyframes loading2 {
+	0% {
+		transform: rotate(0deg); 
+	}
+	50% {
+		transform: rotate(180deg); 
+	}
+	100% {
+		transform: rotate(360deg); 
+	}
+}
+
+.loading2 {
+	width: 3rem; 
+	height: 3rem;
+	position: center;
+	animation: loading2 2s linear infinite; 
+	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
+	background-size: cover; 
+}
+/*========================================================
+view
+========================================================*/  
+.readonly {
+	background-color: rgba(var(--slate), .8);
+}
+
+.readonlyOFF {
+	background-color: rgba(var(--white), 1);
+}
+
+.nav_li {
+	display: inline-block;
+	padding: 0;
+	margin: .4rem 0 .4rem 2rem;
+	vertical-align: middle;
+}
+
+.nav_li>a {
+	text-decoration: none;
+	color: black;
+	font-weight: 400;
+	font-size: large;
+}
+
+.nav_li>a:hover {
+	font-size: larger;
+	font-weight: 500;
+	transition-duration: 300ms;
+}
+
+/*========================================================
+table
+========================================================*/  
+/*------------------
+table layout
+------------------*/
+.tableContainer {
+	margin: 1rem;
+	width: 87vw;
+  }
+  
+  .tableFlex {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+  }
+
+  .tableFlex2 {
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+  }
+
+  
+  .tableData {
+	flex: 1; 
+	border: 1px solid black;
+	text-align: center;
+	height: auto;
+	background-color: rgba(var(--teal), .2);
+	padding: 1vh .1em .5vh .1em;
+  }
+
+
+
+  .tableForm {
+	flex: 1; 
+	border: 1px solid black;
+	text-align: center;
+	height: auto;
+	background-color: rgba(var(--white), 1);
+	padding: 1vh .1em .5vh .1em;
+  }
+
+  .tableHeader {
+	background-color: rgba(var(--teal), .8);
+	font-weight: 700;
+	font-size: 1.2em;
+  }
+  
+  .tableFlex2 {
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	align-content: center;
+	height: auto;
+  }
+  
+  .tableData2 {
+	flex: 1; 
+	border: 1px solid black;
+	text-align: center;
+	height: 5vh;
+	background-color: rgba(var(--teal), .1);
+	padding-top: 1vh;
+  }
+  
+  .tableHeader2 {
+	background-color: rgba(var(--teal), .6);
+  }
+  
+  .tableOri {
+	flex: 1; 
+	border: 1px solid black;
+	text-align: center;
+	height: 5vh;
+	background-color: rgba(var(--teal), .3);
+	padding-top: 1vh;
+  }
+  
+  .tableRow {
+	flex: 1; 
+	border: 1px solid black;
+	height: 27vh;
+	overflow-y: auto;
+  }
+  
+  .columnView {
+	display: flex;
+	flex-direction: column;
+	margin-right: 1rem;
+	width: auto;
+	padding: .5rem 1.2rem;
+  }
+  
+/*========================================================
+button
+========================================================*/  
+/*------------------
+small button
+------------------*/
+.smallSbmt {
+	background-color: rgba(var(--slate), .1);
+}
+
+.switch {
+	border: none;
+	cursor: pointer;
+	background-color: rgba(var(--teal), .7);
+	text-align: center;
+	color: rgba(var(--blackText), 1);
+	font-size: larger;
+	font-weight: 800;
+	width: 100vw;
+	margin: .5em 0;
+}
+
+.switch:hover {
+	background-color: rgba(var(--blackText), 1);
+	color: rgba(var(--whiteText), 1);
+}
+
+.submitBtn {
+	background-color:rgba(var(--gray), 1);
+	margin: .2rem .1rem;
+	height: 2.5vh;
+	font-size: medium;
+	border : solid black .5px;
+	font-weight: 300;
+}
+
+.submitBtn:hover {
+	background-color:rgba(var(--slate), 1);
+	color: beige;
+}
+
+.button_plus {
+	background-image: url('../../assets/svg_file/plus min/add-plus-svgrepo-com.svg');
+	background-color: rgba(var(--gray), 0);
+	background-size: cover;
+	justify-content: center;
+	align-items: center;
+	width: 3vh;
+	height: 3vh;
+	border: none;
+	cursor: pointer;
+	margin: 0 1em 1.5rem 0;
+}
+
+.button_minus {
+	background-image: url('../../assets/svg_file/plus min/substract-minus-svgrepo-com.svg');
+	background-size: cover;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(var(--gray), 0);
+	width: 3vh;
+	height: 3vh;
+	border: none;
+	cursor: pointer;
+	margin: 0 1em 1.5rem 0;
+}
+
+.home {
+	background-image: url('../../assets/svg_file/home/home-2-svgrepo-com.svg');
+	background-size: cover;
+
+	background-color: rgba(var(--gray), 0);
+	width: 3vh;
+	height: 3vh;
+	border: none;
+	cursor: pointer;
+}

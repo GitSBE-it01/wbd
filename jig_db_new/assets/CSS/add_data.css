@@ -1,0 +1,90 @@
+.addform {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+    justify-content: space-between;
+    
+}
+
+.addformtxt {
+    width: 20vw;
+    height: 1.5vh;
+    font-size: small;
+    border-radius: .3rem;
+    padding: 1rem;
+    margin: .4rem 0;
+}
+
+.formgroup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.formgroup>label {
+    margin: .2rem 5rem .2rem .5rem;
+    font-size: medium;
+    font-weight: 500;
+  }
+
+hr {
+    width: 5rem;
+    height: 5rem;
+    border: none;
+}
+
+.main_add {
+    background-color: var(--bg);
+    width: var(--mainwidth);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+.hidden_add {
+    display: none;
+}
+
+.hidden_add.aktif {
+    display: block;
+}
+
+.wrap_add{
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 88vw;
+    overflow-y: scroll;
+}
+
+.topadd {
+    display: sticky;
+    width: var(--mainwidth);
+    padding-left: 1.2rem;
+    background-color: rgb(218, 218, 218);
+}
+
+.indexlink>ul>li {
+    list-style: none;
+    text-align: left;
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+.indexlink>ul>li>a {
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(110, 110, 110);
+}
+
+.nav-link.aktif {
+    font-size: 1.1rem;
+    color: black;
+}
+
+.indexlink>ul>li>a:hover {
+    font-size: 1.1rem;
+    color: black;
+    transition-duration: 150ms;
+}

@@ -1,0 +1,92 @@
+/*
+font-family: 'Fira Sans', sans-serif;
+font-family: 'Lato', sans-serif;
+font-family: 'Roboto', sans-serif;
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,400;1,500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.cap {
+    text-transform: capitalize;
+}
+/*
+fs = font size
+*/
+.fs-s {
+    font-size: small;
+}
+
+.fs-m {
+    font-size: medium;
+}
+
+.fs-l {
+    font-size: large;
+}
+
+.fs-xl {
+    font-size: x-large;
+}
+
+/*
+fw = font weight
+*/
+
+.fw-lgt {
+    font-weight: 300;
+}
+
+.fw-bld {
+    font-weight: 900;
+}
+
+.fw-blk {
+    font-weight: 700;
+}
+
+/*
+fc = font color
+*/
+
+.fc-w {
+    color: azure;
+}
+
+/*
+af = align font or text
+*/
+
+.af-ctr {
+    text-align: center;
+}
+
+.af-l {
+    text-align: left;
+}
+
+.af-r {
+    text-align: right;
+}
+
+/*
+link active
+*/
+.active {
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-decoration: underline;
+    text-decoration-thickness: .3rem; 
+    text-underline-offset: .4rem;
+}
