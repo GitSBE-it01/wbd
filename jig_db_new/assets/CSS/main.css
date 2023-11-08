@@ -481,16 +481,6 @@ Button
   border-bottom: solid .1rem rgba(0, 0, 0, 0.7);
 }
 
-.card_contain {
-  margin: 1rem;
-  width: 88vw;
-}
-
-.card_contain2 {
-  margin: .2rem 0 .2rem 1rem;
-  width: 85vw;
-}
-
 .btn_Switch {
   border: none;
   background-color: var(--gray);

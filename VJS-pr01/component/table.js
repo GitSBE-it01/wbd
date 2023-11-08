@@ -5,15 +5,15 @@ export const tableHeader = async(target,tableID, arrHead) => {
     try {    
         const container = document.getElementById(target);
         const table = document.createElement('div');
-        table.classList.add('tm');
+        table.classList.add('tmFull');
         table.id = tableID;
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont');
+        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'thContFull');
         tr.id = 'tableHeader';
 
         for (let i=0; i<arrHead.length; i++) {
             const th = document.createElement('div');
-            th.classList.add('sl4', 'flexCh', 'th', 'bd-black', 'upper');
+            th.classList.add('tl4', 'flexCh', 'th', 'bd-black', 'upper');
             th.textContent = arrHead[i];
             tr.appendChild(th);
         }
@@ -23,6 +23,8 @@ export const tableHeader = async(target,tableID, arrHead) => {
         console.log(error);
     }
 }
+
+
 
 export const tblGenJig = async (tbodyID,data) => {
     try {

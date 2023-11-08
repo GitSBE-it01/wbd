@@ -90,3 +90,8 @@ link active
     text-decoration-thickness: .3rem; 
     text-underline-offset: .4rem;
 }
+
+
+h1 {
+    text-align: center;
+}

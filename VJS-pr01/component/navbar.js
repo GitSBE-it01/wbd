@@ -1,7 +1,8 @@
 export const createNavbar = (target) => {
     const container = document.getElementById(target);
     const navbarVJS = document.createElement('div');
-    navbarVJS.innerHTML = `<div class='navCard navbar tl2'>
+    navbarVJS.innerHTML = `
+    <div class='navCard navbar tl2 stick'>
     <div class='navli'>
         <a href="../../sbe/index.php">
             <button type='button' class='home'></button>

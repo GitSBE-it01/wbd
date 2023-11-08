@@ -1,7 +1,93 @@
-import { populateOption, html, currentDate, splitCustomString, cekDMCdaily, isFormValid } from './process.js';
-import { relation, woid, trans_log, dmc_vjs_data, dataInspect } from './class.js';
+import { currentDate, splitCustomString, cekDMCdaily } from './process.js';
+import { trans_log } from './class.js';
 
+export const dmcHeader = async(target) => {
+    try {
+        const container = document.getElementById(target);
+        const inputChange = document.getElementById('assetPick');
+        const valueInput = splitCustomString(' -- ', inputChange.value);
+        const noAssetInput = valueInput[0];
+        const namaAssetInput = valueInput[1];
+        const catInput = valueInput[valueInput.length - 1];
+        const todayDate = currentDate();
+        const detail = document.createElement('div');
+        detail.id = 'detailDiv';
+        detail.classList.add('main2', 'tl9');
+        
+        const main1 = document.createElement('div');
+        main1.classList.add('columnView');
+        
+        const h1 = document.createElement('h1');
+        h1.classList.add('cardTitle');
+        h1.textContent = "Daily Maintenance & Verification Job Setup";
+        main1.appendChild(h1);
 
+        const arrayHead = [{key: "No Asset:",value:`${noAssetInput}`}, {key: "Nama_Asset:", value:`${namaAssetInput}`},{key: "Date:", value:`${todayDate}`}]
+
+        for (let i=0; i<arrayHead.length; i++) {
+            const cardContain = document.createElement('div');
+            cardContain.classList.add('fr','fc-ctr','card_contain');
+            
+            const card1 = document.createElement('div');
+            card1.classList.add('mh4', 'fs-l');
+            const label1 = document. createElement('label');
+            label1.textContent= `${arrayHead[i]['key']}`;   
+
+            const card2 = document.createElement('div');
+            card2.classList.add('mh4','fs-l');
+            const label2 = document. createElement('label');
+            label2.textContent= `${arrayHead[i]['value']}`;
+
+            card1.appendChild(label1);
+            cardContain.appendChild(card1);
+            card2.appendChild(label2);
+            cardContain.appendChild(card2);
+            main1.appendChild(cardContain);
+        }
+        detail.appendChild(main1)
+
+        container.appendChild(detail);
+    } catch (error){
+        console.log(error);
+    }
+}
+       
+
+const dmcTable = async() => {
+    
+}
+/*detail.innerHTML = `
+    <div class="tableFlex">
+    <div class="columnView">
+        <div class="formgroup">
+            <div class="card1"><label>No Asset</label></div>
+            <div class="card1"><label>: ${valueInput[0]}</div>
+        </div>
+        <div class="formgroup">
+            <div class="card1"><label>Nama Asset</label></div>
+            <div class="card1"><label>: ${valueInput[1]}</div>
+        </div>
+        <div class="formgroup">
+            <div class="card1"><label>Date</label></div>
+            <div class="card1"><label>: ${todayDate}</div>
+        </div>
+    </div>
+    <div class="columnView">
+        <div class="formgroup">
+            <div class="card1"><label>Decision</label></div>
+            <div class="card1">
+                <select class="tableForm " id='descOption' name='descOption'>
+                    <option value=""></option>
+                    <option value="OK">OK</option>
+                    <option value="HOLD">HOLD</option>
+                    <option value="USE AS IS">USE AS IS</option>
+                    <option value="REPAIR">REPAIR</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="switch" id="dmcSwitch">Daily Maintenance</button>
+`
 export const dmcData = async (btn, target) =>{
     const buttonSearch = document.getElementById(btn);
     buttonSearch.addEventListener("click", async function() {

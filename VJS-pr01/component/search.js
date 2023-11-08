@@ -2,44 +2,52 @@ import { populateOption } from './process.js';
 import { relation } from './class.js';
 import { loading } from './load.js';
 
-const search = async (target) => {
+export const search = async (target) => {
     // loading utk menunggu proses berjalan
     const container = document.getElementById(target);
     container.appendChild(loading('loading1'));
-    
+
+    // search component
     const div = document.createElement('div');
+    div.classList.add('fr', 'navCard2', 'tl7', 'fc-ctr');
     div.id = 'searchID';
-    div.classList.add('fc-ctr');
 
     // search component
     const searchBar = document.createElement('input');
     searchBar.id = 'assetPick';
-    searchBar.classList.add('hideOn');
+    searchBar.classList.add('inpText2');
     searchBar.setAttribute('type', 'text');
     searchBar.setAttribute('list', 'assets');
-    searchBar.setAttribute('placeholder', 'pilih asset mesin');
+    searchBar.setAttribute('placeholder', 'search');
     searchBar.setAttribute('autocomplete', 'off');
     
     const btn = document.createElement('button');
     btn.id = 'show';
-    btn.textContent = 'submit';
     btn.setAttribute('type', 'button');
-    btn.classList.add('hideOn');
+    btn.classList.add('search_icon');
     
-
     try {
         const data = await relation.fetchDataFilter({fromdiv: 'PRODUCTION SPEAKER ASSEMBLY',asset_vjs_kategori: 'IS NOT NULL'});
-        populateOption(target,'assets',' -- ', data,'asset_no_combin','assetname', 'asset_vjs_kategori');
+        populateOption("root",'assets',' -- ', data,'asset_no_combin','assetname', 'asset_vjs_kategori');
     } catch (error) {
         console.log('error : ', error);
     }
     searchBar.classList.remove('hideOn');
     btn.classList.remove('hideOn');
 
-    div.appendChild(searchBar);
     div.appendChild(btn);
+    div.appendChild(searchBar);
     container.appendChild(div);
     container.removeChild(document.getElementById('loading1'));
+    enterProses('assetPick', 'show');
 }
 
-export { search }
+const enterProses = (target,btnID) => {
+    const inputTarget = document.getElementById(target);
+    inputTarget.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const searchBtnSpk = document.getElementById(btnID);
+            searchBtnSpk.click()
+        }
+    })
+}

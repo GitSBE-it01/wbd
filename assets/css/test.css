@@ -1,0 +1,7 @@
+:root {
+    --indigo: $indigo;
+  }
+
+.indigo {
+    background-color: var(--bs-indigo-600);
+}

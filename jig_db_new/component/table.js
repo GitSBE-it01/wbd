@@ -109,7 +109,7 @@ export const tblLocJig = async (target, arrHead, data) => {
         tr.id = 'tableHeader';
         for (let i=0; i<arrHead.length; i++) {
             const th = document.createElement('div');
-            th.classList.add('sl3', 'flexCh', 'th', 'bd-black', 'upper');
+            th.classList.add('or3', 'flexCh', 'th', 'bd-black', 'upper');
             th.textContent = arrHead[i];
             tr.appendChild(th);
         }
@@ -118,9 +118,9 @@ export const tblLocJig = async (target, arrHead, data) => {
             const tr2 = document.createElement('div');
             tr2.classList.add('fr', 'tdCont');
             tr2.innerHTML = `
-                <div class="flexCh td bd-black sl8 cap">${data[i].lokasi}</div>
-                <div class="flexCh td bd-black sl8 cap">${data[i].qty_per_unit}</div>
-                <div class="flexCh td bd-black sl8 cap">${data[i].unit}</div>
+                <div class="flexCh td bd-black or8 cap">${data[i].lokasi}</div>
+                <div class="flexCh td bd-black or8 cap">${data[i].qty_per_unit}</div>
+                <div class="flexCh td bd-black or8 cap">${data[i].unit}</div>
             `
             table.appendChild(tr2);
         }
@@ -147,7 +147,7 @@ export const tblTypeJig = async (target, arrHead, data) => {
         tr.id = 'tableHeader';
         for (let i=0; i<arrHead.length; i++) {
             const th = document.createElement('div');
-            th.classList.add('sl3', 'flexCh', 'th', 'bd-black', 'upper');
+            th.classList.add('or3', 'flexCh', 'th', 'bd-black', 'upper');
             th.textContent = arrHead[i];
             tr.appendChild(th);
         }
@@ -156,11 +156,11 @@ export const tblTypeJig = async (target, arrHead, data) => {
             const tr2 = document.createElement('div');
             tr2.classList.add('fr', 'tdCont');
             tr2.innerHTML = `
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].description}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].status_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_on}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_off}</div>
+                <div class="flexCh td bd-black or9 cap">${data[i].item_type}</div>
+                <div class="flexCh td bd-black or9 cap">${data[i].description}</div>
+                <div class="flexCh td bd-black or9 cap">${data[i].status_type}</div>
+                <div class="flexCh td bd-black or9 cap">${data[i].opt_on}</div>
+                <div class="flexCh td bd-black or9 cap">${data[i].opt_off}</div>
             `
             table.appendChild(tr2);
         }

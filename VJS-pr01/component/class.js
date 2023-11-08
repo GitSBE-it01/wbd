@@ -9,7 +9,7 @@ class Data {
 
     async getData() {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/api.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/middleware/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ class Data {
       */
       async fetchDataFilter(filter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/api.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/middleware/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ class Data {
             insertFilter.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/api.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/middleware/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -97,7 +97,7 @@ class Data {
         }
         console.log(updateFilter);
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/api.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/middleware/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'

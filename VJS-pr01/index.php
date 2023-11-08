@@ -18,25 +18,25 @@ require_once "config.php";
     <title>homepage DMC/VJS</title>
 </head>
 <body>
-<div class="container" id='root'>
+<div class="grid" id='root'>
 </div>
 <script type="module">
-
 // navbar
 import { createNavbar } from './component/navbar.js';
-createNavbar('root');
+await createNavbar('root');
 
 // input utk search pilih asset mesin
 import { search } from './component/search.js';
-search('root');
+await search('root');
 
-import { dmcData } from './component/dmc.js';
-document.addEventListener('click', async function() {
-    return dmcData('show','root');
+import { dmcHeader } from './component/dmc.js';
+import { tableHeader } from './component/table.js';
+const showBtn = document.getElementById('show');
+showBtn.addEventListener("click", async function() {
+    await dmcHeader('root');
+    const arrHead = ['inspection','standard','unit','checklist'];
+    await tableHeader('detailDiv','dmcHead', arrHead);
 })
-
-
-
 
 </script>
 </body>

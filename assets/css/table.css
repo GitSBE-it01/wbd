@@ -5,6 +5,7 @@
     overflow-x: hidden;
 }
 
+
 .tHid {
     margin: .4rem;
     height: auto;
@@ -28,6 +29,8 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+
 
 .tdCont {
     margin: .3rem;
@@ -83,8 +86,60 @@
     display: none;
 }
 
-.main {
-    width: 85vw;
-    height: 100vh;
+
+/*
+full site (no sidebar)
+*/
+
+.tmFull {
+    margin: .3rem;
+    width: 99.3vw;
+    overflow-x: hidden;
+}
+
+.thContFull {
+    margin: .3rem;
+    height: 8vh;
+    width: 99.3vw;
+    overflow-x: hidden;
+}
+
+.tHidFull {
+    margin: .4rem;
+    height: auto;
+    width: 99.3vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thCont2Full {
+    margin: .3rem;
+    height: 5vh;
+    width: 99.3vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tdContFull {
+    margin: .3rem;
+    height: auto;
+    width: 99.3vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.thSmallFull {
+    margin: .3rem;
+    height: 6vh;
+    width: 95vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.trFull {
+    margin: .3rem;
+    height: 78vh;
+    width: 99.3vw;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
