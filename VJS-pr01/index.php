@@ -29,8 +29,7 @@ await createNavbar('root');
 import { search } from './component/search.js';
 await search('root');
 
-import { dmcHeader } from './component/dmc.js';
-import { tableHeader } from './component/table.js';
+import { tableHeader,  dmcHeader  } from './component/table.js';
 const showBtn = document.getElementById('show');
 showBtn.addEventListener("click", async function() {
     await dmcHeader('root');

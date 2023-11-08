@@ -1,3 +1,5 @@
+import { currentDate, splitCustomString } from './process.js';
+
 /*===================================================
 jig table generate
 ===================================================*/
@@ -24,151 +26,85 @@ export const tableHeader = async(target,tableID, arrHead) => {
     }
 }
 
-
-
-export const tblGenJig = async (tbodyID,data) => {
+export const dmcHeader = async(target) => {
     try {
+        const container = document.getElementById(target);
+        const inputChange = document.getElementById('assetPick');
+        const valueInput = splitCustomString(' -- ', inputChange.value);
+        const noAssetInput = valueInput[0];
+        const namaAssetInput = valueInput[1];
+        const catInput = valueInput[valueInput.length - 1];
+        const todayDate = currentDate();
+        const detail = document.createElement('div');
+        detail.id = 'detailDiv';
+        detail.classList.add('main2', 'tl9');
+        
+        const main1 = document.createElement('div');
+        main1.classList.add('columnView');
+        
+        const h1 = document.createElement('h1');
+        h1.classList.add('cardTitle');
+        h1.textContent = "Daily Maintenance & Verification Job Setup";
+        main1.appendChild(h1);
+
+        const arrayHead = [{key: "No Asset:",value:`${noAssetInput}`}, {key: "Nama_Asset:", value:`${namaAssetInput}`},{key: "Date:", value:`${todayDate}`}]
+
+        for (let i=0; i<arrayHead.length; i++) {
+            const cardContain = document.createElement('div');
+            cardContain.classList.add('fr','fc-ctr','card_contain');
+            
+            const card1 = document.createElement('div');
+            card1.classList.add('mh4', 'fs-l');
+            const label1 = document. createElement('label');
+            label1.textContent= `${arrayHead[i]['key']}`;   
+
+            const card2 = document.createElement('div');
+            card2.classList.add('mh4','fs-l');
+            const label2 = document. createElement('label');
+            label2.textContent= `${arrayHead[i]['value']}`;
+
+            card1.appendChild(label1);
+            cardContain.appendChild(card1);
+            card2.appendChild(label2);
+            cardContain.appendChild(card2);
+            main1.appendChild(cardContain);
+        }
+        detail.appendChild(main1)
+
+        container.appendChild(detail);
+    } catch (error){
+        console.log(error);
+    }
+}
+
+export const dmcData = async (tbodyID,data) => {
+    try {
+
         const tableBody = document.createElement('div');
         tableBody.classList.add('tr');
         tableBody.id = tbodyID;
         for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.classList.add('fr');
-            tr2.innerHTML = `
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].desc_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].type_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].status_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].material}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].qtyOnHand}</div>
-                <input type="hidden" value=${data[i].filter}>
-                <div class="flexCh td bd-black sl9 cap">
-                    <button id='type_${data[i].item_jig}'>detail tipe</button>
-                    <button id='loc_${data[i].item_jig}'>detail lokasi</button>
-                </div>
+            const form = document.createElement('div');
+            form.classList.add('fr');
+            form.id = 'inputDMC';
+            form.innerHTML = `
+                <input type="hidden" id="noAsset" name="noAsset" value="${data[i].noAsset}">
+                <input type="hidden" id="namaAsset" name="namaAsset" value="${data[i].namaAsset}">
+                <input type="hidden" id="input_date" name="input_date" value="${data[i].input_date}">
+                <input type="hidden" id="decision" name="decision" value="${data[i].decision}">
+                <input type="hidden" id="wo_id" name="wo_id" value="${data[i].wo_id}">
+                <input type="hidden" id="dmc_vjs" name="dmc_vjs" value="${data[i].dmc_vjs_data}">
+                <input type="hidden" id="id" name="id" value="${data[i].id}">
+                
+                <input type="text" class="tableData readonly" id="inspection" name="inspection" value="${data[i].inspection}" readonly>
+                <input type="text" class="tableData readonly" id="std" name="std" value="${data[i].std}" readonly>
+                <input type="text" class="tableData readonly" id="unit" name="unit" value="${data[i].unit}">
+                <input type="text" class="tableForm readonly" id="input_value" name="input_value" data-inputDMC="dataTag" placeholder="-choose-" value="${data[i].input_value}" list="dmcOption" readonly>
             `;
-            const tr3 = document.createElement('div');
-            tr3.classList.add('fr');
-            tr3.innerHTML=   `<div class="hide" id="hid_${data[i].item_jig}"></div>`;
-            const tr4 = document.createElement('div');
-            tr4.classList.add('fr');
-            tr4.innerHTML=   `<div class="hide" id="hid2_${data[i].item_jig}"></div>`;
-            tableBody.appendChild(tr2);
-            tableBody.appendChild(tr3);
-            tableBody.appendChild(tr4);
+            tableBody.appendChild(form);
         }
         return tableBody;
     } catch(error) {
         console.log(error);
     }
 }
-
-
-/*===================================================
-speaker table generate
-===================================================*/
-export const tblGenSpk = async (tbodyID,data) => {
-    try {    
-        const tableBody = document.createElement('div');
-        tableBody.classList.add('tr');
-        tableBody.id = tbodyID;
-        for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.classList.add('fr');
-            tr2.innerHTML = `
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].description}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].status_speaker}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].desc_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_on}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_off}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].material}</div>
-                <input type="hidden" value=${data[i].filter}>
-                <div class="flexCh td bd-black sl9 cap">${data[i].qtyOnHand}</div>
-            `
-            tableBody.appendChild(tr2);
-        }
-        return tableBody;
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-
-/*===================================================
-location table 
-===================================================*/
-export const tblLocJig = async (target, arrHead, data) => {
-    try {    
-        const container = document.getElementById(target);
-        const table = document.createElement('div');
-        table.classList.add('tHid');
-        const tableBody = document.createElement('div');
-        tableBody.classList.add('thSmall');
-        const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont2');
-        tr.id = 'tableHeader';
-        for (let i=0; i<arrHead.length; i++) {
-            const th = document.createElement('div');
-            th.classList.add('sl3', 'flexCh', 'th', 'bd-black', 'upper');
-            th.textContent = arrHead[i];
-            tr.appendChild(th);
-        }
-        table.appendChild(tr);
-        for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.classList.add('fr', 'tdCont');
-            tr2.innerHTML = `
-                <div class="flexCh td bd-black sl8 cap">${data[i].lokasi}</div>
-                <div class="flexCh td bd-black sl8 cap">${data[i].qty_per_unit}</div>
-                <div class="flexCh td bd-black sl8 cap">${data[i].unit}</div>
-            `
-            table.appendChild(tr2);
-        }
-        container.appendChild(table);
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-
-
-/*===================================================
-type speaker table utk jig table
-===================================================*/
-export const tblTypeJig = async (target, arrHead, data) => {
-    try {    
-        const container = document.getElementById(target);
-        const table = document.createElement('div');
-        table.classList.add('tHid');
-        const tableBody = document.createElement('div');
-        tableBody.classList.add('thSmall');
-        const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont2');
-        tr.id = 'tableHeader';
-        for (let i=0; i<arrHead.length; i++) {
-            const th = document.createElement('div');
-            th.classList.add('sl3', 'flexCh', 'th', 'bd-black', 'upper');
-            th.textContent = arrHead[i];
-            tr.appendChild(th);
-        }
-        table.appendChild(tr);
-        for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.classList.add('fr', 'tdCont');
-            tr2.innerHTML = `
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].description}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].status_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_on}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_off}</div>
-            `
-            table.appendChild(tr2);
-        }
-        container.appendChild(table);
-    } catch(error) {
-        console.log(error);
-    }
-}
-
