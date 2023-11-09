@@ -64,6 +64,21 @@ export const dataJig = async () => {
             databaseJig = filterData;
             table.appendChild(await tblGenJig('tbodyJig', filterData));
         })
+
+        /*const btnXl = document.getElementById('btnJigXls');
+        btnXl.addEventListener("click", async function() {
+            btnXl.textContent = "";
+            btnXl.classList.add('load_txt');
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(databaseJig);
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            // Generate an Excel file
+            XLSX.writeFile(workbook, 'db_jig_download.xlsx');
+            btnXl.classList.remove('load_txt');
+            btnXl.textContent = "dl excel";
+        }) */
+        
         main.appendChild(table);
         main.removeChild(document.getElementById('load'));
     }catch (error){
@@ -71,4 +86,4 @@ export const dataJig = async () => {
     }
 };
 
-export const dataExport = databaseJig;
+export { databaseJig };

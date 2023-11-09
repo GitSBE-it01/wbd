@@ -1,23 +1,11 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "formsparepart");
-  
-if($conn === false){
-    die("ERROR: Could not connect. "
-        . mysqli_connect_error());
-}
+include('conn_form_pinjam.php');
+
 
 $sql = "SELECT * FROM datapeminta";
-$result = $conn->query($sql);
+$result = $conn_form_pinjam->query($sql);
 
-// if ($result->num_rows > 0) {
-//   // output data of each row
-//   while($row = $result->fetch_assoc()) {
-//     echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-//   }
-// } else {
-//   echo "0 results";
-// }
-// $conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,14 +72,16 @@ $result = $conn->query($sql);
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR
   <div id="nav-placeholder"></div>
   <script>
   $(function(){
     $("#nav-placeholder").load("navbar.html");
   });
-  </script>
+  </script> -->
 
+  
+<?php include 'navbar.php';?>
 
 
   <main id="main" class="main">
@@ -172,12 +162,7 @@ $result = $conn->query($sql);
   </main><!-- End #main -->
     
   <!-- ======= Footer ======= -->
-  <div id="footer-placeholder"></div>
-  <script>
-   $(function(){
-     $("#footer-placeholder").load("footer.html");
-   });
-   </script>
+  <?php include 'footer.php';?>
 
 
 <script>

@@ -17,7 +17,7 @@ export const dataTableLoc = async (valueId) => {
                     unit: obj1 ? obj1.unit:""
                 }});
             } else {
-            data = filterData2.map((obj1) => {
+            data = src.map((obj1) => {
                 return {
                     lokasi: obj1.lokasi,
                     qty_per_unit: obj1 ? Math.floor(parseInt(obj1.qty_per_unit) * (100-parseInt(obj1.toleransi)) / 100) :0,

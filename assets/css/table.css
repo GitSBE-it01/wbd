@@ -30,6 +30,13 @@
     overflow-x: hidden;
 }
 
+.thCont3 {
+    margin: .3rem;
+    height: 5vh;
+    width: 80vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 
 .tdCont {
@@ -39,6 +46,24 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+.tdCont2 {
+    margin: .3rem;
+    height: auto;
+    width: 84vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+.tdCont2 {
+    margin: .3rem;
+    height: auto;
+    width: 80vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 
 .thSmall {
     margin: .3rem;

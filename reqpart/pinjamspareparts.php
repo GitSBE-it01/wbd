@@ -1,3 +1,17 @@
+<?php
+
+include ('conn_list_user.php');
+include ('conn_list_barang.php');
+include ('conn_list_barang.php');
+
+
+$sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager'";
+$data_user = $conn_list_user->query($sql);
+
+$sql = "SELECT * from pt_mstr where pt_part LIKE '3%'";
+$data_barang = $conn_list_barang->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,25 +39,24 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   <style type="text/css">
   h1 {
   text-align: center;
   }
 
   </style>
+
 </head>
 
 <body>
 
   <!-- ======= Header ======= -->
-  <div id="nav-placeholder"></div>
-  <script>
-  $(function(){
-    $("#nav-placeholder").load("navbar.html");
-  });
-  </script>
+  
+<?php include 'navbar.php';?>
 
   <main id="main" class="main">
+  
 
     <div class="pagetitle">
       <h1>Permintaan</h1>
@@ -62,24 +75,56 @@
   
                 <div class="col-md-12">  
                     <div class="form-group">
-                        <label for="inputnama">Nama</label>
-                        <input type="text" class="form-control" id="inputnama" name="nama_peminta" placeholder="Masukkan Nama ">
+                        <label for="inputnama">Nama Peminta: </label>
+                        <select id="inputnama" name="nama_peminta">
+                          <?php 
+                           while ($row = $data_user->fetch_assoc()) {
+                             echo '
+                             <option value="'.$row["id"].'">'.$row["nama"].'</option>
+                               ';}
+                          ?>
+                        </select>
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="inputdept">Departemen</label>
-                        <input type="text" class="form-control" id="inputdept" name="departemen" placeholder="Masukkan Asal Departemen">
+                        <label for="inputnamabarang">Nama Barang</label>
+                        <select id="inputnamabarang" name="nama_barang" onchange="addBarang()">
+                          <?php 
+                           while ($row = $data_barang->fetch_assoc()) {
+                             echo '
+                             <option value="'.$row["id"].'|'.$row["pt_desc1"].' '.$row["pt_desc2"].'">'.$row["pt_desc1"].' '.$row["pt_desc2"].'</option>
+                               ';}
+                          ?>
+                        </select>
+                        <div id="list_nama_barang"></div>
+                          
                     </div>
-                    <br>
+
+
+                    <table class="table" id="myTable">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nama Barang</th>
+                          <th scope="col">Jumlah Barang</th>
+                          <th scope="col">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody id="isi_barang_minta">
+                      </tbody>
+                    </table>
+
+
                     <div class="form-group">
                         <label for="inputtglminta">Tanggal Minta</label>
                         <input type="date" class="form-control" id="inputtglminta" name="tanggal_awal" placeholder="Masukkan Tanggal Awal">
                     </div>
                     <br>
                     <div class="form-group">
-                        <label for="inputnamabarang">Nama Barang</label>
-                        <input type="text" class="form-control" id="inputnamabarang" name="nama_barang" placeholder="Masukkan Nama Barang">
+                        <label for="inputduedate">Tanggal Akhir</label>
+                        <input type="date" class="form-control" id="inputduedate" name="tanggal_akhir" placeholder="Masukkan Tenggat Waktu">
                     </div>
+                    <br>
+            
                     <br>
                     <div class="form-group">
                         <label for="inputacccode">Account Code</label>
@@ -96,11 +141,7 @@
                         <input type="text" class="form-control" id="inputcostcenter" name="cost_center" placeholder="Masukkan Cost Center">
                     </div>
                     <br>
-                    <div class="form-group">
-                        <label for="inputduedate">Due Date</label>
-                        <input type="date" class="form-control" id="inputduedate" name="tanggal_akhir" placeholder="Masukkan Tenggat Waktu">
-                    </div>
-                    <br>
+
                 </div>
                 <br/>
                 <button style="align-items: center;" class="btn btn-success" id="submit">Submit</button>
@@ -121,12 +162,37 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <div id="footer-placeholder"></div>
+  <?php include 'footer.php';?>
+
   <script>
-   $(function(){
-     $("#footer-placeholder").load("footer.html");
-   });
-   </script>
+    var counter = 0;
+    function addBarang() {
+      counter++;
+      var selectBox = document.getElementById("inputnamabarang");
+      let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      const myArray = selectedValue.split("|"); 
+      let htm = "<tr id=fulldel_"+ counter +"><td>"+ myArray[1] +"</td> <td><input type="+ "text" +" id='data_"+ myArray[0] +"'></td> <td><input type=button id='del_"+counter+"' value='cancel'></td></tr>";
+      document.getElementById("isi_barang_minta").innerHTML += htm;
+    }
+
+    document.addEventListener("click", function(event) {
+      if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del_')) {
+        const idTarget = event.target.getAttribute('id');
+        // const idElement = document.getElementById(idTarget);
+        // window.alert(idElement.value)
+        const id_saja = idTarget.replace(/del_/g, "");
+        const id_delete = "fulldel_" + id_saja
+        // window.alert(id_delete)
+        document.getElementById(id_delete).remove();
+        //idElement.remove();
+      }
+    })
+/*    function delete_Self(a) {
+      // document.getElementById("test").remove();
+      window.alert(a)
+    }*/
+    </script>
+
   
 
 </body>

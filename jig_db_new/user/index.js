@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             const datalist = document.getElementById('userList');
             for (let i=0; i<result2.length; i++) {
                 const option = document.createElement('option');
-                option.value = result2[i].user;
-                option.innerText = result2[i].user;
+                option.value = result2[i].Absensi;
+                option.innerText = result2[i].Absensi;
                 datalist.appendChild(option);
             }
 

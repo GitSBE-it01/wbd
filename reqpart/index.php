@@ -36,13 +36,15 @@
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR
   <div id="nav-placeholder"></div>
   <script>
   $(function(){
     $("#nav-placeholder").load("navbar.html");
   });
-  </script>
+  </script> -->
+
+  <?php include 'navbar.php';?>
 
   <main id="main" class="main">
 
@@ -689,12 +691,7 @@
 
   
 <!-- FOOTER -->
-<div id="footer-placeholder"></div>
-<script>
-$(function(){
-  $("#footer-placeholder").load("footer.html");
-});
-</script>
+  <?php include 'footer.php';?>
 </body>
 
 </html>

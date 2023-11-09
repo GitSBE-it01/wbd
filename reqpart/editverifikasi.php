@@ -1,12 +1,6 @@
 
 <?php
-
-$conn = mysqli_connect("localhost", "root", "", "formsparepart");
-  
-if($conn === false){
-    die("ERROR: Could not connect. "
-        . mysqli_connect_error());
-}
+include('conn_form_pinjam.php');
   
 $id = $_GET['id'];
 $ver = $_GET['verifikasi'];
@@ -18,7 +12,7 @@ elseif ($ver == 2) {
 }
   
   
-if(mysqli_query($conn, $sql)){
+if(mysqli_query($conn_form_pinjam, $sql)){
 ?>
 <script type="text/javascript">
 window.location = "historyminta.php";
@@ -26,9 +20,9 @@ window.location = "historyminta.php";
 <?php
 } else{
     echo "ERROR: Hush! Sorry $sql. "
-        . mysqli_error($conn);
+        . mysqli_error($conn_form_pinjam);
 }
   
 // Close connection
-mysqli_close($conn);
+mysqli_close($conn_form_pinjam);
 ?>

@@ -1,29 +1,3 @@
-/*const nameInput = 'preload';
-const dbName = 'jig_database';
-const storeName = 'dataStore_db';
-const parameter1 = 'list_location'; 
-const parameter2 = 'new_jig_drawing'; 
-const parameter3 = 'new_jig_loc'; 
-const parameter4 = 'new_jig_stock'; 
-const parameter5 = 'new_jig_usage'; 
-const parameter6 = 'new_jig_mtnc'; 
-const parameter7 = 'jig_function'; 
-const parameter8 = 'new_item_detail';
-const parameter9 = 'jig_location'; 
-const parameter10 = 'jig_master';
-const parameter11 = 'log_function';
-const storageKey1 = 'preload-list_location';
-const storageKey2 = 'preload-new_jig_drawing';
-const storageKey3 = 'preload-new_jig_loc';
-const storageKey4 = 'preload-new_jig_stock';
-const storageKey5 = 'preload-new_jig_usage';
-const storageKey6 = 'preload-new_jig_mtnc';
-const storageKey7 = 'preload-jig_function';
-const storageKey8 = 'preload-new_item_detail';
-const storageKey9 = 'preload-jig_location';
-const storageKey10 = 'preload-jig_master';
-const storageKey11 = 'preload-log_function';*/
-
 /*===================================================================================
 initial load
 ===================================================================================*/
@@ -344,7 +318,7 @@ jig_Location
             view loc
             ------------*/
             const tableHTML = `
-                <div class='tableFlex'>           
+                <div class='fr thCont'>           
                     <div class='tableData tableHeader'>Location</div>
                     <div class='tableData tableHeader'>Qty per Unit</div>
                     <div class='tableData tableHeader'>add / substract</div>
@@ -361,40 +335,42 @@ jig_Location
             </div>`;
 
             let tableData = "";
-            tableData += '<form method="POST">';
+            tableData += `
+            <form method="POST">
+            <div id='inputContainer4'>`;
             for (let i=0; i<data.length; i++) {
-                tableData +=`
-                    <div id='inputContainer4'>
-                        <div class='tableFlex'> 
-                            <div class='tableData'>
-                                <input type="text" value="${data[i].lokasi}" name='loc_name[]' list="dataLokasi">
-                            </div>
-                            <div class='tableData'>
-                                <input class="readonlyOFF" type="text" value="${data[i].qty}" name='qty_per_unit[]' readonly>
-                            </div>
-                            <div class='tableData'>
-                                <select name='addSub[]' id='addSub'>
-                                    <option value='tambah'>tambah</option>
-                                    <option value='kurang'>kurang</option>
-                                </select>
-                            </div>
-                            <div class='tableData'>
-                                <input type="text" value="" name='qtyChange[]'>
-                            </div>
-                            <div class='tableData'>
-                                <input type="text" value="${data[i].unit}" name='unit[]'> 
-                            </div>
-                            <div class='tableData'>
-                                <input type="text" value="" name='remark[]'> 
-                            </div>
-                            <input type="hidden" value="${data[i].code}" name='code[]'> 
-                            <input type="hidden" value="${data[i].status}" name='status[]'> 
-                            <input type="hidden"  value="${data[i].id}" name='id[]'> 
-                            <input type="hidden" value="${data[i].item_jig}" name='item_jig[]'> 
+                tableData +=`                  
+                    <div class='fr tdCont'> 
+                        <div class='tableData'>
+                            <input type="text" value="${data[i].lokasi}" name='loc_name[]' list="dataLokasi">
                         </div>
+                        <div class='tableData'>
+                            <input class="readonlyOFF" type="text" value="${data[i].qty}" name='qty_per_unit[]' readonly>
+                        </div>
+                        <div class='tableData'>
+                            <select name='addSub[]' id='addSub'>
+                                <option value='tambah'>tambah</option>
+                                <option value='kurang'>kurang</option>
+                            </select>
+                        </div>
+                        <div class='tableData'>
+                            <input type="text" value="" name='qtyChange[]'>
+                        </div>
+                        <div class='tableData'>
+                            <input type="text" value="${data[i].unit}" name='unit[]'> 
+                        </div>
+                        <div class='tableData'>
+                            <input type="text" value="" name='remark[]'> 
+                        </div>
+                        <input type="hidden" value="${data[i].code}" name='code[]'> 
+                        <input type="hidden" value="${data[i].status}" name='status[]'> 
+                        <input type="hidden"  value="${data[i].id}" name='id[]'> 
+                        <input type="hidden" value="${data[i].item_jig}" name='item_jig[]'> 
                     </div>`;
-            }   
-            const footer = `</form>`;
+                }   
+            const footer = `
+            </div>
+            </form>`;
             const buttonAdd2 = `<button type="submit" class="button-30" name="update_loc">update</button>`;
             const buttonAdd = `
                 <button type="button" class="" id='addLoc'> 
@@ -412,7 +388,7 @@ jig_Location
             container.appendChild(h1);
             const div =document.createElement('div');
             const header = `
-            <div class='tableFlex'>           
+            <div class='fr thCont'>           
                 <div class='tableData tableHeader'>Location</div>
                 <div class='tableData tableHeader'>Qty per Unit</div>
                 <div class='tableData tableHeader'>Add / Substract</div>
@@ -425,7 +401,7 @@ jig_Location
             let tableData2 = "";
             for (let i=0; i<data2.length; i++) {
                 tableData2 += `
-                <div class='tableFlex'> 
+                <div class='fr tdCont'> 
                     <div class='tableData'>
                         ${data2[i].lokasi}
                     </div>

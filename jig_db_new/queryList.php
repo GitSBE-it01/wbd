@@ -77,7 +77,7 @@ $list_mtnc= array(
 
 $access= 'SELECT * FROM access_config.access_wbd';
 
-$user= 'SELECT * FROM access_config.user_list';
+$user= 'SELECT * FROM db_sb3employee.employee';
 
 $log_master_query = 'SELECT * FROM log_master WHERE item_jig = ?';
 $log_location_query = 'SELECT * FROM log_location WHERE item_jig = ?';

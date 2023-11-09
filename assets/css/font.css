@@ -95,3 +95,7 @@ link active
 h1 {
     text-align: center;
 }
+
+.title {
+    font-size: x-large;
+}

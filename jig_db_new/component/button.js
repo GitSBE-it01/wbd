@@ -74,13 +74,13 @@ hidden table utk jig table
 // location 
 document.addEventListener("click", async function(event) {    
     try{
-        const buttonId = event.target.getAttribute('id');
-        const cekFilter = buttonId.split("_");
-        const valueId = cekFilter[1];
-        const hidDiv = document.getElementById(`hid_${valueId}`);
-        const hidDiv2 = document.getElementById(`hid2_${valueId}`);
         // location
         if (event.target.getAttribute('id').includes('loc_')) {
+            const buttonId = event.target.getAttribute('id');
+            const cekFilter = buttonId.split("_");
+            const valueId = cekFilter[1];
+            const hidDiv = document.getElementById(`hid_${valueId}`);
+            const hidDiv2 = document.getElementById(`hid2_${valueId}`);
             if (hidDiv.classList.contains('hide')) {
                 hidDiv.classList.remove('hide');
                 if (!hidDiv2.classList.contains('hide')) {
@@ -101,6 +101,11 @@ document.addEventListener("click", async function(event) {
         } 
         // type
         if (event.target.getAttribute('id').includes('type_')) {
+            const buttonId = event.target.getAttribute('id');
+            const cekFilter = buttonId.split("_");
+            const valueId = cekFilter[1];
+            const hidDiv = document.getElementById(`hid_${valueId}`);
+            const hidDiv2 = document.getElementById(`hid2_${valueId}`);
             if (hidDiv2.classList.contains('hide')) {
                 hidDiv2.classList.remove('hide');
                 if (!hidDiv.classList.contains('hide')) {
@@ -129,7 +134,8 @@ document.addEventListener("click", async function(event) {
 download excel
 ============================================================================
 */
-import  { jig_master_query, jig_location_query, jig_function_query, item_detail_query } from '../class.js';
+import  { jig_location_query, jig_function_query, item_detail_query } from '../class.js';
+import { databaseJig } from './tableJig.js';
 
 const btnJig2 = document.getElementById('btnJigXls');
 btnJig2.addEventListener("click", async function() {
@@ -138,112 +144,70 @@ btnJig2.addEventListener("click", async function() {
         btnJig2.classList.add('load_txt');
         const inputFilter = document.getElementById('searchJig');
         const workbook = XLSX.utils.book_new();
-        const src1 = await jig_master_query.getData();
-        const src2 = await jig_location_query.getData();
-        let data = src1.map((obj1) => {
-            const matchedObj = src2.find((obj2) => obj2.item_jig === obj1.item_jig);
-            // Use Object.values() to get all property values, filter out undefined values, and join them with a separator
-            const filterValue = Object.values({
-                ...obj1, // Spread properties from obj1
-                qty: matchedObj ? matchedObj.qty_per_unit : 0,
-                unit: matchedObj ? matchedObj.unit : "pcs",
-                loc: matchedObj ? matchedObj.lokasi : "belum ditentukan" // Spread properties from obj2
-            })
-            .filter(value => value !== undefined)
-            .join(' --  '); // You can change the separator as needed
+        const src = await jig_location_query.getData();
+        const src1 = await jig_function_query.getData()
+        const src2 = await item_detail_query.getData();
+        const addData = src1.map((obj1) => {
+            const matObj3 = src2.find((obj2) => obj2.pt_part === obj1.item_type);
             return {
-                ...obj1,
-                qty: matchedObj ? matchedObj.qty_per_unit : 0,
-                unit: matchedObj ? matchedObj.unit : "pcs",
-                loc: matchedObj ? matchedObj.lokasi : "belum ditentukan",
-                filter: filterValue // Add the 'filter' property with the concatenated value
-            };
-        });
+                item_jig: obj1.item_jig,
+                item_type: obj1.item_type,
+                description: matObj3 ? matObj3.pt_desc1:  "-",
+                status_type: matObj3 ? matObj3.pt_status: "-",
+                opt_on: obj1.opt_on,
+                opt_off: obj1.opt_off
+            }
+        })
+
         // Create a worksheet
         const filter1 = inputFilter.value;
-        const filterData1 = data.filter(item =>
-            item.filter.toLowerCase().includes(filter1.toLowerCase())
-        );
-        const worksheet = XLSX.utils.json_to_sheet(filterData1);
-    
-        // Add the worksheet to the workbook
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    
-        // Generate an Excel file
-        XLSX.writeFile(workbook, 'db_jig_download.xlsx');
+        if (filter1 !== "") {
+            const filterData1 = databaseJig.filter(item =>
+                item.filter.toLowerCase().includes(filter1.toLowerCase())
+            );
+            const filterData2= addData.filter((obj1) => {
+                const dataComp = filterData1.find((obj2) => obj2.item_jig === obj1.item_jig);
+                if (dataComp) {
+                    return {
+                        ...obj1
+                    }
+                }
+            })
+            const filterData3= src.filter((obj1) => {
+                const dataComp = filterData1.find((obj2) => obj2.item_jig === obj1.item_jig);
+                if (dataComp) {
+                    return {
+                        ...obj1
+                    };
+                }
+            })
+            const worksheet = XLSX.utils.json_to_sheet(filterData1);
+            const worksheet2 = XLSX.utils.json_to_sheet(filterData2);
+            const worksheet3 = XLSX.utils.json_to_sheet(filterData3);
+            
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'master');
+            XLSX.utils.book_append_sheet(workbook, worksheet2, 'usage');
+            XLSX.utils.book_append_sheet(workbook, worksheet3, 'location');
+            
+            // Generate an Excel file
+            XLSX.writeFile(workbook, 'db_jig_download.xlsx');
+        } else {
+
+            const worksheet = XLSX.utils.json_to_sheet(databaseJig);
+            const worksheet2 = XLSX.utils.json_to_sheet(addData);
+            const worksheet3 = XLSX.utils.json_to_sheet(src);
+            
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'master');
+            XLSX.utils.book_append_sheet(workbook, worksheet2, 'usage');
+            XLSX.utils.book_append_sheet(workbook, worksheet3, 'location');
+            
+            // Generate an Excel file
+            XLSX.writeFile(workbook, 'db_jig_download.xlsx'); 
+        }
         btnJig2.classList.remove('load_txt');
         btnJig2.textContent = "dl excel";
-        } catch(error) {
-            console.log(error);
-        }
-})
-
-
-const btnSpk2 = document.getElementById('btnSpkXls');
-btnSpk2.addEventListener("click", async function() {
-    try {
-        btnSpk2.textContent = "";
-        btnSpk2.classList.add('load_txt');
-        const inputFilter = document.getElementById('searchSpk');
-        const workbook = XLSX.utils.book_new();
-        const src1 = await jig_master_query.getData();
-        const src2 = await jig_location_query.getData();
-        const typeMap = new Map();
-            src2.forEach(item => {     
-                if (typeMap.has(item.item_jig)) {
-                    const existingItem = typeMap.get(item.item_jig);
-                    existingItem.qty += parseInt(item.qty_per_unit);
-                    existingItem.toleransi = item.toleransi;
-                } else {
-                    const newItem = {
-                    item_jig: item.item_jig,
-                    qty: parseInt(item.qty_per_unit),
-                    toleransi: parseInt(item.toleransi),
-                    };
-                    typeMap.set(item.item_jig, newItem);
-                }
-            });
-        const summedData = Array.from(typeMap.values());
-        const src3 = await jig_function_query.getData();
-        const src4 = await item_detail_query.getData();
-        const data = src1.map((item1) => {
-            const matchedObj = summedData.find((item2) => item2.item_jig === item1.item_jig);
-            const matchedObj2 = src3.find((item3) => item3.item_jig === item1.item_jig);
-            const matchedObj3 = src4.find((item4) => item4.pt_part === matchedObj2?.item_type);
-        
-            const qtyOH =
-                role.value === "admin" || role.value === "superuser"
-                ? matchedObj?.qty || 0
-                : Math.floor((matchedObj?.qty || 0) * (100 - (matchedObj?.toleransi || 0)) / 100);
-        
-            return {
-            item_type: matchedObj2?.item_type || "",
-            description: `${matchedObj3?.pt_desc1 || ""}-${matchedObj3?.pt_desc2 || ""}`,
-            status_speaker: matchedObj3?.pt_status || "",
-            item_jig: item1.item_jig,
-            status_jig: item1.status_jig,
-            material: item1.material,
-            opt_on: matchedObj2?.opt_on || "",
-            opt_off: matchedObj2?.opt_off || "",
-            desc_jig: item1.desc_jig || "",
-            qtyOnHand: qtyOH,
-            filter: `${item1.item_jig} -- ${matchedObj2?.item_type || ""} -- ${matchedObj3?.pt_desc1 || ""} -- ${matchedObj3?.pt_status || ""} -- ${item1.status_jig} -- ${item1.material} -- ${matchedObj2?.opt_on || ""} -- ${matchedObj2?.opt_off || ""} -- ${item1.desc_jig || ""} -- ${qtyOH}`
-            };
-          });
-        // Create a worksheet
-        const filter1 = inputFilter.value;
-        const filterData1 = data.filter(item =>
-            item.filter.toLowerCase().includes(filter1.toLowerCase())
-        );
-        const worksheet = XLSX.utils.json_to_sheet(filterData1);
-            
-        // Add the worksheet to the workbook
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    
-        // Generate an Excel file
-        XLSX.writeFile(workbook, 'db_jig_download.xlsx');      
-        btnSpk2.classList.remove('load_txt');
-        btnSpk2.textContent = "dl excel";
         } catch(error) {
             console.log(error);
         }

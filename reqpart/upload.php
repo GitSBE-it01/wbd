@@ -1,9 +1,9 @@
 
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "formsparepart");
+include('conn_form_pinjam.php');
   
-if($conn === false){
+if($conn_form_pinjam === false){
     die("ERROR: Could not connect. "
         . mysqli_connect_error());
 }
@@ -20,7 +20,7 @@ $tanggal_akhir = $_REQUEST['tanggal_akhir'];
 $sql = "INSERT INTO datapeminta (nama_peminta, departemen, tanggal_awal, nama_barang, account_code, keperluan, cost_center, tanggal_akhir, verifikasi) VALUES ('$nama_peminta', 
     '$departemen','$tanggal_awal','$nama_barang','$account_code','$keperluan','$cost_center', '$tanggal_akhir', 0)";
   
-if(mysqli_query($conn, $sql)){
+if(mysqli_query($conn_form_pinjam, $sql)){
 ?>
 <script type="text/javascript">
 window.location = "historyminta.php";

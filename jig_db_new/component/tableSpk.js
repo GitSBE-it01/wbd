@@ -8,6 +8,7 @@ import { tableHeader, tblGenSpk} from './table.js';
 data utk table jig
 ===============================================================================
 */
+let databaseSpk = [];
 export const dataSpk = async () => {
     try {
         const main = document.getElementById('main');
@@ -44,36 +45,51 @@ export const dataSpk = async () => {
                 : Math.floor((matchedObj?.qty || 0) * (100 - (matchedObj?.toleransi || 0)) / 100);
         
             return {
-            item_jig: item1.item_jig,
-            item_type: matchedObj2?.item_type || "",
-            description: `${matchedObj3?.pt_desc1 || ""}-${matchedObj3?.pt_desc2 || ""}`,
-            status_speaker: matchedObj3?.pt_status || "",
-            status_jig: item1.status_jig,
-            material: item1.material,
-            opt_on: matchedObj2?.opt_on || "",
-            opt_off: matchedObj2?.opt_off || "",
-            desc_jig: item1.desc_jig || "",
-            qtyOnHand: qtyOH,
-            filter: `${item1.item_jig} -- ${matchedObj2?.item_type || ""} -- ${matchedObj3?.pt_desc1 || ""} -- ${matchedObj3?.pt_status || ""} -- ${item1.status_jig} -- ${item1.material} -- ${matchedObj2?.opt_on || ""} -- ${matchedObj2?.opt_off || ""} -- ${item1.desc_jig || ""} -- ${qtyOH}`
-            };
-          });
-            const btn = document.getElementById('btnSpk');
-            const filter = document.getElementById('searchSpk');
-            tableHeader('main', 'tableSpk', arrHead1);
-            const table = document.getElementById('tableSpk');
-            table.appendChild(await tblGenSpk('tbodySpk', data));
-            const tbody = document.getElementById('tbodySpk');
-            btn.addEventListener("click", async() => {
-                const tbody = document.getElementById('tbodySpk');
-            if (table && tbody) {
-                table.removeChild(tbody);
-            }
-                const filterValue = filter.value;
-                const filterData = data.filter(item=> item.filter.toLowerCase().includes(filterValue.toLowerCase()));
-                table.appendChild(await tblGenSpk('tbodySpk', filterData));
-          })
-          main.appendChild(table);
-          main.removeChild(document.getElementById('load'))
+                item_jig: item1.item_jig,
+                item_type: matchedObj2?.item_type || "",
+                description: `${matchedObj3?.pt_desc1 || ""}-${matchedObj3?.pt_desc2 || ""}`,
+                status_speaker: matchedObj3?.pt_status || "",
+                status_jig: item1.status_jig,
+                material: item1.material,
+                opt_on: matchedObj2?.opt_on || "",
+                opt_off: matchedObj2?.opt_off || "",
+                desc_jig: item1.desc_jig || "",
+                qtyOnHand: qtyOH,
+                filter: `${item1.item_jig} -- ${matchedObj2?.item_type || ""} -- ${matchedObj3?.pt_desc1 || ""} -- ${matchedObj3?.pt_status || ""} -- ${item1.status_jig} -- ${item1.material} -- ${matchedObj2?.opt_on || ""} -- ${matchedObj2?.opt_off || ""} -- ${item1.desc_jig || ""} -- ${qtyOH}`
+                }});
+        databaseSpk= data;
+        const btn = document.getElementById('btnSpk');
+        const filter = document.getElementById('searchSpk');
+        tableHeader('main', 'tableSpk', arrHead1);
+        const table = document.getElementById('tableSpk');
+        table.appendChild(await tblGenSpk('tbodySpk', databaseSpk));
+        const tbody = document.getElementById('tbodySpk');
+        btn.addEventListener("click", async() => {
+        const tbody = document.getElementById('tbodySpk');
+        if (table && tbody) {
+            table.removeChild(tbody);
+        }
+            const filterValue = filter.value;
+            const filterData = data.filter(item=> item.filter.toLowerCase().includes(filterValue.toLowerCase()));
+            databaseSpk=filterData;
+            table.appendChild(await tblGenSpk('tbodySpk', databaseSpk));
+        })
+        const btnXl2 = document.getElementById('btnSpkXls');
+        btnXl2.addEventListener("click", async function() {
+            btnXl2.textContent = "";
+            btnXl2.classList.add('load_txt');
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(databaseSpk);
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            // Generate an Excel file
+            XLSX.writeFile(workbook, 'db_spk_download.xlsx');
+            btnXl2.classList.remove('load_txt');
+            btnXl2.textContent = "dl excel";
+            
+        }) 
+        main.appendChild(table);
+        main.removeChild(document.getElementById('load'))
     }catch (error){
         console.error('Error:', error);
     }
