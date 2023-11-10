@@ -1,9 +1,17 @@
 <?php
+include 'checklogin.php';
+include('conn_list_user.php');
+$user_login = $_SESSION['username'];
+
+
+$sql = "SELECT * FROM user WHERE username='".$user_login."'";
+$data_login = $conn_list_user->query($sql);
+$result_data_login = $data_login->fetch_assoc();
 echo '
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="index.php" class="logo d-flex align-items-center">
         <img src="assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">Sinar Baja Electric</span>
       </a>
@@ -176,52 +184,14 @@ echo '
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Alfons</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">'.$result_data_login['nama'].'</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Alfons Richardo</h6>
-              <span>Programmer</span>
-            </li>
             <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="logout.php">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span >Sign Out</span>
               </a>
             </li>
 

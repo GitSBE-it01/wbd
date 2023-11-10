@@ -1,10 +1,9 @@
 <?php
 include('conn_form_pinjam.php');
+include 'checklogin.php';
+$user_login = $_SESSION['username'];
   
-if($conn_form_pinjam === false){
-    die("ERROR: Could not connect. "
-        . mysqli_connect_error());
-}
+
 $id = $_GET['id'];
 $sql = "SELECT * FROM datapeminta where id = $id";
 $result = $conn_form_pinjam->query($sql);
@@ -51,8 +50,6 @@ $result = $conn_form_pinjam->query($sql);
 <body>
 
 <?php include 'navbar.php';?>
-
-
 
   <main id="main" class="main">
 

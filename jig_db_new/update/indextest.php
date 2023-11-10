@@ -113,10 +113,11 @@ if ($status === 'success') {
     data section
     ============================================================================
     */
-    import { updateStock } from './component/data.js';
-    updateStock();
+    import { search } from './component/search.js';
+    await search('main', 'searchStock', 'btnStock', 'divStock');
 
 
 </script>
+<script type="module" src="component/stockUpdate.js"></script>
 </body>
 </html>

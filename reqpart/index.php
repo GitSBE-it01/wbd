@@ -1,3 +1,8 @@
+<?php
+include 'navbar.php';
+include 'checklogin.php';
+$user_login = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +49,6 @@
   });
   </script> -->
 
-  <?php include 'navbar.php';?>
 
   <main id="main" class="main">
 

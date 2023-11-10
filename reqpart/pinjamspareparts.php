@@ -2,7 +2,8 @@
 
 include ('conn_list_user.php');
 include ('conn_list_barang.php');
-include ('conn_list_barang.php');
+include 'checklogin.php';
+$user_login = $_SESSION['username'];
 
 
 $sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager'";
@@ -80,12 +81,47 @@ $data_barang = $conn_list_barang->query($sql);
                           <?php 
                            while ($row = $data_user->fetch_assoc()) {
                              echo '
-                             <option value="'.$row["id"].'">'.$row["nama"].'</option>
+                             <option value="'.$row["username"].'">'.$row["divisi"].' - '.$row["nama"].'</option>
                                ';}
                           ?>
                         </select>
                     </div>
-                    <br>
+                    <br><br>
+
+                    <?php
+                    $sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager'";
+$data_user = $conn_list_user->query($sql);                    
+                    ?>
+                    <div class="form-group">
+                        <label for="inputdiketahui">Diketahui oleh: </label>
+                        <select id="inputdiketahui" name="diketahui" onchange="addDiketahui()">
+                          <?php 
+                           while ($row = $data_user->fetch_assoc()) {
+                             echo '
+                             <option value="'.$row["username"].'|'.$row["divisi"].' '.$row["nama"].'">'.$row["divisi"].' - '.$row["nama"].'</option>
+                               ';}
+                          ?>
+                        </select>
+                        <div id="list_diketahui"></div>
+                    </div>
+
+
+                    <table class="table" id="myTablediketahui">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nama Mengetahui</th>
+                          <th scope="col">Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody id="isi_diketahui" name="isi_diketahui[]">
+                      </tbody>
+                    </table>
+
+
+                    <br><br>
+                    
+
+
                     <div class="form-group">
                         <label for="inputnamabarang">Nama Barang</label>
                         <select id="inputnamabarang" name="nama_barang" onchange="addBarang()">
@@ -97,7 +133,6 @@ $data_barang = $conn_list_barang->query($sql);
                           ?>
                         </select>
                         <div id="list_nama_barang"></div>
-                          
                     </div>
 
 
@@ -109,39 +144,44 @@ $data_barang = $conn_list_barang->query($sql);
                           <th scope="col">Edit</th>
                         </tr>
                       </thead>
-                      <tbody id="isi_barang_minta">
+                      <tbody id="isi_barang_minta" name="isi_barang_minta[]">
                       </tbody>
                     </table>
 
+                    <br><br>
 
                     <div class="form-group">
                         <label for="inputtglminta">Tanggal Minta</label>
                         <input type="date" class="form-control" id="inputtglminta" name="tanggal_awal" placeholder="Masukkan Tanggal Awal">
                     </div>
-                    <br>
+                    <br><br>
                     <div class="form-group">
                         <label for="inputduedate">Tanggal Akhir</label>
                         <input type="date" class="form-control" id="inputduedate" name="tanggal_akhir" placeholder="Masukkan Tenggat Waktu">
                     </div>
-                    <br>
+                    <br><br>
             
-                    <br>
                     <div class="form-group">
                         <label for="inputacccode">Account Code</label>
                         <input type="text" class="form-control" id="inputacccode" name="account_code" placeholder="Masukkan Account Code">
                     </div>
-                    <br>
+                    <br><br>
                     <div class="form-group">
                         <label for="inputperlu">Keperluan</label>
                         <input type="text" class="form-control" id="inputperlu" name="keperluan" placeholder="Masukkan Penjelasan Keperluan">
                     </div>
-                    <br>
+                    <br><br>
                     <div class="form-group">
                         <label for="inputcostcenter">Cost Center</label>
                         <input type="text" class="form-control" id="inputcostcenter" name="cost_center" placeholder="Masukkan Cost Center">
                     </div>
-                    <br>
+                    <br><br>
 
+                    <div class="form-group">
+                        <label for="imputcomment">Comment</label>
+                        <input type="text" class="form-control" id="imputcomment" name="comment" placeholder="Masukkan Comment">
+                    </div>
+                    <br><br>
                 </div>
                 <br/>
                 <button style="align-items: center;" class="btn btn-success" id="submit">Submit</button>
@@ -171,15 +211,14 @@ $data_barang = $conn_list_barang->query($sql);
       var selectBox = document.getElementById("inputnamabarang");
       let selectedValue = selectBox.options[selectBox.selectedIndex].value;
       const myArray = selectedValue.split("|"); 
-      let htm = "<tr id=fulldel_"+ counter +"><td>"+ myArray[1] +"</td> <td><input type="+ "text" +" id='data_"+ myArray[0] +"'></td> <td><input type=button id='del_"+counter+"' value='cancel'></td></tr>";
+      let htm = "<tr id=fulldel_"+ counter +"><td id='"+ myArray[0] +"' name='data_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='td_"+counter +"' value='"+ myArray[0] +"'>"+ myArray[1] +"</td> <td><input type='text' name='total_" +counter+ "'></td> <td><input type=button id='del_"+counter+"' value='cancel'><input type='hidden' name='list_id[]' value = '"+ counter +"'></td></tr>";
       document.getElementById("isi_barang_minta").innerHTML += htm;
+      // document.getElementById("tempat_tambah_list_id["+ counter-1 +"]").innerHTML = counter;
     }
 
     document.addEventListener("click", function(event) {
       if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del_')) {
         const idTarget = event.target.getAttribute('id');
-        // const idElement = document.getElementById(idTarget);
-        // window.alert(idElement.value)
         const id_saja = idTarget.replace(/del_/g, "");
         const id_delete = "fulldel_" + id_saja
         // window.alert(id_delete)
@@ -187,10 +226,30 @@ $data_barang = $conn_list_barang->query($sql);
         //idElement.remove();
       }
     })
-/*    function delete_Self(a) {
-      // document.getElementById("test").remove();
-      window.alert(a)
-    }*/
+
+
+    var counterDiketahui = 0;
+    function addDiketahui() {
+      counterDiketahui++;
+      var selectBox = document.getElementById("inputdiketahui");
+      let selectedValue = selectBox.options[selectBox.selectedIndex].value;
+      const myArray = selectedValue.split("|"); 
+      let htm = "<tr id=fulldeltahu_"+ counterDiketahui +"><td id='"+ myArray[0] +"' name='datatahu_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='tdtahu_"+counterDiketahui +"' value='"+ selectedValue +"'>"+ myArray[1] +"</td> <td><input type=button id='deltahu_"+counterDiketahui+"' value='cancel'><input type='hidden' name='listtahu_id[]' value = '"+ counterDiketahui +"'></td></tr>";
+      document.getElementById("isi_diketahui").innerHTML += htm;
+      // document.getElementById("tempat_tambah_list_id["+ counter-1 +"]").innerHTML = counter;
+    }
+
+    document.addEventListener("click", function(event) {
+      if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('deltahu_')) {
+        const idTarget = event.target.getAttribute('id');
+        const id_saja = idTarget.replace(/deltahu_/g, "");
+        const id_delete = "fulldeltahu_" + id_saja
+        // window.alert(id_delete)
+        document.getElementById(id_delete).remove();
+        //idElement.remove();
+      }
+    })
+
     </script>
 
   
