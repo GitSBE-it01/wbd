@@ -1,6 +1,14 @@
 .tm {
+    padding: .4rem;
+    width: 85vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tm2 {
     margin: .3rem;
-    width: 84vw;
+    padding: .4rem;
+    width: 85vw;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -18,7 +26,6 @@
     margin: .3rem;
     height: 8vh;
     width: 84vw;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -51,16 +58,6 @@
     margin: .3rem;
     height: auto;
     width: 84vw;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-
-.tdCont2 {
-    margin: .3rem;
-    height: auto;
-    width: 80vw;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 

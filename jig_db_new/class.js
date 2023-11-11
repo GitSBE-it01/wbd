@@ -120,6 +120,7 @@ class Data {
 // di bawah adalah pembuatan object dengan bantuan class di atas 
 export const access = new Data('access');
 export const user = new Data('user');
+export const list_location = new Data('list_location');
 export const log_master_query = new Data('log_master_query');
 export const log_location_query = new Data('log_location_query');
 export const log_function_query = new Data('log_function_query');

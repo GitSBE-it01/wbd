@@ -80,7 +80,7 @@ if ($status === 'success') {
 
     const title = document.createElement('div');
     title.textContent = "Update Data";
-    title.classList.add('navCard', 'sl3', 'fc-w', 'title', 'pt2');
+    title.classList.add('navCard', 'sl3', 'fc-w', 'fs-xl', 'pt1', 'pl3', 'fw-blk');
     main.appendChild(title);
     /*
     ============================================================================
@@ -115,6 +115,7 @@ if ($status === 'success') {
     */
     import { search } from './component/search.js';
     await search('main', 'searchStock', 'btnStock', 'divStock');
+
 
 
 </script>

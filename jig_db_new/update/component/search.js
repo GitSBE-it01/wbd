@@ -1,5 +1,5 @@
 import { loading } from './load.js';
-import { datalistLoc } from './datalist.js';
+import { datalistLoc, locList } from './datalist.js';
 
 export const search = async (target, inputId, btnId, divId) => {
     try {
@@ -11,10 +11,11 @@ export const search = async (target, inputId, btnId, divId) => {
         div.classList.add('fc', 'navCard3', 'sl6');
         div.id = divId;
         await datalistLoc('jig_suggest');
+        await locList('dataLokasi');
         
         const title2 = document.createElement('div');
         title2.textContent = 'item jig';
-        title2.classList.add('fc-w', 'cap', 'title2');
+        title2.classList.add('fc-w', 'cap', 'fs-l', 'pl3', 'pv3', 'sl3');
 
         // search component
         const div2 = document.createElement('div');
