@@ -95,7 +95,6 @@ class Data {
             const entry = { [keys[i]]: values[i] };
             updateFilter.push(entry);
         }
-        console.log(updateFilter);
         try {
             const response = await fetch('http://192.168.2.103:8080/wbd/VJS-pr01/middleware/api.php', {
                 method: 'POST', 

@@ -55,7 +55,7 @@ if(mysqli_query($conn_form_pinjam, $sql)){
 
     foreach($allNama as $key=>$value) {
         require_once "Mail.php";
-        $subject = "REQUEST SPAREPART - COMMENT";
+        $subject = "REQUEST SPAREPART - NEW COMMENT";
         $body  = "Dear ".$allNama[$key]."\n \n";
         $body .= "\n";
         $body .= "Comment by: ".$result_user_data["nama"]." (".$result_user_data["divisi"].")\n";

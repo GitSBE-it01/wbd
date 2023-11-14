@@ -50,8 +50,9 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
       h1 {
   text-align: center;
   }
-  
-
+  img:hover {
+  opacity: 0.5;
+}
   </style>
 </head>
 
@@ -60,7 +61,12 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
 <?php include 'navbar.php';?>
 
   <main id="main" class="main">
-
+  <div style="float:left"><a onclick="PrintDiv();"><b>Print: </b> <img src="assets/img/print.png" style="width: 30px"></a></div>
+  <?php
+    if((strtoupper($user_login) == strtoupper($result_user['peminta_id']) ||strtoupper($user_login) == strtoupper($result_user['created_id'])) && $result_user["verifikasi"]==0){ // CUMA BOLEH YG BUAT YG FINISH / BELUM FINISH
+      echo '<div style="float:right"><b>Permintaan Selesai? </b><a href="editformutama.php?id='.$result_user['id'].'">Yes</a></div>';
+    }
+  ?>           
     <div class="pagetitle">
       <h1>Verifikasi Permintaan</h1> 
     </div><!-- End Page Title -->
@@ -240,7 +246,6 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
                   ?>
                   </tbody>
                 </table>
-              <!-- <input type="button" value="print" onclick="PrintDiv();" /> -->
             </div>
           </div> 
         </div>
@@ -251,18 +256,6 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
             <div class="card-body">
               <table class="table">
                 <tbody>
-                  <tr>
-                  <th><a>Klik disini untuk Print:</a><th>
-                  <td><div><a onclick="PrintDiv();"><img src="assets/img/print.png" style="width: 30px"></a></div></td>
-                  </tr>
-                  <tr>
-                  <?php
-                    if(strtoupper($user_login) == strtoupper($result_user['peminta_id']) ||strtoupper($user_login) == strtoupper($result_user['created_id'])){ // CUMA BOLEH YG BUAT YG FINISH
-                      echo '<th><a>Permohonan Selesai?</a><th>                      
-                      <td><a href="editformutama.php?id='.$result_user['id'].'">Yes</a></td>';
-                    }
-                  ?>                  
-                  </tr>
                   <tr>
                   <th><a>Tambah Comment:</a><th>
                   <?php
@@ -291,7 +284,7 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
   <script type="text/javascript">     
     function PrintDiv() {    
        var divToPrint = document.getElementById('divToPrint');
-       var popupWin = window.open('', '_blank');
+       var popupWin = window.open('');
        popupWin.document.open();
        popupWin.document.write('<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></html><h1>Form Permintaan Spare Part</h1><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
       popupWin.document.close();

@@ -3,13 +3,22 @@ $access= 'SELECT * FROM access_config.access_wbd';
 
 $user= 'SELECT * FROM access_config.user_list';
 
-$log_master_query = 'SELECT * FROM log_master';
-$log_location_query = 'SELECT * FROM log_location';
-$log_function_query = 'SELECT * FROM log_function';
 $jig_master_query = 'SELECT * FROM jig_master';
+
+$log_master_query = 'SELECT * FROM log_master';
+
+$log_function_query = 'SELECT * FROM log_function';
+
 $jig_location_query = 'SELECT * FROM jig_location';
+$insert_jig_location_query = 'INSERT INTO jig_location';
+$update_jig_location_query = 'UPDATE jig_location';
+
+$log_location_query = 'SELECT * FROM log_location';
+
 $jig_function_query = 'SELECT * FROM jig_function';
+
 $item_detail_query = "SELECT distinct(pt_part), pt_desc1, pt_desc2, pt_status FROM dbqad_live.pt_mstr";
+
 $list_location= 'SELECT * FROM list_location';
 
 $codeList = array(
@@ -23,4 +32,6 @@ $codeList = array(
     'jig_location_query'=>$jig_location_query,
     'jig_function_query'=>$jig_function_query,
     'item_detail_query'=>$item_detail_query,
+    'insert_jig_location_query'=>$insert_jig_location_query,
+    'update_jig_location_query'=>$update_jig_location_query,
 );

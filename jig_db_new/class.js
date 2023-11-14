@@ -5,6 +5,8 @@ Berikut adalah list CLASS yang akan di pakai di prog VJS
 class Data {
     constructor(key) {
         this.key = key;
+        this.insertKey = 'insert_'+key;
+        this.updateKey = 'update_'+key;
     }
 
     async getData() {
@@ -87,7 +89,7 @@ class Data {
         }
       }
 
-      async updateData(update) {
+      async updateData(update, filter) {
         const keys = Object.keys(update);
         const values = Object.values(update);
         const updateFilter=[];
@@ -95,14 +97,20 @@ class Data {
             const entry = { [keys[i]]: values[i] };
             updateFilter.push(entry);
         }
-        console.log(updateFilter);
+        const keys2 = Object.keys(update);
+        const values2 = Object.values(update);
+        const updateFilter2=[];
+        for (let i=0; i<keys2.length; i++) {
+            const entry = { [keys2[i]]: values2[i] };
+            updateFilter2.push(entry);
+        }
         try {
             const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
               },
-              body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter})
+              body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter, updateFilter2})
             });
 
             if (!response.ok) {

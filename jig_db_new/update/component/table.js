@@ -27,6 +27,8 @@ export const tableHeader = async(target,tableID, arrHead) => {
 export const tblUpdLoc = async (target, dataLoc) => {
     try {
         const table = document.getElementById(target);
+
+        // toleransi input
         const card  = document.createElement('div');
         card.classList.add('fr', 'mh2');
         const label = document.createElement('label');

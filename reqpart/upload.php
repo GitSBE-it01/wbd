@@ -7,7 +7,7 @@ include ('checklogin.php');
 $user_login = $_SESSION['username'];
 
 // FIX
-$id_login =  $user_login;
+$id_login =  strtoupper($user_login);
 $id_peminta =  $_REQUEST['nama_peminta'];
 // $tanggal_awal =  $_REQUEST['tanggal_awal'];
 $tanggal_akhir = $_REQUEST['tanggal_akhir'];
@@ -70,7 +70,7 @@ if(mysqli_query($conn_form_pinjam, $sql)){
 foreach($allNama as $key=>$value) {
     require_once "Mail.php";
     $subject = "REQUEST SPAREPART - PERMINTAAN";
-    $body  = "Dear" .$allNama[$key]."\n \n";
+    $body  = "Dear " .$allNama[$key]."\n \n";
     $body .= "\n";
     $body .= "Keperluan:  ".$keperluan."\n  \n";
     $body .= "Click link below to view detail.\n";

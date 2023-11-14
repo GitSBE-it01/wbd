@@ -109,16 +109,16 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
             <div class="card-body">
               <div class="float-right"><h5 class="card-title"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cari data..">  </h5></div>
               
-              <table class="table" id="myTable">
+              <table class="table table-hover table-bordered table-sm" id="myTable">
               <thead>
-                <tr>
+                <tr class="table-secondary align-middle">
                   <!-- <th scope="col">Created by</th> -->
-                  <th scope="col">Nama Peminta</th>
-                  <th scope="col">List Barang</th>
-                  <th scope="col">Verifikasi</th>
-                  <th scope="col">Tenggat Waktu</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Details</th>            
+                  <th class="text-center" scope="col">Nama Peminta</th>
+                  <th class="text-center" scope="col">List Barang</th>
+                  <th class="text-center" scope="col">Verifikasi</th>
+                  <th class="text-center" scope="col">Tenggat Waktu</th>
+                  <th class="text-center" scope="col">Status</th>
+                  <th class="text-center" scope="col">Details</th>            
                 </tr>
               </thead>
               <tbody>
@@ -137,10 +137,16 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
 
                   $sql = "SELECT * FROM list_verifikasi WHERE id_pinjam='".$row_result_data_peminta['id']."'";
                   $result_list_verifikasi = $conn_form_pinjam->query($sql);
-                  echo '
-                  <tr> 
+                  if($row_result_data_peminta["verifikasi"] == 0){
+                    echo '
+                    <tr>'; 
+                  }
+                  else{
+                    echo '
+                    <tr class="table-info">'; 
+                  }
                      
-                      <td>'.$result_user_peminta_data["nama"].'</td> 
+                  echo'<td>'.$result_user_peminta_data["nama"].'</td> 
                       <td>';
                   while ($row_result_list_minta_barang = $result_list_minta_barang->fetch_assoc()) {
                     $sql = "SELECT CONCAT(pt_part, ' (', pt_desc1, ' ', pt_desc2, ')') as nama FROM pt_mstr where id = '".$row_result_list_minta_barang['id_barang']."'";

@@ -208,7 +208,8 @@ $data_user = $conn_list_user->query($sql);
       let selectedValue = selectBox.options[selectBox.selectedIndex].value;
       const myArray = selectedValue.split("|"); 
       let htm = "<tr id=fulldel_"+ counter +"><td id='"+ myArray[0] +"' name='data_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='td_"+counter +"' value='"+ myArray[0] +"'>"+ myArray[1] +"</td> <td><input type='text' name='total_" +counter+ "'></td> <td><input type=button id='del_"+counter+"' value='cancel'><input type='hidden' name='list_id[]' value = '"+ counter +"'></td></tr>";
-      document.getElementById("isi_barang_minta").innerHTML += htm;
+      // document.getElementById("isi_barang_minta").innerHTML += htm;
+      $("#isi_barang_minta").append(htm);
       // document.getElementById("tempat_tambah_list_id["+ counter-1 +"]").innerHTML = counter;
     }
 

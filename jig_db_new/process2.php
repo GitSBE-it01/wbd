@@ -121,7 +121,7 @@ function insertData($query, $filterValues) {
             ${'input' . $counter} = array();
             foreach ($values as $key2 => $value) {
                 // Extract 'value' from subarray and add to the variable
-                ${'input' . $counter}[] = $value['value'];
+                ${'input' . $counter}[] = $value;
             }
             $counter++;
         }
@@ -171,11 +171,13 @@ function insertData($query, $filterValues) {
     }
 }
 
-function updateData($query, $filterValues) {
+function updateData($query, $filterValues, $filterValues2) {
     $conn = connectToDatabase();
     $counter = 0;   
     $count = count($filterValues);
     $keysParam = array();
+    $count2 = count($filterValues2);
+    $filterParam = array();
 
     // making array for each data
     for ($i=0; $i<$count; $i++){
@@ -188,19 +190,16 @@ function updateData($query, $filterValues) {
             ${'input' . $counter} = array();
             foreach ($values as $key2 => $value) {
                 // Extract 'value' from subarray and add to the variable
-                ${'input' . $counter}[] = $value['value'];
+                ${'input' . $counter}[] = $value;
             }
             $counter++;
         }
     }
 
     // Build the WHERE clause based on filter values
-    $params = '(';
-    $bind = ' (';
     $types = '';
     for ($i=0; $i<$counter; $i++){
-        $params .=  ${'inputKeys' . $i} . ", ";
-        $bind .= "?, ";
+        $params .=  ${'inputKeys' . $i} . "=?, ";
         if (is_int(${'input' . $i}[0])) {
             $types .= "i"; // Integer
         } elseif (is_float(${'input' . $i}[0])) {
@@ -210,12 +209,9 @@ function updateData($query, $filterValues) {
         }
     }
     $params = rtrim($params, ', ');
-    $bind = rtrim($bind, ', ');
-    $params .= ")";
-    $bind .= ")";
-    $wholeQuery = $query . $params ." VALUES" . $bind;
-
-    $stmt = $conn->prepare($wholeQuery);
+    $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
+    echo $wholeQuery;
+    /*$stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
@@ -235,7 +231,7 @@ function updateData($query, $filterValues) {
                 echo "success";
             }
         }
-    }
+    }*/
 }
 
 
