@@ -8,6 +8,9 @@ import {updateInsertData} from './data.js';
 document.addEventListener('click', async function(event) {
     if (event.target.getAttribute('id') === 'btnStock'){
         try {
+            if (document.getElementById('newContain')) {
+                document.getElementById('newContain').remove(document.getElementById('newContain').firstChild)
+            }
             const filterId = document.getElementById('searchStock');
             const filter = filterId.value;
             if (filter === "") {
@@ -23,11 +26,7 @@ document.addEventListener('click', async function(event) {
             const dataLoc = await jig_location_query.fetchDataFilter({item_jig: filter});
 
             // form utk input data dan show data saat ini
-            const input = document.createElement('input');
-            input.textContent = 'Tolerance';
-            input.id ='tol';
-            input.setAttribute('autocomplete', 'off');
-            input.setAttribute('type', 'text');
+
 
             const arrayHeader = ['Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark']
             await tableHeader('newContain', 'tableStock', arrayHeader);

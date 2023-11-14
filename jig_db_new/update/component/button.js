@@ -35,10 +35,10 @@ export const addNewStock = async(uniq) => {
         const input1 = document.createElement('input');
         input1.placeholder = 'select location';
         input1.setAttribute('type','text');
-        input1.setAttribute('list','location_ListAll');
+        input1.setAttribute('list','dataLokasi');
         input1.setAttribute('autocomplete','off');
         input1.setAttribute('data-input','');
-        input1.id = `item_jig-${uniq}`;
+        input1.id = `lokasi+${uniq}`;
         div1.appendChild(input1);
         
         // qty per unit
@@ -47,7 +47,7 @@ export const addNewStock = async(uniq) => {
         const input2 = document.createElement('input');
         input2.classList.add('sl5', 'fc-w')
         input2.setAttribute('type','text');
-        input2.id = `qty_per_unit-${uniq}`;
+        input2.id = `qty_per_unit+${uniq}`;
         input2.setAttribute('data-input','');
         input2.setAttribute('readonly', 'readonly');
         div2.appendChild(input2);
@@ -63,7 +63,7 @@ export const addNewStock = async(uniq) => {
             option.textContent = arr[i];
             input3.appendChild(option);
         }
-        input3.id = `addSub-${uniq}`;
+        input3.id = `addSub+${uniq}`;
         input3.setAttribute('data-input','');
         div3.appendChild(input3);
             
@@ -72,7 +72,7 @@ export const addNewStock = async(uniq) => {
         div4.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
         const input4 = document.createElement('input');
         input4.setAttribute('type','text');
-        input4.id = `qty-${uniq}`;
+        input4.id = `qty+${uniq}`;
         input4.setAttribute('data-input','');
         div4.appendChild(input4);
             
@@ -81,7 +81,7 @@ export const addNewStock = async(uniq) => {
         div5.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
         const input5 = document.createElement('input');
         input5.setAttribute('type','text');
-        input5.id = `unit-${uniq}`;
+        input5.id = `unit+${uniq}`;
         input5.setAttribute('data-input','');
         div5.appendChild(input5);
     
@@ -90,7 +90,7 @@ export const addNewStock = async(uniq) => {
         div6.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
         const input6 = document.createElement('input');
         input6.setAttribute('type','text');
-        input6.id = `remark-${uniq}`;
+        input6.id = `remark+${uniq}`;
         input6.setAttribute('data-input','');
         div6.appendChild(input6);
     

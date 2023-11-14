@@ -41,6 +41,8 @@ $data_barang = $conn_list_barang->query($sql);
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <style type="text/css">
   h1 {
   text-align: center;
@@ -77,7 +79,7 @@ $data_barang = $conn_list_barang->query($sql);
                 <div class="col-md-12">  
                     <div class="form-group">
                         <label for="inputnama">Nama Peminta: </label>
-                        <select id="inputnama" name="nama_peminta">
+                        <select class="js-example-basic-single" id="inputnama" name="nama_peminta">
                           <?php 
                            while ($row = $data_user->fetch_assoc()) {
                              echo '
@@ -94,7 +96,7 @@ $data_user = $conn_list_user->query($sql);
                     ?>
                     <div class="form-group">
                         <label for="inputdiketahui">Diketahui oleh: </label>
-                        <select id="inputdiketahui" name="diketahui" onchange="addDiketahui()">
+                        <select class="js-example-basic-single2" id="inputdiketahui" name="diketahui" onchange="addDiketahui()">
                           <?php 
                            while ($row = $data_user->fetch_assoc()) {
                              echo '
@@ -109,7 +111,7 @@ $data_user = $conn_list_user->query($sql);
                     <table class="table" id="myTablediketahui">
                       <thead>
                         <tr>
-                          <th scope="col">Nama Mengetahui</th>
+                          <th scope="col" style="width: 80%">Nama Mengetahui</th>
                           <th scope="col">Edit</th>
                         </tr>
                       </thead>
@@ -123,12 +125,12 @@ $data_user = $conn_list_user->query($sql);
 
 
                     <div class="form-group">
-                        <label for="inputnamabarang">Nama Barang</label>
-                        <select id="inputnamabarang" name="nama_barang" onchange="addBarang()">
+                        <label for="inputnamabarang">Nama Barang: </label>
+                        <select class="js-example-basic-single3" id="inputnamabarang" name="nama_barang" onchange="addBarang()">
                           <?php 
                            while ($row = $data_barang->fetch_assoc()) {
                              echo '
-                             <option value="'.$row["id"].'|'.$row["pt_desc1"].' '.$row["pt_desc2"].'">'.$row["pt_desc1"].' '.$row["pt_desc2"].'</option>
+                             <option value="'.$row["id"].'|'.$row["pt_part"].' '.$row["pt_desc1"].' '.$row["pt_desc2"].'">'.$row["pt_part"].' ('.$row["pt_desc1"].' '.$row["pt_desc2"].')</option>
                                ';}
                           ?>
                         </select>
@@ -139,8 +141,8 @@ $data_user = $conn_list_user->query($sql);
                     <table class="table" id="myTable">
                       <thead>
                         <tr>
-                          <th scope="col">Nama Barang</th>
-                          <th scope="col">Jumlah Barang</th>
+                          <th scope="col" style="width: 60%">Nama Barang</th>
+                          <th scope="col" style="width: 20%">Jumlah Barang</th>
                           <th scope="col">Edit</th>
                         </tr>
                       </thead>
@@ -150,36 +152,30 @@ $data_user = $conn_list_user->query($sql);
 
                     <br><br>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="inputtglminta">Tanggal Minta</label>
                         <input type="date" class="form-control" id="inputtglminta" name="tanggal_awal" placeholder="Masukkan Tanggal Awal">
-                    </div>
-                    <br><br>
+                    </div> -->
+                    <!-- <br><br> -->
                     <div class="form-group">
-                        <label for="inputduedate">Tanggal Akhir</label>
+                        <label for="inputduedate">Tanggal Akhir: </label>
                         <input type="date" class="form-control" id="inputduedate" name="tanggal_akhir" placeholder="Masukkan Tenggat Waktu">
                     </div>
                     <br><br>
             
                     <div class="form-group">
-                        <label for="inputacccode">Account Code</label>
+                        <label for="inputacccode">Account Code: </label>
                         <input type="text" class="form-control" id="inputacccode" name="account_code" placeholder="Masukkan Account Code">
                     </div>
                     <br><br>
                     <div class="form-group">
-                        <label for="inputperlu">Keperluan</label>
+                        <label for="inputperlu">Keperluan: </label>
                         <input type="text" class="form-control" id="inputperlu" name="keperluan" placeholder="Masukkan Penjelasan Keperluan">
                     </div>
                     <br><br>
                     <div class="form-group">
-                        <label for="inputcostcenter">Cost Center</label>
+                        <label for="inputcostcenter">Cost Center: </label>
                         <input type="text" class="form-control" id="inputcostcenter" name="cost_center" placeholder="Masukkan Cost Center">
-                    </div>
-                    <br><br>
-
-                    <div class="form-group">
-                        <label for="imputcomment">Comment</label>
-                        <input type="text" class="form-control" id="imputcomment" name="comment" placeholder="Masukkan Comment">
                     </div>
                     <br><br>
                 </div>
@@ -227,7 +223,6 @@ $data_user = $conn_list_user->query($sql);
       }
     })
 
-
     var counterDiketahui = 0;
     function addDiketahui() {
       counterDiketahui++;
@@ -250,6 +245,11 @@ $data_user = $conn_list_user->query($sql);
       }
     })
 
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+    $('.js-example-basic-single2').select2();
+    $('.js-example-basic-single3').select2();
+    });
     </script>
 
   

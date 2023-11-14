@@ -4,7 +4,7 @@ include('conn_list_barang.php');
 include('conn_list_user.php');
 
 
-$sql = "SELECT * FROM datapeminta";
+$sql = "SELECT * FROM datapeminta ORDER BY id DESC";
 $result_data_peminta = $conn_form_pinjam->query($sql);
 
 
@@ -71,6 +71,14 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
     /* Add a grey background color to the table header and on hover */
     background-color: #f1f1f1;
   }
+
+  .zoom {
+    transition: transform .2s; /* Animation */
+  }
+
+  .zoom:hover {
+    transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
   </style>
 </head>
 
@@ -97,7 +105,6 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
     <section class="section">
       <div class="row">
         <div class="col-lg-qw">
-          
           <div class="card">
             <div class="card-body">
               <div class="float-right"><h5 class="card-title"><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cari data..">  </h5></div>
@@ -105,14 +112,13 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
               <table class="table" id="myTable">
               <thead>
                 <tr>
-                  <th scope="col">Created by</th>
+                  <!-- <th scope="col">Created by</th> -->
                   <th scope="col">Nama Peminta</th>
                   <th scope="col">List Barang</th>
-                  <th scope="col">Tanggal Minta</th>
+                  <th scope="col">Verifikasi</th>
                   <th scope="col">Tenggat Waktu</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Edit</th>
-                  
+                  <th scope="col">Details</th>            
                 </tr>
               </thead>
               <tbody>
@@ -128,42 +134,50 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
 
                   $sql = "SELECT * FROM list_minta_barang WHERE id_pinjam='".$row_result_data_peminta['id']."'";
                   $result_list_minta_barang = $conn_form_pinjam->query($sql);
-                  // $result_list_minta_barang_data = $result_list_minta_barang->fetch_assoc();
+
+                  $sql = "SELECT * FROM list_verifikasi WHERE id_pinjam='".$row_result_data_peminta['id']."'";
+                  $result_list_verifikasi = $conn_form_pinjam->query($sql);
                   echo '
                   <tr> 
-                      <td scope="row">'.$result_user_login_data["nama"].'</td> 
+                     
                       <td>'.$result_user_peminta_data["nama"].'</td> 
                       <td>';
                   while ($row_result_list_minta_barang = $result_list_minta_barang->fetch_assoc()) {
-                    $sql = "SELECT CONCAT(pt_desc1, ' ', pt_desc2) as nama FROM pt_mstr where id = '".$row_result_list_minta_barang['id_barang']."'";
+                    $sql = "SELECT CONCAT(pt_part, ' (', pt_desc1, ' ', pt_desc2, ')') as nama FROM pt_mstr where id = '".$row_result_list_minta_barang['id_barang']."'";
                     $result_part_master = $conn_list_barang->query($sql);
                     $result_part_master_data = $result_part_master->fetch_assoc();
 
                     echo '<b>Nama:</b> '.$result_part_master_data["nama"].'<br><b>Total:</b> '.$row_result_list_minta_barang["total"].'<hr>';
                   }
-                  echo '</td> 
-                      <td>'.$row_result_data_peminta["tanggal_awal"].'</td> 
+                  echo '<br></td> 
+                      <td>';
+                      while ($row_result_list_verifikasi = $result_list_verifikasi->fetch_assoc()) {
+                  
+                        if ($row_result_list_verifikasi["status_verifikasi"] == 0){
+                          echo '<b>Nama: </b> '.$row_result_list_verifikasi["nama"].'<br><b>Status:</b> <img src="assets/img/pending.png" class="rounded-circle" style="width: 30px"> <hr>';
+                        }
+                        else if($row_result_list_verifikasi["status_verifikasi"] == 1){
+                          echo '<b>Nama: </b> '.$row_result_list_verifikasi["nama"].'<br><b>Status:</b> <img src="assets/img/greencheck.png" class="rounded-circle" style="width: 30px"> <hr>';
+                        }
+                        else{
+                          echo '<b>Nama: </b> '.$row_result_list_verifikasi["nama"].'<br><b>Status:</b><img src="assets/img/redcross.png" class="rounded-circle" style="width: 30px"> <hr>';
+                        }
+                      }    
+                  echo'<br></td> 
                       <td>'.$row_result_data_peminta["tanggal_akhir"].'</td>';
                   if ($row_result_data_peminta["verifikasi"] == 0){
                     echo'
-                    <td><img src="assets/img/pending.png" class="rounded-circle" style="width: 30px"></td> 
-                    ';
-                  }
-                  else if($row_result_data_peminta["verifikasi"] == 1){
-                    echo'
-                    <td><img src="assets/img/greencheck.png" class="rounded-circle" style="width: 30px"></td>
+                    <td>Open</td> 
                     ';
                   }
                   else{
                     echo'
-                    <td><img src="assets/img/redcross.png" class="rounded-circle" style="width: 30px"></td>
+                    <td>Closed</td>
                     ';
                   }
-                  if ($row_result_data_peminta["verifikasi"] == 0){
-                    echo'
-                    <td><a href="verifikasihistory.php?id='.$row_result_data_peminta["id"].'"><img src="assets/img/editpng.png" style="width: 30px"></a></td> 
-                    </tr>';
-                  }
+                  echo'
+                  <td><div class="zoom"><a href="verifikasihistory.php?id='.$row_result_data_peminta["id"].'" target="_blank"><img src="assets/img/editpng.png" style="width: 30px"></a></div></td></tr>
+                  ';
                 }
                 ?>
               </tbody>
@@ -210,6 +224,14 @@ function myFunction() {
       }
     }
   }
+}
+
+function PrintDiv() {
+  var divToPrint = document.getElementById('divToPrint');
+  var popupWin = window.open('printform.php');
+  popupWin.document.open();
+  popupWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</html>');
+  popupWin.document.close();
 }
 </script>
 

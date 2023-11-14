@@ -27,6 +27,19 @@ export const tableHeader = async(target,tableID, arrHead) => {
 export const tblUpdLoc = async (target, dataLoc) => {
     try {
         const table = document.getElementById(target);
+        const card  = document.createElement('div');
+        card.classList.add('fr', 'mh2');
+        const label = document.createElement('label');
+        label.textContent = 'toleransi';
+        const input = document.createElement('input');
+        input.textContent = 'Tolerance';
+        input.id ='tol';
+        input.setAttribute('autocomplete', 'off');
+        input.setAttribute('type', 'text');
+        card.appendChild(label)
+        card.appendChild(input);
+        table.appendChild(card);
+
         for (let i=0; i<dataLoc.length; i++){
             const tr = document.createElement('div');
             tr.classList.add('fr', 'tdCont2');
@@ -40,7 +53,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             input1.setAttribute('data-input','');
             input1.setAttribute('list','dataLokasi');
             input1.setAttribute('autocomplete','off');
-            input1.id = `item_jig-${dataLoc[i].code}`
+            input1.id = `lokasi+${dataLoc[i].code}`
             div1.appendChild(input1);
             
             // qty per unit
@@ -51,7 +64,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             input2.value = dataLoc[i].qty_per_unit;
             input2.setAttribute('type','text');
             input2.setAttribute('data-input','');
-            input2.id = `qty_per_unit-${dataLoc[i].code}`
+            input2.id = `qty_per_unit+${dataLoc[i].code}`
             input2.setAttribute('readonly', 'readonly');
             div2.appendChild(input2);
              
@@ -66,7 +79,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
                 option.textContent = arr[i];
                 input3.appendChild(option);
             }
-            input3.id = `addSub-${dataLoc[i].code}`;
+            input3.id = `addSub+${dataLoc[i].code}`;
             input3.setAttribute('data-input','');
             div3.appendChild(input3);
              
@@ -76,7 +89,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             const input4 = document.createElement('input');
             input4.value = 0;
             input4.setAttribute('type','text');
-            input4.id = `qty-${dataLoc[i].code}`;
+            input4.id = `qty+${dataLoc[i].code}`;
             input4.setAttribute('data-input','');
             div4.appendChild(input4);
                 
@@ -86,7 +99,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             const input5 = document.createElement('input');
             input5.value = dataLoc[i].unit;
             input5.setAttribute('type','text');
-            input5.id = `unit-${dataLoc[i].code}`;
+            input5.id = `unit+${dataLoc[i].code}`;
             input5.setAttribute('data-input','');
             div5.appendChild(input5);
         
@@ -96,7 +109,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             const input6 = document.createElement('input');
             input6.value = "-";
             input6.setAttribute('type','text');
-            input6.id = `remark-${dataLoc[i].code}`;
+            input6.id = `remark+${dataLoc[i].code}`;
             input6.setAttribute('data-input','');
             div6.appendChild(input6);
         
@@ -106,6 +119,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             tr.appendChild(div4);
             tr.appendChild(div5);
             tr.appendChild(div6);
+
             table.appendChild(tr);
         }
         return table;
