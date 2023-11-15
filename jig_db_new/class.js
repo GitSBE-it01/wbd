@@ -69,6 +69,7 @@ class Data {
             const entry = { [keys[i]]: values[i] };
             insertFilter.push(entry);
         }
+        console.log(insertFilter);
         try {
             const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
                 method: 'POST', 
@@ -97,8 +98,8 @@ class Data {
             const entry = { [keys[i]]: values[i] };
             updateFilter.push(entry);
         }
-        const keys2 = Object.keys(update);
-        const values2 = Object.values(update);
+        const keys2 = Object.keys(filter);
+        const values2 = Object.values(filter);
         const updateFilter2=[];
         for (let i=0; i<keys2.length; i++) {
             const entry = { [keys2[i]]: values2[i] };

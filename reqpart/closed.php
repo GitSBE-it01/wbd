@@ -1,7 +1,7 @@
 <?php
 include('conn_form_pinjam.php');
 
-$sql = "SELECT * FROM datapeminta WHERE verifikasi = 0 ORDER BY id DESC";
+$sql = "SELECT * FROM datapeminta WHERE verifikasi = 1 ORDER BY id DESC";
 $result_data_peminta = $conn_form_pinjam->query($sql);
 
 
@@ -13,7 +13,7 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <title>Outstanding Request</title>
+  <title>Closed Request</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <link href="assets/img/favicon.png" rel="icon">
@@ -94,7 +94,7 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>History Permintaan Open</h1> 
+      <h1>History Permintaan Closed</h1> 
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -129,7 +129,7 @@ $result_data_peminta = $conn_form_pinjam->query($sql);
                       <td>';
                   while ($row_result_list_minta_barang = $result_list_minta_barang->fetch_assoc()) {
                     
-                    echo '<b>Nama:</b> '.$row_result_list_minta_barang["pt_part"].' '.$row_result_list_minta_barang["nama_barang"].'<br><b>Total:</b> '.$row_result_list_minta_barang["total"].'<hr>';
+                    echo '<b>Nama:</b> '.$row_result_list_minta_barang["nama_barang"].'<br><b>Total:</b> '.$row_result_list_minta_barang["total"].'<hr>';
                   }
                   echo '<br></td><td>';
                   while ($row_result_list_verifikasi = $result_list_verifikasi->fetch_assoc()) {

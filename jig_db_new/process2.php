@@ -147,7 +147,8 @@ function insertData($query, $filterValues) {
     $params .= ")";
     $bind .= ")";
     $wholeQuery = $query . $params ." VALUES" . $bind;
-
+    echo $wholeQuery;
+    /*
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
@@ -168,7 +169,7 @@ function insertData($query, $filterValues) {
                 echo "success";
             }
         }
-    }
+    }*/
 }
 
 function updateData($query, $filterValues, $filterValues2) {
@@ -196,9 +197,28 @@ function updateData($query, $filterValues, $filterValues2) {
         }
     }
 
+    $counter2 = 0;   
+    for ($i=0; $i<$count2; $i++){
+        $cek = array_keys($filterValues2[$i]);
+        $test = array_values($cek);
+        ${'inputKeysFlt' . $counter2} = $test[0];
+        $keysParam2[$test[0]] = array();
+        foreach (array_values($filterValues2[$i]) as $key => $values) {
+            // Create variable names like $input1, $input2, etc.
+            ${'inputFlt' . $counter2} = array();
+            foreach ($values as $key2 => $value) {
+                // Extract 'value' from subarray and add to the variable
+                ${'inputFlt' . $counter2}[] = $value;
+            }
+            $counter2++;
+        }
+    }
+    
+
     // Build the WHERE clause based on filter values
     $types = '';
-    for ($i=0; $i<$counter; $i++){
+    $params = '';
+    for ($i=0; $i<$count; $i++){
         $params .=  ${'inputKeys' . $i} . "=?, ";
         if (is_int(${'input' . $i}[0])) {
             $types .= "i"; // Integer
@@ -208,10 +228,23 @@ function updateData($query, $filterValues, $filterValues2) {
             $types .= "s";
         }
     }
+
+    $filter = '';
+    for ($i=0; $i<$count2; $i++){
+        $filter .=  ${'inputKeysFlt' . $i} . "=?, ";
+        if (is_int(${'inputFlt' . $i}[0])) {
+            $types .= "i"; // Integer
+        } elseif (is_float(${'inputFlt' . $i}[0])) {
+            $types .= "d"; // Double/Float
+        } elseif (is_string(${'inputFlt' . $i}[0])) {
+            $types .= "s";
+        }
+    }
+
     $params = rtrim($params, ', ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
     echo $wholeQuery;
-    /*$stmt = $conn->prepare($wholeQuery);
+    $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
@@ -231,7 +264,7 @@ function updateData($query, $filterValues, $filterValues2) {
                 echo "success";
             }
         }
-    }*/
+    }
 }
 
 

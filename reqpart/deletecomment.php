@@ -1,53 +1,49 @@
 
 <?php
 include('conn_form_pinjam.php');
-include ('conn_list_user.php');
 include ('checklogin.php');
-$user_login = $_SESSION['username'];
-
-$sqllogin = "SELECT nama FROM user WHERE username='".$user_login."'";
-$result_sqllogin = $conn_list_user->query($sqllogin);
-$result_sqllogin_data = $result_sqllogin->fetch_assoc();
 
 $id = $_GET['id'];
 $id_now = $_GET['id_now'];
 $sql = "UPDATE list_komentar SET status_komen='Deleted', created_at = NOW() where id =$id";
 
+//GET ISI KOMEN UNTUK DITAMPILIN DI EMAIL
 $sqlisikomen = "SELECT isi FROM list_komentar WHERE id=$id";
 $sqlisikomen_data = $conn_form_pinjam->query($sqlisikomen);
 $sqlisikomen_data_jadi = $sqlisikomen_data->fetch_assoc();
 
+
 $allNama = array();
 $allEmail = array();
-  
 if(mysqli_query($conn_form_pinjam, $sql)){
-    $sql1 = "SELECT username, nama FROM list_verifikasi WHERE id_pinjam=$id_now";
+    $sql1 = "SELECT username, nama, email FROM list_verifikasi WHERE id_pinjam=$id_now";
     $result = $conn_form_pinjam->query($sql1);
     while ($result_data_loop = $result->fetch_assoc()) {
         array_push($allNama, $result_data_loop["nama"]);
-        $sqlemail = "SELECT email FROM user WHERE username='".$result_data_loop["username"]."'";
-        $result_sqlemail = $conn_list_user->query($sqlemail);
-        $result_sqlemail_data = $result_sqlemail->fetch_assoc();
-        array_push($allEmail, $result_sqlemail_data['email']);
+        array_push($allEmail, $result_data_loop["email"]);
     }
 
-    $sql1 = "SELECT created_id, peminta_id FROM datapeminta WHERE id=$id_now";
+    $sql1 = "SELECT created_id, peminta_id, nama_created, email_created, nama_peminta, email_peminta FROM datapeminta WHERE id=$id_now";
     $result = $conn_form_pinjam->query($sql1);
     $result_data = $result->fetch_assoc();
-    if(strtoupper($result_data["created_id"]) != strtoupper($user_login)){
-        $sqlemail = "SELECT nama, email FROM user WHERE username='".$result_data["created_id"]."'";
-        $result_sqlemail = $conn_list_user->query($sqlemail);
-        $result_sqlemail_data = $result_sqlemail->fetch_assoc();
-        array_push($allNama, $result_sqlemail_data["nama"]);
-        array_push($allEmail, $result_sqlemail_data['email']);
+
+    array_push($allNama, $_SESSION["nama"]);
+    array_push($allEmail, $_SESSION['email']);
+    if($_SESSION["email"] != $result_data["email_created"]){
+        array_push($allNama, $result_data["nama_created"]);
+        array_push($allEmail, $result_data["email_created"]);
+        if($_SESSION["email"] != $result_data["email_peminta"] && $result_data["email_peminta"] != $result_data["email_created"]){
+            array_push($allNama, $result_data["nama_peminta"]);
+            array_push($allEmail, $result_data["email_peminta"]);
+        }
     }
-    if(strtoupper($result_data["peminta_id"]) != strtoupper($user_login)){
-        $sqlemail = "SELECT nama, email FROM user WHERE username='".$result_data["peminta_id"]."'";
-        $result_sqlemail = $conn_list_user->query($sqlemail);
-        $result_sqlemail_data = $result_sqlemail->fetch_assoc();
-        array_push($allNama, $result_sqlemail_data["nama"]);
-        array_push($allEmail, $result_sqlemail_data['email']);
+    else{
+        if($_SESSION["email"] != $result_data["email_peminta"]){
+            array_push($allNama, $result_data["nama_peminta"]);
+            array_push($allEmail, $result_data["email_peminta"]);
+        }
     }
+
 
     foreach($allNama as $key=>$value) {
         require_once "Mail.php";

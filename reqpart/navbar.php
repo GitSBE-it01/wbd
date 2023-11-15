@@ -68,12 +68,17 @@ echo '
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="pinjamspareparts.php">
-              <i class="bi bi-circle"></i><span>Form Spare Parts</span>
+              <i class="bi bi-circle"></i><span>Create</span>
             </a>
           </li>
           <li>
             <a href="historyminta.php">
-              <i class="bi bi-circle"></i><span>History Permintaan</span>
+              <i class="bi bi-circle"></i><span>Browse</span>
+            </a>
+          </li>
+		  <li>
+            <a href="closed.php">
+              <i class="bi bi-circle"></i><span>Closed</span>
             </a>
           </li>
           

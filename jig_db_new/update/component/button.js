@@ -47,7 +47,7 @@ export const addNewStock = async(uniq) => {
         const input2 = document.createElement('input');
         input2.classList.add('sl5', 'fc-w')
         input2.setAttribute('type','text');
-        input2.id = `qty_per_unit+${uniq}`;
+        input2.id = `cur_qty_per_unit+${uniq}`;
         input2.setAttribute('data-input','');
         input2.setAttribute('readonly', 'readonly');
         div2.appendChild(input2);

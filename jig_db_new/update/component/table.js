@@ -30,10 +30,11 @@ export const tblUpdLoc = async (target, dataLoc) => {
 
         // toleransi input
         const card  = document.createElement('div');
-        card.classList.add('fr', 'mh2');
+        card.classList.add('fr', 'mh2', );
         const label = document.createElement('label');
         label.textContent = 'toleransi';
         const input = document.createElement('input');
+        input.classList.add('mh4');
         input.textContent = 'Tolerance';
         input.id ='tol';
         input.setAttribute('autocomplete', 'off');
@@ -66,7 +67,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             input2.value = dataLoc[i].qty_per_unit;
             input2.setAttribute('type','text');
             input2.setAttribute('data-input','');
-            input2.id = `qty_per_unit+${dataLoc[i].code}`
+            input2.id = `cur_qty_per_unit+${dataLoc[i].code}`
             input2.setAttribute('readonly', 'readonly');
             div2.appendChild(input2);
              
@@ -114,7 +115,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             input6.id = `remark+${dataLoc[i].code}`;
             input6.setAttribute('data-input','');
             div6.appendChild(input6);
-        
+
             tr.appendChild(div1);
             tr.appendChild(div2);
             tr.appendChild(div3);

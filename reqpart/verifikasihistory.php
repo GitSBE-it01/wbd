@@ -11,10 +11,6 @@ $sql = "SELECT * FROM datapeminta where id = $id";
 $result = $conn_form_pinjam->query($sql);
 $result_user = $result->fetch_assoc();
 
-$sqluser = "SELECT nama, divisi FROM user WHERE username='".$result_user['peminta_id']."'";
-$result_user_peminta = $conn_list_user->query($sqluser);
-$result_user_peminta_data = $result_user_peminta->fetch_assoc();
-
 $sql = "SELECT * FROM list_minta_barang WHERE id_pinjam='".$result_user['id']."'";
 $result_list_minta_barang = $conn_form_pinjam->query($sql);
 
@@ -76,51 +72,57 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
         <div class="col-lg-qw">
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body pt-4">
               <table class="table">
               <tbody>
-                <tr>
-                  <th scope="col">Nama Peminta</th>
+                <tr class="border border-2">
+                  <th scope="col" >Nama Peminta</th>
                   <?php
-                  echo '<td>'.$result_user_peminta_data["nama"].'</td></tr>';
+                  echo '<td>'.$result_user["nama_peminta"].'</td></tr>';
                   ?>
 
-                <tr>
-                  <th scope="col">Asal Departemen</th>
+                <tr class="border border-2">
+                  <th scope="col" >Asal Departemen</th>
                   <?php
-                  echo '<td>'.$result_user_peminta_data["divisi"].'</td></tr>';
+                  echo '<td>'.$result_user["divisi_peminta"].'</td></tr>';
                   ?>
 
-                <tr>
+                <tr class="border border-2">
                   <th scope="col">Nama Barang</th>
                   <?php
                   echo '
-                      <td>';
+                      <td><table class="table">
+                      <thead><tr class="border border-3 border-black">
+                      <th scope="col" class="border border-3 border-black">Nama</th>
+                      <th scope="col" class="border border-3 border-black">Item Number</th>
+                      <th scope="col" class="border border-3 border-black">Deskripsi um</th>
+                      <th scope="col" class="border border-3 border-black">Total</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        ';
                       while ($row_result_list_minta_barang = $result_list_minta_barang->fetch_assoc()) {
-                        $sql = "SELECT CONCAT(pt_part, ' (',pt_desc1, ' ', pt_desc2, ')') as nama FROM pt_mstr where id = '".$row_result_list_minta_barang['id_barang']."'";
-                        $result_part_master = $conn_list_barang->query($sql);
-                        $result_part_master_data = $result_part_master->fetch_assoc();
-    
-                        echo '<b>Nama:</b> '.$result_part_master_data["nama"].'<br><b>Total:</b> '.$row_result_list_minta_barang["total"].'<br>';
+                       
+                        echo '<tr class="border border-3 border-black"><td class="border border-3 border-black">'.$row_result_list_minta_barang["nama_barang"].'</td><td class="border border-3 border-black">'.$row_result_list_minta_barang["pt_part"].'</td><td class="border border-3 border-black">'.$row_result_list_minta_barang["pt_um"].'</td><td class="border border-3 border-black">'.$row_result_list_minta_barang["total"].'</td></tr>';
                       }
-                      echo'</td></tr>';
+                      echo'</tbody></table></td></tr>';
                     ?>
 
-                <tr>
+                <tr class="border border-2">
                   <th scope="col">Keperluan</th>
                   <?php
                   echo'
                   <td>'.$result_user["keperluan"].'</td></tr>';
                   ?>
 
-                <tr>
+                <tr class="border border-2">
                   <th scope="col">Tenggat Waktu</th>
                   <?php
                   echo'
                   <td>'.$result_user["tanggal_akhir"].'</td></tr>';
                   ?>
 
-                <tr>
+                <tr class="border border-2">
                   <th scope="col">Status</th>
                   <?php
                   if ($result_user["verifikasi"] == 0){
@@ -143,8 +145,8 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
               
               <table class="table">
               <thead>
-                <tr>
-                  <th scope="col">Mengetahui</th>
+                <tr class="border border-2">
+                  <th scope="col" class="border border-2">Mengetahui</th>
                   <th scope="col">Verifikasi</th>
                   
                 </tr>
@@ -152,8 +154,8 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
               <tbody>
                 <?php
                   while ($row_result_list_verifikasi = $result_list_verifikasi->fetch_assoc()) {
-                    echo '<tr> 
-                    <td>'. $row_result_list_verifikasi["nama"] .'</td>';
+                    echo '<tr class="border border-2"> 
+                    <td class="border border-2">'.$row_result_list_verifikasi["divisi"].' '. $row_result_list_verifikasi["nama"] .'</td>';
 
                     if ($row_result_list_verifikasi["status_verifikasi"] == 0){
                       if (strtoupper($user_login) == strtoupper($row_result_list_verifikasi["username"])){
@@ -208,40 +210,71 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
 
         <div class="col-lg-qw">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body pt-4">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nama</th>
-                    <th style="width=60%">Komentar</th>
-                    <th>File</th>
-                    <th>Edit</th>
+                    <th class="border border-2">Nama</th>
+                    <th class="border border-2">Divisi</th>
+                    <th style="width=60%" class="border border-2">Komentar</th>
+                    <th class="border border-2">File</th>
+                    <th class="border border-2">Edit</th>
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="border border-2">
                 <?php
+                $counter = 0;
                   while ($row_result_list_komentar = $result_list_komentar->fetch_assoc()) {
                     if($row_result_list_komentar['status_komen']!= "Deleted"){
                     echo '<tr>
-                    <td style="width=20%"><div style="text-align=center">'.$row_result_list_komentar['nama'].'</div><hr><b>'.$row_result_list_komentar['status_komen'].': </b>'.$row_result_list_komentar['created_at'].'</td>';
+                    <td class="border border-2" style="width=20%"><div style="text-align=center">'.$row_result_list_komentar['nama'].'</div><hr><b>'.$row_result_list_komentar['status_komen'].': </b>'.$row_result_list_komentar['created_at'].'</td><td><div style="text-align=center">'.$row_result_list_komentar['divisi'].'</div></td>';
                     if(strtoupper($row_result_list_komentar['username']) == strtoupper($user_login)){
                         echo'
-                        <td><form method="POST" action="editcomment.php">
-                        <textarea name="editcomment" rows="4" cols="70">'.$row_result_list_komentar['isi'].'</textarea><input type="hidden" name="id" value='.$row_result_list_komentar['id'].'><input type="hidden" name="id_now" value='.$id.'><br>
-                        <button class="btn btn-success" id="submit">Edit</button>
-                        </form></td>
-                        <td><a href="assets/files/'.$row_result_list_komentar['namafile'].'" target="_blank">'.$row_result_list_komentar['namafile'].'</a></td>
-                        <td><a href="deletecomment.php?id='.$row_result_list_komentar['id'].'&id_now='.$id.'">Delete</a></td>
+                        <td class="border border-2">
+                        <a>'.$row_result_list_komentar['isi'].'</a>
+
+                        <button type="button" class="btn float-end" data-bs-toggle="modal" data-bs-target="#exampleModal'.$counter.'">
+                        <img src="assets/img/editpng.png" style="width: 20px">
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal'.$counter.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Komentar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="POST" action="editcomment.php" id="editkomen'.$counter.'">
+                                <textarea name="editcomment" rows="4" cols="50">'.$row_result_list_komentar['isi'].'</textarea>
+                                <input type="hidden" name="id" value='.$row_result_list_komentar['id'].'>
+                                <input type="hidden" name="id_now" value='.$id.'><br>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button form="editkomen'.$counter.'" type="submit" class="btn btn-primary" id="submit">Save</button>
+                              </div>
+                                
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                        </td>
+                        <td class="border border-2"><a href="assets/files/'.$row_result_list_komentar['namafile'].'" target="_blank">'.$row_result_list_komentar['namafile'].'</a></td>
+                        <td class="border border-2"><a href="deletecomment.php?id='.$row_result_list_komentar['id'].'&id_now='.$id.'">Delete</a></td>
                         </tr>';
                       }
                       else{
-                        echo'<td>'.$row_result_list_komentar['isi'].'</td>
-                        <td>'.$row_result_list_komentar['namafile'].'</td>
-                        <td></td>
+                        echo'<td class="border border-2">'.$row_result_list_komentar['isi'].'</td>
+                        <td class="border border-2">'.$row_result_list_komentar['namafile'].'</td>
+                        <td class="border border-2"></td>
                         </tr>';
                       }
                     }
+                    $counter+=1;
                   }
                   ?>
                   </tbody>
@@ -261,7 +294,7 @@ $result_list_komentar = $conn_form_pinjam->query($sql);
                   <?php
                   echo'
                   <form method="POST" action="addcomment.php" enctype="multipart/form-data">
-                  <td><textarea name="newcomment" rows="4" cols="100"></textarea><input type="hidden" name="id" value='.$id.'><input type="hidden" name="username" value='.$user_login.'>
+                  <td><textarea name="newcomment" rows="4" cols="100"></textarea><input type="hidden" name="id" value='.$id.'>
                   <input type="file" id="myfile" name="myfile"><br><br>
                   <button class="btn btn-success" id="submit">Submit</button></td>
                   </form>';

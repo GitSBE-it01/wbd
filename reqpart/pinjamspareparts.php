@@ -6,7 +6,7 @@ include 'checklogin.php';
 $user_login = $_SESSION['username'];
 
 
-$sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager'";
+$sql = "SELECT * from user where (jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager') ORDER BY divisi ASC";
 $data_user = $conn_list_user->query($sql);
 
 $sql = "SELECT * from pt_mstr where pt_part LIKE '3%'";
@@ -79,28 +79,29 @@ $data_barang = $conn_list_barang->query($sql);
                 <div class="col-md-12">  
                     <div class="form-group">
                         <label for="inputnama">Nama Peminta: </label>
-                        <select class="js-example-basic-single" id="inputnama" name="nama_peminta">
+                        <select class="js-example-basic-single" id="inputnama" name="id_peminta">
+							          <option value="" disabled selected>Choose</option>
                           <?php 
                            while ($row = $data_user->fetch_assoc()) {
                              echo '
-                             <option value="'.$row["username"].'">'.$row["divisi"].' - '.$row["nama"].'</option>
-                               ';}
+                             <option value="'.$row["username"].'|'.$row["divisi"].'|'.$row["nama"].'|'.$row["email"].'">'.$row["divisi"].' - '.$row["nama"].'</option>';}
                           ?>
                         </select>
                     </div>
                     <br><br>
 
                     <?php
-                    $sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager'";
+                    $sql = "SELECT * from user where jabatan='Staff' OR jabatan='Staff Approval' OR jabatan='Superintendent' OR jabatan='Manager' order by divisi, nama asc";
 $data_user = $conn_list_user->query($sql);                    
                     ?>
                     <div class="form-group">
                         <label for="inputdiketahui">Diketahui oleh: </label>
                         <select class="js-example-basic-single2" id="inputdiketahui" name="diketahui" onchange="addDiketahui()">
+							<option value="" disabled selected>Choose</option>
                           <?php 
                            while ($row = $data_user->fetch_assoc()) {
                              echo '
-                             <option value="'.$row["username"].'|'.$row["divisi"].' '.$row["nama"].'">'.$row["divisi"].' - '.$row["nama"].'</option>
+                             <option value="'.$row["username"].'|'.$row["divisi"].'|'.$row["nama"].'|'.$row["email"].'">'.$row["divisi"].' - '.$row["nama"].'</option>
                                ';}
                           ?>
                         </select>
@@ -127,10 +128,11 @@ $data_user = $conn_list_user->query($sql);
                     <div class="form-group">
                         <label for="inputnamabarang">Nama Barang: </label>
                         <select class="js-example-basic-single3" id="inputnamabarang" name="nama_barang" onchange="addBarang()">
+							          <option value="" disabled selected>Choose</option>
                           <?php 
                            while ($row = $data_barang->fetch_assoc()) {
                              echo '
-                             <option value="'.$row["id"].'|'.$row["pt_part"].' '.$row["pt_desc1"].' '.$row["pt_desc2"].'">'.$row["pt_part"].' ('.$row["pt_desc1"].' '.$row["pt_desc2"].')</option>
+                             <option value="'.$row["id"].'|'.$row["pt_part"].'|'.$row["pt_desc1"].' '.$row["pt_desc2"].'|'.$row["pt_um"].'">'.$row["pt_part"].' ('.$row["pt_desc1"].' '.$row["pt_desc2"].')</option>
                                ';}
                           ?>
                         </select>
@@ -207,7 +209,7 @@ $data_user = $conn_list_user->query($sql);
       var selectBox = document.getElementById("inputnamabarang");
       let selectedValue = selectBox.options[selectBox.selectedIndex].value;
       const myArray = selectedValue.split("|"); 
-      let htm = "<tr id=fulldel_"+ counter +"><td id='"+ myArray[0] +"' name='data_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='td_"+counter +"' value='"+ myArray[0] +"'>"+ myArray[1] +"</td> <td><input type='text' name='total_" +counter+ "'></td> <td><input type=button id='del_"+counter+"' value='cancel'><input type='hidden' name='list_id[]' value = '"+ counter +"'></td></tr>";
+      let htm = "<tr id=fulldel_"+ counter +"><td id='"+ myArray[0] +"' name='data_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='td_"+counter +"' value='"+ myArray[0] +"'><input type='hidden' name='ptum_"+counter +"' value='"+ myArray[3] +"'><input type='hidden' name='ptpart_"+counter +"' value='"+ myArray[1] +"'><input type='hidden' name='nama_barang_"+counter +"' value='"+ myArray[2] +"'>"+ myArray[1] +" " + myArray[2] +"</td> <td><input type='text' name='total_" +counter+ "'></td> <td><input type=button id='del_"+counter+"' value='cancel'><input type='hidden' name='list_id[]' value = '"+ counter +"'></td></tr>";
       // document.getElementById("isi_barang_minta").innerHTML += htm;
       $("#isi_barang_minta").append(htm);
       // document.getElementById("tempat_tambah_list_id["+ counter-1 +"]").innerHTML = counter;
@@ -230,7 +232,7 @@ $data_user = $conn_list_user->query($sql);
       var selectBox = document.getElementById("inputdiketahui");
       let selectedValue = selectBox.options[selectBox.selectedIndex].value;
       const myArray = selectedValue.split("|"); 
-      let htm = "<tr id=fulldeltahu_"+ counterDiketahui +"><td id='"+ myArray[0] +"' name='datatahu_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='tdtahu_"+counterDiketahui +"' value='"+ selectedValue +"'>"+ myArray[1] +"</td> <td><input type=button id='deltahu_"+counterDiketahui+"' value='cancel'><input type='hidden' name='listtahu_id[]' value = '"+ counterDiketahui +"'></td></tr>";
+      let htm = "<tr id=fulldeltahu_"+ counterDiketahui +"><td id='"+ myArray[0] +"' name='datatahu_"+ myArray[0] +"' value='"+ myArray[0] +"'><input type='hidden' name='tdtahu_"+counterDiketahui +"' value='"+ selectedValue +"'>"+ myArray[2] +"</td> <td><input type=button id='deltahu_"+counterDiketahui+"' value='cancel'><input type='hidden' name='listtahu_id[]' value = '"+ counterDiketahui +"'></td></tr>";
       document.getElementById("isi_diketahui").innerHTML += htm;
       // document.getElementById("tempat_tambah_list_id["+ counter-1 +"]").innerHTML = counter;
     }
