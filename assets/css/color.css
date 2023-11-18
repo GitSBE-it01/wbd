@@ -1,42 +1,15 @@
 /*
 blue color 
 */
-.bl1 {
-    background-color: #031633;
-}
-
-.bl2 {
-    background-color: #052c65;
-}
-
-.bl3 {
-    background-color:#084298;
-}
-
-.bl4 {
-    background-color:#0a58ca;   
-}
-
-.bl5 {
-    background-color:#0d6efd;
-}
-
-.bl6 {
-    background-color:#3d8bfd;
-}
-
-.bl7 {
-    background-color: #6ea8fe;
-}
-
-.bl8 {
-    background-color: #9ec5fe;   
-}
-
-.bl9 {
-    background-color:#cfe2ff;   
-}
-
+.bl1 {background-color:#031633;}
+.bl2 {background-color:#052c65;}
+.bl3 {background-color:#084298;}
+.bl4 {background-color:#0a58ca;}
+.bl5 {background-color:#0d6efd;}
+.bl6 {background-color:#3d8bfd;}
+.bl7 {background-color:#6ea8fe;}
+.bl8 {background-color:#9ec5fe;}
+.bl9 {background-color:#cfe2ff;}
 /*
 teal color 
 */
@@ -52,118 +25,38 @@ teal color
 /*
 slate color 
 */
-.sl1 {
-    background-color:HSL(210, 22%, 18%);
-}
-
-.sl2 {
-    background-color:HSL(210, 22%, 25%);
-}
-
-.sl3 {
-    background-color:HSL(210, 22%, 35%);
-}
-
-.sl4 {
-    background-color:HSL(210, 22%, 45%);   
-}
-
-.sl5 {
-    background-color:HSL(210, 22%, 50%);
-}
-
-.sl6 {
-    background-color:HSL(210, 22%, 65%);
-}
-
-.sl7 {
-    background-color:HSL(210, 22%, 75%);
-}
-
-.sl8 {
-    background-color:HSL(210, 22%, 85%);   
-}
-
-.sl9 {
-    background-color:HSL(210, 22%, 95%);   
-}
-
+.sl1 {background-color:HSL(210, 22%, 18%);}
+.sl2 {background-color:HSL(210, 22%, 25%);}
+.sl3 {background-color:HSL(210, 22%, 35%);}
+.sl4 {background-color:HSL(210, 22%, 45%);}
+.sl5 {background-color:HSL(210, 22%, 50%);}
+.sl6 {background-color:HSL(210, 22%, 65%);}
+.sl7 {background-color:HSL(210, 22%, 75%);}
+.sl8 {background-color:HSL(210, 22%, 85%);}
+.sl9 {background-color:HSL(210, 22%, 95%);}
 
 /*
 orange color 
 */
-.or1 {
-    background-color:HSL(40, 100%, 18%);
-}
-
-.or2 {
-    background-color:HSL(40, 100%, 25%);
-}
-
-.or3 {
-    background-color:HSL(40, 100%, 35%);
-}
-
-.or4 {
-    background-color:HSL(40, 100%, 45%);   
-}
-
-.or5 {
-    background-color:HSL(40, 100%, 50%);
-}
-
-.or6 {
-    background-color:HSL(40, 100%, 65%);
-}
-
-.or7 {
-    background-color:HSL(40, 100%, 75%);
-}
-
-.or8 {
-    background-color:HSL(40, 100%, 85%);   
-}
-
-.or9 {
-    background-color:HSL(40, 100%, 95%);   
-}
-
+.or1 {background-color:HSL(40, 100%, 18%);}
+.or2 {background-color:HSL(40, 100%, 25%);}
+.or3 {background-color:HSL(40, 100%, 35%);}
+.or4 {background-color:HSL(40, 100%, 45%);}
+.or5 {background-color:HSL(40, 100%, 50%);}
+.or6 {background-color:HSL(40, 100%, 65%);}
+.or7 {background-color:HSL(40, 100%, 75%);}
+.or8 {background-color:HSL(40, 100%, 85%);}
+.or9 {background-color:HSL(40, 100%, 95%);}
 
 /*
 red color 
 */
-.rd1 {
-    background-color:HSL(8, 100%, 18%);
-}
-
-.rd2 {
-    background-color:HSL(8, 100%, 25%);
-}
-
-.rd3 {
-    background-color:HSL(8, 100%, 35%);
-}
-
-.rd4 {
-    background-color:HSL(8, 100%, 45%);   
-}
-
-.rd5 {
-    background-color:HSL(8, 100%, 50%);
-}
-
-.rd6 {
-    background-color:HSL(8, 100%, 65%);
-}
-
-.rd7 {
-    background-color:HSL(8, 100%, 75%);
-}
-
-.rd8 {
-    background-color:HSL(8, 100%, 85%);   
-}
-
-.rd9 {
-    background-color:HSL(8, 100%, 95%);   
-}
+.rd1 {background-color:HSL(8, 100%, 18%);}
+.rd2 {background-color:HSL(8, 100%, 25%);}
+.rd3 {background-color:HSL(8, 100%, 35%);}
+.rd4 {background-color:HSL(8, 100%, 45%);}
+.rd5 {background-color:HSL(8, 100%, 50%);}
+.rd6 {background-color:HSL(8, 100%, 65%);}
+.rd7 {background-color:HSL(8, 100%, 75%);}
+.rd8 {background-color:HSL(8, 100%, 85%);}
+.rd9 {background-color:HSL(8, 100%, 95%);}

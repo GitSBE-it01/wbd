@@ -34,11 +34,10 @@ export const dataSpk = async () => {
         const summedData = Array.from(typeMap.values());
         const src3 = await jig_function_query.getData();
         const src4 = await item_detail_query.getData();
-        const data = src1.map((item1) => {
+        const data = src3.map((item1) => {
             const matchedObj = summedData.find((item2) => item2.item_jig === item1.item_jig);
-            const matchedObj2 = src3.find((item3) => item3.item_jig === item1.item_jig);
-            const matchedObj3 = src4.find((item4) => item4.pt_part === matchedObj2?.item_type);
-        
+            const matchedObj2 = src1.find((item3) => item3.item_jig === item1.item_jig);
+            const matchedObj3 = src4.find((item4) => item4.pt_part === item1.item_type);
             const qtyOH =
                 role.value === "admin" || role.value === "superuser"
                 ? matchedObj?.qty || 0
@@ -46,16 +45,16 @@ export const dataSpk = async () => {
         
             return {
                 item_jig: item1.item_jig,
-                item_type: matchedObj2?.item_type || "",
+                item_type: item1?.item_type || "",
                 description: `${matchedObj3?.pt_desc1 || ""}-${matchedObj3?.pt_desc2 || ""}`,
                 status_speaker: matchedObj3?.pt_status || "",
-                status_jig: item1.status_jig,
-                material: item1.material,
-                opt_on: matchedObj2?.opt_on || "",
-                opt_off: matchedObj2?.opt_off || "",
-                desc_jig: item1.desc_jig || "",
+                status_jig: matchedObj2?.status_jig || "",
+                material: matchedObj2?.material || "",
+                opt_on: item1?.opt_on || "",
+                opt_off: item1?.opt_off || "",
+                desc_jig: matchedObj2?.desc_jig || "",
                 qtyOnHand: qtyOH,
-                filter: `${item1.item_jig} -- ${matchedObj2?.item_type || ""} -- ${matchedObj3?.pt_desc1 || ""} -- ${matchedObj3?.pt_status || ""} -- ${item1.status_jig} -- ${item1.material} -- ${matchedObj2?.opt_on || ""} -- ${matchedObj2?.opt_off || ""} -- ${item1.desc_jig || ""} -- ${qtyOH}`
+                filter: `${item1.item_jig} -- ${item1?.item_type || ""} -- ${matchedObj3?.pt_desc1 || ""} -- ${matchedObj3?.pt_status || ""} -- ${matchedObj2?.status_jig || ""} -- ${matchedObj2?.material} -- ${item1?.opt_on || ""} -- ${item1?.opt_off || ""} -- ${matchedObj2?.desc_jig || ""} -- ${qtyOH}`
                 }});
         databaseSpk= data;
         const btn = document.getElementById('btnSpk');

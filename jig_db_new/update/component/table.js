@@ -8,7 +8,7 @@ export const tableHeader = async(target,tableID, arrHead) => {
         table.classList.add('tm');
         table.id = tableID;
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont');
+        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pr4', 'thCont');
         tr.id = 'tableHeader';
 
         for (let i=0; i<arrHead.length; i++) {
@@ -30,7 +30,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
 
         // toleransi input
         const card  = document.createElement('div');
-        card.classList.add('fr', 'mh2', );
+        card.classList.add('fr', 'mh2' );
         const label = document.createElement('label');
         label.textContent = 'toleransi';
         const input = document.createElement('input');
@@ -45,7 +45,8 @@ export const tblUpdLoc = async (target, dataLoc) => {
 
         for (let i=0; i<dataLoc.length; i++){
             const tr = document.createElement('div');
-            tr.classList.add('fr', 'tdCont2');
+            tr.classList.add('fr', 'tdCont2', 'pr4');
+            tr.setAttribute('data-fromDB', "");
             
             // location
             const div1 =document.createElement('div');

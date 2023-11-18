@@ -74,7 +74,7 @@ $data_barang = $conn_list_barang->query($sql);
 
               <h5 class="card-title">Permintaan Spare Parts</h5>
 
-              <form method="POST" action="upload.php" name="formsparepart">
+              <form method="POST" action="upload.php">
   
                 <div class="col-md-12">  
                     <div class="form-group">
@@ -140,7 +140,7 @@ $data_user = $conn_list_user->query($sql);
                     </div>
 
 
-                    <table class="table" id="myTableBarang">
+                    <table class="table" id="myTable">
                       <thead>
                         <tr>
                           <th scope="col" style="width: 60%">Nama Barang</th>
@@ -182,7 +182,7 @@ $data_user = $conn_list_user->query($sql);
                     <br><br>
                 </div>
                 <br/>
-                <button style="align-items: center;" class="btn btn1 btn-success" id="submit">Submit</button>
+                <button style="align-items: center;" class="btn btn-success" id="submit">Submit</button>
             </form>
             </div>
           </div>
@@ -253,47 +253,6 @@ $data_user = $conn_list_user->query($sql);
     $('.js-example-basic-single2').select2();
     $('.js-example-basic-single3').select2();
     });
-
-    $(".btn1").on('click', function(e) {
-
-      if ($("#inputnama")[0].selectedIndex <= 0) {
-        alert("Kolom 'Nama Peminta' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.getElementById("myTablediketahui").rows.length < 2){
-        alert("Kolom 'Diketahui oleh' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.getElementById("myTableBarang").rows.length < 2){
-        alert("Kolom 'Nama Barang' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.forms["formsparepart"]["tanggal_akhir"].value == null || document.forms["formsparepart"]["tanggal_akhir"].value == ""){
-        alert("Kolom 'Tanggal Akhir' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.forms["formsparepart"]["account_code"].value == null || document.forms["formsparepart"]["account_code"].value == ""){
-        alert("Kolom 'Account Code' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.forms["formsparepart"]["keperluan"].value == null || document.forms["formsparepart"]["keperluan"].value == ""){
-        alert("Kolom 'Keperluan' masih kosong");
-        e.preventDefault();
-      }
-      else if(document.forms["formsparepart"]["cost_center"].value == null || document.forms["formsparepart"]["cost_center"].value == ""){
-        alert("Kolom 'Cost Center' masih kosong");
-        e.preventDefault();
-      }
-      else{
-        for (let i = 0; i < counter; i++) {
-          if (document.forms["formsparepart"]["total_"+(i+1)+""].value == null || document.forms["formsparepart"]["total_"+(i+1)+""].value == "") {
-            alert("Kolom Total untuk "+ document.forms["formsparepart"]["nama_barang_"+(i+1)+""].value +" masih kosong");
-            e.preventDefault();
-          }
-        }
-      }
-    });
-
     </script>
 
   

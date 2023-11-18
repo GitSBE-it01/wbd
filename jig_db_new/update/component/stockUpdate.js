@@ -3,6 +3,7 @@ import { btnUpdLoc, addNewStock } from './button.js';
 import { jig_location_query, log_location_query } from '../../class.js';
 import { loading } from './load.js';
 import {updateInsertData} from './data.js';
+import { delChild } from '../../component/process.js';
 
 
 document.addEventListener('click', async function(event) {
@@ -26,8 +27,6 @@ document.addEventListener('click', async function(event) {
             const dataLoc = await jig_location_query.fetchDataFilter({item_jig: filter});
 
             // form utk input data dan show data saat ini
-
-
             const arrayHeader = ['Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark']
             await tableHeader('newContain', 'tableStock', arrayHeader);
             newContain.appendChild(await tblUpdLoc('tableStock',dataLoc));
@@ -46,6 +45,16 @@ document.addEventListener('click', async function(event) {
             btnAddLoc.addEventListener('click', async function() {
                 table.appendChild(await addNewStock(counter));
                 counter++;
+            })
+            const btnDelLoc = document.getElementById('delLoc');
+            btnDelLoc.addEventListener('click', function () {
+                const cek = document.getElementById('tableStock');
+                const cek2 = cek.lastChild;
+                if (!cek2.hasAttribute('data-fromdb')){
+                    delChild('tableStock');
+                    return;
+                }
+                alert('cannot deleted');
             })
             const btnData = document.getElementById('updLoc');
             btnData.addEventListener('click', async function() {

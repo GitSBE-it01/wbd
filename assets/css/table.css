@@ -47,7 +47,7 @@
 
 
 .tdCont {
-    margin: .3rem;
+    margin: .5rem;
     height: auto;
     width: 84vw;
     overflow-y: scroll;
@@ -81,6 +81,16 @@
 .td {
     font-weight: 400;
     font-size: 1rem;
+    padding: 1vh .3rem .5vh .3rem;
+    height: auto;
+    text-align:justify;
+}
+
+
+.td2 {
+    font-weight: 400;
+    font-size: 1rem;
+    width: 9vw;
     padding: 1vh .3rem .5vh .3rem;
     height: auto;
     text-align:justify;

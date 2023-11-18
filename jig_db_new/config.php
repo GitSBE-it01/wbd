@@ -26,7 +26,7 @@ function connectToDatabase() {
 session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   //redirect ke halaman login sbe
-  header('location:../../sbe/index.php?page=login');
+  header('location: http://192.168.2.103:8080/sbe/index.php?cek=no');
   exit(0);
 }
 $user_log = strtoupper($_SESSION["username"]);

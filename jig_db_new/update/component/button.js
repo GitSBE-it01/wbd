@@ -10,11 +10,16 @@ export const btnUpdLoc = async() => {
         btnAdd1.setAttribute('type', 'button');
 
         const btnAdd2 = document.createElement('button');
-        btnAdd2.id = 'addLoc';
-        btnAdd2.textContent = 'add new';
-        btnAdd2.classList.add('mr4', 'btn1');
+        btnAdd2.id = 'delLoc';
+        btnAdd2.classList.add('mr4', 'button_minus');
         btnAdd2.setAttribute('type', 'button');
 
+        const btnAdd3 = document.createElement('button');
+        btnAdd3.id = 'addLoc';
+        btnAdd3.classList.add('mr4', 'button_plus');
+        btnAdd3.setAttribute('type', 'button');
+
+        wrapper.appendChild(btnAdd3);
         wrapper.appendChild(btnAdd2);
         wrapper.appendChild(btnAdd1);
         return wrapper;
@@ -23,11 +28,10 @@ export const btnUpdLoc = async() => {
     }
 }
 
-
 export const addNewStock = async(uniq) => {
     try{
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'tdCont2');
+        tr.classList.add('fr', 'tdCont2', 'pr4');
         
         // location
         const div1 =document.createElement('div');
@@ -37,7 +41,7 @@ export const addNewStock = async(uniq) => {
         input1.setAttribute('type','text');
         input1.setAttribute('list','dataLokasi');
         input1.setAttribute('autocomplete','off');
-        input1.setAttribute('data-input','');
+        input1.setAttribute('data-new','');
         input1.id = `lokasi+${uniq}`;
         div1.appendChild(input1);
         
@@ -48,7 +52,7 @@ export const addNewStock = async(uniq) => {
         input2.classList.add('sl5', 'fc-w')
         input2.setAttribute('type','text');
         input2.id = `cur_qty_per_unit+${uniq}`;
-        input2.setAttribute('data-input','');
+        input2.setAttribute('data-new','');
         input2.setAttribute('readonly', 'readonly');
         div2.appendChild(input2);
             
@@ -56,15 +60,12 @@ export const addNewStock = async(uniq) => {
         const div3 =document.createElement('div');
         div3.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
         const input3 = document.createElement('select');
-        const arr = ['tambah', 'kurang'];
-        for (let i=0; i<arr.length; i++) {
-            const option = document.createElement('option');
-            option.value = arr[i];
-            option.textContent = arr[i];
-            input3.appendChild(option);
-        }
+        const option = document.createElement('option');
+        option.value = 'tambah';
+        option.textContent = 'tambah';
+        input3.appendChild(option);
         input3.id = `addSub+${uniq}`;
-        input3.setAttribute('data-input','');
+        input3.setAttribute('data-new','');
         div3.appendChild(input3);
             
         // qty
@@ -73,7 +74,7 @@ export const addNewStock = async(uniq) => {
         const input4 = document.createElement('input');
         input4.setAttribute('type','text');
         input4.id = `qty+${uniq}`;
-        input4.setAttribute('data-input','');
+        input4.setAttribute('data-new','');
         div4.appendChild(input4);
             
         // unit
@@ -82,7 +83,7 @@ export const addNewStock = async(uniq) => {
         const input5 = document.createElement('input');
         input5.setAttribute('type','text');
         input5.id = `unit+${uniq}`;
-        input5.setAttribute('data-input','');
+        input5.setAttribute('data-new','');
         div5.appendChild(input5);
     
         // remark
@@ -91,7 +92,7 @@ export const addNewStock = async(uniq) => {
         const input6 = document.createElement('input');
         input6.setAttribute('type','text');
         input6.id = `remark+${uniq}`;
-        input6.setAttribute('data-input','');
+        input6.setAttribute('data-new','');
         div6.appendChild(input6);
     
         tr.appendChild(div1);

@@ -244,6 +244,7 @@ function updateData($query, $filterValues, $filterValues2) {
     $params = rtrim($params, ', ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
     echo $wholeQuery;
+    /*
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
@@ -264,7 +265,7 @@ function updateData($query, $filterValues, $filterValues2) {
                 echo "success";
             }
         }
-    }
+    }*/
 }
 
 

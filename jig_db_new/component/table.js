@@ -8,7 +8,7 @@ export const tableHeader = async(target,tableID, arrHead) => {
         table.classList.add('tm');
         table.id = tableID;
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont');
+        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pr4', 'thCont');
         tr.id = 'tableHeader';
 
         for (let i=0; i<arrHead.length; i++) {
@@ -31,7 +31,7 @@ export const tblGenJig = async (tbodyID,data) => {
         tableBody.id = tbodyID;
         for (let i=0; i<data.length; i++) {
             const tr2 = document.createElement('div');
-            tr2.classList.add('fr');
+            tr2.classList.add('fr', 'pr1');
             tr2.innerHTML = `
                 <div class="flexCh td bd-black sl9 cap">${data[i].item_jig}</div>
                 <div class="flexCh td bd-black sl9 cap">${data[i].desc_jig}</div>
@@ -72,18 +72,18 @@ export const tblGenSpk = async (tbodyID,data) => {
         tableBody.id = tbodyID;
         for (let i=0; i<data.length; i++) {
             const tr2 = document.createElement('div');
-            tr2.classList.add('fr');
+            tr2.classList.add('fr', 'pr1');
             tr2.innerHTML = `
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_type}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].description}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].status_speaker}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].item_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].desc_jig}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_on}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].opt_off}</div>
-                <div class="flexCh td bd-black sl9 cap">${data[i].material}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].item_type}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].description}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].status_speaker}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].item_jig}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].desc_jig}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].opt_on}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].opt_off}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].material}</div>
+                <div class="flexCh td2 bd-black sl9 cap">${data[i].qtyOnHand}</div>
                 <input type="hidden" value=${data[i].filter}>
-                <div class="flexCh td bd-black sl9 cap">${data[i].qtyOnHand}</div>
             `
             tableBody.appendChild(tr2);
         }
@@ -105,7 +105,7 @@ export const tblLocJig = async (target, arrHead, data) => {
         const tableBody = document.createElement('div');
         tableBody.classList.add('thSmall');
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont2');
+        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pr4', 'thCont2');
         tr.id = 'tableHeader';
         for (let i=0; i<arrHead.length; i++) {
             const th = document.createElement('div');
@@ -116,7 +116,7 @@ export const tblLocJig = async (target, arrHead, data) => {
         table.appendChild(tr);
         for (let i=0; i<data.length; i++) {
             const tr2 = document.createElement('div');
-            tr2.classList.add('fr', 'tdCont');
+            tr2.classList.add('fr', 'tdCont', 'pr1');
             tr2.innerHTML = `
                 <div class="flexCh td bd-black or8 cap">${data[i].lokasi}</div>
                 <div class="flexCh td bd-black or8 cap">${data[i].qty_per_unit}</div>
@@ -143,18 +143,18 @@ export const tblTypeJig = async (target, arrHead, data) => {
         const tableBody = document.createElement('div');
         tableBody.classList.add('thSmall');
         const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pt', 'thCont2');
+        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pr4', 'thCont2');
         tr.id = 'tableHeader';
         for (let i=0; i<arrHead.length; i++) {
             const th = document.createElement('div');
-            th.classList.add('or3', 'flexCh', 'th', 'bd-black', 'upper');
+            th.classList.add('or3', 'flexCh', 'th', 'bd-black', 'upper', 'pr4');
             th.textContent = arrHead[i];
             tr.appendChild(th);
         }
         table.appendChild(tr);
         for (let i=0; i<data.length; i++) {
             const tr2 = document.createElement('div');
-            tr2.classList.add('fr', 'tdCont');
+            tr2.classList.add('fr', 'tdCont', 'pr1');
             tr2.innerHTML = `
                 <div class="flexCh td bd-black or9 cap">${data[i].item_type}</div>
                 <div class="flexCh td bd-black or9 cap">${data[i].description}</div>
