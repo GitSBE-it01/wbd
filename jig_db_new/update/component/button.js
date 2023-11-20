@@ -4,20 +4,20 @@ export const btnUpdLoc = async() => {
         wrapper.classList.add('fr', 'mh3');
         
         const btnAdd1 = document.createElement('button');
+        btnAdd1.setAttribute('type', 'button');
         btnAdd1.id = 'updLoc';
         btnAdd1.textContent = 'update' ;
         btnAdd1.classList.add('mr4', 'btn1');
-        btnAdd1.setAttribute('type', 'button');
 
         const btnAdd2 = document.createElement('button');
+        btnAdd2.setAttribute('type', 'button');
         btnAdd2.id = 'delLoc';
         btnAdd2.classList.add('mr4', 'button_minus');
-        btnAdd2.setAttribute('type', 'button');
 
         const btnAdd3 = document.createElement('button');
+        btnAdd3.setAttribute('type', 'button');
         btnAdd3.id = 'addLoc';
         btnAdd3.classList.add('mr4', 'button_plus');
-        btnAdd3.setAttribute('type', 'button');
 
         wrapper.appendChild(btnAdd3);
         wrapper.appendChild(btnAdd2);

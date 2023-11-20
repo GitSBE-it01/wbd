@@ -10,6 +10,7 @@ blue color
 .bl7 {background-color:#6ea8fe;}
 .bl8 {background-color:#9ec5fe;}
 .bl9 {background-color:#cfe2ff;}
+
 /*
 teal color 
 */
@@ -22,41 +23,43 @@ teal color
 .tl7 {background-color:#79dfc1}
 .tl8 {background-color:#a6e9d5}
 .tl9 {background-color:#d2f4ea}
+
 /*
 slate color 
 */
-.sl1 {background-color:HSL(210, 22%, 18%);}
-.sl2 {background-color:HSL(210, 22%, 25%);}
-.sl3 {background-color:HSL(210, 22%, 35%);}
-.sl4 {background-color:HSL(210, 22%, 45%);}
-.sl5 {background-color:HSL(210, 22%, 50%);}
-.sl6 {background-color:HSL(210, 22%, 65%);}
-.sl7 {background-color:HSL(210, 22%, 75%);}
-.sl8 {background-color:HSL(210, 22%, 85%);}
-.sl9 {background-color:HSL(210, 22%, 95%);}
+.sl1 {background-color:#1c1f2b;}
+.sl2 {background-color:#2c3040;}
+.sl3 {background-color:#3c4254;}
+.sl4 {background-color:#4c5468;}
+.sl5 {background-color:#5c677d;}
+.sl6 {background-color:#6c7991;}
+.sl7 {background-color:#7c8ca6;}
+.sl8 {background-color:#8c9fba;}
+.sl9 {background-color:#9cb2cf;}
 
 /*
 orange color 
 */
-.or1 {background-color:HSL(40, 100%, 18%);}
-.or2 {background-color:HSL(40, 100%, 25%);}
-.or3 {background-color:HSL(40, 100%, 35%);}
-.or4 {background-color:HSL(40, 100%, 45%);}
-.or5 {background-color:HSL(40, 100%, 50%);}
-.or6 {background-color:HSL(40, 100%, 65%);}
-.or7 {background-color:HSL(40, 100%, 75%);}
-.or8 {background-color:HSL(40, 100%, 85%);}
-.or9 {background-color:HSL(40, 100%, 95%);}
+.or1 {background-color:#6e4c00;}
+.or2 {background-color:#8e6400;}
+.or3 {background-color:#b37a00;}
+.or4 {background-color:#d89100;}
+.or5 {background-color:#ffaa00;}
+.or6 {background-color:#ffb333;}
+.or7 {background-color:#ffbb66;}
+.or8 {background-color:#ffc999;}
+.or9 {background-color:#ffd4b3;}
 
 /*
 red color 
 */
-.rd1 {background-color:HSL(8, 100%, 18%);}
-.rd2 {background-color:HSL(8, 100%, 25%);}
-.rd3 {background-color:HSL(8, 100%, 35%);}
-.rd4 {background-color:HSL(8, 100%, 45%);}
-.rd5 {background-color:HSL(8, 100%, 50%);}
-.rd6 {background-color:HSL(8, 100%, 65%);}
-.rd7 {background-color:HSL(8, 100%, 75%);}
-.rd8 {background-color:HSL(8, 100%, 85%);}
-.rd9 {background-color:HSL(8, 100%, 95%);}
+.rd1 {background-color:#6e0000;}
+.rd2 {background-color:#8e0000;}
+.rd3 {background-color:#b30000;}
+.rd4 {background-color:#d80000;}
+.rd5 {background-color:#ff0000;}
+.rd6 {background-color:#ff3333;}
+.rd7 {background-color:#ff6666;}
+.rd8 {background-color:#ff9999;}
+.rd9 {background-color:#ffb3b3;}
+

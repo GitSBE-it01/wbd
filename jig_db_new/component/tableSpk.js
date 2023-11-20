@@ -77,6 +77,7 @@ export const dataSpk = async () => {
         btnXl2.addEventListener("click", async function() {
             btnXl2.textContent = "";
             btnXl2.classList.add('load_txt');
+            btnXl2.disabled = true;
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.json_to_sheet(databaseSpk);
             // Add the worksheet to the workbook
@@ -85,10 +86,10 @@ export const dataSpk = async () => {
             XLSX.writeFile(workbook, 'db_spk_download.xlsx');
             btnXl2.classList.remove('load_txt');
             btnXl2.textContent = "dl excel";
-            
+            btnXl2.disabled = false;
         }) 
         main.appendChild(table);
-        main.removeChild(document.getElementById('load'))
+        main.removeChild(document.getElementById('load'));
     }catch (error){
         console.error('Error:', error);
     }

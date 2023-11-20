@@ -1,7 +1,10 @@
 <?php
-/*=============================================================================
-to get user role
-=============================================================================
+/*==================================================================================================================
+global
+==================================================================================================================*/
+/*------------------------------------------------------
+cek user
+------------------------------------------------------*/
 function cekUser($user_log, $prog) {
     $conn = connectToDatabase();
     $query = "SELECT user, role FROM access_config.access_wbd WHERE user = '$user_log' AND prog= '$prog'";
@@ -11,20 +14,10 @@ function cekUser($user_log, $prog) {
         $userRole = $result->fetch_assoc();
         return $userRole["role"];
     } else {
-        return null;
+        return null; // User not found or error occurred
     }
 }
 
-/*=============================================================================
-cek if a variable
-=============================================================================*/
-function is_variable($var) {
-    return is_scalar($var) || (is_object($var) && method_exists($var, '__toString'));
-}
-
-/*=============================================================================
-fetch data 
-=============================================================================
 function getArrayList($arrList, $input) {
     $preResult = true;
     foreach ($arrList as $key=>$value) {
@@ -40,6 +33,33 @@ function getArrayList($arrList, $input) {
     }
 }
 
+
+function is_variable($var) {
+    return is_scalar($var) || (is_object($var) && method_exists($var, '__toString'));
+}
+
+/*=============================================================================
+get all data
+=============================================================================*/
+function getData($query) {
+    $conn = connectToDatabase();
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+    $result = $stmt->get_result();
+    $data = array(); 
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row; 
+    }
+    $result->free();
+    $stmt->close();
+    $conn->close();
+    return $data;
+}
 
 /*=============================================================================
 fetch data with filter
@@ -171,7 +191,9 @@ function insertData($query, $filterValues) {
     }
 }
 
-
+/*=============================================================================
+update data
+=============================================================================*/
 function updateData($query, $filterValues, $filterValues2) {
     $conn = connectToDatabase();
     $counter = 0;   
@@ -269,7 +291,5 @@ function updateData($query, $filterValues, $filterValues2) {
         }
     }
 }
-
-
 
 ?>

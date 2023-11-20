@@ -1,5 +1,7 @@
 VJS-pr01/.env
 jig_db_new/.env
+routing/.env
+template/
 VJS-pr01/data_upload/
 assets/svg_file/
 jig_db_new/cache/
@@ -8,3 +10,4 @@ jig_db_new/trash/index.js
 jig_db_new/trash/index.php
 assets/css/test.html
 VJS-pr01/test
+

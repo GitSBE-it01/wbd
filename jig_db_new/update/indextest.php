@@ -63,6 +63,7 @@ if ($status === 'success') {
     main.id ="main";
     root.appendChild(main);
 
+
     // role
     const role = document.getElementById('role');
 
@@ -77,7 +78,6 @@ if ($status === 'success') {
     document.addEventListener("DOMContentLoaded", function() {
         activeLink('a.link');
     });
-
     const title = document.createElement('div');
     title.textContent = "Update Data";
     title.classList.add('navCard', 'sl3', 'fc-w', 'fs-xl', 'pt1', 'pl3', 'fw-blk');
@@ -92,17 +92,17 @@ if ($status === 'success') {
     main.appendChild(createNavbar(`
     <div class='navCard navbar sl4'>
         <div class='navli'>
-            <button type="button" id="btnSec1">
+            <button type="button" id="btnSec1" data-switch="divStock">
                 Update Stock
             </button>
         </div>
         <div class='navli'>
-            <button type="button" id="btnSec2">
+            <button type="button" id="btnSec2" data-switch="divJig">
                 Update Jig Data
             </button>
         </div>
         <div class='navli'>
-            <button type="button" id="btnSec3">
+            <button type="button" id="btnSec3" data-switch="divType">
                 Update Type List
             </button>
         </div>
@@ -114,11 +114,45 @@ if ($status === 'success') {
     ============================================================================
     */
     import { search } from './component/search.js';
-    await search('main', 'searchStock', 'btnStock', 'divStock');
+    import { loading } from './component/load.js';
+    import { datalistLoc, locList, spkList } from './component/datalist.js';
 
+    main.appendChild(loading('loading1', 'loading'));
+    await datalistLoc('jig_suggest');
+    await search('main', 'searchStock', 'btnStock', 'divStock', 'update Stock', 'jig_suggest', 'or6', 'or1');
+    await search('main', 'searchJig', 'btnJig', 'divJig','update jig data', 'jig_suggest', 'sl6', 'sl3');
+    await spkList('spkList');
+    await search('main', 'searchType', 'btnType', 'divType', 'update type list', 'spkList', 'bl6','bl3');
+    await locList('dataLokasi');
+    const divStock = document.getElementById('divStock');
+    divStock.classList.remove('hide');
+    const btnStockDiv = document.getElementById('btnSec1');
+    btnStockDiv.classList.add('switchActive');
+    main.removeChild(document.getElementById('loading1'));
+    
+    document.addEventListener("click", async function(event) {
+        if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('data-switch') !== null) {
+            const dataSwitch = document.querySelectorAll('[data-switch]')
+            dataSwitch.forEach((obj) => {
+                const change1 = document.getElementById(obj.getAttribute('id'));
+                change1.classList.remove('switchActive');
+                const change2 = document.getElementById(obj.getAttribute('data-switch'));
+                change2.classList.add('hide');
+            })
+            const divTarget1 = document.getElementById(event.target.getAttribute('id'));
+            const divTarget2 = document.getElementById(event.target.getAttribute('data-switch'));
+            divTarget1.classList.add('switchActive');
+            divTarget2.classList.remove('hide');
+        }
+    })
+
+    import { stockUpdate } from './component/data.js';
+    const btnStock = document.getElementById('btnStock');
+    btnStock.addEventListener('click', async function() {
+        await stockUpdate();
+    })
 
 
 </script>
-<script type="module" src="component/stockUpdate.js"></script>
 </body>
 </html>

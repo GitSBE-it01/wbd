@@ -144,6 +144,27 @@ loading view
   color: white;
 }
 
+@keyframes proses {
+  0%, 50% {
+    content: "proses";
+  }
+  25%, 75% {
+    content: "";
+  }
+}
+
+.proses::before {
+  content: "proses";
+  animation: proses 2s linear infinite;
+  display: inline-block;
+  color: black;
+}
+
+.proses {
+  color: black;
+}
+
+
 .search_icon {
   background: url('../../assets/svg_file/magni/magnifier-svgrepo-com.svg');
   background-size: cover; 

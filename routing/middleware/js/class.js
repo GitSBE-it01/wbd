@@ -11,7 +11,7 @@ class Data {
 
     async getData() {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/routing/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ class Data {
       */
       async fetchDataFilter(filter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/routing/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ class Data {
             insertFilter.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/routing/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ class Data {
             updateFilter2.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/routing/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -126,13 +126,12 @@ class Data {
 }
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
-export const access = new Data('access');
-export const user = new Data('user');
-export const list_location = new Data('list_location');
-export const jig_master_query = new Data('jig_master_query');
-export const log_master_query = new Data('log_master_query');
-export const jig_location_query = new Data('jig_location_query');
-export const log_location_query = new Data('log_location_query');
-export const jig_function_query = new Data('jig_function_query');
-export const log_function_query = new Data('log_function_query');
-export const item_detail_query = new Data('item_detail_query');
+export const routing_ori = new Data('routing_ori');
+export const insert_routing_ori = new Data('insert_routing_ori');
+export const update_routing_ori = new Data('update_routing_ori');
+export const routing_alter = new Data('routing_alter');
+export const insert_routing_alter = new Data('insert_routing_alter');
+export const update_routing_alter = new Data('update_routing_alter');
+export const log_routing = new Data('log_routing');
+export const insert_log_routing = new Data('insert_log_routing');
+export const update_log_routing = new Data('update_log_routing');

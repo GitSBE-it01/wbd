@@ -37,6 +37,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
         input.classList.add('mh4');
         input.textContent = 'Tolerance';
         input.id ='tol';
+        input.value = dataLoc[0]?.toleransi || 0;
         input.setAttribute('autocomplete', 'off');
         input.setAttribute('type', 'text');
         card.appendChild(label)

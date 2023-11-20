@@ -142,6 +142,7 @@ btnJig2.addEventListener("click", async function() {
     try {
         btnJig2.textContent = "";
         btnJig2.classList.add('load_txt');
+        btnJig2.disabled =true;
         const inputFilter = document.getElementById('searchJig');
         const workbook = XLSX.utils.book_new();
         const src = await jig_location_query.getData();
@@ -208,6 +209,7 @@ btnJig2.addEventListener("click", async function() {
         }
         btnJig2.classList.remove('load_txt');
         btnJig2.textContent = "dl excel";
+        btnJig2.disabled =false;
         } catch(error) {
             console.log(error);
         }
