@@ -126,9 +126,9 @@ class Data {
 }
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
-export const routing_ori = new Data('routing_ori');
-export const insert_routing_ori = new Data('insert_routing_ori');
-export const update_routing_ori = new Data('update_routing_ori');
+export const routing_base = new Data('routing_base');
+export const insert_routing_base = new Data('insert_routing_base');
+export const update_routing_base = new Data('update_routing_base');
 export const routing_alter = new Data('routing_alter');
 export const insert_routing_alter = new Data('insert_routing_alter');
 export const update_routing_alter = new Data('update_routing_alter');

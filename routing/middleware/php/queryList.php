@@ -1,7 +1,7 @@
 <?php
-$routing_ori= 'SELECT * FROM routing_ori';
-$insert_routing_ori= 'INSERT INTO routing_ori';
-$update_routing_ori= 'UPDATE routing_ori';
+$routing_base= 'SELECT * FROM routing_base';
+$insert_routing_base= 'INSERT INTO routing_base';
+$update_routing_base= 'UPDATE routing_base';
 $routing_alter= 'SELECT * FROM routing_alter';
 $insert_routing_alter= 'INSERT INTO routing_alter';
 $update_routing_alter= 'UPDATE routing_alter';
@@ -11,9 +11,9 @@ $update_log_routing = 'UPDATE log_routing';
 
 
 $codeList = array(
-    'routing_ori' => $routing_ori,
-    'insert_routing_ori' => $insert_routing_ori,
-    'update_routing_ori' => $update_routing_ori,
+    'routing_base' => $routing_base,
+    'insert_routing_base' => $insert_routing_base,
+    'update_routing_base' => $update_routing_base,
     'routing_alter' => $routing_alter,
     'insert_routing_alter' => $insert_routing_alter,
     'update_routing_alter' => $update_routing_alter,

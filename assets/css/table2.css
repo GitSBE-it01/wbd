@@ -1,0 +1,61 @@
+.tm {
+    width: 99vw;
+    padding: .4rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tm2 {
+    padding: .4rem;
+    overflow: scroll;
+}
+
+.tr {
+    width: 100%;
+}
+
+.th {
+    width: 100%;
+}
+
+.bd-black {
+    border: solid .1rem;
+    border-color: black;
+}
+
+.bd-white {
+    border: solid .1rem;
+    border-color: white;
+}
+
+.input1 {
+    width: 100%;
+}
+
+.wrap {
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.ht1 {
+    height: 6vh;
+}
+
+.ht2 {
+    height: 8vh;
+}
+
+
+.ht3 {
+    height: 10vh;
+}
+
+.ht4 {
+    height: 12vh;
+}
+
+.st {
+    position: sticky;
+    top: 0;
+}
