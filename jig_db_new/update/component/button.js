@@ -1,22 +1,22 @@
-export const btnUpdLoc = async() => {
+export const btnUpdLoc = async(id1, id2, id3) => {
     try{
         const wrapper = document.createElement('div')
         wrapper.classList.add('fr', 'mh3');
         
         const btnAdd1 = document.createElement('button');
         btnAdd1.setAttribute('type', 'button');
-        btnAdd1.id = 'updLoc';
+        btnAdd1.id = id1;
         btnAdd1.textContent = 'update' ;
         btnAdd1.classList.add('mr4', 'btn1');
 
         const btnAdd2 = document.createElement('button');
         btnAdd2.setAttribute('type', 'button');
-        btnAdd2.id = 'delLoc';
+        btnAdd2.id = id2;
         btnAdd2.classList.add('mr4', 'button_minus');
 
         const btnAdd3 = document.createElement('button');
         btnAdd3.setAttribute('type', 'button');
-        btnAdd3.id = 'addLoc';
+        btnAdd3.id = id3;
         btnAdd3.classList.add('mr4', 'button_plus');
 
         wrapper.appendChild(btnAdd3);
@@ -102,6 +102,31 @@ export const addNewStock = async(uniq) => {
         tr.appendChild(div5);
         tr.appendChild(div6);
         return tr;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+export const btnUpdJig = async() => {
+    try{
+        const wrapper = document.createElement('div')
+        wrapper.classList.add('fr', 'm2', 'p1' );
+        
+        const btnAdd1 = document.createElement('button');
+        btnAdd1.setAttribute('type', 'button');
+        btnAdd1.id = 'updJig';
+        btnAdd1.textContent = 'update' ;
+        btnAdd1.classList.add('mr4', 'btn1');
+
+        const btnAdd2 = document.createElement('button');
+        btnAdd2.setAttribute('type', 'button');
+        btnAdd2.id = 'editJig';
+        btnAdd2.textContent = 'edit' ;
+        btnAdd2.classList.add('mr4', 'btn1');
+
+        wrapper.appendChild(btnAdd2);
+        wrapper.appendChild(btnAdd1);
+        return wrapper;
     } catch(error){
         console.log(error);
     }

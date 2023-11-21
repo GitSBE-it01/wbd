@@ -1,7 +1,7 @@
-import { tableHeader, tblUpdLoc, tblHistLoc } from './table.js';
-import { btnUpdLoc, addNewStock } from './button.js';
-import { jig_location_query, log_location_query } from '../../class.js';
-import { loading } from './load.js';
+import { tableHeader, tblUpdLoc, tblHistLoc, tblUpdJig, tblHistJig, tblUpdType } from './table.js';
+import { btnUpdLoc, addNewStock, btnUpdJig } from './button.js';
+import { jig_location_query, log_location_query, jig_master_query, log_master_query, jig_function_query, log_function_query, item_detail_query  } from '../../class.js';
+import { loading } from '../../component/load.js';
 import { updateInsertData } from './updateInsert.js';
 import { delChild } from '../../component/process.js';
 
@@ -38,7 +38,7 @@ export const stockUpdate = async() => {
 
         newContain.removeChild(document.getElementById('loading1'));
         newContain.appendChild(table);
-        newContain.appendChild(await btnUpdLoc());
+        newContain.appendChild(await btnUpdLoc('updLoc', 'delLoc', 'addLoc'));
         const btnAddLoc = document.getElementById('addLoc');
         let counter = 0;
         btnAddLoc.addEventListener('click', async function() {
@@ -71,6 +71,133 @@ export const stockUpdate = async() => {
         })
         newContain.appendChild(historyTitle);
         newContain.appendChild(await tblHistLoc(dataHist));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const dataUpdate = async() => {
+    try {
+        if (document.getElementById('dataContain')) {
+            document.getElementById('dataContain').remove(document.getElementById('dataContain').firstChild)
+        }
+        const filterId = document.getElementById('searchJig');
+        const filter = filterId.value;
+        if (filter === "") {
+            filterId.placeholder = 'please choose item';
+            return;                
+        }
+        const dataDiv = document.getElementById('divJig');
+        const dataContain = document.createElement('div');
+        dataContain.id= 'dataContain';
+        dataDiv.appendChild(dataContain);
+        dataContain.appendChild(loading('loading1', 'loading'));
+
+        const data = await jig_master_query.fetchDataFilter({item_jig: filter});
+
+        // form utk input data dan show data saat ini
+        await tblUpdJig('dataContain', data);
+        //const table = document.getElementById('tableJig');
+
+        const historyTitle = document.createElement('div');
+        historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
+        historyTitle.textContent = 'History Log';
+        const dataHist = await log_master_query.fetchDataFilter({item_jig: filter});
+
+        dataContain.removeChild(document.getElementById('loading1'));
+        //dataContain.appendChild(table);
+        dataContain.appendChild(await btnUpdJig());
+        const btnEdtJig = document.getElementById('editJig');
+        btnEdtJig.addEventListener('click', function () {
+            const cek = document.querySelectorAll('[data-updJig]');
+            cek.forEach((obj) => {
+                obj.disabled =false;
+                obj.classList.remove('sl4', 'fc-w');
+            }) 
+        })
+        /*const btnData = document.getElementById('updJig');
+        btnData.addEventListener('click', async function() {
+            try {
+                btnData.textContent="";
+                btnData.classList.add('proses');
+                btnData.disabled = true;
+                await updateInsertData();
+                btnData.classList.remove('proses');
+                btnData.textContent="update";
+                btnData.disabled = false;
+            }catch(error){
+                console.log(error);
+            }
+        })*/
+        dataContain.appendChild(historyTitle);
+        dataContain.appendChild(await tblHistJig(dataHist));
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const typeUpdate = async() => {
+    try {
+        if (document.getElementById('typeContain')) {
+            document.getElementById('typeContain').remove(document.getElementById('typeContain').firstChild)
+        }
+        const filterId = document.getElementById('searchType');
+        const filter = filterId.value;
+        if (filter === "") {
+            filterId.placeholder = 'please choose item';
+            return;                
+        }
+        const dataDiv = document.getElementById('divType');
+        const typeContain = document.createElement('div');
+        typeContain.id= 'typeContain';
+        dataDiv.appendChild(typeContain);
+        typeContain.appendChild(loading('loading1', 'loading'));
+
+        const data = await jig_function_query.fetchDataFilter({item_type: filter});
+        const data2 = await item_detail_query.fetchDataFilter({pt_part: filter});       
+
+        // form utk input data dan show data saat ini
+        const arrHead = ['item jig', 'put on ops', 'pull out ops', 'status', 'remark', 'delete'];
+        const arrClass = ['flexCh', 'td', 'cap', 'bd-black', 'sl8'];
+        const trClass = ['fr', 'tdCont2', 'pr4'];
+        const inpClass = ['cap'];
+
+        await tableHeader('typeContain', 'typeTable', arrHead);
+        await tblUpdType('typeTable', data, data2, trClass, arrClass, inpClass);
+        //const table = document.getElementById('tableJig');
+
+        const historyTitle = document.createElement('div');
+        historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
+        historyTitle.textContent = 'History Log';
+        const dataHist = await log_function_query.fetchDataFilter({item_jig: filter});
+
+        typeContain.removeChild(document.getElementById('loading1'));
+        //typeContain.appendChild(table);
+        typeContain.appendChild(await btnUpdLoc('updType', 'delType', 'addType'));
+        const btnEdtJig = document.getElementById('editJig');
+        /*btnEdtJig.addEventListener('click', function () {
+            const cek = document.querySelectorAll('[data-updJig]');
+            cek.forEach((obj) => {
+                obj.disabled =false;
+                obj.classList.remove('sl4', 'fc-w');
+            }) 
+        })
+        /*const btnData = document.getElementById('updJig');
+        btnData.addEventListener('click', async function() {
+            try {
+                btnData.textContent="";
+                btnData.classList.add('proses');
+                btnData.disabled = true;
+                await updateInsertData();
+                btnData.classList.remove('proses');
+                btnData.textContent="update";
+                btnData.disabled = false;
+            }catch(error){
+                console.log(error);
+            }
+        })*/
+        typeContain.appendChild(historyTitle);
+        typeContain.appendChild(await tblHistJig(dataHist));
     } catch (error) {
         console.log(error);
     }

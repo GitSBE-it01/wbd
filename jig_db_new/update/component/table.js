@@ -157,3 +157,174 @@ export const tblHistLoc = async(data) => {
         console.log(error);
     }
 }
+
+
+export const tblUpdJig = async (target, data) => {
+    try {
+        const table = document.getElementById(target);
+        const arrayHeader = ['description jig', 'status jig', 'material jig', 'tipe jig', 'drawing', 'remark']
+        const arrayDat = ['desc_jig', 'status_jig', 'material', 'type', 'drawing', 'remark']
+        for (let i=0; i<arrayHeader.length; i++) {
+            const card  = document.createElement('div');
+            card.classList.add('fc', 'sl2', 'pv3');
+            const label = document.createElement('label');
+            label.textContent = arrayHeader[i];
+            label.classList.add('fc-w', 'cap', 'mh2', 'fs-m');
+            const input = document.createElement('input');
+            input.classList.add('mh4', 'inpText1', 'sl4', 'fc-w');
+            input.id =arrayDat[i];
+            input.value = data[0][arrayDat[i]] ? data[0][arrayDat[i]]: "";
+            input.setAttribute('autocomplete', 'off');
+            input.setAttribute('data-updJig', '');
+            input.disabled = true;
+            input.setAttribute('type', 'text');
+            card.appendChild(label)
+            card.appendChild(input);
+            table.appendChild(card);
+        }
+        return table;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+
+export const tblHistJig = async(data) => {
+    try{
+        const arrayHeader = ['item jig', 'description', 'type of jig', 'status jig', 'material', 'drawing', 'Remark', 'Transaction Date (y-m-d)'];
+        await tableHeader('divJig', 'tableJigHist', arrayHeader);
+        const arrData = ['item_jig', 'desc_jig', 'type', 'status_jig', 'material', 'drawing', 'remark', 'trans_date'];
+        const table = document.getElementById('tableJigHist');
+        for (let i=0; i<data.length; i++){
+            const tr = document.createElement('div');
+            tr.classList.add('fr', 'tdCont2');
+            for (let ii=0; ii<arrData.length; ii++) {
+                const div =document.createElement('div');
+                div.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+                div.textContent = data[i][`${arrData[ii]}`];
+                div.id = `${arrData[ii]}_${data[i]}`;
+                tr.appendChild(div);
+            }
+            table.appendChild(tr);
+        }
+        return table;
+    }catch(error) {
+        console.log(error);
+    }
+}
+
+
+export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClass) => {
+    try {
+        const table = document.getElementById(target);
+
+        // toleransi input
+        const card  = document.createElement('div');
+        card.classList.add('fr', 'mh2' );
+        const label = document.createElement('label');
+        label.textContent = 'Status Speaker';
+        const input = document.createElement('input');
+        input.classList.add('mh4', 'bl2','fc-w');
+        input.disabled = true;
+        input.id ='stat';
+        input.value = data2[0].pt_status;
+        input.setAttribute('autocomplete', 'off');
+        input.setAttribute('type', 'text');
+        card.appendChild(label)
+        card.appendChild(input);
+        table.appendChild(card);
+
+        const arrDat = ['opt_on', 'opt_off','status'];
+        
+        for (let i=0; i<data.length; i++){
+            const tr = document.createElement('div');
+            tr.classList.add('fr', 'tdCont2', 'pr4');
+            tr.setAttribute('data-fromDB', "");
+            
+            // item number jig
+            const div1 =document.createElement('div');
+            div1.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input1 = document.createElement('input');
+            for (let ii=0; ii<inpClass.lenght; ii++) {
+                input1.classList.add(inpClass[i]);
+            }
+            input1.value = data[i].item_jig;
+            input1.setAttribute('type','text');
+            input1.setAttribute('data-updType','');
+            input1.setAttribute('list','jig_suggest');
+            input1.setAttribute('autocomplete','off');
+            input1.id = `item_jig+${data[i].id}`
+            div1.appendChild(input1);
+            tr.appendChild(div1);
+
+            for (let iii=0; iii<arrDat.length; iii++) {
+                const div2 =document.createElement('div');
+                    div2.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+                const input2 = document.createElement('input');
+                input2.classList.add('cap');
+                input2.value = data[i][arrDat[iii]];
+                input2.setAttribute('type','text');
+                input2.setAttribute('data-updType','');
+                input2.id = `${arrDat[iii]}+${data[i].id}`
+                div2.appendChild(input2);
+                tr.appendChild(div2);
+            }
+
+             
+            // add/substract
+            const div3 =document.createElement('div');
+            div3.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input3 = document.createElement('input');
+            input3.classList.add('cap');
+            input3.setAttribute('type','text');
+            input3.id = `remark+${data[i].id}`;
+            input3.setAttribute('data-updType','');
+            div3.appendChild(input3);
+
+            const div4 =document.createElement('div');
+            div4.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input4 = document.createElement('button');
+            input4.classList.add('cap');
+            input4.setAttribute('type','button');
+            input4.id = `del+${data[i].id}`;
+            input4.setAttribute('data-updType','');
+            input4.textContent = "delete";
+            div4.appendChild(input4);
+             
+            tr.appendChild(div3);
+            tr.appendChild(div4);
+            table.appendChild(tr);
+        }
+        return table;
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+
+export const tblHistType = async(data) => {
+    try{
+        const arrayHeader = ['item jig', 'description', 'type of jig', 'status jig', 'material', 'drawing', 'Remark', 'Transaction Date (y-m-d)'];
+        await tableHeader('divJig', 'tableJigHist', arrayHeader);
+        const arrData = ['item_jig', 'desc_jig', 'type', 'status_jig', 'material', 'drawing', 'remark', 'trans_date'];
+        const table = document.getElementById('tableJigHist');
+        for (let i=0; i<data.length; i++){
+            const tr = document.createElement('div');
+            tr.classList.add('fr', 'tdCont2');
+            for (let ii=0; ii<arrData.length; ii++) {
+                const div =document.createElement('div');
+                div.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+                div.textContent = data[i][`${arrData[ii]}`];
+                div.id = `${arrData[ii]}_${data[i]}`;
+                tr.appendChild(div);
+            }
+            table.appendChild(tr);
+        }
+        return table;
+    }catch(error) {
+        console.log(error);
+    }
+}
+

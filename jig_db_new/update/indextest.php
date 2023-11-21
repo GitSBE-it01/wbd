@@ -1,17 +1,5 @@
 <?php 
 require_once "../config.php";
-require_once "query_update.php";
-require_once "../queryList.php";
-require_once "../api.php";
-$cacheFolder = CACHE . 'update/';
-
-$status = isset($_GET['status']) ? $_GET['status'] : '';
-if ($status === 'success') {
-    $message = 'Data successfully updated';
-    echo $message;
-} else {
-    $message = '';
-}
 ?>
 
 <!DOCTYPE html>
@@ -49,21 +37,9 @@ if ($status === 'success') {
     ============================================================================
     */
     // flex display div di root
+    import { loading, init} from '../component/load.js';
     const root = document.getElementById('root');
-    root.classList.add('fr')
-
-    // create sidebar container div
-    const side = document.createElement('div');
-    side.classList.add('sideCard');
-    side.id ="side";
-    root.appendChild(side);
-    // create main container div
-    const main = document.createElement('div');
-    main.classList.add('main');
-    main.id ="main";
-    root.appendChild(main);
-
-
+    init('root', 'side', 'sl9', 'sl1');
     // role
     const role = document.getElementById('role');
 
@@ -114,7 +90,6 @@ if ($status === 'success') {
     ============================================================================
     */
     import { search } from './component/search.js';
-    import { loading } from './component/load.js';
     import { datalistLoc, locList, spkList } from './component/datalist.js';
 
     main.appendChild(loading('loading1', 'loading'));
@@ -146,10 +121,18 @@ if ($status === 'success') {
         }
     })
 
-    import { stockUpdate } from './component/data.js';
+    import { stockUpdate, dataUpdate, typeUpdate } from './component/data.js';
     const btnStock = document.getElementById('btnStock');
     btnStock.addEventListener('click', async function() {
         await stockUpdate();
+    })
+    const btnJig = document.getElementById('btnJig');
+    btnJig.addEventListener('click', async function() {
+        await dataUpdate();
+    })
+    const btnType = document.getElementById('btnType');
+    btnType.addEventListener('click', async function() {
+        await typeUpdate();
     })
 
 
