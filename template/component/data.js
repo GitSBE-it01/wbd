@@ -1,4 +1,4 @@
-import { routing_base, routing_alter } from '../middleware/js/class.js';
+import { routing_base, routing_alter } from '../middleware/js/class.js'; // tergantung data dari class.js
 
 export const dataTable = async() => {
     try {

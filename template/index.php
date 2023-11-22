@@ -20,7 +20,8 @@ require_once "config.php";
 <div id='root'></div>
 
 <script type='module'>
-    
+    const array = {a:['test', 'test2'], b:['1231','325146']};
+    console.log(array);
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>
