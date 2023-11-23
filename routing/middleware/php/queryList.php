@@ -1,25 +1,31 @@
 <?php
-$routing_base= 'SELECT * FROM routing_base';
-$insert_routing_base= 'INSERT INTO routing_base';
-$update_routing_base= 'UPDATE routing_base';
-$routing_alter= 'SELECT * FROM routing_alter';
-$insert_routing_alter= 'INSERT INTO routing_alter';
-$update_routing_alter= 'UPDATE routing_alter';
-$log_routing = 'SELECT * FROM log_routing';
-$insert_log_routing = 'INSERT INTO log_routing';
-$update_log_routing = 'UPDATE log_routing';
+$item_number = 'SELECT * FROM item_number';
+$new_routing = 'SELECT * FROM new_routing';
+$old_routing = 'SELECT * FROM old_routing';
+$process  = 'SELECT * FROM process';
+$insert_item_number = 'INSERT INTO item_number';
+$insert_new_routing = 'INSERT INTO new_routing';
+$insert_old_routing = 'INSERT INTO old_routing';
+$insert_process  = 'INSERT INTO process';
+$update_item_number = 'UPDATE item_number';
+$update_new_routing = 'UPDATE new_routing';
+$update_old_routing = 'UPDATE old_routing';
+$update_process  = 'UPDATE process';
 
 
 $codeList = array(
-    'routing_base' => $routing_base,
-    'insert_routing_base' => $insert_routing_base,
-    'update_routing_base' => $update_routing_base,
-    'routing_alter' => $routing_alter,
-    'insert_routing_alter' => $insert_routing_alter,
-    'update_routing_alter' => $update_routing_alter,
-    'log_routing' => $log_routing,
-    'insert_log_routing' => $insert_log_routing,
-    'update_log_routing' => $update_log_routing,
+    'item_number' =>$item_number,
+    'new_routing' =>$new_routing,
+    'old_routing' =>$old_routing,
+    'process' =>$process,
+    'insert_item_number' =>$insert_item_number,
+    'insert_new_routing' =>$insert_new_routing,
+    'insert_old_routing' =>$insert_old_routing,
+    'insert_process' =>$insert_process,
+    'update_item_number' =>$update_item_number,
+    'update_new_routing' =>$update_new_routing,
+    'update_old_routing' =>$update_old_routing,
+    'update_process' =>$update_process,
 );
 
 ?>

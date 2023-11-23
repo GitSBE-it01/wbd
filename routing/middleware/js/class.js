@@ -126,12 +126,15 @@ class Data {
 }
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
-export const routing_base = new Data('routing_base');
-export const insert_routing_base = new Data('insert_routing_base');
-export const update_routing_base = new Data('update_routing_base');
-export const routing_alter = new Data('routing_alter');
-export const insert_routing_alter = new Data('insert_routing_alter');
-export const update_routing_alter = new Data('update_routing_alter');
-export const log_routing = new Data('log_routing');
-export const insert_log_routing = new Data('insert_log_routing');
-export const update_log_routing = new Data('update_log_routing');
+export const item_number= new Data('item_number');
+export const new_routing= new Data('new_routing');
+export const old_routing= new Data('old_routing');
+export const process= new Data('process');
+export const insert_item_number= new Data('insert_item_number');
+export const insert_new_routing= new Data('insert_new_routing');
+export const insert_old_routing= new Data('insert_old_routing');
+export const insert_process= new Data('insert_process');
+export const update_item_number= new Data('update_item_number');
+export const update_new_routing= new Data('update_new_routing');
+export const update_old_routing= new Data('update_old_routing');
+export const update_process= new Data('update_process');

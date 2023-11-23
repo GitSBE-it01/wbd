@@ -1,11 +1,13 @@
-import { routing_base, routing_alter } from '../middleware/js/class.js';
+import { item_number, new_routing, old_routing } from '../middleware/js/class.js';
 
 export const dataTable = async() => {
     try {
-        const data = await routing_base.getData();
-        const data2 = await routing_alter.getData();
-        const mainDat = data.map((obj1) => {
-            const matObj = data2.find((obj2) => obj2.parent_id === obj1.id);
+        const src = await item_number.getData();
+        const src2 = await new_routing.getData();
+        const src3 = await old_routing.getData();
+        const mainDat = src.map((obj1) => {
+            const matObj = src2.find((obj2) => obj2.No_Part_Cust === obj1.No_Part_Cust);
+            const matObj2 = src3.find((obj3) => obj3.No_Part_Cust === obj1.No_Part_Cust)
             return {
                 code_old: obj1.code,
                 code_new: matObj?.code ||"",

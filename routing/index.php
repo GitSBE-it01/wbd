@@ -22,9 +22,11 @@ require_once "config.php";
 <script type='module'>
     const root = document.getElementById('root');
     const role = document.getElementById('role');
-    import { routing_base, routing_alter } from './middleware/js/class.js';
+
+    import { item_number, new_routing, old_routing } from './middleware/js/class.js';
     import { tHeader, tblData } from './component/table.js';
     import { loading, init } from './component/load.js';
+
     init('root', 'navBar', 'sl9', 'sl2');
     const main = document.getElementById('main');
     const arrHeader = ['routing code SBE4', 'routing code new', 'desc SBE4', 'WIP old', 'wc old', 'ops old', 'ops old desc', 'WIP new', 'wc new', 'ops new', 'ops new desc'];
