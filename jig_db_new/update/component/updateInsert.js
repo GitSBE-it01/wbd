@@ -183,11 +183,8 @@ export const updateInsertJig = async() => {
     try {
         // ambil data dari input / form
         const arrInput = document.querySelectorAll('[data-updJig]');
-        const arrNew = document.querySelectorAll('[data-new]');
         let data = [];
-        let newData = [];
         data['key']=[];
-        newData['key']=[];
         for (let i=0; i<arrInput.length; i++) {
             const rawId = arrInput[i].id;
             const id = splitCustomString("+", rawId);
@@ -203,32 +200,18 @@ export const updateInsertJig = async() => {
                 data[key].push(value);
             }
         }
-
-        for (let i=0; i<arrNew.length; i++) {
-            const rawId = arrNew[i].id;
-            const id = splitCustomString("+", rawId);
-            const key = id[0];
-            const value = arrNew[i].value;
-            if (!newData['key'].includes(`${key}`)) {
-                const codeLength = newData['key'].length;
-                newData['key'][codeLength] = key;
-            }
-            if (!newData[key]) {
-                newData[key] = [value];    
-            } else {
-                newData[key].push(value);
-            }
-        }
         // data olahan utk dimasukkan ke database
-        data['code'] = [];
-        data['item_jig']=[];
-        data['id']=[];
-        data['status']=[];
-        data['toleransi']=[];
-        data['trans_date']=[];
-        data['qty_per_unit']=[];
+        data['item_jig'] = [];
+        data['desc_jig'] = [];
+        data['status_jig'] = [];
+        data['material'] = [];
+        data['type'] = [];
+        data['trans_date'] = [];
+        data['remark'] = [];
+        data['drawing'] = [];
+
         
-        const itemJig = document.getElementById('searchStock').value;  
+        const itemJig = document.getElementById('searchJig').value;  
         const itemTol = document.getElementById('tol').value;   
         const status = "active";
         const cekInput = document.querySelectorAll(`[data-input][id*="${data['key'][0]}"]`);

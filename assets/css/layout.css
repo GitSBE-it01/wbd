@@ -45,10 +45,10 @@ side bar
 /*
 position freeze
 */
-.posT {top: 0;}
-.posR {right: 0;}
-.posL {left: 0;}
-.posB {bottom: 0;}
+.posT {display: sticky; top: 0;}
+.posR {display: sticky; right: 0;}
+.posL {display: sticky; left: 0;}
+.posB {display: sticky; bottom: 0;}
 
 
 /*

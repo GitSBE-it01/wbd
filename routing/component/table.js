@@ -38,6 +38,7 @@ export const tHeader2 = async() => {
         const table = document.createElement('div');
         table.classList.add('fc');
         table.id = 'mainTable';
+        table.setAttribute('style', 'height: 88vh; overflow-y: scroll;')
         
         const tr = document.createElement('div');
         tr.id = 'tableHeader';
@@ -89,11 +90,33 @@ export const tHeader2 = async() => {
         }
         tx2.appendChild(tx2h2);
         tr.appendChild(tx2);
-        
-        table.appendChild(tr);
+        container.appendChild(tr);
         container.appendChild(table);
     } catch(error){
         console.log(error);
+    }
+}
+
+export const filter = async() => {
+    const filter = document.getElementById('filter').value;
+    const dataTarget = document.querySelectorAll('[data-cek]');
+    for (let i=0; i<dataTarget.length; i++) {
+        const id = dataTarget[i].id;
+        const getId = document.getElementById(id);
+        console.log({id, getId})
+        const cek = id.toLowerCase().includes(filter.toLowerCase());
+        if (!cek) {
+            getId.classList.add('hide');
+            getId.classList.remove('fr');
+            console.log(getId);
+        } else {
+            if (getId.classList.contains('hide')) {
+                getId.classList.remove('hide');
+                getId.classList.add('fr');
+                return;
+            }
+            return;
+        }
     }
 }
 
@@ -107,7 +130,7 @@ export const tblAll = async() => {
         return {
             code: obj1.code,
             code_wip: obj1.code_wip,
-            code_gab: obj1.code +"_" + obj1.code_wip
+            code_gab: obj1.code + "_" + obj1.code_wip
         };
     })
     const array1 = ['urutan', 'SBE3/SBE4', 'code_wc', 'proses']
@@ -115,6 +138,7 @@ export const tblAll = async() => {
     for (let i=0; i<src1.length; i++) {
         const tr = document.createElement('div');
         tr.id = src1[i].code;
+        tr.setAttribute('data-cek', `${src1[i].code}`);
         tr.classList.add('fr');
         const td = document.createElement('div');
         td.textContent = src1[i].code;
@@ -126,15 +150,15 @@ export const tblAll = async() => {
         tdx.classList.add('cl1', 'tl8', 'fc');
         for (let ii=0; ii<dataGab.length; ii++) {
             const tdxx = document.createElement('div');
-            tdxx.id = src5[ii].code_gab;
-            tdxx.textContent = src5[ii].code_wip;
+            tdxx.id = dataGab[ii].code_gab;
+            tdxx.textContent = dataGab[ii].code_wip;
             tdx.appendChild(tdxx);            
         }
         tr.appendChild(tdx);
 
         const oldDiv = document.createElement('div');
         oldDiv.id = `oldDiv_${src1[i]['code']}`
-        const dataGab1 = src2.filter((obj1) => obj1.code === src1[i].code);
+        const dataGab1 = src3.filter((obj1) => obj1.code === src1[i].code);
         for (let i2=0; i2<dataGab1.length; i2++) {
             const tx = document.createElement('div');
             tx.classList.add('fr');
@@ -151,6 +175,21 @@ export const tblAll = async() => {
         const newDiv = document.createElement('div');
         newDiv.id = `newDiv_${src1[i]['code']}`
         newDiv.classList.add('cl5', 'fc');
+        const dataGab2 = src2.filter((obj1) => obj1.code === src1[i].code);
+        for (let i2=0; i2<dataGab2.length; i2++) {
+            const tx = document.createElement('div');
+            tx.classList.add('fr');
+            for (let ii=0; ii<array1.length; ii++) {
+                const td2 = document.createElement('div');
+                td2.classList.add('cl1', 'bl8');
+                const input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.value = dataGab2[i2][array1[ii]];
+                td2.appendChild(input);
+                tx.appendChild(td2);
+            }
+            newDiv.appendChild(tx);
+        }
         tr.appendChild(newDiv);
 
         container.appendChild(tr);

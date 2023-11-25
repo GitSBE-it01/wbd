@@ -15,7 +15,8 @@ export const init = (target, navBar, mainColor, navBarColor) => {
         div.classList.add('sideCard');
         div.id = 'side';
     } else { 
-        alert('yang anda masukkan salah');
+        main.classList.add('main2');
+        div.classList.add('hide');
     }
     container.appendChild(div);
     container.appendChild(main);

@@ -15,6 +15,7 @@ export const search = async (target, inputId, btnId, divId, titleText, datalist,
         // search component
         const div2 = document.createElement('div');
         div2.classList.add('fr');
+        div2.id = 'inpId';
         const searchBar = document.createElement('input');
         searchBar.id = inputId;
         searchBar.classList.add('inpText1');

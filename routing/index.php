@@ -25,14 +25,25 @@ require_once "config.php";
     const role = document.getElementById('role');
 
     import { item_number, new_routing, old_routing } from './middleware/js/class.js';
-    import { tHeader2, tblAll } from './component/table.js';
+    import { tHeader2, tblAll, filter } from './component/table.js';
     import { loading, init } from './component/load.js';
+    import { search } from './component/search.js';
+    import { populateOption} from './middleware/js/process.js'
+    import { item_wip } from './middleware/js/class.js'
 
-    init('root', 'navBar', 'sl9', 'sl2');
+    init('root', '', 'sl9', 'sl2');
     const main = document.getElementById('main');
+    const datalist = await item_wip.getData();
+    await populateOption('main', 'item', '', datalist, 'code');
+    await search('main', 'filter', 'btnFilter', 'filterDiv', 'search', 'item', 'sl8', 'sl4');
+    const filterDiv = document.getElementById('filterDiv');
+    filterDiv.classList.remove('hide');
     await tHeader2();
     await tblAll();
-
+    const btn = document.getElementById('btnFilter');
+    btn.addEventListener('click', async function() {
+        await filter();
+    })
     import { dataTable } from './component/data.js';
 
 
