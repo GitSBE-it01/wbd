@@ -138,3 +138,6 @@ export const update_item_number= new Data('update_item_number');
 export const update_new_routing= new Data('update_new_routing');
 export const update_old_routing= new Data('update_old_routing');
 export const update_process= new Data('update_process');
+export const item_wip= new Data('item_wip');
+export const update_item_wip= new Data('update_item_wip');
+export const insert_item_wip = new Data('insert_item_wip');
