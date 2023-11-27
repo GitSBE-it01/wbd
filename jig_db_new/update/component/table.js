@@ -118,12 +118,23 @@ export const tblUpdLoc = async (target, dataLoc) => {
             input6.setAttribute('data-input','');
             div6.appendChild(input6);
 
+            // del button
+            const div7 =document.createElement('div');
+            div7.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const btn7 = document.createElement('button');
+            btn7.setAttribute('type','button');
+            btn7.textContent = 'delete';
+            btn7.id = `del+${dataLoc[i].code}`;
+            btn7.setAttribute('data-input','');
+            div7.appendChild(btn7);
+
             tr.appendChild(div1);
             tr.appendChild(div2);
             tr.appendChild(div3);
             tr.appendChild(div4);
             tr.appendChild(div5);
             tr.appendChild(div6);
+            tr.appendChild(div7);
 
             table.appendChild(tr);
         }

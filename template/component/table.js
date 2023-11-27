@@ -110,3 +110,14 @@ export const insertHidDiv = async (target, data, arr) => {
         console.log(error);
     }
 }
+
+
+
+
+for (let i=0; i<data.length; i++) {
+    input();
+    hidden();
+    btnUpdJig();
+
+
+}

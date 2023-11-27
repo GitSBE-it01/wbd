@@ -2,7 +2,7 @@ import { tableHeader, tblUpdLoc, tblHistLoc, tblUpdJig, tblHistJig, tblUpdType }
 import { btnUpdLoc, addNewStock, btnUpdJig } from './button.js';
 import { jig_location_query, log_location_query, jig_master_query, log_master_query, jig_function_query, log_function_query, item_detail_query  } from '../../class.js';
 import { loading } from '../../component/load.js';
-import { updateInsertData } from './updateInsert.js';
+import { updateInsertData, updateInsertJig } from './updateInsert.js';
 import { delChild } from '../../component/process.js';
 
 
@@ -26,7 +26,7 @@ export const stockUpdate = async() => {
         const dataLoc = await jig_location_query.fetchDataFilter({item_jig: filter});
 
         // form utk input data dan show data saat ini
-        const arrayHeader = ['Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark']
+        const arrayHeader = ['Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark', 'delete']
         await tableHeader('newContain', 'tableStock', arrayHeader);
         newContain.appendChild(await tblUpdLoc('tableStock',dataLoc));
         const table = document.getElementById('tableStock');
@@ -115,20 +115,20 @@ export const dataUpdate = async() => {
                 obj.classList.remove('sl4', 'fc-w');
             }) 
         })
-        /*const btnData = document.getElementById('updJig');
+        const btnData = document.getElementById('updJig');
         btnData.addEventListener('click', async function() {
             try {
                 btnData.textContent="";
                 btnData.classList.add('proses');
                 btnData.disabled = true;
-                await updateInsertData();
+                await updateInsertJig();
                 btnData.classList.remove('proses');
                 btnData.textContent="update";
                 btnData.disabled = false;
             }catch(error){
                 console.log(error);
             }
-        })*/
+        })
         dataContain.appendChild(historyTitle);
         dataContain.appendChild(await tblHistJig(dataHist));
     } catch (error) {

@@ -6,17 +6,6 @@ opt_on
 opt_off
 status
 
-jig_location
-code
-item_jig
-qty_per_unit
-unit
-lokasi
-status
-id
-toleransi
-
-
 
 log_function 
 id
@@ -29,6 +18,17 @@ id_log
 remark
 trans_date
 
+
+
+jig_location
+code
+item_jig
+qty_per_unit
+unit
+lokasi
+status
+id
+toleransi
 
 log_location
 code
@@ -44,6 +44,8 @@ id
 toleransi
 addSub
 qty_change
+
+
 
 log_master
 item_jig

@@ -94,6 +94,10 @@ export const addNewStock = async(uniq) => {
         input6.id = `remark+${uniq}`;
         input6.setAttribute('data-new','');
         div6.appendChild(input6);
+
+        // empty
+        const div7 =document.createElement('div');
+        div7.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
     
         tr.appendChild(div1);
         tr.appendChild(div2);
@@ -101,6 +105,7 @@ export const addNewStock = async(uniq) => {
         tr.appendChild(div4);
         tr.appendChild(div5);
         tr.appendChild(div6);
+        tr.appendChild(div7);
         return tr;
     } catch(error){
         console.log(error);
