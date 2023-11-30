@@ -1,8 +1,8 @@
-import { tableHeader, tblUpdLoc, tblHistLoc, tblUpdJig, tblHistJig, tblUpdType } from './table.js';
-import { btnUpdLoc, addNewStock, btnUpdJig } from './button.js';
+import { tableHeader, tblUpdLoc, tblHistLoc, tblUpdJig, tblHistJig, tblUpdType, tblHistType } from './table.js';
+import { btnUpdLoc, addNewStock, btnUpdJig, addNewType, btnUpdType } from './button.js';
 import { jig_location_query, log_location_query, jig_master_query, log_master_query, jig_function_query, log_function_query, item_detail_query  } from '../../class.js';
 import { loading } from '../../component/load.js';
-import { updateInsertData, updateInsertJig } from './updateInsert.js';
+import { updateInsertData, updateInsertJig, updateInsertType } from './updateInsert.js';
 import { delChild } from '../../component/process.js';
 
 
@@ -136,6 +136,7 @@ export const dataUpdate = async() => {
     }
 }
 
+
 export const typeUpdate = async() => {
     try {
         if (document.getElementById('typeContain')) {
@@ -154,17 +155,13 @@ export const typeUpdate = async() => {
         typeContain.appendChild(loading('loading1', 'loading'));
 
         const data = await jig_function_query.fetchDataFilter({item_type: filter});
-        const data2 = await item_detail_query.fetchDataFilter({pt_part: filter});       
+        const data2 = await item_detail_query.fetchDataFilter({pt_part: filter});
 
         // form utk input data dan show data saat ini
-        const arrHead = ['item jig', 'put on ops', 'pull out ops', 'status', 'remark', 'delete'];
-        const arrClass = ['flexCh', 'td', 'cap', 'bd-black', 'sl8'];
-        const trClass = ['fr', 'tdCont2', 'pr4'];
-        const inpClass = ['cap'];
-
-        await tableHeader('typeContain', 'typeTable', arrHead);
-        await tblUpdType('typeTable', data, data2, trClass, arrClass, inpClass);
-        //const table = document.getElementById('tableJig');
+        const arrayHeader = ['item number jig', 'ops put on', 'ops pull out', 'status jig', 'Remark', 'delete']
+        await tableHeader('typeContain', 'tableType', arrayHeader);
+        typeContain.appendChild(await tblUpdType('tableType',data, data2));
+        const table = document.getElementById('tableType');
 
         const historyTitle = document.createElement('div');
         historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
@@ -172,37 +169,41 @@ export const typeUpdate = async() => {
         const dataHist = await log_function_query.fetchDataFilter({item_jig: filter});
 
         typeContain.removeChild(document.getElementById('loading1'));
-        //typeContain.appendChild(table);
-        typeContain.appendChild(await btnUpdLoc('updType', 'delType', 'addType'));
-        const btnEdtJig = document.getElementById('editJig');
-        /*btnEdtJig.addEventListener('click', function () {
-            const cek = document.querySelectorAll('[data-updJig]');
-            cek.forEach((obj) => {
-                obj.disabled =false;
-                obj.classList.remove('sl4', 'fc-w');
-            }) 
+        typeContain.appendChild(table);
+        typeContain.appendChild(await btnUpdType('updType', 'delType', 'addType'));
+        const btnAddLoc = document.getElementById('addType');
+        let counter = 0;
+        btnAddLoc.addEventListener('click', async function() {
+            table.appendChild(await addNewType(counter));
+            counter++;
         })
-        /*const btnData = document.getElementById('updJig');
+        const btnDelType = document.getElementById('delType');
+        btnDelType.addEventListener('click', function () {
+            const cek = document.getElementById('tableType');
+            const cek2 = cek.lastChild;
+            if (!cek2.hasAttribute('data-fromdb')){
+                delChild('tableType');
+                return;
+            }
+            alert('row tidak bisa di hapus');
+        })
+        const btnData = document.getElementById('updType');
         btnData.addEventListener('click', async function() {
             try {
                 btnData.textContent="";
                 btnData.classList.add('proses');
                 btnData.disabled = true;
-                await updateInsertData();
+                await updateInsertType();
                 btnData.classList.remove('proses');
                 btnData.textContent="update";
                 btnData.disabled = false;
             }catch(error){
                 console.log(error);
             }
-        })*/
+        })
         typeContain.appendChild(historyTitle);
-        typeContain.appendChild(await tblHistJig(dataHist));
+        typeContain.appendChild(await tblHistType(dataHist));
     } catch (error) {
         console.log(error);
     }
 }
-
-
-
-

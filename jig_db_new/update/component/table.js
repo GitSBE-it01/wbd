@@ -204,7 +204,7 @@ export const tblUpdJig = async (target, data) => {
 export const tblHistJig = async(data) => {
     try{
         const arrayHeader = ['item jig', 'description', 'type of jig', 'status jig', 'material', 'drawing', 'Remark', 'Transaction Date (y-m-d)'];
-        await tableHeader('divJig', 'tableJigHist', arrayHeader);
+        await tableHeader('dataContain', 'tableJigHist', arrayHeader);
         const arrData = ['item_jig', 'desc_jig', 'type', 'status_jig', 'material', 'drawing', 'remark', 'trans_date'];
         const table = document.getElementById('tableJigHist');
         for (let i=0; i<data.length; i++){
@@ -226,7 +226,7 @@ export const tblHistJig = async(data) => {
 }
 
 
-export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClass) => {
+export const tblUpdType = async (target, data, data2) => {
     try {
         const table = document.getElementById(target);
 
@@ -257,9 +257,6 @@ export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClas
             const div1 =document.createElement('div');
             div1.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
             const input1 = document.createElement('input');
-            for (let ii=0; ii<inpClass.lenght; ii++) {
-                input1.classList.add(inpClass[i]);
-            }
             input1.value = data[i].item_jig;
             input1.setAttribute('type','text');
             input1.setAttribute('data-updType','');
@@ -283,7 +280,6 @@ export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClas
             }
 
              
-            // add/substract
             const div3 =document.createElement('div');
             div3.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
             const input3 = document.createElement('input');
@@ -302,9 +298,16 @@ export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClas
             input4.setAttribute('data-updType','');
             input4.textContent = "delete";
             div4.appendChild(input4);
+
+            const input5 = document.createElement('input');
+            input5.setAttribute('type', 'hidden');
+            input5.id = `mark+${data[i].id}`;
+            input5.value = `${data[i].item_jig}+${data[i].item_type}+${data[i].opt_on}+${data[i].opt_off}+${data[i].status}`;
+            input5.setAttribute('data-updType','');
              
             tr.appendChild(div3);
             tr.appendChild(div4);
+            tr.appendChild(input5);
             table.appendChild(tr);
         }
         return table;
@@ -317,10 +320,10 @@ export const tblUpdType = async (target, data, data2, trClass, arrClass, inpClas
 
 export const tblHistType = async(data) => {
     try{
-        const arrayHeader = ['item jig', 'description', 'type of jig', 'status jig', 'material', 'drawing', 'Remark', 'Transaction Date (y-m-d)'];
-        await tableHeader('divJig', 'tableJigHist', arrayHeader);
-        const arrData = ['item_jig', 'desc_jig', 'type', 'status_jig', 'material', 'drawing', 'remark', 'trans_date'];
-        const table = document.getElementById('tableJigHist');
+        const arrayHeader = ['item jig', 'put on ops', 'pull out ops', 'status', 'Remark', 'Transaction Date (y-m-d)'];
+        await tableHeader('typeContain', 'tableTypeHist', arrayHeader);
+        const arrData = ['item_jig', 'opt_on', 'opt_off', 'status', 'remark', 'trans_date'];
+        const table = document.getElementById('tableTypeHist');
         for (let i=0; i<data.length; i++){
             const tr = document.createElement('div');
             tr.classList.add('fr', 'tdCont2');

@@ -136,3 +136,84 @@ export const btnUpdJig = async() => {
         console.log(error);
     }
 }
+
+export const btnUpdType = async(id1, id2, id3) => {
+    try{
+        const wrapper = document.createElement('div')
+        wrapper.classList.add('fr', 'mh3');
+        
+        const btnAdd1 = document.createElement('button');
+        btnAdd1.setAttribute('type', 'button');
+        btnAdd1.id = id1;
+        btnAdd1.textContent = 'update' ;
+        btnAdd1.classList.add('mr4', 'btn1');
+
+        const btnAdd2 = document.createElement('button');
+        btnAdd2.setAttribute('type', 'button');
+        btnAdd2.id = id2;
+        btnAdd2.classList.add('mr4', 'button_minus');
+
+        const btnAdd3 = document.createElement('button');
+        btnAdd3.setAttribute('type', 'button');
+        btnAdd3.id = id3;
+        btnAdd3.classList.add('mr4', 'button_plus');
+
+        wrapper.appendChild(btnAdd3);
+        wrapper.appendChild(btnAdd2);
+        wrapper.appendChild(btnAdd1);
+        return wrapper;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+export const addNewType = async(uniq) => {
+    try{
+        const tr = document.createElement('div');
+        tr.classList.add('fr', 'tdCont2', 'pr4');
+        
+        // item number jig
+        const div1 =document.createElement('div');
+        div1.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+        const input1 = document.createElement('input');
+        input1.setAttribute('type','text');
+        input1.setAttribute('data-addType','');
+        input1.setAttribute('list','jig_suggest');
+        input1.setAttribute('autocomplete','off');
+        input1.id = `item_jig+${uniq}`
+        div1.appendChild(input1);
+        tr.appendChild(div1);
+
+        const arrDat = ['opt_on', 'opt_off','status'];
+        for (let iii=0; iii<arrDat.length; iii++) {
+            const div2 =document.createElement('div');
+                div2.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input2 = document.createElement('input');
+            input2.classList.add('cap');
+            input2.setAttribute('type','text');
+            input2.setAttribute('data-addType','');
+            input2.id = `${arrDat[iii]}+${uniq}`
+            div2.appendChild(input2);
+            tr.appendChild(div2);
+        }
+
+        const div3 =document.createElement('div');
+        div3.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+        const input3 = document.createElement('input');
+        input3.classList.add('cap');
+        input3.setAttribute('type','text');
+        input3.id = `remark+${uniq}`;
+        input3.setAttribute('data-addType','');
+        div3.appendChild(input3);
+
+        const div4 =document.createElement('div');
+        div4.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+    
+        tr.appendChild(div1);
+        tr.appendChild(div3);
+        tr.appendChild(div4);
+        return tr;
+    } catch(error){
+        console.log(error);
+    }
+}
