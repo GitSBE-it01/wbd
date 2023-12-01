@@ -22,10 +22,38 @@ require_once "config.php";
 
 <script type='module'>
     const src1 = [
-        {header: 'nama', value:'code', typeData:'input', list:'', dataClass:'', secondClass:'', headerClass:['cl2','sl1', 'fc-w']},
-        {header: 'work center', value:'wc', typeData:'text', list:'', dataClass:'', secondClass:'', headerClass:['cl2','sl3', 'fc-w']},
-        {header: '', value:'nomor', typeData:'hidden', list:'', dataClass:'', secondClass:'', headerClass:['cl2','sl5', 'fc-w']},
-        {header: 'delete', value:'delete', typeData:'button', list:'', dataClass:'', secondClass:'', headerClass:['cl2','sl7', 'fc-w']}
+        {header: 'item jig', 
+            value:'item_jig', 
+            typeData:'input', 
+            list:'', 
+            dataClass:'', 
+            secondClass:'', 
+            headerClass:['cl2','sl1', 'fc-w']
+        },
+        {header: 'desc jig', 
+            value:'desc_jig', 
+            typeData:'text', 
+            list:'', 
+            dataClass:'', 
+            secondClass:'', 
+            headerClass:['cl2','sl3', 'fc-w']
+        },
+        {header: '' , 
+            value:'type', 
+            typeData:'hidden', 
+            list:'', 
+            dataClass:'', 
+            secondClass:'', 
+            headerClass:['cl2','sl5', 'fc-w']
+        },
+        {header: 'delete', 
+            value:'delete', 
+            typeData:'button', 
+            list:'', 
+            dataClass:'', 
+            secondClass:'', 
+            headerClass:['cl2','sl7', 'fc-w']
+        }
     ]
 
     /*
@@ -123,23 +151,23 @@ require_once "config.php";
             table.appendChild(await createTr(idMarker));
             const getTr = document.getElementById(idMarker);
             for (let ii=0; ii<array.length; ii++) {
-                console.log(ii);
-                if (array[ii].typeData = 'input'){
+                console.log(array[ii].typeData);
+                if (array[ii].typeData === 'input'){
                     const result = await input(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
-                } else if (array[ii].typeData = 'text'){
+                } else if (array[ii].typeData === 'text'){
                     const result = await text(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
-                } else if (array[ii].typeData = 'hidden'){
+                } else if (array[ii].typeData === 'hidden'){
                     const result = await hidden(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
-                } else if (array[ii].typeData = 'button'){
+                } else if (array[ii].typeData === 'button'){
                     const result = await button(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
-                } else if (array[ii].typeData = 'div'){
+                } else if (array[ii].typeData === 'div'){
                     const result = await div(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
-                } else if (array[ii].typeData = 'hidDiv'){
+                } else if (array[ii].typeData === 'hidDiv'){
                     const result = await hidDiv(array[ii], data[i],idMarker)
                     getTr.appendChild(result);
                 } else {
@@ -179,9 +207,9 @@ require_once "config.php";
 
 
 
-    import {item_number} from '../routing/middleware/js/class.js';
-    const dataDB = await item_number.getData();
-    createTable(src1, dataDB, 'code', 'root', 'testTable');
+    import {jig_master_query} from '../jig_db_new/class.js';
+    const dataDB = await jig_master_query.getData();
+    createTable(src1, dataDB, 'item_jig', 'root', 'testTable');
 
 
 

@@ -292,4 +292,70 @@ function updateData($query, $filterValues, $filterValues2) {
     }
 }
 
+/*=============================================================================
+delete data
+=============================================================================*/
+function deleteData($query, $filterValues) {
+    $conn = connectToDatabase();
+    $counter = 0;   
+    $count = count($filterValues);
+    $keysParam = array();
+
+    // making array for each data
+    for ($i=0; $i<$count; $i++){
+        $cek = array_keys($filterValues[$i]);
+        $test = array_values($cek);
+        ${'inputKeys' . $counter} = $test[0];
+        $keysParam[$test[0]] = array();
+        foreach (array_values($filterValues[$i]) as $key => $values) {
+            // Create variable names like $input1, $input2, etc.
+            ${'input' . $counter} = array();
+            foreach ($values as $key2 => $value) {
+                // Extract 'value' from subarray and add to the variable
+                ${'input' . $counter}[] = $value;
+            }
+            $counter++;
+        }
+    }
+    
+    // Build the WHERE clause based on filter values
+    $types = '';
+    $params = '';
+    for ($i=0; $i<$count; $i++){
+        $params .=  ${'inputKeys' . $i} . " = ?, ";
+        if (is_int(${'input' . $i}[0])) {
+            $types .= "i"; // Integer
+        } elseif (is_float(${'input' . $i}[0])) {
+            $types .= "d"; // Double/Float
+        } elseif (is_string(${'input' . $i}[0])) {
+            $types .= "s";
+        }
+    }
+
+    $params = rtrim($params, ', ');
+    $filter = rtrim($filter, ', ');
+    $wholeQuery = $query ." WHERE " . $params;
+
+    $stmt = $conn->prepare($wholeQuery);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    if (!empty($types)) {
+        for ($i=0; $i<count($input0); $i++){
+            $bindParams = array();
+            for ($ii=0; $ii<$counter; $ii++){
+                ${'keyBind_' . $ii} = &${'input' . $ii}[$i];
+                $bindParams[] = &${'keyBind_' . $ii};
+            }
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            } else {
+                echo "success";
+            }
+        }
+    }
+}
 ?>

@@ -3,7 +3,7 @@ import { btnUpdLoc, addNewStock, btnUpdJig, addNewType, btnUpdType } from './but
 import { jig_location_query, log_location_query, jig_master_query, log_master_query, jig_function_query, log_function_query, item_detail_query  } from '../../class.js';
 import { loading } from '../../component/load.js';
 import { updateInsertData, updateInsertJig, updateInsertType } from './updateInsert.js';
-import { delChild } from '../../component/process.js';
+import { delChild, splitCustomString } from '../../component/process.js';
 
 
 export const stockUpdate = async() => {
@@ -177,6 +177,7 @@ export const typeUpdate = async() => {
             table.appendChild(await addNewType(counter));
             counter++;
         })
+        
         const btnDelType = document.getElementById('delType');
         btnDelType.addEventListener('click', function () {
             const cek = document.getElementById('tableType');
@@ -207,3 +208,18 @@ export const typeUpdate = async() => {
         console.log(error);
     }
 }
+
+document.addEventListener('change', async function(event) {
+    if (event.target.getAttribute('data-addtype') !== null && event.target.getAttribute('id').includes('item_jig')) {
+        try {
+            const targetId = document.getElementById(event.target.getAttribute('id'));
+            const value = targetId.value;
+            const result = await jig_master_query.fetchDataFilter({item_jig: value});
+            const targetResult = splitCustomString("+", targetId.id);
+            const statusNew = document.getElementById(`status+${targetResult[1]}`);
+            statusNew.value = result[0].status_jig
+        } catch(error) {
+            console.log(error);
+        }
+    }
+})

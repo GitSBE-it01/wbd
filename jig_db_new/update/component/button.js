@@ -180,11 +180,11 @@ export const addNewType = async(uniq) => {
         input1.setAttribute('data-addType','');
         input1.setAttribute('list','jig_suggest');
         input1.setAttribute('autocomplete','off');
-        input1.id = `item_jig+${uniq}`
+        input1.id = `item_jig+new${uniq}`
         div1.appendChild(input1);
         tr.appendChild(div1);
 
-        const arrDat = ['opt_on', 'opt_off','status'];
+        const arrDat = ['opt_on', 'opt_off'];
         for (let iii=0; iii<arrDat.length; iii++) {
             const div2 =document.createElement('div');
                 div2.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
@@ -192,24 +192,36 @@ export const addNewType = async(uniq) => {
             input2.classList.add('cap');
             input2.setAttribute('type','text');
             input2.setAttribute('data-addType','');
-            input2.id = `${arrDat[iii]}+${uniq}`
+            input2.id = `${arrDat[iii]}+new${uniq}`
             div2.appendChild(input2);
             tr.appendChild(div2);
         }
+
+        const div5 =document.createElement('div');
+        div5.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+        const input5 = document.createElement('input');
+        input5.classList.add('cap', 'sl3', 'fc-w');
+        input5.setAttribute('type','text');
+        input5.value = "-";
+        input5.disabled = true;
+        input5.setAttribute('data-addType','');
+        input5.id = `status+new${uniq}`
+        div5.appendChild(input5);
+        tr.appendChild(div5);
+
 
         const div3 =document.createElement('div');
         div3.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
         const input3 = document.createElement('input');
         input3.classList.add('cap');
         input3.setAttribute('type','text');
-        input3.id = `remark+${uniq}`;
+        input3.id = `remark+new${uniq}`;
         input3.setAttribute('data-addType','');
         div3.appendChild(input3);
 
         const div4 =document.createElement('div');
         div4.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
     
-        tr.appendChild(div1);
         tr.appendChild(div3);
         tr.appendChild(div4);
         return tr;
@@ -217,3 +229,4 @@ export const addNewType = async(uniq) => {
         console.log(error);
     }
 }
+

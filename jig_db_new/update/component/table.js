@@ -246,7 +246,7 @@ export const tblUpdType = async (target, data, data2) => {
         card.appendChild(input);
         table.appendChild(card);
 
-        const arrDat = ['opt_on', 'opt_off','status'];
+        const arrDat = ['opt_on', 'opt_off'];
         
         for (let i=0; i<data.length; i++){
             const tr = document.createElement('div');
@@ -278,6 +278,18 @@ export const tblUpdType = async (target, data, data2) => {
                 div2.appendChild(input2);
                 tr.appendChild(div2);
             }
+
+            const div6 =document.createElement('div');
+            div6.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input6 = document.createElement('input');
+            input6.classList.add('cap', 'sl3', 'fc-w');
+            input6.value = data[i]['status'];
+            input6.setAttribute('type','text');
+            input6.disabled = true;
+            input6.setAttribute('data-updType','');
+            input6.id = `status+${data[i].id}`
+            div6.appendChild(input6);
+            tr.appendChild(div6);
 
              
             const div3 =document.createElement('div');

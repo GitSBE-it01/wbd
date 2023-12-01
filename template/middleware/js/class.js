@@ -7,6 +7,7 @@ class Data {
         this.key = key;
         this.insertKey = 'insert_'+key;
         this.updateKey = 'update_'+key;
+        this.delKey = 'delete_'+key;
     }
 
     async getData() {
@@ -111,6 +112,35 @@ class Data {
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter, updateFilter2})
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+      }
+
+      
+      async deleteData(del) {
+        const keys = Object.keys(del);
+        const values = Object.values(del);
+        const delFilter=[];
+        for (let i=0; i<keys.length; i++) {
+            const entry = { [keys[i]]: values[i] };
+            delFilter.push(entry);
+        }
+        try {
+            const response = await fetch('http://192.168.2.103:8080/wbd/routing/api.php', {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({action: 'delData', parameters: this.delKey, delFilter})
             });
 
             if (!response.ok) {

@@ -23,6 +23,8 @@ $item_detail_query = "SELECT distinct(pt_part), pt_desc1, pt_desc2, pt_status FR
 
 $list_location= 'SELECT * FROM list_location';
 
+$delete_table = 'DELETE FROM nama_table';
+
 $codeList = array(
     'access'=>$access,
     'user'=>$user,
@@ -38,6 +40,7 @@ $codeList = array(
     'update_jig_location_query'=>$update_jig_location_query,
     'insert_log_location_query'=>$insert_log_location_query,
     'update_log_location_query'=>$update_log_location_query,
+    'delete_table'=>$delete_table,
 );
 
 ?>
