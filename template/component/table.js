@@ -1,123 +1,139 @@
-/*===================================================
-jig table generate
-===================================================*/
-export const tHeader = async(target,tableID, arrHead, color) => {
-    try {    
-        const container = document.getElementById(target);
-        const table = document.createElement('div');
-        table.classList.add('tm');
-        table.id = tableID;
-        const tr = document.createElement('div');
-        tr.classList.add('fr', 'fc-ctr', 'fc-w', 'pr4', 'thCont');
-        tr.id = 'tableHeader';
-
-        for (let i=0; i<arrHead.length; i++) {
-            const th = document.createElement('div');
-            th.classList.add('flexCh', 'th', 'bd-black', 'upper', color);
-            th.textContent = arrHead[i];
-            tr.appendChild(th);
-        }
-        table.appendChild(tr);
-        container.appendChild(table);
-    } catch(error){
-        console.log(error);
+export const input = async(data, src, mark) => {
+    const div = document.createElement('div');
+    const classes = data.dataClass;
+    if(classes) {
+        classes.forEach(clas=>{
+            div.classList.add(clas);
+        });
     }
+    const input = document.createElement('input');
+    const classes2 = data.secondClass;
+    if(classes2) {
+        classes2.forEach(clas=>{
+            input.classList.add(clas);
+        });
+    }
+    input.id = data.value + "+" + mark;
+    input.setAttribute('autocomplete', 'off');
+    if (data.list) {
+        input.setAttribute('list', data.list);
+    }
+    input.value = src[data.value];
+    div.appendChild(input);
+    return div;
+}    
+
+export const button = async(data, mark) => {
+    const div = document.createElement('div');
+    const classes = data.dataClass;
+    if(classes) {
+        classes.forEach(clas=>{
+            div.classList.add(clas);
+        });
+    }
+    const btn = document.createElement('button');
+    const classes2 = data.secondClass;
+    if(classes2) {
+        classes2.forEach(clas=>{
+            btn.classList.add(clas);
+        });
+    }
+    btn.id = data.value + "+" + mark;
+    btn.setAttribute('type', 'button');
+    btn.textContent = data.value;
+    div.appendChild(btn);
+    return div;
 }
 
-export const tData = async (tbodyID, data, arr, color) => {
-    try {
-        const tableBody = document.createElement('div');
-        tableBody.classList.add('tr');
-        tableBody.id = tbodyID;
-        for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.setAttribute('data-tr', '');
-            tr2.classList.add('fr', 'pr1');
-            for (let ii=0; ii<arr.length; ii++) {
-                const tData = document.createElement('div');
-                tData.classList.add('flexCh', 'td', 'bd-black', `${color}`, 'cap');
-                tData.textContent = `${data[i].arr[i]}`;
-                tr2.appendChild(tData);
+
+export const text = async(data, src, mark) => {
+    const div = document.createElement('div');
+    const classes = data.dataClass;
+    if(classes) {
+        classes.forEach(clas=>{
+            div.classList.add(clas);
+        });
+    }
+    div.id = data.value + "+" + mark;
+    div.textContent = src[data.value];
+    return div;
+}
+
+export const hidden = async(data, src, mark) => {
+    const div = document.createElement('input');
+    div.setAttribute('type', 'hidden');
+    div.id = data.value + "+" + mark;
+    div.value = src[data.value];
+    return div;
+}
+
+export const hidDiv = async(data, mark) => {
+    const div = document.createElement('input');
+    div.setAttribute('type', 'text');
+    div.classList.add('hide');
+    div.id = data.value + "+" + mark;
+    return div;
+}
+
+export const createTable = async(array, data, mark, target, idTable) => {
+    const container = document.getElementById(target);
+    container.appendChild(await header(idTable, array));
+    const table = document.getElementById(idTable);
+    for (let i=0; i<data.length; i++) {
+        const idMarker = data[i][mark];
+        table.appendChild(await createTr(idMarker));
+        const getTr = document.getElementById(idMarker);
+        for (let ii=0; ii<array.length; ii++) {
+            console.log(array[ii].typeData);
+            if (array[ii].typeData === 'input'){
+                const result = await input(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else if (array[ii].typeData === 'text'){
+                const result = await text(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else if (array[ii].typeData === 'hidden'){
+                const result = await hidden(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else if (array[ii].typeData === 'button'){
+                const result = await button(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else if (array[ii].typeData === 'div'){
+                const result = await div(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else if (array[ii].typeData === 'hidDiv'){
+                const result = await hidDiv(array[ii], data[i],idMarker)
+                getTr.appendChild(result);
+            } else {
+                alert('data input wrong');
             }
-            tableBody.appendChild(tr2);
         }
-        return tableBody;
-    } catch(error) {
-        console.log(error);
+
     }
 }
 
-export const tDataInput = async (tbodyID, data, arr, color, noteData) => {
-    try {
-        const tableBody = document.createElement('div');
-        tableBody.classList.add('tr');
-        tableBody.id = tbodyID;
-        for (let i=0; i<data.length; i++) {
-            const tr2 = document.createElement('div');
-            tr2.setAttribute('data-tr', '')
-            tr2.classList.add('fr', 'pr1');
-            for (let ii=0; ii<arr.length; ii++) {
-                const tData = document.createElement('div');
-                tData.classList.add('flexCh', 'td', 'bd-black', `${color}`, 'cap');
-                const tInput = document.createElement('input');
-                tInput.classList.add(`${color}`)
-                tInput.value = data[i][arr[ii]];
-                tInput.setAttribute('type','text');
-                tInput.setAttribute('data-input', noteData);
-                tInput.id = arr[ii]+ data[i][arr[ii]];;
-                tData.appendChild(tInput);
-                tr2.appendChild(tData);
-            }
-            tableBody.appendChild(tr2);
+export const header = async(idTable, data) =>{
+    const tableDiv = document.createElement('div');
+    tableDiv.id = idTable;
+    const headerTr = document.createElement('div');
+    headerTr.classList.add('fr');
+    for (let i=0; i<data.length; i++) {
+        if (data[i].header) {
+            const div = document.createElement('div');
+            div.textContent = data[i].header;
+            const classes = data[i].headerClass;
+            classes.forEach(clas=>{
+                div.classList.add(clas);
+            });
+            headerTr.appendChild(div);
         }
-        return tableBody;
-    } catch(error) {
-        console.log(error);
     }
+    tableDiv.appendChild(headerTr);
+    return tableDiv;
 }
 
-export const insertHidInp = async (target, data, arr) => {
-    try {
-        const dataTr = document.querySelectorAll(target);
-        for (let i=0; i<dataTr.length; i++) {
-            for (let ii=0; ii<arr.length; ii++) {
-                const input = document.createElement('input');
-                input.value = `${data[i].arr[ii]}`;
-                input.setAttribute('type','hidden');
-                input.setAttribute('data-input', arr[ii]);
-                input.id = `${arr[ii]}+${data[i]}`;
-                dataTr.appendChild(input);
-            }
-        }
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-export const insertHidDiv = async (target, data, arr) => {
-    try {
-        const dataTr = document.querySelectorAll(target);
-        for (let i=0; i<dataTr.length; i++) {
-            for (let ii=0; ii<arr.length; ii++) {
-                const div = document.createElement('div');
-                div.classList.add('hide');
-                div.setAttribute('data-div', arr[ii]);
-                div.id = `${arr[ii]}+${data[i]}`;
-                dataTr.appendChild(div);
-            }
-        }
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-
-
-
-for (let i=0; i<data.length; i++) {
-    input();
-    hidden();
-    btnUpdJig();
-
-
+export const createTr = async(trId) => {
+    const tr = document.createElement('div');
+    tr.classList.add('fr');
+    tr.id = trId;
+    return tr;
 }

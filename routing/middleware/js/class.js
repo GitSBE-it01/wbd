@@ -129,6 +129,7 @@ class Data {
 export const item_number= new Data('item_number');
 export const new_routing= new Data('new_routing');
 export const old_routing= new Data('old_routing');
+export const bom= new Data('bom');
 export const process= new Data('process');
 export const insert_item_number= new Data('insert_item_number');
 export const insert_new_routing= new Data('insert_new_routing');

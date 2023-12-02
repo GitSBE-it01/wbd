@@ -26,15 +26,15 @@ require_once "config.php";
             value:'item_jig', 
             typeData:'input', 
             list:'', 
-            dataClass:'', 
-            secondClass:'', 
+            dataClass:['cl2','sl9'], 
+            secondClass:['p4'], 
             headerClass:['cl2','sl1', 'fc-w']
         },
         {header: 'desc jig', 
             value:'desc_jig', 
             typeData:'text', 
             list:'', 
-            dataClass:'', 
+            dataClass:['cl2','sl9'], 
             secondClass:'', 
             headerClass:['cl2','sl3', 'fc-w']
         },
@@ -42,7 +42,7 @@ require_once "config.php";
             value:'type', 
             typeData:'hidden', 
             list:'', 
-            dataClass:'', 
+            dataClass:['cl2','sl9'], 
             secondClass:'', 
             headerClass:['cl2','sl5', 'fc-w']
         },
@@ -50,7 +50,7 @@ require_once "config.php";
             value:'delete', 
             typeData:'button', 
             list:'', 
-            dataClass:'', 
+            dataClass:['cl2','sl9'], 
             secondClass:'', 
             headerClass:['cl2','sl7', 'fc-w']
         }
@@ -65,151 +65,46 @@ require_once "config.php";
     hidDiv : membuat hidden div
     */
 
-    const input = async(data, src, mark) => {
-        const div = document.createElement('div');
-        const classes = data.dataClass;
-        if(classes) {
-            classes.forEach(clas=>{
-                div.classList.add(clas);
-            });
+    import { input,button,text,hidden,hidDiv,createTable,header,createTr } from './component/table.js';
+
+
+    import {bom} from './middleware/js/class.js';
+    const dataDB = await bom.getData();
+    let dataChild = [];
+    /*const data = dataDB.map((obj1) => {
+        const isChildInParent = obj1.child.includes(obj1.parent);
+        dataChild[obj1.parent] = [];
+        if (!isChildInParent) {
+            dataChild[obj1.parent].push(obj1.child);
+        } else {
+            const parentFilter = obj1.child;
+            const data2 = dataDB.filter((obj2)=> { 
+                return obj2.parent.includes(parentFilter);
+            })
+            data2.forEach((obj) => {
+                dataChild[obj1.parent].push(obj.child);
+            })
         }
-        const input = document.createElement('input');
-        const classes2 = data.secondClass;
-        if(classes2) {
-            classes2.forEach(clas=>{
-                input.classList.add(clas);
-            });
-        }
-        input.id = data.value + "+" + mark;
-        input.setAttribute('autocomplete', 'off');
-        if (data.list) {
-            input.setAttribute('list', data.list);
-        }
-        input.value = src[data.value];
-        div.appendChild(input);
-        return div;
-    }    
-    
-    const button = async(data, src, mark) => {
-        const div = document.createElement('div');
-        const classes = data.dataClass;
-        if(classes) {
-            classes.forEach(clas=>{
-                div.classList.add(clas);
-            });
-        }
-        const btn = document.createElement('button');
-        const classes2 = data.secondClass;
-        if(classes2) {
-            classes2.forEach(clas=>{
-                btn.classList.add(clas);
-            });
-        }
-        btn.id = data.value + "+" + mark;
-        btn.setAttribute('type', 'button');
-        btn.textContent = src[data.value];
-        div.appendChild(btn);
-        return div;
-    }
+        return {
+            parent1: obj1.parent,
+            children1: obj1.child,
+        };
+    });*/
+    console.log(dataDB);
+    dataChild['A'] = [];
+    dataChild['B'] = [];
+    dataChild['C'] = [];
+    dataDB.forEach((obj) => {
+        dataChild["A"].push(obj.parent);
+        dataChild["B"].push(obj.child);
 
-
-    const text = async(data, src, mark) => {
-        const div = document.createElement('div');
-        const classes = data.dataClass;
-        if(classes) {
-            classes.forEach(clas=>{
-                div.classList.add(clas);
-            });
-        }
-        div.id = data.value + "+" + mark;
-        div.textContent = src[data.value];
-        return div;
-    }
-
-    const hidden = async(data, src, mark) => {
-        const div = document.createElement('input');
-        div.setAttribute('type', 'hidden');
-        div.id = data.value + "+" + mark;
-        div.value = src[data.value];
-        return div;
-    }
-
-    const hidDiv = async(data, src, mark) => {
-        const div = document.createElement('input');
-        div.setAttribute('type', 'text');
-        div.classList.add('hide');
-        div.id = data.value + "+" + mark;
-        return div;
-    }
-
-    const createTable = async(array, data, mark, target, idTable) => {
-        const container = document.getElementById(target);
-        container.appendChild(await header(idTable, array));
-        const table = document.getElementById(idTable);
-        for (let i=0; i<data.length; i++) {
-            const idMarker = data[i][mark];
-            table.appendChild(await createTr(idMarker));
-            const getTr = document.getElementById(idMarker);
-            for (let ii=0; ii<array.length; ii++) {
-                console.log(array[ii].typeData);
-                if (array[ii].typeData === 'input'){
-                    const result = await input(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else if (array[ii].typeData === 'text'){
-                    const result = await text(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else if (array[ii].typeData === 'hidden'){
-                    const result = await hidden(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else if (array[ii].typeData === 'button'){
-                    const result = await button(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else if (array[ii].typeData === 'div'){
-                    const result = await div(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else if (array[ii].typeData === 'hidDiv'){
-                    const result = await hidDiv(array[ii], data[i],idMarker)
-                    getTr.appendChild(result);
-                } else {
-                    alert('data input wrong');
-                }
-            }
-
-        }
-    }
-
-    const header = async(idTable, data) =>{
-        const tableDiv = document.createElement('div');
-        tableDiv.id = idTable;
-        const headerTr = document.createElement('div');
-        headerTr.classList.add('fr');
-        for (let i=0; i<data.length; i++) {
-            if (data[i].header) {
-                const div = document.createElement('div');
-                div.textContent = data[i].header;
-                const classes = data[i].headerClass;
-                classes.forEach(clas=>{
-                    div.classList.add(clas);
-                });
-                headerTr.appendChild(div);
-            }
-        }
-        tableDiv.appendChild(headerTr);
-        return tableDiv;
-    }
-    
-    const createTr = async(trId) => {
-        const tr = document.createElement('div');
-        tr.classList.add('fr');
-        tr.id = trId;
-        return tr;
-    }
-
-
-
-    import {jig_master_query} from '../jig_db_new/class.js';
-    const dataDB = await jig_master_query.getData();
-    createTable(src1, dataDB, 'item_jig', 'root', 'testTable');
+        console.log(obj.child.includes(obj.parent));
+        if (!dataChild[obj.parent]) {
+            dataChild[obj.parent] = [];
+        } 
+        
+    })
+    // createTable(src1, dataDB, 'item_jig', 'root', 'testTable');
 
 
 

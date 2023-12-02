@@ -14,6 +14,7 @@ $update_new_routing = 'UPDATE new_routing';
 $update_old_routing = 'UPDATE old_routing';
 $update_item_wip = 'UPDATE old_routing';
 $update_process  = 'UPDATE process';
+$bom = 'SELECT * FROM bom';
 
 
 
@@ -33,6 +34,7 @@ $codeList = array(
     'item_wip' =>$item_wip,
     'insert_item_wip' =>$insert_item_wip,
     'update_item_wip' =>$update_item_wip,
+    'bom'=>$bom,
 );
 
 ?>
