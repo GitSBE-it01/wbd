@@ -41,7 +41,7 @@ require_once "trans.php";
             </datalist>
 		</div>
         <div class="middle"> 
-            <div class="loading" id="loading" style="display:none;">Loading . . .</div>
+            <div class="loading" id="loading" style="display:none;"></div>
             <div id="display" style="display:none;"></div>
 		</div>
     </div>

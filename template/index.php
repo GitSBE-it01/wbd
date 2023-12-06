@@ -70,7 +70,83 @@ require_once "config.php";
 
     import {bom} from './middleware/js/class.js';
     const dataDB = await bom.getData();
-    let dataChild = [];
+    let parent =[];
+    let child = [];
+    let wip = [];
+    let finishGood =[];
+
+    dataDB.forEach((obj) => {
+        if (!parent.includes(obj.parent)) {
+            parent.push(obj.parent);
+        }
+        if (!child.includes(obj.child)) {
+            child.push(obj.child);
+        }
+    })
+
+    console.log({parent, child});
+    
+    parent.forEach((obj) => {
+        if(!child.includes(obj)) {
+            finishGood.push(obj);
+        }
+    })
+
+    parent.forEach((obj)=> {
+        if (!finishGood.includes(obj)){
+            wip.push(obj);
+        }
+    })
+
+    let BOM =[];
+    parent.forEach((obj) => {
+        if (!BOM[obj]) {
+            BOM[obj] =[];
+        }
+        for (let i=0; i<dataDB.length; i++) {
+            if(obj === dataDB[i].parent) {
+                BOM[obj].push(dataDB[i].child);
+            }
+        }
+    })
+
+    console.log({BOM, wip, finishGood});
+
+    const root = document.getElementById('root');
+
+    parent.forEach((obj) => {
+        const row = document.createElement('div');
+        row.id = obj;
+        row.classList.add('fr');
+
+        const parentCol = document.createElement('div');
+        parentCol.textContent = obj;
+        parentCol.classList.add('sl9', 'cl2');
+        row.appendChild(parentCol);
+        
+        const child1 = document.createElement('div');
+        child1.classList.add('cl2', 'fc');
+        row.appendChild(child1);
+        
+        const child1Dat = dataDB.filter((obj2) => obj2.parent === obj);
+        child1Dat.forEach((obj3) => {
+            const childData = document.createElement('div');
+            childData.classList.add('tl9');
+            childData.textContent = obj3.child;
+            child1.appendChild(childData);
+            const child2Dat = dataDB.filter((obj4) => obj4.parent === obj3);
+            child2Dat.forEach((obj5)=> {
+                const child2Data = document.createElement('div');
+                child2Data.classList.add('tl9');
+                child2Data.textContent = obj3.child;
+                child1.appendChild(child2Data);
+            })
+        })      
+        root.appendChild(row);
+    })
+
+
+
     /*const data = dataDB.map((obj1) => {
         const isChildInParent = obj1.child.includes(obj1.parent);
         dataChild[obj1.parent] = [];
@@ -90,20 +166,18 @@ require_once "config.php";
             children1: obj1.child,
         };
     });*/
-    console.log(dataDB);
-    dataChild['A'] = [];
-    dataChild['B'] = [];
-    dataChild['C'] = [];
-    dataDB.forEach((obj) => {
-        dataChild["A"].push(obj.parent);
-        dataChild["B"].push(obj.child);
+    
 
-        console.log(obj.child.includes(obj.parent));
-        if (!dataChild[obj.parent]) {
-            dataChild[obj.parent] = [];
-        } 
-        
-    })
+
+
+/*
+
+    */
+
+    
+
+
+    
     // createTable(src1, dataDB, 'item_jig', 'root', 'testTable');
 
 

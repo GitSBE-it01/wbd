@@ -128,6 +128,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             btn7.setAttribute('data-input','');
             div7.appendChild(btn7);
 
+
             tr.appendChild(div1);
             tr.appendChild(div2);
             tr.appendChild(div3);

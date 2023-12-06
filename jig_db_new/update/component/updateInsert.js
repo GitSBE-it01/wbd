@@ -10,6 +10,7 @@ export const updateInsertData = async() => {
         let newData = [];
         data['key']=[];
         newData['key']=[];
+        data['filter']=[];
         for (let i=0; i<arrInput.length; i++) {
             const rawId = arrInput[i].id;
             const id = splitCustomString("+", rawId);
@@ -41,6 +42,7 @@ export const updateInsertData = async() => {
                 newData[key].push(value);
             }
         }
+
         // data olahan utk dimasukkan ke database
         data['code'] = [];
         data['item_jig']=[];
@@ -68,7 +70,7 @@ export const updateInsertData = async() => {
             if (data['addSub'][i] === 'tambah') {
                 data['qty_per_unit'][i] = parseInt(data['cur_qty_per_unit'][i]) + parseInt(data['qty'][i]);
             } else if (data['addSub'][i] === 'kurang') {
-                if (data['cur_qty_per_unit'][i]< data['qty'][i]){
+                if (parseInt(data['cur_qty_per_unit'][i])<parseInt(data['qty'][i])){
                     return alert("quantity perubahan lebih kecil dari pada qty on hand");
                 }
                 data['qty_per_unit'][i] = parseInt(data['cur_qty_per_unit'][i]) - parseInt(data['qty'][i]);
@@ -109,30 +111,57 @@ export const updateInsertData = async() => {
         // utk jig_location_query
         // code, item_jig, qty_per_unit, unit, lokasi, status, id, toleransi
         let update1 = [];
-        update1['item_jig'] = data['item_jig'];
-        update1['qty_per_unit'] = data['qty_per_unit'];
-        update1['unit'] = data['unit'];
-        update1['lokasi'] = data['lokasi'];
-        update1['status'] = data['status'];
-        update1['id'] = data['id'];
-        update1['toleransi'] = data['toleransi'];
-        let filter1 = []
-        filter1['code'] = data['code'];
-
-        // insert too jig_location_query
+        let filter1 = [];
+        update1['item_jig'] =[];
+        update1['qty_per_unit'] =[];
+        update1['unit'] =[];
+        update1['lokasi'] =[];
+        update1['status'] =[];
+        update1['id'] =[];
+        update1['toleransi'] =[];
+        filter1['code'] =[];
         let insert1 = [];
-        insert1['code'] = data['code'];
-        insert1['item_jig'] = data['item_jig'];
-        insert1['qty_per_unit'] = data['qty_per_unit'];
-        insert1['unit'] = data['unit'];
-        insert1['lokasi'] = data['lokasi'];
-        insert1['trans_date'] = data['trans_date'];
-        insert1['remark'] = data['remark'];
-        insert1['status'] = data['status'];
-        insert1['id'] = data['id'];
-        insert1['toleransi'] = data['toleransi'];
-        insert1['addSub'] = data['addSub'];
-        insert1['qty_change'] = data['qty'];
+        insert1['code'] = [];
+        insert1['item_jig'] = [];
+        insert1['qty_per_unit'] = [];
+        insert1['unit'] = [];
+        insert1['lokasi'] = [];
+        insert1['trans_date'] = [];
+        insert1['remark'] = [];
+        insert1['status'] = [];
+        insert1['id'] = [];
+        insert1['toleransi'] = [];
+        insert1['addSub'] = [];
+        insert1['qty_change'] = [];
+
+        for (let i=0; i<data['qty'].length; i++) {
+            if (!parseInt(data['qty'][i])==0 ) {
+                update1['item_jig'].push(data['item_jig'][i]);
+                update1['qty_per_unit'].push(data['qty_per_unit'][i]);
+                update1['unit'].push(data['unit'][i]);
+                update1['lokasi'].push(data['lokasi'][i]);
+                update1['status'].push(data['status'][i]);
+                update1['id'].push(data['id'][i]);
+                update1['toleransi'].push(data['toleransi'][i]);
+
+                filter1['code'].push(data['code'][i]);
+
+                insert1['code'].push(data['code'][i]);
+                insert1['item_jig'].push(data['item_jig'][i]);
+                insert1['qty_per_unit'].push(data['qty_per_unit'][i]);
+                insert1['unit'].push(data['unit'][i]);
+                insert1['lokasi'].push(data['lokasi'][i]);
+                insert1['trans_date'].push(data['trans_date'][i]);
+                insert1['remark'].push(data['remark'][i]);
+                insert1['status'].push(data['status'][i]);
+                insert1['id'].push(data['id'][i]);
+                insert1['toleransi'].push(data['toleransi'][i]);
+                insert1['addSub'].push(data['addSub'][i]);
+                insert1['qty_change'].push(data['qty'][i]);
+            }
+        }
+        // insert too jig_location_query
+
 
         // insert too jig_location for new data
         let insert2 = [];
@@ -160,11 +189,15 @@ export const updateInsertData = async() => {
         insert3['addSub'] = newData['addSub'];
         insert3['qty_change'] = newData['qty'];
 
+        
         if (newData['code'].length == 0) {
             const result3 = await jig_location_query.updateData(update1, filter1);     
             const result1 = await log_location_query.insertData(insert1);
-            if (result3==='success') {
+            if (!result3.includes('fail')) {
                 alert('data successfully updated');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 alert('data is not updated');
             }
@@ -174,8 +207,11 @@ export const updateInsertData = async() => {
         const result1 = await log_location_query.insertData(insert1);     
         const result2 = await jig_location_query.insertData(insert2);     
         const result4 = await log_location_query.insertData(insert3);     
-        if (result3==='success' && result2=== 'success') {
+        if (!result3.includes('fail') && !result2.includes('fail')) {
             alert('data successfully updated');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             alert('data is not updated');
         }
@@ -231,8 +267,11 @@ export const updateInsertJig = async() => {
 
         const result3 = await jig_master_query.updateData(update1, filter1);     
         const result1 = await log_master_query.insertData(insert1);
-        if (result3==='success') {
+        if (!result3.includes('fail')) {
             alert('data successfully updated');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             alert('data is not updated');
         }
@@ -363,8 +402,11 @@ export const updateInsertType = async() => {
         if (newData['item_jig'].length == 0) {
             const result3 = await jig_function_query.updateData(update1, filter1);     
             const result1 = await log_function_query.insertData(insert1);
-            if (result3==='success') {
+            if (!result3.includes('fail')) {
                 alert('data successfully updated');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             } else {
                 alert('data is not updated');
             }
@@ -374,8 +416,11 @@ export const updateInsertType = async() => {
         const result1 = await log_function_query.insertData(insert1);     
         const result2 = await jig_function_query.insertData(insert2);     
         const result4 = await log_function_query.insertData(insert3);     
-        if (result3=='success' && result2=='success' ) {
+        if (!result3.includes('fail') && !result2.includes('fail') ) {
             alert('data successfully updated and inserted');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             alert('data is not updated or inserted');
         }
