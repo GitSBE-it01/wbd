@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $insertData = isset($data['insertFilter']) ? $data['insertFilter']:''; 
     $updateData = isset($data['updateFilter']) ? $data['updateFilter']:'';
     $updateData2 = isset($data['updateFilter2']) ? $data['updateFilter2']:'';
+    $delData = isset($data['delFilterKey']) ? $data['delFilterKey']:'';
+    $delData2 = isset($data['delFilter']) ? $data['delFilter']:'';
     $filter = isset($data['filter']) ? $data['filter']:''; 
     $query = getArrayList($codeList, $param); 
     if ($action === 'getData') {
@@ -22,7 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // $result = array($insertData);
     }elseif ($action === 'updateData') {
         $result = updateData($query, $updateData, $updateData2);
+    } elseif ($action === 'deleteData') {
+        $result = deleteData($query, $delData, $delData2);
     }
+
     header("Cache-Control: public, max-age=3600");
     header("Content-Type: application/json");
     echo json_encode($result);

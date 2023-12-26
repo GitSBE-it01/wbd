@@ -221,6 +221,50 @@ export const updateInsertData = async() => {
 
 }
 
+export const delDataStock = async(id,pk) => {
+    try {
+        const code = splitCustomString("+", id);
+        const idToDelete = code[1];
+        const item = splitCustomString("--", idToDelete);
+        const allData = document.querySelectorAll(`[id*="${idToDelete}"]`);
+        let data = [];
+        for (let i=0; i<allData.length; i++) {
+            const rawId = allData[i].id;
+            const id = splitCustomString("+", rawId);
+            const key = id[0];
+            const value = allData[i].value;
+            if (!data[key]) {
+                data[key] = [value];    
+            } else {
+                data[key].push(value);
+            }
+        }
+        let insert1 = [];
+        insert1['code'] = [idToDelete];
+        insert1['item_jig'] = [item[0]];
+        insert1['qty_per_unit'] = [data['cur_qty_per_unit'][0]];
+        insert1['unit'] = [data['unit'][0]];
+        insert1['lokasi'] = [data['lokasi'][0]];
+        insert1['trans_date'] = [currentDate()];
+        insert1['remark'] = ['delete'];
+        insert1['qty_change'] = [data['qty'][0]];
+
+        const result = await jig_location_query.deleteData(pk,idToDelete);
+        const result1 = await log_location_query.insertData(insert1);  
+
+        if (!result.includes('fail')) {
+            alert('data successfully deleted');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            alert('data is not deleted');
+        }
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 
 
 export const updateInsertJig = async() => {

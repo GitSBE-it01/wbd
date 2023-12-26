@@ -7,6 +7,7 @@ class Data {
         this.key = key;
         this.insertKey = 'insert_'+key;
         this.updateKey = 'update_'+key;
+        this.deleteKey = 'delete_'+key;
     }
 
     async getData() {
@@ -111,6 +112,27 @@ class Data {
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter, updateFilter2})
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+      }
+
+      async deleteData(delFilterKey, delFilter) {
+        try {
+            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, delFilterKey, delFilter})
             });
 
             if (!response.ok) {

@@ -104,6 +104,9 @@ require_once "../config.php";
     const btnStockDiv = document.getElementById('btnSec1');
     btnStockDiv.classList.add('switchActive');
     main.removeChild(document.getElementById('loading1'));
+
+    import { stockUpdate, dataUpdate, typeUpdate } from './component/data.js';
+    import { delDataStock } from './component/updateInsert.js';
     
     document.addEventListener("click", async function(event) {
         if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('data-switch') !== null) {
@@ -118,10 +121,14 @@ require_once "../config.php";
             const divTarget2 = document.getElementById(event.target.getAttribute('data-switch'));
             divTarget1.classList.add('switchActive');
             divTarget2.classList.remove('hide');
+            return;
+        }
+        if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+')) {
+            await delDataStock(event.target.getAttribute('id'),'code');
+            return;
         }
     })
 
-    import { stockUpdate, dataUpdate, typeUpdate } from './component/data.js';
     const btnStock = document.getElementById('btnStock');
     btnStock.addEventListener('click', async function() {
         await stockUpdate();
