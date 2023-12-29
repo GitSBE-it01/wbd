@@ -394,8 +394,6 @@ export const updateInsertType = async() => {
         insert2['opt_on'] = [];
         insert2['opt_off'] = [];
         insert2['status'] = [];
-        insert2['remark'] = [];
-        insert2['trans_date'] = [];
         let insert3 = [];
         insert3['item_jig'] = [];
         insert3['item_type'] = [];
@@ -405,7 +403,6 @@ export const updateInsertType = async() => {
         insert3['remark'] = [];
         insert3['trans_date'] = [];
 
-        console.log(data);
         for (let i=0; i<data['mark'].length; i++) {
             // item_jig item_type opt on opt off status
             const cekChange = `${data['item_jig'][i]}+${item}+${data['opt_on'][i]}+${data['opt_off'][i]}+${data['status'][i]}`;
@@ -424,29 +421,43 @@ export const updateInsertType = async() => {
                 insert1['status'].push(data['status'][i]);
                 insert1['remark'].push(data['remark'][i]);
                 insert1['trans_date'].push(currentDate());
-
-                insert2['item_jig'].push(newData['item_jig'][i]);
-                insert2['item_type'].push(item);
-                insert2['opt_on'].push(newData['opt_on'][i]);
-                insert2['opt_off'].push(newData['opt_off'][i]);
-                insert2['status'].push(newData['status'][i]);
-                insert2['remark'].push(newData['remark'][i]);
-                insert2['trans_date'].push(currentDate());
-
-                insert3['item_jig'].push(newData['item_jig'][i]);
-                insert3['item_type'].push(item);
-                insert3['opt_on'].push(newData['opt_on'][i]);
-                insert3['opt_off'].push(newData['opt_off'][i]);
-                insert3['status'].push(newData['status'][i]);
-                insert3['remark'].push(newData['remark'][i]);
-                insert3['trans_date'].push(currentDate());
             }
         }
 
-        if (newData['item_jig'].length == 0) {
+        for (let i=0; i<newData['item_jig'].length; i++) {
+            insert2['item_jig'].push(newData['item_jig'][i]);
+            insert2['item_type'].push(item);
+            insert2['opt_on'].push(newData['opt_on'][i]);
+            insert2['opt_off'].push(newData['opt_off'][i]);
+            insert2['status'].push(newData['status'][i]);
+
+            insert3['item_jig'].push(newData['item_jig'][i]);
+            insert3['item_type'].push(item);
+            insert3['opt_on'].push(newData['opt_on'][i]);
+            insert3['opt_off'].push(newData['opt_off'][i]);
+            insert3['status'].push(newData['status'][i]);
+            insert3['remark'].push(newData['remark'][i]);
+            insert3['trans_date'].push(currentDate());
+        }
+
+        console.log({update1, filter1, insert1, insert2, insert3});
+        let result = true;
+        if (update1['item_jig'].length > 0) {
             const result3 = await jig_function_query.updateData(update1, filter1);     
             const result1 = await log_function_query.insertData(insert1);
-            if (!result3.includes('fail')) {
+            if (result3.includes('fail')) {
+                result = false;
+            }
+        }
+        if (insert2['item_jig'].length > 0) {
+            const result2 = await jig_function_query.insertData(insert2);   
+            const result4 = await log_function_query.insertData(insert3);
+            if (result2.includes('fail')) {
+                result = false;
+            }
+        }
+
+        if (result) {
                 alert('data successfully updated');
                 setTimeout(() => {
                     location.reload();
@@ -454,22 +465,59 @@ export const updateInsertType = async() => {
             } else {
                 alert('data is not updated');
             }
-            return;
-        }
-        const result3 = await jig_function_query.updateData(update1, filter1);     
-        const result1 = await log_function_query.insertData(insert1);     
-        const result2 = await jig_function_query.insertData(insert2);     
-        const result4 = await log_function_query.insertData(insert3);     
-        if (!result3.includes('fail') && !result2.includes('fail') ) {
-            alert('data successfully updated and inserted');
-            setTimeout(() => {
-                location.reload();
-            }, 2000);
-        } else {
-            alert('data is not updated or inserted');
-        }
     } catch(error){
         console.log(error);
     }
 
+}
+
+
+
+export const delDataType = async(id,pk) => {
+    try {
+        const code = splitCustomString("+", id);
+        const idToDelete = code[1];
+        const itemType = document.getElementById('searchType').value;
+        const allData = document.querySelectorAll(`[id*="${idToDelete}"]`);
+        let data = [];
+        for (let i=0; i<allData.length; i++) {
+            const rawId = allData[i].id;
+            const id = splitCustomString("+", rawId);
+            const key = id[0];
+            const value = allData[i].value;
+            if (!data[key]) {
+                data[key] = [value];    
+            } else {
+                data[key].push(value);
+            }
+        }
+
+        console.log(data);
+
+        let insert1 = [];
+        insert1['id'] = [idToDelete];
+        insert1['item_jig'] = [data['item_jig'][0]];
+        insert1['item_type'] = [itemType];
+        insert1['opt_on'] = [data['opt_on'][0]];
+        insert1['opt_off'] = [data['opt_off'][0]];
+        insert1['status'] = 
+        insert1['remark'] = ['delete'];
+        insert1['trans_date'] = [currentDate()];
+        
+        console.log(insert1);
+
+        const result = await jig_function_query.deleteData(pk,idToDelete);
+        const result1 = await log_function_query.insertData(insert1);  
+
+        if (!result.includes('fail')) {
+            alert('data successfully deleted');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            alert('data is not deleted');
+        }
+    } catch(error) {
+        console.log(error);
+    }
 }

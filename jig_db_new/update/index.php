@@ -106,7 +106,7 @@ require_once "../config.php";
     main.removeChild(document.getElementById('loading1'));
 
     import { stockUpdate, dataUpdate, typeUpdate } from './component/data.js';
-    import { delDataStock } from './component/updateInsert.js';
+    import { delDataStock, delDataType } from './component/updateInsert.js';
     
     document.addEventListener("click", async function(event) {
         if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('data-switch') !== null) {
@@ -123,8 +123,12 @@ require_once "../config.php";
             divTarget2.classList.remove('hide');
             return;
         }
-        if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+')) {
+        if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+') && event.target.getAttribute('data-input') !== null) {
             await delDataStock(event.target.getAttribute('id'),'code');
+            return;
+        }
+        if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+') && event.target.getAttribute('data-updtype') !== null) {
+            await delDataType(event.target.getAttribute('id'),'id');
             return;
         }
     })

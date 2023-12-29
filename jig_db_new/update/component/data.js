@@ -35,6 +35,7 @@ export const stockUpdate = async() => {
         historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
         historyTitle.textContent = 'History Log';
         const dataHist = await log_location_query.fetchDataFilter({item_jig: filter});
+        dataHist.sort((a, b) => b.id_log - a.id_log);
 
         newContain.removeChild(document.getElementById('loading1'));
         newContain.appendChild(table);
@@ -103,6 +104,7 @@ export const dataUpdate = async() => {
         historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
         historyTitle.textContent = 'History Log';
         const dataHist = await log_master_query.fetchDataFilter({item_jig: filter});
+        dataHist.sort((a, b) => b.id_log - a.id_log);
 
         dataContain.removeChild(document.getElementById('loading1'));
         //dataContain.appendChild(table);
@@ -166,7 +168,8 @@ export const typeUpdate = async() => {
         const historyTitle = document.createElement('div');
         historyTitle.classList.add('fs-l', 'fc-w', 'cap', 'mt4', 'pl4', 'pv2','sl3');
         historyTitle.textContent = 'History Log';
-        const dataHist = await log_function_query.fetchDataFilter({item_jig: filter});
+        const dataHist = await log_function_query.fetchDataFilter({item_type: filter});
+        dataHist.sort((a, b) => b.id_log - a.id_log);
 
         typeContain.removeChild(document.getElementById('loading1'));
         typeContain.appendChild(table);
@@ -204,6 +207,7 @@ export const typeUpdate = async() => {
         })
         typeContain.appendChild(historyTitle);
         typeContain.appendChild(await tblHistType(dataHist));
+        console.log(dataHist);
     } catch (error) {
         console.log(error);
     }
