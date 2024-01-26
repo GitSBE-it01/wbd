@@ -12,7 +12,7 @@ class Data {
 
     async getData() {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ class Data {
       */
       async fetchDataFilter(filter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ class Data {
             insertFilter.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ class Data {
             updateFilter2.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ class Data {
 
       async deleteData(delFilterKey, delFilter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/jig_db_new/api2.php', {
+            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json'
@@ -148,4 +148,4 @@ class Data {
 }
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
-export const bom= new Data('bom');
+export const bom= new Data('dmc_vjs');
