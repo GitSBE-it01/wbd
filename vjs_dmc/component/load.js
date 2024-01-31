@@ -9,9 +9,9 @@ export const init = (target, navBar, mainColor, navBarColor) => {
     container.appendChild(div);
     container.appendChild(main);
     if (navBar === 'navBar') {
-        main.classList.add('main2');
-        div.classList.add('navCard');
+        main.classList.add('navCard1');
         div.id = 'navBar';
+        div.classList.add('navCard2', 'fr');
         return;
     } 
     if (navBar === 'side') {
@@ -40,15 +40,19 @@ export const createNavbar = (target, navbarHTML) => {
     navbar.innerHTML = navbarHTML;
     return navbar;
 }
-
-
-const array = {
-    href:[],
-    btn_txt:[{
-        spanClass:[],
-        text:[],
-    }]
-};
+/*-------------------------
+check active link
+-------------------------*/
+export const activeLink = (target) => {
+    const aLink = document.querySelectorAll(target);
+    aLink.forEach(link=> {
+        const currentUrl = window.location.href;
+        const hrefValue = link.getAttribute('href'); 
+        const span = link.querySelector('span.fc-w');
+        if (hrefValue === currentUrl) {
+            span.classList.add('active'); // Add the new class if it matches
+    }   
+})}
 
 export const createSidebar = (target, array) => {
     const container = document.getElementById(target);

@@ -1,6 +1,25 @@
-import { populateOption } from './process.js';
-import { relation } from './class.js';
 import { loading } from './load.js';
+
+export const searchBar = async(target, id, divStyle, inpStyle, btnStyle) => {
+    const container = document.getElementyById(target);
+    const div = document.createElement('div');
+    divStyle.forEach(sty => {
+        div.classList.add(sty)
+    });
+    const input = document.createElement('input');
+    inpStyle.forEach(sty => {
+        input.classList.add(sty)
+    });
+    const btn = document.createElement('button');
+    btnStyle.forEach(sty => {
+        btn.classList.add(sty)
+    });
+    div.appendChild(input)
+
+}
+
+
+
 
 export const search = async (target) => {
     // loading utk menunggu proses berjalan

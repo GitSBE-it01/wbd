@@ -134,16 +134,4 @@ export function delChild(target) {
 }
 
 
-/*-------------------------
-check active link
--------------------------*/
-export const activeLink = (target) => {
-    const aLink = document.querySelectorAll(target);
-    aLink.forEach(link=> {
-        const currentUrl = window.location.href;
-        const hrefValue = link.getAttribute('href'); 
-        const span = link.querySelector('span.fc-w');
-        if (hrefValue === currentUrl) {
-            span.classList.add('active'); // Add the new class if it matches
-    }   
-})}
+

@@ -7,8 +7,7 @@ require_once "config.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/layout.css">
-    <link rel="stylesheet" href="../assets/css/layout2.css">
+    <link rel="stylesheet" href="../assets/css/layout_fix.css">
     <link rel="stylesheet" href="../assets/css/animation.css">
     <link rel="stylesheet" href="../assets/css/font.css">
     <link rel="stylesheet" href="../assets/css/color.css">
@@ -18,78 +17,45 @@ require_once "config.php";
 </head>
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
-<div id='root'></div>
+<div id='root' class='container'></div>
+<!--
+<div id='root' class="container tl8">
+    <div id='navbar' class= 'navCard tl1'>
 
+
+    </div>
+</div>
+-->
 
 <script type='module'>
-    import {asset} from './middleware/js/class.js';
-    import {createTable} from './component/table.js';
+    /*
+    *navigation bar :
+        home 
+        insert category
+        history
+        back to main menu
     
-    const src2 = await asset.getData();
-    console.log(src2);
+    * search no asset utk di input VJS - DMC nya
 
-    const tblStyle = {
-        contStyle: [],
-        thdStyle:[],
-        trowStyle:[],
-        tdtStyle:[],
-        selStyle:[],
-        btnStyle:[],
-    }
+    *  jika blum ada data inputan di DMC di hari tersebut utk asset tersebut. maka akan membuat DMC baru
+        jika sudah maka di munculkan DMC dan resultnya 
 
-    const tblData = [
-        {
-            header:'no asset',
-            db_field:'assetno',
-            dt_type:'text',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'asset description',
-            db_field:'assetname',
-            dt_type:'text',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'test',
-            db_field:'',
-            dt_type:'select',
-            mark:'assetno',
-            param:["-choose-",'yes','no']
-        },
-        {
-            header:'test2',
-            db_field:'test',
-            dt_type:'button',
-            mark:'assetno',
-            param:'submit'
-        },
-        {
-            header:'test3',
-            db_field:'byusername',
-            dt_type:'hidden',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'test4',
-            db_field:'hidDiv',
-            dt_type:'hidDiv',
-            mark:'assetno',
-            param:''
-        },        
-        {
-            header:'test5',
-            db_field:'location',
-            dt_type:'input',
-            mark:'assetno',
-            param:'list_test'
-        }
-    ]
-        console.log(tblData);
-    createTable('root','test1',src2,tblStyle, tblData);
+    *   sesudah DMC selesai maka muncul VJS data 
+    *   data vjs bisa ditambah terus dan keluar semua data dalam sehari itu 
+
+    */
+    import {init} from './component/index.js';
+    init('root', 'navBar', 'tl8', 'tl2');
+    const navBar = document.getElementById('navBar');
+    navBar.innerHTML = `
+    <div class='child'> 
+        <a href="../../sbe/index.php">
+            <button type='button' class='home'></button>
+        </a>
+    </div>
+    <div class='navli child'><a class="fc-w" href="index.php">Home</a></div>
+    <div class='navli child'><a class="fc-w" href="insert_cat.php">Insert category</a></div>
+    </div>`;
     
 
 </script>
