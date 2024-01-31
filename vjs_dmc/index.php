@@ -18,155 +18,79 @@ require_once "config.php";
 </head>
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
-<div id='root'>
-    <h1>HELLO WORLD</h1>
-</div>
+<div id='root'></div>
+
 
 <script type='module'>
-    init('sidebar')
-    // navbar
-    import { createNavbar } from './component/load.js';
+    import {asset} from './middleware/js/class.js';
+    import {createTable} from './component/table.js';
     
-    
-    await createNavbar('root');
+    const src2 = await asset.getData();
+    console.log(src2);
 
-    // input utk search pilih asset mesin
-    import { search } from './component/search.js';
-    await search('root');
+    const tblStyle = {
+        contStyle: [],
+        thdStyle:[],
+        trowStyle:[],
+        tdtStyle:[],
+        selStyle:[],
+        btnStyle:[],
+    }
 
-    import { tableHeader,  dmcHeader  } from './component/table.js';
-    const showBtn = document.getElementById('show');
-    showBtn.addEventListener("click", async function() {
-        await dmcHeader('root');
-        const arrHead = ['inspection','standard','unit','checklist'];
-        await tableHeader('detailDiv','dmcHead', arrHead);
-    })
-
-    const src1 = [
-        {header: 'item jig', 
-            value:'item_jig', 
-            typeData:'input', 
-            list:'', 
-            dataClass:['cl2','sl9'], 
-            secondClass:['p4'], 
-            headerClass:['cl2','sl1', 'fc-w']
+    const tblData = [
+        {
+            header:'no asset',
+            db_field:'assetno',
+            dt_type:'text',
+            mark:'assetno',
+            param:''
         },
-        {header: 'desc jig', 
-            value:'desc_jig', 
-            typeData:'text', 
-            list:'', 
-            dataClass:['cl2','sl9'], 
-            secondClass:'', 
-            headerClass:['cl2','sl3', 'fc-w']
+        {
+            header:'asset description',
+            db_field:'assetname',
+            dt_type:'text',
+            mark:'assetno',
+            param:''
         },
-        {header: '' , 
-            value:'type', 
-            typeData:'hidden', 
-            list:'', 
-            dataClass:['cl2','sl9'], 
-            secondClass:'', 
-            headerClass:['cl2','sl5', 'fc-w']
+        {
+            header:'test',
+            db_field:'',
+            dt_type:'select',
+            mark:'assetno',
+            param:["-choose-",'yes','no']
         },
-        {header: 'delete', 
-            value:'delete', 
-            typeData:'button', 
-            list:'', 
-            dataClass:['cl2','sl9'], 
-            secondClass:'', 
-            headerClass:['cl2','sl7', 'fc-w']
+        {
+            header:'test2',
+            db_field:'test',
+            dt_type:'button',
+            mark:'assetno',
+            param:'submit'
+        },
+        {
+            header:'test3',
+            db_field:'byusername',
+            dt_type:'hidden',
+            mark:'assetno',
+            param:''
+        },
+        {
+            header:'test4',
+            db_field:'hidDiv',
+            dt_type:'hidDiv',
+            mark:'assetno',
+            param:''
+        },        
+        {
+            header:'test5',
+            db_field:'location',
+            dt_type:'input',
+            mark:'assetno',
+            param:'list_test'
         }
     ]
-
-    /*
-    input : utk membuat data div dan input yg bisa terisi
-    text : hanya div
-    readonly : membuat div dan input yang readonly
-    button : membuat button 
-    hidden : membuat hidden input
-    hidDiv : membuat hidden div
-    */
-
-    import { input,button,text,hidden,hidDiv,createTable,header,createTr } from './component/table.js';
-
-
-    import {bom} from './middleware/js/class.js';
-    const dataDB = await bom.getData();
-    let parent =[];
-    let child = [];
-    let wip = [];
-    let finishGood =[];
-
-    dataDB.forEach((obj) => {
-        if (!parent.includes(obj.parent)) {
-            parent.push(obj.parent);
-        }
-        if (!child.includes(obj.child)) {
-            child.push(obj.child);
-        }
-    })
-
-    console.log({parent, child});
+        console.log(tblData);
+    createTable('root','test1',src2,tblStyle, tblData);
     
-    parent.forEach((obj) => {
-        if(!child.includes(obj)) {
-            finishGood.push(obj);
-        }
-    })
-
-    parent.forEach((obj)=> {
-        if (!finishGood.includes(obj)){
-            wip.push(obj);
-        }
-    })
-
-    let BOM =[];
-    parent.forEach((obj) => {
-        if (!BOM[obj]) {
-            BOM[obj] =[];
-        }
-        for (let i=0; i<dataDB.length; i++) {
-            if(obj === dataDB[i].parent) {
-                BOM[obj].push(dataDB[i].child);
-            }
-        }
-    })
-
-    console.log({BOM, wip, finishGood});
-
-    const root = document.getElementById('root');
-
-    parent.forEach((obj) => {
-        const row = document.createElement('div');
-        row.id = obj;
-        row.classList.add('fr');
-
-        const parentCol = document.createElement('div');
-        parentCol.textContent = obj;
-        parentCol.classList.add('sl9', 'cl2');
-        row.appendChild(parentCol);
-        
-        const child1 = document.createElement('div');
-        child1.classList.add('cl2', 'fc');
-        row.appendChild(child1);
-        
-        const child1Dat = dataDB.filter((obj2) => obj2.parent === obj);
-        child1Dat.forEach((obj3) => {
-            const childData = document.createElement('div');
-            childData.classList.add('tl9');
-            childData.textContent = obj3.child;
-            child1.appendChild(childData);
-            const child2Dat = dataDB.filter((obj4) => obj4.parent === obj3);
-            child2Dat.forEach((obj5)=> {
-                const child2Data = document.createElement('div');
-                child2Data.classList.add('tl9');
-                child2Data.textContent = obj3.child;
-                child1.appendChild(child2Data);
-            })
-        })      
-        root.appendChild(row);
-    })
-
-
 
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>

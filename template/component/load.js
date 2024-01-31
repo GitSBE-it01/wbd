@@ -37,7 +37,6 @@ export const createNavbar = (target, navbarHTML) => {
     container.classList.add('navbar');
     const navbar = document.createElement('div');
     navbar.innerHTML = navbarHTML;
-    //container.appendChild(navbar);
     return navbar;
 }
 

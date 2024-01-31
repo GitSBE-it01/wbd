@@ -8,14 +8,31 @@ class Data {
         this.insertKey = 'insert_'+key;
         this.updateKey = 'update_'+key;
         this.deleteKey = 'delete_'+key;
+        const { url, ori } = this.getUrl();
+        this.url = url;
+        this.ori = ori;
+    }
+    getUrl() {
+        const check = window.location.href.split("/");
+        let url ="";
+        let ori = "";
+        if (check[2].length > 20 ){
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/vjs_dmc/middleware/php/api.php';
+            ori = 'http://informationsystem.sbe.co.id';
+        } else {
+            url = 'http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php';
+            ori = 'http://192.168.2.103';
+        }
+        return { url, ori };
     }
 
     async getData() {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
+            const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
               },
               body: JSON.stringify({action: 'getData', parameters: this.key})
             });
@@ -44,10 +61,11 @@ class Data {
       */
       async fetchDataFilter(filter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
+            const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
               },
               body: JSON.stringify({action: 'fetchDataFilter', parameters: this.key, filter})
             });
@@ -71,10 +89,11 @@ class Data {
             insertFilter.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
+            const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
               },
               body: JSON.stringify({action: 'insertData', parameters: this.insertKey, insertFilter})
             });
@@ -106,10 +125,11 @@ class Data {
             updateFilter2.push(entry);
         }
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
+            const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
               },
               body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter, updateFilter2})
             });
@@ -127,10 +147,11 @@ class Data {
 
       async deleteData(delFilterKey, delFilter) {
         try {
-            const response = await fetch('http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php', {
+            const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
               },
               body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, delFilterKey, delFilter})
             });
@@ -149,3 +170,7 @@ class Data {
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
 export const bom= new Data('dmc_vjs');
+export const asset = new Data('assets');
+export const ng_daily = new Data('ng_daily');
+export const wo_mstr = new Data('wo_mstr');
+
