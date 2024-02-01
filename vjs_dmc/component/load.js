@@ -11,20 +11,23 @@ export const init = (target, navBar, mainColor, navBarColor) => {
     if (navBar === 'navBar') {
         main.classList.add('navCard1');
         div.id = 'navBar';
-        div.classList.add('navCard2', 'fr');
+        div.classList.add('navCard2', 'flex-r');
         return;
     } 
     if (navBar === 'side') {
-        main.classList.add('main');
-        div.classList.add('sideCard');
+        main.classList.add('sideCard1');
         div.id = 'side';
+        div.classList.add('sideCard2');
         return;
     } 
-    alert('yang anda masukkan salah');
+    alert('parameter ada yang salah');
     return;
 
 }
 
+/*-------------------------
+loading animasi
+-------------------------*/
 export const loading = (idLoad, classDiv) => {
     const div = document.createElement("div");
     div.id = idLoad;
@@ -32,14 +35,62 @@ export const loading = (idLoad, classDiv) => {
     return div;
 }
 
+/*-------------------------
+buat nav bar
+-------------------------*/
+// contoh array 
+const navigation = [
+    {
+        link: '../../sbe/index.php',
+        type: 'btn', // if btn then create a button, if txt then create span
+        text: '', //if btn then empty
+        divStyle:['mx5', 'mt2', 'scale-120'],
+        linkStyle: ['home']
+    },
+    {
+        link: 'index.php',
+        type: 'txt', // if btn then create a button, if txt then create span
+        text: 'home',
+        divStyle:['ml5','mt3', 'scale-120'],
+        linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
+    },
+]
 
-export const createNavbar = (target, navbarHTML) => {
-    const container = document.getElementById(target);
-    container.classList.add('navbar');
-    const navbar = document.createElement('div');
-    navbar.innerHTML = navbarHTML;
+export const createNavbar = (target, navigation) => {
+    const navbar = document.getElementById(target);
+    navigation.forEach(nav=>{
+        const div = document.createElement('div');
+        const classes = nav.divStyle;
+        classes.forEach(cls =>{
+            div.classList.add(cls);
+        })
+        const a = document.createElement('a');
+        a.setAttribute('href', nav.link);
+        a.setAttribute('style', 'text-decoration: none;')
+        if(nav.type === 'txt') {
+            const span = document.createElement('span');
+            span.textContent = nav.text;
+            const classes2 = nav.linkStyle;
+            classes2.forEach(cls =>{
+                span.classList.add(cls);
+            })
+            a.appendChild(span);
+        }
+        if(nav.type === 'btn') {
+            const btn = document.createElement('button');
+            const classes2 = nav.linkStyle;
+            classes2.forEach(cls =>{
+                btn.classList.add(cls);
+            })
+            a.appendChild(btn);
+        }
+        div.appendChild(a);
+        navbar.appendChild(div);
+    })
+    console.log(navbar);
     return navbar;
 }
+
 /*-------------------------
 check active link
 -------------------------*/
@@ -54,6 +105,7 @@ export const activeLink = (target) => {
     }   
 })}
 
+/*
 export const createSidebar = (target, array) => {
     const container = document.getElementById(target);
     container.classList.add('sidebar');
@@ -74,3 +126,4 @@ export const createSidebar = (target, array) => {
     container.appendChild(createSidebar);
     return createSidebar;
 }
+*/

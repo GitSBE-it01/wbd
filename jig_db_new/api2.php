@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $insertData = isset($data['insertFilter']) ? $data['insertFilter']:''; 
     $updateData = isset($data['updateFilter']) ? $data['updateFilter']:'';
     $updateData2 = isset($data['updateFilter2']) ? $data['updateFilter2']:'';
-    $updateData2 = isset($data['delFilter']) ? $data['delFilter']:'';
     $delData = isset($data['delFilterKey']) ? $data['delFilterKey']:'';
     $delData2 = isset($data['delFilter']) ? $data['delFilter']:'';
     $filter = isset($data['filter']) ? $data['filter']:''; 

@@ -124,11 +124,23 @@ require_once "../config.php";
             return;
         }
         if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+') && event.target.getAttribute('data-input') !== null) {
+            const delIdData = document.getElementById(event.target.getAttribute('id'));
+            delIdData.textContent = "";
+            delIdData.classList.add('proses');
+            delIdData.disabled = true;
             await delDataStock(event.target.getAttribute('id'),'code');
+            delIdData.classList.remove('proses');
+            delIdData.textContent = "delete";
             return;
         }
         if (event.target.getAttribute('type') === 'button' && event.target.getAttribute('id').includes('del+') && event.target.getAttribute('data-updtype') !== null) {
+            const delIdType = document.getElementById(event.target.getAttribute('id'));
+            delIdType.textContent = "";
+            delIdType.classList.add('proses');
+            delIdType.disabled = true;
             await delDataType(event.target.getAttribute('id'),'id');
+            delIdType.classList.remove('proses');
+            delIdType.textContent = "delete";
             return;
         }
     })

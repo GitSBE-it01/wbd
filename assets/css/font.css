@@ -10,6 +10,8 @@ font-family: 'Roboto', sans-serif;
 body {font-family: 'Fira Sans', sans-serif;}
 .upper {text-transform: uppercase;}
 .cap {text-transform: capitalize;}
+
+
 /*
 fs = font size
 */
@@ -37,6 +39,18 @@ af = align font or text
 .af-ctr {text-align: center;}
 .af-l {text-align: left;}
 .af-r {text-align: right;}
+
+/*
+hover bigger
+*/
+.scale-120 {
+    transition: transform 0.2s ease; /* Adding a transition for a smooth effect */
+}
+
+.scale-120:hover {
+    transform: scale(1.2) translateY(0.13rem);
+}
+
 
 /*
 link active

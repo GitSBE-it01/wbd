@@ -44,19 +44,28 @@ require_once "config.php";
     *   data vjs bisa ditambah terus dan keluar semua data dalam sehari itu 
 
     */
-    import {init} from './component/index.js';
+    import {init, createNavbar, createSearch} from './component/index.js';
     init('root', 'navBar', 'tl8', 'tl2');
-    const navBar = document.getElementById('navBar');
-    navBar.innerHTML = `
-    <div class='child'> 
-        <a href="../../sbe/index.php">
-            <button type='button' class='home'></button>
-        </a>
-    </div>
-    <div class='navli child'><a class="fc-w" href="index.php">Home</a></div>
-    <div class='navli child'><a class="fc-w" href="insert_cat.php">Insert category</a></div>
-    </div>`;
-    
+    createNavbar(
+        'navBar',
+        [
+            {
+                link: '../../sbe/index.php',
+                type: 'btn', // if btn then create a button, if txt then create span
+                text: '', //if btn then empty
+                divStyle:['mx5', 'mt2', 'scale-120'],
+                linkStyle: ['home']
+            },
+            {
+                link: 'index.php',
+                type: 'txt', // if btn then create a button, if txt then create span
+                text: 'home',
+                divStyle:['ml5','mt3', 'scale-120'],
+                linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
+            },
+        ]
+    );
+   
 
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>

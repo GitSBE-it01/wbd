@@ -188,10 +188,11 @@ export const updateInsertData = async() => {
         insert3['toleransi'] = newData['toleransi'];
         insert3['addSub'] = newData['addSub'];
         insert3['qty_change'] = newData['qty'];
-
+        console.log({update1, filter1});
         
         if (newData['code'].length == 0) {
             const result3 = await jig_location_query.updateData(update1, filter1);     
+            console.log(result3);
             const result1 = await log_location_query.insertData(insert1);
             if (!result3.includes('fail')) {
                 alert('data successfully updated');

@@ -1,9 +1,24 @@
-import { loading } from './load.js';
+import { loading, createBtn, createInp } from './index.js';
 
-export const searchBar = async(target, id, divStyle, inpStyle, btnStyle) => {
-    const container = document.getElementyById(target);
+/*
+=======================================================================================
+create search bar 
+*/
+const arrSearch = {
+    target:'target',
+    divStyle:'',
+    inpId:'',
+    inpType:'',
+    inpClass:[],
+    btnId:'',
+    btnType:'',
+    btnClass:[]
+}
+
+export const createSearch = async(arr) => {
+    const container = document.getElementyById(arr.target);
     const div = document.createElement('div');
-    divStyle.forEach(sty => {
+    arr.divStyle.forEach(sty => {
         div.classList.add(sty)
     });
     const input = document.createElement('input');
@@ -15,8 +30,9 @@ export const searchBar = async(target, id, divStyle, inpStyle, btnStyle) => {
         btn.classList.add(sty)
     });
     div.appendChild(input)
-
 }
+
+
 
 
 
