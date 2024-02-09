@@ -8,8 +8,9 @@ $woid = 'SELECT * FROM dbqad_live.wo_mstr wo LEFT JOIN dbqad_live.pt_mstr pt on 
 $list_inspect = 'SELECT * FROM list_inspect';
 $insert_dmc_vjs_log = "INSERT INTO dmc_vjs_log";
 $assets = 'SELECT * FROM dbinventaris.astreg_main';
-$ng_daily = 'SELECT * FROM dbngvar.ng_daily';
-$wo_mstr = 'SELECT * FROM dbngvar.wo_mstr';
+$data_input = 'SELECT * FROM data_input';
+$insert_data_input = 'INSERT INTO data_input';
+$vjs_assets = 'SELECT * FROM vjs_list vl join dbinventaris.astreg_main ast on vl.asset_id = ast.id';
 
 $codeList = array(
     'asset_vjs_rel'=>$asset_vjs_rel,
@@ -19,8 +20,9 @@ $codeList = array(
     'list_inspect'=>$list_inspect,
     'woid'=>$woid,
     'assets'=>$assets,
-    'ng_daily'=>$ng_daily,
-    'wo_mstr'=>$wo_mstr,
+    'data_input'=>$data_input,
+    'insert_data_input'=>$insert_data_input,
+    'vjs_assets'=>$vjs_assets,
     'insert_dmc_vjs_log'=>$insert_dmc_vjs_log,
 
 );

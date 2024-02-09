@@ -1,30 +1,3 @@
-// utk animation loading saat tunggu proses berjalan contoh saat tarik data dari database
-export const init = (target, navBar, mainColor, navBarColor) => {
-    const container = document.getElementById(target);
-    const main = document.createElement('div');
-    main.id = 'main';
-    main.classList.add(mainColor);
-    const div = document.createElement('div');
-    div.classList.add(navBarColor);
-    container.appendChild(div);
-    container.appendChild(main);
-    if (navBar === 'navBar') {
-        main.classList.add('navCard1');
-        div.id = 'navBar';
-        div.classList.add('navCard2', 'flex-r');
-        return;
-    } 
-    if (navBar === 'side') {
-        main.classList.add('sideCard1');
-        div.id = 'side';
-        div.classList.add('sideCard2');
-        return;
-    } 
-    alert('parameter ada yang salah');
-    return;
-
-}
-
 /*-------------------------
 loading animasi
 -------------------------*/
@@ -39,30 +12,49 @@ export const loading = (idLoad, classDiv) => {
 buat nav bar
 -------------------------*/
 // contoh array 
-const navigation = [
-    {
-        link: '../../sbe/index.php',
-        type: 'btn', // if btn then create a button, if txt then create span
-        text: '', //if btn then empty
-        divStyle:['mx5', 'mt2', 'scale-120'],
-        linkStyle: ['home']
-    },
-    {
-        link: 'index.php',
-        type: 'txt', // if btn then create a button, if txt then create span
-        text: 'home',
-        divStyle:['ml5','mt3', 'scale-120'],
-        linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
-    },
-]
+const navArr = {
+    target:'',
+    tgtStyle:'', //only for flex direction row or column, row for sidebar, column for navbar
+    navStyle:[],
+    mainStyle:[],
+    navi:[
+            {
+                link: '../../sbe/index.php',
+                type: 'btn', // if btn then create a button, if txt then create span
+                text: '', //if btn then empty
+                divStyle:['mx5', 'mt2', 'scale-120'],
+                linkStyle: ['home']
+            },
+            {
+                link: 'index.php',
+                type: 'txt', // if btn then create a button, if txt then create span
+                text: 'home',
+                divStyle:['ml5','mt3', 'scale-120'],
+                linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
+            },
+        ]
+    };
 
-export const createNavbar = (target, navigation) => {
-    const navbar = document.getElementById(target);
-    navigation.forEach(nav=>{
+export const createNav = async(navArr) => {
+    const container = document.getElementById(navArr.target);
+    container.classList.add(navArr.tgtStyle);
+    const navbar = document.createElement('div');
+    navbar.id = 'navID';
+    const classes = navArr.navStyle;
+    classes.forEach(cls => {
+        navbar.classList.add(cls);
+    })
+    const main = document.createElement('div');
+    main.id = 'main';
+    const classes2 = navArr.mainStyle;
+    classes2.forEach(cls2 => {
+        main.classList.add(cls2);
+    })
+    navArr.navi.forEach(nav=>{
         const div = document.createElement('div');
-        const classes = nav.divStyle;
-        classes.forEach(cls =>{
-            div.classList.add(cls);
+        const classes3 = nav.divStyle;
+        classes3.forEach(cls3 =>{
+            div.classList.add(cls3);
         })
         const a = document.createElement('a');
         a.setAttribute('href', nav.link);
@@ -87,43 +79,28 @@ export const createNavbar = (target, navigation) => {
         div.appendChild(a);
         navbar.appendChild(div);
     })
-    console.log(navbar);
-    return navbar;
+    container.appendChild(navbar);
+    container.appendChild(main);
+    return 
 }
 
 /*-------------------------
 check active link
 -------------------------*/
-export const activeLink = (target) => {
-    const aLink = document.querySelectorAll(target);
-    aLink.forEach(link=> {
-        const currentUrl = window.location.href;
-        const hrefValue = link.getAttribute('href'); 
-        const span = link.querySelector('span.fc-w');
-        if (hrefValue === currentUrl) {
-            span.classList.add('active'); // Add the new class if it matches
-    }   
-})}
-
-/*
-export const createSidebar = (target, array) => {
+export const activeLink = (target, arrCls) => {
     const container = document.getElementById(target);
-    container.classList.add('sidebar');
-    for (let i=0; i<array.length; i++) {
-        const sideli = document.createElement('div');
-        sideli.classList.add('sideli');
-        const aLink = document.createElement('a');
-        aLink.classList.add('link');
-        aLink.setAttribute('href', array[i].href);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.id = array.id;
-        btn.classList.add()
-        const span =document.createElement('span');
-        span.classList.add(array[i].spanClass);
-        span.textContent = array[i].text;
-    }
-    container.appendChild(createSidebar);
-    return createSidebar;
+    const aLink = container.querySelectorAll('a');
+    aLink.forEach(link=> {
+        const currentUrl = window.location.href.split('/');
+        const compare = currentUrl[currentUrl.length-1];
+        const hrefValue = link.getAttribute('href');
+        if (hrefValue === compare) {
+            const linkCh = link.childNodes;
+            linkCh.forEach(n=>{
+                arrCls.forEach(cls=> {
+                    n.classList.add(cls);
+                })
+            })
+        }
+    })
 }
-*/

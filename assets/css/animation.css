@@ -4,20 +4,54 @@ hover zoom
 .hz {
     transform: scale(1); 
     transition: transform 0.3s ease; 
-  }
-  .hz>span {
-    transform: scale(1); 
-    transition: transform 0.3s ease; 
-  }
+}
+.hz>span {
+  transform: scale(1); 
+  transition: transform 0.3s ease; 
+}
 
-  .hz:hover {
-    transform: scale(1.2); 
-  }
+.hz:hover {
+  transform: scale(1.2); 
+}
 
-  .hz:hover>span {
-    transform: scale(1.2); 
-  }
+.hz:hover>span {
+  transform: scale(1.2); 
+}
 
+/*
+hover scale
+*/
+.scale-120 {
+  transition: transform 0.2s ease; /* Adding a transition for a smooth effect */
+}
+
+.scale-120:hover {
+  transform: scale(1.2) translateY(0.1rem);
+}
+
+/*
+hover move
+*/
+
+.move-y1 {
+  transition: transform 0.2s ease; /* Adding a transition for a smooth effect */
+}
+.move-y1:hover {
+  transform: translateY(0.1rem);
+}
+
+.move-y2 {
+  transition: transform 0.2s ease; /* Adding a transition for a smooth effect */
+}
+.move-y2:hover {
+  transform: translateY(0.15rem);
+}
+.move-x2 {
+  transition: transform 0.2s ease; /* Adding a transition for a smooth effect */
+}
+.move-x2:hover {
+  transform: translateX(0.1rem);
+}
 /*
 svg
 */
@@ -69,6 +103,27 @@ svg
   justify-content: center;
 }
 
+.check {
+  background-image: url('../svg_file/sign/checkGreen.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: 5vh;
+  height: 5vh;
+  border: none;
+  margin: 0 1em 1.5rem 0;
+}
+
+.cross {
+  background-image:  url('../svg_file/sign/cross-svgrepo-com.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: 5vh;
+  height: 5vh;
+  border: none;
+  margin: 0 1em 1.5rem 0;
+}
 /*========================================================
 loading view
 ========================================================*/ 

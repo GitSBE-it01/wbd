@@ -23,20 +23,6 @@ export function splitCustomString (delimiter, value) {
 
 
 /*-------------------------
-cek form valid
--------------------------*/
-export function isFormValid(formID) {
-    const form = document.getElementById(formID);
-    const inputElements = form.querySelectorAll('input[required]');
-    for (const input of inputElements) {
-        if (input.value === null || input.value === "") {
-            return false; 
-        }
-    }
-    return true; 
-}
-
-/*-------------------------
 str to number with number of char and decimal
 -------------------------*/
 export function strToNumber(number, minNumber, decimalMinimum) {

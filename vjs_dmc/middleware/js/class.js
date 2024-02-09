@@ -170,7 +170,9 @@ class Data {
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
 export const bom= new Data('dmc_vjs');
+export const dataInput= new Data('data_input');
+export const dmc_vjs_log = new Data('dmc_vjs_log');
 export const asset = new Data('assets');
-export const ng_daily = new Data('ng_daily');
-export const wo_mstr = new Data('wo_mstr');
+export const vjs_asset = new Data('vjs_assets');
+
 

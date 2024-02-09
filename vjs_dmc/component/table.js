@@ -15,49 +15,70 @@ const tblData = [
         header:'no asset',
         db_field:'assetno',
         dt_type:'text',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:''
     },
     {
         header:'asset description',
         db_field:'assetname',
         dt_type:'text',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:''
     },
     {
         header:'test',
         db_field:'',
         dt_type:'select',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:["-choose-",'yes','no'] //isi dari option
     },
     {
         header:'test2',
         db_field:'test', // sebagai ID
         dt_type:'button',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:'submit'
     },
     {
         header:'test3',
         db_field:'byusername',
         dt_type:'hidden',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:''
     },
     {
         header:'test4',
         db_field:'hidDiv', // sebagai keterangan
         dt_type:'hidDiv',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:''
     },
     {
         header:'test4',
         db_field:'location', 
         dt_type:'input',
-        mark:'assetno',
+        mark:{
+            dbfield:'noAsset',
+            text:'test'
+        },
         param:'list_test'
     }
 ]
@@ -78,7 +99,6 @@ const createTblCont = async(tblID, tblStyle) => {
 // header column
 const theader = async(tblData, tblStyle) =>{
     const divHeader = document.createElement('div');
-    divHeader.classList.add('fr');
     const classes = tblStyle.thdStyle;
     classes.forEach(clas=>{
         divHeader.classList.add(clas);
@@ -87,6 +107,10 @@ const theader = async(tblData, tblStyle) =>{
         if (hd.dt_type !== 'hidden' || hd.dt_type !== 'hidDiv') {
             const th = document.createElement('div');
             th.textContent = hd.header;
+            const classes2 = tblStyle.thrStyle;
+            classes2.forEach(clas=>{
+                th.classList.add(clas);
+            });
             divHeader.appendChild(th);
         }
     })
@@ -103,7 +127,7 @@ const cellTxt = (src,data, tblStyle) => {
             div.classList.add(clas);
         });
     }
-    div.setAttribute('data-cell', src[data.mark]);
+    div.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
     div.textContent = src[data.db_field];
     return div;
 }
@@ -125,13 +149,15 @@ const cellSel = (src,data, tblStyle) => {
             sel.classList.add(clas);
         });
     }
-    sel.setAttribute('data-cell', src[data.mark]);
+
+    sel.setAttribute('data-cell',  data.mark.text + "___" + src[data.mark.dbfield]);
     data.param.forEach(op=> {
         const opt = document.createElement('option');
         opt.value = op;
         opt.textContent = op;
         sel.appendChild(opt);
     })
+    sel.value = src[data.db_field];
     div.appendChild(sel);
     return div;
 }
@@ -153,8 +179,8 @@ const cellBtn = (src,data, tblStyle) => {
             btn.classList.add(clas);
         });
     }
-    btn.setAttribute('data-cell', src[data.mark]);
-    btn.id = data.db_field + src[data.mark];
+    btn.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
+    btn.id = data.db_field + data.mark.text + "___" +src[data.mark.dbfield];
     btn.textContent = data.param;
     btn.setAttribute('type','button');
     div.appendChild(btn);
@@ -166,8 +192,8 @@ const cellBtn = (src,data, tblStyle) => {
 const cellHid = (src,data) => {
     const input = document.createElement('input');
     input.type = 'hidden';
-    input.setAttribute('data-cell', src[data.mark]);
-    input.id = data.db_field + "//" + src[data.mark];
+    input.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
+    input.id = data.db_field + "//" + data.mark.text + "___" +src[data.mark.dbfield];
     input.value = src[data.db_field];
     return input;
 }
@@ -189,11 +215,12 @@ const cellInp = (src,data) => {
             inp.classList.add(clas);
         });
     }
-    inp.setAttribute('data-cell', src[data.mark]);
-    inp.id = data.db_field +"//" + src[data.mark];
+    inp.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
+    inp.id = data.db_field +"//" + data.mark.text + "___" +src[data.mark.dbfield];
     inp.setAttribute('type', 'text');
     inp.setAttribute('autocomplete', 'off');
-    inp.setAttribute('list', data.param);
+    inp.setAttribute('list', data.param.list);
+    inp.setAttribute('disable', data.param.disable);
     div.appendChild(inp);
     return div;
 }
@@ -203,8 +230,8 @@ const cellInp = (src,data) => {
 const cellDiv = (src,data) => {
     const div = document.createElement('div');
     div.classList.add('hide');
-    div.setAttribute('data-cell', src[data.mark]);
-    div.id = data.db_field + "//" + src[data.mark];
+    div.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
+    div.id = data.db_field + "//" + data.mark.text + "___" +src[data.mark.dbfield];
     div.value = data.db_field;
     div.textContent ="test";
     return div;
@@ -215,7 +242,6 @@ const cellDiv = (src,data) => {
 const tData = async(src, tblData, tblStyle) => {
     try{
         const trow = document.createElement('div');
-        trow.classList.add('fr');
         const classes = tblStyle.trowStyle;
         classes.forEach(clas=>{
             trow.classList.add(clas);
@@ -236,19 +262,90 @@ const tData = async(src, tblData, tblStyle) => {
 
 //===========================================================================
 // main function di export
-export const createTable = async(target, tblID, dbsrc, tblStyle, tblData) => {
+const arr = {
+    target:'', 
+    tblID: '', 
+    dbsrc: '', 
+    tblStyle: 
+        {
+            contStyle: [],
+            thdStyle:[],
+            thrStyle:[],
+            trowStyle:[],
+            tdtStyle:[],
+            selStyle:[],
+            btnStyle:[],
+        }, 
+    tblData: 
+    [
+        {
+            header:'no asset',
+            db_field:'assetno',
+            dt_type:'text',
+            mark:'assetno',
+            param:''
+        },
+        {
+            header:'asset description',
+            db_field:'assetname',
+            dt_type:'text',
+            mark:'assetno',
+            param:''
+        },
+        {
+            header:'test',
+            db_field:'',
+            dt_type:'select',
+            mark:'assetno',
+            param:["-choose-",'yes','no'] //isi dari option
+        },
+        {
+            header:'test2',
+            db_field:'test', // sebagai ID
+            dt_type:'button',
+            mark:'assetno',
+            param:'submit'
+        },
+        {
+            header:'test3',
+            db_field:'byusername',
+            dt_type:'hidden',
+            mark:'assetno',
+            param:''
+        },
+        {
+            header:'test4',
+            db_field:'hidDiv', // sebagai keterangan
+            dt_type:'hidDiv',
+            mark:'assetno',
+            param:''
+        },
+        {
+            header:'test4',
+            db_field:'location', 
+            dt_type:'input',
+            mark:'assetno',
+            param:
+            {
+                list: 'list_test',
+                disable: false
+            }
+        }
+    ]}
+    
+export const createTable = async(arr) => {
     try{
-        const container = document.getElementById(target);
+        const container = document.getElementById(arr.target);
         // table container
-        container.appendChild(await createTblCont(tblID, tblStyle.contStyle));
+        container.appendChild(await createTblCont(arr.tblID, arr.tblStyle.contStyle));
         
         // header
-        const tblBody = document.getElementById(tblID);
-        tblBody.appendChild(await theader(tblData, tblStyle));
+        const tblBody = document.getElementById(arr.tblID);
+        tblBody.appendChild(await theader(arr.tblData, arr.tblStyle));
 
         // table data
-        for (let i=0; i<dbsrc.length; i++) {
-            const result = await tData(dbsrc[i], tblData, tblStyle);
+        for (let i=0; i<arr.dbsrc.length; i++) {
+            const result = await tData(arr.dbsrc[i], arr.tblData, arr.tblStyle);
             tblBody.appendChild(result);
         }
     } catch (error) {
