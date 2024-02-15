@@ -1,89 +1,4 @@
 //===========================================================================
-// example of array to use : 
-
-const tblStyle = {
-    contStyle: [],
-    thdStyle:[],
-    trowStyle:[],
-    tdtStyle:[],
-    selStyle:[],
-    btnStyle:[],
-}
-
-const tblData = [
-    {
-        header:'no asset',
-        db_field:'assetno',
-        dt_type:'text',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:''
-    },
-    {
-        header:'asset description',
-        db_field:'assetname',
-        dt_type:'text',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:''
-    },
-    {
-        header:'test',
-        db_field:'',
-        dt_type:'select',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:["-choose-",'yes','no'] //isi dari option
-    },
-    {
-        header:'test2',
-        db_field:'test', // sebagai ID
-        dt_type:'button',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:'submit'
-    },
-    {
-        header:'test3',
-        db_field:'byusername',
-        dt_type:'hidden',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:''
-    },
-    {
-        header:'test4',
-        db_field:'hidDiv', // sebagai keterangan
-        dt_type:'hidDiv',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:''
-    },
-    {
-        header:'test4',
-        db_field:'location', 
-        dt_type:'input',
-        mark:{
-            dbfield:'noAsset',
-            text:'test'
-        },
-        param:'list_test'
-    }
-]
-
-//===========================================================================
 // create div container
 const createTblCont = async(tblID, tblStyle) => {
     const table = document.createElement('div');
@@ -293,11 +208,14 @@ const arr = {
             param:''
         },
         {
-            header:'test',
+            header:'OK / NG',
             db_field:'',
             dt_type:'select',
-            mark:'assetno',
-            param:["-choose-",'yes','no'] //isi dari option
+            mark:{
+                dbfield:'category',
+                text:'input_value'
+            },
+            param:['OK','NG'] //isi dari option
         },
         {
             header:'test2',

@@ -212,7 +212,7 @@ export const updateInsertData = async() => {
             alert('data successfully updated');
             setTimeout(() => {
                 location.reload();
-            }, 2000);
+            }, 1000);
         } else {
             alert('data is not updated');
         }
@@ -257,7 +257,7 @@ export const delDataStock = async(id,pk) => {
             alert('data successfully deleted');
             setTimeout(() => {
                 location.reload();
-            }, 2000);
+            }, 1000);
         } else {
             alert('data is not deleted');
         }
@@ -316,7 +316,7 @@ export const updateInsertJig = async() => {
             alert('data successfully updated');
             setTimeout(() => {
                 location.reload();
-            }, 2000);
+            }, 1000);
         } else {
             alert('data is not updated');
         }
@@ -462,7 +462,7 @@ export const updateInsertType = async() => {
                 alert('data successfully updated');
                 setTimeout(() => {
                     location.reload();
-                }, 2000);
+                }, 1000);
             } else {
                 alert('data is not updated');
             }
@@ -514,7 +514,7 @@ export const delDataType = async(id,pk) => {
             alert('data successfully deleted');
             setTimeout(() => {
                 location.reload();
-            }, 2000);
+            }, 1000);
         } else {
             alert('data is not deleted');
         }

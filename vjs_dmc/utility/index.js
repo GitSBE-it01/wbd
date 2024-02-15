@@ -1,5 +1,5 @@
-import { inpDMCProcess } from "./input.js"
-;
+import { inpDMCProcess } from "./data/input.js";
+
 document.addEventListener ('click', function(event) {
     if(event.target.getAttribute('id') === 'dmcInput'){
         const form = document.getElementById('mainDMC');

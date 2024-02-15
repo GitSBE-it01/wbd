@@ -12,20 +12,28 @@ class Data {
         this.url = url;
         this.ori = ori;
     }
+
+    // for API URL 
     getUrl() {
         const check = window.location.href.split("/");
         let url ="";
         let ori = "";
         if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/vjs_dmc/middleware/php/api.php';
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/vjs_dmc/middleware/api.php';
             ori = 'http://informationsystem.sbe.co.id';
         } else {
-            url = 'http://192.168.2.103:8080/wbd/vjs_dmc/middleware/php/api.php';
+            url = 'http://192.168.2.103:8080/wbd/vjs_dmc/middleware/api.php';
             ori = 'http://192.168.2.103';
         }
         return { url, ori };
     }
 
+      /* 
+      ambil data tanpa filter dari database
+      tanpa imbuhan apapun contoh : 
+    
+      const dataDMC = await dataInput.getData();
+      */
     async getData() {
         try {
             const response = await fetch(this.url, {
@@ -48,16 +56,14 @@ class Data {
       }
 
       /* 
-      contoh penggunaan fetchDataFilter(arrKey, arrValue) :                
-      variable arrKey di isi dengan index kolom yang di filter dan di buat dalam bentuk array
-      const arrKey = ['fromdiv', 'asset_vjs_kategori'] 
-
-      variable arrValue di isi dengan kata2 filter yang akan di filter
-      const arrValue = ['PRODUCTION SPEAKER ASSEMBLY','IS NOT NULL' ]
-      note : hanya kata2 yang sama persis bukan dimulai dari atau terdiri dari
-      
-      contoh penggunaan utk mendapatkan data dengan menggunakan class method
-      const data = await relation.fetchDataFilter(arrKey, arrValue)
+      ambil data dengan filter dari database
+      menggunakan object contoh : 
+    
+      const dataDMC = await dataInput.fetchDataFilter({
+            assetno: valueInp[0], 
+            assetkat:valueInp[1], 
+            input_date:currentDate()
+        });
       */
       async fetchDataFilter(filter) {
         try {
@@ -80,6 +86,18 @@ class Data {
         }
       }
 
+      /* 
+      insert data ke database
+      menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
+    
+      const dataDMC = await dataInput.insertData(
+        {
+            assetno: valueInp[0], 
+            assetkat:valueInp[1], 
+            input_date:currentDate()
+        }
+        );
+      */
       async insertData(insert) {
         const keys = Object.keys(insert);
         const values = Object.values(insert);
@@ -109,21 +127,37 @@ class Data {
         }
       }
 
-      async updateData(update, filter) {
-        const keys = Object.keys(update);
-        const values = Object.values(update);
-        const updateFilter=[];
-        for (let i=0; i<keys.length; i++) {
+      /* 
+      update data ke database
+      menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
+    
+      const dataDMC = await dataInput.updateData(
+        update:{
+                assetno: valueInp[0], 
+                assetkat:valueInp[1], 
+                input_date:currentDate()
+            },
+        filter:{
+                id: 123
+            }
+        );
+      */
+      async updateData(arr) {
+        //const keys = Object.keys(arr.update);
+        //const values = Object.values(arr.update);
+        const updateFilter= arr.update;
+        /*for (let i=0; i<keys.length; i++) {
             const entry = { [keys[i]]: values[i] };
             updateFilter.push(entry);
-        }
-        const keys2 = Object.keys(filter);
-        const values2 = Object.values(filter);
-        const updateFilter2=[];
-        for (let i=0; i<keys2.length; i++) {
+        }*/
+        //const keys2 = Object.keys(arr.filter);
+        //const values2 = Object.values(arr.filter);
+        const updateFilter2=arr.filter;
+        /*for (let i=0; i<keys2.length; i++) {
             const entry = { [keys2[i]]: values2[i] };
             updateFilter2.push(entry);
-        }
+        }*/
+        console.log({updateFilter,updateFilter2})
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -145,7 +179,20 @@ class Data {
         }
       }
 
-      async deleteData(delFilterKey, delFilter) {
+      /* 
+      delete data ke database
+      menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
+    
+      const dataDMC = await dataInput.deleteData({id: 123});
+      */
+      async deleteData(arr) {
+        const keys = Object.keys(arr);
+        const values = Object.values(arr);
+        const delFilter=[];
+        for (let i=0; i<keys.length; i++) {
+            const entry = { [keys[i]]: values[i] };
+            delFilter.push(entry);
+        }
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -153,7 +200,7 @@ class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, delFilterKey, delFilter})
+              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, keys, values})
             });
 
             if (!response.ok) {

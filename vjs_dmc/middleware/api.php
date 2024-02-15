@@ -1,5 +1,5 @@
 <?php
-require_once "../../config.php";
+require_once "../config.php";
 require_once "queryList.php";
 require_once "process.php";
 
@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $insertData = isset($data['insertFilter']) ? $data['insertFilter']:''; 
     $updateData = isset($data['updateFilter']) ? $data['updateFilter']:'';
     $updateData2 = isset($data['updateFilter2']) ? $data['updateFilter2']:'';
-    $updateData2 = isset($data['delFilter']) ? $data['delFilter']:'';
     $delData = isset($data['delFilterKey']) ? $data['delFilterKey']:'';
     $delData2 = isset($data['delFilter']) ? $data['delFilter']:'';
     $filter = isset($data['filter']) ? $data['filter']:''; 
@@ -33,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = insertData($query, $insertData);
         // $result = array($insertData);
     } elseif ($action === 'updateData') {
-        $result = updateData($query, $updateData, $updateData2);
+        // $result = updateData($query, $updateData, $updateData2);
+        $result = $updateData2;
     } elseif ($action === 'deleteData') {
         $result = deleteData($query, $delData, $delData2);
     }

@@ -1,5 +1,5 @@
 <?php
-require_once "middleware/php/process.php";
+require_once "middleware/process.php";
 
 define('ENV_FILE', __DIR__ . '/.env');
 

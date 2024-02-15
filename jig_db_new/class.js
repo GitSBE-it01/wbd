@@ -128,6 +128,7 @@ class Data {
             const entry = { [keys2[i]]: values2[i] };
             updateFilter2.push(entry);
         }
+        console.log({updateFilter,updateFilter2})
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 

@@ -127,28 +127,28 @@ svg
 /*========================================================
 loading view
 ========================================================*/ 
+
 @keyframes loading {
-	0%, 100% {
-		background: url('../../assets/svg_file/solar_line/sunrise-svgrepo-com.svg')  no-repeat;
-		background-size: cover; 
-		background-position: bottom;
+	0% {
+		transform: rotate(0deg); 
 	}
-	30%, 90% {
-		background: url('../../assets/svg_file/solar_line/sun-fog-svgrepo-com.svg')  no-repeat;
-		background-size: cover; 
-		background-position: center;
+	50% {
+		transform: rotate(180deg); 
 	}
-	60% {
-		background: url('../../assets/svg_file/solar_line/sunset-svgrepo-com.svg')  no-repeat;
-		background-size: cover; 
-		background-position: top;
+	100% {
+		transform: rotate(360deg); 
 	}
 }
-  
+
 .loading {
-	width: 4rem; 
-	height: 4rem;
-	animation: loading 2s linear infinite; 
+	width: 8rem; 
+	height: 8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+	animation: loading 1.8s linear infinite; 
+	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
+	background-size: cover; 
 }
 
 @keyframes loading2 {
@@ -166,7 +166,6 @@ loading view
 .loading2 {
 	width: 3rem; 
 	height: 3rem;
-	position: center;
 	animation: loading2 2s linear infinite; 
 	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
 	background-size: cover; 
