@@ -13,14 +13,14 @@ require_once "config.php";
     <link rel="stylesheet" href="../assets/css/color.css">
     <link rel="stylesheet" href="../assets/css/table.css">
     <link rel="stylesheet" href="../assets/css/search_btn.css">
-    <title>Document</title>
+    <title>VJS & DMC</title>
 </head>
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
 <div id='root' class='container'>
     <div id='load' class='loading'></div>
 </div>
-
+<script src="./utility/prep.js"></script>
 <script type='module'>
     import {
         createNav,
@@ -38,11 +38,16 @@ require_once "config.php";
         btnDmcEdit, 
         btnDmcSbmt, 
         dmcOk, 
-        dmcNg
-        } from './component/index.js';
-    
-    import {dataInput, bom} from './utility/class.js';
-    import {splitCustomString, currentDate} from './utility/process.js';
+        dmcNg,
+        header1,
+        header2
+    } from './component/index.js';
+    import {
+        inpDMCProcess, 
+        dataInput, 
+        bom, 
+        currentDate
+    } from './utility/index.js';
     
     // start up web page
     const root = document.getElementById('root');
@@ -52,62 +57,122 @@ require_once "config.php";
     await createSearch(searchBarMain);
     root.removeChild(document.getElementById('load'));
     
-    // proses saat klik submit button
+
+    // proses saat klik submit button di search bar
     const sbmtBtn = document.getElementById('test2');
     sbmtBtn.addEventListener('click', async function(event) {
         try{
-            main.appendChild(loading('load','loading2'));
+            if (document.getElementById('dmcDivAll')) {
+                    document.getElementById('dmcDivAll').remove();
+                }
+            const target = document.getElementById('main');
+            const div = document.createElement('div');
+            div.id = 'dmcDivAll';
+            div.appendChild(loading('load','loading2'));
+            target.appendChild(div);
             const sbmtBtn = document.getElementById('test2');
             sbmtBtn.disabled = true;
             // check apakah ada DMC yg terbentuk di hari ini utk asset yg dipilih
             const valueInp = await document.getElementById('test1').value.split('/');
-            const dataDMC = await dataInput.fetchDataFilter({assetno: valueInp[0], assetkat:valueInp[1], input_date:currentDate()});
+            const dataDMC = await dataInput.fetchDataFilter({assetno: valueInp[0], assetkat:valueInp[1], dmc_vjs:'dmc', input_date:currentDate()});
             // buat title heading utk daily maintenance
-            await createHeader(
-                    {
-                        target:'main',
-                        id:'hd',
-                        style: ['textCenter', 'fs-xl','fw-bld', 'm3'],
-                        text:'Daily Maintenance'               
-                    }
-                );
+            await createHeader(header1);
+            await createHeader(header2);
             // check apakah sudah ada data yg di munculkan. jika ada maka di hapus terlebih dahulu
-            if (document.getElementById('mainDMC')) {
-                    document.getElementById('mainDMC').remove();
-                }
 
             // jika data DMC blum terbuat maka buat table utk input data
             if (dataDMC.length === 0) { // setelah proses ini lgsg break
-                    const dmc = await bom.fetchDataFilter({category: valueInp[2]});
+                    const dmc = await bom.fetchDataFilter({category: valueInp[2], dmc_vjs: 'dmc'});
                     await createTable(tableDMC(dmc));
-                    main.appendChild(await createBtn(btnDmcEdit));
-                    main.appendChild(await createBtn(btnDmcSbmt));
+                    const maindDMC = document.getElementById('mainDMC');
+                    maindDMC.appendChild(await createBtn(btnDmcEdit));
+                    maindDMC.appendChild(await createBtn(btnDmcSbmt));
                     sbmtBtn.disabled = false;
-                    return main.removeChild(document.getElementById('load'));          
+                    const dmEdit = document.getElementById('dmcEdit');
+                    dmEdit.disabled = true;
+                    return div.removeChild(document.getElementById('load'));          
                 } 
             
             // jika data DMC ada maka buat table utk show data 
             await createTable(tableDMC(dataDMC));
-            main.appendChild(await createBtn(btnDmcEdit));
-            main.appendChild(await createBtn(btnDmcSbmt));
+            const maindDMC = document.getElementById('mainDMC');
+            maindDMC.appendChild(await createBtn(btnDmcEdit));
+            maindDMC.appendChild(await createBtn(btnDmcSbmt));
             const btnDMCInp = document.getElementById('dmcInput');
             btnDMCInp.disabled = true;
-            const maindDMC = document.getElementById('mainDMC');
             maindDMC.classList.add('displayHide');
+            const head = document.getElementById('hd2');
             if (dataDMC[0].decision === 'OK') {
-                        main.appendChild(await createBtn(dmcOk))
+                        head.appendChild(await createBtn(dmcOk))
                     } else {
-                        main.appendChild(await createBtn(dmcNg)
+                        head.appendChild(await createBtn(dmcNg)
                     )
                 }
             sbmtBtn.disabled = false;
-            return main.removeChild(document.getElementById('load'));    
+            return div.removeChild(document.getElementById('load'));    
         } catch(error) {
             console.log(error);
         }
     })
+
+    // proses saat klik submit button di DMC
+    document.addEventListener('click', async function(event) {
+        if (event.target.getAttribute('id') === 'dmcInput')
+            try{
+                const btn = document.getElementById('dmcInput');
+                const mainDMC = document.getElementById('mainDMC');
+                mainDMC.appendChild(loading('load','loading2'));
+                const element = mainDMC.querySelectorAll('[data-cell^="input_value"]');
+                let isValid = true;
+                let decision = 'OK';
+                element.forEach( el=> {
+                    if (el.value !== 'OK' && el.value !== 'NG') {
+                        isValid = false;
+                    };
+                    if (el.value === 'NG') {
+                        decision = 'NG';
+                    } 
+                })
+                
+                if (!isValid) {
+                    main.removeChild(load);
+                    alert('data harap di lengkapi');
+                } else{
+                    btn.disabled = true;
+                    const element2 = mainDMC.querySelectorAll('[data-cell]');
+                    const valueSearch = document.getElementById('test1');
+                    let data = [];
+                    data['decs'] = [decision];
+                    data['srch'] = [];
+                    data['srch'].push(valueSearch.value);
+                    element2.forEach( el2=> {
+                        const dataField = el2.getAttribute('data-cell');
+                        const field = dataField.split('__');
+                        if (!data[field[0]]) {
+                            data[field[0]] = [];
+                        }
+
+                        if(el2.tagName === 'SELECT') {
+                            data[field[0]].push(el2.value);
+                        } else {
+                            data[field[0]].push(el2.textContent);
+                        }
+                    })
+                    inpDMCProcess(data);
+                }
+                const btnSelf = document.getElementById('dmcEdit');
+                btnSelf.disabled = false;
+                const load = document.getElementById('load');
+                mainDMC.removeChild(load);
+                return;
+            } catch(error) {
+                console.log('error = ', error);
+            }
+        })
+
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 <script type='module' src="./utility/index.js"></script>
+<script src="./utility/post.js"></script>
 </body>
 </html>

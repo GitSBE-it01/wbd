@@ -3,23 +3,6 @@ import { createBtn, createInp } from './index.js';
 =======================================================================================
 create search bar 
 */
-const arrSearch = {
-    target:'target',
-    divStyle:[],
-    arrInp:
-    {
-        id:'',
-        type:'', // text or hidden
-        list:'',
-        classSty:[],
-    },
-    arrBtn: 
-    {
-        id:'',
-        type:'', // submit or button
-        classSty:[]
-    }
-}
 
 export const createSearch = async(arr) => {
     try{

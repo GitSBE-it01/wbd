@@ -224,12 +224,16 @@ function updateData($query, $filterValues, $filterValues2) {
         $test = array_values($cek);
         ${'inputKeysFlt' . $counter2} = $test[0];
         $keysParam2[$test[0]] = array();
-        foreach (array_values($filterValues2[$i]) as $key => $values) {
+        foreach (array_values($filterValues2[$i]) as $values) {
             // Create variable names like $input1, $input2, etc.
             ${'inputFlt' . $counter2} = array();
-            foreach ($values as $key2 => $value) {
-                // Extract 'value' from subarray and add to the variable
-                ${'inputFlt' . $counter2}[] = $value;
+            if(is_array($values)) {
+                foreach ($values as $value) {
+                    // Extract 'value' from subarray and add to the variable
+                    ${'inputFlt' . $counter2}[] = $value;
+                }
+            } else {
+                ${'inputFlt' . $counter2}[] = $values;
             }
             $counter2++;
         }
@@ -249,6 +253,7 @@ function updateData($query, $filterValues, $filterValues2) {
         }
     }
 
+
     $filter = '';
     for ($i=0; $i<$count2; $i++){
         $filter .=  ${'inputKeysFlt' . $i} . "=?, ";
@@ -260,12 +265,11 @@ function updateData($query, $filterValues, $filterValues2) {
             $types .= "s";
         }
     }
-
+    
     $params = rtrim($params, ', ');
     $filter = rtrim($filter, ', ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
-
-    $stmt = $conn->prepare($wholeQuery);
+        $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
@@ -277,11 +281,13 @@ function updateData($query, $filterValues, $filterValues2) {
                 ${'keyBind_' . $ii} = &${'input' . $ii}[$i];
                 $bindParams[] = &${'keyBind_' . $ii};
             }
-            for ($ii=0; $ii<$counter2; $ii++){
-                ${'keyBind_' . $ii} = &${'inputFlt' . $ii}[$i];
-                $bindParams[] = &${'keyBind_' . $ii};
+    
+            for ($iii=0; $iii<$counter2; $iii++){
+                $total = $ii +$iii;
+                ${'keyBind_' . $total} = &${'inputFlt' . $iii}[$i];
+                $bindParams[] = &${'keyBind_' . $total};
             }
-            array_unshift($bindParams, $types);
+            array_unshift($bindParams, $types);  
             call_user_func_array([$stmt, 'bind_param'], $bindParams);
             if (!$stmt->execute()) {
                 die("Execute failed: " . $stmt->error);

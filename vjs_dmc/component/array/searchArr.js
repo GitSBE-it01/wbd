@@ -7,13 +7,17 @@ export const searchBarMain = {// detail search
         type:'text', // text or hidden
         placeholder:'-choose-',
         list:'asset_list',
-        classSty:['mx2'],
+        classSty:['mx2']
     },
     arrBtn: 
     {
         id:'test2',
         type:'button', // submit or button
         text: 'submit',
-        classSty:['mx1']
+        classSty:['mx1'],
+        js: {
+            attr:'',
+            value:''
+        }
     }
 }

@@ -27,7 +27,7 @@ str to number with number of char and decimal
 -------------------------*/
 export function strToNumber(number, minNumber, decimalMinimum) {
     const noStr = number.toString();
-    const splitStr = splitCustomString(".", noStr);
+    const splitStr = noStr.split(".");
     const intNo = splitStr[0];
     const decNo = splitStr[1];
     let resultInt = "";
@@ -85,6 +85,5 @@ export function delChild(target) {
     }
     alert('there is nothing to delete');
 }
-
 
 

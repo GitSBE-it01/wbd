@@ -143,21 +143,20 @@ class Data {
         );
       */
       async updateData(arr) {
-        //const keys = Object.keys(arr.update);
-        //const values = Object.values(arr.update);
-        const updateFilter= arr.update;
-        /*for (let i=0; i<keys.length; i++) {
+        const keys = Object.keys(arr.update);
+        const values = Object.values(arr.update);
+        const updateFilter= [];
+        for (let i=0; i<keys.length; i++) {
             const entry = { [keys[i]]: values[i] };
             updateFilter.push(entry);
-        }*/
-        //const keys2 = Object.keys(arr.filter);
-        //const values2 = Object.values(arr.filter);
-        const updateFilter2=arr.filter;
-        /*for (let i=0; i<keys2.length; i++) {
+        }
+        const keys2 = Object.keys(arr.filter);
+        const values2 = Object.values(arr.filter);
+        const updateFilter2=[];
+        for (let i=0; i<keys2.length; i++) {
             const entry = { [keys2[i]]: values2[i] };
             updateFilter2.push(entry);
-        }*/
-        console.log({updateFilter,updateFilter2})
+        }
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 

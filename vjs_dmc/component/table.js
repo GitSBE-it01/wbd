@@ -19,7 +19,7 @@ const theader = async(tblData, tblStyle) =>{
         divHeader.classList.add(clas);
     });
     tblData.forEach(hd=>{
-        if (hd.dt_type !== 'hidden' || hd.dt_type !== 'hidDiv') {
+        if (hd.dt_type !== 'hidden' && hd.dt_type !== 'hidDiv') {
             const th = document.createElement('div');
             th.textContent = hd.header;
             const classes2 = tblStyle.thrStyle;
@@ -73,6 +73,9 @@ const cellSel = (src,data, tblStyle) => {
         sel.appendChild(opt);
     })
     sel.value = src[data.db_field];
+    if (data.js.attr !=='') {
+        sel.setAttribute(data.js.attr, data.js.value);
+    }
     div.appendChild(sel);
     return div;
 }
@@ -136,6 +139,9 @@ const cellInp = (src,data) => {
     inp.setAttribute('autocomplete', 'off');
     inp.setAttribute('list', data.param.list);
     inp.setAttribute('disable', data.param.disable);
+    if (data.js.attr !=='') {
+        sel.setAttribute(data.js.attr, data.js.value);
+    }
     div.appendChild(inp);
     return div;
 }
@@ -157,6 +163,7 @@ const cellDiv = (src,data) => {
 const tData = async(src, tblData, tblStyle) => {
     try{
         const trow = document.createElement('div');
+        trow.setAttribute('data-row','');
         const classes = tblStyle.trowStyle;
         classes.forEach(clas=>{
             trow.classList.add(clas);
@@ -177,80 +184,6 @@ const tData = async(src, tblData, tblStyle) => {
 
 //===========================================================================
 // main function di export
-const arr = {
-    target:'', 
-    tblID: '', 
-    dbsrc: '', 
-    tblStyle: 
-        {
-            contStyle: [],
-            thdStyle:[],
-            thrStyle:[],
-            trowStyle:[],
-            tdtStyle:[],
-            selStyle:[],
-            btnStyle:[],
-        }, 
-    tblData: 
-    [
-        {
-            header:'no asset',
-            db_field:'assetno',
-            dt_type:'text',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'asset description',
-            db_field:'assetname',
-            dt_type:'text',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'OK / NG',
-            db_field:'',
-            dt_type:'select',
-            mark:{
-                dbfield:'category',
-                text:'input_value'
-            },
-            param:['OK','NG'] //isi dari option
-        },
-        {
-            header:'test2',
-            db_field:'test', // sebagai ID
-            dt_type:'button',
-            mark:'assetno',
-            param:'submit'
-        },
-        {
-            header:'test3',
-            db_field:'byusername',
-            dt_type:'hidden',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'test4',
-            db_field:'hidDiv', // sebagai keterangan
-            dt_type:'hidDiv',
-            mark:'assetno',
-            param:''
-        },
-        {
-            header:'test4',
-            db_field:'location', 
-            dt_type:'input',
-            mark:'assetno',
-            param:
-            {
-                list: 'list_test',
-                disable: false
-            }
-        }
-    ]}
-    
 export const createTable = async(arr) => {
     try{
         const container = document.getElementById(arr.target);

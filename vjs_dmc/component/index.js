@@ -16,6 +16,11 @@ import {
 } from './array/dtListArr.js';
 
 import { 
+    header1,
+    header2
+} from './array/header.js';
+
+import { 
     tableDMC
 } from './array/tblArr.js';
 
@@ -42,13 +47,15 @@ export {
     createDatalist,
     createHeader,
     createSearch,
+    tableDMC,
     navigation,
     assetList,
     searchBarMain,
-    tableDMC,
     btnDmcEdit, 
     btnDmcSbmt, 
     dmcOk, 
-    dmcNg
+    dmcNg,
+    header1,
+    header2
 }
     

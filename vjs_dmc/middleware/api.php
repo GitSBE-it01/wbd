@@ -32,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = insertData($query, $insertData);
         // $result = array($insertData);
     } elseif ($action === 'updateData') {
-        // $result = updateData($query, $updateData, $updateData2);
-        $result = $updateData2;
+        $result = updateData($query, $updateData, $updateData2);
     } elseif ($action === 'deleteData') {
         $result = deleteData($query, $delData, $delData2);
     }

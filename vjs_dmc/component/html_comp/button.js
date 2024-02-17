@@ -7,6 +7,10 @@ const btnArrExp = {
     type:'', // submit or button
     text:'',
     classSty:[],
+    js: {
+        attr:'',
+        value:''
+    }
 }
 
 export const createBtn = async(arr) => {
@@ -17,5 +21,8 @@ export const createBtn = async(arr) => {
     })
     btn.textContent = arr.text;
     btn.setAttribute('type',arr.type);
+    if (arr.js.attr !=='') {
+        btn.setAttribute(arr.js.attr, arr.js.value);
+    }
     return btn;
 }

@@ -14,14 +14,14 @@ export const navigation = { //nav list
             {
                 link: 'index.php',
                 type: 'txt', // if btn then create a button, if txt then create span
-                text: 'home',
+                text: 'Home',
                 divStyle:['ml5','mt3', 'scale-120'],
                 linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
             },
             {
                 link: '#',
                 type: 'txt', // if btn then create a button, if txt then create span
-                text: 'kategori',
+                text: 'Kategori',
                 divStyle:['ml5','mt3', 'scale-120'],
                 linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
             }
