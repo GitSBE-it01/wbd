@@ -120,8 +120,11 @@ require_once "config.php";
         if (event.target.getAttribute('id') === 'dmcInput')
             try{
                 const btn = document.getElementById('dmcInput');
+                const cont = document.getElementById('dmcDivAll');
+                const loadDMC = await loading('load', 'loading2');
+                console.log(loadDMC);
+                cont.appendChild(loadDMC);
                 const mainDMC = document.getElementById('mainDMC');
-                mainDMC.appendChild(loading('load','loading2'));
                 const element = mainDMC.querySelectorAll('[data-cell^="input_value"]');
                 let isValid = true;
                 let decision = 'OK';
@@ -135,35 +138,17 @@ require_once "config.php";
                 })
                 
                 if (!isValid) {
-                    main.removeChild(load);
                     alert('data harap di lengkapi');
                 } else{
                     btn.disabled = true;
-                    const element2 = mainDMC.querySelectorAll('[data-cell]');
+                    const data = mainDMC.querySelectorAll('[data-row]');
                     const valueSearch = document.getElementById('test1');
-                    let data = [];
-                    data['decs'] = [decision];
-                    data['srch'] = [];
-                    data['srch'].push(valueSearch.value);
-                    element2.forEach( el2=> {
-                        const dataField = el2.getAttribute('data-cell');
-                        const field = dataField.split('__');
-                        if (!data[field[0]]) {
-                            data[field[0]] = [];
-                        }
-
-                        if(el2.tagName === 'SELECT') {
-                            data[field[0]].push(el2.value);
-                        } else {
-                            data[field[0]].push(el2.textContent);
-                        }
-                    })
-                    inpDMCProcess(data);
+                    const btnEdit = document.getElementById('dmcEdit');
+                    btnEdit.disabled = false;
+                    inpDMCProcess(data, decision, valueSearch);
                 }
-                const btnSelf = document.getElementById('dmcEdit');
-                btnSelf.disabled = false;
                 const load = document.getElementById('load');
-                mainDMC.removeChild(load);
+                cont.removeChild(load);
                 return;
             } catch(error) {
                 console.log('error = ', error);

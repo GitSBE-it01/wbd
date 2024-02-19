@@ -1,12 +1,21 @@
 import { currentDate } from '../process.js';
 import { dataInput} from '../class.js';
+import { createBtn, dmcOk, dmcNg} from '../../component/index.js';
 
-export const inpDMCProcess = async(data) =>{
-    const dmcInit = await initDMC(data);
-    const cek = await cekDataDMC(dmcInit);
+export const inpDMCProcess = async(data, decision, valueSearch) =>{
+    const splitValue = valueSearch.value.split('/');
+    const addInfo = {
+        decs: decision,
+        assetno: splitValue[0],
+        assetkat: splitValue[1],
+        cat: splitValue[2]
+    }
 
-    if (!cek['update']['assetno']) {
-        const result = await dataInput.insertData(dmcInit);
+    const cek = await dataInput.fetchDataFilter({assetno:splitValue[0], input_date:currentDate(), dmc_vjs:'dmc'});
+    const dmcInit = await initDMC(data, addInfo, decision);
+
+    if (cek.length === 0) {
+        const result = await dataInput.insertData(dmcInit.update);
         if (!result.includes('fail')) {
             alert('data successfully inserted');
             document.getElementById('mainDMC').classList.add('displayHide');
@@ -17,87 +26,90 @@ export const inpDMCProcess = async(data) =>{
     }
 
     let resultAll = '';
-    for (let i=0; i<cek['update']['assetno'].length; i++) {
-        let data ={'update':[],'filter':[]};
-        const updateDt = Object.keys(cek['update']);
-        const filterDt = Object.keys(cek['filter']);
+    if (cek[0]['decision'] !== decision) {
+        for (let i=0; i<cek.length; i++) {
+            let data3 ={'update':[],'filter':[]};
+            data3.filter.id = [cek[i]['id']];
+            data3.update.decision = [decision];
+            const result = await dataInput.updateData(data3);
+            resultAll += " " + result;
+        }
+    }
+
+    for (let i=0; i<dmcInit['update']['assetno'].length; i++) {
+        let data2 ={'update':[],'filter':[]};
+        const updateDt = Object.keys(dmcInit['update']);
+        const filterDt = Object.keys(dmcInit['filter']);
         updateDt.forEach(dt => {
-            if(!data['update'][dt]) {
-                data['update'][dt] =[];
-                data['update'][dt].push(cek['update'][dt][i]);
+            if(!data2['update'][dt]) {
+                data2['update'][dt] =[];
+                data2['update'][dt].push(dmcInit['update'][dt][i]);
             } else {
-                data['update'][dt].push(cek['update'][dt][i]);
+                data2['update'][dt].push(dmcInit['update'][dt][i]);
             }
         })
         filterDt.forEach(dt => {
-                data['filter'][dt] = (cek['filter'][dt][i]);
+                data2['filter'][dt] = (dmcInit['filter'][dt][i]);
         })
-        const result = await dataInput.updateData(data);
+        const result = await dataInput.updateData(data2);
         resultAll += " " + result;
     }
 
     if (!resultAll.includes('fail')) {
         alert('data successfully updated');
-        location.reload();
+        if (document.getElementById('dmcDiv')){
+            document.getElementById('dmcDiv').remove();
+            const head = document.getElementById('hd2');
+            if (decision === 'OK') {
+                head.appendChild(await createBtn(dmcOk));
+            } else {
+                head.appendChild(await createBtn(dmcNg));
+        }}
+        const mainDMC = document.getElementById('mainDMC');
+        mainDMC.classList.add('displayHide');
     } else {
         alert('data is not updated');
     }
     return;
 }
 
-const initDMC = async(data) =>{
-    const splitValue = await data['srch'][0].split('/');
+const initDMC = async(data, addInfo, decision) =>{
     const result = {
-        assetno:[],
-        assetkat:[],
-        inspection:[],
-        std:[],
-        unit:[],
-        input_value:[],
-        input_date:[],
-        dmc_vjs:[],
-        decision:[]
-    }
-    for (let i=0; i<data.inspection.length; i++) {
-        result.assetno.push(splitValue[0]);
-        result.assetkat.push(splitValue[1]);
-        result.inspection.push(data.inspection[i]);
-        result.std.push(data.std[i]);
-        result.unit.push(data.unit[i]);
-        result.input_value.push(data.input_value[i]);
-        result.input_date.push(currentDate());
-        result.dmc_vjs.push("dmc");
-        result.decision.push(data.decs[0]);
-    }
+            update: {
+                assetno:[],
+                assetkat:[],
+                inspection:[],
+                std:[],
+                unit:[],
+                input_value:[],
+                input_date:[],
+                dmc_vjs:[],
+                decision:[]
+            },
+            filter: {
+                id:[]
+            }
+    };
+    data.forEach(dt =>{
+        if (dt.getAttribute('data-row') === 'change') {
+            const detail = dt.querySelectorAll('[data-cell');
+            result.update.assetno.push(addInfo.assetno);
+            result.update.assetkat.push(addInfo.assetkat);
+            result.update.decision.push(decision);
+            result.update.dmc_vjs.push("dmc");
+            result.update.input_date.push(currentDate());
+            detail.forEach(dtl=> {
+                if (dtl.getAttribute('data-cell').includes('inspection')) {result.update.inspection.push(dtl.textContent)};
+                if (dtl.getAttribute('data-cell').includes('std')) {result.update.std.push(dtl.textContent)};
+                if (dtl.getAttribute('data-cell').includes('unit')) {result.update.unit.push(dtl.textContent)};
+                if (dtl.getAttribute('data-cell').includes('id')) {
+                    const id = dtl.getAttribute('data-cell').split('___');
+                    result.filter.id.push(id[1]);
+                };
+                if (dtl.getAttribute('data-cell').includes('input_value')) {result.update.input_value.push(dtl.value)};
+            })
+        }})
     return result;
 }
 
-const cekDataDMC = async(data) =>{
-    const dataSrc = await dataInput.fetchDataFilter({assetno:data.assetno[0], input_date:currentDate()});
-    let data2 ={'update':[],'filter':[]};
-    let decision3 = "OK";
-    if (dataSrc.length>0) {
-        const keys = Object.keys(data);
-        data['id']=[];
-        for (let i=0; i<dataSrc.length; i++){
-            const data1 = data['assetno'][i] + data['assetkat'][i] + data['inspection'][i] + data['std'][i] + data['unit'][i] + data['input_value'][i] + data['dmc_vjs'][i] + data['decision'][i];
-            const data2 = dataSrc[i]['assetno'] + dataSrc[i]['assetkat'] + dataSrc[i]['inspection'] + dataSrc[i]['std'] + dataSrc[i]['unit'] + dataSrc[i]['input_value'] + dataSrc[i]['dmc_vjs'] + dataSrc[i]['decision'];
-            data['id'].push(dataSrc[i]['id']);
-            if (data1 === data2) {
-                const keys = Object.keys(data);
-                keys.forEach(key => {
-                    delete data[key][i];
-                })
-            if (data['input_value'][i] === "NG") {
-                decision3 = "NG";
-            }
-            }
-        }
-        keys.forEach(key => {
-            data2['update'][key] = data[key].filter(element => element !== undefined);
-        })
-        data2['filter']['id'] = data['id'].filter(element => element !== undefined);
-        return data2;
-    }
-    return data2;
-}
+
