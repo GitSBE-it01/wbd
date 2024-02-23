@@ -1,4 +1,5 @@
-import { inpDMCProcess } from "./data/input.js";
+import { inpDMCProcess } from "./data/dmc.js";
+import { initVJS } from "./data/vjs.js";
 import { delChild, strToNumber, currentDate } from "./process.js";
 import {
     bom,
@@ -13,6 +14,7 @@ export {
     delChild, 
     strToNumber, 
     currentDate,
+    initVJS,
     bom,
     dataInput,
     dmc_vjs_log,

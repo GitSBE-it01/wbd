@@ -9,3 +9,13 @@ export const assetList = {
     optValue:['assetno', 'assetkategori','vjs_kategory'],
     optText:['assetno', 'assetkategori', 'assetname', 'location']
 }
+
+
+export const woList = (src) => ({
+    target:'root',
+    id:'woList',
+    data: src,
+    delimiter:' -- ',
+    optValue:['wo_lot', 'wo_part', 'pt_desc1'],
+    optText:['wo_lot']
+})

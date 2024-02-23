@@ -220,5 +220,6 @@ export const dataInput= new Data('data_input');
 export const dmc_vjs_log = new Data('dmc_vjs_log');
 export const asset = new Data('assets');
 export const vjs_asset = new Data('vjs_assets');
+export const wo_list = new Data('wo_list');
 
 

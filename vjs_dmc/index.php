@@ -18,7 +18,7 @@ require_once "config.php";
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
 <div id='root' class='container'>
-    <div id='load' class='loading'></div>
+    <div class='loading'></div>
 </div>
 <script src="./utility/prep.js"></script>
 <script type='module'>
@@ -35,8 +35,11 @@ require_once "config.php";
         assetList,
         searchBarMain,
         tableDMC,
+        tableVJS,
         btnDmcEdit, 
-        btnDmcSbmt, 
+        btnDmcSbmt,
+        btnVjsEdit,
+        btnVjsSbmt, 
         dmcOk, 
         dmcNg,
         header1,
@@ -46,7 +49,8 @@ require_once "config.php";
         inpDMCProcess, 
         dataInput, 
         bom, 
-        currentDate
+        currentDate,
+        initVJS
     } from './utility/index.js';
     
     // start up web page
@@ -55,7 +59,7 @@ require_once "config.php";
     activeLink('navID', ['f-or7']);
     await createDatalist(assetList);
     await createSearch(searchBarMain);
-    root.removeChild(document.getElementById('load'));
+    root.removeChild(document.querySelector('.loading'));
     
 
     // proses saat klik submit button di search bar
@@ -65,11 +69,14 @@ require_once "config.php";
             if (document.getElementById('dmcDivAll')) {
                     document.getElementById('dmcDivAll').remove();
                 }
+            if (document.getElementById('vjsDivAll')) {
+                    document.getElementById('vjsDivAll').remove();
+                }
             const target = document.getElementById('main');
             const div = document.createElement('div');
             div.id = 'dmcDivAll';
-            div.appendChild(loading('load','loading2'));
             target.appendChild(div);
+            div.appendChild(await loading('loading2'));
             const sbmtBtn = document.getElementById('test2');
             sbmtBtn.disabled = true;
             // check apakah ada DMC yg terbentuk di hari ini utk asset yg dipilih
@@ -90,7 +97,7 @@ require_once "config.php";
                     sbmtBtn.disabled = false;
                     const dmEdit = document.getElementById('dmcEdit');
                     dmEdit.disabled = true;
-                    return div.removeChild(document.getElementById('load'));          
+                    return div.removeChild(document.querySelector('.loading2'));          
                 } 
             
             // jika data DMC ada maka buat table utk show data 
@@ -109,7 +116,10 @@ require_once "config.php";
                     )
                 }
             sbmtBtn.disabled = false;
-            return div.removeChild(document.getElementById('load'));    
+            const vjsEdit = await createBtn(btnVjsEdit);
+            const vjsSbmt = await createBtn(btnVjsSbmt);
+            await initVJS(valueInp, vjsEdit, vjsSbmt);
+            return div.removeChild(document.querySelector('.loading2'));    
         } catch(error) {
             console.log(error);
         }
@@ -117,14 +127,11 @@ require_once "config.php";
 
     // proses saat klik submit button di DMC
     document.addEventListener('click', async function(event) {
-        if (event.target.getAttribute('id') === 'dmcInput')
+        if (event.target.getAttribute('id') === 'dmcInput') {
             try{
                 const btn = document.getElementById('dmcInput');
-                const cont = document.getElementById('dmcDivAll');
-                const loadDMC = await loading('load', 'loading2');
-                console.log(loadDMC);
-                cont.appendChild(loadDMC);
                 const mainDMC = document.getElementById('mainDMC');
+                mainDMC.appendChild(await loading('loading2'));
                 const element = mainDMC.querySelectorAll('[data-cell^="input_value"]');
                 let isValid = true;
                 let decision = 'OK';
@@ -145,15 +152,28 @@ require_once "config.php";
                     const valueSearch = document.getElementById('test1');
                     const btnEdit = document.getElementById('dmcEdit');
                     btnEdit.disabled = false;
-                    inpDMCProcess(data, decision, valueSearch);
+                    await inpDMCProcess(data, decision, valueSearch);
                 }
-                const load = document.getElementById('load');
-                cont.removeChild(load);
+                
+                const head = document.getElementById('hd2');
+                if (decision === 'OK') {
+                        head.appendChild(await createBtn(dmcOk))
+                    } else {
+                        head.appendChild(await createBtn(dmcNg)
+                    )
+                }
+                const vjsEdit = await createBtn(btnVjsEdit);
+                const vjsSbmt = await createBtn(btnVjsSbmt);
+                const valueInp = await document.getElementById('test1').value.split('/');
+                await initVJS(valueInp, vjsEdit, vjsSbmt);
+                mainDMC.removeChild(document.querySelector('.loading2'));
                 return;
             } catch(error) {
                 console.log('error = ', error);
             }
-        })
+        }
+    })
+
 
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>

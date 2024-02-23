@@ -148,8 +148,8 @@ loading view
 	width: 8rem; 
 	height: 8rem;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 44%;
+  left: 44%;
 	animation: loading 1.8s linear infinite; 
 	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
 	background-size: cover; 

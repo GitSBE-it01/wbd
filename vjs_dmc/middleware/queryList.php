@@ -4,6 +4,7 @@ $dmc_vjs = 'SELECT * FROM dmc_vjs d join list_inspect l on d.inspection = l.insp
 $dmc_vjs_log = 'SELECT * FROM dmc_vjs_log';
 $data_input = 'SELECT * FROM data_input';
 $assets = 'SELECT * FROM dbinventaris.astreg_main';
+$wo_list = 'SELECT * FROM dbqad_live.wo_mstr w JOIN dbqad_live.pt_mstr p on w.wo_part = p.pt_part';
 $vjs_assets = 'SELECT * FROM vjs_list vl join dbinventaris.astreg_main ast on vl.asset_id = ast.id';
 
 $insert_dmc_vjs = 'INSERT INTO dmc_vjs';
@@ -29,6 +30,7 @@ $codeList = array(
     'data_input'=>$data_input,
     'dmc_vjs_log'=>$dmc_vjs_log,
     'assets'=>$assets,
+    'wo_list' => $wo_list,
     'vjs_assets'=>$vjs_assets,
 
     'insert_dmc_vjs'=>$insert_dmc_vjs,

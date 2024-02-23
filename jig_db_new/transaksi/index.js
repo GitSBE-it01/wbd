@@ -128,6 +128,7 @@ function tableTrans(a,b,c,d) {
         <div class='tableFlex hideOn' id="openEdit-${b[i].item_jig}">
             <div class='tableRow'>
                 <div class='tableFlex2'>          
+                    <div class='tableData2 tableHeader2'>code</div>
                     <div class='tableData2 tableHeader2'>Lokasi</div>
                     <div class='tableData2 tableHeader2'>qty</div>
                     <div class='tableData2 tableHeader2'>tgl peminjaman</div>
@@ -178,7 +179,7 @@ function tableTrans(a,b,c,d) {
                     <form method="POST">
                         <div class='tableFlex2'>    
                             <input type='hidden' name='id' id='id_${d[name][iii].id}' value='${d[name][iii].id}'>
-                            <input type='hidden' idid='codeData_${d[name][iii].code}' value='${d[name][iii].code}'>
+                            <div class='tableData2'id='codeData_${d[name][iii].code}'>${d[name][iii].code}</div>
                             <div class='tableData2'>${d[name][iii].loc}</div>
                             <div class='tableData2'>${d[name][iii].qty}</div>
                             <div class='tableData2'>${d[name][iii].start_date}</div>`;
@@ -206,6 +207,7 @@ function tableTrans(a,b,c,d) {
              // dataOri digunakan sebagai tempat menampung semua html
             dataOri[`oriData${b[i].item_jig}`] += `
             <div class='tableFlex2'>         
+                <div class='tableOri'>${filterData2[ii].code}</div>
                 <div class='tableOri'>${filterData2[ii].lokasi}</div>
                 <div class='tableOri'>${parseInt(filterData2[ii].qty_per_unit) - qtyCode[`qtyCode${c[i].code}`]}</div>
                 <div class='tableOri'></div>

@@ -14,3 +14,11 @@ const opClHide = () => {
     }
     return btnOpen.classList.add('displayHide');
 }
+
+const getSplitValue = (data, ...val) => {
+    const split = data.value.split(" -- ");
+    for (let i=0; i<val.length; i++) {
+        const target = document.querySelector(`[data-cell*="${val[i]}"]`);
+        target.textContent = split[i+1];
+    }
+}

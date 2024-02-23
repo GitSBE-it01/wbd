@@ -23,6 +23,10 @@ export const tableDMC = (data) => ({ // data table
                     text:'inspection'
                 },
                 param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
                 header:'standard',
@@ -32,7 +36,11 @@ export const tableDMC = (data) => ({ // data table
                     dbfield:'category',
                     text:'std'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
                 header:'unit',
@@ -42,7 +50,11 @@ export const tableDMC = (data) => ({ // data table
                     dbfield:'category',
                     text:'unit'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
                 header:'OK / NG',
@@ -66,36 +78,110 @@ export const tableDMC = (data) => ({ // data table
                     dbfield:'id',
                     text:'id'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             }
         ]
 })
 
-export const tableVJS = (data) => ({ // data table
-    target:'dmcDivAll', 
-    tblID: 'mainVJS', 
-    dbsrc: data, 
+export const headerForm = () => ({ // data table
+    target:'mainVJS', 
+    tblID: 'hdVJS', 
+    dbsrc: [], 
     tblStyle: 
         {
-            contStyle: ['m4'],
-            thdStyle:['flex-c', 'fs-l', 'fw-blk', 'mb3', 'tl3', 'f-wht', 'p2'],
-            thrStyle:['f-child'],
+            contStyle: ['m4', 'flex-r'],
+            thdStyle:['flex-c', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'f-wht', 'p2'],
+            thrStyle:['f-child', 'mb1'],
             trowStyle:['flex-c', 'px2'],
             tdtStyle:['f-child', 'mb1'],
             selStyle:['f-child', 'mb1'],
             btnStyle:[],
+            divStyle:[]
         }, 
     tblData: 
         [
             {
-                header:'deskripsi',
+                header: `ID`,
+                db_field:'',
+                dt_type:'input',
+                mark:{
+                    dbfield:'wo_id',
+                    text:'wo_id'
+                },
+                param:{
+                    list: 'woList',
+                    disable: false
+                },
+                js:{
+                    attr:'onchange',
+                    value:`getSplitValue(this, "part_", "desc_")`
+                }
+            },
+            {
+                header:'Item Number',
+                db_field:'',
+                dt_type:'text',
+                mark:{
+                    dbfield:'wo_part',
+                    text:'part'
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Description',
+                db_field:'',
+                dt_type:'text',
+                mark:{
+                    dbfield:'wo_part',
+                    text:'desc'
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+        ]
+})
+
+
+export const tableVJS = (data) => ({ // data table
+    target:'mainVJS', 
+    tblID: 'isiVJS', 
+    dbsrc: data, 
+    tblStyle: 
+        {
+            contStyle: ['m4'],
+            thdStyle:['flex-r', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'f-wht', 'p2'],
+            thrStyle:['f-child'],
+            trowStyle:['flex-r', 'px2'],
+            tdtStyle:['f-child', 'mb1'],
+            selStyle:['f-child', 'mb1'],
+            btnStyle:[],
+            divStyle:['fullwidth','or9']
+        }, 
+    tblData: 
+        [
+            {
+                header:'Check',
                 db_field:'inspection',
                 dt_type:'text',
                 mark:{
                     dbfield:'category',
                     text:'inspection'
                 },
-                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
                 header:'standard',
@@ -105,7 +191,11 @@ export const tableVJS = (data) => ({ // data table
                     dbfield:'category',
                     text:'std'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
                 header:'unit',
@@ -115,20 +205,44 @@ export const tableVJS = (data) => ({ // data table
                     dbfield:'category',
                     text:'unit'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
             {
-                header:'OK / NG',
+                header: `aktual`,
                 db_field:'input_value',
-                dt_type:'select',
+                dt_type:'input',
                 mark:{
-                    dbfield:'category',
+                    dbfield:'id',
                     text:'input_value'
                 },
-                param:['OK','NG'], //isi dari option
+                param:{
+                    list: '',
+                    disable: false
+                },
                 js:{
-                    attr:'onchange',
-                    value:'addDtTag(this)'
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header: `keterangan`,
+                db_field:'remark',
+                dt_type:'input',
+                mark:{
+                    dbfield:'id',
+                    text:'remark'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
                 }
             },
             {
@@ -139,7 +253,11 @@ export const tableVJS = (data) => ({ // data table
                     dbfield:'id',
                     text:'id'
                 },
-                param:''
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
             }
         ]
 })
@@ -160,6 +278,7 @@ const arr = {
             tdtStyle:[],
             selStyle:[],
             btnStyle:[],
+            divStyle:[]
         }, 
     tblData: 
     [
@@ -191,14 +310,20 @@ const arr = {
             header:'test2',
             db_field:'test', // sebagai ID
             dt_type:'button',
-            mark:'assetno',
+            mark:{
+                dbfield:'category',
+                text:'input_value'
+            },
             param:'submit'
         },
         {
             header:'test3',
             db_field:'byusername',
             dt_type:'hidden',
-            mark:'assetno',
+                        mark:{
+                dbfield:'category',
+                text:'input_value'
+            },
             param:''
         },
         {

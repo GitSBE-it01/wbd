@@ -222,6 +222,7 @@ function updateData($query, $filterValues, $filterValues2) {
     for ($i=0; $i<$count2; $i++){
         $cek = array_keys($filterValues2[$i]);
         $test = array_values($cek);
+
         ${'inputKeysFlt' . $counter2} = $test[0];
         $keysParam2[$test[0]] = array();
         foreach (array_values($filterValues2[$i]) as $values) {
@@ -269,7 +270,7 @@ function updateData($query, $filterValues, $filterValues2) {
     $params = rtrim($params, ', ');
     $filter = rtrim($filter, ', ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
-        $stmt = $conn->prepare($wholeQuery);
+    $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }

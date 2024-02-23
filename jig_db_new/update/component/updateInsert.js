@@ -46,7 +46,7 @@ export const updateInsertData = async() => {
         // data olahan utk dimasukkan ke database
         data['code'] = [];
         data['item_jig']=[];
-        data['id']=[];
+        data['urut']=[];
         data['status']=[];
         data['toleransi']=[];
         data['trans_date']=[];
@@ -79,16 +79,22 @@ export const updateInsertData = async() => {
             const codeGet = splitCustomString("+", cekInput[i].id);
             const cekID = splitCustomString("--", codeGet[1]);
             data['code'][i] = codeGet[1];
-            data['id'][i] = parseInt(cekID[1]);
+            data['urut'][i] = parseInt(cekID[1]);
         }
-        
+
         newData['code'] = [];
         newData['item_jig']=[];
-        newData['id']=[];
+        newData['urut']=[];
         newData['status']=[];
         newData['toleransi']=[];
         newData['trans_date']=[];
         newData['qty_per_unit']=[];
+        let cekCodeNo = [];
+        data['code'].forEach (dt => {
+            const vl = dt.split('--');
+            cekCodeNo.push(parseInt(vl[1]))
+        })
+
         let cekLength = cekInput.length + 1;
         for (let i=0; i<cekInput2.length; i++) {
             // item_jig
@@ -104,12 +110,16 @@ export const updateInsertData = async() => {
                 newData['qty_per_unit'][i] = parseInt(newData['qty'][i]);
             } 
             // id no dan code baru
-            newData['id'].push(cekLength);
-            newData['code'][i] = newData['item_jig'][i] + "--" + strToNumber(cekLength,3,0);
+            let counter = 1;
+            console.log(cekCodeNo);
+            while (cekCodeNo.includes(counter)) {counter++};
+            console.log(counter);
+            newData['urut'].push(counter);
+            newData['code'][i] = newData['item_jig'][i] + "--" + strToNumber(counter,3,0);
             cekLength++
         }
         // utk jig_location_query
-        // code, item_jig, qty_per_unit, unit, lokasi, status, id, toleransi
+        // code, item_jig, qty_per_unit, unit, lokasi, status, urut, toleransi
         let update1 = [];
         let filter1 = [];
         update1['item_jig'] =[];
@@ -117,7 +127,7 @@ export const updateInsertData = async() => {
         update1['unit'] =[];
         update1['lokasi'] =[];
         update1['status'] =[];
-        update1['id'] =[];
+        update1['urut'] =[];
         update1['toleransi'] =[];
         filter1['code'] =[];
         let insert1 = [];
@@ -129,7 +139,7 @@ export const updateInsertData = async() => {
         insert1['trans_date'] = [];
         insert1['remark'] = [];
         insert1['status'] = [];
-        insert1['id'] = [];
+        insert1['urut'] = [];
         insert1['toleransi'] = [];
         insert1['addSub'] = [];
         insert1['qty_change'] = [];
@@ -141,7 +151,7 @@ export const updateInsertData = async() => {
                 update1['unit'].push(data['unit'][i]);
                 update1['lokasi'].push(data['lokasi'][i]);
                 update1['status'].push(data['status'][i]);
-                update1['id'].push(data['id'][i]);
+                update1['urut'].push(data['urut'][i]);
                 update1['toleransi'].push(data['toleransi'][i]);
 
                 filter1['code'].push(data['code'][i]);
@@ -154,7 +164,7 @@ export const updateInsertData = async() => {
                 insert1['trans_date'].push(data['trans_date'][i]);
                 insert1['remark'].push(data['remark'][i]);
                 insert1['status'].push(data['status'][i]);
-                insert1['id'].push(data['id'][i]);
+                insert1['urut'].push(data['urut'][i]);
                 insert1['toleransi'].push(data['toleransi'][i]);
                 insert1['addSub'].push(data['addSub'][i]);
                 insert1['qty_change'].push(data['qty'][i]);
@@ -171,7 +181,7 @@ export const updateInsertData = async() => {
         insert2['unit'] = newData['unit'];
         insert2['lokasi'] = newData['lokasi'];
         insert2['status'] = newData['status'];
-        insert2['id'] = newData['id'];
+        insert2['urut'] = newData['urut'];
         insert2['toleransi'] = newData['toleransi'];
 
         // insert log_location for new data
@@ -184,31 +194,32 @@ export const updateInsertData = async() => {
         insert3['trans_date'] = newData['trans_date'];
         insert3['remark'] = newData['remark'];
         insert3['status'] = newData['status'];
-        insert3['id'] = newData['id'];
+        insert3['urut'] = newData['urut'];
         insert3['toleransi'] = newData['toleransi'];
         insert3['addSub'] = newData['addSub'];
         insert3['qty_change'] = newData['qty'];
-        console.log({update1, filter1});
-        
+        console.log({update1, filter1, insert2, insert3});
+
         if (newData['code'].length == 0) {
             const result3 = await jig_location_query.updateData(update1, filter1);     
-            console.log(result3);
-            const result1 = await log_location_query.insertData(insert1);
             if (!result3.includes('fail')) {
+                const result1 = await log_location_query.insertData(insert1);
                 alert('data successfully updated');
                 setTimeout(() => {
                     location.reload();
-                }, 2000);
+                }, 1000);
             } else {
                 alert('data is not updated');
             }
             return;
         }
+
         const result3 = await jig_location_query.updateData(update1, filter1);     
-        const result1 = await log_location_query.insertData(insert1);     
-        const result2 = await jig_location_query.insertData(insert2);     
-        const result4 = await log_location_query.insertData(insert3);     
+        const result2 = await jig_location_query.insertData(insert2);
+        console.log({result3, result2});
         if (!result3.includes('fail') && !result2.includes('fail')) {
+            const result1 = await log_location_query.insertData(insert1);     
+            const result4 = await log_location_query.insertData(insert3);     
             alert('data successfully updated');
             setTimeout(() => {
                 location.reload();
@@ -251,15 +262,16 @@ export const delDataStock = async(id,pk) => {
         insert1['qty_change'] = [data['qty'][0]];
 
         const result = await jig_location_query.deleteData(pk,idToDelete);
-        const result1 = await log_location_query.insertData(insert1);  
 
         if (!result.includes('fail')) {
-            alert('data successfully deleted');
-            setTimeout(() => {
+            const result1 = await log_location_query.insertData(insert1);
+            if (!result1.includes('fail')) {
+                alert('data successfully deleted');
                 location.reload();
-            }, 1000);
+            }
         } else {
             alert('data is not deleted');
+            location.reload();
         }
     } catch(error) {
         console.log(error);

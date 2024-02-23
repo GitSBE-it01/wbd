@@ -28,6 +28,7 @@ flex display parent
 Children flex
 */
 .f-child {flex: 1;}
+.fullwidth {width: 100%;}
 
 .cl1 {display: flex; width: 8.33vw;}
 .cl2 {display: flex; width: 16.67vw;}

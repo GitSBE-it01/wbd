@@ -44,6 +44,9 @@ const cellTxt = (src,data, tblStyle) => {
     }
     div.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
     div.textContent = src[data.db_field];
+    if (data.js.attr !=='') {
+        div.setAttribute(data.js.attr, data.js.value);
+    }
     return div;
 }
 
@@ -113,12 +116,15 @@ const cellHid = (src,data) => {
     input.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
     input.id = data.db_field + "//" + data.mark.text + "___" +src[data.mark.dbfield];
     input.value = src[data.db_field];
+    if (data.js.attr !=='') {
+        input.setAttribute(data.js.attr, data.js.value);
+    }
     return input;
 }
 
 //===========================================================================
-// data cell hidden field 
-const cellInp = (src,data) => {
+// data cell input field 
+const cellInp = (src,tblData, tblStyle) => {
     const div = document.createElement('div');
     const inp = document.createElement('input');
     const classes = tblStyle.tdtStyle;
@@ -133,35 +139,40 @@ const cellInp = (src,data) => {
             inp.classList.add(clas);
         });
     }
-    inp.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
-    inp.id = data.db_field +"//" + data.mark.text + "___" +src[data.mark.dbfield];
+    inp.setAttribute('data-cell', tblData.mark.text + "___" +src[tblData.mark.dbfield]);
+    inp.id = tblData.db_field +"//" + tblData.mark.text + "___" +src[tblData.mark.dbfield];
     inp.setAttribute('type', 'text');
     inp.setAttribute('autocomplete', 'off');
-    inp.setAttribute('list', data.param.list);
-    inp.setAttribute('disable', data.param.disable);
-    if (data.js.attr !=='') {
-        sel.setAttribute(data.js.attr, data.js.value);
+    inp.setAttribute('list', tblData.param.list);
+    inp.setAttribute('disable', tblData.param.disable);
+    if (tblData.js.attr !=='') {
+        inp.setAttribute(tblData.js.attr, tblData.js.value);
     }
     div.appendChild(inp);
     return div;
 }
 
 //===========================================================================
-// data cell hidden field 
-const cellDiv = (src,data) => {
+// data cell div but not displayed
+const cellDiv = (src,data, tblStyle) => {
     const div = document.createElement('div');
-    div.classList.add('hide');
+    div.classList.add('displayHide');
+    const classes = tblStyle.divStyle;
+    if(classes) {
+        classes.forEach(clas=>{
+            div.classList.add(clas);
+        });
+    }
     div.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
     div.id = data.db_field + "//" + data.mark.text + "___" +src[data.mark.dbfield];
-    div.value = data.db_field;
-    div.textContent ="test";
     return div;
 }
 
 //===========================================================================
 // data cell text 
-const tData = async(src, tblData, tblStyle) => {
+const tData = async(target, src, tblData, tblStyle) => {
     try{
+        const cont = document.getElementById(target);
         const trow = document.createElement('div');
         trow.setAttribute('data-row','');
         const classes = tblStyle.trowStyle;
@@ -173,10 +184,14 @@ const tData = async(src, tblData, tblStyle) => {
             if (data.dt_type === 'select'   ) {return trow.appendChild(cellSel(src,data, tblStyle));}
             if (data.dt_type === 'button'   ) {return trow.appendChild(cellBtn(src,data, tblStyle));}
             if (data.dt_type === 'hidden'   ) {return trow.appendChild(cellHid(src,data));}
-            if (data.dt_type === 'hidDiv'   ) {return trow.appendChild(cellDiv(src,data));}
-            if (data.dt_type === 'input'    ) {return trow.appendChild(cellInp(src,data));}
+            // hidden div should be at first line or last line only
+            if (data.dt_type === 'hidDiv'   ) {
+                return cont.appendChild(cellDiv(src, data,tblStyle));
+            }
+            if (data.dt_type === 'input'    ) {return trow.appendChild(cellInp(src,data, tblStyle));}
         })
-        return trow;
+        cont.appendChild(trow)
+        return;
     } catch(error) {
         console.log(error);
     }
@@ -195,9 +210,12 @@ export const createTable = async(arr) => {
         tblBody.appendChild(await theader(arr.tblData, arr.tblStyle));
 
         // table data
-        for (let i=0; i<arr.dbsrc.length; i++) {
-            const result = await tData(arr.dbsrc[i], arr.tblData, arr.tblStyle);
-            tblBody.appendChild(result);
+        if (arr.dbsrc.length === 0 ) {
+            await tData(arr.tblID, [1], arr.tblData, arr.tblStyle);
+        } else {
+            for (let i=0; i<arr.dbsrc.length; i++) {
+                await tData(arr.tblID, arr.dbsrc[i], arr.tblData, arr.tblStyle);
+            }
         }
     } catch (error) {
         console.log(error);

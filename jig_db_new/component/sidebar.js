@@ -17,6 +17,7 @@ export const createSidebar = (target, color) => {
         <div class="sideli"><a class="link" href="${url}index.php"><span class="fc-w">Home</span></a></div>
         <div class="sideli"><a class="link" href="${url}update/"><span class="fc-w">Update Data & Stock</span></a></div>
         <div class="sideli"><a class="link" href="${url}transaksi/"><span class="fc-w">Transaction</span></a></div>
+        <div class="sideli"><a class="link" href="${url}usage/"><span class="fc-w">Usage</span></a></div>
         <div class="sideli"><a class="link" href="${url}add_data/"><span class="fc-w">Add New</span></a></div>
         <div class="sideli"><a class="link" href="${url}user/"><span class="fc-w">User</span></a></div>
         <div class="sideli"><a class="link" href="http://192.168.2.103:8080/sbe/index.php?cek=no"><button type="button" class="home2"></button></a></div>
@@ -32,6 +33,7 @@ export const createSidebar = (target, color) => {
             <div class="sideli"><a class="link" href="${url}index.php"><span class="fc-w">Home</span></a></div>
             <div class="sideli"><a class="link" href="${url}update/"><span class="fc-w">Update Data & Stock</span></a></div>
             <div class="sideli"><a class="link" href="${url}transaksi/"><span class="fc-w">Transaction</span></a></div>
+            <div class="sideli"><a class="link" href="${url}usage/"><span class="fc-w">Usage</span></a></div>
             <div class="sideli"><a class="link" href="${url}add_data/"><span class="fc-w">Add New</span></a></div>
             <div class="sideli"><a class="link" href="http://192.168.2.103:8080/sbe/index.php?cek=no"><button type="button" class="home2"></button></a></div>
         </div>
@@ -44,6 +46,7 @@ export const createSidebar = (target, color) => {
         <div class="sideCard sidebar ${color}">
             <div class="sideli"><a class="link" href="${url}index.php"><span class="fc-w">Home</span></a></div>
             <div class="sideli"><a class="link" href="${url}transaksi/"><span class="fc-w">Transaction</span></a></div>
+            <div class="sideli"><a class="link" href="${url}usage/"><span class="fc-w">Usage</span></a></div>
             <div class="sideli"><a class="link" href="http://192.168.2.103:8080/sbe/index.php?cek=no"><button type="button" class="home2"></button></a></div>
         </div>
         `; 

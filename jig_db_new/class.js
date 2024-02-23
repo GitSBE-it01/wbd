@@ -128,7 +128,6 @@ class Data {
             const entry = { [keys2[i]]: values2[i] };
             updateFilter2.push(entry);
         }
-        console.log({updateFilter,updateFilter2})
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -184,3 +183,4 @@ export const log_location_query = new Data('log_location_query');
 export const jig_function_query = new Data('jig_function_query');
 export const log_function_query = new Data('log_function_query');
 export const item_detail_query = new Data('item_detail_query');
+export const ng_daily = new Data('ng_daily_query');

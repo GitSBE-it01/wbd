@@ -59,12 +59,13 @@ export const inpDMCProcess = async(data, decision, valueSearch) =>{
         alert('data successfully updated');
         if (document.getElementById('dmcDiv')){
             document.getElementById('dmcDiv').remove();
-            const head = document.getElementById('hd2');
-            if (decision === 'OK') {
-                head.appendChild(await createBtn(dmcOk));
-            } else {
-                head.appendChild(await createBtn(dmcNg));
-        }}
+        }
+        const head = document.getElementById('hd2');
+        if (decision === 'OK') {
+            head.appendChild(await createBtn(dmcOk));
+        } else {
+            head.appendChild(await createBtn(dmcNg));
+        }
         const mainDMC = document.getElementById('mainDMC');
         mainDMC.classList.add('displayHide');
     } else {

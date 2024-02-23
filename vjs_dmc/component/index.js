@@ -12,21 +12,27 @@ import {
 } from './array/searchArr.js';
 
 import { 
-    assetList
+    assetList,
+    woList
 } from './array/dtListArr.js';
 
 import { 
     header1,
-    header2
+    header2,
+    header3
 } from './array/header.js';
 
 import { 
-    tableDMC
+    tableDMC,
+    headerForm,
+    tableVJS
 } from './array/tblArr.js';
 
 import {
     btnDmcEdit, 
     btnDmcSbmt, 
+    btnVjsEdit,
+    btnVjsSbmt,
     dmcOk, 
     dmcNg
 } from './array/btnArr.js';
@@ -48,14 +54,20 @@ export {
     createHeader,
     createSearch,
     tableDMC,
+    headerForm,
+    tableVJS,
     navigation,
     assetList,
+    woList,
     searchBarMain,
     btnDmcEdit, 
     btnDmcSbmt, 
+    btnVjsEdit,
+    btnVjsSbmt,
     dmcOk, 
     dmcNg,
     header1,
-    header2
+    header2,
+    header3
 }
     

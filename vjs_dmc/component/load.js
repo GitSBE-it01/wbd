@@ -1,9 +1,8 @@
 /*-------------------------
 loading animasi
 -------------------------*/
-export const loading = (idLoad, classDiv) => {
+export const loading = (classDiv) => {
     const div = document.createElement("div");
-    div.id = idLoad;
     div.classList.add(classDiv);
     return div;
 }

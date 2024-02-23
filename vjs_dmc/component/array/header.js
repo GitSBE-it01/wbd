@@ -10,3 +10,10 @@ export const header2 = {
         style: ['textCenter', 'fs-m', 'm1', 'pb4'],
         text:'Decision'               
     };
+
+export const header3 = {
+        target:'mainVJS',
+        id:'hd',
+        style: ['textCenter', 'fs-xl','fw-bld', 'm3'],
+        text:'Verifikasi Job Setup'               
+    };

@@ -42,3 +42,26 @@ export const dmcNg =
             value:'opClHide()'
         }
     }
+
+export const btnVjsEdit = {
+    id:'vjsEdit',
+    type:'button', // submit or button
+    text:'edit',
+    classSty:['mx4'],
+    js: {
+        attr:'onclick',
+        value:'disabledBtn()'
+    }
+}
+
+export const btnVjsSbmt ={
+    id:'vjsInput',
+    type:'button', // submit or button
+    text:'submit',
+    classSty:['mx4'],
+    js: {
+        attr:'',
+        value:''
+    }
+}
+    
