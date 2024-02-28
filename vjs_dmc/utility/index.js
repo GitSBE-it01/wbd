@@ -3,10 +3,11 @@ import { initVJS } from "./data/vjs.js";
 import { delChild, strToNumber, currentDate } from "./process.js";
 import {
     bom,
-    dataInput,
-    dmc_vjs_log,
+    dmc_input,
+    vjs_input,
     asset,
-    vjs_asset
+    vjs_asset,
+    wo_list
 } from './class.js';
 
 export {
@@ -16,9 +17,10 @@ export {
     currentDate,
     initVJS,
     bom,
-    dataInput,
-    dmc_vjs_log,
+    dmc_input,
+    vjs_input,
     asset,
-    vjs_asset
+    vjs_asset,
+    wo_list
 };
 

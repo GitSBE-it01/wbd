@@ -12,8 +12,15 @@ export const header2 = {
     };
 
 export const header3 = {
-        target:'mainVJS',
-        id:'hd',
+        target:'vjsDivAll',
+        id:'hdVJS',
         style: ['textCenter', 'fs-xl','fw-bld', 'm3'],
         text:'Verifikasi Job Setup'               
     };
+
+export const header4 = (idTgt, counter) => ({
+    target: idTgt,
+    id:`hdVJS${counter}`,
+    style: ['fs-l', 'm3'],
+    text: `Verifikasi ${counter}`
+});

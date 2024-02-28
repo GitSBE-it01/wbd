@@ -1,5 +1,5 @@
 import { currentDate } from '../process.js';
-import { dataInput} from '../class.js';
+import { dmc_input} from '../class.js';
 import { createBtn, dmcOk, dmcNg} from '../../component/index.js';
 
 export const inpDMCProcess = async(data, decision, valueSearch) =>{
@@ -11,11 +11,11 @@ export const inpDMCProcess = async(data, decision, valueSearch) =>{
         cat: splitValue[2]
     }
 
-    const cek = await dataInput.fetchDataFilter({assetno:splitValue[0], input_date:currentDate(), dmc_vjs:'dmc'});
+    const cek = await dmc_input.fetchDataFilter({assetno:splitValue[0], input_date:currentDate(), dmc_vjs:'dmc'});
     const dmcInit = await initDMC(data, addInfo, decision);
 
     if (cek.length === 0) {
-        const result = await dataInput.insertData(dmcInit.update);
+        const result = await dmc_input.insertData(dmcInit.update);
         if (!result.includes('fail')) {
             alert('data successfully inserted');
             document.getElementById('mainDMC').classList.add('displayHide');
@@ -31,7 +31,7 @@ export const inpDMCProcess = async(data, decision, valueSearch) =>{
             let data3 ={'update':[],'filter':[]};
             data3.filter.id = [cek[i]['id']];
             data3.update.decision = [decision];
-            const result = await dataInput.updateData(data3);
+            const result = await dmc_input.updateData(data3);
             resultAll += " " + result;
         }
     }
@@ -51,7 +51,7 @@ export const inpDMCProcess = async(data, decision, valueSearch) =>{
         filterDt.forEach(dt => {
                 data2['filter'][dt] = (dmcInit['filter'][dt][i]);
         })
-        const result = await dataInput.updateData(data2);
+        const result = await dmc_input.updateData(data2);
         resultAll += " " + result;
     }
 

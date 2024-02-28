@@ -2,20 +2,10 @@
 =================================================================
 button
 */
-const btnArrExp = {
-    id:'',
-    type:'', // submit or button
-    text:'',
-    classSty:[],
-    js: {
-        attr:'',
-        value:''
-    }
-}
-
 export const createBtn = async(arr) => {
     const btn = document.createElement('button');
-    btn.id = arr.id;
+    if(arr.id !== "") {btn.id = arr.id;}
+    if(arr.mark !== "") {btn.setAttribute('data-btn', arr.mark);}
     arr.classSty.forEach(sty => {
         btn.classList.add(sty)
     })

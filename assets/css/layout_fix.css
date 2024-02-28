@@ -5,7 +5,7 @@ body {margin: 0; padding: 0;}
 /*
 navbar
 */
-.navCard1 {width: 100%;height: 95%;overflow: hidden;}
+.navCard1 {width: 100%;height: 95%;overflow-x: hidden;}
 .navCard2 {width: 100%;height: 5%;overflow: hidden;}
 .navChild {align-items: center;}
 /*.navbar {display: flex;flex-direction: row;justify-content: flex-start;align-items: center;}*/
@@ -44,7 +44,8 @@ Children flex
 .cl12 {display: flex; width: 100vw;}
 
 .displayHide {display: none;}
-
+.floatRight {float: right;}
+.floatLeft {float: left;}
 
 /*
 margin

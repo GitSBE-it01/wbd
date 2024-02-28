@@ -12,6 +12,7 @@ export const searchBarMain = {// detail search
     arrBtn: 
     {
         id:'test2',
+        marK:'',
         type:'button', // submit or button
         text: 'submit',
         classSty:['mx1'],

@@ -1,7 +1,7 @@
 
-const disabledBtn= () =>{
-    const btntarget = document.getElementById('dmcInput');
-    const btnSelf = document.getElementById('dmcEdit');
+const disabledBtn= (self, target) =>{
+    const btntarget = document.querySelector(target);
+    const btnSelf = document.querySelector(self);
     btnSelf.disabled = true;
     btntarget.disabled = false;
     return;
@@ -15,10 +15,26 @@ const opClHide = () => {
     return btnOpen.classList.add('displayHide');
 }
 
-const getSplitValue = (data, ...val) => {
-    const split = data.value.split(" -- ");
-    for (let i=0; i<val.length; i++) {
-        const target = document.querySelector(`[data-cell*="${val[i]}"]`);
-        target.textContent = split[i+1];
-    }
+const deleteChild = (target) => {
+    const container = document.getElementById(target);
+    container.remove();
 }
+
+const opnHide = (target) => {
+    const cont = document.getElementById(target);
+    if (cont.classList.contains('displayHide')) {
+        cont.classList.remove('displayHide');
+        return;
+    }
+    return cont.classList.add('displayHide');
+}
+
+const vjsDtInput = (target) => {
+    const cont = document.getElementById(target);
+    if (cont.classList.contains('displayHide')) {
+        cont.classList.remove('displayHide');
+        return;
+    }
+    return cont.classList.add('displayHide');
+}
+

@@ -64,10 +64,10 @@ export const tableDMC = (data) => ({ // data table
                     dbfield:'category',
                     text:'input_value'
                 },
-                param:['OK','NG'], //isi dari option
+                param:['OK','NG'], 
                 js:{
                     attr:'onchange',
-                    value:'addDtTag(this)'
+                    value:'addDtTag(this, "[data-row]", "data-cell")' 
                 }
             },
             {
@@ -87,18 +87,18 @@ export const tableDMC = (data) => ({ // data table
         ]
 })
 
-export const headerForm = () => ({ // data table
-    target:'mainVJS', 
-    tblID: 'hdVJS', 
+export const headerForm = (counter) => ({ // data table
+    target:`mainVJS${counter}`, 
+    tblID: `dtVJS${counter}`, 
     dbsrc: [], 
     tblStyle: 
         {
-            contStyle: ['m4', 'flex-r'],
-            thdStyle:['flex-c', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'f-wht', 'p2'],
-            thrStyle:['f-child', 'mb1'],
-            trowStyle:['flex-c', 'px2'],
-            tdtStyle:['f-child', 'mb1'],
-            selStyle:['f-child', 'mb1'],
+            contStyle: ['mx4', 'flex-r', 'floatLeft'],
+            thdStyle:['flex-c', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'p2'],
+            thrStyle:['f-child', 'mb2'],
+            trowStyle:['flex-c', 'mb3', 'py2'],
+            tdtStyle:['mb2', 'pl1', 'fs-m'],
+            selStyle:[],
             btnStyle:[],
             divStyle:[]
         }, 
@@ -110,7 +110,7 @@ export const headerForm = () => ({ // data table
                 dt_type:'input',
                 mark:{
                     dbfield:'wo_id',
-                    text:'wo_id'
+                    text:'VJSwo_id'
                 },
                 param:{
                     list: 'woList',
@@ -118,7 +118,7 @@ export const headerForm = () => ({ // data table
                 },
                 js:{
                     attr:'onchange',
-                    value:`getSplitValue(this, "part_", "desc_")`
+                    value:'getSplitValue(this,  "[data-row]", "data-cell", "part_", "desc_")' 
                 }
             },
             {
@@ -153,16 +153,16 @@ export const headerForm = () => ({ // data table
 })
 
 
-export const tableVJS = (data) => ({ // data table
-    target:'mainVJS', 
-    tblID: 'isiVJS', 
+export const tableVJS = (data, counter) => ({ // data table
+    target:`mainVJS${counter}`, 
+    tblID: `isiVJS${counter}`, 
     dbsrc: data, 
     tblStyle: 
         {
-            contStyle: ['m4'],
-            thdStyle:['flex-r', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'f-wht', 'p2'],
+            contStyle: ['mx4', 'mb2'],
+            thdStyle:['flex-r', 'fs-m', 'fw-blk', 'mb3', 'tl2', 'f-wht', 'p2'],
             thrStyle:['f-child'],
-            trowStyle:['flex-r', 'px2'],
+            trowStyle:['flex-r', 'px2', 'mb2'],
             tdtStyle:['f-child', 'mb1'],
             selStyle:['f-child', 'mb1'],
             btnStyle:[],
@@ -224,8 +224,8 @@ export const tableVJS = (data) => ({ // data table
                     disable: false
                 },
                 js:{
-                    attr:'',
-                    value:''
+                    attr:'onchange',
+                    value:'addDtTag(this, "[data-row]", "data-cell")'
                 }
             },
             {
@@ -241,8 +241,8 @@ export const tableVJS = (data) => ({ // data table
                     disable: false
                 },
                 js:{
-                    attr:'',
-                    value:''
+                    attr:'onchange',
+                    value:'addDtTag(this, "[data-row]", "data-cell")'
                 }
             },
             {

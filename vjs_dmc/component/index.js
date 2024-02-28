@@ -19,7 +19,8 @@ import {
 import { 
     header1,
     header2,
-    header3
+    header3,
+    header4
 } from './array/header.js';
 
 import { 
@@ -34,7 +35,10 @@ import {
     btnVjsEdit,
     btnVjsSbmt,
     dmcOk, 
-    dmcNg
+    dmcNg,
+    addVJS,
+    minVJS,
+    openVJS
 } from './array/btnArr.js';
 
 // html component folder
@@ -68,6 +72,10 @@ export {
     dmcNg,
     header1,
     header2,
-    header3
+    header3,
+    header4,
+    addVJS,
+    minVJS,
+    openVJS
 }
     

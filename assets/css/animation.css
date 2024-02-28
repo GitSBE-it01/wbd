@@ -128,6 +128,20 @@ svg
   margin: 0 1em 1.5em 2em;
   cursor: pointer;
 }
+
+.editBtn {
+  background-image:  url('../svg_file/edit/edit-pen-write-1-svgrepo-com.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20%;
+  width: 3vh;
+  height: 3vh;
+  border: none;
+  margin: 0 1em 0 2em;
+  cursor: pointer;
+}
+
 /*========================================================
 loading view
 ========================================================*/ 

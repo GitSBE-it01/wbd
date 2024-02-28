@@ -1,16 +1,18 @@
 export const btnDmcEdit = {
-    id:'dmcEdit',
+    id:'',
+    mark:'dmcEdit',
     type:'button', // submit or button
     text:'edit',
     classSty:['mx4'],
     js: {
         attr:'onclick',
-        value:'disabledBtn()'
+        value:`disabledBtn('[data-btn*= "dmcEdit"]', '[data-btn*="dmcInput"]')`
     }
 }
 
 export const btnDmcSbmt ={
     id:'dmcInput',
+    mark:'dmcInput',
     type:'button', // submit or button
     text:'submit',
     classSty:['mx4'],
@@ -22,6 +24,7 @@ export const btnDmcSbmt ={
 
 export const dmcOk = {
     id:'dmcDiv',
+    mark:'',
     type:'button', // submit or button
     text:'',
     classSty:['check'],
@@ -34,6 +37,7 @@ export const dmcOk = {
 export const dmcNg = 
     {
         id:'dmcDiv',
+        mark:'',
         type:'button', // submit or button
         text:'',
         classSty:['cross'],
@@ -43,25 +47,63 @@ export const dmcNg =
         }
     }
 
-export const btnVjsEdit = {
-    id:'vjsEdit',
+export const btnVjsEdit = (counter) => ({
+    id:``,
+    mark:`vjsEdit--${counter}`,
     type:'button', // submit or button
     text:'edit',
     classSty:['mx4'],
     js: {
         attr:'onclick',
-        value:'disabledBtn()'
+        value:`disabledBtn('[data-btn*="vjsEdit"]', '[data-btn*="vjsInput"]')`
     }
-}
+})
 
-export const btnVjsSbmt ={
-    id:'vjsInput',
+export const btnVjsSbmt =(counter) => ({
+    id:'',
+    mark:`vjsInput--${counter}`,
     type:'button', // submit or button
     text:'submit',
     classSty:['mx4'],
     js: {
         attr:'',
+        value:``
+    }
+})
+    
+export const minVJS = (counter) => ({
+    id:'',
+    mark:`minVJS--${counter}`,
+    type:'button', // submit or button
+    text:'',
+    classSty:['button_minus'],
+    js: {
+        attr:'onclick',
+        value:`deleteChild("mainVJS${counter}")`
+    }
+})
+    
+export const addVJS =() => ({
+    id:'',
+    mark:`addVJS`,
+    type:'button', // submit or button
+    text:'',
+    classSty:['button_plus'],
+    js: {
+        attr:'',
         value:''
     }
-}
+})
+
+export const openVJS = (counter) => ({
+    id:'',
+    mark:`openVJS--${counter}`,
+    type:'button', // submit or button
+    text:'',
+    classSty:['editBtn'],
+    js: {
+        attr:'onclick',
+        value:`opnHide("mainVJS${counter}")`
+    }
+})
     
