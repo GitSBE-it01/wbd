@@ -22,3 +22,28 @@ export const searchBarMain = {// detail search
         }
     }
 }
+
+export const searchBarKat = {// detail search
+    target:'main',
+    divStyle:['bl7', 'p2'],
+    arrInp:
+    {
+        id:'assetInput',
+        type:'text', // text or hidden
+        placeholder:'-choose-',
+        list:'all_asset',
+        classSty:['mx2']
+    },
+    arrBtn: 
+    {
+        id:'sbmtAsset',
+        marK:'',
+        type:'button', // submit or button
+        text: 'submit',
+        classSty:['mx1'],
+        js: {
+            attr:'',
+            value:''
+        }
+    }
+}

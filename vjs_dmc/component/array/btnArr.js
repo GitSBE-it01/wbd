@@ -55,7 +55,7 @@ export const btnVjsEdit = (counter) => ({
     classSty:['mx4'],
     js: {
         attr:'onclick',
-        value:`disabledBtn('[data-btn*="vjsEdit"]', '[data-btn*="vjsInput"]')`
+        value:`disabledBtn('[data-btn="vjsEdit--${counter}"]', '[data-btn="vjsInput--${counter}"]')`
     }
 })
 
@@ -79,7 +79,7 @@ export const minVJS = (counter) => ({
     classSty:['button_minus'],
     js: {
         attr:'onclick',
-        value:`deleteChild("mainVJS${counter}")`
+        value:`deleteChild("mainVJS${counter}", "hdVJS${counter}")`
     }
 })
     
@@ -107,3 +107,15 @@ export const openVJS = (counter) => ({
     }
 })
     
+
+export const selectCat = (text) => ({
+    id:'',
+    mark:text,
+    type:'button', // submit or button
+    text:text,
+    classSty:['btnText'],
+    js: {
+        attr:'',
+        value:``
+    }
+})

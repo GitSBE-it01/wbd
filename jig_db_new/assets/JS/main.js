@@ -79,6 +79,7 @@ function addTableInput(target, tdClass, arr) {
     inputElement.id= arr[i].inputID;
     inputElement.placeholder= arr[i].textHolder;
     inputElement.setAttribute ('list', arr[i].listName);
+    inputElement.setAttribute ('data-cell', arr[i].dcell);
     dataTable.appendChild(inputElement);
     rowTable.appendChild(dataTable);
   }

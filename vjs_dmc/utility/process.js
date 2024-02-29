@@ -86,4 +86,26 @@ export function delChild(target) {
     alert('there is nothing to delete');
 }
 
+/*-------------------------
+remove container 
+-------------------------*/
+export function rmvNode(...target) {
+    target.forEach(tgt=> {
+        if (document.getElementById(tgt)) {
+            document.getElementById(tgt).remove();
+        }
+    })
+    return;
+}
 
+/*-------------------------
+cache to local storage
+-------------------------*/
+export function test2(...target) {
+    target.forEach(tgt=> {
+        if (document.getElementById(tgt)) {
+            document.getElementById(tgt).remove();
+        }
+    })
+    return;
+}

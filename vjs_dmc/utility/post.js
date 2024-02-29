@@ -15,9 +15,11 @@ const opClHide = () => {
     return btnOpen.classList.add('displayHide');
 }
 
-const deleteChild = (target) => {
-    const container = document.getElementById(target);
-    container.remove();
+const deleteChild = (...target) => {
+    target.forEach(tgt => {
+        const container = document.getElementById(tgt);
+        container.remove();
+    })
 }
 
 const opnHide = (target) => {
@@ -38,3 +40,6 @@ const vjsDtInput = (target) => {
     return cont.classList.add('displayHide');
 }
 
+const alerting = (alt) => {
+    alert(alt);
+}

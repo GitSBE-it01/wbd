@@ -43,7 +43,8 @@ require_once "config.php";
         header1,
         header2,
         header3,
-        woList
+        woList,
+        arrVJSInp
     } from './component/index.js';
     import {
         inpDMCProcess, 
@@ -52,17 +53,18 @@ require_once "config.php";
         currentDate,
         initVJS,
         vjs_input,
-        wo_list
+        wo_list,
+        rmvNode
     } from './utility/index.js';
     
     // start up web page
     const root = document.getElementById('root');
     await createNav(navigation);
     activeLink('navID', ['f-or7']);
-    await createDatalist(assetList);
-    await createSearch(searchBarMain);
     const woDT = await wo_list.fetchDataFilter({wo_status:'R'});
     await createDatalist(woList(woDT));
+    await createDatalist(assetList);
+    await createSearch(searchBarMain);
     root.removeChild(document.querySelector('.loading'));
     
 
@@ -71,15 +73,7 @@ require_once "config.php";
     sbmtBtn.addEventListener('click', async function(event) {
         try{
             localStorage.clear();
-            if (document.getElementById('dmcDivAll')) {
-                    document.getElementById('dmcDivAll').remove();
-                }
-            if (document.getElementById('dmcDiv')) {
-                    document.getElementById('dmcDiv').remove();
-                }
-            if (document.getElementById('vjsDivAll')) {
-                    document.getElementById('vjsDivAll').remove();
-                }
+            await rmvNode('dmcDivAll','dmcDiv', 'vjsDivAll');
             const target = document.getElementById('main');
             const div = document.createElement('div');
             div.id = 'dmcDivAll';
@@ -146,6 +140,26 @@ require_once "config.php";
 
             if (JSON.parse(localStorage.getItem('vjsData')).length > 0) {
                 await initVJS(JSON.parse(localStorage.getItem('vjsData')));
+                const vjEdit = document.querySelectorAll('[data-btn*="vjsEdit"]');
+                vjEdit.forEach(ve => {
+                    ve.disabled = false;
+                })
+                const minVJS = document.querySelectorAll('[data-btn*="minVJS"]');
+                minVJS.forEach(mi => {
+                    mi.setAttribute('onclick', 'alerting("data cannot be deleted")');
+                })
+                const vjInpt = document.querySelectorAll('[data-btn*="vjsInput"]');
+                vjInpt.forEach(vi => {
+                    vi.disabled = true;
+                })
+                const cek1 = document.querySelectorAll('[data-cell*="VJSwo_"]');
+                const cek2 = document.querySelectorAll('[data-cell*="desc_"]');
+                const cek3 = document.querySelectorAll('[data-cell*="part_"]');
+                for (let i=0; i<cek1.length; i++) {
+                    const rslt = woDT.filter((obj1) => obj1.wo_lot === cek1[i].value)
+                    cek2[i].textContent = rslt[0].wo_part;
+                    cek3[i].textContent = rslt[0].pt_desc1;
+                }
             } else {
                 await initVJS(JSON.parse(localStorage.getItem('vjs')));
             }
@@ -224,6 +238,26 @@ require_once "config.php";
 
                     if (JSON.parse(localStorage.getItem('vjsData')).length > 0) {
                         await initVJS(JSON.parse(localStorage.getItem('vjsData')));
+                        const vjEdit = document.querySelectorAll('[data-btn*="vjsEdit"]');
+                        vjEdit.forEach(ve => {
+                            ve.disabled = false;
+                        })
+                        const minVJS = document.querySelectorAll('[data-btn*="minVJS"]');
+                        minVJS.forEach(mi => {
+                            mi.setAttribute('onclick', 'alerting("data cannot be deleted")');
+                        })
+                        const vjInpt = document.querySelectorAll('[data-btn*="vjsInput"]');
+                        vjInpt.forEach(vi => {
+                            vi.disabled = true;
+                        })
+                        const cek1 = document.querySelectorAll('[data-cell*="VJSwo_"]');
+                        const cek2 = document.querySelectorAll('[data-cell*="desc_"]');
+                        const cek3 = document.querySelectorAll('[data-cell*="part_"]');
+                        for (let i=0; i<cek1.length; i++) {
+                            const rslt = woDT.filter((obj1) => obj1.wo_lot === cek1[i].value)
+                            cek2[i].textContent = rslt[0].wo_part;
+                            cek3[i].textContent = rslt[0].pt_desc1;
+                        }
                     } else {
                         await initVJS(JSON.parse(localStorage.getItem('vjs')));
                     }
@@ -246,17 +280,7 @@ require_once "config.php";
                     const vjsDt = JSON.stringify(vjs);
                     localStorage.setItem('vjs', vjsDt);
                 }
-                if (!localStorage.getItem('vjsData')) {
-                    const vjsData = await vjs_input.fetchDataFilter({assetno: valueInp[0], input_date:currentDate()});
-                    const vjsDt2 = JSON.stringify(vjsData);
-                    localStorage.setItem('vjsData', vjsDt2);
-                } 
-
-                if (JSON.parse(localStorage.getItem('vjsData')).length > 0) {
-                    await initVJS(JSON.parse(localStorage.getItem('vjsData')));
-                } else {
-                    await initVJS(JSON.parse(localStorage.getItem('vjs')));
-                }
+                await initVJS(JSON.parse(localStorage.getItem('vjs')));
             } catch(error) {
                 console.log(error);
             }
@@ -270,28 +294,13 @@ require_once "config.php";
         if(event.target.getAttribute('data-btn')) {
             try{
                 if (event.target.getAttribute('data-btn').includes('vjsInput')) {
-                    const arrVJSInp = {
-                        update: {
-                            assetno:[],
-                            assetkat:[],
-                            inspection:[],
-                            std:[],
-                            unit:[],
-                            input_value:[],
-                            input_date:[],
-                            wo_id:[],
-                            dmc_vjs:[],
-                            remark:[]
-                        },
-                        insert: {
-                            id:[]
-                        }
-                    }
+                    const arrDt = arrVJSInp();
+                    console.log(arrDt);
                     const val = event.target.getAttribute('data-btn');
                     const valSplit = val.split("--");
-                    const val2 = document.querySelector(`[data-btn=${val}]`);
+                    const val2 = document.querySelector(`[data-btn="vjsInput--${valSplit[1]}"]`);
                     val2.disabled = true;
-                    const edtOpen = document.querySelector(`[data-btn=vjsEdit--${valSplit[1]}`);
+                    const edtOpen = document.querySelector(`[data-btn="vjsEdit--${valSplit[1]}"]`);
                     edtOpen.disabled = false;
                     const cont1 = document.getElementById(`dtVJS${valSplit[1]}`);
                     const cont2 = document.getElementById(`isiVJS${valSplit[1]}`);
@@ -311,31 +320,56 @@ require_once "config.php";
                             const v = dt.getAttribute('data-cell');
                             const splitV = v.split("___");
                             const key = splitV[0];
-                            if(arrVJSInp['update'][`${key}`]) {
+                            if(arrDt['update'][`${key}`]) {
                                 if(dt.tagName === 'INPUT') {
-                                    arrVJSInp['update'][`${key}`].push(dt.value)
+                                    arrDt['update'][`${key}`].push(dt.value)
                                 } else {
-                                    arrVJSInp['update'][`${key}`].push(dt.textContent);
+                                    arrDt['update'][`${key}`].push(dt.textContent);
                                 }
                             }
-                            if(arrVJSInp['insert'][`${key}`]) {
-                                    arrVJSInp['insert'][`${key}`].push(dt.value)
+                            if(arrDt['filter'][`${key}`]) {
+                                if(dt.tagName === 'INPUT') {
+                                    arrDt['filter'][`${key}`].push(dt.value)
+                                } else {
+                                    arrDt['filter'][`${key}`].push(dt.textContent)
                                 }
+                            }
                         })
-                        arrVJSInp.update.wo_id.push(id);
-                        arrVJSInp.update.assetno.push(valueInp[0]);
-                        arrVJSInp.update.assetkat.push(valueInp[1]);
-                        arrVJSInp.update.input_date.push(currentDate());
-                        arrVJSInp.update.dmc_vjs.push(`VJS${valSplit[1]}`);
-                        arrVJSInp.insert.id.push()
+                        arrDt.update.wo_id.push(id);
+                        arrDt.update.assetno.push(valueInp[0]);
+                        arrDt.update.assetkat.push(valueInp[1]);
+                        arrDt.update.input_date.push(currentDate());
+                        arrDt.update.dmc_vjs.push(`VJS${valSplit[1]}`);
                     })
-                    const result = await vjs_input.insertData(arrVJSInp.update);
-                    if (!result.includes('fail')) {
-                        alert('data successfully inserted');
+
+                    if (arrDt.filter.id[0] !== 'undefined') {
+                        const result = await vjs_input.updateData(arrDt);
+                        if (!result.includes('fail')) {
+                            alert('data successfully updated');
+                            const minVJS = document.querySelector(`[data-btn="minVJS--${valSplit[1]}"]`);
+                            minVJS.setAttribute('onclick', 'alerting("data cannot be deleted")');
+                            const val3 = document.querySelector(`[data-div="mainVJS--${valSplit[1]}"]`);
+                            val3.classList.add('displayHide');
+                        } else {
+                            alert('data is not updated');
+                            val2.disabled = false;
+                            edtOpen.disabled = true;
+                        }
                     } else {
-                        alert('data is not inserted');
+                        const result = await vjs_input.insertData(arrDt.update);
+                        if (!result.includes('fail')) {
+                            alert('data successfully inserted');
+                            const minVJS = document.querySelector(`[data-btn="minVJS--${valSplit[1]}"]`);
+                            minVJS.setAttribute('onclick', 'alerting("data cannot be deleted")');
+                            const val3 = document.querySelector(`[data-div="mainVJS--${valSplit[1]}"]`);
+                            val3.classList.add('displayHide');
+                        } else {
+                            alert('data is not inserted');
+                            val2.disabled = false;
+                            edtOpen.disabled = true;
+                        }
                     }
-                }
+            }
             } catch(error) {
                 console.log(error);
             }

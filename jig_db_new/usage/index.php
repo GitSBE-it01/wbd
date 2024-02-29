@@ -86,7 +86,7 @@ require_once "../config.php";
     data section
     ============================================================================
     */
-    import {ng_daily, jig_function_query} from '../class.js';
+    import {ng_daily, jig_function_query, jig_usage} from '../class.js';
     import {currentDate} from '../process.js';
 
     const start = performance.now();
@@ -180,6 +180,10 @@ require_once "../config.php";
         inputData.qty.push(rlt.use);
     })
     console.log(inputData);
+
+    const inputDt = await jig_usage.insertData(inputData);
+    console.log(inputDt);
+
     const end = performance.now();
     const totalTime = end - start;
     console.log('total time = ' + totalTime);

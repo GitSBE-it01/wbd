@@ -3,15 +3,40 @@ import { tableVJS, createTable, createHeader, createBtn, header4, openVJS, btnVj
 
 
 export const initVJS = async(data) =>{
-    const cekFirst = document.querySelectorAll('[data-div*="mainVJS"]');
     let cekResult = [];
+    if(data[0].dmc_vjs.substring(3) !== '') {
+        data.forEach(dt=>{
+            const val = dt.dmc_vjs.substring(3);
+            if(!cekResult.includes(val)) {
+                cekResult.push(val);
+            }
+        })
+    }
+
+    const vjsDivAll = document.getElementById('vjsDivAll');
+    if(cekResult.length>0) {
+        for (let i = 0; i<cekResult.length; i++) {
+            const mainVJS = document.createElement('div');
+            mainVJS.id = `mainVJS${cekResult[i]}`;
+            mainVJS.setAttribute('data-div',`mainVJS--${cekResult[i]}`);
+            mainVJS.classList.add('tl7', 'p2');
+            await createHeader(header4(`vjsDivAll`, cekResult[i]));
+            vjsDivAll.appendChild(mainVJS);
+            const docHD = document.getElementById(`hdVJS${cekResult[i]}`);
+            docHD.appendChild(await createBtn(openVJS(cekResult[i])));
+            const dataFix = data.filter(dt=> dt.dmc_vjs === `VJS${cekResult[i]}`);
+            await formVJS(dataFix, cekResult[i]);
+        }
+        return;
+    }
+
+    const cekFirst = document.querySelectorAll('[data-div*="mainVJS"]');
     cekFirst.forEach(dt => {
         const value = dt.getAttribute('data-div');
-        const splt = value.split("--");    
-        cekResult.push(splt[1]);
+        const splt = value.split("--");
+        if(!cekResult.includes(splt[1])) {cekResult.push(splt[1]);}
     })
     let counter = cekResult.length + 1;
-    const vjsDivAll = document.getElementById('vjsDivAll');
     const mainVJS = document.createElement('div');
     mainVJS.id = `mainVJS${counter}`;
     mainVJS.setAttribute('data-div',`mainVJS--${counter}`);
@@ -26,7 +51,7 @@ export const initVJS = async(data) =>{
 }
 
 const formVJS = async(data, counter) => {
-    await createTable(headerForm(counter));
+    await createTable(headerForm([data[0]], counter));
     await createTable(tableVJS(data, counter));
     const hidDiv = vjsDivAll.querySelectorAll('.fullwidth');
     hidDiv.forEach(hid=>{

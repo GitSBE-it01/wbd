@@ -87,10 +87,10 @@ export const tableDMC = (data) => ({ // data table
         ]
 })
 
-export const headerForm = (counter) => ({ // data table
+export const headerForm = (data,counter) => ({ // data table
     target:`mainVJS${counter}`, 
     tblID: `dtVJS${counter}`, 
-    dbsrc: [], 
+    dbsrc: data, 
     tblStyle: 
         {
             contStyle: ['mx4', 'flex-r', 'floatLeft'],
@@ -106,7 +106,7 @@ export const headerForm = (counter) => ({ // data table
         [
             {
                 header: `ID`,
-                db_field:'',
+                db_field:'wo_id',
                 dt_type:'input',
                 mark:{
                     dbfield:'wo_id',
@@ -118,7 +118,7 @@ export const headerForm = (counter) => ({ // data table
                 },
                 js:{
                     attr:'onchange',
-                    value:'getSplitValue(this,  "[data-row]", "data-cell", "part_", "desc_")' 
+                    value:`getSplitValue(this, "[data-row]", "data-cell", "mainVJS${counter}", "part_", "desc_")`
                 }
             },
             {
@@ -126,7 +126,7 @@ export const headerForm = (counter) => ({ // data table
                 db_field:'',
                 dt_type:'text',
                 mark:{
-                    dbfield:'wo_part',
+                    dbfield:'assetno',
                     text:'part'
                 },
                 param:'',
@@ -140,7 +140,7 @@ export const headerForm = (counter) => ({ // data table
                 db_field:'',
                 dt_type:'text',
                 mark:{
-                    dbfield:'wo_part',
+                    dbfield:'assetno',
                     text:'desc'
                 },
                 param:'',
@@ -149,6 +149,20 @@ export const headerForm = (counter) => ({ // data table
                     value:''
                 }
             },
+            {
+                header:'',
+                db_field:'dmc_vjs',
+                dt_type:'hidden',
+                mark:{
+                    dbfield:'dmc_vjs',
+                    text:'count'
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            }
         ]
 })
 
@@ -261,6 +275,7 @@ export const tableVJS = (data, counter) => ({ // data table
             }
         ]
 })
+
 
 /*
 contoh lengkap ============================================

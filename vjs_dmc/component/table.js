@@ -43,10 +43,8 @@ const cellTxt = (src,data, tblStyle) => {
         });
     }
     div.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
-    div.textContent = src[data.db_field];
-    if (data.js.attr !=='') {
-        div.setAttribute(data.js.attr, data.js.value);
-    }
+    if(src[data.db_field] !== undefined) {div.textContent = src[data.db_field];}
+    if(data.js.attr !=='') {div.setAttribute(data.js.attr, data.js.value);}
     return div;
 }
 
@@ -141,6 +139,7 @@ const cellInp = (src,tblData, tblStyle) => {
     }
     inp.setAttribute('data-cell', tblData.mark.text + "___" +src[tblData.mark.dbfield]);
     inp.id = tblData.db_field +"//" + tblData.mark.text + "___" +src[tblData.mark.dbfield];
+    if (src[tblData.db_field] !== undefined) {inp.value = src[tblData.db_field];}
     inp.setAttribute('type', 'text');
     inp.setAttribute('autocomplete', 'off');
     inp.setAttribute('list', tblData.param.list);

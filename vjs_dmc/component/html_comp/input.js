@@ -19,7 +19,7 @@ export const createInp = async(arr) => {
     if (arr.type === 'text'){
         input.setAttribute('placeholder', arr.placeholder)
         input.setAttribute('list', arr.list);
-        input.setAttribute('autocomplete', false);
+        input.setAttribute('autocomplete', "off");
     }
     return input;
 }

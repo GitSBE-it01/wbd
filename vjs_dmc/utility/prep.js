@@ -13,10 +13,12 @@ const addDtTag= (dt, tag, srcTag) =>{
 }
 
 
-const getSplitValue = (data, tag, srcTag, ...val) => {
+const getSplitValue = (data, tag, srcTag, cont, ...val) => {
     const split = data.value.split(" -- ");
+    const container = document.getElementById(cont);
     for (let i=0; i<val.length; i++) {
-        const target = document.querySelector(`[data-cell*="${val[i]}"]`);
+        console.log(val[i]);
+        const target = container.querySelector(`[data-cell*="${val[i]}"]`);
         target.textContent = split[i+1];
     }
     addDtTag(data, tag, srcTag);

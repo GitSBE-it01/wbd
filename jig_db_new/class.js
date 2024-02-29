@@ -176,6 +176,7 @@ class Data {
 export const access = new Data('access');
 export const user = new Data('user');
 export const list_location = new Data('list_location');
+export const list_mtnc = new Data('list_mtnc_query');
 export const jig_master_query = new Data('jig_master_query');
 export const log_master_query = new Data('log_master_query');
 export const jig_location_query = new Data('jig_location_query');
@@ -184,3 +185,5 @@ export const jig_function_query = new Data('jig_function_query');
 export const log_function_query = new Data('log_function_query');
 export const item_detail_query = new Data('item_detail_query');
 export const ng_daily = new Data('ng_daily_query');
+export const jig_usage = new Data('jig_usage_query');
+export const asset = new Data('asset');

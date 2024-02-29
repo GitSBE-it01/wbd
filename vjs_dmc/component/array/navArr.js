@@ -19,7 +19,7 @@ export const navigation = { //nav list
                 linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
             },
             {
-                link: '#',
+                link: 'add_kategori.php',
                 type: 'txt', // if btn then create a button, if txt then create span
                 text: 'Kategori',
                 divStyle:['ml5','mt3', 'scale-120'],

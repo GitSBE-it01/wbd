@@ -1,4 +1,4 @@
-import {loading, createNav, activeLink} from './load.js';
+import {loading, createNav, activeLink, columnSprt} from './load.js';
 import {createTable} from './table.js';
 import {createSearch} from './searchBar.js';
 
@@ -8,12 +8,22 @@ import {
 } from './array/navArr.js';
 
 import {
-    searchBarMain
+    arrVJSInp
+} from './array/dataArr.js';
+
+import {
+    arrKat
+} from './array/layout.js';
+
+import {
+    searchBarMain,
+    searchBarKat
 } from './array/searchArr.js';
 
 import { 
     assetList,
-    woList
+    woList,
+    allAsset
 } from './array/dtListArr.js';
 
 import { 
@@ -38,7 +48,8 @@ import {
     dmcNg,
     addVJS,
     minVJS,
-    openVJS
+    openVJS,
+    selectCat
 } from './array/btnArr.js';
 
 // html component folder
@@ -76,6 +87,12 @@ export {
     header4,
     addVJS,
     minVJS,
-    openVJS
+    openVJS,
+    allAsset,
+    searchBarKat,
+    arrVJSInp,
+    arrKat,
+    columnSprt,
+    selectCat
 }
     

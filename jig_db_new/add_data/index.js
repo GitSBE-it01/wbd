@@ -1,3 +1,4 @@
+/*
 const nameInput = 'preload';
 const dbName = 'jig_database';
 const storeName = 'dataStore_db';
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         let result3 = await fetchedDataIndexDB(dbName, storeName, storageKey3, parameter3);
         let result4 = await fetchedDataIndexDB(dbName, storeName, storageKey4, parameter4);
         let result8 = await fetchedDataIndexDB(dbName, storeName, storageKey8, parameter8);
+        console.log({result1,result3,result4,result8});
         const populate1 = document.getElementById('suggestion2');//type speaker
         const populate2 = document.getElementById('suggest3'); //lokasi
         const populate3 = document.getElementById('suggest'); // item jig
@@ -81,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             populate4.appendChild(option);
         }
     }
-})
+})*/
 
 document.addEventListener("keyup", function(event) {
     if (event.target.getAttribute('id') === 'qty0') {

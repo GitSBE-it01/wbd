@@ -1,7 +1,7 @@
 <?PHP
 include_once "../config.php";
 
-
+/*
 function addJigData() {
     $conn = connectToDatabase();
     $conn->autocommit(false);
@@ -254,7 +254,7 @@ function addJigData() {
     // Close the database connection
     $conn->close();
 }
-
+*/
 
 function addTypeData() {
     $conn = connectToDatabase();
@@ -415,6 +415,7 @@ function addMtncData() {
 }
 
 // Call the function to process the form submission
+/*
 if (isset($_POST['input_jig'])) {
     addJigData();
 } elseif (isset($_POST['input_type'])) {
@@ -425,7 +426,7 @@ if (isset($_POST['input_jig'])) {
     addMtncData();
 } else {
     
-}
+}*/
 
 ?>
 
