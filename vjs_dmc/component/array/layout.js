@@ -4,11 +4,11 @@ export const arrKat = {
     col:[
         {
             id:'smallSide',
-            style:['flex-c','cl3', 'sl6']
+            style:['flex-c','cl2', 'sl6']
         },
         {
             id:'bigSide',
-            style:['cl9', 'sl9']
+            style:['cl10', 'sl9', 'flex-c']
         }
     ]
 }

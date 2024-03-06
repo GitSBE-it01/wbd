@@ -47,3 +47,28 @@ export const searchBarKat = {// detail search
         }
     }
 }
+
+export const inpNew = (data) =>({// detail search
+    target:'smallSide',
+    divStyle:['flex-c','bl8', 'p2'],
+    arrInp:
+    {
+        id:'newCat',
+        type:'text', // text or hidden
+        placeholder:'new category',
+        list:data,
+        classSty:['mx2']
+    },
+    arrBtn: 
+    {
+        id:'sbmtCat',
+        marK:'',
+        type:'button', // submit or button
+        text: 'add',
+        classSty:['mx2'],
+        js: {
+            attr:'',
+            value:''
+        }
+    }
+})

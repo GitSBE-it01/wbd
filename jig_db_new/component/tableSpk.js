@@ -32,17 +32,19 @@ export const dataSpk = async () => {
                 }
             });
         const summedData = Array.from(typeMap.values());
+        console.log(summedData);
         const src3 = await jig_function_query.getData();
         const src4 = await item_detail_query.getData();
         const data = src3.map((item1) => {
             const matchedObj = summedData.find((item2) => item2.item_jig === item1.item_jig);
+            console.log(matchedObj);
             const matchedObj2 = src1.find((item3) => item3.item_jig === item1.item_jig);
             const matchedObj3 = src4.find((item4) => item4.pt_part === item1.item_type);
             const qtyOH =
                 role.value === "admin" || role.value === "superuser"
                 ? matchedObj?.qty || 0
                 : Math.floor((matchedObj?.qty || 0) * (100 - (matchedObj?.toleransi || 0)) / 100);
-        
+            console.log(qtyOH);
             return {
                 item_jig: item1.item_jig,
                 item_type: item1?.item_type || "",

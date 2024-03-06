@@ -127,8 +127,6 @@ function deleteValue(target, input, arr) {
     inputID.innerText = arr[1].button;
   }
   
-  console.log(targetID.value);
-  console.log(inputID.innerText);
 }
 
 /*==============================================================================================

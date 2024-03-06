@@ -102,6 +102,9 @@ const cellBtn = (src,data, tblStyle) => {
     btn.id = data.db_field + data.mark.text + "___" +src[data.mark.dbfield];
     btn.textContent = data.param;
     btn.setAttribute('type','button');
+    if (data.js.attr !=='') {
+        btn.setAttribute(data.js.attr, data.js.value);
+    }
     div.appendChild(btn);
     return div;
 }
@@ -143,7 +146,7 @@ const cellInp = (src,tblData, tblStyle) => {
     inp.setAttribute('type', 'text');
     inp.setAttribute('autocomplete', 'off');
     inp.setAttribute('list', tblData.param.list);
-    inp.setAttribute('disable', tblData.param.disable);
+    inp.disabled = tblData.param.disable;
     if (tblData.js.attr !=='') {
         inp.setAttribute(tblData.js.attr, tblData.js.value);
     }

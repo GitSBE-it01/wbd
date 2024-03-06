@@ -43,3 +43,19 @@ const vjsDtInput = (target) => {
 const alerting = (alt) => {
     alert(alt);
 }
+
+const listInsInput = (target) => {
+    const cont = document.getElementById(target);
+    if (cont.classList.contains('displayHide')) {
+        cont.classList.remove('displayHide');
+        return;
+    }
+    return cont.classList.add('displayHide');
+}
+
+const delNode = (a, target) => {
+    const test = a.closest(target);
+    test.remove();
+    return;
+}
+

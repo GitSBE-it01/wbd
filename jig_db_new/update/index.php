@@ -48,9 +48,7 @@ require_once "../config.php";
     // sidebar menu dan penanda link active di sidebar
     import { createSidebar, activeLink } from '../component/sidebar.js';
     createSidebar('side', 'sl1');
-    document.addEventListener("DOMContentLoaded", function() {
-        activeLink('a.link');
-    });
+    activeLink('[data-nav]');
     const title = document.createElement('div');
     title.textContent = "Update Data";
     title.classList.add('navCard', 'sl3', 'fc-w', 'fs-xl', 'pt1', 'pl3', 'fw-blk');

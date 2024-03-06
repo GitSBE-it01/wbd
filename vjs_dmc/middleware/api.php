@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php";
+require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "queryList.php";
 require_once "process.php";
 
@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $db = 'dbvjs';
     $data = json_decode(file_get_contents('php://input'), true);
     $param = $data['parameters']; 
     $action = $data['action']; 
@@ -25,16 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filter = isset($data['filter']) ? $data['filter']:''; 
     $query = getArrayList($codeList, $param); 
     if ($action === 'getData') {
-        $result = getData($query);
+        $result = getData($db, $query);
     } elseif ($action === 'fetchDataFilter') {
-        $result = fetchDataFilter($query, $filter);
+        $result = fetchDataFilter($db, $query, $filter);
     } elseif ($action === 'insertData') {
-        $result = insertData($query, $insertData);
-        // $result = array($insertData);
+        $result = insertData($db, $query, $insertData);
     } elseif ($action === 'updateData') {
-        $result = updateData($query, $updateData, $updateData2);
+        $result = updateData($db, $query, $updateData, $updateData2);
     } elseif ($action === 'deleteData') {
-        $result = deleteData($query, $delData, $delData2);
+        $result = deleteData($db, $query, $delData, $delData2);
     }
     header("Cache-Control: public, max-age=3600");
     header("Content-Type: application/json");

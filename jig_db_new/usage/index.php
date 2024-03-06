@@ -39,154 +39,100 @@ require_once "../config.php";
     init('root', 'side', 'sl9', 'sl1');
     // role
     const role = document.getElementById('role');
-
+    
     /*
     ============================================================================
     sidebar
     ============================================================================
     */
-    // sidebar menu dan penanda link active di sidebar
+   // sidebar menu dan penanda link active di sidebar
     import { createSidebar, activeLink } from '../component/sidebar.js';
     createSidebar('side', 'sl1');
-    document.addEventListener("DOMContentLoaded", function() {
-        activeLink('a.link');
-    });
+    activeLink('[data-nav]');
+    const main = document.getElementById('main');
     const title = document.createElement('div');
     title.textContent = "Usage History";
     title.classList.add('navCard', 'sl3', 'fc-w', 'fs-xl', 'pt1', 'pl3', 'fw-blk');
     main.appendChild(title);
-    /*
-    ============================================================================
-    navbar
-    ============================================================================
-    */
-    // navbar di main container utk unhide div dari jig database dan speaker database
-    import { createNavbar } from '../component/navbar.js';
-    main.appendChild(createNavbar(`
-    <div class='navCard navbar sl4'>
-        <div class='navli'>
-            <button type="button" id="btnSec1" data-switch="divStock">
-                Update Stock
-            </button>
-        </div>
-        <div class='navli'>
-            <button type="button" id="btnSec2" data-switch="divJig">
-                Update Jig Data
-            </button>
-        </div>
-        <div class='navli'>
-            <button type="button" id="btnSec3" data-switch="divType">
-                Update Type List
-            </button>
-        </div>
-    </div>
-    `));
+
     /*
     ============================================================================
     data section
     ============================================================================
     */
-    import {ng_daily, jig_function_query, jig_usage} from '../class.js';
-    import {currentDate} from '../process.js';
+    import {jig_usage} from '../class.js';
+    import {createTable, tableUsage} from './table.js';
+    import {createSearch, searchBarMain} from './searchBar.js';
+    import {createBtn} from './button.js';
 
-    const start = performance.now();
-    const data = await ng_daily.fetchDataFilter({op_wkctr:'TWD'});
-    const mapDt = new Map();
-    data.forEach(dt => {     
-        const year = dt.op_date.split('-');
-        if (year[0] === '2024') {
-            const filter = dt.op_part+"///" + dt.op_wo_op;
-            if (mapDt.has(filter)) {
-                const target = mapDt.get(filter);
-                target.qty_run += parseInt(dt.op_qty_run);
-                target.qty_ng += parseInt(dt.op_qty_ng);
-            } else {
-                const objDt = {
-                    wc: dt.op_wkctr,
-                    id: dt.op_wo_lot,
-                    oprt: dt.op_wo_op,
-                    itm_nbr: dt.op_part,
-                    type: dt.op_type,
-                    op_desc: dt.op_wr_desc,
-                    qty_run: parseInt(dt.op_qty_run),
-                    qty_ng: parseInt(dt.op_qty_ng),
-                    cat: dt.op_categ
-                };
-                mapDt.set(filter, objDt);
-            }}
-        });
-    const sumDt = Array.from(mapDt.values());
-    const sumDt2 = new Map();
-    sumDt.forEach(sd=>{ 
-        if(sumDt2.has(sd.itm_nbr)) {
-            const target = sumDt2.get(sd.itm_nbr);
-            if (target.qty_run < sd.qty_run) {
-                target.qty_run = sd.qty_run;
-            }
-        } else {
-            const newDt = {
-                itm_nbr: sd.itm_nbr,
-                qty_run: parseInt(sd.qty_run)
-            }
-            sumDt2.set(sd.itm_nbr,newDt);
+    const data = await jig_usage.getData();
+    for (let i=0; i<data.length; i++) {
+        const fltr = data[i]['item_jig'] + " -- " + data[i]['tr_date'] + " -- " + data[i]['qty'];
+        data[i]['filter']=fltr;
+    }
+    const sortDtFilt = data.sort((a, b) => {
+        const nameComparison = a.item_jig.localeCompare(b.item_jig);
+        if (nameComparison !== 0) {
+            return nameComparison;
         }
+        return b.tr_date - a.tr_date;
     })
-    const dtFix = Array.from(sumDt2.values());
-    const jig_use = await jig_function_query.getData();
-    const join = jig_use.map((obj1) => {
-        const match = dtFix.find((obj2)=> obj2.itm_nbr === obj1.item_type);
-        return {
-            ...obj1,
-            use: match?.qty_run ?? 0
-        }
-    });
-    const filterCek = [];
-    const lastCheck = new Map();
-    join.forEach(jn=>{
-        const filter = jn.item_jig + jn.item_type;
-        if (jn.use !== 0) {
-            jn.fltr = filter;
-            filterCek.push(jn);
-        } 
-    })
-    filterCek.forEach(ft => {
-        if (!lastCheck.has(ft.fltr)){
-            const inp = {
-                item_jig: ft.item_jig,
-                use: ft.use
-            }
-            lastCheck.set(ft.fltr, inp);
-        }
-    })
-    const sumFix = new Map();
-    lastCheck.forEach(lc=> {
-        if(sumFix.has(lc.item_jig)) {
-            const target = sumFix.get(lc.item_jig);
-            target.use += lc.use;
-        } else {
-            const newDt = {
-                item_jig: lc.item_jig,
-                use: lc.use
-            }
-            sumFix.set(lc.item_jig, newDt);
-        }
-    })
-    const result = Array.from(sumFix.values());
-    console.log(result);
-    const inputData = {item_jig:[], tr_date: [], qty:[]};
-    result.forEach(rlt => {
-        inputData.item_jig.push(rlt.item_jig.trim());
-        inputData.tr_date.push(currentDate());
-        inputData.qty.push(rlt.use);
-    })
-    console.log(inputData);
+    let finalData = sortDtFilt;
 
-    const inputDt = await jig_usage.insertData(inputData);
-    console.log(inputDt);
+    main.appendChild(loading('load','loading2'));
+    await createSearch(searchBarMain);
+    const searchDiv = document.getElementById('searchDiv');
+    searchDiv.appendChild(await createBtn({
+        id:'usageHist',
+        mark:'usageHist',
+        type:'button', // submit or button
+        text:'dl excel',
+        classSty:['mx4'],
+        js: {
+            attr:'',
+            value:''
+        }
+    }))
+    await createTable(tableUsage(finalData));
+    main.removeChild(document.getElementById('load'));
 
-    const end = performance.now();
-    const totalTime = end - start;
-    console.log('total time = ' + totalTime);
+    document.addEventListener('click', async function(event) {
+        if(event.target.getAttribute('id') === 'searchBtn') {
+            if(document.getElementById('mainTable')) {
+                document.getElementById('mainTable').remove();
+            }
+            const fltrVal = document.getElementById('search').value.toLowerCase();
+            const dataFltr = data.filter(item =>item.filter.toLowerCase().includes(fltrVal));
+            const sortDtFilt = dataFltr.sort((a, b) => {
+                const nameComparison = a.item_jig.localeCompare(b.item_jig);
+                if (nameComparison !== 0) {
+                  return nameComparison;
+                }
+                return b.tr_date - a.tr_date;
+            })
+            finalData = sortDtFilt;
+            await createTable(tableUsage(finalData));
+            return;
+        }
+        if(event.target.getAttribute('id') === 'usageHist') {
+            const btnXl2 = document.getElementById('usageHist');
+            btnXl2.textContent = "";
+            btnXl2.classList.add('load_txt');
+            btnXl2.disabled = true;
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(finalData);
+            // Add the worksheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+            // Generate an Excel file
+            XLSX.writeFile(workbook, 'usage.xlsx');
+            btnXl2.classList.remove('load_txt');
+            btnXl2.textContent = "dl excel";
+            btnXl2.disabled = false;
+            return;
+        }
+    })
+
 </script>
+<script src="../../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>
 </html>

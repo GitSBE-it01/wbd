@@ -11,7 +11,7 @@ $log_function_query = 'SELECT * FROM log_function';
 $jig_location_query = 'SELECT * FROM jig_loc2';
 $log_location_query = 'SELECT * FROM log_location';
 $ng_daily_query = 'SELECT * FROM dbngvar.ng_daily';
-$Jig_usage_query = 'SELECT * FROM jig_usage';
+$jig_usage_query = 'SELECT * FROM jig_usage';
 $list_mtnc_query = 'SELECT * FROM list_mtnc';
 
 $insert_jig_master_query = 'INSERT INTO jig_master';
@@ -69,7 +69,7 @@ $codeList = array(
     'delete_jig_function_query' => $delete_jig_function_query,
     'delete_jig_location_query' => $delete_jig_location_query,
 
-    'Jig_usage_query' => $Jig_usage_query,
+    'jig_usage_query' => $jig_usage_query,
     'insert_jig_usage_query' => $insert_jig_usage_query,
     'update_jig_usage_query' => $update_jig_usage_query,
     'delete_jig_usage_query' => $delete_jig_usage_query,

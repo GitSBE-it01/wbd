@@ -63,7 +63,7 @@ if ($status === 'success') {
 
                     <div class="formgroup">
                         <div class="card1"><label>Jig Type</label></div>
-                        <div class="card2"><input autocomplete='off' data-cell='jig_mstr' type="text" class="addformtxt" name="type_jig" placeholder="Type Jig"></div>
+                        <div class="card2"><input autocomplete='off' data-cell='jig_mstr' type="text" class="addformtxt" name="type" placeholder="Type Jig"></div>
                     </div>
 
                     <div class="formgroup">
@@ -80,7 +80,7 @@ if ($status === 'success') {
                     </div><br/>
                     <div class="formgroup">
                         <div class="card1"><label>Tolerance</label></div>
-                        <div class="card2"><input autocomplete='off' data-cell='jig_loc' type="text" class="addformtxt" name="toleransi" placeholder="Toleransi"></div>
+                        <div class="card2"><input autocomplete='off' data-cell='jig_loc' type="text" class="addformtxt" name="tolerance" placeholder="Toleransi"></div>
                     </div><br/>
                     <table>
                         <tbody id="inputContainer">
@@ -93,11 +93,11 @@ if ($status === 'success') {
                             <td class="tbl-value"><input autocomplete='off' data-cell='jig_loc' type="text" class="addformtxt" name="lokasi" placeholder="location" list="suggest3">
                             </td>
                             <td class="tbl-value"><input autocomplete='off' data-cell='jig_loc' type="text" id="qty0" class="addformtxt" name="qty_per_unit" placeholder="Qty Per Unit"></td>
-                            <td class="tbl-value"><input autocomplete='off' data-cell type="text" class="addformtxt" name="unit[]" placeholder="Unit"></td>
+                            <td class="tbl-value"><input autocomplete='off' data-cell='jig_loc' type="text" class="addformtxt" name="unit" placeholder="Unit"></td>
                         </tr>
                         </tbody>
                     </table>
-                    <button type="button" onclick="addTableInput('inputContainer', 'tbl-value',[{style:'addformtxt', inputName:'lokasi', inputID:'', typeInput: 'text', textHolder: 'Location', listName:'suggest3', dcell:'jig_loc'},{style:'addformtxt', inputName:'qty_per_unit', inputID:'qty0', typeInput: 'text', textHolder: 'Qty Per Unit', listName:'', dcell:'jig_loc'},{style:'addformtxt', inputName:'unit', inputID:'', typeInput: 'text', textHolder: 'Unit', listName:'',dcell:'jig_loc'}])">add input</button>
+                    <button type="button" onclick="addTableInput('inputContainer', 'tbl-value',[{style:'addformtxt', inputName:'lokasi', inputID:'', typeInput: 'text', textHolder: 'Location', listName:'suggest3', dcell:'jig_loc'},{style:'addformtxt', inputName:'qty_per_unit', inputID:'qty0', typeInput: 'text', textHolder: 'Qty Per Unit', listName:'', dcell:'jig_loc'},{style:'addformtxt', inputName:'unit', inputID:'', typeInput: 'text', textHolder: 'unit', listName:'',dcell:'jig_loc'}])">add input</button>
                     <datalist id="suggest3">
                         <option value="- Choose -" selected></option>
                     </datalist>
@@ -135,7 +135,7 @@ if ($status === 'success') {
                 <form method="POST" class="addform">
                     <div class="formgroup">
                         <label>Speaker Item Number</label>
-                        <input autocomplete='off' data-cell='jig_func2' type="text" class="addformtxt" name="item_type" placeholder="Input item number speaker">
+                        <input autocomplete='off' data-cell='jig_func2' type="text" class="addformtxt" name="item_type" placeholder="Input item number speaker" list="suggestion2">
                     </div>
                     <table>
                         <tbody id="inputContainer3">
@@ -217,22 +217,25 @@ if ($status === 'success') {
 <script src="index.js"></script>
 <script type='module'>
     import { createSidebar, activeLink } from '../component/sidebar.js';
+    import { loading } from '../component/load.js';
     import {
         jig_master_query,
+        jig_location_query,
+        jig_function_query,
+        log_master_query,
+        log_location_query,
+        log_function_query,
         list_location, 
         list_mtnc, 
         asset
     } from '../class.js';
     createSidebar('side', 'sl1');
-    document.addEventListener("DOMContentLoaded", function() {
-        activeLink('a.link');
-    });
+    activeLink('[data-nav]');
 
     const result1 = await jig_master_query.getData();
     const result3 = await list_location.getData();
     const result8 = await asset.getData();
     const result4 = await list_mtnc.getData();
-    console.log({result1,result3,result8,result4});
     
 
     const populate1 = document.getElementById('suggestion2');//type speaker
@@ -242,7 +245,7 @@ if ($status === 'success') {
     const data = result8.map((obj1) => {
         return {
             item_speaker: obj1.pt_part,
-            description: obj1.pt_desc1
+            description: obj1.pt_desc1 + " "+ obj1.pt_desc2 
         }
     });
     const data2 = result3.map((obj1) => {
@@ -291,8 +294,15 @@ if ($status === 'success') {
 
 
     document.addEventListener('click', async function(event) {
-        if(event.target.getAttribute('id') === 'jigMstrSbmt'){
-            const data1 = document.querySelectorAll('[data-cell*=jig_mstr]');
+        if(event.target.getAttribute('id') === 'jigMstrSbmt'){ 
+            const btn =  document.getElementById('listMtncSbmt');
+            btn.disabled=true;
+            const target = document.getElementById('section1');
+            target.appendChild(await loading('load','loading2'));
+            const data1 = document.querySelectorAll('[data-cell=jig_mstr]');
+            const data2 = document.querySelectorAll('[data-cell=jig_loc]');
+
+            let item_jig = '';
             const arr_jig_mstr = {
                     item_jig:[],
                     desc_jig:[],
@@ -306,12 +316,14 @@ if ($status === 'success') {
                 console.log(arr_jig_mstr[key]);
                 if(arr_jig_mstr[key]) {
                     arr_jig_mstr[key].push(dt.value);
+                    if(key === 'item_jig') {
+                        item_jig = dt.value;
+                        arr_jig_mstr['drawing'].push('');
+                    }
                 }
             })
             arr_jig_mstr['status_jig'].push('ACTIVE');
-            console.log(arr_jig_mstr);
 
-            const data2 = document.querySelectorAll('[data-cell*=jig_loc]');
             const arr_jig_loc = {
                     item_jig:[],
                     qty_per_unit:[],
@@ -321,17 +333,27 @@ if ($status === 'success') {
                     toleransi:[],
                     code: [],
                 }
-            for (let i=0; i<data2.length; i++) {
-                const key = data2[i].getAttribute('name');
-                console.log(key)
+                
+            let tol = '';
+            data2.forEach(dt=>{
+                const key = dt.getAttribute('name');
                 if(arr_jig_loc[key]) {
-                    arr_jig_loc[key].push(data2[i].value);
+                    arr_jig_loc[key].push(dt.value);
                 }
-                arr_jig_loc['status'].push('active');
-            }
-            console.log(arr_jig_loc);
+                if(key === 'tolerance') {tol = dt.value};
+                if(key === 'qty_per_unit') {
+                    //counter = counter + 1;
+                    arr_jig_loc['toleransi'].push(tol);
+                    arr_jig_loc['item_jig'].push(item_jig);
+                    const counter = arr_jig_loc['code'].length +1 ;
+                    const codeNew = item_jig + "--00" + counter;
+                    arr_jig_loc['code'].push(codeNew);
+                    arr_jig_loc['status'].push('active');
+                    
+                }
+            })
             
-            const data3 = document.querySelectorAll('[data-cell*=jig_func]');
+            const data3 = document.querySelectorAll('[data-cell=jig_func]');
             const arr_jig_function = {
                         item_jig:[],
                         item_type:[],
@@ -339,51 +361,131 @@ if ($status === 'success') {
                         opt_off : [],
                         status: [],
                     }
+                    console.log(data3.length);
             data3.forEach(dt=>{
-                const key = dt.getAttribute('name');
-                if(arr_jig_function[key]) {
+                const key = dt.getAttribute('name');                
+                if(key === 'item_type') {
+                    const type = dt.value.split(' // ');
+                    arr_jig_function['item_type'].push(type[0]);
+                    arr_jig_function['item_jig'].push(item_jig);
+                    arr_jig_function['status'].push('active')
+                } else {
                     arr_jig_function[key].push(dt.value);
                 }
             })
-            console.log(arr_jig_function);
-            
+            const result1 = await jig_master_query.insertData(arr_jig_mstr);
+            if(!result1.includes('fail')) {
+                const log1 = await log_master_query.insertData(arr_jig_mstr);
+                const result2 = await jig_location_query.insertData(arr_jig_loc);
+                if(!result2.includes('fail')) {
+                    const log2 = await log_location_query.insertData(arr_jig_loc);
+                    const result3 = await jig_function_query.insertData(arr_jig_function);
+                    if(!result3.includes('fail')) {
+                        const log3 = await log_function_query.insertData(arr_jig_function);
+                        alert('all data inserted');
+                    } else {
+                        alert('data master dan lokasi inserted, penggunaan gagal')
+                    }
+                } else {
+                    alert('data master inserted, lokasi dan penggunaan gagal');
+                } 
+            } else {
+                alert('semua data gagal insert');
+            }
+            target.removeChild(document.getElementById('load'));
+            return;
         } 
 
+
         if(event.target.getAttribute('id') === 'jigFuncSbmt') {
+            const target = document.getElementById('section2');
+            target.appendChild(await loading('load','loading2'));
+            const btn =  document.getElementById('jigFuncSbmt');
+            btn.disabled=true;
+            const dataFunc = document.querySelectorAll('[data-cell=jig_func2]');
             const arr_jig_function = {
-                update: {
                     item_jig:[],
                     item_type:[],
                     opt_on: [],
                     opt_off : [],
                     status: [],
-                },
-                filter: {
-                    id:[]
                 }
+            let item_type ='';
+            dataFunc.forEach(dt=>{
+                const key = dt.getAttribute('name');
+                if (key === 'item_type') {
+                    item_type = dt.value.split(" // ");
+                }
+                if(key === 'item_jig') {
+                    const val = dt.value.split(" // ");
+                    const item_jig = val[0].trim();
+                    arr_jig_function['item_type'].push(item_type[0]);
+                    arr_jig_function['item_jig'].push(item_jig);
+                    arr_jig_function['status'].push('active')
+                    } else if(key !== 'item_type' && arr_jig_function[key]) {
+                        arr_jig_function[key].push(dt.value);
+                    }
+                })
+                console.log(arr_jig_function);
+            const result1 = await jig_function_query.insertData(arr_jig_function);
+            if(!result1.includes('fail')) {
+                const log1 = await log_function_query.insertData(arr_jig_function);
+                alert('data inserted');
+            } else {
+                alert('error data tidak berhasil di insert ke database')
             }
+            target.removeChild(document.getElementById('load'));
+            btn.disabled = false;
             return;
         }
+
+
         if(event.target.getAttribute('id') === 'listLocSbmt') {
-               
-            const arr_list_loc = {
-                update: {name:[]},
-                filter: {id:[]}
+            const btn =  document.getElementById('listLocSbmt');
+            btn.disabled=true;
+            const target = document.getElementById('section3');
+            target.appendChild(await loading('load','loading2'));
+            const data = document.querySelector('[data-cell=list_loc]');
+            const arr_list_loc = {name:[]};
+            arr_list_loc['name'].push(data.value);
+            const result1 = await list_location.insertData(arr_list_loc);
+            if(!result1.includes('fail')) {
+                alert('all data inserted');
+            } else {
+                alert('error data tidak berhasil di insert ke database')
             }
+            btn.disabled=false;
+            target.remove(document.getElementById('load'));
             return;
         }
+        
         if(event.target.getAttribute('id') === 'listMtncSbmt') {
+            const btn =  document.getElementById('listMtncSbmt');
+            btn.disabled=true;
+            const target = document.getElementById('section');
+            target.appendChild(await loading('load','loading2'));
+            const data = document.querySelectorAll('[data-cell=list_loc]');
             const arr_list_mtnc = {
-                update: {
                     type_jig:[],
                     mtnc_std_lifetime:[],
                     mtnc_by: [],
                     lftm_unit : [],
-                },
-                filter: {
-                    type_jig:[]
                 }
+                
+            data.forEach(dt=>{
+                const key = dt.getAttribute('name');
+                if(list_mtnc[key]) {
+                    list_mtnc[key].push(dt.value);
+                }
+            })
+            const result1 = await list_mtnc.insertData(arr_list_mtnc);
+            if(!result1.includes('fail')) {
+                    alert('data inserted');
+            } else {
+                    alert('error data tidak berhasil di insert ke database')
             }
+            btn.disabled=false;
+            target.remove(document.getElementById('load'));
             return;
         }
     })

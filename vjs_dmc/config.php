@@ -1,6 +1,4 @@
 <?php
-require_once "middleware/process.php";
-
 define('ENV_FILE', __DIR__ . '/.env');
 
 function connectToDatabase() {
@@ -18,6 +16,19 @@ function connectToDatabase() {
       die("Failed to connect to the database: " . $connection->connect_error);
   }
   return $connection;
+}
+
+function cekUser($user_log, $prog) {
+  $conn = connectToDatabase();
+  $query = "SELECT user, role FROM access_config.access_wbd WHERE user = '$user_log' AND prog= '$prog'";
+  $result = $conn->query($query);
+  
+  if ($result && $result->num_rows > 0) {
+      $userRole = $result->fetch_assoc();
+      return $userRole["role"];
+  } else {
+      return null; // User not found or error occurred
+  }
 }
 
 session_start();

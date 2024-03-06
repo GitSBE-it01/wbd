@@ -24,6 +24,13 @@ export const navigation = { //nav list
                 text: 'Kategori',
                 divStyle:['ml5','mt3', 'scale-120'],
                 linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
+            },
+            {
+                link: 'add_insp.php',
+                type: 'txt', // if btn then create a button, if txt then create span
+                text: 'Inspeksi',
+                divStyle:['ml5','mt3', 'scale-120'],
+                linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
             }
         ]
 }

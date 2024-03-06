@@ -5,19 +5,6 @@ global
 /*------------------------------------------------------
 cek user
 ------------------------------------------------------*/
-function cekUser($user_log, $prog) {
-    $conn = connectToDatabase();
-    $query = "SELECT user, role FROM access_config.access_wbd WHERE user = '$user_log' AND prog= '$prog'";
-    $result = $conn->query($query);
-    
-    if ($result && $result->num_rows > 0) {
-        $userRole = $result->fetch_assoc();
-        return $userRole["role"];
-    } else {
-        return null; // User not found or error occurred
-    }
-}
-
 function getArrayList($arrList, $input) {
     $preResult = true;
     foreach ($arrList as $key=>$value) {
@@ -41,8 +28,8 @@ function is_variable($var) {
 /*=============================================================================
 get all data
 =============================================================================*/
-function getData($query) {
-    $conn = connectToDatabase();
+function getData($db, $query) {
+    $conn = connectToDatabase($db);
     $stmt = $conn->prepare($query);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
@@ -64,8 +51,8 @@ function getData($query) {
 /*=============================================================================
 fetch data with filter
 =============================================================================*/
-function fetchDataFilter($query, $filterValues) {
-    $conn = connectToDatabase();
+function fetchDataFilter($db, $query, $filterValues) {
+    $conn = connectToDatabase($db);
     // Build the WHERE clause based on filter values
     $whereClause = '';
     $types = '';
@@ -124,8 +111,8 @@ function fetchDataFilter($query, $filterValues) {
 /*=============================================================================
 insert data
 =============================================================================*/
-function insertData($query, $filterValues) {
-    $conn = connectToDatabase();
+function insertData($db, $query, $filterValues) {
+    $conn = connectToDatabase($db);
     $counter = 0;   
     $count = count($filterValues);
     $keysParam = array();
@@ -189,13 +176,15 @@ function insertData($query, $filterValues) {
             }
         }
     }
+    $stmt->close();
+    $conn->close();
 }
 
 /*=============================================================================
 update data
 =============================================================================*/
-function updateData($query, $filterValues, $filterValues2) {
-    $conn = connectToDatabase();
+function updateData($db, $query, $filterValues, $filterValues2) {
+    $conn = connectToDatabase($db);
     $counter = 0;   
     $count = count($filterValues);
     $keysParam = array();
@@ -297,13 +286,15 @@ function updateData($query, $filterValues, $filterValues2) {
             }
         }
     }
+    $stmt->close();
+    $conn->close();
 }
 
 /*=============================================================================
 Delete data
 =============================================================================*/
-function deleteData($query, $filter, $filter2) {
-    $conn = connectToDatabase();
+function deleteData($db, $query, $filter, $filter2) {
+    $conn = connectToDatabase($db);
 
     // Build the WHERE clause based on filter values
     $params = $filter . " = ?";
@@ -316,7 +307,7 @@ function deleteData($query, $filter, $filter2) {
         $types = "s";
     }
     $wholeQuery = $query . " WHERE " . $params;
-
+    echo $wholeQuery;
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);

@@ -58,8 +58,6 @@ $cacheFolder = CACHE . 'update/';
 <script type='module'>
     import { createSidebar, activeLink } from '../component/sidebar.js';
     createSidebar('side', 'sl1');
-    document.addEventListener("DOMContentLoaded", function() {
-        activeLink('a.link');
-    });
+    activeLink('[data-nav]');
 </script>
 </body>

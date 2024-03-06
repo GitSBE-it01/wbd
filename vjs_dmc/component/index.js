@@ -8,6 +8,10 @@ import {
 } from './array/navArr.js';
 
 import {
+    inpArrCat
+} from './array/inpArr.js';
+
+import {
     arrVJSInp
 } from './array/dataArr.js';
 
@@ -17,26 +21,36 @@ import {
 
 import {
     searchBarMain,
-    searchBarKat
+    searchBarKat,
+    inpNew,
 } from './array/searchArr.js';
 
 import { 
     assetList,
     woList,
-    allAsset
+    allAsset,
+    catData,
+    insData
 } from './array/dtListArr.js';
 
 import { 
     header1,
     header2,
     header3,
-    header4
+    header4,
+    selection,
+    headerListInsp,
+    inspection
 } from './array/header.js';
 
 import { 
     tableDMC,
     headerForm,
-    tableVJS
+    tableVJS,
+    tablecatList,
+    tblAddList,
+    listInspTable,
+    addInspTable
 } from './array/tblArr.js';
 
 import {
@@ -49,14 +63,17 @@ import {
     addVJS,
     minVJS,
     openVJS,
-    selectCat
+    selectCat,
+    slcAddBtn,
+    slcDelBtn,
+    basicBtn
 } from './array/btnArr.js';
 
 // html component folder
 import {createInp} from './html_comp/input.js';
 import {createBtn} from './html_comp/button.js';
 import {createDatalist} from './html_comp/datalist.js';
-import {createHeader} from './html_comp/header.js';
+import {createHeader, createHeader2} from './html_comp/header.js';
 
 export {
     loading, 
@@ -93,6 +110,21 @@ export {
     arrVJSInp,
     arrKat,
     columnSprt,
-    selectCat
+    selectCat,
+    tablecatList,
+    slcAddBtn,
+    slcDelBtn,
+    inpNew,
+    catData,
+    insData,
+    inpArrCat,
+    tblAddList,
+    basicBtn,
+    selection,
+    createHeader2,
+    headerListInsp,
+    listInspTable,
+    inspection,
+    addInspTable
 }
     

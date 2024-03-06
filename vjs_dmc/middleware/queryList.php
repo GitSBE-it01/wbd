@@ -7,9 +7,9 @@ $vjs_input = 'SELECT * FROM vjs_input';
 $assets = 'SELECT * FROM dbinventaris.astreg_main';
 $wo_list = 'SELECT * FROM dbqad_live.wo_mstr w JOIN dbqad_live.pt_mstr p on w.wo_part = p.pt_part';
 $vjs_assets = 'SELECT * FROM vjs_list vl join dbinventaris.astreg_main ast on vl.asset_id = ast.id';
-$list_inspect = 'SELECT * FROM list_inspect';
-$list_category = 'SELECT * FROM list_category';
-$dmc_vjs2 = 'SELECT * FROM dmc_vjs';
+$list_inspect = 'SELECT * FROM dbvjs.list_inspect';
+$list_category = 'SELECT * FROM dbvjs.list_category';
+$dmc_vjs2 = 'SELECT * FROM dbvjs.dmc_vjs';
 
 $insert_dmc_vjs = 'INSERT INTO dmc_vjs';
 $insert_dmc_vjs_log = 'INSERT INTO dmc_vjs_log';

@@ -19,3 +19,13 @@ export const createHeader = async(arr)=> {
     })
     return target.appendChild(hd);
 }
+
+export const createHeader2 = async(arr)=> {
+    const hd = document.createElement('div');
+    hd.textContent = arr.text;
+    hd.id = arr.id;
+    arr.style.forEach(cls => {
+        hd.classList.add(cls);
+    })
+    return hd;
+}

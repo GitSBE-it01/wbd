@@ -11,6 +11,7 @@ const inpArrExp = {
 }
 export const createInp = async(arr) => {
     const input = document.createElement('input');
+    input.setAttribute('data-input', arr.mark);
     input.id = arr.id;
     arr.classSty.forEach(sty => {
         input.classList.add(sty)

@@ -2,7 +2,7 @@
 require_once "middleware/process.php";
 
 define('CACHE', __DIR__ . '/cache/');
-define('ENV_FILE', __DIR__ . '/.env');
+define('ENV_FILE', __DIR__ . '../.env');
 $main_menu = '../sbe/index.php?page=login';
 
 

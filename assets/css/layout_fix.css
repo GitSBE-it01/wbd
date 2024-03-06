@@ -29,6 +29,7 @@ Children flex
 */
 .f-child {flex: 1;}
 .fullwidth {width: 100%;}
+.alg-ctnt {align-items: center;}
 
 .cl1 {display: flex; width: 8.33vw;}
 .cl2 {display: flex; width: 16.67vw;}
@@ -46,7 +47,7 @@ Children flex
 .displayHide {display: none;}
 .floatRight {float: right;}
 .floatLeft {float: left;}
-
+.h100 {height:100%;}
 /*
 margin
 */

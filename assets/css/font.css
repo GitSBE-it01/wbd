@@ -21,6 +21,21 @@ fs = font size
 .fs-xl {font-size: 2rem;}
 .fs-xxl {font-size: 3rem;}
 .fs-x3l {font-size: 6rem;}
+
+.hv-fs-s {transition:font-size 300ms;}
+.hv-fs-s:hover {transition:font-size 300ms; font-size: .5rem;}
+.hv-fs-m {transition:font-size 300ms;}
+.hv-fs-m:hover {transition:font-size 300ms; font-size: 1rem;}
+
+.hv-fs-l {transition:font-size 300ms;}
+.hv-fs-l:hover {transition:font-size 300ms; font-size: 1.5rem;}
+
+.hv-fs-xl {transition:font-size 300ms;}
+.hv-fs-xl:hover {transition:font-size 300ms; font-size: 2rem;}
+.hv-fs-xxl {transition:font-size 300ms;}
+.hv-fs-xxl:hover {transition:font-size 300ms; font-size: 3rem;}
+.hv-fs-x3l {transition:font-size 300ms;}
+.hv-fs-x3l:hover {transition:font-size 300ms; font-size: 6rem;}
 /*
 fw = font weight
 */
@@ -28,10 +43,16 @@ fw = font weight
 .fw-bld {font-weight: 900;}
 .fw-blk {font-weight: 700;}
 
+.hv-fw-lgt:hover {transition-duration: 300ms; font-weight: 300;}
+.hv-fw-bld:hover {transition-duration: 300ms; font-weight: 900;}
+.hv-fw-blk:hover {transition-duration: 300ms; font-weight: 700;}
 /*
 fc = font color
 */
 .fc-w {color: azure;}
+.hv-fc-w:hover {transition-duration:300ms; transition: ease-in-out ;color: azure;}
+.fc-b {color: black;}
+.hv-fc-b:hover {transition-duration:300ms; transition: ease-in-out ;color: black;}
 
 /*
 af = align font or text
@@ -66,3 +87,5 @@ h1 {text-align: center;}
 .bl3-solid {border-left: 3px solid black;}
 .bl4-solid {border-left: 4px solid black;}
 .bl5-solid {border-left: 5px solid black;}
+
+.text-undecor {text-decoration: none;}

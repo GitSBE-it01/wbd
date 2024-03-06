@@ -63,6 +63,77 @@ red color
 .rd8 {background-color:#ff9999;}
 .rd9 {background-color:#ffb3b3;}
 
+
+/*
+=================================================================
+hover
+=================================================================
+blue color 
+*/
+.hv-bl1:hover {transition-duration: 300ms; background-color:#031633;}
+.hv-bl2:hover {transition-duration: 300ms; background-color:#052c65;}
+.hv-bl3:hover {transition-duration: 300ms; background-color:#084298;}
+.hv-bl4:hover {transition-duration: 300ms; background-color:#0a58ca;}
+.hv-bl5:hover {transition-duration: 300ms; background-color:#0d6efd;}
+.hv-bl6:hover {transition-duration: 300ms; background-color:#3d8bfd;}
+.hv-bl7:hover {transition-duration: 300ms; background-color:#6ea8fe;}
+.hv-bl8:hover {transition-duration: 300ms; background-color:#9ec5fe;}
+.hv-bl9:hover {transition-duration: 300ms; background-color:#cfe2ff;}
+
+/*
+teal color 
+*/
+.hv-tl1:hover {transition-duration: 300ms; background-color:#06281e}
+.hv-tl2:hover {transition-duration: 300ms; background-color:#0d503c}
+.hv-tl3:hover {transition-duration: 300ms; background-color:#13795b}
+.hv-tl4:hover {transition-duration: 300ms; background-color:#1aa179}
+.hv-tl5:hover {transition-duration: 300ms; background-color:#20c997}
+.hv-tl6:hover {transition-duration: 300ms; background-color:#44d4ac}
+.hv-tl7:hover {transition-duration: 300ms; background-color:#79dfc1}
+.hv-tl8:hover {transition-duration: 300ms; background-color:#a6e9d5}
+.hv-tl9:hover {transition-duration: 300ms; background-color:#d2f4ea}
+
+/*
+slate color 
+*/
+.hv-sl1:hover {transition-duration: 300ms; background-color:#1c1f2b;}
+.hv-sl2:hover {transition-duration: 300ms; background-color:#2c3040;}
+.hv-sl3:hover {transition-duration: 300ms; background-color:#3c4254;}
+.hv-sl4:hover {transition-duration: 300ms; background-color:#4c5468;}
+.hv-sl5:hover {transition-duration: 300ms; background-color:#5c677d;}
+.hv-sl6:hover {transition-duration: 300ms; background-color:#6c7991;}
+.hv-sl7:hover {transition-duration: 300ms; background-color:#7c8ca6;}
+.hv-sl8:hover {transition-duration: 300ms; background-color:#8c9fba;}
+.hv-sl9:hover {transition-duration: 300ms; background-color:#9cb2cf;}
+
+/*
+orange color 
+*/
+.hv-or1:hover {transition-duration: 300ms; background-color:#6e4c00;}
+.hv-or2:hover {transition-duration: 300ms; background-color:#8e6400;}
+.hv-or3:hover {transition-duration: 300ms; background-color:#b37a00;}
+.hv-or4:hover {transition-duration: 300ms; background-color:#d89100;}
+.hv-or5:hover {transition-duration: 300ms; background-color:#ffaa00;}
+.hv-or6:hover {transition-duration: 300ms; background-color:#ffb333;}
+.hv-or7:hover {transition-duration: 300ms; background-color:#ffbb66;}
+.hv-or8:hover {transition-duration: 300ms; background-color:#ffc999;}
+.hv-or9:hover {transition-duration: 300ms; background-color:#ffd4b3;}
+
+/*
+red color 
+*/
+.hv-rd1:hover {transition-duration: 300ms;  background-color:#6e0000;}
+.hv-rd2:hover {transition-duration: 300ms;  background-color:#8e0000;}
+.hv-rd3:hover {transition-duration: 300ms;  background-color:#b30000;}
+.hv-rd4:hover {transition-duration: 300ms;  background-color:#d80000;}
+.hv-rd5:hover {transition-duration: 300ms;  background-color:#ff0000;}
+.hv-rd6:hover {transition-duration: 300ms;  background-color:#ff3333;}
+.hv-rd7:hover {transition-duration: 300ms;  background-color:#ff6666;}
+.hv-rd8:hover {transition-duration: 300ms;  background-color:#ff9999;}
+.hv-rd9:hover {transition-duration: 300ms;  background-color:#ffb3b3;}
+
+
+
 /* ================================================================== */
 .f-blk{color: black;}
 .f-wht{color: white;}

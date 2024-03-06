@@ -1,4 +1,4 @@
-import { vjs_asset, asset } from "../../utility/class.js";
+import { vjs_asset } from "../../utility/class.js";
 
 const assetDt = await vjs_asset.getData();
 export const assetList = {
@@ -24,8 +24,26 @@ export const woList = (src) => ({
 export const allAsset = (src) => ({
     target:'root',
     id:'all_asset',
-    data:src,
+    data: src,
     delimiter:'/',
-    optValue:['assetno', 'assetkategori', 'id'],
+    optValue:['assetno', 'assetkategori', 'id', 'assetname', 'location'],
     optText:['assetno', 'assetkategori', 'assetname', 'location']
+})
+
+export const catData = (src) => ({
+    target:'root',
+    id:'sel_cat',
+    data: src,
+    delimiter:'',
+    optValue:['mesin_cat'],
+    optText:['mesin_cat']
+})
+
+export const insData = (src) => ({
+    target:'root',
+    id:'listInsp',
+    data: src,
+    delimiter:'--',
+    optValue:['dmc_vjs','inspection'],
+    optText:['dmc_vjs','inspection']
 })

@@ -184,14 +184,7 @@ class Data {
     
       const dataDMC = await dataInput.deleteData({id: 123});
       */
-      async deleteData(arr) {
-        const keys = Object.keys(arr);
-        const values = Object.values(arr);
-        const delFilter=[];
-        for (let i=0; i<keys.length; i++) {
-            const entry = { [keys[i]]: values[i] };
-            delFilter.push(entry);
-        }
+      async deleteData(delFilterKey, delFilter) {
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -199,7 +192,7 @@ class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, keys, values})
+              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, delFilterKey, delFilter})
             });
 
             if (!response.ok) {
