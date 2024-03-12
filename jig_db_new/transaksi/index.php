@@ -24,38 +24,8 @@ require_once "trans.php";
     <link rel="stylesheet" href="../../assets/css/search_btn.css">
 </head>
 <body>
-<input type=hidden id='role' value="<?php if (isset($role)) {echo $role;} else {echo 'guest';}?>">
-<div class="fr">
-	<div class="sideCard" id='side'>
-	</div>
-
-    <div class="main">
-        <div class="top">
-            <h2>Transaksi Harian</h2>
-            <div class="side hideOff aktif">
-			    <input type="text" id="filterTrans" class="inputinfo" placeholder="jig" autocomplete="off" list='jig_name' onkeydown="enterProcess(event,'search')" autocomplete='off'>
-                <button type='button' id='search' class='button-30'>search</button>
-            </div>
-            <datalist id='jig_name'>
-                <option value="-choose-">-choose-</option>
-            </datalist>
-		</div>
-        <div class="middle"> 
-            <div class="loading" id="loading" style="display:none;"></div>
-            <div id="display" style="display:none;"></div>
-		</div>
-    </div>
-    <datalist id="locS">
-        <option value="-choose-"></option>
-    </datalist>
+<div>
+    <H1>halaman ini dalam perbaikan</H1>
 </div>
-
-<script src="../assets/JS/main.js"></script>
-<script src="index.js"></script>
-<script type='module'>
-    import { createSidebar, activeLink } from '../component/sidebar.js';
-    createSidebar('side', 'sl1');
-    activeLink('[data-nav]');
-</script>
 </body>
 </html>

@@ -87,6 +87,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const list_insp = await list_inspect.getData();
     const main = document.getElementById('main');
     main.appendChild(await createHeader2(inspection));
+    main.setAttribute('style', 'height:96%; overflow-y:hidden;')
     await createTable(addInspTable());
     const cont = document.getElementById('inputInsp');
     const div = document.createElement('div');
@@ -96,6 +97,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     div.appendChild(await createBtn(basicBtn('addInsp', 'button_plus')));
     div.appendChild(await createBtn(basicBtn('delInsp', 'button_minus')));
     await createTable(listInspTable(list_insp));
+    const listTbl = document.getElementById('listAll');
+    listAll.setAttribute('style', 'height:85%;');
     root.removeChild(document.querySelector('.loading'));
 
     document.addEventListener('click', async function(event) {
@@ -118,6 +121,22 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 } else {
                     alert('data fail to insert');
                 }
+            return;
+        }
+
+        if(event.target.getAttribute('data-btn') === `delInsp` ) {
+            const value1 = document.querySelectorAll(`[data-cell*="delLs__"]`);
+            value1.forEach(vl=> {
+                if(vl.classList.contains('displayHide')){
+                    vl.classList.remove('displayHide');
+                } else {
+                    vl.classList.add('displayHide');
+                }
+            })
+            return;
+        }
+        if(event.target.getAttribute('data-btn') === `addInsp` ) {
+
             return;
         }
     })

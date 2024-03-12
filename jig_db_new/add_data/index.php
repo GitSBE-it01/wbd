@@ -383,11 +383,14 @@ if ($status === 'success') {
                     if(!result3.includes('fail')) {
                         const log3 = await log_function_query.insertData(arr_jig_function);
                         alert('all data inserted');
+                        location.reload();
                     } else {
                         alert('data master dan lokasi inserted, penggunaan gagal')
+                        location.reload();
                     }
                 } else {
                     alert('data master inserted, lokasi dan penggunaan gagal');
+                    location.reload();
                 } 
             } else {
                 alert('semua data gagal insert');
@@ -431,6 +434,7 @@ if ($status === 'success') {
             if(!result1.includes('fail')) {
                 const log1 = await log_function_query.insertData(arr_jig_function);
                 alert('data inserted');
+                location.reload();
             } else {
                 alert('error data tidak berhasil di insert ke database')
             }
@@ -451,6 +455,7 @@ if ($status === 'success') {
             const result1 = await list_location.insertData(arr_list_loc);
             if(!result1.includes('fail')) {
                 alert('all data inserted');
+                location.reload();
             } else {
                 alert('error data tidak berhasil di insert ke database')
             }
@@ -481,6 +486,7 @@ if ($status === 'success') {
             const result1 = await list_mtnc.insertData(arr_list_mtnc);
             if(!result1.includes('fail')) {
                     alert('data inserted');
+                    location.reload();
             } else {
                     alert('error data tidak berhasil di insert ke database')
             }

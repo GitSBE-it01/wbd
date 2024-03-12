@@ -65,6 +65,7 @@ require_once "../config.php";
     import {createSearch, searchBarMain} from './searchBar.js';
     import {createBtn} from './button.js';
 
+    main.appendChild(loading('load','loading2'));
     const data = await jig_usage.getData();
     for (let i=0; i<data.length; i++) {
         const fltr = data[i]['item_jig'] + " -- " + data[i]['tr_date'] + " -- " + data[i]['qty'];
@@ -79,7 +80,6 @@ require_once "../config.php";
     })
     let finalData = sortDtFilt;
 
-    main.appendChild(loading('load','loading2'));
     await createSearch(searchBarMain);
     const searchDiv = document.getElementById('searchDiv');
     searchDiv.appendChild(await createBtn({

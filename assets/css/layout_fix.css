@@ -23,6 +23,8 @@ flex display parent
 .flex-c {display: flex;flex-direction: column;}
 .centerFlex {justify-content: center;}
 .midFlex {display: flex;justify-content: center; align-items: center; }
+.overX {overflow-x: scroll;}
+.overY {overflow-y: scroll;}
 
 /*
 Children flex

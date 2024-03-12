@@ -3,7 +3,13 @@ preload process
 ======================================================================*/
 document.addEventListener('DOMContentLoaded', async function() {
     const currentUrl = window.location.href;
-    const specificUrls = 'http://192.168.2.103:8080/wbd/jig_db_new/transaksi';
+    let specificUrls = '';
+    const check = window.location.href.split("/");
+    if (check[2].length > 20 ){
+        specificUrls = 'http://informationsystem.sbe.co.id:8080/wbd/jig_db_new/transaksi';
+    } else {
+        specificUrls = 'http://192.168.2.103:8080/wbd/jig_db_new/transaksi';
+    }
     const extractedPortion = currentUrl.substring(0,specificUrls.length);
     if (extractedPortion == specificUrls){
         const role = document.getElementById('role');
@@ -38,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 desc: obj1.desc_jig
             }
         })
+        
         const datalistContain = document.getElementById('jig_name');
         for (let i=0; i<data.length; i++) {
             const option = document.createElement('option');

@@ -54,6 +54,19 @@ function openHide(event) {
   }
 }
 
+function openHide2(event, trgt, cls) {
+  const cekVal = event.target.id.split('__');
+  const buttonTarget = event.target;
+  const query = trgt+"__"+cekVal[1]
+  const target = document.querySelector(`[data-row="${query}"]`);
+  if (buttonTarget.innerText ==='open') {
+      target.classList.remove(cls);
+      buttonTarget.innerText='close';
+  } else {
+      target.classList.add(cls);
+      buttonTarget.innerText='open';
+  }
+}
 /*==============================================================================================
 Button add
 ==============================================================================================*/

@@ -490,7 +490,7 @@ export const listInspTable = (src) => ({ // data table
     dbsrc: src, 
     tblStyle: 
         {
-            contStyle: ['mx2', 'mb2', 'f-child'],
+            contStyle: ['mx2', 'mb2', 'f-child', 'overY'],
             thdStyle:['flex-r', 'displayHide'],
             thrStyle:['f-child'],
             trowStyle:['flex-r', 'px2', 'mb2'],
@@ -600,7 +600,7 @@ export const addInspTable = () => ({ // data table
             trowStyle:['flex-r', 'px2', 'mb2'],
             tdtStyle:['f-child', 'mb1', 'flex-c', 'mt2'],
             selStyle:['f-child', 'mb1', 'mt2'],
-            btnStyle:['button_minus_sml'],
+            btnStyle:['button_minus_sml', 'displayHide'],
             divStyle:['fullwidth','or9']
         }, 
     tblData: 

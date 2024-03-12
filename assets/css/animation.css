@@ -265,6 +265,37 @@ svg
   padding: 0 .2em .1em 0;
   margin: .1em .2em;
 }
+
+
+.arrow_red {
+  background-image: url('../svg_file/arrow/arrow-circle-left-svgrepo-com.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 3.5vh;
+  height: 3.5vh;
+  rotate: 180;
+  border: none;
+  cursor: pointer;
+  padding: 0 1em 1.5rem 0;
+  margin: .5em;
+}
+
+.arrow_green{
+  background-image: url('../svg_file/arrow/arrow-circle-right-svgrepo-com.svg');
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 3.5vh;
+  height: 3.5vh;
+  border: none;
+  cursor: pointer;
+  padding: 0 .3em .2em 0;
+  margin: .2em .4em;
+}
+
 /*========================================================
 loading view
 ========================================================*/ 

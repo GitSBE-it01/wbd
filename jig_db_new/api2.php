@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = updateData($query, $updateData, $updateData2);
     } elseif ($action === 'deleteData') {
         $result = deleteData($query, $delData, $delData2);
+    } elseif ($action === 'fetchRangeFilter') {
+        $result = fetchRangeFilter($query, $filter);
     }
     header("Cache-Control: public, max-age=3600");
     header("Content-Type: application/json");

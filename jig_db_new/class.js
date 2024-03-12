@@ -170,6 +170,27 @@ class Data {
             return Promise.reject(error);
         }
       }
+
+      async fetchRangeFilter(filter) {
+        try {
+            const response = await fetch(this.url, {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Origin': 'http://informationsystem.sbe.co.id'
+              },
+              body: JSON.stringify({action: 'fetchRangeFilter', parameters: this.key, filter})
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.text();
+            return result;
+        } catch (error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+      }
 }
 
 // di bawah adalah pembuatan object dengan bantuan class di atas 
@@ -186,4 +207,5 @@ export const log_function_query = new Data('log_function_query');
 export const item_detail_query = new Data('item_detail_query');
 export const ng_daily = new Data('ng_daily_query');
 export const jig_usage = new Data('jig_usage_query');
+export const jig_trans = new Data('jig_trans_query');
 export const asset = new Data('asset');

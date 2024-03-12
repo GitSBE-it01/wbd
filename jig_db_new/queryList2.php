@@ -12,6 +12,7 @@ $jig_location_query = 'SELECT * FROM jig_loc2';
 $log_location_query = 'SELECT * FROM log_location';
 $ng_daily_query = 'SELECT * FROM dbngvar.ng_daily';
 $jig_usage_query = 'SELECT * FROM jig_usage';
+$jig_trans_query = 'SELECT * FROM jig_trans';
 $list_mtnc_query = 'SELECT * FROM list_mtnc';
 
 $insert_jig_master_query = 'INSERT INTO jig_master';
@@ -21,6 +22,7 @@ $insert_log_function_query = 'INSERT INTO log_function';
 $insert_jig_location_query = 'INSERT INTO jig_loc2';
 $insert_log_location_query = 'INSERT INTO log_location';
 $insert_jig_usage_query = 'INSERT INTO jig_usage';
+$insert_jig_trans_query = 'INSERT INTO jig_trans';
 
 $update_jig_master_query = 'UPDATE jig_master';
 $update_log_master_query = 'UPDATE log_master';
@@ -29,6 +31,7 @@ $update_log_function_query = 'UPDATE log_function';
 $update_jig_location_query = 'UPDATE jig_loc2';
 $update_log_location_query = 'UPDATE log_location';
 $update_jig_usage_query = 'UPDATE jig_usage';
+$update_jig_trans_query = 'UPDATE jig_trans';
 
 $delete_jig_master_query = 'DELETE FROM jig_master';
 $delete_jig_function_query = 'DELETE FROM jig_function';
@@ -73,5 +76,10 @@ $codeList = array(
     'insert_jig_usage_query' => $insert_jig_usage_query,
     'update_jig_usage_query' => $update_jig_usage_query,
     'delete_jig_usage_query' => $delete_jig_usage_query,
+
+    'jig_trans_query' => $jig_trans_query,
+    'insert_jig_trans_query' => $insert_jig_trans_query,
+    'update_jig_trans_query' => $update_jig_trans_query,
+
     'list_mtnc_query' =>$list_mtnc_query
 );
