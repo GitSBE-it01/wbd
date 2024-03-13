@@ -33,6 +33,11 @@ $update_log_location_query = 'UPDATE log_location';
 $update_jig_usage_query = 'UPDATE jig_usage';
 $update_jig_trans_query = 'UPDATE jig_trans';
 
+$labor_log = 'SELECT * FROM labor_log';
+$update_labor_log = 'UPDATE labor_log';
+$insert_labor_log = 'INSERT INTO labor_log';
+$delete_labor_log = 'DELETE FROM labor_log';
+
 $delete_jig_master_query = 'DELETE FROM jig_master';
 $delete_jig_function_query = 'DELETE FROM jig_function';
 $delete_jig_location_query = 'DELETE FROM jig_loc2';
@@ -80,6 +85,10 @@ $codeList = array(
     'jig_trans_query' => $jig_trans_query,
     'insert_jig_trans_query' => $insert_jig_trans_query,
     'update_jig_trans_query' => $update_jig_trans_query,
+    'list_mtnc_query' =>$list_mtnc_query,
 
-    'list_mtnc_query' =>$list_mtnc_query
+    'labor_log' => $labor_log,
+    'insert_labor_log' => $insert_labor_log,
+    'update_labor_log' => $update_labor_log,
+    'delete_labor_log' => $delete_labor_log,
 );

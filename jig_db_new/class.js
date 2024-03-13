@@ -184,7 +184,7 @@ class Data {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const result = await response.text();
+            const result = await response.json();
             return result;
         } catch (error) {
             console.error('Error:', error);
@@ -209,3 +209,4 @@ export const ng_daily = new Data('ng_daily_query');
 export const jig_usage = new Data('jig_usage_query');
 export const jig_trans = new Data('jig_trans_query');
 export const asset = new Data('asset');
+export const labor_log = new Data('labor_log');

@@ -91,7 +91,7 @@ document.addEventListener("click", async function(event) {
                 }
                 hidDiv.appendChild(loading('load','loading2'));
                 const respons = await dataTableLoc(valueId);
-                const arr = ['Location', ' qty per unit', 'unit'];
+                const arr = ['Code', 'Location', ' qty per unit', 'unit'];
                 tblLocJig(`hid_${valueId}`,arr, respons );
                 hidDiv.removeChild(document.getElementById('load'));
                 return;

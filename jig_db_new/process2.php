@@ -329,21 +329,10 @@ function fetchRangeFilter($query, $filterValues) {
     // Build the WHERE clause based on filter values
     $whereClause = '';
     $types = '';
-    echo  "<pre>";
-    print_r($filterValues);
-    echo  "</pre>";
     $bindParams = array();
+    $ii = 0;
     foreach ($filterValues as $key => $value ) {
-        for ($i=0; $i<count($value); $i++) {
-            echo $i;
-            echo $key;
-            if (is_int($value[$i])) {
-                $types .= "i"; // Integer
-            } elseif (is_float($value[$i])) {
-                $types .= "d"; // Double/Float
-            } elseif (is_string($value[$i])) {
-                $types .= "s";
-            }
+        if (count($value) === 1) {
             
             if ($value === NULL) {
                 $whereClause .= "`$key` is NULL AND ";
@@ -351,36 +340,44 @@ function fetchRangeFilter($query, $filterValues) {
                 $whereClause .= "`$key` IS NOT NULL AND ";
             } else {
                 $whereClause .= "`$key` = ? AND ";
-                $bindParams[] = &$filterValues[$key]; // Pass the value by reference
+                $bindParams[$ii] = &$filterValues[$key]; // Pass the value by reference
             }
-        }
-    }
-    /*
-    foreach ($filterValues as $key => $value ) {
-        echo $key;
-        if (is_int($value)) {
-            $types .= "i"; // Integer
-        } elseif (is_float($value)) {
-            $types .= "d"; // Double/Float
-        } elseif (is_string($value)) {
-            $types .= "s";
-        }
 
-        if ($value === NULL) {
-            $whereClause .= "`$key` is NULL AND ";
-        } elseif ($value === 'IS NOT NULL') {
-            $whereClause .= "`$key` IS NOT NULL AND ";
+            if (is_int($value)) {
+                $types .= "i"; // Integer
+            } elseif (is_float($value)) {
+                $types .= "d"; // Double/Float
+            } elseif (is_string($value)) {
+                $types .= "s";
+            }
+            $ii++;
         } else {
-            $whereClause .= "`$key` = ? AND ";
-            $bindParams[] = &$filterValues[$key]; // Pass the value by reference
+            for ($i=0; $i<count($value); $i++) {
+                if (is_int($value[$i])) {
+                    $types .= "i"; // Integer
+                } elseif (is_float($value[$i])) {
+                    $types .= "d"; // Double/Float
+                } elseif (is_string($value[$i])) {
+                    $types .= "s";
+                }
+
+                if ($i===0) {
+                    $whereClause .= "`$key` BETWEEN ? AND ";
+                    $bindParams[$ii] = &$filterValues[$key][$i];
+                } else {
+                    $whereClause .= " ? AND ";
+                    $bindParams[$ii] = &$filterValues[$key][$i];
+                }
+                $ii++;
+            }
         }
     }
 
     $whereClause = rtrim($whereClause, 'AND ');
-
     if (!empty($whereClause)) {
         $query .= " WHERE $whereClause";
     }
+
     $stmt = $conn->prepare($query);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
@@ -394,16 +391,15 @@ function fetchRangeFilter($query, $filterValues) {
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     }
-    /*
+    
     $result = $stmt->get_result();
     $data = array();
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
-    }
-    
+    }   
     $result->free();
     $stmt->close();
     $conn->close();
-    return $data;*/
+    return $data;
 }
 ?>

@@ -118,6 +118,7 @@ export const tblLocJig = async (target, arrHead, data) => {
             const tr2 = document.createElement('div');
             tr2.classList.add('fr', 'tdCont', 'pr1');
             tr2.innerHTML = `
+                <div class="flexCh td bd-black or8 cap">${data[i].code}</div>
                 <div class="flexCh td bd-black or8 cap">${data[i].lokasi}</div>
                 <div class="flexCh td bd-black or8 cap">${data[i].qty_per_unit}</div>
                 <div class="flexCh td bd-black or8 cap">${data[i].unit}</div>

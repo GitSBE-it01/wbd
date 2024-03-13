@@ -12,6 +12,7 @@ export const dataTableLoc = async (valueId) => {
         if (role.value === "admin" || role.value === "superuser") {
             data = src.map((obj1) => {
                 return {
+                    code: obj1.code,
                     lokasi: obj1.lokasi,
                     qty_per_unit: parseInt(obj1 ? obj1.qty_per_unit :0),
                     unit: obj1 ? obj1.unit:""
@@ -19,6 +20,7 @@ export const dataTableLoc = async (valueId) => {
             } else {
             data = src.map((obj1) => {
                 return {
+                    code: obj1.code,
                     lokasi: obj1.lokasi,
                     qty_per_unit: obj1 ? Math.floor(parseInt(obj1.qty_per_unit) * (100-parseInt(obj1.toleransi)) / 100) :0,
                     unit: obj1 ? obj1.unit:""
