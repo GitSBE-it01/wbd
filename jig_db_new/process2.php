@@ -148,7 +148,6 @@ function insertData($query, $filterValues) {
     $bind .= ")";
     $wholeQuery = $query . $params ." VALUES" . $bind;
 
-
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
@@ -170,7 +169,8 @@ function insertData($query, $filterValues) {
             }
         }
     }
-    
+    $stmt->close();
+    $conn->close();
 }
 
 

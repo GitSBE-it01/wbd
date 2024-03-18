@@ -59,6 +59,7 @@ require_once "trans.php";
         hidDtTrans,
         hidTblTrans
     } from '../comps/index.js';
+    import {currentDate} from '../process.js';
 
     const root = document.getElementById('root');
     const listLoc = await list_location.getData();
@@ -76,18 +77,35 @@ require_once "trans.php";
     root.removeChild(document.querySelector('.loading'));
 
     bot.appendChild(await loading('loading'));
-    const jigTrans = await jig_trans.getData();
+    const jigTrans = await jig_trans.fetchDataFilter({status: 'open'});
     const jigLoc = await jig_location_query.getData();
     const result = await mainDt(jigMstr, jigTrans, jigLoc);
     const result2 = await hidDtTrans(jigTrans, jigLoc);
+    const cek = {};
+    jigTrans.forEach(dt => {
+        if(!cek[dt.item_jig]) {
+            cek[dt.item_jig] = dt.code;
+        } 
+    })
     await createTable(mainTblTrans(result));    
     for (let i=0; i<result2.length; i++) {
         const target = `hid___${result2[i].item_jig}`;
         const id = `id___${result2[i].code}`;
         const targetCont = document.getElementById(target);
-        const data = result2.filter(item => item.item_jig === result2[i].item_jig);
+        let data =[];
+        if (!cek[`${result2[i].item_jig}`]) {
+            data = result2.filter(item => item.item_jig === result2[i].item_jig);
+        } else {
+            data = jigTrans.filter(item => item.item_jig === result2[i].item_jig)
+        }
         if (targetCont !== null && targetCont.childNodes.length===0) {
             await createTable(hidTblTrans(data,target,id));
+            const cek = document.querySelector(`[data-cell="date___${result2[i].code}"]`)
+            if(cek.textContent !== "") {
+                const btn = document.querySelector(`[data-cell="btnInp___${result2[i].code}"]`)
+                btn.classList.remove('arrow_green');
+                btn.classList.add('arrow_red');
+            }
         } 
     }   
     bot.removeChild(document.querySelector('.loading'));
@@ -108,6 +126,77 @@ require_once "trans.php";
                     row.classList.add('displayHide');
                 }
             })
+            return;
+        }
+        if (event.target.getAttribute('id').includes('btnInp')) { 
+            const cell = event.target;
+            const row = cell.closest('[data-row]');
+            const target = row.querySelectorAll(`[data-cell]`);
+            let code = '';
+            const arrInp = {
+                    code:[],
+                    loc:[],
+                    qty:[],
+                    start_date:[],
+                    status:[],
+                    item_jig:[]
+            }
+            target.forEach( tg=> {
+                const key = tg.getAttribute('data-cell');
+                const key2 = key.split('___');
+                const codeInp = key2[0];
+                const jig = key2[1].split('--');
+                const today = currentDate();
+                if (arrInp[`${codeInp}`]) {
+                    if(tg.tagName === 'INPUT') {
+                        const value = tg.value;
+                        arrInp[`${codeInp}`].push(value);
+                        arrInp.status.push('open');
+                        arrInp.item_jig.push(`${jig[0]}`);
+                        arrInp.start_date.push(today);
+                    } else {
+                        const value = tg.textContent;
+                        arrInp[`${codeInp}`].push(value);
+                        if (codeInp === 'code'){
+                            arrInp[`${codeInp}`].push(value);
+                        }
+                    }
+                }
+            })
+            console.log(arrInp);
+            let result ='';
+            if (cell.classList.contains('arrow_green')) {
+                result = await jig_trans.insertData(arrInp);
+                if (!result.includes('fail')) {
+                    cell.classList.remove('arrow_green');
+                    cell.classList.add('arrow_red');
+                    const target2 = row.querySelector(`[data-cell*="date___${row.id}"]`);
+                    target2.textContent = currentDate();
+                } else {
+                    alert('data fail to insert');
+                }
+            } else if(cell.classList.contains('arrow_red')) {
+                const data = {
+                    update: {
+                        end_date: [],
+                        status: []
+                    },
+                    insert: {
+                        id:[]
+                    }
+                }
+                result = await jig_trans.updateData(data.update, data.insert);
+                if (!result.includes('fail')) {
+                    cell.classList.remove('arrow_red');
+                    cell.classList.add('arrow_green');
+                    const target2 = row.querySelector(`[data-cell*="date___${row.id}"]`);
+                    target2.textContent = '';
+                } else {
+                    alert('data fail to update');
+                }
+            }
+
+            
         }
     })
 

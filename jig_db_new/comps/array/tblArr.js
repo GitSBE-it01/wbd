@@ -140,8 +140,7 @@ export const mainTblTrans = (data) => ({ // data table
                     attr:'onclick',
                     value:'openHide2(event, "hid", "displayHide")'
                 }
-            },
-
+            }
         ]
 })
 
@@ -167,8 +166,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'code', // sebagai ID
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'code'
                 },
                 param:{
                     list: '',
@@ -184,8 +183,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'lokasi', // sebagai ID
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'cek'
                 },
                 param:{
                     list: '',
@@ -202,8 +201,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'qty_per_unit', // sebagai ID
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'qty'
                 },
                 param:{
                     list: '',
@@ -220,8 +219,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'unit', // sebagai ID
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'unit'
                 },
                 param:{
                     list: '',
@@ -238,8 +237,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'start_date', // sebagai ID
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'date'
                 },
                 param:{
                     list: '',
@@ -256,8 +255,8 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 db_field:'loc', // sebagai ID
                 dt_type:'input',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'loc'
                 },
                 param:{
                     list: 'locS',
@@ -273,6 +272,24 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
                 header:'action',
                 db_field:'', // sebagai ID
                 dt_type:'button',
+                mark:{
+                    dbfield:'code',
+                    text:'btnInp'
+                },
+                param:{
+                    list: '',
+                    disable: '',
+                    text: '',
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'',
+                db_field:'id', // sebagai ID
+                dt_type:'hidDiv',
                 mark:{
                     dbfield:'',
                     text:''

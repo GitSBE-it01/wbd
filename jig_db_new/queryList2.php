@@ -14,6 +14,7 @@ $ng_daily_query = 'SELECT * FROM dbngvar.ng_daily';
 $jig_usage_query = 'SELECT * FROM jig_usage';
 $jig_trans_query = 'SELECT * FROM jig_trans';
 $list_mtnc_query = 'SELECT * FROM list_mtnc';
+$emp_code = 'SELECT * FROM emp_code';
 
 $insert_jig_master_query = 'INSERT INTO jig_master';
 $insert_log_master_query = 'INSERT INTO log_master';
@@ -91,4 +92,5 @@ $codeList = array(
     'insert_labor_log' => $insert_labor_log,
     'update_labor_log' => $update_labor_log,
     'delete_labor_log' => $delete_labor_log,
+    'emp_code'=> $emp_code
 );

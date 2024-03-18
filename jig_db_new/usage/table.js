@@ -230,17 +230,45 @@ export const tableUsage = (data) => ({ // data table
         {
             contStyle: ['m4'],
             thdStyle:['fr', 'fs-l', 'fw-blk', 'mb3', 'sl3', 'f-wht', 'p2'],
-            thrStyle:['flexCh'],
+            thrStyle:['flexCh', 'pl2'],
             trowStyle:['fr', 'px2'],
-            tdtStyle:['flexCh', 'mb1'],
-            selStyle:['flexCh', 'mb1'],
+            tdtStyle:['flexCh', 'mb1', 'pl2'],
+            selStyle:['flexCh', 'mb1', 'pl2'],
             btnStyle:[],
         }, 
     tblData: 
         [
             {
                 header:'item number jig',
-                db_field:'item_jig',
+                db_field:'jig',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Description jig',
+                db_field:'desc_jig',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'code jig',
+                db_field:'code',
                 dt_type:'text',
                 mark:{
                     dbfield:'',
@@ -267,8 +295,8 @@ export const tableUsage = (data) => ({ // data table
                 }
             },
             {
-                header:'quantity',
-                db_field:'qty',
+                header:'lokasi',
+                db_field:'loc',
                 dt_type:'text',
                 mark:{
                     dbfield:'',
@@ -282,7 +310,77 @@ export const tableUsage = (data) => ({ // data table
             },
             {
                 header:'keterangan',
-                db_field:'remark',
+                db_field:'cat',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'qty jig',
+                db_field:'qty_jig',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'ID wo',
+                db_field:'wo_id',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'item number speaker',
+                db_field:'type',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'qty ID',
+                db_field:'qty_total',
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:'',
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'penggunaan per pcs per hari',
+                db_field:'qty_usage',
                 dt_type:'text',
                 mark:{
                     dbfield:'',

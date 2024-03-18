@@ -68,11 +68,18 @@ require_once "../config.php";
     main.appendChild(loading('load','loading2'));
     const data = await jig_usage.getData();
     for (let i=0; i<data.length; i++) {
-        const fltr = data[i]['item_jig'] + " -- " + data[i]['tr_date'] + " -- " + data[i]['qty'];
-        data[i]['filter']=fltr;
+        const fltr = data[i]['jig'] + " -- " + 
+            data[i]['tr_date'] + " -- " + 
+            data[i]['code'] + " -- " + 
+            data[i]['loc'] + " -- " + 
+            data[i]['desc_jig'] + " -- " + 
+            data[i]['cat'] + " -- " + 
+            data[i]['wo_id'] + " -- " + 
+            data[i]['type'];
+        data[i]['filter'] = fltr;
     }
     const sortDtFilt = data.sort((a, b) => {
-        const nameComparison = a.item_jig.localeCompare(b.item_jig);
+        const nameComparison = a.jig.localeCompare(b.jig);
         if (nameComparison !== 0) {
             return nameComparison;
         }
@@ -104,7 +111,7 @@ require_once "../config.php";
             const fltrVal = document.getElementById('search').value.toLowerCase();
             const dataFltr = data.filter(item =>item.filter.toLowerCase().includes(fltrVal));
             const sortDtFilt = dataFltr.sort((a, b) => {
-                const nameComparison = a.item_jig.localeCompare(b.item_jig);
+                const nameComparison = a.jig.localeCompare(b.jig);
                 if (nameComparison !== 0) {
                   return nameComparison;
                 }
