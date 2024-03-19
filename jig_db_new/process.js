@@ -59,6 +59,20 @@ export function currentDate () {
     return `${year}-${month}-${day}`;
 }
 
+export function yesterdayDate () {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate() - 1;
+    let result = '';
+    if(month<10 && day<10) {return result = `${year}-0${month}-0${day}`;} 
+    if (month<10 && day>9) {return result = `${year}-0${month}-${day}`;}
+    if (month>9 && day>9) {return result = `${year}-${month}-${day}`;}
+    if (month>9 && day<10) {return result = `${year}-${month}-0${day}`;}
+    console.log(result);
+    return result;
+}
+
 /*-------------------------
 split string data
 -------------------------*/
@@ -89,7 +103,3 @@ export function isFormValid(formID) {
     }
     return true; 
 }
-
-/*export function styleSet(target) {
-    target.style.background
-}*/

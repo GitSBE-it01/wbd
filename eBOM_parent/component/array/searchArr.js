@@ -9,16 +9,28 @@ export const searchBarMain = {// detail search
         list:'asset_list',
         classSty:['mx2']
     },
-    arrBtn: 
-    {
-        id:'btnSbmt1',
-        marK:'',
-        type:'button', // submit or button
-        text: 'submit',
-        classSty:['mx1'],
-        js: {
-            attr:'',
-            value:''
+    arrBtn: [
+        {
+            id:'btnSbmt1',
+            mark:'',
+            type:'button', // submit or button
+            text: 'submit',
+            classSty:['mx1'],
+            js: {
+                attr:'',
+                value:''
+            }
+        },
+        {
+            id:'dlExcl',
+            mark:'',
+            type:'button', // submit or button
+            text: 'download excel',
+            classSty:['mx1'],
+            js: {
+                attr:'',
+                value:''
+            }
         }
-    }
+    ]
 }

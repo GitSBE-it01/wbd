@@ -44,7 +44,7 @@ import {
 } from './array/tblArr.js';
 
 import {
-    
+
 } from './array/btnArr.js';
 
 export {

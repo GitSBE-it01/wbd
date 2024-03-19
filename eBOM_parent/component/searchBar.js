@@ -12,7 +12,9 @@ export const createSearch = async(arr) => {
             div.classList.add(sty)
         });
         div.appendChild(await createInp(arr.arrInp));
-        div.appendChild(await createBtn(arr.arrBtn));
+        for (let i=0; i<arr.arrBtn.length; i++) {
+            div.appendChild(await createBtn(arr.arrBtn[i]));
+        }
         container.appendChild(div);
     } catch(error){
         console.log(error);

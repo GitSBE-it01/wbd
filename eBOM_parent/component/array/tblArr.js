@@ -2,25 +2,25 @@ export const mainTbl = (data) => ({ // data table
     target:`main`, 
     tblID: `tblMain`, 
     dbsrc: data, 
-    tblStyle: {
-        contStyle: ['mx2', 'mb2', 'flex-r'],
-        thrStyle:['flex-r'],
-        trowStyle:['flex-r', 'px2', 'mb2'],
-    },
+    tblStyle: 
+        {
+            contStyle: ['m4'],
+            thdStyle:['flex-r', 'fs-l', 'fw-blk', 'mb3', 'tl3', 'f-wht', 'p2'],
+            thrStyle:['f-child'],
+            trowStyle:['flex-r', 'px2'],
+            tdtStyle:['f-child', 'mb2', 'pt1', 'newLine', 'bt-White1'],
+            selStyle:[],
+            btnStyle:[],
+        }, 
     tblData: 
         [
             {
                 header:'Component',
                 db_field:'part', 
                 dt_type:'text',
-                style: {
-                    thdStyle:['fs-m', 'fw-blk', 'mb3', 'tl2', 'f-wht', 'p2', 'cl2'],
-                    tdtStyle:['mb1', 'px3', 'mt2', 'cl10'],
-                    insideStyle:[]
-                },
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'part',
+                    text:'part'
                 },
                 param:{
                     list: '',
@@ -35,11 +35,6 @@ export const mainTbl = (data) => ({ // data table
                 header:'Parent',
                 db_field:'parent', 
                 dt_type:'text',
-                style: {
-                    thdStyle:['fs-m', 'fw-blk', 'mb3', 'tl2', 'f-wht', 'p2', 'cl10'],
-                    tdtStyle:['mb1', 'px3', 'mt2', 'cl10'],
-                    insideStyle:[]
-                },
                 mark:{
                     dbfield:'',
                     text:''

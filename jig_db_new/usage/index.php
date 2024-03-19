@@ -66,27 +66,6 @@ require_once "../config.php";
     import {createBtn} from './button.js';
 
     main.appendChild(loading('load','loading2'));
-    const data = await jig_usage.getData();
-    for (let i=0; i<data.length; i++) {
-        const fltr = data[i]['jig'] + " -- " + 
-            data[i]['tr_date'] + " -- " + 
-            data[i]['code'] + " -- " + 
-            data[i]['loc'] + " -- " + 
-            data[i]['desc_jig'] + " -- " + 
-            data[i]['cat'] + " -- " + 
-            data[i]['wo_id'] + " -- " + 
-            data[i]['type'];
-        data[i]['filter'] = fltr;
-    }
-    const sortDtFilt = data.sort((a, b) => {
-        const nameComparison = a.jig.localeCompare(b.jig);
-        if (nameComparison !== 0) {
-            return nameComparison;
-        }
-        return b.tr_date - a.tr_date;
-    })
-    let finalData = sortDtFilt;
-
     await createSearch(searchBarMain);
     const searchDiv = document.getElementById('searchDiv');
     searchDiv.appendChild(await createBtn({
@@ -100,25 +79,32 @@ require_once "../config.php";
             value:''
         }
     }))
-    await createTable(tableUsage(finalData));
     main.removeChild(document.getElementById('load'));
-
+    
+    let finalData=[];
     document.addEventListener('click', async function(event) {
         if(event.target.getAttribute('id') === 'searchBtn') {
             if(document.getElementById('mainTable')) {
                 document.getElementById('mainTable').remove();
             }
-            const fltrVal = document.getElementById('search').value.toLowerCase();
-            const dataFltr = data.filter(item =>item.filter.toLowerCase().includes(fltrVal));
-            const sortDtFilt = dataFltr.sort((a, b) => {
-                const nameComparison = a.jig.localeCompare(b.jig);
-                if (nameComparison !== 0) {
-                  return nameComparison;
-                }
-                return b.tr_date - a.tr_date;
-            })
-            finalData = sortDtFilt;
+            main.appendChild(loading('load','loading2'));
+            const from = document.getElementById('from').value;
+            const too = document.getElementById('too').value;
+            const data = await jig_usage.fetchRangeFilter({tr_date:[`${from}`,`${too}`]});
+            data.sort((a,b)=> {return b.tr_date.localeCompare(a.part)});
+            for (let i=0; i<data.length; i++) {
+                const fltr = data[i]['jig'] + " -- " + 
+                data[i]['tr_date'] + " -- " + 
+                data[i]['code'] + " -- " + 
+                data[i]['loc'] + " -- " + 
+                data[i]['desc_jig'] + " -- " + 
+                data[i]['cat'] + " -- " + 
+                data[i]['wo_id'] + " -- " + 
+                data[i]['type'];
+            }
+            finalData = data;
             await createTable(tableUsage(finalData));
+            main.removeChild(document.getElementById('load'));
             return;
         }
         if(event.target.getAttribute('id') === 'usageHist') {

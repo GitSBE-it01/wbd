@@ -3,7 +3,7 @@
 const createTblCont = async(tblID, tblStyle) => {
     const table = document.createElement('div');
     table.id = tblID;
-    const classes = tblStyle.contStyle;
+    const classes = tblStyle;
     classes.forEach(clas=>{
         table.classList.add(clas);
     })
@@ -12,17 +12,17 @@ const createTblCont = async(tblID, tblStyle) => {
 
 //===========================================================================
 // header column
-const theader = async(data, tblStyle) =>{
+const theader = async(tblData, tblStyle) =>{
     const divHeader = document.createElement('div');
-    const classes = tblStyle.thrStyle;
+    const classes = tblStyle.thdStyle;
     classes.forEach(clas=>{
         divHeader.classList.add(clas);
     });
-    data.forEach(hd=>{
+    tblData.forEach(hd=>{
         if (hd.dt_type !== 'hidden' && hd.dt_type !== 'hidDiv') {
             const th = document.createElement('div');
             th.textContent = hd.header;
-            const classes2 = hd.style.thdStyle;
+            const classes2 = tblStyle.thrStyle;
             classes2.forEach(clas=>{
                 th.classList.add(clas);
             });
@@ -34,9 +34,9 @@ const theader = async(data, tblStyle) =>{
 
 //===========================================================================
 // data cell text 
-const cellTxt = (src,data) => {
+const cellTxt = (src,data, tblStyle) => {
     const div = document.createElement('div');
-    const classes = data.style.tdtStyle;
+    const classes = tblStyle.tdtStyle;
     if(classes) {
         classes.forEach(clas=>{
             div.classList.add(clas);
@@ -50,16 +50,16 @@ const cellTxt = (src,data) => {
 
 //===========================================================================
 // data cell selection 
-const cellSel = (src,data) => {
+const cellSel = (src,data, tblStyle) => {
     const div = document.createElement('div');
     const sel = document.createElement('select');
-    const classes = data.style.tdtStyle;
+    const classes = tblStyle.tdtStyle;
     if(classes) {
         classes.forEach(clas=>{
             div.classList.add(clas);
         });
     }
-    const classes2 = data.style.insideStyle;
+    const classes2 = tblStyle.selStyle;
     if(classes2) {
         classes2.forEach(clas=>{
             sel.classList.add(clas);
@@ -83,16 +83,16 @@ const cellSel = (src,data) => {
 
 //===========================================================================
 // data cell button 
-const cellBtn = (src,data) => {
+const cellBtn = (src,data, tblStyle) => {
     const div = document.createElement('div');
     const btn = document.createElement('button');
-    const classes = data.style.tdtStyle;
+    const classes = tblStyle.tdtStyle;
     if(classes) {
         classes.forEach(clas=>{
             div.classList.add(clas);
         });
     }
-    const classes2 = data.style.insideStyle;
+    const classes2 = tblStyle.btnStyle;
     if(classes2) {
         classes2.forEach(clas=>{
             btn.classList.add(clas);
@@ -125,30 +125,30 @@ const cellHid = (src,data) => {
 
 //===========================================================================
 // data cell input field 
-const cellInp = (src,data) => {
+const cellInp = (src,tblData, tblStyle) => {
     const div = document.createElement('div');
     const inp = document.createElement('input');
-    const classes = data.style.tdtStyle;
+    const classes = tblStyle.tdtStyle;
     if(classes) {
         classes.forEach(clas=>{
             div.classList.add(clas);
         });
     }
-    const classes2 = data.style.insideStyle;
+    const classes2 = tblStyle.inpStyle;
     if(classes2) {
         classes2.forEach(clas=>{
             inp.classList.add(clas);
         });
     }
-    inp.setAttribute('data-cell', data.mark.text + "___" +src[data.mark.dbfield]);
-    inp.id = data.db_field +"//" + data.mark.text + "___" +src[data.mark.dbfield];
-    if (src[data.db_field] !== undefined) {inp.value = src[data.db_field];}
+    inp.setAttribute('data-cell', tblData.mark.text + "___" +src[tblData.mark.dbfield]);
+    inp.id = tblData.db_field +"//" + tblData.mark.text + "___" +src[tblData.mark.dbfield];
+    if (src[tblData.db_field] !== undefined) {inp.value = src[tblData.db_field];}
     inp.setAttribute('type', 'text');
     inp.setAttribute('autocomplete', 'off');
-    inp.setAttribute('list', data.param.list);
-    inp.disabled = data.param.disable;
-    if (data.js.attr !=='') {
-        inp.setAttribute(data.js.attr, data.js.value);
+    inp.setAttribute('list', tblData.param.list);
+    inp.disabled = tblData.param.disable;
+    if (tblData.js.attr !=='') {
+        inp.setAttribute(tblData.js.attr, tblData.js.value);
     }
     div.appendChild(inp);
     return div;
@@ -156,10 +156,10 @@ const cellInp = (src,data) => {
 
 //===========================================================================
 // data cell div but not displayed
-const cellDiv = (src,data) => {
+const cellDiv = (src,data, tblStyle) => {
     const div = document.createElement('div');
     div.classList.add('displayHide');
-    const classes = data.style.insideStyle;
+    const classes = tblStyle.divStyle;
     if(classes) {
         classes.forEach(clas=>{
             div.classList.add(clas);
@@ -182,15 +182,15 @@ const tData = async(target, src, tblData, tblStyle) => {
             trow.classList.add(clas);
         });
         tblData.forEach(data=> {
-            if (data.dt_type === 'text'     ) {return trow.appendChild(cellTxt(src,data));}
-            if (data.dt_type === 'select'   ) {return trow.appendChild(cellSel(src,data));}
-            if (data.dt_type === 'button'   ) {return trow.appendChild(cellBtn(src,data));}
+            if (data.dt_type === 'text'     ) {return trow.appendChild(cellTxt(src,data, tblStyle));}
+            if (data.dt_type === 'select'   ) {return trow.appendChild(cellSel(src,data, tblStyle));}
+            if (data.dt_type === 'button'   ) {return trow.appendChild(cellBtn(src,data, tblStyle));}
             if (data.dt_type === 'hidden'   ) {return trow.appendChild(cellHid(src,data));}
             // hidden div should be at first line or last line only
             if (data.dt_type === 'hidDiv'   ) {
-                return cont.appendChild(cellDiv(src, data));
+                return cont.appendChild(cellDiv(src, data,tblStyle));
             }
-            if (data.dt_type === 'input'    ) {return trow.appendChild(cellInp(src,data));}
+            if (data.dt_type === 'input'    ) {return trow.appendChild(cellInp(src,data, tblStyle));}
         })
         cont.appendChild(trow)
         return;
@@ -205,7 +205,7 @@ export const createTable = async(arr) => {
     try{
         const container = document.getElementById(arr.target);
         // table container
-        container.appendChild(await createTblCont(arr.tblID, arr.tblStyle));
+        container.appendChild(await createTblCont(arr.tblID, arr.tblStyle.contStyle));
         
         // header
         const tblBody = document.getElementById(arr.tblID);

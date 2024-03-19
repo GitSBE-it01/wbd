@@ -46,7 +46,18 @@ export const mainDt = (dtMstr, dtTrans, dtLoc) => {
 }
 
 export const hidDtTrans = (dtTrans, dtLoc) => {
-    let final = {code:[],item_jig:[], lokasi:[], qty_per_unit:[],unit:[], start_date:[], loc:[], qty_bor:[], qty_avail:[]};
+    let final = {
+        code:[],
+        item_jig:[],
+        lokasi:[],
+        qty_per_unit:[],
+        unit:[],
+        start_date:[],
+        loc:[],
+        qty_bor:[],
+        qty_avail:[],
+        id_trans:[]
+    };
     dtLoc.forEach(Loc=>{
         if(final['code'].includes(Loc.code)){
             const idx = final['code'].indexOf(Loc.code);
@@ -65,6 +76,7 @@ export const hidDtTrans = (dtTrans, dtLoc) => {
             final['unit'].push(Loc.unit);
             final['start_date'].push('');
             final['loc'].push('');
+            final['id_trans'].push(0);
         }
     })
     dtTrans.forEach(tr=>{
@@ -75,6 +87,7 @@ export const hidDtTrans = (dtTrans, dtLoc) => {
                 final['start_date'][idx] = tr.start_date;
                 final['loc'][idx] = tr.loc;
                 final['qty_avail'][idx] -= parseInt(tr.qty);
+                final['id_trans'][idx] += parseInt(tr.id);
             }
         } else if(tr.status === 'open') {
             final['code'].push(tr.code);
@@ -83,6 +96,7 @@ export const hidDtTrans = (dtTrans, dtLoc) => {
             final['loc'].push(tr.loc);
             final['qty_per_unit'].push(0);
             final['qty_avail'].push(0);
+            final['id_trans'].push(parseInt(tr.id));
         }
     })
 

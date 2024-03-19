@@ -362,7 +362,7 @@ function fetchRangeFilter($query, $filterValues) {
                 }
 
                 if ($i===0) {
-                    $whereClause .= "`$key` BETWEEN ? AND ";
+                    $whereClause .= "$key BETWEEN ? AND ";
                     $bindParams[$ii] = &$filterValues[$key][$i];
                 } else {
                     $whereClause .= " ? AND ";
@@ -391,7 +391,7 @@ function fetchRangeFilter($query, $filterValues) {
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     }
-    
+
     $result = $stmt->get_result();
     $data = array();
     while ($row = $result->fetch_assoc()) {

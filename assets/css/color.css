@@ -202,3 +202,9 @@ red color
 .f-rd7 {color:#ff6666;}
 .f-rd8 {color:#ff9999;}
 .f-rd9 {color:#ffb3b3;}
+
+
+/* ================================================================== */
+.b-White1 {border: azure;}
+.bt-White1 {border-top: azure 3px solid;}
+.bb-White1 {border-bottom: azure 3px solid;}

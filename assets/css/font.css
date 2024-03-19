@@ -89,3 +89,5 @@ h1 {text-align: center;}
 .bl5-solid {border-left: 5px solid black;}
 
 .text-undecor {text-decoration: none;}
+
+.newLine {white-space: pre-wrap;}

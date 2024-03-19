@@ -122,24 +122,6 @@ export const mainTblTrans = (data) => ({ // data table
                     attr:'onclick',
                     value:'openHide2(event, "hid", "displayHide")'
                 }
-            },
-            {
-                header:'',
-                db_field:'filter', // sebagai ID
-                dt_type:'hidden',
-                mark:{
-                    dbfield:'',
-                    text:'filter'
-                },
-                param:{
-                    list: '',
-                    disable: '',
-                    text: 'open',
-                },
-                js:{
-                    attr:'onclick',
-                    value:'openHide2(event, "hid", "displayHide")'
-                }
             }
         ]
 })
@@ -288,11 +270,11 @@ export const hidTblTrans = (data,trgt,id) => ({ // data table
             },
             {
                 header:'',
-                db_field:'id', // sebagai ID
-                dt_type:'hidDiv',
+                db_field:'id_trans', // sebagai ID
+                dt_type:'hidden',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'code',
+                    text:'idTrans'
                 },
                 param:{
                     list: '',

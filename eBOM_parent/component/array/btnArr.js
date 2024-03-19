@@ -1,9 +1,9 @@
-export const sbmtSel = (text) => ({
-    id:'',
-    mark:text,
+export const dlExcel = () => ({
+    id:'dlexcl',
+    mark:'',
     type:'button', // submit or button
-    text:'',
-    classSty:['button_minus_m'],
+    text:'download excel',
+    classSty:['mx1'],
     js: {
         attr:'',
         value:``

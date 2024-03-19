@@ -20,7 +20,7 @@ require_once "../config.php";
 
 <?php if ($role === 'admin' || $role === 'superuser')  {?>
     
-<div id="root">
+<div id="root" class='sl9'>
 </div>
 
 <?php } else {
@@ -29,18 +29,21 @@ require_once "../config.php";
 ?>
 <script type='module'>
     import {ng_daily, jig_function_query, emp_code, jig_trans, jig_master_query, jig_usage} from '../class.js';
-    import {currentDate} from '../process.js';
+    import {currentDate, yesterdayDate} from '../process.js';
 
     const root = document.getElementById('root');
     const h1 = document.createElement('h1');
     root.appendChild(h1);
 const start = performance.now();
-const otb = await ng_daily.fetchRangeFilter({op_date:['2024-01-01', '2024-03-15']}); // labor
-const trans = await jig_trans.getData(); // trans
-const emp = await emp_code.getData(); // trans
+const otb = await ng_daily.fetchDataFilter({op_tran_date:yesterdayDate()}); // labor
+const trans = await jig_trans.fetchDataFilter({start_date:yesterdayDate()}); 
+const trans2 = await jig_trans.fetchDataFilter({end_date:yesterdayDate() }); 
+const emp = await emp_code.getData(); 
 const func = await jig_function_query.getData();
 const mstr = await jig_master_query.getData();
-
+trans2.forEach(dt=>{
+    trans.push(dt);
+})
 console.log({ trans, func, otb, emp, mstr});
 
 const codeEmp = {};
@@ -362,16 +365,15 @@ arrInp.forEach(dt => {
 })
 
 console.log('array input : ');
-console.log(arrInp)
-console.log(arrInpFix)
+console.log(arrInp);
+console.log(arrInpFix);
 const result = await jig_usage.insertData(arrInpFix);
-
 const end = performance.now();
 const totalTime = (end - start) /1000;
 console.log('total time = ' + totalTime);
 
 if(!result.includes('fail')) {
-    h1.textContent = `data successfully inserted to database after ${totalTime} seconds`;
+    h1.textContent = `${arrInp.length} data successfully inserted to database after ${totalTime} seconds`;
 } else {
     h1.textContent = `something went wrong`;
     const p = document.createElement('p');
