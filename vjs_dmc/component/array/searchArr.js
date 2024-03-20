@@ -32,7 +32,7 @@ export const searchBarKat = {// detail search
         type:'text', // text or hidden
         placeholder:'-choose-',
         list:'all_asset',
-        classSty:['mx2']
+        classSty:['mx2', 'inpText2']
     },
     arrBtn: 
     {

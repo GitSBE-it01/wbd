@@ -93,7 +93,7 @@ export const headerForm = (data,counter) => ({ // data table
     dbsrc: data, 
     tblStyle: 
         {
-            contStyle: ['mx4', 'flex-r', 'floatLeft'],
+            contStyle: ['mx4', 'flex-r', 'cl3'],
             thdStyle:['flex-c', 'fs-m', 'fw-blk', 'mb3', 'tl5', 'p2'],
             thrStyle:['f-child', 'mb2'],
             trowStyle:['flex-c', 'mb3', 'py2'],
@@ -172,7 +172,7 @@ export const tableVJS = (data, counter) => ({ // data table
     dbsrc: data, 
     tblStyle: 
         {
-            contStyle: ['mx4', 'mb2'],
+            contStyle: ['mx4', 'mb2', 'cl9', 'flex-c'],
             thdStyle:['flex-r', 'fs-m', 'fw-blk', 'mb3', 'tl2', 'f-wht', 'p2'],
             thrStyle:['f-child'],
             trowStyle:['flex-r', 'px2', 'mb2'],
@@ -506,8 +506,8 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'inspection',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'inspection',
+                    text:'insp'
                 },
                 param:'',
                 js:{
@@ -520,7 +520,7 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'dmc_vjs',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
+                    dbfield:'inspection',
                     text:''
                 },
                 param:'',
@@ -534,7 +534,7 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'doc',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
+                    dbfield:'inspection',
                     text:''
                 },
                 param:'',
@@ -548,7 +548,7 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'std',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
+                    dbfield:'inspection',
                     text:''
                 },
                 param:'',
@@ -562,7 +562,7 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'unit',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
+                    dbfield:'inspection',
                     text:''
                 },
                 param:'',
@@ -576,7 +576,7 @@ export const listInspTable = (src) => ({ // data table
                 db_field:'', // sebagai ID
                 dt_type:'button',
                 mark:{
-                    dbfield:``,
+                    dbfield:`inspection`,
                     text:'delLs'
                 },
                 param:'',
@@ -589,8 +589,8 @@ export const listInspTable = (src) => ({ // data table
 })
 
 export const addInspTable = () => ({ // data table
-    target:`main`, 
-    tblID: `inputInsp`, 
+    target:`inputInsp`, 
+    tblID: `formInp`, 
     dbsrc: [], 
     tblStyle: 
         {
@@ -600,7 +600,7 @@ export const addInspTable = () => ({ // data table
             trowStyle:['flex-r', 'px2', 'mb2'],
             tdtStyle:['f-child', 'mb1', 'flex-c', 'mt2'],
             selStyle:['f-child', 'mb1', 'mt2'],
-            btnStyle:['button_minus_sml', 'displayHide'],
+            btnStyle:['button_minus_sml'],
             divStyle:['fullwidth','or9']
         }, 
     tblData: 
@@ -706,96 +706,123 @@ export const addInspTable = () => ({ // data table
             },
         ]
 })
-/*
-contoh lengkap ============================================
 
-const arr = {
-    target:'', 
-    tblID: '', 
-    dbsrc: '', 
+
+export const addInspTable2 = (counter) => ({ // data table
+    target:`inputInsp`, 
+    tblID: `formInp${counter}`, 
+    dbsrc: [], 
     tblStyle: 
         {
-            contStyle: [],
-            thdStyle:[],
+            contStyle: ['mx2', 'mb2', 'f-child'],
+            thdStyle:['displayHide'],
             thrStyle:[],
-            trowStyle:[],
-            tdtStyle:[],
-            selStyle:[],
-            btnStyle:[],
-            divStyle:[]
+            trowStyle:['flex-r', 'px2', 'mb2'],
+            tdtStyle:['f-child', 'mb1', 'flex-c', 'mt2'],
+            selStyle:['f-child', 'mb1', 'mt2'],
+            btnStyle:['button_minus_sml'],
+            divStyle:['fullwidth','or9']
         }, 
     tblData: 
-    [
-        {
-            header:'no asset',
-            db_field:'assetno',
-            dt_type:'text',
-            mark:{
-                dbfield:'category',
-                text:'unit'
-            },
-            param:''
-        },
-        {
-            header:'OK / NG',
-            db_field:'',
-            dt_type:'select',
-            mark:{
-                dbfield:'category',
-                text:'input_value'
-            },
-            param:['OK','NG'], //isi dari option
-            js:{
-                attr:'',
-                value:''
-            }
-        },
-        {
-            header:'test2',
-            db_field:'test', // sebagai ID
-            dt_type:'button',
-            mark:{
-                dbfield:'category',
-                text:'input_value'
-            },
-            param:'submit'
-        },
-        {
-            header:'test3',
-            db_field:'byusername',
-            dt_type:'hidden',
-            mark:{
-                dbfield:'category',
-                text:'input_value'
-            },
-            param:''
-        },
-        {
-            header:'test4',
-            db_field:'hidDiv', // sebagai keterangan
-            dt_type:'hidDiv',
+        [
+            {
+                header:'Inspection',
+                db_field:'', 
+                dt_type:'input',
                 mark:{
-                    dbfield:'category',
-                    text:'id'
+                    dbfield:'',
+                    text:'inspection'
                 },
-            param:''
-        },
-        {
-            header:'test4',
-            db_field:'location', 
-            dt_type:'input',
-            mark:{
-                dbfield:'category',
-                text:'id'
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
-            param:{
-                list: 'list_test',
-                disable: false
+            {
+                header:'DMC / VJS',
+                db_field:'', 
+                dt_type:'input',
+                mark:{
+                    dbfield:'',
+                    text:'dmc_vjs'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
             },
-            js:{
-                attr:'',
-                value:''
-            }
-        }
-    ]}
-*/
+            {
+                header:'Document',
+                db_field:'', 
+                dt_type:'input',
+                mark:{
+                    dbfield:'',
+                    text:'doc'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Standard',
+                db_field:'', 
+                dt_type:'input',
+                mark:{
+                    dbfield:'',
+                    text:'std'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Unit',
+                db_field:'', 
+                dt_type:'input',
+                mark:{
+                    dbfield:'',
+                    text:'unit'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'',
+                db_field:'', // sebagai ID
+                dt_type:'button',
+                mark:{
+                    dbfield:`inspection`,
+                    text:'delList'
+                },
+                param:'',
+                js:{
+                    attr:'onclick',
+                    value:'delNode(this,"[data-row]")'
+                }
+            },
+        ]
+})

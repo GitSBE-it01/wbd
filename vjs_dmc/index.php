@@ -1,5 +1,19 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
+require_once './middleware/process.php';
+session_start();
+if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+  //redirect ke halaman login sbe
+  $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+  $url = explode("/",$currentURL);
+  header(`location: http://$url[2]/sbe/index.php?cek=no`);
+  exit(0);
+}
+
+$user_log = strtoupper($_SESSION["username"]);
+$prog = 'vjs_dmc';
+$role = cekUser('dbvjs',$user_log, $prog);
+
 ?>
 
 <!DOCTYPE html>

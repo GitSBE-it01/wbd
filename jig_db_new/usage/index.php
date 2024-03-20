@@ -9,6 +9,7 @@ require_once "../config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update record</title>
     <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/layout_fix.css">
     <link rel="stylesheet" href="../../assets/css/animation.css">
     <link rel="stylesheet" href="../../assets/css/font.css">
     <link rel="stylesheet" href="../../assets/css/color.css">
@@ -62,11 +63,11 @@ require_once "../config.php";
     */
     import {jig_usage} from '../class.js';
     import {createTable, tableUsage} from './table.js';
-    import {createSearch, searchBarMain} from './searchBar.js';
+    import {createSearch, createSearch2,searchBarDate, searchBarMain} from './searchBar.js';
     import {createBtn} from './button.js';
 
     main.appendChild(loading('load','loading2'));
-    await createSearch(searchBarMain);
+    await createSearch2(searchBarDate);
     const searchDiv = document.getElementById('searchDiv');
     searchDiv.appendChild(await createBtn({
         id:'usageHist',
@@ -79,6 +80,7 @@ require_once "../config.php";
             value:''
         }
     }))
+    await createSearch(searchBarMain);
     main.removeChild(document.getElementById('load'));
     
     let finalData=[];
@@ -91,7 +93,7 @@ require_once "../config.php";
             const from = document.getElementById('from').value;
             const too = document.getElementById('too').value;
             const data = await jig_usage.fetchRangeFilter({tr_date:[`${from}`,`${too}`]});
-            data.sort((a,b)=> {return b.tr_date.localeCompare(a.part)});
+            data.sort((a,b)=> {return b.tr_date.localeCompare(a.tr_date)});
             for (let i=0; i<data.length; i++) {
                 const fltr = data[i]['jig'] + " -- " + 
                 data[i]['tr_date'] + " -- " + 
@@ -101,9 +103,18 @@ require_once "../config.php";
                 data[i]['cat'] + " -- " + 
                 data[i]['wo_id'] + " -- " + 
                 data[i]['type'];
+                data[i]['fltr'] = fltr;
             }
             finalData = data;
             await createTable(tableUsage(finalData));
+            const mainTbl = document.getElementById('mainTable');
+            const targetDt = mainTbl.querySelectorAll('[data-row]');
+            targetDt.forEach(dt=> {
+                const target = dt.querySelector('[data-cell*="fltr"]');
+                const value = target.getAttribute('data-cell');
+                const splt = value.split('___');
+                dt.setAttribute('data-row',splt[1]);
+            })
             main.removeChild(document.getElementById('load'));
             return;
         }
@@ -122,6 +133,22 @@ require_once "../config.php";
             btnXl2.textContent = "dl excel";
             btnXl2.disabled = false;
             return;
+        }
+    })
+
+    document.addEventListener('change', async function(event) {
+        if(event.target.getAttribute('id') === 'search1') {
+            const target = event.target;
+            const value = event.target.value;
+            const mainTbl = document.getElementById('mainTable');
+            const targetDt = mainTbl.querySelectorAll('[data-row]');
+            targetDt.forEach(dt=>{
+                dt.classList.remove('displayHide');
+                if(!dt.getAttribute('data-row').toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+                    console.log('count')
+                    dt.classList.add('displayHide');
+                }
+            })
         }
     })
 

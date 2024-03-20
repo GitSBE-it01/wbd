@@ -296,6 +296,18 @@ svg
   margin: .2em .4em;
 }
 
+.magni{
+  background-image: url('../svg_file/magni/magnifier-svgrepo-com.svg');
+  background-size: cover;
+  background-color: transparent;
+  z-index: 1;
+  width: 2.3vh;
+  height: 2.3vh;
+  border: none;
+  cursor: pointer;
+  transform: translate(-40px, 3px);
+}
+
 /*========================================================
 loading view
 ========================================================*/ 

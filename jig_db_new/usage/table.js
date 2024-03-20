@@ -243,8 +243,8 @@ export const tableUsage = (data) => ({ // data table
                 db_field:'jig',
                 dt_type:'text',
                 mark:{
-                    dbfield:'',
-                    text:''
+                    dbfield:'jig',
+                    text:'jig'
                 },
                 param:'',
                 js:{
@@ -394,11 +394,11 @@ export const tableUsage = (data) => ({ // data table
             },
             {
                 header:'',
-                db_field:'filter',
+                db_field:'fltr',
                 dt_type:'hidden',
                 mark:{
-                    dbfield:'',
-                    text:'filter'
+                    dbfield:'fltr',
+                    text:'fltr'
                 },
                 param:'',
                 js:{

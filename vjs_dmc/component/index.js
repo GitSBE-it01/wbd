@@ -1,6 +1,7 @@
 import {loading, createNav, activeLink, columnSprt} from './load.js';
 import {createTable} from './table.js';
 import {createSearch} from './searchBar.js';
+import {createForm} from './form.js';
 
 // array folder
 import {
@@ -8,7 +9,8 @@ import {
 } from './array/navArr.js';
 
 import {
-    inpArrCat
+    inpArrCat,
+    inpArrForm
 } from './array/inpArr.js';
 
 import {
@@ -50,7 +52,8 @@ import {
     tablecatList,
     tblAddList,
     listInspTable,
-    addInspTable
+    addInspTable,
+    addInspTable2    
 } from './array/tblArr.js';
 
 import {
@@ -125,6 +128,9 @@ export {
     headerListInsp,
     listInspTable,
     inspection,
-    addInspTable
+    addInspTable,
+    addInspTable2,
+    createForm,
+    inpArrForm
 }
     

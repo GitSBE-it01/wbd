@@ -64,7 +64,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         headerListInsp,
         listInspTable,
         inspection,
-        addInspTable
+        addInspTable,
+        addInspTable2,
     } from './component/index.js';
     import {
         inpDMCProcess, 
@@ -88,39 +89,57 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const main = document.getElementById('main');
     main.appendChild(await createHeader2(inspection));
     main.setAttribute('style', 'height:96%; overflow-y:hidden;')
+    const contDiv = document.createElement('div');
+    contDiv.id = 'inputInsp';
+    main.appendChild(contDiv);
     await createTable(addInspTable());
-    const cont = document.getElementById('inputInsp');
     const div = document.createElement('div');
     div.classList.add('flex-r','mx4', 'my2');
-    cont.appendChild(div);
-    div.appendChild(await createBtn(basicBtn('sbmtInsp', 'enter')));
+    main.appendChild(div);
     div.appendChild(await createBtn(basicBtn('addInsp', 'button_plus')));
     div.appendChild(await createBtn(basicBtn('delInsp', 'button_minus')));
+    div.appendChild(await createBtn(basicBtn('sbmtInsp', 'enter')));
     await createTable(listInspTable(list_insp));
     const listTbl = document.getElementById('listAll');
-    listAll.setAttribute('style', 'height:85%;');
+    listTbl.setAttribute('style', 'height:85%;');
+    const row = listTbl.querySelectorAll('[data-row]');
+    row.forEach(dt=>{
+        const target = dt.querySelector('[data-cell*="insp"]');
+        const value = target.getAttribute('data-cell').split('___');
+        dt.setAttribute('data-row', value[1]);
+    })
+    const delBtn = document.querySelectorAll(`[data-cell*="delLs_"]`)
+    delBtn.forEach(dt=> {
+        dt.classList.add('displayHide');
+    })
     root.removeChild(document.querySelector('.loading'));
 
+    let counter = 1;
     document.addEventListener('click', async function(event) {
-        if(event.target.getAttribute('data-btn') === `editInsp__${valueTest}` ) {
-            const value1 = document.querySelectorAll(`[data-cell*="inspection__${valueTest}__`);
-            const dataArr = {category:[], inspection:[]};
-            value1.forEach(vl=>{
-                if(vl.value !== ''){
-                    dataArr['category'].push(valueTest);
-                    const value = vl.value.split("--")
-                    dataArr['inspection'].push(value[1]);
+        if(event.target.getAttribute('data-btn') === `sbmtInsp` ) {
+            const cont = document.getElementById('inputInsp');
+            const data = cont.querySelectorAll('[data-cell');
+            const dataArr = {
+                inspection:[],
+                dmc_vjs:[],
+                doc:[],
+                std:[],
+                unit:[]
+            };
+            data.forEach(dt=>{
+                const code = dt.getAttribute('data-cell');
+                const codeFix = code.split('__');
+                if(dataArr[`${codeFix[0]}`]) {
+                    dataArr[`${codeFix[0]}`].push(dt.value);
                 }
             })
-            console.log(dataArr);
-            const result = await bom.insertData(dataArr);
-            console.log(result)
+            const result = await list_inspect.insertData(dataArr);
             if (!result.includes('fail')) {
-                    alert('data successfully inserted');
-                    location.reload();
-                } else {
-                    alert('data fail to insert');
-                }
+                alert('data successfully inserted');
+                location.reload();
+            } else {
+                alert('data fail to insert');
+            }
             return;
         }
 
@@ -136,7 +155,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
             return;
         }
         if(event.target.getAttribute('data-btn') === `addInsp` ) {
-
+            await createTable(addInspTable2(counter));
+            counter++;
             return;
         }
     })

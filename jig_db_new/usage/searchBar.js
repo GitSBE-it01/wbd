@@ -12,6 +12,21 @@ export const createSearch = async(arr) => {
         arr.divStyle.forEach(sty => {
             div.classList.add(sty)
         });
+        div.appendChild(await createInp(arr.arrInp));
+        div.appendChild(await createBtn(arr.arrBtn));
+        container.appendChild(div);
+    } catch(error){
+        console.log(error);
+}}
+
+export const createSearch2 = async(arr) => {
+    try{
+        const container = document.getElementById(arr.target);
+        const div = document.createElement('div');
+        div.id = arr.id;
+        arr.divStyle.forEach(sty => {
+            div.classList.add(sty)
+        });
         const label = document.createElement('label');
         label.textContent = 'From Date';
         label.classList.add('mr2', 'pr1');
@@ -27,9 +42,7 @@ export const createSearch = async(arr) => {
     } catch(error){
         console.log(error);
     }}
-
-
-export const searchBarMain = {// detail search
+export const searchBarDate = {// detail search
     target:'main',
     id:'searchDiv',
     divStyle:['tl4', 'p2'],
@@ -63,4 +76,29 @@ export const searchBarMain = {// detail search
     },
 }
 
+export const searchBarMain = {// detail search
+    target:'main',
+    id:'searchDiv',
+    divStyle:['tl6', 'p2'],
+    arrInp: 
+        {
+            id:'search1',
+            type:'text', // text or hidden
+            placeholder:'search',
+            list:'',
+            classSty:['mx2', 'px2', 'inpText2']
+        },
+    arrBtn: 
+    {
+        id:'btn1',
+        marK:'',
+        type:'button', // submit or button
+        text: '',
+        classSty:['magni', 'pt1'],
+        js: {
+            attr:'',
+            value:''
+        }
+    },
+}
 

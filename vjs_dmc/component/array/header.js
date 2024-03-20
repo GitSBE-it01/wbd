@@ -28,7 +28,7 @@ export const selection = {
 export const headerListInsp = (tulisan) => ({
         target:'',
         id:'hdList2',
-        style: ['fs-l', 'fw-blk'],
+        style: ['fs-l', 'fw-blk', 'newLine', 'mb3'],
         text:tulisan
     });
 

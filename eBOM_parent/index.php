@@ -181,8 +181,6 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 result2.push(dt);
             }
         })
-
-
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.json_to_sheet(result2);
         XLSX.utils.book_append_sheet(workbook, worksheet, 'parent');

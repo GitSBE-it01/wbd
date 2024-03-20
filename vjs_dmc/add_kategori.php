@@ -101,7 +101,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     main2.setAttribute('style', 'height:96%;');
     const side1 = document.getElementById('smallSide');
     const big = document.getElementById('bigSide');
-    big.appendChild(await createHeader2(headerListInsp(`Mesin`)));
+    big.appendChild(await createHeader2(headerListInsp(``)));
     const addDelCat = document.createElement('div');
     addDelCat.classList.add('bl4', 'p2');
     const btnDiv = document.createElement('div');
@@ -129,6 +129,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
 
 
     let valueTest ='';
+    let std = '';
     let cek = 0;
     document.addEventListener('mouseover', async function(event){
         if(event.target.getAttribute('data-select')) {
@@ -176,18 +177,16 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 const getSearchVal = document.getElementById('assetInput').value;
                 const splitSearchVal = getSearchVal.split('/');
                 const getIdTxt = document.getElementById('hdList2');
-                getIdTxt.textContent = `
-                Mesin: ${splitSearchVal[0]} --  
-                Deskripsi: ${splitSearchVal[3]} -- 
-                Lokasi: ${splitSearchVal[4]}`;
-
+                std = '';
                 listedAst.forEach(ls=> {
                     if(ls.assetno === splitSearchVal[0]) {
                         valueTest = ls.vjs_kategory;
+                        std = ls.vjs_kategory;
                         cek = ls.id;
                         return;
                     }
                 })
+                getIdTxt.textContent = ` Mesin: ${splitSearchVal[0]} -- ${splitSearchVal[3]} \n Lokasi: ${splitSearchVal[4]} \n kategori DMC VJS : ${std}`;
 
 
                 const all = document.querySelectorAll('[data-select]');
@@ -196,6 +195,10 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                     if(al.getAttribute('data-select')=== valueTest) {
                         al.classList.add('fs-l','fc-b', 'sl9', 'fw-blk');
                     }
+                    if(al.getAttribute('data-select')=== std) {
+                        al.classList.add('or9', 'f-rd1');
+                    }
+                    
                 })
                 const raw = combine.filter(item => item.category === valueTest);
                 const result = raw.sort((a, b) => {
@@ -254,10 +257,13 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
             
         // insert new Category
         if(event.target.getAttribute('data-btn') === ('addBtn')) {
-                const valueCat = document.querySelector('[data-input*="inpCatNew"]');
+                const valueCat = document.querySelector('[data-input*="inpCatNew"]').value;
+                if (valueCat === "") {
+                    alert('kategori tidak bisa kosong ');
+                    return;
+                } else {
                 const dataArr ={mesin_cat: [valueCat.value]};
                 const result = await list_category.insertData(dataArr);
-                console.log(result);
                 if (!result.includes('fail')) {
                     alert('data successfully inserted');
                     location.reload();
@@ -265,7 +271,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                     alert('data is not inserted');
                 }
                 return;
-            }
+            }}
 
         // delete category
         if(event.target.getAttribute('data-selbtn') === (`${valueTest}`)) {
@@ -298,7 +304,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
             }
 
         //add inspection to selected category
-        if(event.target.getAttribute('data-btn') === `addBtnList__${valueTest}` ) {
+        if(event.target.getAttribute('data-btn') === (`addBtnList__${valueTest}`)) {
+                console.log('test');
                 const div = document.createElement('div');
                 div.id = `addedList__${valueTest}`;
                 div.setAttribute('data-divList', valueTest);

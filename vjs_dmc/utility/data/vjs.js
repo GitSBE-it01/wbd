@@ -19,7 +19,7 @@ export const initVJS = async(data) =>{
             const mainVJS = document.createElement('div');
             mainVJS.id = `mainVJS${cekResult[i]}`;
             mainVJS.setAttribute('data-div',`mainVJS--${cekResult[i]}`);
-            mainVJS.classList.add('tl7', 'p2');
+            mainVJS.classList.add('tl7', 'p2', 'flex-r');
             await createHeader(header4(`vjsDivAll`, cekResult[i]));
             vjsDivAll.appendChild(mainVJS);
             const docHD = document.getElementById(`hdVJS${cekResult[i]}`);
@@ -40,7 +40,7 @@ export const initVJS = async(data) =>{
     const mainVJS = document.createElement('div');
     mainVJS.id = `mainVJS${counter}`;
     mainVJS.setAttribute('data-div',`mainVJS--${counter}`);
-    mainVJS.classList.add('tl7', 'p2');
+    mainVJS.classList.add('tl7', 'p2', 'flex-r');
     await createHeader(header4(`vjsDivAll`, counter));
     vjsDivAll.appendChild(mainVJS);
     const docHD = document.getElementById(`hdVJS${counter}`);
@@ -57,17 +57,20 @@ const formVJS = async(data, counter) => {
     hidDiv.forEach(hid=>{
         hid.classList.remove('displayHide');
     })
-    const mainVJS = document.getElementById(`mainVJS${counter}`);
+    const isiVJS = document.getElementById(`isiVJS${counter}`);
+    const lastRow = document.createElement('div');
+    lastRow.classList.add('flex-r');
+    isiVJS.appendChild(lastRow);
     const vjsEdit = await createBtn(btnVjsEdit(counter));
     const vjsSbmt = await createBtn(btnVjsSbmt(counter));
-    mainVJS.appendChild(vjsEdit);
+    lastRow.appendChild(vjsEdit);
     const vjsEdt = document.querySelector(`[data-btn*=vjsEdit--${counter}]`);
     vjsEdt.disabled = true;
-    mainVJS.appendChild(vjsSbmt);
+    lastRow.appendChild(vjsSbmt);
     const minDivVJS= await createBtn(minVJS(counter));
-    mainVJS.appendChild(minDivVJS);
+    lastRow.appendChild(minDivVJS);
     const addDivVJS= await createBtn(addVJS(counter));
-    mainVJS.appendChild(addDivVJS);
+    lastRow.appendChild(addDivVJS);
     return;
 }
 
