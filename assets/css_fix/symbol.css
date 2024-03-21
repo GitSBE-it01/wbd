@@ -1,0 +1,257 @@
+
+.button_plus {
+    background-image: url('../svg_file/plus min/add-plus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 3vh;
+    height: 3vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em 1.5rem 0;
+    margin: .5em;
+  }
+  
+  .button_plus_m {
+    background-image: url('../svg_file/plus min/add-plus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 2.5vh;
+    height: 2.5vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .3em .2em 0;
+    margin: .2em .4em;
+  }
+  
+  .button_plus_sml {
+    background-image: url('../svg_file/plus min/add-plus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 2vh;
+    height: 2vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .2em .1em 0;
+    margin: .1em .2em;
+  }
+  
+  .button_minus {
+    background-image: url('../svg_file/plus min/substract-minus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 3vh;
+    height: 3vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em 1.5rem 0;
+    margin: .5em;
+  }
+  
+  .button_minus_m {
+    background-image: url('../svg_file/plus min/substract-minus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 2.5vh;
+    height: 2.5vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .3em .2em 0;
+    margin: .2em .4em;
+  }
+  
+  .button_minus_sml {
+    background-image: url('../svg_file/plus min/substract-minus-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 2vh;
+    height: 2vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .2em .1em 0;
+    margin: .1em .2em;
+  }
+  
+  .home {
+    background-image: url('../svg_file/home/home-2-svgrepo-com.svg');
+    background-size: cover;
+    background-color: transparent;
+    width: 3vh;
+    height: 3vh;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .home2 {
+    background-image: url('../svg_file/home/home-alt-1-svgrepo-com.svg');
+    background-size: cover;
+    background-color: rgba( 255, 255, 255, 1);
+    border-radius: 30%;
+    width: 5vh;
+    height: 5vh;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+  }
+  
+  .check {
+    background-image: url('../svg_file/sign/checkGreen.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 5vh;
+    height: 5vh;
+    border: none;
+    margin: 0 1em 1.5em 2em;
+    cursor: pointer;
+  }
+  
+  .cross {
+    background-image:  url('../svg_file/sign/cross-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 5vh;
+    height: 5vh;
+    border: none;
+    margin: 0 1em 1.5em 2em;
+    cursor: pointer;
+  }
+  
+  .editBtn {
+    background-image:  url('../svg_file/edit/edit-pen-write-1-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    width: 3vh;
+    height: 3vh;
+    border: none;
+    margin: 0 1em 0 2em;
+    cursor: pointer;
+  }
+  
+  .editBtn_m {
+    background-image:  url('../svg_file/edit/edit-pen-write-1-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    width: 2.5vh;
+    height: 2.5vh;
+    border: none;
+    margin: 0 1em 0 2em;
+    cursor: pointer;
+  }
+  
+  .editBtn_sml {
+    background-image:  url('../svg_file/edit/edit-pen-write-1-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+    width: 2vh;
+    height: 2vh;
+    border: none;
+    margin: 0 1em 0 2em;
+    cursor: pointer;
+  }
+  
+  .enter {
+    background-image: url('../svg_file/enter/enter-outline-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    width: 3vh;
+    height: 3vh;
+    border: none;
+    border-radius: 20%;
+    cursor: pointer;
+    padding: 0 .3em .2em 0;
+    margin: .2em .4em;
+  }
+  
+  .enter_m {
+    background-image: url('../svg_file/enter/enter-outline-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    width: 2.5vh;
+    height: 2.5vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .3em .2em 0;
+    margin: .2em .4em;
+  }
+  
+  .enter_sml {
+    background-image: url('../svg_file/enter/enter-outline-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+    width: 2vh;
+    height: 2vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .2em .1em 0;
+    margin: .1em .2em;
+  }
+  
+  
+  .arrow_red {
+    background-image: url('../svg_file/arrow/arrow-circle-left-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 3.5vh;
+    height: 3.5vh;
+    rotate: 180;
+    border: none;
+    cursor: pointer;
+    padding: 0 1em 1.5rem 0;
+    margin: .5em;
+  }
+  
+  .arrow_green{
+    background-image: url('../svg_file/arrow/arrow-circle-right-svgrepo-com.svg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 3.5vh;
+    height: 3.5vh;
+    border: none;
+    cursor: pointer;
+    padding: 0 .3em .2em 0;
+    margin: .2em .4em;
+  }
+  
+  .magni{
+    background-image: url('../svg_file/magni/magnifier-svgrepo-com.svg');
+    background-size: cover;
+    background-color: transparent;
+    z-index: 1;
+    width: 2.3vh;
+    height: 2.3vh;
+    border: none;
+    cursor: pointer;
+    transform: translate(-40px, 3px);
+  }
+  

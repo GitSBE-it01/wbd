@@ -236,7 +236,7 @@ function updateData($query, $filterValues, $filterValues2) {
 
     $filter = '';
     for ($i=0; $i<$count2; $i++){
-        $filter .=  ${'inputKeysFlt' . $i} . "=?, ";
+        $filter .=  ${'inputKeysFlt' . $i} . "=? AND ";
         if (is_int(${'inputFlt' . $i}[0])) {
             $types .= "i"; // Integer
         } elseif (is_float(${'inputFlt' . $i}[0])) {
@@ -247,9 +247,9 @@ function updateData($query, $filterValues, $filterValues2) {
     }
 
     $params = rtrim($params, ', ');
-    $filter = rtrim($filter, ', ');
+    $filter = rtrim($filter, 'AND ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
-
+    echo $wholeQuery;
     
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {

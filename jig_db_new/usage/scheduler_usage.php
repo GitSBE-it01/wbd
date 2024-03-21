@@ -15,18 +15,9 @@ require_once "../config.php";
     <link rel="stylesheet" href="../../assets/css/table.css">
     <link rel="stylesheet" href="../../assets/css/search_btn.css">
 </head>
-<body>
-<input type=hidden id='role' value="<?php if (isset($role)) {echo $role;} else {echo 'guest';}?>">
-
-<?php if ($role === 'admin' || $role === 'superuser')  {?>
-    
+<body>   
 <div id="root" class='sl9'>
 </div>
-
-<?php } else {
-    header("Location: http://192.168.2.103:8080/wbd/jig_db_new/index.php");
-    exit;}
-?>
 <script type='module'>
     import {ng_daily, jig_function_query, emp_code, jig_trans, jig_master_query, jig_usage} from '../class.js';
     import {currentDate, yesterdayDate} from '../process.js';
@@ -37,7 +28,7 @@ require_once "../config.php";
 const start = performance.now();
 const otb = await ng_daily.fetchDataFilter({op_tran_date:yesterdayDate()}); // labor
 const trans = await jig_trans.fetchDataFilter({start_date:yesterdayDate()}); 
-const trans2 = await jig_trans.fetchDataFilter({end_date:yesterdayDate() }); 
+const trans2 = await jig_trans.fetchDataFilter({end_date:yesterdayDate()}); 
 const emp = await emp_code.getData(); 
 const func = await jig_function_query.getData();
 const mstr = await jig_master_query.getData();

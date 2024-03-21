@@ -68,16 +68,18 @@ $role = cekUser('dbvjs',$user_log, $prog);
         initVJS,
         vjs_input,
         wo_list,
-        rmvNode
+        rmvNode,
+        vjs_asset
     } from './utility/index.js';
     
     // start up web page
     const root = document.getElementById('root');
     await createNav(navigation);
     activeLink('navID', ['f-or7']);
+    const assetDt = await vjs_asset.getData();
     const woDT = await wo_list.fetchDataFilter({wo_status:'R'});
     await createDatalist(woList(woDT));
-    await createDatalist(assetList);
+    await createDatalist(assetList(assetDt));
     await createSearch(searchBarMain);
     root.removeChild(document.querySelector('.loading'));
     
@@ -97,7 +99,21 @@ $role = cekUser('dbvjs',$user_log, $prog);
             sbmtBtn.disabled = true;
 
             // check apakah ada DMC yg terbentuk di hari ini utk asset yg dipilih
-            const valueInp = await document.getElementById('test1').value.split('/');
+            const valueRaw = await document.getElementById('test1').value;
+            const valueInp = valueRaw.split('/');
+            console.log({valueRaw, valueInp});
+            let cek = false;
+            assetDt.forEach(dt=> {
+                if(dt.assetno === valueInp[0]) {
+                    cek =true;
+                }
+            })
+            if(cek===false) {
+                alert('asset belum terdaftar dalam VJS');
+                sbmtBtn.disabled = false;
+                div.removeChild(document.querySelector('.loading2'))
+                return;
+            }
             const dataDMC = await dmc_input.fetchDataFilter({assetno: valueInp[0], assetkat:valueInp[1], dmc_vjs:'dmc', input_date:currentDate()});
 
             // buat title heading utk daily maintenance

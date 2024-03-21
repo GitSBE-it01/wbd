@@ -74,8 +74,10 @@ require_once "trans.php";
     await createSearch(transSearchBar());
     await createDatalist(jigList(jigMstr));
     await createDatalist(locList(listLoc));
+    const filterTrans = document.getElementById('filterTrans');
+    filterTrans.disabled = true;
     root.removeChild(document.querySelector('.loading'));
-
+    
     bot.appendChild(await loading('loading'));
     const jigTrans = await jig_trans.fetchDataFilter({status: 'open'});
     const jigLoc = await jig_location_query.getData();
@@ -87,29 +89,34 @@ require_once "trans.php";
             cek[dt.item_jig] = dt.code;
         } 
     })
-    await createTable(mainTblTrans(result));    
+    await createTable(mainTblTrans(result));  
     for (let i=0; i<result2.length; i++) {
         const target = `hid___${result2[i].item_jig}`;
         const id = `id___${result2[i].code}`;
-        const targetCont = document.getElementById(target);
+        const targetCont = document.querySelector(`[data-row="${target}"]`);
         const data = result2.filter(item => item.item_jig === result2[i].item_jig);
-        if (targetCont !== null && targetCont.childNodes.length===0) {
+        if (targetCont && targetCont.childNodes.length <1) {
             await createTable(hidTblTrans(data,target,id));
-            const cek = document.querySelector(`[data-cell="date___${result2[i].code}"]`)
-            if(cek && cek.textContent !== '') {
-                const btn = document.querySelector(`[data-cell="btnInp___${result2[i].code}"]`);
-                btn.classList.remove('arrow_green');
-                btn.classList.add('arrow_red');
-                const inp = document.querySelector(`[data-cell="loc___${result2[i].code}"]`);
-                inp.disabled =true;
-
-            }
-        } 
-    }   
+        }
+    }
+        
+    const changeClass = document.querySelectorAll(`[data-cell*="date__"]`);
+    changeClass.forEach( dt=>{
+        const val = dt.getAttribute('data-cell');
+        const splt = val.split('___');
+        if(dt.textContent !== '') {
+            const btn = document.querySelector(`[data-cell="btnInp___${splt[1]}"]`);
+            btn.classList.remove('arrow_green');
+            btn.classList.add('arrow_red');
+            const inp = document.querySelector(`[data-cell="loc___${splt[1]}"]`);
+            inp.disabled =true;
+        }
+    })
+    filterTrans.disabled = false;
     bot.removeChild(document.querySelector('.loading'));
     
-    document.addEventListener('click', async function(event) {
-        if (event.target.getAttribute('id')==='sbmtCat') {
+    document.addEventListener('change', async function(event) {
+        if (event.target.getAttribute('id')==='filterTrans') {
             const inputVal = document.getElementById('filterTrans').value;
             const main = document.getElementById('mainTbl');
             const target = main.querySelectorAll('[data-cell*="item__"]');
@@ -126,83 +133,112 @@ require_once "trans.php";
             })
             return;
         }
-        if (event.target.getAttribute('id').includes('btnInp')) { 
+    })
+
+    document.addEventListener('click', async function(event) {
+        if (event.target.tagName === 'BUTTON' && event.target.getAttribute('data-cell').includes('btnInp')) { 
             const cell = event.target;
+            const item = cell.getAttribute('data-cell');
+            const splt1 = item.split('___');
+            const splt2 = splt1[1].split('--');
             const row = cell.closest('[data-row]');
-            const target = row.querySelectorAll(`[data-cell]`);
-            let code = '';
-            const arrInp = {
-                    code:[],
-                    loc:[],
-                    qty:[],
-                    start_date:[],
-                    status:[],
-                    item_jig:[]
-            }
-            target.forEach( tg=> {
-                const key = tg.getAttribute('data-cell');
-                const key2 = key.split('___');
-                const codeInp = key2[0];
-                const jig = key2[1].split('--');
-                const today = currentDate();
-                if (arrInp[`${codeInp}`]) {
-                    if(tg.tagName === 'INPUT') {
-                        const value = tg.value;
-                        arrInp[`${codeInp}`].push(value);
-                        arrInp.status.push('open');
-                        arrInp.item_jig.push(`${jig[0]}`);
-                        arrInp.start_date.push(today);
-                    } else {
-                        const value = tg.textContent;
-                        arrInp[`${codeInp}`].push(value);
-                        if (codeInp === 'code'){
+            if (cell.classList.contains('arrow_green')) {
+                cell.disabled = true;
+                cell.classList.remove('arrow_green');
+                cell.classList.add('loading2');            
+                const target = row.querySelectorAll(`[data-cell]`);
+                const arrInp = {
+                        code:[],
+                        loc:[],
+                        qty:[],
+                        start_date:[],
+                        status:[],
+                        item_jig:[]
+                }
+                target.forEach( tg=> {
+                    const key = tg.getAttribute('data-cell');
+                    const key2 = key.split('___');
+                    const codeInp = key2[0];
+                    const jig = key2[1].split('--');
+                    const today = currentDate();
+                    if (arrInp[`${codeInp}`]) {
+                        if(tg.tagName === 'INPUT') {
+                            const value = tg.value;
+                            arrInp[`${codeInp}`].push(value);
+                            arrInp.status.push('open');
+                            arrInp.item_jig.push(`${jig[0]}`);
+                            arrInp.start_date.push(today);
+                        } else {
+                            const value = tg.textContent;
                             arrInp[`${codeInp}`].push(value);
                         }
                     }
-                }
-            })
-            let result ='';
-            if (cell.classList.contains('arrow_green')) {
-                result = await jig_trans.insertData(arrInp);
+                })
+                const result = await jig_trans.insertData(arrInp);
                 if (!result.includes('fail')) {
-                    cell.classList.remove('arrow_green');
-                    cell.classList.add('arrow_red');
-                    const target2 = row.querySelector(`[data-cell*="date___${row.id}"]`);
+                    const target2 = row.querySelector(`[data-cell*="date___"]`);
                     target2.textContent = currentDate();
-                    const inp = row.querySelector(`[data-cell*="loc___${row.id}"]`);
+                    const inp = row.querySelector(`[data-cell*="loc___"]`);
                     inp.disabled = true;
+                    const qty = row.querySelector(`[data-cell*="qty___"]`);
+                    const qtyBor = document.querySelector(`[data-cell*="qtyBor___"]`);
+                    const curBor = qtyBor.textContent;
+                    qtyBor.textContent = parseInt(curBor) + parseInt(qty.textContent);
+                    const qtyAvl = document.querySelector(`[data-cell*="qtyAvl___${splt2[0]}"]`);
+                    const curAvl = qtyAvl.textContent;
+                    qtyAvl.textContent = parseInt(curAvl) - parseInt(qty.textContent);
+                    cell.classList.remove('loading2');
+                    cell.classList.add('arrow_red');
+                    cell.disabled = false;
                 } else {
-                    alert('data fail to insert');
+                    alert('data fail to update');
+                    cell.disabled = false;
+                    cell.classList.add('arrow_green');
+                    cell.classList.remove('loading2');    
                 }
-            } else if(cell.classList.contains('arrow_red')) {
-                const target2 = row.querySelector(`[data-cell*="idTrans___${row.id}"]`);
-                const value = target2.value;
+            } else if(cell.classList.contains('arrow_red')){
+                cell.disabled = true;
+                cell.classList.remove('arrow_red');
+                cell.classList.add('loading2');   
+                const trgt2 = row.querySelector(`[data-cell*="code___"]`);
+                const value = trgt2.textContent;
                 const data = {
                     update: {
                         end_date: [currentDate()],
                         status: ['close']
                     },
                     insert: {
-                        id:[value]
+                        code:[`${value}`],
+                        status: ['open']
                     }
                 }
-                result = await jig_trans.updateData(data.update, data.insert);
+                const result = await jig_trans.updateData(data.update, data.insert);
                 if (!result.includes('fail')) {
-                    cell.classList.remove('arrow_red');
-                    cell.classList.add('arrow_green');
-                    const target2 = row.querySelector(`[data-cell*="date___${row.id}"]`);
+                    cell.disabled = false;
+                    const target2 = row.querySelector(`[data-cell*="date___"]`);
                     target2.textContent = '';
-                    const inp = row.querySelector(`[data-cell*="loc___${row.id}"]`);
+                    const inp = row.querySelector(`[data-cell*="loc___"]`);
+                    const qty = row.querySelector(`[data-cell*="qty___"]`);
+                    inp.value = '';
                     inp.disabled = false;
+                    const qtyBor = document.querySelector(`[data-cell*="qtyBor___${splt2[0]}"]`);
+                    const curBor = qtyBor.textContent;
+                    qtyBor.textContent = parseInt(curBor) - parseInt(qty.textContent);
+                    const qtyAvl = document.querySelector(`[data-cell*="qtyAvl___${splt2[0]}"]`);
+                    const curAvl = qtyAvl.textContent;
+                    qtyAvl.textContent = parseInt(curAvl) + parseInt(qty.textContent);
+
+                    cell.classList.remove('loading2');
+                    cell.classList.add('arrow_green');
                 } else {
                     alert('data fail to update');
+                    cell.disabled = false;
+                    cell.classList.add('arrow_red');
+                    cell.classList.remove('loading2');    
                 }
-            }
-
-            
+            }            
         }
     })
-
     
 </script>
 </body>

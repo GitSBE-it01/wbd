@@ -351,6 +351,7 @@ loading view
 	width: 3rem; 
 	height: 3rem;
 	animation: loading2 2s linear infinite; 
+  border: none;
 	background: url('../../assets/svg_file/solar_line/star-1-svgrepo-com.svg');
 	background-size: cover; 
 }
