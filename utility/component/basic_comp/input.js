@@ -2,13 +2,6 @@
 =================================================================
 input
 */
-const inpArrExp = {
-    id:'',
-    type:'', // text or hidden
-    placeholder: '',
-    list:'',
-    classSty:[],
-}
 export const createInp = async(arr) => {
     const input = document.createElement('input');
     input.setAttribute('data-input', arr.mark);

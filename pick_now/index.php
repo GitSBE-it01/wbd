@@ -1,6 +1,6 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
-require_once 'D:/xampp/htdocs/wbd/middleware/process.php'; 
+require_once 'D:/xampp/htdocs/wbd/backend/index.php'; 
 
 session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
@@ -32,7 +32,7 @@ $role = cekUser($db,$user_log, $prog);
 </head>
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
-<div id='root' class='container bl9'>
+<div id='root' class='container bl8'>
 
 </div>
 <script type='module'>
@@ -42,7 +42,8 @@ $role = cekUser($db,$user_log, $prog);
     debug.classList.add('px3')
     const root = document.getElementById('root');
     root.appendChild(debug);
-    debug.innerHTML = await bom.fetchDataFilter({type:'YG'});
+    const bomDt = await bom.get({type:'YG', status:'active'});
+    debug.innerHTML = JSON.stringify(bomDt);
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>

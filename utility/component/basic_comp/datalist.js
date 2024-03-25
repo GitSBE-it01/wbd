@@ -2,16 +2,6 @@
 =================================================================
 datalist
 */
-const datalistArr = {
-    target:'',
-    id:'',
-    data:'',
-    delimiter:'',
-    optValue:[],
-    optText:[]
-}
-// valueshown di isi dengan db field yg mau di tampilkan di value dan text contentnya 
-
 export const createDatalist = async(arr) => {
     const target = document.getElementById(arr.target);
     const datalist = document.createElement('datalist');

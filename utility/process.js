@@ -14,15 +14,6 @@ export function currentDate () {
 }
 
 /*-------------------------
-split string data
--------------------------*/
-export function splitCustomString (delimiter, value) {
-    const result = value.split(delimiter);
-    return result
-}
-
-
-/*-------------------------
 str to number with number of char and decimal
 -------------------------*/
 export function strToNumber(number, minNumber, decimalMinimum) {
@@ -90,18 +81,6 @@ export function delChild(target) {
 remove container 
 -------------------------*/
 export function rmvNode(...target) {
-    target.forEach(tgt=> {
-        if (document.getElementById(tgt)) {
-            document.getElementById(tgt).remove();
-        }
-    })
-    return;
-}
-
-/*-------------------------
-cache to local storage
--------------------------*/
-export function test2(...target) {
     target.forEach(tgt=> {
         if (document.getElementById(tgt)) {
             document.getElementById(tgt).remove();

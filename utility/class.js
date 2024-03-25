@@ -21,25 +21,20 @@ export class Data {
         let url ="";
         let ori = "";
         if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/middleware/';
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/backend/API.php';
             ori = 'http://informationsystem.sbe.co.id';
         } else {
-            url = 'http://192.168.2.103:8080/wbd/middleware/';
+            url = 'http://192.168.2.103:8080/wbd/backend/API.php';
             ori = 'http://192.168.2.103';
         }
         return { url, ori };
     }
 
-
-      /* 
-      ambil data tanpa filter dari database
-      tanpa imbuhan apapun contoh : 
-    
-      const dataDMC = await dataInput.getData();
-      */
-    async getData() {
+    async get(data) {
         try {
-            const response = await fetch(this.url, {
+            const filter = new URLSearchParams(data)
+            const fetchURL = this.url + "/" + this.dt.db + "." + this.dt.table + "?" + filter.toString();
+            const response = await fetch(fetchURL, {
                 method: 'GET', 
                 headers: {
                   'Content-Type': 'application/json',
@@ -49,7 +44,7 @@ export class Data {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const result = await response.json();
+            const result = await response.text();
             return result;
         } catch (error) {
             console.error('Error:', error);
@@ -67,10 +62,10 @@ export class Data {
             input_date:currentDate()
         });
       */
-      async fetchDataFilter(data) {
+      async fetch(data) {
         try {
             this.dt.filter = data;
-            const fetchURL = this.url + 'post.php'
+            const fetchURL = this.url;
             const response = await fetch(fetchURL, {
                 method: 'POST', 
                 headers: {
@@ -82,7 +77,7 @@ export class Data {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const result = await response.text();
+            const result = await response.json();
             return result;
         } catch (error) {
             console.error('Error:', error);
@@ -102,22 +97,16 @@ export class Data {
         }
         );
       */
-      async insertData(insert) {
-        const keys = Object.keys(insert);
-        const values = Object.values(insert);
-        const data=[];
-        for (let i=0; i<keys.length; i++) {
-            const entry = { [keys[i]]: values[i] };
-            data.push(entry);
-        }
+      async insert(data) {
         try {
+            this.dt.data = data;
             const response = await fetch(this.url, {
-                method: 'POST', 
+                method: 'PUT', 
                 headers: {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'insertData', param1: this.db, param2: this.key, data})
+              body: JSON.stringify(this.dt)
             });
 
             if (!response.ok) {
@@ -203,27 +192,6 @@ export class Data {
                 throw new Error('Network response was not ok');
             }
             const result = await response.text();
-            return result;
-        } catch (error) {
-            console.error('Error:', error);
-            return Promise.reject(error);
-        }
-      }
-
-      async fetchRangeFilter(data) {
-        try {
-            const response = await fetch(this.url, {
-                method: 'POST', 
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Origin': 'http://informationsystem.sbe.co.id'
-              },
-              body: JSON.stringify({action: 'fetchRangeFilter', param1: this.db, param2: this.key, data})
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
             return result;
         } catch (error) {
             console.error('Error:', error);

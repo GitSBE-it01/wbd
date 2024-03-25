@@ -3,12 +3,6 @@
 =================================================================
 header text
 */
-const arr = {
-    target:'',
-    id:'',
-    style: [],
-    text:''
-}
 export const createHeader = async(arr)=> {
     const target = document.getElementById(arr.target);
     const hd = document.createElement('div');
