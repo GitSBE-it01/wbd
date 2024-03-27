@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "config2.php";
 require_once "queryList2.php";
 require_once "process2.php";
 require_once "process.php";

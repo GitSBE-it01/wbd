@@ -32,18 +32,54 @@ $role = cekUser($db,$user_log, $prog);
 </head>
 <body>
 <input type='hidden' value="<?php echo $role; ?>" id='role'>
-<div id='root' class='container bl8'>
-
-</div>
+<div id='root' class='container bl8'></div>
 <script type='module'>
-    import { Data } from  '/wbd/utility/class.js';
-    const bom= new Data('db_jig','jig_master');
-    const debug = document.createElement('p');
-    debug.classList.add('px3')
+    import {currentDate, debug } from '/wbd/utilities/index.js';
+    import { Data } from  '/wbd/utilities/class.js';
+
+    /*
+    const start = performance.now();
+    const start1 = performance.now();
+    const loc = new Data('dbqad_live','loc_mstr');
+    const whLoc = await loc.fetch();
+    console.log(whLoc['response']);
+    const end1 = performance.now();
+    const totalTime1 = (end1 - start1) /1000;
+    console.log('total time1 = ' + totalTime1);
+    
+    const start2 = performance.now()
+    const wobb = new Data('dbqad_live','wod_det');
+    const wobbR = await wobb.fetch();
+    console.log(wobbR['response']);
+    const end2 = performance.now();
+    const totalTime2 = (end2 - start2) /1000;
+    console.log('total time1 = ' + totalTime2);
+    
+    const start3 = performance.now()
+    const inv = new Data('dbqad_live','ld_det');
+    const oh = await inv.fetch();
+    console.log(oh['response']);
+    const end3 = performance.now();
+    const totalTime3 = (end3 - start3) /3000;
+    console.log('total time3 = ' + totalTime3);
+    */
+    
+    const start4 = performance.now()
+    const wo = new Data('dbqad_live','wo_mstr');
+    const woR = await wo.fetch({wo_status: "R"});
+    console.log(woR['response']);
+    const end4 = performance.now();
+    const totalTime4 = (end4 - start4) /1000;
+    console.log('total time4 = ' + totalTime4);
+    
+    // const end = performance.now();
+    // const totalTime = (end - start) /1000;
+    // console.log('total time = ' + totalTime);
     const root = document.getElementById('root');
-    root.appendChild(debug);
-    const bomDt = await bom.get({type:'YG', status:'active'});
-    debug.innerHTML = JSON.stringify(bomDt);
+
+
+
+
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>

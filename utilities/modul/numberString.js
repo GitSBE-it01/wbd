@@ -1,22 +1,4 @@
-/*==============================================================================
-FUNCTION LIST
-Berikut adalah list FUNCTION  yang akan di pakai di prog VJS
-==============================================================================*/
-/*-------------------------
-Get today date
--------------------------*/
-export function currentDate () {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-    return `${year}-${month}-${day}`;
-}
-
-/*-------------------------
-str to number with number of char and decimal
--------------------------*/
-export function strToNumber(number, minNumber, decimalMinimum) {
+export function numberToString(number, minNumber, decimalMinimum) {
     const noStr = number.toString();
     const splitStr = noStr.split(".");
     const intNo = splitStr[0];
@@ -63,28 +45,4 @@ export function strToNumber(number, minNumber, decimalMinimum) {
             return resultInt + resultCek.toString();  
         }
     return resultDec = "." + cek1 + cek2;
-}
-
-/*-------------------------
-delete children node
--------------------------*/
-export function delChild(target) {
-    const container = document.getElementById(target);
-    if (container.childNodes.length > 0) {
-        container.removeChild(container.lastChild);
-        return;
-    }
-    alert('there is nothing to delete');
-}
-
-/*-------------------------
-remove container 
--------------------------*/
-export function rmvNode(...target) {
-    target.forEach(tgt=> {
-        if (document.getElementById(tgt)) {
-            document.getElementById(tgt).remove();
-        }
-    })
-    return;
 }

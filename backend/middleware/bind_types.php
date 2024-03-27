@@ -1,6 +1,20 @@
 <?php
-require_once "../index.php";
 function bindTypes($data) {
+    $types ='';
+    $keys = array_keys($data);
+    foreach ($keys as $key => $value ) {
+        if (is_int($data[$value][0])) {
+            $types .= "i"; // Integer
+        } elseif (is_float($data[$value][0])) {
+            $types .= "d"; // Double/Float
+        } elseif (is_string($data[$value][0])) {
+            $types .= "s";
+        }
+    }
+    return $types;
+}
+
+function bindTypes2($data) {
     $types ='';
     $ii = 0;
     foreach ($data as $key => $value ) {

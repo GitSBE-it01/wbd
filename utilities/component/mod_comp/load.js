@@ -7,33 +7,6 @@ export const loading = (classDiv) => {
     return div;
 }
 
-/*-------------------------
-buat nav bar
--------------------------*/
-// contoh array 
-const navArr = {
-    target:'',
-    tgtStyle:'', //only for flex direction row or column, row for sidebar, column for navbar
-    navStyle:[],
-    mainStyle:[],
-    navi:[
-            {
-                link: '../../sbe/index.php',
-                type: 'btn', // if btn then create a button, if txt then create span
-                text: '', //if btn then empty
-                divStyle:['mx5', 'mt2', 'scale-120'],
-                linkStyle: ['home']
-            },
-            {
-                link: 'index.php',
-                type: 'txt', // if btn then create a button, if txt then create span
-                text: 'home',
-                divStyle:['ml5','mt3', 'scale-120'],
-                linkStyle: ['f-tl7', 'fs-m', 'fw-blk']
-            },
-        ]
-    };
-
 export const createNav = async(navArr) => {
     const container = document.getElementById(navArr.target);
     container.classList.add(navArr.tgtStyle);

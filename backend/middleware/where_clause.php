@@ -1,5 +1,4 @@
 <?php
-require_once "../index.php";
 function whereClause($data) {
     $whereClause = '';
     $ii=0;
@@ -26,6 +25,7 @@ function whereClause($data) {
         }
     }
     $whereClause = rtrim($whereClause, 'AND');
-    return $whereClause;
+    return $data;
 }
+
 ?>

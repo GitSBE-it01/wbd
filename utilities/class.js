@@ -29,8 +29,13 @@ export class Data {
         }
         return { url, ori };
     }
-
-    async get(data) {
+      /* 
+      fetch data dari database
+        const fetch = {
+            first_name:'hello'
+        }
+      */
+    async fetch(data) {
         try {
             const filter = new URLSearchParams(data)
             const fetchURL = this.url + "/" + this.dt.db + "." + this.dt.table + "?" + filter.toString();
@@ -40,39 +45,6 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.text();
-            return result;
-        } catch (error) {
-            console.error('Error:', error);
-            return Promise.reject(error);
-        }
-      }
-
-      /* 
-      ambil data dengan filter dari database
-      menggunakan object contoh : 
-    
-      const dataDMC = await dataInput.fetchDataFilter({
-            assetno: valueInp[0], 
-            assetkat:valueInp[1], 
-            input_date:currentDate()
-        });
-      */
-      async fetch(data) {
-        try {
-            this.dt.filter = data;
-            const fetchURL = this.url;
-            const response = await fetch(fetchURL, {
-                method: 'POST', 
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Origin': this.ori
-              },
-              body: JSON.stringify(this.dt)
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -89,17 +61,51 @@ export class Data {
       insert data ke database
       menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
     
-      const dataDMC = await dataInput.insertData(
-        {
-            assetno: valueInp[0], 
-            assetkat:valueInp[1], 
-            input_date:currentDate()
+    const insertDt = {
+            first_name:['hello','Redo'],
+            last_name:['world', 'test']
         }
-        );
       */
       async insert(data) {
         try {
             this.dt.data = data;
+            const response = await fetch(this.url, {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
+              },
+              body: JSON.stringify(this.dt)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+      }
+
+      /* 
+      update data ke database
+      menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
+    
+    const updateDt = {
+        data: {
+            last_name:['world', 'test']
+        },
+            filter: {
+                id: [7,8]
+            }
+        }
+      */
+      async update(data) {
+        try {
+            this.dt.data = data['data'];
+            this.dt.filter = data['filter'];
             const response = await fetch(this.url, {
                 method: 'PUT', 
                 headers: {
@@ -112,58 +118,7 @@ export class Data {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const result = await response.text();
-            return result;
-        } catch (error) {
-            console.error('Error:', error);
-            return Promise.reject(error);
-        }
-      }
-
-      /* 
-      update data ke database
-      menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
-    
-      const dataDMC = await dataInput.updateData(
-        update:{
-                assetno: valueInp[0], 
-                assetkat:valueInp[1], 
-                input_date:currentDate()
-            },
-        filter:{
-                id: 123
-            }
-        );
-      */
-      async updateData(arr) {
-        const keys = Object.keys(arr.update);
-        const values = Object.values(arr.update);
-        const updateFilter= [];
-        for (let i=0; i<keys.length; i++) {
-            const entry = { [keys[i]]: values[i] };
-            updateFilter.push(entry);
-        }
-        const keys2 = Object.keys(arr.filter);
-        const values2 = Object.values(arr.filter);
-        const updateFilter2=[];
-        for (let i=0; i<keys2.length; i++) {
-            const entry = { [keys2[i]]: values2[i] };
-            updateFilter2.push(entry);
-        }
-        try {
-            const response = await fetch(this.url, {
-                method: 'POST', 
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Origin': this.ori
-              },
-              body: JSON.stringify({action: 'updateData', param1: this.db, param2: this.key, data})
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.text();
+            const result = await response.json();
             return result;
         } catch (error) {
             console.error('Error:', error);
@@ -175,23 +130,26 @@ export class Data {
       delete data ke database
       menggunakan utk filter dan field yang di tambahkan data di masukkan dalam bentuk object contoh : 
     
-      const dataDMC = await dataInput.deleteData({id: 123});
+    const deleteDt = {
+        last_name: ['Smith']
+        }
       */
-      async deleteData(data) {
+      async delete(data) {
         try {
+            this.dt.data = data;
             const response = await fetch(this.url, {
-                method: 'POST', 
+                method: 'DELETE', 
                 headers: {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'deleteData', param1: this.db, param2: this.key, data})
+              body: JSON.stringify(this.dt)
             });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            const result = await response.text();
+            const result = await response.json();
             return result;
         } catch (error) {
             console.error('Error:', error);

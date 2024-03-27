@@ -1,6 +1,4 @@
 <?php
-require_once "../index.php";
-
 function joinQuery($table) {
     $add = ' JOIN ';
     $count = count($table['tbl']);
