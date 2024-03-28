@@ -7,19 +7,21 @@ function search($req) {
     }
     // whereClause or data : 
     if($req['filter'][0] !== '') {
-        $whereClause = whereClause($req['filter']);
-        $wholeQuery .= " WHERE" . $whereClause;
-        $types = bindTypes2($req['filter']);
+        $wholeQuery .= ' WHERE ';
+        foreach($req['filter'] as $value) {
+            $splt = explode("=", $value);
+            $wholeQuery .= $splt[0] . "="."'$splt[1]', ";
+        }
+        $wholeQuery = rtrim($wholeQuery, ", ");
         $bindParams = array();
         foreach ($req['filter'] as $key => $value ) {
             $bindParams[] = &$req['filter'][$key]; 
         }
-        // $result = executeFetch($req['db'], $wholeQuery, $types, $bindParams);
-        $result = array('where'=>$whereClause, 'query'=>$wholeQuery);
+        $result = executeFetch($req['db'], $wholeQuery);
         return $result;
     }
-    // $result = executeFetch2($req['db'], $wholeQuery);
-    return $req;
+    $result = executeFetch($req['db'], $wholeQuery);
+    return $result;
 }
 
 function fetch($data) {

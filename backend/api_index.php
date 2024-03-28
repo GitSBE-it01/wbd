@@ -1,7 +1,24 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
-require_once "index.php";
+require_once "middleware.php";
+require_once "data_index.php";
+require_once "endpoint/pick_now.php";
 
+// Handling preflight requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    header('HTTP/1.1 200 OK');
+    exit();
+}
+$req = $_SERVER;
+$res = new stdClass();
+
+switch($req['HTTP_POINT']) {
+    case "pick_now":
+        $res = pickNow($req, $res);
+        break;
+    default:
+}
+/*
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET,POST, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -12,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
+echo json_encode($_SERVER);
+/*
 $timestamp = time();
 $time = date('Y-m-d H:i:s', $timestamp);
 
@@ -59,5 +78,5 @@ if($check) {
     http_response_code(405); // Method Not Allowed
     echo 'Requests method errors are allowed for this endpoint.';
 }
-
+*/
 ?>

@@ -44,7 +44,6 @@ export const updateInsertData = async() => {
         }
 
         // data olahan utk dimasukkan ke database
-        data['code'] = [];
         data['item_jig']=[];
         data['urut']=[];
         data['status']=[];
@@ -78,11 +77,9 @@ export const updateInsertData = async() => {
             // id no dan code baru
             const codeGet = splitCustomString("+", cekInput[i].id);
             const cekID = splitCustomString("--", codeGet[1]);
-            data['code'][i] = codeGet[1];
             data['urut'][i] = parseInt(cekID[1]);
         }
 
-        newData['code'] = [];
         newData['item_jig']=[];
         newData['urut']=[];
         newData['status']=[];
@@ -110,13 +107,8 @@ export const updateInsertData = async() => {
                 newData['qty_per_unit'][i] = parseInt(newData['qty'][i]);
             } 
             // id no dan code baru
-            let counter = 1;
-            console.log(cekCodeNo);
-            while (cekCodeNo.includes(counter)) {counter++};
-            console.log(counter);
-            newData['urut'].push(counter);
-            newData['code'][i] = newData['item_jig'][i] + "--" + strToNumber(counter,3,0);
-            cekLength++
+            const counter = newData['code'][i].split("--");
+            newData['urut'].push(counter[1]);
         }
         // utk jig_location_query
         // code, item_jig, qty_per_unit, unit, lokasi, status, urut, toleransi

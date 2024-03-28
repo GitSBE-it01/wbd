@@ -49,6 +49,18 @@ export const tblUpdLoc = async (target, dataLoc) => {
             tr.classList.add('fr', 'tdCont2', 'pr4');
             tr.setAttribute('data-fromDB', "");
             
+            // code
+            const div0 =document.createElement('div');
+            div0.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+            const input0 = document.createElement('input');
+            input0.value = dataLoc[i].code;
+            input0.setAttribute('type','text');
+            input0.disabled = true;
+            input0.setAttribute('data-input','');
+            input0.setAttribute('autocomplete','off');
+            input0.id = `code+${dataLoc[i].code}`
+            div0.appendChild(input0);
+
             // location
             const div1 =document.createElement('div');
             div1.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
@@ -129,6 +141,7 @@ export const tblUpdLoc = async (target, dataLoc) => {
             div7.appendChild(btn7);
 
 
+            tr.appendChild(div0);
             tr.appendChild(div1);
             tr.appendChild(div2);
             tr.appendChild(div3);

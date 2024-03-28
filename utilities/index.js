@@ -12,9 +12,9 @@ export {
 
 };
 
-import {loading, createNav, activeLink, columnSprt} from './component/mod_comp/load.js';
-import {createForm} from './component/mod_comp/form.js';
-import { debug } from "./component/mod_comp/debug.js";
+import {loading, createNav, activeLink, columnSprt} from './component/section/load.js';
+import {createForm} from './component/section/form.js';
+import { debug } from "./component/section/debug.js";
 export {
     loading, 
     createNav, 
@@ -24,10 +24,10 @@ export {
     debug
 }
 
-import {createInp} from './component/basic_comp/input.js';
-import {createBtn} from './component/basic_comp/button.js';
-import {createDatalist} from './component/basic_comp/datalist.js';
-import {createHeader, createHeader2} from './component/basic_comp/header.js';
+import {createInp} from './component/parts/input.js';
+import {createBtn} from './component/parts/button.js';
+import {createDatalist} from './component/parts/datalist.js';
+import {createHeader, createHeader2} from './component/parts/header.js';
 
 export {
     createInp,

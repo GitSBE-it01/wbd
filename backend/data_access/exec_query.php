@@ -1,18 +1,12 @@
 <?php
-function executeFetch($db, $wholeQuery, $types, $bindParams) {
+function executeFetch($db, $wholeQuery) {
     $conn = connectToDatabase($db);
     
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
-
-    if (!empty($types)) {
-        array_unshift($bindParams, $types);
-        call_user_func_array([$stmt, 'bind_param'], $bindParams);
-    }
-
-    
+   
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     }
@@ -40,25 +34,6 @@ function executeQuery($db, $wholeQuery, $types, $bindParams) {
     if (!empty($types)) {
         array_unshift($bindParams, $types);
         call_user_func_array([$stmt, 'bind_param'], $bindParams);
-    }
-
-    if (!$stmt->execute()) {
-        die("Execute failed: " . $stmt->error);
-    } else {
-        $data = 'success';
-    }
-
-    $stmt->close();
-    $conn->close();
-    return $data;
-}
-
-function executeFetch2($db, $wholeQuery) {
-    $conn = connectToDatabase($db);
-    
-    $stmt = $conn->prepare($wholeQuery);
-    if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
     }
 
     if (!$stmt->execute()) {

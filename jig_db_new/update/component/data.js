@@ -26,7 +26,7 @@ export const stockUpdate = async() => {
         const dataLoc = await jig_location_query.fetchDataFilter({item_jig: filter});
 
         // form utk input data dan show data saat ini
-        const arrayHeader = ['Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark', 'delete']
+        const arrayHeader = ['Code', 'Location', 'Qty per unit', 'add/substract', 'Qty', 'Unit', 'Remark', 'delete']
         await tableHeader('newContain', 'tableStock', arrayHeader);
         newContain.appendChild(await tblUpdLoc('tableStock',dataLoc));
         const table = document.getElementById('tableStock');
@@ -41,10 +41,10 @@ export const stockUpdate = async() => {
         newContain.appendChild(table);
         newContain.appendChild(await btnUpdLoc('updLoc', 'delLoc', 'addLoc'));
         const btnAddLoc = document.getElementById('addLoc');
-        let counter = 0;
+        let counter = dataHist.length + 1; 
         btnAddLoc.addEventListener('click', async function() {
-            table.appendChild(await addNewStock(counter));
             counter++;
+            table.appendChild(await addNewStock(counter, filter));
         })
         const btnDelLoc = document.getElementById('delLoc');
         btnDelLoc.addEventListener('click', function () {

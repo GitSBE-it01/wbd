@@ -6,7 +6,7 @@ export class Data {
     constructor(db, key) {
         this.db = db
         this.key = key;
-        const { url, ori } = this.getUrl();
+        const { url, ori } = this.#getUrl();
         this.url = url;
         this.ori = ori;
         this.dt = {
@@ -16,15 +16,15 @@ export class Data {
     }
 
     // for API URL 
-    getUrl() {
+   #getUrl() {
         const check = window.location.href.split("/");
         let url ="";
         let ori = "";
         if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/backend/API.php';
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/backend/api_index.php';
             ori = 'http://informationsystem.sbe.co.id';
         } else {
-            url = 'http://192.168.2.103:8080/wbd/backend/API.php';
+            url = 'http://192.168.2.103:8080/wbd/backend/api_index.php';
             ori = 'http://192.168.2.103';
         }
         return { url, ori };
@@ -35,7 +35,7 @@ export class Data {
             first_name:'hello'
         }
       */
-    async fetch(data) {
+    async fetch(data, point) {
         try {
             const filter = new URLSearchParams(data)
             const fetchURL = this.url + "/" + this.dt.db + "." + this.dt.table + "?" + filter.toString();
@@ -43,7 +43,8 @@ export class Data {
                 method: 'GET', 
                 headers: {
                   'Content-Type': 'application/json',
-                  'Origin': this.ori
+                  'Origin': this.ori,
+                  'Point': point
               },
             });
             if (!response.ok) {

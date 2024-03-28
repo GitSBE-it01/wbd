@@ -28,11 +28,27 @@ export const btnUpdLoc = async(id1, id2, id3) => {
     }
 }
 
-export const addNewStock = async(uniq) => {
+export const addNewStock = async(uniq, item_jig) => {
     try{
         const tr = document.createElement('div');
         tr.classList.add('fr', 'tdCont2', 'pr4');
         
+        // code
+        const div0 =document.createElement('div');
+        div0.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
+        const input0 = document.createElement('input');
+        input0.setAttribute('type','text');
+        input0.disabled = true;
+        let counter = '';
+        if(uniq<10) {counter = `00${uniq}`;}
+        else if(uniq<100) {counter = `0${uniq}`;} 
+        else {counter = uniq;}
+        input0.value = item_jig + `--${counter}`;
+        input0.setAttribute('autocomplete','off');
+        input0.setAttribute('data-new','');
+        input0.id = `code+${uniq}`;
+        div0.appendChild(input0);
+
         // location
         const div1 =document.createElement('div');
         div1.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
@@ -99,6 +115,7 @@ export const addNewStock = async(uniq) => {
         const div7 =document.createElement('div');
         div7.classList.add('flexCh', 'td', 'cap', 'bd-black', 'sl8');
     
+        tr.appendChild(div0);
         tr.appendChild(div1);
         tr.appendChild(div2);
         tr.appendChild(div3);
