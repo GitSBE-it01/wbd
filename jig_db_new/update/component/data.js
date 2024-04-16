@@ -41,7 +41,7 @@ export const stockUpdate = async() => {
         newContain.appendChild(table);
         newContain.appendChild(await btnUpdLoc('updLoc', 'delLoc', 'addLoc'));
         const btnAddLoc = document.getElementById('addLoc');
-        let counter = dataHist.length + 1; 
+        let counter = dataLoc.length; 
         btnAddLoc.addEventListener('click', async function() {
             counter++;
             table.appendChild(await addNewStock(counter, filter));
@@ -52,6 +52,7 @@ export const stockUpdate = async() => {
             const cek2 = cek.lastChild;
             if (!cek2.hasAttribute('data-fromdb')){
                 delChild('tableStock');
+                counter--;
                 return;
             }
             alert('row tidak bisa di hapus');

@@ -18,7 +18,6 @@
             default:
                 http_response_code(405); // Method not allowed status code
                 echo 'Method not supported';
-                
         }
     }
     

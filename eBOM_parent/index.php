@@ -65,7 +65,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     
     const parent = {};
     bomDt.forEach(dt => {
-        const fltr = dt.Parent_Item + " -- " + dt.Description_1;
+        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
         const data = dt.Component_Item + " -- " + dt.Description_2;
         
         if(!parent[fltr] && fltr[0] === '1') {
@@ -77,7 +77,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
 
     const allParent = {};
     bomDt.forEach(dt=> {
-        const fltr = dt.Parent_Item + " -- " + dt.Description_1;
+        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
         const data = dt.Component_Item + " -- " + dt.Description_2;
         if(!allParent[fltr]) {
             allParent[fltr] = [data];

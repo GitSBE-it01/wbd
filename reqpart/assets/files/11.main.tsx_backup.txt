@@ -1,0 +1,206 @@
+"use client";
+
+import { useSearchParams, useRouter } from "next/navigation";
+
+import { Filters, Products } from "@/types";
+import NoResults from "@/components/ui/no-results";
+import ProductCard from "@/components/ui/product-card";
+import { XCircleIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import qs from "query-string";
+
+interface MainProps {
+  data: (Products)[];
+};
+
+
+
+const MainParts: React.FC<MainProps> = ({
+  data,
+}) => {
+    
+    console.log("==========================================")
+    const searchParams = useSearchParams()
+    const router = useRouter();
+  
+    let allfilters: Array<Filters>= []
+    let counter = 0
+    const categorySlug = searchParams.get('categorySlug')
+    if(categorySlug!=null){
+        counter++
+        let fil: Filters = {
+            id: counter.toString(),
+            name: categorySlug,
+            origin: "Category",
+            params: "categorySlug"
+        }
+        allfilters.push(fil)
+    } 
+    const subcategorySlug = searchParams.get('subcategorySlug')
+    if(subcategorySlug!=null){ 
+        counter++
+        let fil: Filters = {
+            id: counter.toString(),
+            name: subcategorySlug,
+            origin: "Sub Category",
+            params: "subcategorySlug"
+        }
+        allfilters.push(fil)
+    }
+    const subsubcategorySlug = searchParams.get('subsubcategorySlug')
+    if(subsubcategorySlug!=null) {
+        counter++
+        let fil: Filters = {
+            id: counter.toString(),
+            name: subsubcategorySlug,
+            origin: "Sub Sub Category",
+            params: "subsubcategorySlug"
+        }
+        allfilters.push(fil)
+    }
+    const sizeId = searchParams.get('sizeId')
+    if(sizeId!=null) {
+        counter++
+        let fil: Filters = {
+            id: counter.toString(),
+            name: sizeId,
+            origin: "Size",
+            params: "sizeId"
+        }
+        allfilters.push(fil)
+    }
+    // const sizeIdmin = searchParams.get('sizeIdmin')
+    // const sizeIdmax = searchParams.get('sizeIdmax')
+    // if(sizeIdmin!=null && sizeIdmax!=null) {
+    //     counter++
+    //     let fil: Filters = {
+    //         id: counter.toString(),
+    //         name: sizeIdmin,
+    //         origin: "Size",
+    //         params: "sizeIdmin"
+    //     }
+    //     allfilters.push(fil)
+    // }
+    const sensitivityValue = searchParams.get('sensitivityValue')
+    if(sensitivityValue!=null) {
+        counter++
+        let fil: Filters = {
+            id: counter.toString(),
+            name: sensitivityValue,
+            origin: "Sensitivity",
+            params: "sensitivityValue"
+        }
+        allfilters.push(fil)
+    }
+    
+    let showedReviewsFinal: Array<Products> = []
+    if(categorySlug != null || subcategorySlug != null || subsubcategorySlug !=null || sizeId != null || sensitivityValue != null){
+        for (let i = 0; i < data.length; i++) {
+            if(categorySlug != null){
+                for (let j = 0; j < data[i].categories.length; j++) {
+                    if(data[i].categories[j].slug == categorySlug){
+                        showedReviewsFinal.push(data[i])
+                        break;
+                    }
+                }
+            }
+            if(subsubcategorySlug != null){
+                for (let j = 0; j < data[i].sub_sub_categories.length; j++) {
+                    if(data[i].sub_sub_categories[j].slug == subsubcategorySlug){
+                        showedReviewsFinal.push(data[i])
+                        break;
+                    }
+                }
+            }
+            if(subcategorySlug != null){
+                for (let j = 0; j < data[i].sub_categories.length; j++) {
+                    if(data[i].sub_categories[j].slug == subcategorySlug){
+                        showedReviewsFinal.push(data[i])
+                        break;
+                    }
+                }
+            }
+            if(sizeId != null){
+                if(data[i].size.value.toString() == sizeId){
+                    showedReviewsFinal.push(data[i])
+                }
+            }
+            
+            if(sensitivityValue != null){
+                if(data[i].specification.sensitivity == sensitivityValue){
+                    showedReviewsFinal.push(data[i])
+                }
+            }
+        }
+        if(counter > 1){
+            let index: string[] = [];
+            let index_showedReviewsFinal: number[] = [];
+            let counter_index: number[] = [];
+            let counterReviews: Array<Products> = []
+            let counter_baru = 0
+            for (let i = 0; i < showedReviewsFinal.length; i++) {
+                if(index.length == 0){
+                    index.push(showedReviewsFinal[i].id)
+                    index_showedReviewsFinal.push(i)
+                    counter_index.push(1)
+                }
+                else{
+                    for (let j = 0; j < index.length; j++) {
+                        if(showedReviewsFinal[i].id == index[j]){
+                            counter_index[j]++
+                            counter_baru = 1
+                            break
+                        }
+                    }
+                    if(counter_baru==0){
+                        index.push(showedReviewsFinal[i].id)
+                        index_showedReviewsFinal.push(i)
+                        counter_index.push(1)
+                    }
+                    counter_baru = 0
+                }
+            }
+            for (let i = 0; i < index.length; i++) {
+                if(counter_index[i] == counter){
+                    counterReviews.push(showedReviewsFinal[index_showedReviewsFinal[i]])
+                }
+            }
+            showedReviewsFinal = counterReviews
+        }
+    }
+    else{
+        showedReviewsFinal = data
+    }
+
+    const deleteFilter = (params: string) => {
+        const current = qs.parse(searchParams.toString());
+        const query = {
+        ...current,
+        };
+        query[params] = null
+
+        const url = qs.stringifyUrl({
+        url: window.location.href,
+        query,
+        }, { skipNull: true });
+        router.push(url);
+    }
+
+    return ( 
+        <div className="mt-6 lg:col-span-4 lg:mt-0">
+            <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
+            {allfilters.map((item: Filters) => (
+                <Badge className="flex m-2 p-2">{item.origin}: {item.name}<div onClick={() => deleteFilter(item.params)}><XCircleIcon/></div></Badge>
+            ))}
+            </nav>
+            {showedReviewsFinal.length === 0 && <NoResults />}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {showedReviewsFinal.map((item: Products) => (
+                <ProductCard key={item.id} data={item} />
+            ))}
+            </div>
+        </div>
+    );
+};
+
+export default MainParts;
