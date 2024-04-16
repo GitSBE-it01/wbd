@@ -2,19 +2,32 @@
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "middleware.php";
 require_once "data_index.php";
-require_once "endpoint/pick_now.php";
+require_once "end_point_index.php";
+
 
 // Handling preflight requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header('HTTP/1.1 200 OK');
     exit();
 }
+
+/*
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    header("Content-Type: application/json");
+    echo json_encode($data);
+}
+*/
+
 $req = $_SERVER;
 $res = new stdClass();
 
 switch($req['HTTP_POINT']) {
     case "pick_now":
         $res = pickNow($req, $res);
+        break;
+    case "data_oh":
+        $res = dataOH($req, $res);
         break;
     default:
 }

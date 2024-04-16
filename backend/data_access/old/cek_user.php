@@ -11,4 +11,5 @@ function cekUser($db, $user_log, $prog) {
         return null;
     }
 }
+
 ?>
