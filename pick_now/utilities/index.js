@@ -12,9 +12,9 @@ export {
 
 };
 
-import {loading, createNav, activeLink, columnSprt} from './component/section/load.js';
-import {createForm} from './component/section/form.js';
-import { debug } from "./component/section/debug.js";
+import {loading, createNav, activeLink, columnSprt} from './component/cluster/load.js';
+import {createForm} from './component/cluster/form.js';
+import { debug } from "./component/cluster/debug.js";
 export {
     loading, 
     createNav, 
@@ -24,10 +24,10 @@ export {
     debug
 }
 
-import {createInp} from './component/parts/input.js';
-import {createBtn} from './component/parts/button.js';
-import {createDatalist} from './component/parts/datalist.js';
-import {createHeader, createHeader2} from './component/parts/header.js';
+import {createInp} from './component/block/input.js';
+import {createBtn} from './component/block/button.js';
+import {createDatalist} from './component/block/datalist.js';
+import {createHeader, createHeader2} from './component/block/header.js';
 
 export {
     createInp,
