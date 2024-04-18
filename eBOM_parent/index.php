@@ -57,16 +57,17 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const start1 = performance.now();
     const comp = [];
     bomDt.forEach(dt=>{
-        const data = dt.Component_Item + " -- " + dt.Description_2;
+        const data = dt.Component_Item + " -- " + dt.Description_2 + "(" + dt.Stats +")";
         if(!comp.includes(data)) {
             comp.push(data);
         }
+
     })
     
     const parent = {};
     bomDt.forEach(dt => {
         const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
-        const data = dt.Component_Item + " -- " + dt.Description_2;
+        const data = dt.Component_Item + " -- " + dt.Description_2 + "(" + dt.Stats +")";
         
         if(!parent[fltr] && fltr[0] === '1') {
             parent[fltr] = [data];    
@@ -78,7 +79,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const allParent = {};
     bomDt.forEach(dt=> {
         const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
-        const data = dt.Component_Item + " -- " + dt.Description_2;
+        const data = dt.Component_Item + " -- " + dt.Description_2 + "(" + dt.Stats +")" ;
         if(!allParent[fltr]) {
             allParent[fltr] = [data];
         } else {allParent[fltr].push(data); }
@@ -114,6 +115,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const end2 = performance.now(); 
     const prs2 = (end2 - start2) / 1000;
     console.log('waktu proses data2 : ' + prs2);
+
+
 
     const start3 = performance.now();
     const map = new Map();
@@ -187,6 +190,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         XLSX.writeFile(workbook, 'cek_parent.xlsx')
         btn.disabled = false;
     })
+
 
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
