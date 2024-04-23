@@ -4,29 +4,113 @@ import { jig_location_query, log_location_query, jig_master_query, log_master_qu
 export const updateInsertData = async() => {
     try {
         // ambil data dari input / form
-        const arrInput = document.querySelectorAll('[data-input]');
-        const arrNew = document.querySelectorAll('[data-new]');
         let data = [];
         let newData = [];
         data['key']=[];
         newData['key']=[];
         data['filter']=[];
-        for (let i=0; i<arrInput.length; i++) {
-            const rawId = arrInput[i].id;
-            const id = splitCustomString("+", rawId);
-            const key = id[0];
-            const value = arrInput[i].value;
-            if (!data['key'].includes(`${key}`)) {
-                const codeLength = data['key'].length;
-                data['key'][codeLength] = key;
+        const form = document.querySelectorAll('[data-fromdb = "change"]');
+        form.forEach(dt=> {
+            const arrInput = dt.querySelectorAll('[data-input]');
+            if (arrInput.length >0 ) {
+                for (let i=0; i<arrInput.length; i++) {
+                    const rawId = arrInput[i].id;
+                    const id = splitCustomString("+", rawId);
+                    const key = id[0];
+                    const value = arrInput[i].value;
+                    if (!data['key'].includes(`${key}`)) {
+                        const codeLength = data['key'].length;
+                        data['key'][codeLength] = key;
+                    }
+                    if (!data[key]) {
+                        data[key] = [value];    
+                    } else {
+                        data[key].push(value);
+                    }
+                }}
             }
-            if (!data[key]) {
-                data[key] = [value];    
-            } else {
-                data[key].push(value);
-            }
-        }
+        )
 
+        // for updating data
+        // utk jig_location_query
+        // code, item_jig, qty_per_unit, unit, lokasi, status, urut, toleransi
+        const update1 = {
+            item_jig: [],
+            qty_per_unit: [],
+            unit: [],
+            lokasi: [],
+            status: [],
+            urut: [],
+            toleransi: [],
+            code: [],
+        }
+        let filter1 = {
+            code:[]
+        };
+
+        let insert1 = {
+            code: [],
+            item_jig: [],
+            qty_per_unit: [],
+            unit: [],
+            lokasi: [],
+            trans_date: [],
+            remark: [],
+            status: [],
+            urut: [],
+            toleransi: [],
+            addSub: [],
+            qty_change: [],
+        };
+
+        const itemJig = document.getElementById('searchStock').value;
+        const status = 'active';
+        const tol = document.getElementById('tol').value;
+        const today = currentDate();
+        if(form.length>0) {
+        for (let i=0; i<data['qty'].length; i++) {
+            if (!parseInt(data['qty'][i])==0 ) {
+                let qty_new = 0;
+                if (data['addSub'][i] === 'tambah') {
+                    qty_new = parseInt(data['cur_qty_per_unit'][i]) + parseInt(data['qty'][i]);
+                } else if (data['addSub'][i] === 'kurang') {
+                    if (parseInt(data['cur_qty_per_unit'][i])<parseInt(data['qty'][i])){
+                        return alert("quantity perubahan lebih kecil dari pada qty on hand");
+                    }
+                    qty_new = parseInt(data['cur_qty_per_unit'][i]) - parseInt(data['qty'][i]);
+                }
+                const urut = parseInt(data['code'][i].substring(data['code'][i].length - 3));
+                update1['item_jig'].push(itemJig); //
+                update1['qty_per_unit'].push(qty_new);
+                update1['unit'].push(data['unit'][i]);
+                update1['lokasi'].push(data['lokasi'][i]);
+                update1['status'].push(status); //
+                update1['urut'].push(urut);
+                update1['toleransi'].push(tol); //
+                update1['code'].push(data['code'][i]);
+
+                filter1['code'].push(data['code'][i]);
+
+                insert1['code'].push(data['code'][i]);
+                insert1['item_jig'].push(itemJig);
+                insert1['qty_per_unit'].push(qty_new);
+                insert1['unit'].push(data['unit'][i]);
+                insert1['lokasi'].push(data['lokasi'][i]);
+                insert1['trans_date'].push(today); //   
+                insert1['remark'].push(data['remark'][i]);
+                insert1['status'].push(status);
+                insert1['urut'].push(urut);
+
+                insert1['toleransi'].push(tol);
+                insert1['addSub'].push(data['addSub'][i]);
+                insert1['qty_change'].push(data['qty'][i]);
+            }
+        }}
+        
+
+        // for new data 
+        const arrNew = document.querySelectorAll('[data-new]');
+        if(arrNew.length >0) {
         for (let i=0; i<arrNew.length; i++) {
             const rawId = arrNew[i].id;
             const id = splitCustomString("+", rawId);
@@ -41,158 +125,64 @@ export const updateInsertData = async() => {
             } else {
                 newData[key].push(value);
             }
+        }}
+
+        let insert2 = {
+            code: [],
+            item_jig: [],
+            qty_per_unit: [],
+            unit: [],
+            lokasi: [],
+            status: [],
+            urut: [],
+            toleransi: [],
         }
-
-        // data olahan utk dimasukkan ke database
-        data['item_jig']=[];
-        data['urut']=[];
-        data['status']=[];
-        data['toleransi']=[];
-        data['trans_date']=[];
-        data['qty_per_unit']=[];
-        
-        const itemJig = document.getElementById('searchStock').value;  
-        const itemTol = document.getElementById('tol').value;   
-        const status = "active";
-        const cekInput = document.querySelectorAll(`[data-input][id*="${data['key'][0]}"]`);
-        const cekInput2 = document.querySelectorAll(`[data-new][id*="${newData['key'][0]}"]`);
-        for (let i=0; i<cekInput.length; i++) {
-            // item_jig
-            data['item_jig'][i] = itemJig;
-            // status
-            data['status'][i] = status;
-            // toleransi
-            data['toleransi'][i] = itemTol;
-            // trans_date
-            data['trans_date'][i] = currentDate();
-            // qty_per_unit
-            if (data['addSub'][i] === 'tambah') {
-                data['qty_per_unit'][i] = parseInt(data['cur_qty_per_unit'][i]) + parseInt(data['qty'][i]);
-            } else if (data['addSub'][i] === 'kurang') {
-                if (parseInt(data['cur_qty_per_unit'][i])<parseInt(data['qty'][i])){
-                    return alert("quantity perubahan lebih kecil dari pada qty on hand");
-                }
-                data['qty_per_unit'][i] = parseInt(data['cur_qty_per_unit'][i]) - parseInt(data['qty'][i]);
-            }
-            // id no dan code baru
-            const codeGet = splitCustomString("+", cekInput[i].id);
-            const cekID = splitCustomString("--", codeGet[1]);
-            data['urut'][i] = parseInt(cekID[1]);
-        }
-
-        newData['item_jig']=[];
-        newData['urut']=[];
-        newData['status']=[];
-        newData['toleransi']=[];
-        newData['trans_date']=[];
-        newData['qty_per_unit']=[];
-        let cekCodeNo = [];
-        data['code'].forEach (dt => {
-            const vl = dt.split('--');
-            cekCodeNo.push(parseInt(vl[1]))
-        })
-
-        let cekLength = cekInput.length + 1;
-        for (let i=0; i<cekInput2.length; i++) {
-            // item_jig
-            newData['item_jig'][i] = itemJig;
-            // status
-            newData['status'][i] = status;
-            // toleransi
-            newData['toleransi'][i] = itemTol;
-            // trans_date
-            newData['trans_date'][i] = currentDate();
-            // qty_per_unit
-            if (newData['addSub'][i] === 'tambah') {
-                newData['qty_per_unit'][i] = parseInt(newData['qty'][i]);
-            } 
-            // id no dan code baru
-            const counter = newData['code'][i].split("--");
-            newData['urut'].push(counter[1]);
-        }
-        // utk jig_location_query
-        // code, item_jig, qty_per_unit, unit, lokasi, status, urut, toleransi
-        let update1 = [];
-        let filter1 = [];
-        update1['item_jig'] =[];
-        update1['qty_per_unit'] =[];
-        update1['unit'] =[];
-        update1['lokasi'] =[];
-        update1['status'] =[];
-        update1['urut'] =[];
-        update1['toleransi'] =[];
-        filter1['code'] =[];
-        let insert1 = [];
-        insert1['code'] = [];
-        insert1['item_jig'] = [];
-        insert1['qty_per_unit'] = [];
-        insert1['unit'] = [];
-        insert1['lokasi'] = [];
-        insert1['trans_date'] = [];
-        insert1['remark'] = [];
-        insert1['status'] = [];
-        insert1['urut'] = [];
-        insert1['toleransi'] = [];
-        insert1['addSub'] = [];
-        insert1['qty_change'] = [];
-
-        for (let i=0; i<data['qty'].length; i++) {
-            if (!parseInt(data['qty'][i])==0 ) {
-                update1['item_jig'].push(data['item_jig'][i]);
-                update1['qty_per_unit'].push(data['qty_per_unit'][i]);
-                update1['unit'].push(data['unit'][i]);
-                update1['lokasi'].push(data['lokasi'][i]);
-                update1['status'].push(data['status'][i]);
-                update1['urut'].push(data['urut'][i]);
-                update1['toleransi'].push(data['toleransi'][i]);
-
-                filter1['code'].push(data['code'][i]);
-
-                insert1['code'].push(data['code'][i]);
-                insert1['item_jig'].push(data['item_jig'][i]);
-                insert1['qty_per_unit'].push(data['qty_per_unit'][i]);
-                insert1['unit'].push(data['unit'][i]);
-                insert1['lokasi'].push(data['lokasi'][i]);
-                insert1['trans_date'].push(data['trans_date'][i]);
-                insert1['remark'].push(data['remark'][i]);
-                insert1['status'].push(data['status'][i]);
-                insert1['urut'].push(data['urut'][i]);
-                insert1['toleransi'].push(data['toleransi'][i]);
-                insert1['addSub'].push(data['addSub'][i]);
-                insert1['qty_change'].push(data['qty'][i]);
-            }
-        }
-        // insert too jig_location_query
-
-
-        // insert too jig_location for new data
-        let insert2 = [];
-        insert2['code'] = newData['code'];
-        insert2['item_jig'] = newData['item_jig'];
-        insert2['qty_per_unit'] = newData['qty_per_unit'];
-        insert2['unit'] = newData['unit'];
-        insert2['lokasi'] = newData['lokasi'];
-        insert2['status'] = newData['status'];
-        insert2['urut'] = newData['urut'];
-        insert2['toleransi'] = newData['toleransi'];
 
         // insert log_location for new data
-        let insert3 = [];
-        insert3['code'] = newData['code'];
-        insert3['item_jig'] = newData['item_jig'];
-        insert3['qty_per_unit'] = newData['qty_per_unit'];
-        insert3['unit'] = newData['unit'];
-        insert3['lokasi'] = newData['lokasi'];
-        insert3['trans_date'] = newData['trans_date'];
-        insert3['remark'] = newData['remark'];
-        insert3['status'] = newData['status'];
-        insert3['urut'] = newData['urut'];
-        insert3['toleransi'] = newData['toleransi'];
-        insert3['addSub'] = newData['addSub'];
-        insert3['qty_change'] = newData['qty'];
-        console.log({update1, filter1, insert2, insert3});
+        let insert3 = {
+            code: [],
+            item_jig: [],
+            qty_per_unit: [],
+            unit: [],
+            lokasi: [],
+            trans_date: [],
+            remark: [],
+            status: [],
+            urut: [],
+            toleransi: [],
+            addSub: [],
+            qty_change: [],
+        }
 
-        if (newData['code'].length == 0) {
+        if(newData['key'].length>0) {
+            for (let i=0; i<newData['code'].length; i++) {
+                const urut = parseInt(newData['code'][i].substring(newData['code'][i].length - 3));
+
+                insert2['code'].push(newData['code'][i]);
+                insert2['item_jig'].push(itemJig);
+                insert2['qty_per_unit'].push(parseInt(newData['qty'][i]));
+                insert2['unit'].push(newData['unit'][i]);
+                insert2['lokasi'].push(newData['lokasi'][i]);
+                insert2['status'].push(status);
+                insert2['urut'].push(urut);
+                insert2['toleransi'].push(tol);
+
+                insert3['code'].push(newData['code'][i]);
+                insert3['item_jig'].push(itemJig);
+                insert3['qty_per_unit'].push(parseInt(newData['qty'][i]));
+                insert3['unit'].push(newData['unit'][i]);
+                insert3['lokasi'].push(newData['lokasi'][i]);
+                insert3['status'].push(status);
+                insert3['urut'].push(urut);
+                insert3['toleransi'].push(tol);
+                insert3['trans_date'].push(today);
+                insert3['remark'].push(newData['remark'][i]);
+                insert3['addSub'].push(newData['addSub'][i]);
+                insert3['qty_change'].push(newData['qty'][i]);
+            }
+        }
+        
+        if (newData['key'].length == 0) {
             const result3 = await jig_location_query.updateData(update1, filter1);     
             if (!result3.includes('fail')) {
                 const result1 = await log_location_query.insertData(insert1);
@@ -208,7 +198,6 @@ export const updateInsertData = async() => {
 
         const result3 = await jig_location_query.updateData(update1, filter1);     
         const result2 = await jig_location_query.insertData(insert2);
-        console.log({result3, result2});
         if (!result3.includes('fail') && !result2.includes('fail')) {
             const result1 = await log_location_query.insertData(insert1);     
             const result4 = await log_location_query.insertData(insert3);     
@@ -224,6 +213,18 @@ export const updateInsertData = async() => {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const delDataStock = async(id,pk) => {
     try {

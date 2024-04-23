@@ -2,7 +2,7 @@
 CLASS LIST
 Berikut adalah list CLASS yang akan di pakai di prog VJS
 ==============================================================================*/
-class Data {
+export class Data {
     constructor(key) {
         this.key = key;
         this.insertKey = 'insert_'+key;
@@ -19,10 +19,10 @@ class Data {
         let url ="";
         let ori = "";
         if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/pick_now/middleware/api.php';
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/pick_now/backend/api.php';
             ori = 'http://informationsystem.sbe.co.id';
         } else {
-            url = 'http://192.168.2.103:8080/wbd/pick_now/middleware/api.php';
+            url = 'http://192.168.2.103:8080/wbd/pick_now/backend/api.php';
             ori = 'http://192.168.2.103';
         }
         return { url, ori };

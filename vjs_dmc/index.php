@@ -77,9 +77,9 @@ $role = cekUser('dbvjs',$user_log, $prog);
     await createNav(navigation);
     activeLink('navID', ['f-or7']);
     const assetDt = await vjs_asset.getData();
+    await createDatalist(assetList(assetDt));
     const woDT = await wo_list.fetchDataFilter({wo_status:'R'});
     await createDatalist(woList(woDT));
-    await createDatalist(assetList(assetDt));
     await createSearch(searchBarMain);
     root.removeChild(document.querySelector('.loading'));
     
