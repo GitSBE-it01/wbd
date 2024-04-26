@@ -1,4 +1,4 @@
-import { createBtn, createInp } from './index.js';
+import { createBtn, createInp } from '../index.js';
 /*
 =======================================================================================
 create search bar 

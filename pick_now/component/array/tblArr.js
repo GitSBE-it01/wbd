@@ -1,4 +1,4 @@
-export const mainTbl = (data) => ({ // data table
+export const sec1Tbl = (data) => ({ // data table
     target:`main`, 
     tblID: `tblMain`, 
     dbsrc: data, 

@@ -1,10 +1,38 @@
 <?php
-$wobb = 'SELECT * FROM wod_det';
-$wo = 'SELECT * FROM wo_mstr';
-$ld = 'SELECT * FROM ld_det';
-$loc = 'SELECT * FROM loc_mstr';
-$dept = 'SELECT * FROM dbpick_now.dept_new';
+class QueryInit {
+    public $tableName;
+    public $get;
+    public $insert;
+    public $update;
+    public $delete;
+    
+    public function __construct($tableName) {
+        $this->get = 'SELECT * FROM ' . $tableName;
+        $this->insert = 'INSERT INTO ' . $tableName;
+        $this->update = 'UPDATE ' . $tableName;
+        $this->delete = 'DELETE FROM ' . $tableName;
+    }
 
+    public function getQuery() {
+        return $this->get;
+    }
+    public function insertQuery() {
+        return $this->insert;
+    }
+    public function updateQuery() {
+        return $this->update;
+    }
+    public function deleteQuery() {
+        return $this->delete;
+    }
+}
+
+$wobb = new QueryInit('wod_det');
+$wo = new QueryInit('wo_mstr');
+$ld = new QueryInit('ld_det');
+$loc = new QueryInit('loc_mstr');
+$dept = new QueryInit('dbpick_now.dept_new');
+$pickNow = new QueryInit('dbpick_now.result');
 
 $codeList = array(
     'wobb'=>$wobb,
@@ -12,6 +40,8 @@ $codeList = array(
     'ld'=>$ld,
     'loc'=>$loc,
     'dept'=>$dept,
+    'pickNow'=> $pickNow,
 );
+
 
 ?>

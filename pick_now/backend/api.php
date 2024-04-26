@@ -29,25 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
     $action = $data['action']; 
     $param = $data['parameters']; 
-    $query = getArrayList($codeList, $param); 
+    $queryStart = getArrayList($codeList, $param); 
     switch($action) {
         case "getData":
+            $query = $queryStart->getQuery();
             $response = getData($db, $query);
             break;
         case "fetchDataFilter":
+            $query = $queryStart->getQuery();
             $filter = isset($data['filter']) ? $data['filter']:''; 
             $response = fetchDataFilter($db, $query, $filter);
             break;
         case "insertData":
+            $query = $queryStart->insertQuery();
             $insertData = isset($data['insertFilter']) ? $data['insertFilter']:''; 
             $response = insertData($db, $query, $insertData);
             break;
         case "updateData":
+            $query = $queryStart->updateQuery();
             $updateData = isset($data['updateFilter']) ? $data['updateFilter']:'';
             $updateData2 = isset($data['updateFilter2']) ? $data['updateFilter2']:'';
             $response = updateData($db, $query, $updateData, $updateData2);
             break;
         case "deleteData":
+            $query = $queryStart->deleteQuery();
             $delData = isset($data['delFilterKey']) ? $data['delFilterKey']:'';
             $delData2 = isset($data['delFilter']) ? $data['delFilter']:'';
             $response = deleteData($db, $query, $delData, $delData2);

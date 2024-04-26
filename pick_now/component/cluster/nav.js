@@ -1,13 +1,4 @@
 /*-------------------------
-loading animasi
--------------------------*/
-export const loading = (classDiv) => {
-    const div = document.createElement("div");
-    div.classList.add(classDiv);
-    return div;
-}
-
-/*-------------------------
 buat nav bar
 -------------------------*/
 // contoh array 
@@ -15,13 +6,13 @@ export const createNav = async(navArr) => {
     const container = document.getElementById(navArr.target);
     container.classList.add(navArr.tgtStyle);
     const navbar = document.createElement('div');
-    navbar.id = 'navID';
+    navbar.id = navArr.id;
     const classes = navArr.navStyle;
     classes.forEach(cls => {
         navbar.classList.add(cls);
     })
     const main = document.createElement('div');
-    main.id = 'main';
+    main.id = navArr.mainID;
     const classes2 = navArr.mainStyle;
     classes2.forEach(cls2 => {
         main.classList.add(cls2);
@@ -82,22 +73,3 @@ export const activeLink = (target, arrCls) => {
 }
 
 
-/*-------------------------
-layout kolom 
--------------------------*/
-export const columnSprt = (arr) => {
-    const container = document.getElementById(arr.target);
-    const create = document.createElement('div');
-    create.classList.add('flex-r');
-    create.id = arr.id;
-    arr.col.forEach(cl => {
-        const div = document.createElement('div');
-        div.id = cl.id;
-        cl.style.forEach(st => {
-            div.classList.add(st);
-        })
-        create.appendChild(div);
-    })
-    container.appendChild(create);
-    return;
-}

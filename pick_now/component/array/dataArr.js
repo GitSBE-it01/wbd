@@ -1,3 +1,4 @@
+/*
 export const arrVJSInp = () =>  ({
     update: {
         assetno:[],
@@ -15,3 +16,4 @@ export const arrVJSInp = () =>  ({
         id:[]
     }
 })
+*/

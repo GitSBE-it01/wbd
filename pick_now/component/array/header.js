@@ -1,3 +1,4 @@
+/*
 export const header4 = (idTgt, counter) => ({
     target: idTgt,
     id:`hdVJS${counter}`,
@@ -11,3 +12,4 @@ export const inspection = {
     style: ['fs-l', 'fw-bld', 'mx4'],
     text:'Add New Inspection'               
 };
+*/

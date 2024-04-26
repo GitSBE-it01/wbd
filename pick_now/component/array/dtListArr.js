@@ -1,3 +1,4 @@
+/*
 export const insData = (src) => ({
     target:'root',
     id:'listInsp',
@@ -6,3 +7,4 @@ export const insData = (src) => ({
     optValue:['dmc_vjs','inspection'],
     optText:['dmc_vjs','inspection']
 })
+*/

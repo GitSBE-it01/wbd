@@ -13,6 +13,8 @@ function insertData($db, $query, $filterValues) {
         $cek = array_keys($filterValues[$i]);
         $test = array_values($cek);
         ${'inputKeys' . $counter} = $test[0];
+        echo $test[0];
+        echo ${'inputKeys' . $counter};
         $keysParam[$test[0]] = array();
         foreach (array_values($filterValues[$i]) as $key => $values) {
             if(is_array($values)) {
@@ -20,7 +22,7 @@ function insertData($db, $query, $filterValues) {
                     ${'input' . $counter}[] = $value;
                 }
             } else {
-                ${'input' . $counter}[] = $value;
+                ${'input' . $counter}[] = $values;
             }
             $counter++;
         }
@@ -46,6 +48,8 @@ function insertData($db, $query, $filterValues) {
     $params .= ")";
     $bind .= ")";
     $wholeQuery = $query . $params ." VALUES" . $bind;
+
+    echo $wholeQuery;
 
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {

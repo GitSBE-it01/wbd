@@ -1,3 +1,4 @@
+/*
 export const inpArrCat = (text) => ({
     id:'',
     mark:text,
@@ -6,3 +7,4 @@ export const inpArrCat = (text) => ({
     list:'',
     classSty:[],
 })
+*/

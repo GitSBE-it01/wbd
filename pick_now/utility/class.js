@@ -101,10 +101,14 @@ export class Data {
       async insertData(insert) {
         const keys = Object.keys(insert);
         const values = Object.values(insert);
-        const insertFilter=[];
-        for (let i=0; i<keys.length; i++) {
-            const entry = { [keys[i]]: values[i] };
-            insertFilter.push(entry);
+        let insertFilter=[];
+        if(!insert[0]) {
+            for (let i=0; i<keys.length; i++) {
+                const entry = { [keys[i]]: values[i] };
+                insertFilter.push(entry);
+            }
+        } else {
+            insertFilter = insert;
         }
         try {
             const response = await fetch(this.url, {
@@ -120,6 +124,7 @@ export class Data {
                 throw new Error('Network response was not ok');
             }
             const result = await response.text();
+            console.log(result);
             return result;
         } catch (error) {
             console.error('Error:', error);
