@@ -29,12 +29,10 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         createBtn,
         createInp,
         createDatalist,
-        createHeader,
         createSearch,    
-        createHeader2,
+        createTxt,
         navigation,
         searchBarMain,
-        mainTbl,
     } from './component/index.js';
     import {
         jsonToCsv,jsonToExcel,
@@ -274,6 +272,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
 
     if (cek.length === 0) {
         const result2 = await pickNow.insertData(inputArr);
+        console.log(result2);
         if(!result2.includes('fail')) {
             report5.textContent = 'Pemasukan data ke database selesai';
         } else {

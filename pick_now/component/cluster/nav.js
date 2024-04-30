@@ -2,6 +2,41 @@
 buat nav bar
 -------------------------*/
 // contoh array 
+import { create } from "../block.js";
+
+export const mainNav = async() => {
+    await create({
+        element: 'div',
+        selector: '#root',
+        id: 'navID',
+        class: 'sl8'
+    })
+    await create({
+        element: 'div',
+        selector: '#root',
+        id: 'main',
+        class: 'sl2 navCard1 flex-r'
+    })
+    await linkDiv();
+}
+
+const linkDiv = async() => {
+    await create({
+        element: 'div',
+        cell: 'link1',
+        selector: '#navID',
+        class: 'mx5 mt2 scale-120',
+    })
+    await create({
+        element: 'a',
+        selector: '[data-cell = "link1"]',
+        class: 'home',
+        textCont: 'testing',
+        href:'../../sbe/index.php'
+    })
+}
+
+
 export const createNav = async(navArr) => {
     const container = document.getElementById(navArr.target);
     container.classList.add(navArr.tgtStyle);

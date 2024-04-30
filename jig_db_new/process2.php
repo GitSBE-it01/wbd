@@ -188,10 +188,12 @@ function updateData($query, $filterValues, $filterValues2) {
         ${'inputKeys' . $counter} = $test[0];
         $keysParam[$test[0]] = array();
         foreach (array_values($filterValues[$i]) as $key => $values) {
-            // Create variable names like $input1, $input2, etc.
             ${'input' . $counter} = array();
-            foreach ($values as $key2 => $value) {
-                // Extract 'value' from subarray and add to the variable
+            if(is_array($values)) {
+                foreach ($values as $key2 => $value) {
+                    ${'input' . $counter}[] = $value;
+                }
+            } else {
                 ${'input' . $counter}[] = $value;
             }
             $counter++;

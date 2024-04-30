@@ -1,17 +1,16 @@
 /*
 =================================================================
-input
+Link
 */
-const defaultInp = () => ({
-    target:'',
+const defaultLink = () => ({
+    trgt:'',
     id:'',
-    text:'input here',
+    text: '', //if btn then empty
+    link: '#',
     data_attr:{
         attr: '',
         value: ''
     },
-    type: 'text',
-    list: [],
     style: [],
     js: {
         attr:'',
@@ -19,41 +18,37 @@ const defaultInp = () => ({
     }
 })
 
-export const createInp = async(arr) => {
-    const dflt = defaultInp();
-    const inp = document.createElement('input');
+export const createLink = async(arr) => {
+    const dflt = defaultLink();
+    const aLink = document.createElement('a');
     const trgt = arr.trgt ? arr.trgt : dflt.trgt;
-    inp.id = arr.id ? arr.id : dflt.id;
-    const textContent = arr.text ? arr.text : dflt.text;
+    aLink.id = arr.id ? arr.id : dflt.id;
+    const textCont = arr.text ? arr.text : dflt.text;
+    aLink.textContent = textCont;
+    const link = arr.link ? arr.link : dflt.link;
+    aLink.setAttribute('href', link);
     const data_attr = arr.data_attr.attr ? arr.data_attr.attr : dflt.data_attr.attr;
     const data_val = arr.data_attr.value ? arr.data_attr.value : dflt.data_attr.value;
-    const type = arr.type ? arr.type : dflt.type;
-    const list = arr.list ? arr.list : dflt.list;
     const style = arr.style ? arr.style : dflt.style;
     const js_attr = arr.js.attr ? arr.js.attr : dflt.js.attr;
     const js_val = arr.js.value ? arr.js.value : dflt.js.value;
 
     style.forEach(sty => {
-        inp.classList.add(sty)
+        aLink.classList.add(sty)
     })
+    
     if (data_attr !=='') {
-        inp.setAttribute(data_attr, data_val);
+        aLink.setAttribute(data_attr, data_val);
     }
     if (js_attr !=='') {
-        inp.setAttribute(js_attr, js_val);
-    }
-    inp.setAttribute('type',type);
-    if (type === 'text'){
-        inp.setAttribute('placeholder', textContent)
-        inp.setAttribute('list', list);
-        inp.setAttribute('autocomplete', "off");
+        aLink.setAttribute(js_attr, js_val);
     }
 
     if(trgt !=='') {
         const target = document.getElementById(trgt);
-        target.appendChild(inp);
+        target.appendChild(aLink);
         return;
     }
-    return inp;
+    return aLink;
 }
 

@@ -117,14 +117,13 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'insertData', parameters: this.insertKey, insertFilter})
+              body: JSON.stringify({action: 'insertData', parameters: this.key, insertFilter})
             });
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const result = await response.text();
-            console.log(result);
             return result;
         } catch (error) {
             console.error('Error:', error);
@@ -169,7 +168,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'updateData', parameters: this.updateKey, updateFilter, updateFilter2})
+              body: JSON.stringify({action: 'updateData', parameters: this.key, updateFilter, updateFilter2})
             });
 
             if (!response.ok) {
@@ -197,7 +196,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'deleteData', parameters: this.deleteKey, delFilterKey, delFilter})
+              body: JSON.stringify({action: 'deleteData', parameters: this.key, delFilterKey, delFilter})
             });
 
             if (!response.ok) {

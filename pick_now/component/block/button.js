@@ -42,7 +42,7 @@ export const createBtn = async(arr) => {
         btn.setAttribute(js_attr, js_val);
     }
     if(trgt !=='') {
-        const target = document.getElementById(arr.target);
+        const target = document.getElementById(trgt);
         target.appendChild(btn);
         return;
     }

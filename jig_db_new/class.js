@@ -142,6 +142,7 @@ class Data {
                 throw new Error('Network response was not ok');
             }
             const result = await response.text();
+            console.log(result);
             return result;
         } catch (error) {
             console.error('Error:', error);

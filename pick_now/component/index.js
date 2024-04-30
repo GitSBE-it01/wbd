@@ -11,14 +11,14 @@ import {} from './array/inpArr.js';
 import {arrKat} from './array/layout.js';
 import {navigation,sidebarHome} from './array/navArr.js';
 import {searchBarMain} from './array/searchArr.js';
-import {mainTbl} from './array/tblArr.js';
+import {sec1Tbl} from './array/tblArr.js';
 
 export {
     dlExcel,
     navigation,
     sidebarHome,
     searchBarMain,
-    mainTbl,
+    sec1Tbl,
     arrKat
 }
    
@@ -30,19 +30,18 @@ block
 */
 import {createBtn} from './block/button.js';
 import {createDatalist} from './block/datalist.js';
-import {createHeader, createHeader2} from './block/header.js';
+import {createTxt} from './block/header.js';
 import {createInp} from './block/input.js';
-import {columnSprt} from './block/layout.js';
-import {loading} from './block/load.js';
+import {createDiv} from './block/div.js';
+import {create} from './block.js';
 
 export {
     createInp,
     createBtn,
     createDatalist,
-    createHeader,
-    createHeader2,
-    columnSprt,
-    loading
+    createTxt,
+    createDiv,
+    create
 }
 
 /*
@@ -51,17 +50,19 @@ cluster
 ====================================================================================
 */
 
-import {createNav, activeLink} from './cluster/nav.js';
+import {createNav, activeLink, mainNav} from './cluster/nav.js';
 import {createSearch} from './cluster/searchBar.js';
 import {createTable} from './cluster/table.js';
+import {loading} from './cluster/load.js';
+
 
 export {
     loading, 
     createNav, 
     activeLink, 
-    columnSprt,
     createTable,
-    createSearch
+    createSearch,
+    mainNav
 }
 
 

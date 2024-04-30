@@ -181,7 +181,7 @@ export const updateInsertData = async() => {
                 insert3['qty_change'].push(newData['qty'][i]);
             }
         }
-        
+        console.log({update1, filter1, insert2, insert3});
         if (newData['key'].length == 0) {
             const result3 = await jig_location_query.updateData(update1, filter1);     
             if (!result3.includes('fail')) {

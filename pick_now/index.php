@@ -43,14 +43,14 @@ $role = cekUser('dbvjs',$user_log, $prog);
         createBtn,
         createInp,
         createDatalist,
-        createHeader,
+        createTxt,
         createSearch,    
-        createHeader2,
         navigation,
         sidebarHome,
-        mainTbl,
-        columnSprt,
-        arrKat
+        sec1Tbl,
+        arrKat,
+        create,
+        mainNav
     } from './component/index.js';
     import {
         jsonToCsv, currentDate, // proses
@@ -59,12 +59,12 @@ $role = cekUser('dbvjs',$user_log, $prog);
     
     const root = document.getElementById('root');
     const mainData = await pickNow.fetchDataFilter({data_date: currentDate()});
-    console.log(mainData);
-    await createNav(navigation);
-    activeLink('navID', ['f-or7']);
-    await createNav(sidebarHome);
+    //await createNav(navigation);
+    //activeLink('navID', ['f-or7']);
+    //await createNav(sidebarHome);
+    await mainNav();
+    
     root.removeChild(document.querySelector('.loading'));
-
     //section 1
     
     //section 2
