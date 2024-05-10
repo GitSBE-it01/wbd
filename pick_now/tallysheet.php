@@ -2,6 +2,7 @@
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
+  //redirect ke halaman login sbe
   $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $url = explode("/",$currentURL);
   header(`location: http://$url[2]/sbe/index.php?cek=no`);
@@ -37,67 +38,28 @@ $role = cekUser('dbvjs',$user_log, $prog);
     import {
         loading, 
         activeLink,
+        navigation,
+        sidebarHome,
+        sec1Tbl,
+        arrKat,
         create,
         mainNav,
-        sideNav, 
-        tablePickNow
+        sideNav
     } from './component/index.js';
     import {
         jsonToCsv, currentDate, // proses
-        pickNow, on_hand, wo, pt_mstr  // class
+        pickNow  // class
     } from './utility/index.js';
     
+    const root = document.getElementById('root');
+    const mainData = await pickNow.fetchDataFilter({data_date: currentDate()});
     await mainNav();
     activeLink('navID', ['f-or7']);
     await sideNav();
-    let deptVal = 'P1.ASSY';
-    const defShow = document.querySelector(`[data-deptPick = "${deptVal}"]`);
-    defShow.classList.add('sl8', 'fw-blk');
-    const root = document.getElementById('root');
-    const start = performance.now();
-    const mainData = await pickNow.fetchDataFilter({data_date: currentDate()});
-    const inventory = await on_hand.fetchDataFilter({data_date: currentDate()});
-    //const woR = await wo.fetchDataFilter({wo_status: 'R'}); // wo_mstr
-    //const item = await pt_mstr.getData(); // wo_mstr
-    const end = performance.now();
-    const total = (end - start) / 1000;
-    console.log({mainData, inventory, woR, item});
-    console.log(total);
-    
-
     root.removeChild(document.querySelector('.loading'));
 
-    tablePickNow(deptVal, );
 
-        // const data = {
-        //     komponen: '', //mainData.item
-        //     release_date: '', //woR.wo_rel_datex
-        //     due_date: '', //woR.wo_due_datex
-        //     lokasi: '', //mainData.loc__line
-        //     lot__id: '', //mainData.lot__id
-        //     PM: '', //
-        //     sum_of_QtyOH: '', // sum qty OH WH semua
-        //     nasehat: '', // qty need
-        //     id_par_desc: '', // item.pt_desc1 + pt_desc2
-        //     remarks: '', // woR.wo_rmks
-        //     pick_now: '', //mainData.pick
-        //     qty_OH_all: '', //mainData.qty
-        //     dept: '', //mainData.dept
-        //     all_lot:'', //    kombinasi lot inventory 
-        // }
-
-    document.addEventListener('click', function(event) {
-        const allData = document.querySelectorAll('[data-deptPick]');
-        console.log(allData);
-        allData.forEach(dt=>{
-            dt.classList.remove('sl8', 'fw-blk');
-            if(dt.value === 'deptVal') {
-                dt.classList.add('sl8', 'fw-blk');
-            }
-        })
-    })
-
-/*
+    /*
     const input = document.getElementById('input1');
     input1.addEventListener('change', function(event) {
         const inp = event.target;
@@ -127,5 +89,6 @@ $role = cekUser('dbvjs',$user_log, $prog);
 */
 
 </script>
+<script type='module' src="./utility/index.js"></script>
 </body>
 </html>

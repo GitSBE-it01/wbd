@@ -2,7 +2,7 @@
 CLASS LIST
 Berikut adalah list CLASS yang akan di pakai di prog VJS
 ==============================================================================*/
-export class Data {
+export class Data2 {
     constructor(key) {
         this.key = key;
         this.insertKey = 'insert_'+key;
@@ -99,17 +99,6 @@ export class Data {
         );
       */
       async insertData(insert) {
-        const keys = Object.keys(insert);
-        const values = Object.values(insert);
-        let insertFilter=[];
-        if(!insert[0]) {
-            for (let i=0; i<keys.length; i++) {
-                const entry = { [keys[i]]: values[i] };
-                insertFilter.push(entry);
-            }
-        } else {
-            insertFilter = insert;
-        }
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -117,7 +106,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'insertData', parameters: this.key, insertFilter})
+              body: JSON.stringify({action: 'insertData', parameters: this.key, insert})
             });
 
             if (!response.ok) {
@@ -146,21 +135,7 @@ export class Data {
             }
         );
       */
-      async updateData(arr) {
-        const keys = Object.keys(arr.update);
-        const values = Object.values(arr.update);
-        const updateFilter= [];
-        for (let i=0; i<keys.length; i++) {
-            const entry = { [keys[i]]: values[i] };
-            updateFilter.push(entry);
-        }
-        const keys2 = Object.keys(arr.filter);
-        const values2 = Object.values(arr.filter);
-        const updateFilter2=[];
-        for (let i=0; i<keys2.length; i++) {
-            const entry = { [keys2[i]]: values2[i] };
-            updateFilter2.push(entry);
-        }
+      async updateData(update) {
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -168,7 +143,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'updateData', parameters: this.key, updateFilter, updateFilter2})
+              body: JSON.stringify({action: 'updateData', parameters: this.key, update})
             });
 
             if (!response.ok) {
@@ -188,7 +163,7 @@ export class Data {
     
       const dataDMC = await dataInput.deleteData({id: 123});
       */
-      async deleteData(delFilterKey, delFilter) {
+      async deleteData(delFilter) {
         try {
             const response = await fetch(this.url, {
                 method: 'POST', 
@@ -196,7 +171,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Origin': this.ori
               },
-              body: JSON.stringify({action: 'deleteData', parameters: this.key, delFilterKey, delFilter})
+              body: JSON.stringify({action: 'deleteData', parameters: this.key, delFilter})
             });
 
             if (!response.ok) {
@@ -213,5 +188,48 @@ export class Data {
 
 
 
+export class Data {
+    constructor(key) {
+        this.key = key;
+        const { url, ori } = this.getUrl();
+        this.url = url;
+        this.ori = ori;
+    }
 
+    // for API URL 
+    getUrl() {
+        const check = window.location.href.split("/");
+        let url ="";
+        let ori = "";
+        if (check[2].length > 20 ){
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/pick_now/backend/api.php';
+            ori = 'http://informationsystem.sbe.co.id';
+        } else {
+            url = 'http://192.168.2.103:8080/wbd/pick_now/backend/api.php';
+            ori = 'http://192.168.2.103';
+        }
+        return { url, ori };
+    }
+
+    async dbProcess (action, data, cache) {
+        try {
+            const response = await fetch(this.url, {
+                method: 'POST', 
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Origin': this.ori
+              },
+              body: JSON.stringify({action: action, parameters: this.key, data, cache})
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            const errorJson = JSON.stringify(error);
+            return errorJson;
+        }
+      }
+}
 

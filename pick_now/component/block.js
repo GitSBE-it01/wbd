@@ -57,6 +57,8 @@ const defaultAll ={
     onclick: '',
     onchange: '',
     onmouseover: '',
+    onmouseenter: '',
+    onmouseleave: '',
     onmouseout: '',
     onkeydown: '',
     onkeyup: '',

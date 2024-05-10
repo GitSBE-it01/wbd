@@ -1,7 +1,7 @@
 /*-------------------------
 buat nav bar
 -------------------------*/
-// contoh array 
+// main navigation 
 import { create } from "../block.js";
 
 export const mainNav = async() => {
@@ -9,81 +9,94 @@ export const mainNav = async() => {
         element: 'div',
         selector: '#root',
         id: 'navID',
-        class: 'sl8'
+        class: 'sl2 pb2 flex-r'
     })
     await create({
         element: 'div',
         selector: '#root',
         id: 'main',
-        class: 'sl2 navCard1 flex-r'
+        class: 'sl8 h100 w100 flex-r'
     })
-    await linkDiv();
+    await mainLinkDiv();
 }
 
-const linkDiv = async() => {
+const mainLinkDiv = async() => {
     await create({
         element: 'div',
-        cell: 'link1',
+        cell: 'linkHome',
         selector: '#navID',
-        class: 'mx5 mt2 scale-120',
+        class: 'mx5 mt2 pr1',
     })
     await create({
-        element: 'a',
-        selector: '[data-cell = "link1"]',
+        element: 'button',
+        selector: '[data-cell = "linkHome"]',
         class: 'home',
-        textCont: 'testing',
         href:'../../sbe/index.php'
     })
+    const textContArr = [
+        {text:'home', ref: 'index.php'}, 
+        {text:'tallysheet', ref: 'tallysheet.php'}, 
+        {text:'test2', ref: '#section2'}, 
+    ]
+    for (let i = 0; i<textContArr.length; i++) {
+        await create({
+            element: 'div',
+            cell: `mainLink--${i}`,
+            selector: '#navID', 
+            class: 'mx4 mt2 pt1',
+        })
+        await create({
+            element: 'a',
+            selector: `[data-cell = "mainLink--${i}"]`,
+            textCont: `${textContArr[i]['text']}`,
+            class: 'f-sl7 fs-m fw-blk cap',
+            onmouseover: '',
+            href:`${textContArr[i]['ref']}`
+        })
+    }
 }
 
+// sidebar home
+export const sideNav = async() => {
+    await create({
+        element: 'div',
+        selector: '#main',
+        id: 'sideID',
+        class: 'sl4 cl1 pb2 flex-c h100'
+    })
+    await create({
+        element: 'div',
+        selector: '#main',
+        id: 'main2',
+        class: 'sl8 cl11 h100 w100 flex-c'
+    })
+    await sideLinkDiv();
+}
 
-export const createNav = async(navArr) => {
-    const container = document.getElementById(navArr.target);
-    container.classList.add(navArr.tgtStyle);
-    const navbar = document.createElement('div');
-    navbar.id = navArr.id;
-    const classes = navArr.navStyle;
-    classes.forEach(cls => {
-        navbar.classList.add(cls);
-    })
-    const main = document.createElement('div');
-    main.id = navArr.mainID;
-    const classes2 = navArr.mainStyle;
-    classes2.forEach(cls2 => {
-        main.classList.add(cls2);
-    })
-    navArr.navi.forEach(nav=>{
-        const div = document.createElement('div');
-        const classes3 = nav.divStyle;
-        classes3.forEach(cls3 =>{
-            div.classList.add(cls3);
+const sideLinkDiv = async() => {
+
+    const textContArr = [
+        {dept: 'P1.ASSY',text:'Prod1', ref: '#Prod1'}, 
+        {dept: 'PROD1.VC',text:'VC', ref: '#VC'}, 
+        {dept: 'WH ASSY',text:'WHPR', ref: '#WHPR'}, 
+        {dept: 'SBE3',text:'SBE3', ref: '#SBE3'}, 
+        {dept: 'PROD2',text:'Prod2', ref: '#Prod2'}, 
+        {dept: 'PROD3',text:'Prod3', ref: '#Prod3'}, 
+        {dept: 'QA',text:'Servis', ref: '#Servis'}, 
+        {dept: 'SBE4',text:'Subcont', ref: '#Subcont'}, 
+        {dept: 'KAYU',text:'WWA', ref: '#WWA'}, 
+    ]
+    for (let i = 0; i<textContArr.length; i++) {
+        await create({
+            element: 'div',
+            cell: `sideLink--${i}`,
+            selector: '#sideID', 
+            class: 'py4 tl8 fc-b pl2 mouseHover',
+            deptPick: `${textContArr[i]['dept']}`,
+            tanda: '',
+            textCont: `${textContArr[i]['text']}`
         })
-        const a = document.createElement('a');
-        a.setAttribute('href', nav.link);
-        a.setAttribute('style', 'text-decoration: none;')
-        if(nav.type === 'txt') {
-            const span = document.createElement('span');
-            span.textContent = nav.text;
-            const classes2 = nav.linkStyle;
-            classes2.forEach(cls =>{
-                span.classList.add(cls);
-            })
-            a.appendChild(span);
-        }
-        if(nav.type === 'btn') {
-            const btn = document.createElement('button');
-            const classes2 = nav.linkStyle;
-            classes2.forEach(cls =>{
-                btn.classList.add(cls);
-            })
-            a.appendChild(btn);
-        }
-        div.appendChild(a);
-        navbar.appendChild(div);
-    })
-    container.appendChild(navbar);
-    container.appendChild(main);
-    return 
+    }
 }
 
 /*-------------------------
@@ -97,11 +110,8 @@ export const activeLink = (target, arrCls) => {
         const compare = currentUrl[currentUrl.length-1];
         const hrefValue = link.getAttribute('href');
         if (hrefValue === compare) {
-            const linkCh = link.childNodes;
-            linkCh.forEach(n=>{
-                arrCls.forEach(cls=> {
-                    n.classList.add(cls);
-                })
+            arrCls.forEach(cls=> {
+                link.classList.add(cls);
             })
         }
     })

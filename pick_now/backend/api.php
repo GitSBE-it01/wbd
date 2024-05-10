@@ -30,39 +30,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $data['action']; 
     $param = $data['parameters']; 
     $queryStart = getArrayList($codeList, $param); 
+    $dataParam = isset($data['data']) ? $data['data']:''; 
+    
+    if(isset($data['cache']) && $data['cache']==='cache') {
+        $md5Hash = md5($param . "--" . date("YmdHis"));
+        $filePath = '../cache/' . $md5Hash . '.json';
+        if (file_exists($filePath)) {
+            $action = 'get_cache';
+        } 
+    }
+
     switch($action) {
-        case "getData":
+        case "get":
             $query = $queryStart->getQuery();
             $response = getData($db, $query);
             break;
-        case "fetchDataFilter":
+        case "fetch":
             $query = $queryStart->getQuery();
-            $filter = isset($data['filter']) ? $data['filter']:''; 
-            $response = fetchDataFilter($db, $query, $filter);
+            $response = fetchDataFilter($db, $query, $dataParam);
             break;
-        case "insertData":
+        case "insert":
             $query = $queryStart->insertQuery();
-            $insertData = isset($data['insertFilter']) ? $data['insertFilter']:''; 
-            $response = insertData($db, $query, $insertData);
+            $response = insertData($db, $query, $dataParam);
             break;
-        case "updateData":
+        case "update":
             $query = $queryStart->updateQuery();
-            $updateData = isset($data['updateFilter']) ? $data['updateFilter']:'';
-            $updateData2 = isset($data['updateFilter2']) ? $data['updateFilter2']:'';
-            $response = updateData($db, $query, $updateData, $updateData2);
+            $response = updateData($db, $query, $dataParam);
             break;
-        case "deleteData":
+        case "delete":
             $query = $queryStart->deleteQuery();
-            $delData = isset($data['delFilterKey']) ? $data['delFilterKey']:'';
-            $delData2 = isset($data['delFilter']) ? $data['delFilter']:'';
-            $response = deleteData($db, $query, $delData, $delData2);
+            $response = deleteData($db, $query, $dataParam);
             break;
+        case "get_cache":
+            $cachedFile = file_get_contents($filePath);
+            echo $cachedFile;
+            return;
         default:
             $response = 'Method not supported';
     }
-    header("Cache-Control: public, max-age=3600");
+    
+    if(isset($data['cache']) && $data['cache']==='cache'&& $action !== 'get_cache') {
+        $json = json_encode($response);
+        $md5Hash = md5($param . "--" . date("YmdHis"));
+        $filePath = '../cache/' . $md5Hash . '.json';
+        file_put_contents($filePath, $json);
+    }
+
+    header("Cache-Control: public");
     header("Content-Type: application/json");
     echo json_encode($response);
+    return;
 }
 
 

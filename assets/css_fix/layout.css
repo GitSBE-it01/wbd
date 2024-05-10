@@ -1,15 +1,14 @@
-body {margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-*, *::before, *::after {box-sizing: border-box;}
+
 .container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%; 
     overflow: hidden;
     white-space: pre-wrap;
+    padding: 0;
+    margin: 0;
+    color: lightblue;
 }
 
 /*
@@ -32,6 +31,7 @@ flex display parent
 .flex-r {display: flex;flex-direction: row;}
 .flex-c {display: flex;flex-direction: column;}
 .centerFlex {justify-content: center;}
+.textCenter {text-align: center;}
 .midFlex {display: flex;justify-content: center; align-items: center; }
 .overX {overflow-x: scroll;}
 .overY {overflow-y: scroll;}

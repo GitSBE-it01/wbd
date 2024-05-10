@@ -3,24 +3,49 @@ FUNCTION LIST
 Berikut adalah list FUNCTION  yang akan di pakai di prog VJS
 ==============================================================================*/
 /*-------------------------
-Get today date
+Get date
 -------------------------*/
-export function currentDate () {
+export function currentDate() {
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
+    const month = String(today.getMonth() + 1).padStart(2,'0');
+    const day = String(today.getDate()).padStart(2,'0');
     return `${year}-${month}-${day}`;
 }
 
-/*-------------------------
-split string data
--------------------------*/
-export function splitCustomString (delimiter, value) {
-    const result = value.split(delimiter);
-    return result
+export function getCustomDate(number) {
+    let dayDate = new Date();
+    dayDate.setDate(dayDate.getDate() + (number));
+    const year = dayDate.getFullYear();
+    const month = String(dayDate.getMonth() + 1).padStart(2,'0');
+    const day = String(dayDate.getDate()).padStart(2,'0');
+    return `${year}-${month}-${day}`;
 }
 
+
+
+/*-------------------------
+date format
+-------------------------*/
+export const convertDateFormat = (inputDate) => {
+    // Split the input date string by '/'
+    let parts = inputDate.split('/');
+    
+    // Extract day, month, and year from the split parts
+    let day = parts[0];
+    let month = parts[1];
+    let year = '20' + parts[2];
+    
+    // Construct a new Date object using the extracted values
+    let date = new Date(year, month - 1, day); // Note: Month in Date object is 0-indexed
+    
+    // Format the date as 'yyyy-mm-dd'
+    let formattedDate = date.getFullYear() + '-' + 
+        (String(date.getMonth() + 1).padStart(2, '0')) + '-' + 
+        (String(date.getDate()).padStart(2, '0'));
+        
+    return formattedDate;
+}
 
 /*-------------------------
 str to number with number of char and decimal
@@ -132,28 +157,7 @@ export const jsonToCsv= async(jsonData, name) => {
     }
 }
 
-/*-------------------------
-date format
--------------------------*/
-export const convertDateFormat = (inputDate) => {
-    // Split the input date string by '/'
-    let parts = inputDate.split('/');
-    
-    // Extract day, month, and year from the split parts
-    let day = parts[0];
-    let month = parts[1];
-    let year = '20' + parts[2];
-    
-    // Construct a new Date object using the extracted values
-    let date = new Date(year, month - 1, day); // Note: Month in Date object is 0-indexed
-    
-    // Format the date as 'yyyy-mm-dd'
-    let formattedDate = date.getFullYear() + '-' + 
-                        (date.getMonth() + 1) + '-' + 
-                        (date.getDate());
-    
-    return formattedDate;
-}
+
 
 export const jsonToExcel = async (jsonData, name) => {
     try {

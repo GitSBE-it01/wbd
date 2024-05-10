@@ -2,76 +2,47 @@
 /*=============================================================================
 insert data
 =============================================================================*/
-function insertData($db, $query, $filterValues) {
+function insertData($db, $query, $data) {
     $conn = connectToDatabase($db);
-    $counter = 0;   
-    $count = count($filterValues);
-    $keysParam = array();
-
-    // making array for each data
-    for ($i=0; $i<$count; $i++){
-        $cek = array_keys($filterValues[$i]);
-        $test = array_values($cek);
-        ${'inputKeys' . $counter} = $test[0];
-        echo $test[0];
-        echo ${'inputKeys' . $counter};
-        $keysParam[$test[0]] = array();
-        foreach (array_values($filterValues[$i]) as $key => $values) {
-            if(is_array($values)) {
-                foreach ($values as $key2 => $value) {
-                    ${'input' . $counter}[] = $value;
-                }
-            } else {
-                ${'input' . $counter}[] = $values;
-            }
-            $counter++;
-        }
-    }
-
-    // Build the WHERE clause based on filter values
     $params = '(';
     $bind = ' (';
     $types = '';
-    for ($i=0; $i<$counter; $i++){
-        $params .=  ${'inputKeys' . $i} . ", ";
+
+    foreach($data[0] as $key=>$value) {
+        $params .= $key . ", ";
         $bind .= "?, ";
-        if (is_int(${'input' . $i}[0])) {
+        if (is_int($value)) {
             $types .= "i"; // Integer
-        } elseif (is_float(${'input' . $i}[0])) {
+        } elseif (is_float($value)) {
             $types .= "d"; // Double/Float
-        } elseif (is_string(${'input' . $i}[0])) {
+        } elseif (is_string($value)) {
             $types .= "s";
         }
     }
-    $params = rtrim($params, ', ');
-    $bind = rtrim($bind, ', ');
-    $params .= ")";
-    $bind .= ")";
+    $params = rtrim($params, ', ') . ")";
+    $bind = rtrim($bind, ', ') . ")";
     $wholeQuery = $query . $params ." VALUES" . $bind;
-
-    echo $wholeQuery;
-
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }
 
-    if (!empty($types)) {
-        for ($i=0; $i<count($input0); $i++){
-            $bindParams = array();
-            for ($ii=0; $ii<$counter; $ii++){
-                ${'keyBind_' . $ii} = &${'input' . $ii}[$i];
-                $bindParams[] = &${'keyBind_' . $ii};
-            }
-            array_unshift($bindParams, $types);
-            call_user_func_array([$stmt, 'bind_param'], $bindParams);
-            if (!$stmt->execute()) {
-                die("Execute failed: " . $stmt->error);
-            } else {
-                echo "success";
-            }
+    set_time_limit(3600);
+    foreach($data as $set) {
+        $bindParams = array();
+        foreach($set as $key=>$value) {
+            ${'param' . $key} = $value;
+            $bindParams[] = &${'param' . $key};
+        }
+        array_unshift($bindParams, $types);
+        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        } else {
+            echo "success ";
         }
     }
+
     $stmt->close();
     $conn->close();
 }

@@ -1,2 +1,4 @@
 .bigSide {width: 100%;height: 100%;overflow-Y: scroll;}
 .smallSide {width: 100%;height: 100%;overflow-Y: scroll;}
+
+.mouseHover:hover {cursor: pointer};
