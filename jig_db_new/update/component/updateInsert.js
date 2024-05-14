@@ -68,43 +68,42 @@ export const updateInsertData = async() => {
         const tol = document.getElementById('tol').value;
         const today = currentDate();
         if(form.length>0) {
+            console.log(data['qty'].length);
         for (let i=0; i<data['qty'].length; i++) {
-            if (!parseInt(data['qty'][i])==0 ) {
-                let qty_new = 0;
-                if (data['addSub'][i] === 'tambah') {
-                    qty_new = parseInt(data['cur_qty_per_unit'][i]) + parseInt(data['qty'][i]);
-                } else if (data['addSub'][i] === 'kurang') {
-                    if (parseInt(data['cur_qty_per_unit'][i])<parseInt(data['qty'][i])){
-                        return alert("quantity perubahan lebih kecil dari pada qty on hand");
-                    }
-                    qty_new = parseInt(data['cur_qty_per_unit'][i]) - parseInt(data['qty'][i]);
+            let qty_new = 0;
+            if (data['addSub'][i] === 'tambah') {
+                qty_new = parseInt(data['cur_qty_per_unit'][i]) + parseInt(data['qty'][i]);
+            } else if (data['addSub'][i] === 'kurang') {
+                if (parseInt(data['cur_qty_per_unit'][i])<parseInt(data['qty'][i])){
+                    return alert("quantity perubahan lebih kecil dari pada qty on hand");
                 }
-                const urut = parseInt(data['code'][i].substring(data['code'][i].length - 3));
-                update1['item_jig'].push(itemJig); //
-                update1['qty_per_unit'].push(qty_new);
-                update1['unit'].push(data['unit'][i]);
-                update1['lokasi'].push(data['lokasi'][i]);
-                update1['status'].push(status); //
-                update1['urut'].push(urut);
-                update1['toleransi'].push(tol); //
-                update1['code'].push(data['code'][i]);
-
-                filter1['code'].push(data['code'][i]);
-
-                insert1['code'].push(data['code'][i]);
-                insert1['item_jig'].push(itemJig);
-                insert1['qty_per_unit'].push(qty_new);
-                insert1['unit'].push(data['unit'][i]);
-                insert1['lokasi'].push(data['lokasi'][i]);
-                insert1['trans_date'].push(today); //   
-                insert1['remark'].push(data['remark'][i]);
-                insert1['status'].push(status);
-                insert1['urut'].push(urut);
-
-                insert1['toleransi'].push(tol);
-                insert1['addSub'].push(data['addSub'][i]);
-                insert1['qty_change'].push(data['qty'][i]);
+                qty_new = parseInt(data['cur_qty_per_unit'][i]) - parseInt(data['qty'][i]);
             }
+            const urut = parseInt(data['code'][i].substring(data['code'][i].length - 3));
+            update1['item_jig'].push(itemJig); //
+            update1['qty_per_unit'].push(qty_new);
+            update1['unit'].push(data['unit'][i]);
+            update1['lokasi'].push(data['lokasi'][i]);
+            update1['status'].push(status); //
+            update1['urut'].push(urut);
+            update1['toleransi'].push(tol); //
+            update1['code'].push(data['code'][i]);
+
+            filter1['code'].push(data['code'][i]);
+
+            insert1['code'].push(data['code'][i]);
+            insert1['item_jig'].push(itemJig);
+            insert1['qty_per_unit'].push(qty_new);
+            insert1['unit'].push(data['unit'][i]);
+            insert1['lokasi'].push(data['lokasi'][i]);
+            insert1['trans_date'].push(today); //   
+            insert1['remark'].push(data['remark'][i]);
+            insert1['status'].push(status);
+            insert1['urut'].push(urut);
+
+            insert1['toleransi'].push(tol);
+            insert1['addSub'].push(data['addSub'][i]);
+            insert1['qty_change'].push(data['qty'][i]);
         }}
         
 

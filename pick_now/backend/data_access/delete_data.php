@@ -31,7 +31,10 @@ function deleteData($db, $query, $delete) {
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     } else {
-        echo "success ";
+        $data = "success ";
     }
+    $stmt->close();
+    $conn->close();
+    return $data;
 }
 ?>

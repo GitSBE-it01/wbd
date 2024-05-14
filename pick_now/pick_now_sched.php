@@ -26,8 +26,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         activeLink,
     } from './component/index.js';
     import {
-        jsonToCsv,jsonToExcel, getCustomDate,
-        wobb, wo, ld, loc, currentDate, dept, pickNow, on_hand, pt_mstr,
+        jsonToCsv,jsonToExcel, getCustomDate,currentDate,
+        wobb, wo, ld, loc, dept, pickNow, pt_mstr,pic_part,
         convertDateFormat
     } from './utility/index.js';
     
@@ -36,35 +36,35 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     console.log('========================================================================================');
     console.log('step0 : inisiasi awal ')
     console.log('========================================================================================');
-    const demand = await wobb.dbProcess('get','', 'cache'); // wod_det
-    const woR = await wo.dbProcess('fetch',{wo_status: 'R'}, 'cache'); // wo_mstr
-    const item_mstr = await pt_mstr.dbProcess('get','', 'cache'); // wo_mstr
-    const oh = await ld.dbProcess('get','',''); // ld_det
-    const cekLoc = await loc.dbProcess('get','', 'cache'); //loc_mstr
-    const cekDept = await dept.dbProcess('get','', 'cache');
-    const cekNew = await pickNow.dbProcess('fetch',{data_date: getCustomDate(-1)}, 'cache');
-    const delete1 = await pickNow.dbProcess('delete',{data_date: getCustomDate(-2)});
-    const delete2 = await on_hand.dbProcess('delete',{data_date: getCustomDate(-1)});
-    console.log({delete1, delete2}); 
     const h1 = document.createElement('h1');
     h1.textContent = 'Scheduler Pick Now';
     root.appendChild(h1);
-    
+    const demand = await wobb.dbProcess('get',''); // wod_det
+    const woR = await wo.dbProcess('fetch',{wo_status: 'R'}); // wo_mstr
+    const cekDept = await dept.dbProcess('get','');
+    const item_mstr = await pt_mstr.dbProcess('get',''); // wo_mstr
     console.log('************************************************************');
     console.log('data raw utk demand dari WOBB dan WO yang R');
     console.log('------------------------------------------------------------');
-    console.log({demand, woR, cekDept});
+    console.log({demand, woR, cekDept, item_mstr});
 
 
+    const pic = await pic_part.dbProcess('get',''); // wo_mstr
+    const oh = await ld.dbProcess('get',''); // ld_det
+    const cekLoc = await loc.dbProcess('get',''); //loc_mstr
     console.log('************************************************************');
     console.log('data raw utk OH dan list lokasi utk mendapatkan demand');
     console.log('------------------------------------------------------------');
-    console.log({oh, cekLoc, item_mstr});
+    console.log({pic, oh, cekLoc});
 
+
+    const delete1 = await pickNow.dbProcess('delete',{data_date: getCustomDate(-2)});
+    console.log(delete1);
     
     console.log('************************************************************');
     console.log('list WO release dari data penarikkan tgl sebelumnya');
     console.log('------------------------------------------------------------');
+    const cekNew = await pickNow.dbProcess('fetch',{data_date: getCustomDate(-1)});
     const cekIDnewR = [];
     cekNew.forEach(dt=>{
         if(!cekNew.includes(dt.lot__id)) {
@@ -170,6 +170,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         if(invDet.has(fltr)) {
             const exst = invDet.get(fltr);
             exst.qty_OH += parseFloat(dt.ld_qty_oh);
+            exst.detail += dt.ld_lot + "--" + dt.ld_loc + ", \n";
         } else {
             const data = {
                 dept: dt.dept,
@@ -177,7 +178,8 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 item: dt.ld_part,
                 qty_OH: parseFloat(dt.ld_qty_oh),
                 lot: dt.ld_lot,
-                reff: dt.ld_ref
+                reff: dt.ld_ref,
+                detail: dt.ld_lot + "--" + dt.ld_loc + ", \n"
             }
             invDet.set(fltr,data);
         }
@@ -206,7 +208,6 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     let counter = 0;
     dmnd_new.forEach(dt=>{
         const cekDate = convertDateFormat(dt.rel_dt);
-        const code = dt.wod_part+dt.dept;
         let data ={
             item: dt.wod_part,
             remark: '2.demand',
@@ -238,6 +239,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 lot__id: dt.lot,
                 date: currentDate(),
                 current: currentDate(),
+                detail: dt.detail
             }
             gabCek.push(data);
         }
@@ -296,10 +298,14 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     console.log('************************************************************');
     console.log('all id pick now');
     const ls_pick = [];
+    const typePick = [];
 
     gabCek.forEach(dt=>{
         if(!ls_pick.includes(dt.lot__id) && dt.pick === 'pick now') {
             ls_pick.push(dt.lot__id);
+        }
+        if(!typePick.includes(dt.item) && dt.pick === 'pick now') {
+            typePick.push(dt.item);
         }
     })
     console.log('------------------------------------------------------------');
@@ -310,6 +316,9 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const result_pick = [];
     gabCek.forEach(dt=>{
         if(ls_pick.includes(dt.lot__id)) {
+            result_pick.push(dt);
+        }
+        if(dt.remark === '1.on hand' && typePick.includes(dt.item)) {
             result_pick.push(dt);
         }
     })
@@ -324,67 +333,74 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     root.appendChild(report4);
 
     console.log('========================================================================================');
-    console.log('step5 : input data ke database');
+    console.log('step5 : finalizing and input data ke database');
     console.log('========================================================================================');
     const start5 = performance.now();
     console.log('************************************************************');
     console.log('proses data pick now utk input ke database');
-    //const inputArr = {
-    //    data_date: [],
-    //    item: [],
-    //    remark: [],
-    //    loc__line: [],
-    //    dept: [],
-    //    qty: [],
-    //    lot__id: [],
-    //    _date: [],
-    //};
+
+    const finalResult = [];
+    result_pick.forEach(dt=>{
+        const picCek = pic.filter(item=>item.tipe === dt.item);
+        const OH = oh_all.filter(item=>item.item === dt.item);
+        const wo = woR.filter(item => item.wo_lot === dt.lot__id);
+        const it = item_mstr.filter( item => item.pt_part === dt.item);
+        const data = {
+            ...dt,
+            rel_date: wo && wo[0] && wo[0]['wo_rel_datex'] ? wo[0]['wo_rel_datex'] : '',
+            due_date: wo && wo[0] && wo[0]['wo_due_datex']  ? wo[0]['wo_due_datex'] :'',
+            rmks: wo && wo[0] && wo[0]['wo_rmks']  ? wo[0]['wo_rmks'] :'',
+            desc: it && it[0] && it[0]['pt_desc1']? it[0]['pt_desc1'] : '',
+            qtyOnHand: OH && OH[0] && OH[0]['qty_OH'] ? OH[0]['qty_OH'] : 0,
+            all_lot: OH && OH[0] && OH[0]['lot'] ? OH[0]['lot'] : "-",
+            pic: picCek ? picCek : "",
+        }
+        finalResult.push(data);
+    })
+    console.log('------------------------------------------------------------');
+    finalResult.forEach(dt=>{
+        if(dt['pic'].length > 0) {
+            dt['picFix'] = dt['pic'][0]['optr'];
+        }
+    })
+    console.log(finalResult);
+
+    console.log('************************************************************');
+    console.log('proses data pick now utk input ke database');
+
     const inputArr = [];
-    for (let i=0; i<result_pick.length; i++) {
+    for (let i=0; i<finalResult.length; i++) {
         const data ={
             data_date: currentDate(),
-            item: result_pick[i]['item'],
-            remark: result_pick[i]['remark'],
-            loc__line: result_pick[i]['loc__line'],
-            dept: result_pick[i]['dept'],
-            qty: result_pick[i]['qty'],
-            lot__id: result_pick[i]['lot__id'],
-            _date: result_pick[i]['date'],
-            pick: result_pick[i]['pick']
+            item: finalResult[i]['item'],
+            _desc: finalResult[i]['desc'],
+            remark: finalResult[i]['remark'],
+            lot__id: finalResult[i]['lot__id'],
+            loc__line: finalResult[i]['loc__line'],
+            dept: finalResult[i]['dept'],
+            qty: finalResult[i]['qty'],
+            valAcc: finalResult[i]['valAcc'],
+            qty_OH: finalResult[i]['qtyOnHand'],
+            lotOH: finalResult[i]['detail'] ? finalResult[i]['detail'] : '-',
+            _date: finalResult[i]['date'],
+            rel_dt: finalResult[i]['rel_date'],
+            due_dt: finalResult[i]['due_date'],
+            wo_rmks: finalResult[i]['rmks'],
+            pic: finalResult[i]['picFix'] ? finalResult[i]['picFix'] : "-",
+            pick: finalResult[i]['pick'],
+            id_new: finalResult[i]['id_new']
         }
         inputArr.push(data);
     }
-    console.log('------------------------------------------------------------');
-    console.log(inputArr);
-
-    console.log('************************************************************');
-    console.log('proses data On Hand utk input ke database');   
-    //const inputArr2 = {
-    //    data_date: [],
-    //    dept: [],
-    //    item: [],
-    //    loc: [],
-    //    lot: [],
-    //    qty_OH: [],
-    //    reff: [],
-    //};
-    const inputArr2 =[];
-    oh_all.forEach(dt=>{
-        if(dt.dept === 'WH') {
-            const data = {
-                data_date: currentDate(),
-                dept: dt['dept'],
-                item: dt['item'],
-                loc: dt['loc'],
-                lot: dt['lot'],
-                qty_OH: dt['qty_OH'],
-                reff: dt['reff'],
-            }
-            inputArr2.push(data);
-        }
+    inputArr.sort((a,b) => {
+        if (a.item !== b.item) return a.item.localeCompare(b.item);
+        if (a.dept !== b.dept) return a.dept.localeCompare(b.dept);
+        if (a._date !== b._date) return a._date.localeCompare(b._date);
+        if (a.remark !== b.remark) return a.remark.localeCompare(b.remark);
+        return 0; // objects are equal
     })
     console.log('------------------------------------------------------------');
-    console.log(inputArr2);
+    console.log(inputArr);
 
     console.log('************************************************************');
     const cek = await pickNow.dbProcess('fetch',{data_date: currentDate()}) ;
@@ -401,25 +417,12 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         report5.textContent = 'Data pick now sudah tersedia';
     }
 
-    const cek2 = await on_hand.dbProcess('fetch',{data_date: currentDate()}) ;
-    const report6 = document.createElement('h3');
-    if (cek2.length === 0) {
-        const result3 = await on_hand.dbProcess('insert',inputArr2);
-        if(!result3.includes('fail')) {
-            report6.textContent = 'Pemasukan data on hand sebanyak ' + inputArr2.length + ' data ke database selesai';
-        } else {
-            report6.textContent = 'Pemasukan data on hand gagal';
-        }
-    } else  {
-        report6.textContent = 'Data on hand sudah tersedia';
-    }
     const endFinal = performance.now();
     const totalTime = (endFinal - initPage) /1000;
     const h2 = document.createElement('h3');
     h2.textContent = 'waktu proses total : ' + totalTime;
     root.removeChild(document.querySelector('.loading'));
     root.appendChild(report5);
-    root.appendChild(report6);
     root.appendChild(h2);
 
 /*
@@ -427,31 +430,12 @@ woR = woR
 item = item_mstr
 mainData = inputArr
 inventory = inpu
-*/
-
-
-/*
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(demand);
-    const worksheet2 = XLSX.utils.json_to_sheet(woR);
-    const worksheet3 = XLSX.utils.json_to_sheet(oh);
-    const worksheet4 = XLSX.utils.json_to_sheet(cekLoc);
-    const worksheet5 = XLSX.utils.json_to_sheet(cekDept);
-    const worksheet6 = XLSX.utils.json_to_sheet(dmnd_new);
-    const worksheet7 = XLSX.utils.json_to_sheet(oh_all);
-    const worksheet9 = XLSX.utils.json_to_sheet(gabCek);
-    const worksheet10 = XLSX.utils.json_to_sheet(result_pick);
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'demand');
-    XLSX.utils.book_append_sheet(workbook, worksheet2, 'woR');
-    XLSX.utils.book_append_sheet(workbook, worksheet3, 'oh');
-    XLSX.utils.book_append_sheet(workbook, worksheet4, 'cekLoc');
-    XLSX.utils.book_append_sheet(workbook, worksheet5, 'cekDept');
-    XLSX.utils.book_append_sheet(workbook, worksheet6, 'demandNew');
-    XLSX.utils.book_append_sheet(workbook, worksheet7, 'oh_all');
-    XLSX.utils.book_append_sheet(workbook, worksheet9, 'gabCek');
-    XLSX.utils.book_append_sheet(workbook, worksheet10, 'result_pick');
+    const worksheet = XLSX.utils.json_to_sheet(inputArr);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'result_pick');
     XLSX.writeFile(workbook, 'data.xlsx')
 */
+
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>

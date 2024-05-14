@@ -31,6 +31,5 @@ export const ld = new Data('ld');
 export const loc = new Data('loc');  
 export const dept = new Data('dept');  
 export const pickNow = new Data('pickNow');  
-export const on_hand = new Data('on_hand');  // data di on hand harian
 export const pt_mstr = new Data('pt_mstr');  
 export const pic_part = new Data('pic_part');  

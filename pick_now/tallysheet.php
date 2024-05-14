@@ -9,11 +9,7 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
   exit(0);
 }
 
-/*
-$user_log = strtoupper($_SESSION["username"]);
-$prog = 'pick_now';
-$role = cekUser('dbvjs',$user_log, $prog);
-*/
+
 ?>
 
 <!DOCTYPE html>
@@ -38,55 +34,28 @@ $role = cekUser('dbvjs',$user_log, $prog);
     import {
         loading, 
         activeLink,
-        navigation,
-        sidebarHome,
-        sec1Tbl,
-        arrKat,
         create,
         mainNav,
-        sideNav
+        sideNav, 
+        tablePickNow
     } from './component/index.js';
     import {
         jsonToCsv, currentDate, // proses
-        pickNow  // class
+        pickNow, wo, pt_mstr  // class
     } from './utility/index.js';
     
-    const root = document.getElementById('root');
-    const mainData = await pickNow.fetchDataFilter({data_date: currentDate()});
     await mainNav();
     activeLink('navID', ['f-or7']);
     await sideNav();
-    root.removeChild(document.querySelector('.loading'));
-
-
-    /*
-    const input = document.getElementById('input1');
-    input1.addEventListener('change', function(event) {
-        const inp = event.target;
-        const inpValue = inp.value.toLocaleLowerCase();
-        console.log(inpValue);
-        const tbl = document.getElementById('tblMain');
-        const row = tbl.querySelectorAll('[data-row]');
-        row.forEach(dt=>{
-            if(dt.classList.contains('displayHide')) {
-                dt.classList.remove('displayHide');
-            }
-            if(!dt.getAttribute('data-row').toLocaleLowerCase().includes(inpValue)) {
-                dt.classList.add('displayHide');
-            }
-        })
-    })
-
-    // download excel
-    const dlExc = document.getElementById('dlExcl');
-    dlExc.addEventListener('click', async function(event) {
-        const btn = event.target;
-        btn.disabled = true;
-        await jsonToCsv(allArray, 'testing.csv');
-
-        btn.disabled = false;
-    })
-*/
+    let deptVal = 'P1.ASSY';
+    const defShow = document.querySelector(`[data-deptPick = "${deptVal}"]`);
+    defShow.classList.add('sl8', 'fw-blk');
+    const root = document.getElementById('root');
+    const start = performance.now();
+    const cekNew = await pickNow.dbProcess('get','');
+    const end = performance.now();
+    const total = (end - start) / 1000;
+    console.log({cekNew});
 
 </script>
 <script type='module' src="./utility/index.js"></script>

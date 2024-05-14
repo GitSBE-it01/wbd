@@ -30,15 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $data['action']; 
     $param = $data['parameters']; 
     $queryStart = getArrayList($codeList, $param); 
-    $dataParam = isset($data['data']) ? $data['data']:''; 
-    
-    if(isset($data['cache']) && $data['cache']==='cache') {
-        $md5Hash = md5($param . "--" . date("YmdHis"));
-        $filePath = '../cache/' . $md5Hash . '.json';
-        if (file_exists($filePath)) {
-            $action = 'get_cache';
-        } 
-    }
+    $dataParam = isset($data['data']) ? $data['data']:'';
 
     switch($action) {
         case "get":
@@ -61,19 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $query = $queryStart->deleteQuery();
             $response = deleteData($db, $query, $dataParam);
             break;
-        case "get_cache":
-            $cachedFile = file_get_contents($filePath);
-            echo $cachedFile;
-            return;
         default:
             $response = 'Method not supported';
-    }
-    
-    if(isset($data['cache']) && $data['cache']==='cache'&& $action !== 'get_cache') {
-        $json = json_encode($response);
-        $md5Hash = md5($param . "--" . date("YmdHis"));
-        $filePath = '../cache/' . $md5Hash . '.json';
-        file_put_contents($filePath, $json);
     }
 
     header("Cache-Control: public");

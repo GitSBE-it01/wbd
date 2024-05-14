@@ -27,6 +27,7 @@ function insertData($db, $query, $data) {
         die("Prepare failed: " . $conn->error);
     }
 
+
     set_time_limit(3600);
     foreach($data as $set) {
         $bindParams = array();
@@ -39,12 +40,12 @@ function insertData($db, $query, $data) {
         if (!$stmt->execute()) {
             die("Execute failed: " . $stmt->error);
         } else {
-            echo "success ";
+            $data = "success ";
         }
     }
-
     $stmt->close();
     $conn->close();
+    return $data;
 }
 
 ?>

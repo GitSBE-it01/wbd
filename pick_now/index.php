@@ -44,7 +44,7 @@ $role = cekUser('dbvjs',$user_log, $prog);
     } from './component/index.js';
     import {
         jsonToCsv, currentDate, // proses
-        pickNow, on_hand, wo, pt_mstr  // class
+        pickNow// class
     } from './utility/index.js';
     
     await mainNav();
@@ -55,13 +55,10 @@ $role = cekUser('dbvjs',$user_log, $prog);
     defShow.classList.add('sl8', 'fw-blk');
     const root = document.getElementById('root');
     const start = performance.now();
-    const mainData = await pickNow.fetchDataFilter({data_date: currentDate()});
-    const inventory = await on_hand.fetchDataFilter({data_date: currentDate()});
-    //const woR = await wo.fetchDataFilter({wo_status: 'R'}); // wo_mstr
-    //const item = await pt_mstr.getData(); // wo_mstr
+    const mainData = await pickNow.dbProcess('fetch',{data_date: currentDate()});
     const end = performance.now();
     const total = (end - start) / 1000;
-    console.log({mainData, inventory, woR, item});
+    console.log({mainData});
     console.log(total);
     
 

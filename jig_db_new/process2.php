@@ -173,7 +173,7 @@ function insertData($query, $filterValues) {
     $conn->close();
 }
 
-
+/*
 function updateData($query, $filterValues, $filterValues2) {
     $conn = connectToDatabase();
     $counter = 0;   
@@ -251,7 +251,6 @@ function updateData($query, $filterValues, $filterValues2) {
     $params = rtrim($params, ', ');
     $filter = rtrim($filter, 'AND ');
     $wholeQuery = $query ." SET " . $params . " WHERE " . $filter;
-    echo $wholeQuery;
     
     $stmt = $conn->prepare($wholeQuery);
     if (!$stmt) {
@@ -280,9 +279,58 @@ function updateData($query, $filterValues, $filterValues2) {
             }
         }
     }
+}*/
+
+function updateData($query, $data, $filter) {
+    $conn = connectToDatabase();
+    $types = '';
+    $bindParams = array();
+    $wholeQuery = $query . " SET ";
+    foreach($data as $set) {
+        foreach($set as $key=>$value) {
+            $wholeQuery .= $key . "=?, ";
+            if (is_int($value[0])) {
+                $types .= "i"; // Integer
+            } elseif (is_float($value[0])) {
+                $types .= "d"; // Double Float
+            } elseif (is_string($value[0])) {
+                $types .= "s";
+            }
+            ${'param' . $key} = $value[0];
+            $bindParams[] = &${'param' . $key};
+        }
+    }
+    $wholeQuery = rtrim($wholeQuery, ', ') . " WHERE ";
+    foreach($filter as $set) {
+        foreach($set as $key=>$value) {
+            $wholeQuery .= $key . "=? AND ";
+            if (is_int($value[0])) {
+                $types .= "i"; // Integer
+            } elseif (is_float($value[0])) {
+                $types .= "d"; // Double Float
+            } elseif (is_string($value[0])) {
+                $types .= "s";
+            }
+            ${'param2' . $key} = $value[0];
+            $bindParams[] = &${'param2' . $key};
+        }
+    }
+    $wholeQuery = rtrim($wholeQuery, ' AND ');
+    $stmt = $conn->prepare($wholeQuery);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+    set_time_limit(3600);
+    array_unshift($bindParams, $types);
+    call_user_func_array([$stmt, 'bind_param'], $bindParams);
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    } else {
+        echo "success ";
+    }
+    $stmt->close();
+    $conn->close();
 }
-
-
 /*=============================================================================
 Delete data
 =============================================================================*/

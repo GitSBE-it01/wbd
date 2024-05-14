@@ -154,11 +154,9 @@ require_once "../config.php";
     })
 
     document.addEventListener('change', async function(event) {
-        console.log('change');
         if(event.target.hasAttribute('data-input')) {
             const current = event.target;
             const form = current.closest('[data-fromdb');
-            console.log({current, form});
             form.setAttribute('data-fromdb','change');
         }
     })
