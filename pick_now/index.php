@@ -26,7 +26,7 @@ $role = cekUser('dbvjs',$user_log, $prog);
     <link rel="stylesheet" href="../assets/css_fix/font.css">
     <link rel="stylesheet" href="../assets/css_fix/layout.css">
     <link rel="stylesheet" href="../assets/css_fix/symbol.css">
-    <title>parent code</title>
+    <title>pick now</title>
 </head>
 <body>
 <div id='root' class='container'>
@@ -36,14 +36,14 @@ $role = cekUser('dbvjs',$user_log, $prog);
     const initPage = performance.now();
     import {
         loading, 
-        activeLink,
         create,
         mainNav,
         sideNav, 
-        tablePickNow
+        pickNowHeader,
+        pickNowTbl
     } from './component/index.js';
     import {
-        jsonToCsv, currentDate, // proses
+        jsonToCsv, currentDate, mainDataProcess,activeLink,// proses
         pickNow// class
     } from './utility/index.js';
     
@@ -55,74 +55,152 @@ $role = cekUser('dbvjs',$user_log, $prog);
     defShow.classList.add('sl8', 'fw-blk');
     const root = document.getElementById('root');
     const start = performance.now();
-    const mainData = await pickNow.dbProcess('fetch',{data_date: currentDate()});
+    const mainData = await pickNow.dbProcess('fetch',{data_date: currentDate()});  
+    console.log({mainData});
+    const dataProcess = await mainDataProcess(mainData);
+    console.log({dataProcess});
+    const itemReff = {};
+    dataProcess.forEach(dt=>{
+        if(itemReff[dt.depmnt]) {
+            itemReff[dt.depmnt].push(dt.komponen);
+        } else {
+            itemReff[dt.depmnt]=[dt.komponen];
+        }
+    })
+    let dataTbl = []
+    dataProcess.forEach(dt => {
+        if(dt.depmnt === deptVal) {dataTbl.push(dt)}
+        if(dt.depmnt === 'WH' && itemReff[deptVal].includes(dt.komponen)) {dataTbl.push(dt)}
+    });
+    await pickNowHeader(deptVal);
+    await pickNowTbl(dataTbl, deptVal);
+    root.removeChild(document.querySelector('.loading'));
     const end = performance.now();
     const total = (end - start) / 1000;
-    console.log({mainData});
     console.log(total);
-    
-
-    root.removeChild(document.querySelector('.loading'));
-
-    tablePickNow(deptVal, );
-
-        // const data = {
-        //     komponen: '', //mainData.item
-        //     release_date: '', //woR.wo_rel_datex
-        //     due_date: '', //woR.wo_due_datex
-        //     lokasi: '', //mainData.loc__line
-        //     lot__id: '', //mainData.lot__id
-        //     PM: '', //
-        //     sum_of_QtyOH: '', // sum qty OH WH semua
-        //     nasehat: '', // qty need
-        //     id_par_desc: '', // item.pt_desc1 + pt_desc2
-        //     remarks: '', // woR.wo_rmks
-        //     pick_now: '', //mainData.pick
-        //     qty_OH_all: '', //mainData.qty
-        //     dept: '', //mainData.dept
-        //     all_lot:'', //    kombinasi lot inventory 
-        // }
 
     document.addEventListener('click', function(event) {
-        const allData = document.querySelectorAll('[data-deptPick]');
-        console.log(allData);
-        allData.forEach(dt=>{
-            dt.classList.remove('sl8', 'fw-blk');
-            if(dt.value === 'deptVal') {
-                dt.classList.add('sl8', 'fw-blk');
+        if(event.target.hasAttribute('data-deptPick')) {
+            const start = performance.now();
+            const main2 = document.querySelector('#main2');
+            const current = document.querySelectorAll(`[data-table]`);
+            current.forEach(dt=>{
+                if(!dt.classList.contains('displayHide')) {
+                    dt.classList.add('displayHide');
+                }
+            })
+            main2.appendChild(loading('loading'));
+            deptVal = event.target.getAttribute('data-deptPick');
+            const sideData = document.querySelectorAll('[data-deptPick]');
+            sideData.forEach(dt=>{
+                dt.classList.remove('sl8', 'fw-blk');
+                if(dt.getAttribute('data-deptPick') === deptVal) {
+                    dt.classList.add('sl8', 'fw-blk');
+                }
+            })
+            const title = document.getElementById('pickNowTitle');
+            title.textContent = `Pick Now Untuk ${deptVal}`;
+            const after = document.querySelector(`[data-table = "pickNowTbl${deptVal}"]`);
+            if(after) {
+                after.classList.remove('displayHide');
+            } else {
+                dataTbl = [];
+                dataProcess.forEach(dt => {
+                    if(dt.depmnt === deptVal) {dataTbl.push(dt)}
+                    if(dt.depmnt === 'WH' && itemReff[deptVal].includes(dt.komponen)) {dataTbl.push(dt)}
+                });
+                if(dataTbl.length >0) {
+                    pickNowTbl(dataTbl, deptVal);
+                } else {
+                    create ({
+                        element: 'div',
+                        selector: '#main2',
+                        table: `pickNowTbl${deptVal}`,
+                        class: 'h100 w100 overY'
+                    }) 
+                }
             }
-        })
-    })
-
-/*
-    const input = document.getElementById('input1');
-    input1.addEventListener('change', function(event) {
-        const inp = event.target;
-        const inpValue = inp.value.toLocaleLowerCase();
-        console.log(inpValue);
-        const tbl = document.getElementById('tblMain');
-        const row = tbl.querySelectorAll('[data-row]');
-        row.forEach(dt=>{
-            if(dt.classList.contains('displayHide')) {
-                dt.classList.remove('displayHide');
+            main2.removeChild(document.querySelector('.loading'));
+            const end = performance.now();
+            console.log('total time proses pindah : ' + ((end-start)/1000) + ' second');
+        }
+        if(event.target.getAttribute('id')==='mainSearchBtn') {
+            const searchVal = document.getElementById('mainSearchInput').value.toLowerCase();
+            if(searchVal) {
+                const allRow = document.querySelectorAll('[data-row]');
+                allRow.forEach(dt=>{
+                    const val = dt.getAttribute('data-filter').toLowerCase();
+                    if(!val.includes(searchVal) && !dt.classList.contains('displayHide')) {
+                        dt.classList.add('displayHide');
+                    }
+                })
+                return;
+            }  else {
+                let itemCek2 ='';
+                const allRow = document.querySelectorAll('[data-row]');
+                allRow.forEach(dt=>{
+                    dt.classList.remove('bt2-solid');
+                    const itemDt = dt.querySelector('[data-cell ="komponen"]').textContent;
+                    if(itemDt !== itemCek2) {
+                        dt.classList.add('bt2-solid');
+                        itemCek2 = itemDt;
+                    }
+                    const cek = dt.getAttribute('data-deptVal');
+                    if(cek === deptVal || cek === 'WH') {
+                        if(itemReff[deptVal] && itemReff[deptVal].includes(itemDt)) {
+                            dt.classList.remove('displayHide');
+                        } else if(itemReff[deptVal] && !dt.classList.contains('displayHide')){
+                            dt.classList.add('displayHide');
+                        }
+                        if(!itemReff[deptVal] && !dt.classList.contains('displayHide')){
+                            dt.classList.add('displayHide');
+                        }
+                    } else if(!dt.classList.contains('displayHide')){
+                            dt.classList.add('displayHide');
+                        }
+                })
             }
-            if(!dt.getAttribute('data-row').toLocaleLowerCase().includes(inpValue)) {
-                dt.classList.add('displayHide');
-            }
-        })
+        }
+        if(event.target.getAttribute('id')==='dlExcel') {
+            let excelData =[];
+            const allRow = document.querySelectorAll('[data-row]');
+            allRow.forEach(dt=>{
+                const data = {
+                    komponen:'komponenkomponen',
+                    depmnt:'depmnt',
+                    keterangan:'keterangan',
+                    dt_need:'dt_need',
+                    release_date:'release_date',
+                    due_date:'due_date',
+                    lokasi:'lokasi',
+                    lot__id:'lot__id',
+                    qty:'qty',
+                    nasehat:'nasehat',
+                    pick_now:'pick_nowpick',
+                    qty_OH_all:'qty_OH_all',
+                    remarks:'remarks',
+                    all_lot:'all_lot',
+                    pic:'pic',
+                }
+                const dataValue = dt.querySelectorAll('[data-cell]');
+                dataValue.forEach(dt=>{
+                    const key = dt.getAttribute('data-cell');
+                    if(data[`${key}`]) {
+                        data[`${key}`] = dt.textContent;
+                    }
+                })
+                if(!dt.classList.contains('displayHide')) {
+                    excelData.push(data);
+                }
+            })
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(excelData);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
+            XLSX.writeFile(workbook, 'pick_now.xlsx')
+        }
     })
-
-    // download excel
-    const dlExc = document.getElementById('dlExcl');
-    dlExc.addEventListener('click', async function(event) {
-        const btn = event.target;
-        btn.disabled = true;
-        await jsonToCsv(allArray, 'testing.csv');
-
-        btn.disabled = false;
-    })
-*/
 
 </script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>
 </html>

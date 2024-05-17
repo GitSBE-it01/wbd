@@ -96,6 +96,36 @@ link active
 .bl4-solid {border-left: 4px solid black;}
 .bl5-solid {border-left: 5px solid black;}
 
+.br1-solid {border-right: 1px solid black;}
+.br2-solid {border-right: 2px solid black;}
+.br3-solid {border-right: 3px solid black;}
+.br4-solid {border-right: 4px solid black;}
+.br5-solid {border-right: 5px solid black;}
+
+.bt1-solid {border-top: 1px solid black;}
+.bt2-solid {border-top: 2px solid black;}
+.bt3-solid {border-top: 3px solid black;}
+.bt4-solid {border-top: 4px solid black;}
+.bt5-solid {border-top: 5px solid black;}
+
+.bb1-solid {border-bottom: 1px solid black;}
+.bb2-solid {border-bottom: 2px solid black;}
+.bb3-solid {border-bottom: 3px solid black;}
+.bb4-solid {border-bottom: 4px solid black;}
+.bb5-solid {border-bottom: 5px solid black;}
+
+.bx1-solid {border-left: 1px solid black; border-right: 1px solid black;}
+.bx2-solid {border-left: 2px solid black; border-right: 2px solid black;}
+.bx3-solid {border-left: 3px solid black; border-right: 3px solid black;}
+.bx4-solid {border-left: 4px solid black; border-right: 4px solid black;}
+.bx5-solid {border-left: 5px solid black; border-right: 5px solid black;}
+
+.by1-solid {border-top: 1px solid black; border-bottom: 1px solid black;}
+.by2-solid {border-top: 2px solid black; border-bottom: 2px solid black;}
+.by3-solid {border-top: 3px solid black; border-bottom: 3px solid black;}
+.by4-solid {border-top: 4px solid black; border-bottom: 4px solid black;}
+.by5-solid {border-top: 5px solid black; border-bottom: 5px solid black;}
+
 .text-undecor {text-decoration: none;}
 
 .newLine {white-space: pre-wrap;}

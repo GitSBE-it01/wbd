@@ -42,8 +42,31 @@ export const dataTableType = async (valueId) => {
     try {
         const src1 = await jig_function_query.fetchDataFilter({item_jig: valueId});
         const src2 = await item_detail_query.getData();
+        const data = [];
+        console.log(src1);
+        src1.forEach(dt=>{
+            let matObj = []
+            src2.forEach(dt2=> {
+                if(dt2.pt_part === dt.item_type.trim()){
+                    matObj= dt2;
+                }
+            })
+
+
+            const content = {
+                item_jig: dt.item_jig,
+                item_type: dt.item_type || "-",
+                description: matObj ? matObj['pt_desc1'] : "-",
+                status_type: matObj ? matObj['pt_status'] : "-",
+                opt_on: dt.opt_on || 0,
+                opt_off: dt.opt_off || 0
+            }
+            data.push(content);
+        })
+        /*
         const data = src1.map((obj1) => {
-            const matObj = src2.find((obj2) => obj2.pt_part === obj1.item_type);
+            const matObj = src2.filter((obj2) => obj2.pt_part === obj1.item_type);
+            console.log(matObj);
             return {
                 item_jig: obj1.item_jig,
                 item_type: obj1.item_type || "-",
@@ -52,7 +75,7 @@ export const dataTableType = async (valueId) => {
                 opt_on: obj1.opt_on || 0,
                 opt_off: obj1.opt_off || 0
             };
-        });
+        });*/
         return data;
     }catch (error){
         console.error('Error:', error);

@@ -1,39 +1,57 @@
-export const data = async(data) => {
-    const inven = new Map();
-    inventory.forEach(dt=>{
-        if(inven.has(dt.item)) {
-            const exst = inven.get(dt.item);
-            exst.qty_OH += parseFloat(dt.qty_OH);
-            exst.detail += dt.lot + "--" + dt.loc + ", \n";
-        } else {
-            const newItem = {
-                dept: dt.dept,
-                item: dt.item,
-                loc: dt.loc,
-                lot: dt.lot,
-                qty_OH: parseFloat(dt.qty_OH),
-                reff:dt.reff,
-                detail: dt.lot + "--" + dt.loc + ", \n"
-            }
-            inven.set(dt.item, newItem);
+import {numberToStr} from '../index.js';
+
+export const mainDataProcess = (src)=> {
+    const tableData =[];
+    src.forEach(dt=> {
+        let qtyNasehat = 0;
+        if(dt.valAcc < 0 ) {
+            qtyNasehat = dt.valAcc;
         }
-    })
-    const resultInven = Array.from(inven.values());
-    const pickNowDataFix = [];
-    mainData.forEach(dt=>{
-        const OH = resultInven.filter(item=>item.item === dt.item);
-        const wo = woR.filter(item => item.wo_lot === dt.lot__id);
-        const it = item.filter( item => item.pt_part === dt.item);
+        const fltr = dt.id + '--' +
+        dt.item + '--' +
+        dt.dept + '--' +
+        dt.remark + '--' +
+        dt._date + '--' +
+        dt.rel_dt + '--' +
+        dt.due_dt + '--' +
+        dt.loc__line + '--' +
+        dt.lot__id + '--' +
+        dt.qt + '--' +
+        qtyNasehat + '--' +
+        dt.pick + '--' +
+        dt.qty_OH + '--' +
+        dt.wo_rmks + '--' +
+        dt.lotOH + '--' +
+        dt.pic;
         const data = {
-            ...dt,
-            rel_date: wo[0]['wo_rel_datex'],
-            due_date: wo[0]['wo_due_datex'],
-            rmks: wo[0]['wo_rmks'],
-            desc: it[0]['pt_desc1'] +it[0]['pt_desc2'],
-            qtyOnHand: OH && OH[0] && OH[0]['qty_OH'] ? OH[0]['qty_OH'] : 0,
-            all_lot: OH && OH[0] && OH[0]['lot'] ? OH[0]['lot'] : "-",
+            id: dt.id,
+            komponen: dt.item, 
+            depmnt: dt.dept,
+            keterangan: dt.remark,
+            dt_need: dt._date,
+            release_date: dt.rel_dt, 
+            due_date: dt.due_dt, 
+            lokasi: dt.loc__line, 
+            lot__id: dt.lot__id, 
+            qty: numberToStr(dt.qty,0,2),
+            nasehat: numberToStr(qtyNasehat,0,2), 
+            pick_now: dt.pick, 
+            qty_OH_all: numberToStr(dt.qty_OH,0,2), 
+            remarks: dt.wo_rmks, 
+            all_lot: dt.lotOH, 
+            pic: dt.pic,
+            filter: fltr
         }
-        pickNowDataFix.push(data);
+        tableData.push(data);
     })
-    console.log(pickNowDataFix);
+    tableData.sort((a,b) => {
+        if (a.komponen !== b.komponen) return a.komponen.localeCompare(b.komponen);
+        if (a.depmnt === 'WH') return -1;
+        if (b.depmnt === 'WH') return 1;
+        if (a.depmnt !== b.depmnt) return a.depmnt.localeCompare(b.depmnt);
+        if (a.dt_need !== b.dt_need) return a.dt_need.localeCompare(b.dt_need);
+        if (a.keterangan !== b.keterangan) return a.keterangan.localeCompare(b.keterangan);
+        return 0; // objects are equal
+    })
+    return tableData;
 }

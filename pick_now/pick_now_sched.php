@@ -23,7 +23,6 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     const initPage = performance.now();
     import {
         loading, 
-        activeLink,
     } from './component/index.js';
     import {
         jsonToCsv,jsonToExcel, getCustomDate,currentDate,
@@ -229,7 +228,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     console.log('************************************************************');
     console.log('data gabungan demand dan OH all yg');
     oh_all.forEach(dt=>{
-        if (ls_dept.includes(dt.dept) && item.includes(dt.item)) {
+        if (ls_dept.includes(dt.dept) && item.includes(dt.item) && dt.dept === 'WH') {
             let data = {
                 item: dt.item,
                 remark: '1.on hand',
@@ -237,7 +236,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 dept: dt.dept,
                 qty: dt.qty_OH,
                 lot__id: dt.lot,
-                date: currentDate(),
+                date: '2000-01-01',
                 current: currentDate(),
                 detail: dt.detail
             }
@@ -256,20 +255,21 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     let action = '';
     gabCek.forEach(dt=>{
         if(codeCek !== dt.item+dt.dept) {
+            tempVal = 0;
             codeCek = dt.item+dt.dept;
             if(dt.remark === '1.on hand') {
-                tempVal = dt.qty;
+                tempVal = parseFloat(dt.qty);
             } else {
-                tempVal = (-1) * dt.qty;
+                tempVal = (-1) * parseFloat(dt.qty);
             }
         } else {
             if(dt.remark === '1.on hand') {
-                tempVal = tempVal + dt.qty;
+                tempVal = tempVal + parseFloat(dt.qty);
             } else {
-                tempVal = tempVal - dt.qty;
+                tempVal = tempVal - parseFloat(dt.qty);
             }
         }
-        if(dt.date > currentDate() && tempVal < 0) {
+        if(tempVal < 0) {
             action = 'pick now';
         } else { action = '';}
         dt.code =  codeCek;

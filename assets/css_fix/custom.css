@@ -2,3 +2,22 @@
 .smallSide {width: 100%;height: 100%;overflow-Y: scroll;}
 
 .mouseHover:hover {cursor: pointer};
+
+.magni{
+    background-image: url('../svg_file/magni/magnifier-svgrepo-com.svg');
+    background-size: cover;
+    background-color: black;
+    z-index: 1;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+
+  }
+
+.inputMagni {
+    padding: 0 0 0 1em;
+    margin: 1em 0 0 1em;
+    border-radius: 10%;
+    height: 40px;
+    width: 150px
+}

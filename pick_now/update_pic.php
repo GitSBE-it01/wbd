@@ -26,7 +26,7 @@ $role = cekUser('dbvjs',$user_log, $prog);
     <link rel="stylesheet" href="../assets/css_fix/font.css">
     <link rel="stylesheet" href="../assets/css_fix/layout.css">
     <link rel="stylesheet" href="../assets/css_fix/symbol.css">
-    <title>parent code</title>
+    <title>update PIC WH</title>
 </head>
 <body>
 <div id='root' class='container'>
@@ -39,17 +39,53 @@ $role = cekUser('dbvjs',$user_log, $prog);
         create,
         mainNav,
         sideNav, 
-        tablePickNow
+        tablePickNow,
+        smallSearchBar
     } from './component/index.js';
     import {
-        jsonToCsv, currentDate, numberToStr, activeLink,// proses
-        pickNow// class
+        jsonToCsv, currentDate, numberToStr, activeLink, // proses
+        pic_part, pt_mstr// class
     } from './utility/index.js';
     
     await mainNav();
     activeLink('navID', ['f-or7']);
+    const main = document.getElementById('main');
+    main.classList.remove('flex-r');
 
-    defShow.classList.add('sl8', 'fw-blk');
+    const item = await pt_mstr.dbProcess('get','');  
+    create ({
+        element: 'datalist',
+        selector: '#root',
+        id: 'item',
+    })   
+    item.forEach(dt=>{
+        create ({
+            element: 'option',
+            selector: '#item',
+            value: dt.pt_part + '--' + dt.pt_desc1 + dt.pt_desc2 + '--' + dt.pt_status,
+            textCont: dt.pt_part + '--' + dt.pt_desc1 + dt.pt_desc2 + '--' + dt.pt_status
+        })  
+    })
+
+    const pic = await pic_part.dbProcess('get','');  
+    create ({
+        element: 'datalist',
+        selector: '#root',
+        id: 'pic_list',
+    })   
+    let cek = '';
+    pic.forEach(dt=>{
+        if(cek !== dt.optr) {
+            cek = dt.optr;
+            create ({
+                element: 'option',
+                selector: '#pic_list',
+                value: dt.optr,
+                textCont: dt.optr
+            })  
+        }
+    })
+    
     const root = document.getElementById('root');
     const start = performance.now();
     root.removeChild(document.querySelector('.loading'));

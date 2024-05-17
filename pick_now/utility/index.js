@@ -1,30 +1,38 @@
 import { 
     delChild, 
-    strToNumber, 
+    numberToStr, 
     currentDate ,
     rmvNode,
     jsonToCsv,
     jsonToExcel,
     convertDateFormat,
-    getCustomDate
+    getCustomDate,
+    activeLink
 } from "./process.js";
 
 export {
     delChild, 
-    strToNumber, 
+    numberToStr, 
     currentDate ,
     rmvNode,
     jsonToCsv,
     jsonToExcel,
     convertDateFormat,
-    getCustomDate
+    getCustomDate,
+    activeLink
 };
+
+
+import {
+    mainDataProcess
+} from './data/main.js';
+export {mainDataProcess}
+
 
 
 import {
     Data
 } from './class.js';
-
 export const wobb = new Data('wobb');
 export const wo = new Data('wo');
 export const ld = new Data('ld');

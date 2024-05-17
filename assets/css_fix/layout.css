@@ -33,9 +33,32 @@ flex display parent
 .centerFlex {justify-content: center;}
 .textCenter {text-align: center;}
 .midFlex {display: flex;justify-content: center; align-items: center; }
-.overX {overflow-x: scroll;}
-.overY {overflow-y: scroll;}
+.overX {
+    overflow-x: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+.overX ::-webkit-scrollbar {
+    display: none; /* WebKit browsers */
+}
 
+.overY {
+    overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+.overY ::-webkit-scrollbar {
+    display: none; /* WebKit browsers */
+}
+
+.over {
+    overflow: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+.over::-webkit-scrollbar {
+    display: none; /* WebKit browsers */
+}
 /*
 Children flex
 */
@@ -60,6 +83,7 @@ Children flex
 .floatLeft {float: left;}
 .h100 {height:100%;}
 .w100 {width: 100%;}
+.h10 {height: 10%;}
 /*
 margin
 */

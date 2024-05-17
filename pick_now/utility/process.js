@@ -50,7 +50,7 @@ export const convertDateFormat = (inputDate) => {
 /*-------------------------
 str to number with number of char and decimal
 -------------------------*/
-export function strToNumber(number, minNumber, decimalMinimum) {
+export function numberToStr(number, minNumber, decimalMinimum) {
     const noStr = number.toString();
     const splitStr = noStr.split(".");
     const intNo = splitStr[0];
@@ -67,36 +67,38 @@ export function strToNumber(number, minNumber, decimalMinimum) {
         resultInt = intNo;
     }
 
-    if (decimalMinimum === 0) {
+    if (!decNo || decimalMinimum === 0) {
         return resultInt;
     }
 
-    if (decNo.length < decimalMinimum) {
-        const diff = decimalMinimum - intNo.length;
-        resultDec = "." + decNo;
-        for (let i =0 ; i < diff; i++) {
-            resultDec += "0";
-            }
-        return resultInt + resultDec;
-    } 
-
-    const cek1 = decNo.substring(0, decimalMinimum);
-    const cek2 = decNo.substring(decimalMinimum, decimalMinimum+1);
-    const cek3 = decNo.substring(decimalMinimum, decimalMinimum+2);
-    let resultCek ="";
-
-    if (decimalMinimum === 1) {
-        if (parseInt(cek2) > 4) {
-            resultCek = (parseInt(cek1) + 1);
-            return resultInt + resultCek.toString();  
+    if (decNo) {
+        if (decNo.length < decimalMinimum) {
+            const diff = decimalMinimum - intNo.length;
+            resultDec = "." + decNo;
+            for (let i =0 ; i < diff; i++) {
+                resultDec += "0";
+                }
+            return resultInt + resultDec;
         } 
-        return resultInt + "." + cek1;
-    } 
-    if (parseInt(cek3) > 4) {
-            resultCek = (parseInt(cek2) + 1);
-            return resultInt + resultCek.toString();  
-        }
-    return resultDec = "." + cek1 + cek2;
+
+        const cek1 = decNo.substring(0, decimalMinimum);
+        const cek2 = decNo.substring(decimalMinimum, decimalMinimum+1);
+        const cek3 = decNo.substring(decimalMinimum, decimalMinimum+2);
+        let resultCek ="";
+
+        if (decimalMinimum === 1) {
+            if (parseInt(cek2) > 4) {
+                resultCek = (parseInt(cek1) + 1);
+                return resultInt + resultCek.toString();  
+            } 
+            return resultInt + "." + cek1;
+        } 
+        if (parseInt(cek3) > 4) {
+                resultCek = (parseInt(cek2) + 1);
+                return resultInt + resultCek.toString();  
+            }
+        return resultDec = resultInt + "." + cek1 + cek2;
+    }
 }
 
 /*-------------------------
@@ -157,8 +159,6 @@ export const jsonToCsv= async(jsonData, name) => {
     }
 }
 
-
-
 export const jsonToExcel = async (jsonData, name) => {
     try {
         const json = JSON.stringify(jsonData);
@@ -207,3 +207,21 @@ export const jsonToExcel = async (jsonData, name) => {
         console.log(error);
     }
 };
+
+/*-------------------------
+check active link
+-------------------------*/
+export const activeLink = (target, arrCls) => {
+    const container = document.getElementById(target);
+    const aLink = container.querySelectorAll('a');
+    aLink.forEach(link=> {
+        const currentUrl = window.location.href.split('/');
+        const compare = currentUrl[currentUrl.length-1];
+        const hrefValue = link.getAttribute('href');
+        if (hrefValue === compare) {
+            arrCls.forEach(cls=> {
+                link.classList.add(cls);
+            })
+        }
+    })
+}

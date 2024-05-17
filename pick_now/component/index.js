@@ -12,17 +12,20 @@ cluster
 ====================================================================================
 */
 
-import {activeLink, mainNav, sideNav} from './cluster/nav.js';
-import {tablePickNow} from './cluster/table.js';
+import {mainNav} from './cluster/navbar.js';
+import {sideNav} from './cluster/sidebar.js';
+import {pickNowHeader, pickNowTbl} from './cluster/table.js';
 import {loading} from './cluster/load.js';
+import {smallSearchBar} from './cluster/search.js';
 
 
 export {
     loading, 
-    activeLink, 
     mainNav,
     sideNav,
-    tablePickNow
+    pickNowHeader,
+    pickNowTbl,
+    smallSearchBar
 }
 
 

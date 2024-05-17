@@ -54,6 +54,8 @@ const defaultAll ={
     checked: '', // (for checkboxes and radio buttons)
     value: '', // (for form elements)
     type: '', // (for input elements)
+    list: '', // (for input elements)
+    placeholder: '',
     onclick: '',
     onchange: '',
     onmouseover: '',
@@ -69,6 +71,7 @@ const defaultAll ={
     method: '',  // form
     enctype: '',  // form
     textCont:'', // main attribute 
+    style:'',
 }
 
 
@@ -95,7 +98,6 @@ export const create = (arr) => {
             el.setAttribute('data-'+dt, arr[dt]);
         }
     })
-
     if(target !== '') {
         return target.appendChild(el);
     }
