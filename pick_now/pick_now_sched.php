@@ -317,8 +317,10 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     gabCek.forEach(dt=>{
         if(ls_pick.includes(dt.lot__id)) {
             result_pick.push(dt);
-        }
-        if(dt.remark === '1.on hand' && typePick.includes(dt.item)) {
+        } else 
+        if(typePick.includes(dt.item)) {
+            result_pick.push(dt);
+        } else if(dt.remark === '1.on hand') {
             result_pick.push(dt);
         }
     })
