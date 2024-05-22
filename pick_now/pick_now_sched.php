@@ -228,7 +228,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     console.log('************************************************************');
     console.log('data gabungan demand dan OH all yg');
     oh_all.forEach(dt=>{
-        if (ls_dept.includes(dt.dept) && item.includes(dt.item) && dt.dept === 'WH') {
+        if (ls_dept.includes(dt.dept) && item.includes(dt.item)) {
             let data = {
                 item: dt.item,
                 remark: '1.on hand',
@@ -432,11 +432,22 @@ woR = woR
 item = item_mstr
 mainData = inputArr
 inventory = inpu
+
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(inputArr);
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'result_pick');
+    const worksheet = XLSX.utils.json_to_sheet(gabCek);
+    const worksheet1 = XLSX.utils.json_to_sheet(oh_all);
+    const worksheet2 = XLSX.utils.json_to_sheet(result_pick);
+    const worksheet3 = XLSX.utils.json_to_sheet(typePick);
+    const worksheet4 = XLSX.utils.json_to_sheet(ls_pick);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'gabCek');
+    XLSX.utils.book_append_sheet(workbook, worksheet1, 'oh_all');
+    XLSX.utils.book_append_sheet(workbook, worksheet2, 'result_pick');
+    XLSX.utils.book_append_sheet(workbook, worksheet3, 'typePick');
+    XLSX.utils.book_append_sheet(workbook, worksheet4, 'ls_pick');
     XLSX.writeFile(workbook, 'data.xlsx')
+    
 */
+
 
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>

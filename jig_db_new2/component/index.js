@@ -14,22 +14,27 @@ cluster
 ====================================================================================
 */
 
+import {dtlist} from './cluster/datalist.js';
 import {addDataNav} from './cluster/navbar.js';
 import {sideNav} from './cluster/sidebar.js';
-import {formJigMstr} from './cluster/form.js';
-import {pickNowHeader, pickNowTbl} from './cluster/table.js';
+import {baseH1,baseH2,baseH3} from './cluster/title.js';
+import {formBase} from './cluster/form.js';
+import {tableInit} from './cluster/table.js';
 import {loading} from './cluster/load.js';
 import {smallSearchBar} from './cluster/search.js';
 
 
 export {
     loading, 
+    dtlist,
     addDataNav,
     sideNav,
-    pickNowHeader,
-    pickNowTbl,
     smallSearchBar,
-    formJigMstr
+    baseH1,
+    baseH2,
+    baseH3,
+    tableInit,
+    formBase
 }
 
 

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = 'dbqad_live';
+    $db = 'db_jig';
     $data = json_decode(file_get_contents('php://input'), true);
     $action = $data['action']; 
     $param = $data['parameters']; 

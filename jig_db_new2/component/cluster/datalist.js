@@ -1,15 +1,17 @@
-export const dtlist =(src) =>{
+import { create } from "../block.js";
+
+export const dtlist =(src, idList, value, text) =>{
     create ({
         element: 'datalist',
         selector: '#root',
-        id: 'item',
+        id: idList,
     })   
-    item.forEach(dt=>{
+    src.forEach(dt=>{
         create ({
             element: 'option',
-            selector: '#item',
-            value: dt.pt_part + '--' + dt.pt_desc1 + dt.pt_desc2 + '--' + dt.pt_status,
-            textCont: dt.pt_part + '--' + dt.pt_desc1 + dt.pt_desc2 + '--' + dt.pt_status
+            selector: `#${idList}`,
+            value: dt[value],
+            textCont: dt[text]
         })  
     })
 }

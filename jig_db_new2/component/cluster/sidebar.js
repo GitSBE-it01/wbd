@@ -4,17 +4,6 @@ buat nav bar
 // main navigation 
 import { create } from "../block.js";
 
-const cekUrl = () =>{
-    const check = window.location.href.split("/");
-    let url ="";
-    if (check[2].length > 20 ){
-        url = 'http://informationsystem.sbe.co.id:8080';
-    } else {
-        url = 'http://192.168.2.103:8080';
-    }
-    return url;
-}
-
 const linkArr = (roleUser) => {
     const dataLink = [
         {text: 'Home', link:`../jig_db_new/index.php`},

@@ -55,6 +55,7 @@ const defaultAll ={
     value: '', // (for form elements)
     type: '', // (for input elements)
     list: '', // (for input elements)
+    autocomplete:'',
     placeholder: '',
     onclick: '',
     onchange: '',
