@@ -1,9 +1,9 @@
 import {createDiv,
     symbolBtn,
         textInp
-} from "../index.js";
+} from "../../index.js";
 
-export const searchMagni = (target, idInput, idBtn) => {
+export const searchMagnifier = (target, idInput) => {
     createDiv({
         selector: target,
         id: 'search' + idInput,
@@ -11,13 +11,13 @@ export const searchMagni = (target, idInput, idBtn) => {
     })
     textInp({                    
         selector: '#search' + idInput,
-        id: idInput,
+        id: '#searchInp' + idInput,
         placeholder: 'search',
         class: 'searchForm'
     })
     symbolBtn({
         selector: '#search' + idInput,
-        id: idBtn,
+        id: '#searchBtn' + idInput,
         type: 'button',
         class: 'magnifier',
     })

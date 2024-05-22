@@ -1,5 +1,5 @@
 import {createDiv,
-} from "../index.js";
+} from "../../index.js";
 
 export const load = (target, loadClass) => {
     createDiv({

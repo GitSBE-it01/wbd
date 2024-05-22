@@ -26,7 +26,7 @@ export const createBtn = (arr) => {
             element.setAttribute('data-'+dt, arr.custom.dt);
         })
     }
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
@@ -53,7 +53,7 @@ export const submitBtn = (arr) => {
     }
     
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
@@ -81,7 +81,7 @@ export const symbolBtn = (arr) => {
     }
 
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }

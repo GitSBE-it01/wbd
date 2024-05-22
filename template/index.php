@@ -22,15 +22,20 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 </head>
 <body>
 <div id='root' class='container'>
-<h1>Testing 123</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolores. Ipsum, dolor incidunt! Alias soluta rem amet incidunt id, at ratione ipsum necessitatibus possimus cum. Ullam aliquid quo ipsa, mollitia, eum explicabo nulla quisquam rem sunt fugiat culpa, voluptate exercitationem sit a excepturi in vitae? Dignissimos quam voluptas, repudiandae incidunt nihil iure quas velit repellat saepe quisquam asperiores quasi, animi veritatis ducimus sed est? Laboriosam soluta fugit fugiat sit perspiciatis provident odio impedit aliquam fuga pariatur natus nam maiores harum, deleniti dolor recusandae dolores similique dolorum mollitia iusto illo. Perferendis consequuntur minus id eos reiciendis soluta placeat quibusdam iste voluptatem!</p>
-<button class= 'defaultBtn'>submit</button>
+
 </div>
 
 
 
 <script type='module'>
+import {navbar} from './assets/index.js';
 
+const testArr = [
+    {text: 'test1', link:'#section1'},
+    {text: 'test2', link:'#section2'},
+    {text: 'test3', link:'#section3'},
+]
+await navbar('root', 'mainBar', testArr);
 
 
 </script>

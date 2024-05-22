@@ -1,5 +1,5 @@
 import { createOpt,
-    createDtlist } from "../index.js";
+    createDtlist } from "../../index.js";
 
 export const datalist =(src, idList, arrValue, arrText) =>{
     createDtlist ({

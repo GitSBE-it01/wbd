@@ -16,7 +16,9 @@ import {createLink} from './js/blocks/link.js';
 import {createSel,
     createOpt,
     createDtlist} from './js/blocks/select.js';
-import {createLabel} from './js/blocks/text.js';
+import {createLabel,
+        createHead  
+} from './js/blocks/text.js';
 
 export {
     create,
@@ -32,7 +34,8 @@ export {
     createSel,
     createOpt,
     createDtlist,
-    createLabel
+    createLabel,
+    createHead
 }
 
 /*
@@ -44,12 +47,16 @@ cluster
 import {datalist} from './js/cluster/datalist.js';
 import {labelForm} from './js/cluster/form.js';
 import {load} from './js/cluster/load.js';
+import {searchMagnifier} from './js/cluster/search.js';
+import {navbar} from './js/cluster/navbar.js';
 
 
 export {
     datalist,
     labelForm,
-    load
+    load,
+    searchMagnifier,
+    navbar
 }
 
 

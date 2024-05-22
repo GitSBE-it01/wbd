@@ -30,7 +30,7 @@ export const createInp = (arr) => {
     }
 
     if(arr.style && arr.style !=='') {element.setAttribute('style', arr.style)}
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
@@ -50,7 +50,7 @@ export const hiddenInp = (arr) => {
         })
     }
 
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
@@ -74,7 +74,7 @@ export const textInp = (arr) => {
             element.setAttribute('data-'+dt, arr.custom.dt);
         })
     }
-    
+
     //js
     if(arr.onclick && arr.onclick !== '') {element.setAttribute('onclick', arr.onclick)}
     if(arr.onchange && arr.onchange !== '') {element.setAttribute('onchange', arr.onchange)}
@@ -84,7 +84,7 @@ export const textInp = (arr) => {
     if(arr.onblur && arr.onblur !== '') {element.setAttribute('onblur', arr.onblur)}
 
     if(arr.style && arr.style !=='') {element.setAttribute('style', arr.style)}
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }

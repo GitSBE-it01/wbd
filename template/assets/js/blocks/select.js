@@ -13,7 +13,7 @@ export const createSel = (arr) =>{
         })
     }
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
@@ -28,7 +28,7 @@ export const createOpt = (arr) =>{
         element.textContent = arr.textCont;
     } else {element.textContent = arr.value ? arr.value : "";}
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(arr.custom && arr.custom !== '') {
         const attr = Object.keys(arr.custom);
         attr.forEach(dt=>{
@@ -51,7 +51,7 @@ export const createDtlist = (arr) =>{
         })
     }
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }

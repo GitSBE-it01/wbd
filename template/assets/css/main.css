@@ -29,3 +29,36 @@ body {
 .displayHide {
     display:none;
 }
+
+.navbar {
+    width: 100vw;
+    height: 4vh;
+    background-color: aqua;
+    display: flex;
+}
+
+.long_nav {
+    display: flex;
+    width: 75%;
+    height: 100%;
+    background-color: #959ada;
+}
+
+.short_nav {
+    width: 25%;
+    height: 100%;
+    background-color: #ffb555;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+}
+
+.divLink{
+    padding: .4rem 1rem .2rem 1rem;
+}
+.divLink:hover {
+    background-color: red;
+}

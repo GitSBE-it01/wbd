@@ -1,7 +1,7 @@
 import {createDiv,
         createLabel,
         textInp
-} from "../index.js";
+} from "../../index.js";
 
 export const labelForm = (target, fieldName, text) => {
     createDiv({

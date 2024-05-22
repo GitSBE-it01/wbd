@@ -24,10 +24,10 @@ export const createLink = (arr) => {
             element.setAttribute('data-'+dt, arr.custom.dt);
         })
     }
-    
+
     if(arr.style && arr.style !=='') {element.setAttribute('style', arr.style)}
     if(arr.textCont && arr.textCont !=='') {element.textContent = arr.textCont;}
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }

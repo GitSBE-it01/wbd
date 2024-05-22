@@ -1,7 +1,7 @@
 export const createDiv = (arr) => {
     const element = document.createElement('div');
     let target  = '';
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(arr.id && arr.id !== '') {element.setAttribute('id', arr.id);}
     if(arr.class && arr.class !== '') {element.setAttribute('class', arr.class)}
     if(arr.onclick && arr.onclick !== '') {element.setAttribute('onclick', arr.onclick)}
@@ -17,9 +17,10 @@ export const createDiv = (arr) => {
     if(arr.custom && arr.custom !== '') {
         const attr = Object.keys(arr.custom);
         attr.forEach(dt=>{
-            element.setAttribute('data-'+dt, arr.custom.dt);
+            element.setAttribute('data-'+dt, arr['custom'][dt]);
         })
     }
+    console.log(element);
     if(arr.style && arr.style !=='') {element.setAttribute('style', arr.style)}
     if(arr.textCont && arr.textCont !=='') {element.textContent = arr.textCont;}
     if(target !== '') {
@@ -41,7 +42,7 @@ export const hiddenDiv = (arr) => {
             element.setAttribute('data-'+dt, arr.custom.dt);
         })
     }
-    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr[dt]);}
+    if(arr.selector && arr.selector !== '') {target = document.querySelector(arr.selector);}
     if(target !== '') {
         return target.appendChild(element);
     }
