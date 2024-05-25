@@ -16,10 +16,10 @@ export class Data {
         let url ="";
         let ori = "";
         if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/jig_db_new2/backend/api.php';
+            url = 'http://informationsystem.sbe.co.id:8080/wbd/template/backend/api.php';
             ori = 'http://informationsystem.sbe.co.id';
         } else {
-            url = 'http://192.168.2.103:8080/wbd/jig_db_new2/backend/api.php';
+            url = 'http://192.168.2.103:8080/wbd/template/backend/api.php';
             ori = 'http://192.168.2.103';
         }
         return { url, ori };
@@ -31,7 +31,7 @@ export class Data {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json',
-                  'Origin': this.ori
+                  'Ori': this.ori
               },
               body: JSON.stringify({action: action, parameters: this.key, data})
             });
@@ -45,5 +45,6 @@ export class Data {
             return Promise.reject(error);
         }
       }
+
 }
 

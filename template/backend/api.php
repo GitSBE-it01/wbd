@@ -3,25 +3,41 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "index.php";
 require_once "../queryList.php";
 
+session_start();
 $allowedOrigins = [
     'http://informationsystem.sbe.co.id:8080', 
-    'http://192.168.2.103:8080'
+    'http://192.168.2.103:8080',
+    'http://informationsystem.sbe.co.id', 
+    'http://192.168.2.103'
 ];
 
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+$origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';
 if (in_array($origin, $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
 } else {
     http_response_code(403); 
     exit(); 
 }
+
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type', 'Origin');
 
 // Handling preflight requests
+
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header('HTTP/1.1 200 OK');
     exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //echo $_SERVER['HTTP_COOKIE'];
+    echo $_SESSION['auth_token'] . '</br>';
+    echo $_SERVER['HTTP_COOKIE'];
+    $val = explode("=",$_SERVER['HTTP_COOKIE']);
+    print_r($val);
+    if ($_SESSION['auth_token'] === $val[2]) {
+        echo "okk";
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param = $data['parameters']; 
     $queryStart = getArrayList($codeList, $param); 
     $dataParam = isset($data['data']) ? $data['data']:'';
-
     switch($action) {
         case "get":
             $query = $queryStart->getQuery();
@@ -53,6 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $query = $queryStart->deleteQuery();
             $response = deleteData($db, $query, $dataParam);
             break;
+        case "auth":
+
+            $response = 'authenticate';
+            break;
         default:
             $response = 'Method not supported';
     }
@@ -61,7 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Content-Type: application/json");
     echo json_encode($response);
     return;
-}
+} 
+
 
 
 ?>

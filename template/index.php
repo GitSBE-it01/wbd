@@ -2,43 +2,42 @@
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 session_start();
 if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
-  $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-  $url = explode("/",$currentURL);
-  header(`location: http://$url[2]/sbe/index.php?cek=no`);
-  exit(0);
+  header(`location: http://$_SERVER[HTTP_HOST]/sbe/index.php?cek=no`);
+} else {
+  $user_id = md5('username=' . $_SESSION['username']);  
+  $cookie_name = 'auth_token';
+  $expire = time() + 60 * 60 * 24;
+  $today = date('Y-m-d');
+  $cookie_value = md5('authenticate--' . $user_id .$today);
+  $_SESSION[$cookie_name] = $cookie_value;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/animation.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/symbol.css">
-    <title>pick now</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-<div id='root' class='container'>
-
-</div>
-
-
-
-<script type='module'>
-import {navbar} from './assets/index.js';
-
-const testArr = [
-    {text: 'test1', link:'#section1'},
-    {text: 'test2', link:'#section2'},
-    {text: 'test3', link:'#section3'},
-]
-await navbar('root', 'mainBar', testArr);
-
-
-</script>
-<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+  <input type="hidden" id="name" value="<?php echo $cookie_name;  ?>">
+  <input type="hidden" id="value" value="<?php echo $cookie_value;  ?>">
+  <input type="hidden" id="expire" value="<?php echo $expire;  ?>">
 </body>
 </html>
+<script>
+  function setCookie() {
+    const name = document.getElementById('name').value;
+    const value = document.getElementById('value').value;
+    const expires = document.getElementById('expire').value;
+    document.cookie = name + "=" + value + "; " + expires + "; path=/";
+  }
+
+  setCookie();
+  console.log(document.cookie);
+  const check = window.location.href.split("/");
+  console.log(check);
+  const newURL = 'http://' + check[2] + '/wbd/template/index.html';
+  window.location.href = newURL;
+</script>

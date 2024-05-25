@@ -26,6 +26,7 @@ export const mainDataProcess = (src)=> {
         const data = {
             id: dt.id,
             komponen: dt.item, 
+            _desc: dt._desc,
             depmnt: dt.dept,
             keterangan: dt.remark,
             dt_need: dt._date,

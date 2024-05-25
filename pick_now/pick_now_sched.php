@@ -169,7 +169,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         if(invDet.has(fltr)) {
             const exst = invDet.get(fltr);
             exst.qty_OH += parseFloat(dt.ld_qty_oh);
-            exst.detail += dt.ld_lot + "--" + dt.ld_loc + ", \n";
+            exst.detail += dt.ld_lot + "--" + dt.ld_loc + "=" + dt.ld_qty_oh + ", \n";
         } else {
             const data = {
                 dept: dt.dept,
@@ -178,7 +178,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
                 qty_OH: parseFloat(dt.ld_qty_oh),
                 lot: dt.ld_lot,
                 reff: dt.ld_ref,
-                detail: dt.ld_lot + "--" + dt.ld_loc + ", \n"
+                detail: dt.ld_lot + "--" + dt.ld_loc + "=" + dt.ld_qty_oh + ", \n"
             }
             invDet.set(fltr,data);
         }

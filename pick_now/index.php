@@ -73,6 +73,7 @@ $role = cekUser('dbvjs',$user_log, $prog);
         if(dt.depmnt === 'WH' && itemReff[deptVal].includes(dt.komponen)) {dataTbl.push(dt)}
     });
     await pickNowHeader(deptVal);
+    console.log(dataTbl);
     await pickNowTbl(dataTbl, deptVal);
     root.removeChild(document.querySelector('.loading'));
     const end = performance.now();
@@ -124,6 +125,7 @@ $role = cekUser('dbvjs',$user_log, $prog);
             const end = performance.now();
             console.log('total time proses pindah : ' + ((end-start)/1000) + ' second');
         }
+        
         if(event.target.getAttribute('id')==='mainSearchBtn') {
             const searchVal = document.getElementById('mainSearchInput').value.toLowerCase();
             if(searchVal) {
@@ -166,7 +168,8 @@ $role = cekUser('dbvjs',$user_log, $prog);
             const allRow = document.querySelectorAll('[data-row]');
             allRow.forEach(dt=>{
                 const data = {
-                    komponen:'komponenkomponen',
+                    komponen:'komponen',
+                    desc: '_desc',
                     depmnt:'depmnt',
                     keterangan:'keterangan',
                     dt_need:'dt_need',
@@ -175,9 +178,9 @@ $role = cekUser('dbvjs',$user_log, $prog);
                     lokasi:'lokasi',
                     lot__id:'lot__id',
                     qty:'qty',
-                    nasehat:'nasehat',
                     pick_now:'pick_nowpick',
                     qty_OH_all:'qty_OH_all',
+                    nasehat:'nasehat',
                     remarks:'remarks',
                     all_lot:'all_lot',
                     pic:'pic',

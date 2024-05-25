@@ -3,6 +3,7 @@ import { create } from "../block.js";
 export const pickNowHeader = (text) => {
     const array = [
         'komponen',
+        'description',
         'departement',
         'keterangan',
         'date',
@@ -12,9 +13,9 @@ export const pickNowHeader = (text) => {
         'id / Lot',
         'qty id/lot',
         'nasehat',
-        'remarks',
         'pick now',
         'qty OH WH',
+        'remarks',
         'all lot',
         'PIC WH'
     ];
@@ -73,11 +74,18 @@ export const pickNowTbl= async(src, idNew) =>{
         const target2 = document.querySelector(`[data-row = "${dt['id']}"]`);
 
         //1
+        const div0 = document.createElement('div');
+        div0.classList.add('f-child', 'p2', 'bx1-solid');
+        div0.setAttribute('data-hdCell','cellHD');
+        div0.setAttribute('data-cell','komponen');
+        div0.textContent = dt['komponen'];
+        target2.appendChild(div0);
+        //1
         const div2 = document.createElement('div');
         div2.classList.add('f-child', 'p2', 'bx1-solid');
         div2.setAttribute('data-hdCell','cellHD');
-        div2.setAttribute('data-cell','komponen');
-        div2.textContent = dt['komponen'];
+        div2.setAttribute('data-cell','_desc');
+        div2.textContent = dt['_desc'];
         target2.appendChild(div2);
         //2
         const div3 = document.createElement('div');
