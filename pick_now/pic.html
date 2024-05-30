@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="./component/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./utility/auth.js"></script>
+    <title>warehouse PIC</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+    <div class='loading'></div>
+<script type="module">
+    // import module
+    import {button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable} from './component/index.js';
+    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, 
+        db_pic, pic_part
+    } from './utility/index.js';
+
+    // navigation
+    navigation('Warehouse PIC', [    
+        {link: 'index.html', text: 'Home'},
+        {link: 'tallysheet.html', text: 'Tallysheet'},
+        {link: 'pic.html', text: 'PIC'},
+        {link: 'location.html', text: 'lokasi'},
+    ])
+
+    // header
+    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+        const part = await pic_part.dbProcess('get','');
+        const list=[];
+        part.forEach(dt=>{
+            const data = dt.optr + '--' + dt.tipe + '--' + dt.part_cat;
+            if(!list.includes(data)) {
+                list.push(data);
+            } else {
+                console.log(dt.id);
+                console.log(dt.tipe);
+                console.log(data);
+            }
+        })
+        await dtlist('filter', list);
+        await searchbar('header', 'wh pic', 'filter');
+
+    // main
+    main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
+        const detailPart = await pic_part.dbProcess('get','');
+        detailPart.sort((a,b) => {
+            if (a.optr !== b.optr) return a.optr.localeCompare(b.optr);
+            if (a.part_cat !== b.part_cat) return a.part_cat.localeCompare(b.part_cat);
+        })
+        const tableArray = [
+            {header:'PIC', data: 'optr'},
+            {header:'item number', data: 'tipe'},
+            {header:'part kategori', data: 'part_cat'},
+            {header:'ID', data: 'id', pk:'id'},
+        ];
+        await inputTable('main', 'all', tableArray, detailPart);
+        const mainPick = document.querySelector('body');
+        mainPick.removeChild(document.querySelector('.loading'));    
+
+    // event listener
+    // change event
+
+    document.addEventListener('change', async function(event) {
+        if(event.target.id.includes('filter__')) {
+            let filter1 = document.querySelector('#filter__pilih_pic').value !== 'All' ? document.querySelector('#filter__pilih_pic').value : '';
+            let filter2 = document.querySelector('#filter__pilih_item').value !== 'All' ? document.querySelector('#filter__pilih_item').value : '';
+            let filter3 = document.querySelector('#filter__pilih_kategori').value !== 'All' ? document.querySelector('#filter__pilih_kategori').value : '';
+            const valAll = filter1 + '--' + filter2 + '--' + filter3 + '--'
+            console.log(valAll);
+            const all = document.querySelectorAll(`[data-filter]`);
+            all.forEach(dt=>{
+                const cek = dt.getAttribute('data-filter');
+                dt.classList.toggle('hidden',!cek.toLowerCase().includes(valAll));
+            })
+        }
+    })
+
+    //click event
+    document.addEventListener('click', async function(event) {
+        if(event.target.id.includes('search_btn')) {
+            const inpValue = document.querySelector('#search_input__pick_now').value;
+            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const allRow = target.querySelectorAll('[data-filter]');
+            allRow.forEach(dt=>{
+                const valueCek = dt.getAttribute('data-filter');
+                if (!dt.classList.contains('hidden')) {
+                    dt.classList.add('hidden');
+                }
+                if (valueCek.toLowerCase().includes(inpValue.toLowerCase())) {
+                    dt.classList.remove('hidden');
+                }
+            })
+        }
+        if(event.target.id.includes('dl_btn')) {
+            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const allRow = target.querySelectorAll('[data-filter]');
+            let file = [];
+            allRow.forEach(dt=>{
+                if (!dt.classList.contains('hidden')) {
+                    const td = dt.querySelectorAll('td');
+                    const data = {};
+                    for (let i=0; i<td.length; i++) {
+                        data[`${array[i].header}`] = td[i].textContent;
+                    }
+                    file.push(data);
+                }
+            })
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(file);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
+            XLSX.writeFile(workbook, 'pick_now.xlsx')
+        }
+    })
+
+    // keydown event listener
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#search_btn__pick_now');
+            submit_btn.click();
+        }
+    })
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>

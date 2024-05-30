@@ -13,15 +13,8 @@ export class Data {
     // for API URL 
     getUrl() {
         const check = window.location.href.split("/");
-        let url ="";
-        let ori = "";
-        if (check[2].length > 20 ){
-            url = 'http://informationsystem.sbe.co.id:8080/wbd/pick_now/backend/api.php';
-            ori = 'http://informationsystem.sbe.co.id';
-        } else {
-            url = 'http://192.168.2.103:8080/wbd/pick_now/backend/api.php';
-            ori = 'http://192.168.2.103';
-        }
+        let url =`http://${check[2]}/${check[3]}/${check[4]}/backend/api.php`;
+        let ori =`http://${check[2]}`;
         return { url, ori };
     }
 
@@ -31,7 +24,7 @@ export class Data {
                 method: 'POST', 
                 headers: {
                   'Content-Type': 'application/json',
-                  'Origin': this.ori
+                  'Ori': this.ori
               },
               body: JSON.stringify({action: action, parameters: this.key, data})
             });
@@ -45,5 +38,6 @@ export class Data {
             return Promise.reject(error);
         }
       }
+
 }
 

@@ -13,3 +13,4 @@ vjs_dmc/.env
 template/.env
 .env
 pick_now/cache
+*/cache

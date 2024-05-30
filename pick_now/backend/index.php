@@ -1,5 +1,6 @@
 <?php
 // data_access
+require_once './data_access/cache_data.php';
 require_once './data_access/delete_data.php';
 require_once './data_access/fetch_data.php';
 require_once './data_access/get_data.php';

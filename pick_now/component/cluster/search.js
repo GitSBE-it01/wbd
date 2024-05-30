@@ -1,41 +1,31 @@
-import {create} from '../index.js';
+import {removeSpaces} from '../../utility/index.js';
 
-export const smallSearchBar = (target, idInput, idBtn) => {
-    create({
-        element: 'div',
-        selector: target,
-        id: 'search' + idInput,
-        class: 'flex-r'
-    })
-    create({                    
-        element: 'input',
-        selector: '#search' + idInput,
-        id: idInput,
-        placeholder: 'search',
-        style: `
-            padding: 0 0 0 1em;
-            margin: 1em 0 0 1em;
-            border-radius: 10%;
-            height: 40px;
-            width: 150px
-        `,
-        class: 'inputMagni'
-    })
-    create({
-        element: 'button',
-        selector: '#search' + idInput,
-        id: idBtn,
-        type: 'button',
-        style: `
-            background-image: url('../../../assets/svg_file/magni/magnifier-svgrepo-com.svg');
-            background-size: cover;
-            background-color: black;
-            z-index: 1;
-            border: none;
-            cursor: pointer;
-            border-radius: 50%;
-            margin-top: 1em;
-        `,
-        textCont: 'testing'
-    })
+export const searchbar = async(target, ID, dtlist) => {
+    const trgt = document.querySelector(target);
+    const div= document.createElement('div');
+    div.setAttribute('class', 'flex flex-row mx-2 mt-3 fixed right-0 items-center');
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'search';
+    input.setAttribute('list', dtlist)
+    input.setAttribute('class', 'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300')
+    input.id = 'search_input__' + removeSpaces(ID, '_');
+
+    const sbmtBtn = document.createElement('button');
+    sbmtBtn.textContent = 'search';
+    sbmtBtn.type = 'button';
+    sbmtBtn.setAttribute('class', 'rounded bg-slate-100 px-4 h-[1.6rem] py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 hover:border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+    sbmtBtn.id = 'search_btn__' + removeSpaces(ID, '_');
+
+    const dlBtn = document.createElement('button');
+    dlBtn.type = 'button';
+    dlBtn.textContent = 'download';
+    dlBtn.setAttribute('class', 'rounded bg-slate-100 px-4 py-1  h-[1.6rem] text-sm ml-2 hover:border-b-4 hover:border-r-4 hover:border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+    dlBtn.id = 'dl_btn__' + removeSpaces(ID, '_');
+
+    div.appendChild(input);
+    div.appendChild(sbmtBtn);
+    div.appendChild(dlBtn);
+    trgt.appendChild(div);    
 }

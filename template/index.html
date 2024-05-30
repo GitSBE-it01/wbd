@@ -5,57 +5,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="main.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./utility/auth.js"></script>
     <title>pick now</title>
 </head>
-<body class="font-[Poppins] h-screen w-screen bg-slate-400">
-    <header class="bg-slate-950 pl-16 w-full h-12 flex flex-row gap-10">
-        <nav class="flex flex-row items-center list-none h-full ">
-            <li class="h-full hover:text-2xl hover:pt-1 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class=" text-white text-xl font-black ease-in-out duration-200" href="#">Main Menu</a>
-            </li>
-            <li class="h-full hover:text-lg hover:pt-2 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class="text-white font-bold ease-in-out h-full duration-200" href="#">Products</a>
-            </li>
-            <li class="h-full hover:text-lg hover:pt-2 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class="text-white font-bold ease-in-out h-full duration-200" href="#">Solution</a>
-            </li>
-            <li class="h-full hover:text-lg hover:pt-2 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class="text-white font-bold ease-in-out h-full duration-200" href="#">Resource</a>
-            </li>
-            <li class="h-full hover:text-lg hover:pt-2 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class="text-white font-bold ease-in-out h-full duration-200" href="#">Developers</a>
-            </li>
-            <li class="h-full hover:text-lg hover:pt-2 hover:px-9 hover:bg-slate-700 duration-200 pt-3 px-10  ease-in-out hover:border-b-4 hover:border-teal-300">
-                <a class="text-white font-bold ease-in-out h-full duration-200" href="#">Pricing</a>
-            </li>
-        </nav>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+    <header class="bg-slate-950  w-full h-12 gap-10 block flex">
     </header>
-
-    <main class="w-full h-s">
-        <h1>testing</h1>
-        <table>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            
-        </table>
+    <main class="w-full h-full">
+        <div class='loading'></div>
     </main>
     
-
-
-
-
-
 <script type="module">
-    console.log(document.cookie);
+    import {navbar, main_title, filter, searchbar, table, loading} from './component/index.js';
+    import {
+        jsonToCsv, currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
+        pickNow// class
+    } from './utility/index.js';
 
+    const main = document.querySelector('main');
+    navbar([    
+        {link: 'index.html', text: 'Home'},
+        {link: 'tallysheet.html', text: 'Tallysheet'},
+        {link: 'pic.html', text: 'PIC'},
+    ])
+    await main_title(`main`, 'Pick Now');
+
+
+    const list = [
+        {val: 'P1.ASSY',text:'Prod1'},
+        {val: 'PROD1.VC',text:'VC'},
+        {val: 'WH_ASSY',text:'WHPR'},
+        {val: 'SBE3',text:'SBE3'},
+        {val: 'PROD2',text:'Prod2'},
+        {val: 'PROD3',text:'Prod3'},
+        {val: 'QA',text:'Servis'},
+        {val: 'SBE4',text:'Subcon'},
+        {val: 'WOODWORK',text:'WWA'},
+    ]
+    await filter('#main_title__pick_now', 'pilih department', list);
+    await searchbar('#main_filter__pilih_department', 'pick_now');
+
+    let deptVal = 'P1.ASSY';
+    const defShow = document.querySelector(`[data-deptPick = "${deptVal}"]`);
+    const date = curDate('');
+    const start = performance.now();
+    let mainData = await get_cache(`${date}__${deptVal}`);
+    const array = [
+        {header:'komponen', data: 'komponen'},
+        {header:'description', data: '_desc'},
+        {header:'departement', data: 'depmnt'},
+        {header:'keterangan', data: 'keterangan'},
+        {header:'date', data: 'dt_need'},
+        {header:'rel date', data: 'release_date'},
+        {header:'due date', data: 'due_date'},
+        {header:'lokasi', data: 'lokasi'},
+        {header:'id / Lot', data: 'lot__id'},
+        {header:'qty id/lot', data: 'qty'},
+        {header:'nasehat', data: 'nasehat'},
+        {header:'pick now', data: 'pick_now'},
+        {header:'qty OH WH', data: 'qty_OH_all'},
+        {header:'remarks', data: 'remarks'},
+        {header:'all lot', data: 'all_lot'},
+        {header:'PIC WH', data: 'pic'},
+    ];
+
+    table('main', deptVal, array, mainData);
+    main.removeChild(document.querySelector('.loading'));    
+    const last = performance.now();
+    const totalAll = (last - start) / 1000;
+    console.log(totalAll);
+
+    document.addEventListener('change', async function(event) {
+        if(event.target.id.includes('main_filter')) {
+            const value = event.target.value;
+            deptVal = value;
+            const all = document.querySelectorAll(`[data-table]`);
+            let avail = false;
+            main.appendChild(await loading('loading'));
+            all.forEach(dt=>{
+                if(!dt.classList.contains('hidden')) {
+                    dt.classList.add('hidden');
+                }
+                const cek = dt.getAttribute('data-table');
+                if(cek === value) {
+                    avail = true;
+                    dt.classList.remove('hidden');
+                }
+            })
+            
+            if(avail === false) {
+                console.log(`${date}__${deptVal}`);
+                mainData = await get_cache(`${date}__${deptVal}`);
+                console.log(mainData);
+                await table('main', deptVal, array, mainData);
+                main.removeChild(document.querySelector('.loading'));    
+                return;
+            } 
+            main.removeChild(document.querySelector('.loading'));    
+        }
+    })
+
+    document.addEventListener('click', async function(event) {
+        if(event.target.id.includes('search_btn')) {
+            const inpValue = document.querySelector('#search_input__pick_now').value;
+            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const allRow = target.querySelectorAll('[data-filter]');
+            allRow.forEach(dt=>{
+                const valueCek = dt.getAttribute('data-filter');
+                if (!dt.classList.contains('hidden')) {
+                    dt.classList.add('hidden');
+                }
+                if (valueCek.toLowerCase().includes(inpValue.toLowerCase())) {
+                    dt.classList.remove('hidden');
+                }
+            })
+        }
+        if(event.target.id.includes('dl_btn')) {
+            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const allRow = target.querySelectorAll('[data-filter]');
+            let file = [];
+            allRow.forEach(dt=>{
+                if (!dt.classList.contains('hidden')) {
+                    const td = dt.querySelectorAll('td');
+                    const data = {};
+                    for (let i=0; i<td.length; i++) {
+                        data[`${array[i].header}`] = td[i].textContent;
+                    }
+                    file.push(data);
+                }
+            })
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(file);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
+            XLSX.writeFile(workbook, 'pick_now.xlsx')
+        }
+    })
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#search_btn__pick_now');
+            submit_btn.click();
+        }
+    })
 </script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>
 </html>

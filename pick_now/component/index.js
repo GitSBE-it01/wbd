@@ -1,40 +1,37 @@
-/*
-====================================================================================
-block
-====================================================================================
-*/
-import {create} from './block.js';
-export {create}
-
-/*
-====================================================================================
-cluster 
-====================================================================================
-*/
-
-import {mainNav} from './cluster/navbar.js';
-import {sideNav} from './cluster/sidebar.js';
-import {pickNowHeader, pickNowTbl} from './cluster/table.js';
-import {loading} from './cluster/load.js';
-import {smallSearchBar} from './cluster/search.js';
-
+import {button,
+        addButton} from './blocks/button.js';
+import {dtlist} from './blocks/datalist.js';
+import {textInput,
+        hiddenInput} from './blocks/input.js';
+import {loading} from './blocks/load.js';
+import {header,
+        main,
+        section,
+        aside,
+        div} from './blocks/structure.js';
+import {navigation} from './cluster/navigation.js';
+import {searchbar} from './cluster/search.js';
+import {selectionRow,
+        selectionCol,} from './cluster/selection.js';
+import {table,
+        inputTable} from './cluster/table.js';
 
 export {
-    loading, 
-    mainNav,
-    sideNav,
-    pickNowHeader,
-    pickNowTbl,
-    smallSearchBar
+        button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable
 }
-
-
-
-/*
-====================================================================================
-page
-====================================================================================
-*/
-import {section1} from './page/section1.js';
-
-export {section1};

@@ -1,51 +1,30 @@
-<?php
-class QueryInit {
-    public $tableName;
-    public $get;
-    public $insert;
-    public $update;
-    public $delete;
-    
-    public function __construct($tableName) {
-        $this->get = 'SELECT * FROM ' . $tableName;
-        $this->insert = 'INSERT INTO ' . $tableName;
-        $this->update = 'UPDATE ' . $tableName;
-        $this->delete = 'DELETE FROM ' . $tableName;
-    }
+<?php 
+require_once "class.php";
 
-    public function getQuery() {
-        return $this->get;
-    }
-    public function insertQuery() {
-        return $this->insert;
-    }
-    public function updateQuery() {
-        return $this->update;
-    }
-    public function deleteQuery() {
-        return $this->delete;
-    }
-}
+$wobb = new QueryInit('dbqad_live.wod_det');
+$wo = new QueryInit('dbqad_live.wo_mstr');
+$ld = new QueryInit('dbqad_live.ld_det');
+$pt_mstr = new QueryInit('dbqad_live.pt_mstr');
 
-$wobb = new QueryInit('wod_det');
-$wo = new QueryInit('wo_mstr');
-$ld = new QueryInit('ld_det');
-$loc = new QueryInit('loc_mstr');
+
+$loc = new QueryInit('dbpick_now.loc_dept');
+$pic = new QueryInit('dbpick_now.pic_list');
 $dept = new QueryInit('dbpick_now.dept_new');
 $pickNow = new QueryInit('dbpick_now.result_fix');
-$pt_mstr = new QueryInit('pt_mstr');
 $pic_part = new QueryInit('dbpick_now.pic_part_category');
 
 $codeList = array(
     'wobb'=>$wobb,
     'wo'=>$wo,
     'ld'=>$ld,
+    'pt_mstr'=> $pt_mstr,
     'loc'=>$loc,
+    'pic'=>$pic,
     'dept'=>$dept,
     'pickNow'=> $pickNow,
-    'pt_mstr'=> $pt_mstr,
     'pic_part'=> $pic_part,
 );
+
 
 
 ?>

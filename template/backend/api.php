@@ -1,46 +1,65 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "index.php";
-require_once "../queryList.php";
+require_once "queryList.php";
 
 session_start();
 $allowedOrigins = [
     'http://informationsystem.sbe.co.id:8080', 
     'http://192.168.2.103:8080',
-    'http://informationsystem.sbe.co.id', 
-    'http://192.168.2.103'
+    'informationsystem.sbe.co.id:8080', 
+    '192.168.2.103:8080',
 ];
 
-$origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';
+$origin = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 if (in_array($origin, $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
 } else {
     http_response_code(403); 
     exit(); 
 }
-
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type', 'Origin');
+header('Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
 // Handling preflight requests
-
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header('HTTP/1.1 200 OK');
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    //echo $_SERVER['HTTP_COOKIE'];
-    echo $_SESSION['auth_token'] . '</br>';
-    echo $_SERVER['HTTP_COOKIE'];
-    $val = explode("=",$_SERVER['HTTP_COOKIE']);
-    print_r($val);
-    if ($_SESSION['auth_token'] === $val[2]) {
-        echo "okk";
-    }
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    $response = delete_cache();
+    echo json_encode($response);
+    return;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $data_name = isset($data['parameters']) ? $data['parameters']:'';
+    $isi_data = isset($data['data']) ? $data['data']:'';
+    $response = cache_data($data_name, $isi_data);
+    echo json_encode($response);
+    return;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if(isset($_SERVER['HTTP_APP']) && $_SERVER['HTTP_APP'] === 'cache') {
+        $response = get_cache($_SERVER['HTTP_PARAM']);
+    } else {
+        if(isset($_SESSION['username'])) {
+            $response = "success ";
+        } else {
+            $response = "failed ";
+        }
+    }
+    header("Cache-Control: public");
+    header("Content-Type: application/json");
+    echo json_encode($response);
+    return;
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db = 'db_wbd';
     $data = json_decode(file_get_contents('php://input'), true);
     $action = $data['action']; 
@@ -67,10 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case "delete":
             $query = $queryStart->deleteQuery();
             $response = deleteData($db, $query, $dataParam);
-            break;
-        case "auth":
-
-            $response = 'authenticate';
             break;
         default:
             $response = 'Method not supported';
