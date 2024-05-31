@@ -1,10 +1,10 @@
 export const table = async(target, tableID, arr, data) =>{
     const trgt = document.querySelector(target);
     const div = document.createElement('div');
-    div.setAttribute('class', 'w-full h-full bg-teal-100 scrollable');
+    div.setAttribute('class', 'w-full h-full scrollable');
     div.setAttribute('data-table',tableID);
     const table = document.createElement('table');
-    table.setAttribute('class', 'w-full h-full bg-teal-400 ');
+    table.setAttribute('class', 'w-full bg-teal-400 ');
     
     const header_tr = document.createElement('tr');
     for (let i=0; i<arr.length; i++) {
@@ -41,16 +41,16 @@ export const table = async(target, tableID, arr, data) =>{
 }
 
 
-
 export const inputTable = async(target, tableID, arr, data) =>{
     const trgt = document.querySelector(target);
     const div = document.createElement('div');
     div.setAttribute('class', 'w-full h-full bg-teal-100 scrollable');
     div.setAttribute('data-table',tableID);
     const table = document.createElement('table');
-    table.setAttribute('class', 'w-full h-full bg-teal-400 ');
+    table.setAttribute('class', 'w-full bg-teal-400 ');
     
     const header_tr = document.createElement('tr');
+    header_tr.setAttribute('data-header','');
     for (let i=0; i<arr.length; i++) {
         if(!arr[i].pk) {
             const th = document.createElement('th');
@@ -72,17 +72,20 @@ export const inputTable = async(target, tableID, arr, data) =>{
             if(!arr[i].pk) {
                 const el = document.createElement('input');
                 el.type = 'text';
-                el.value = dt[`${arr[i].data}`];
-                el.disabled = true;
+                el.value = dt[`${arr[i].data}`] ? dt[`${arr[i].data}`] : '';
+                el.autocomplete = 'off';
+                el.setAttribute('data-field', arr[i].data);
+                if(arr[i].list || arr[i].list !=='') {el.setAttribute('list', arr[i].list)}
+                if(arr[i].disable || arr[i].disable !=='') {el.disabled = arr[i].disable}
                 const td = document.createElement('td');
                 td.appendChild(el);
                 filter += dt[`${arr[i].data}`] + "--";
                 if(i === 0) {
-                    td.setAttribute('class','bg-slate-400 border-2 text-sm border-black p-2 sticky left-0 z-10 font-semibold')
-                    el.setAttribute('class', 'rounded px-4 w-[90%] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300 bg-slate-300');
+                    td.setAttribute('class','bg-slate-400 border-2 text-sm border-black sticky left-0 z-10 font-semibold')
+                    el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
                 } else {
-                    td.setAttribute('class','bg-slate-300 border-2 text-sm border-black p-2')
-                    el.setAttribute('class', 'rounded px-4 w-[90%] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300 bg-slate-300');
+                    td.setAttribute('class','bg-slate-300 border-2 text-sm border-black')
+                    el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent');
                 }
                 data_tr.appendChild(td);
             } else {
@@ -94,4 +97,37 @@ export const inputTable = async(target, tableID, arr, data) =>{
     })
     div.appendChild(table);
     trgt.appendChild(div);
+}
+
+
+export const inputEmptyRow = async(target, counter, arr) =>{
+    const trgt = document.querySelector(target);
+    const data_tr = document.createElement('tr');
+    let filter ='';
+    for (let i=0; i<arr.length; i++) {
+        if(!arr[i].pk) {
+            const el = document.createElement('input');
+            el.type = 'text';
+            el.value = arr[i].header ? arr[i].header : '';
+            el.autocomplete = 'off';
+            el.setAttribute('data-field', arr[i].data);
+            if(arr[i].list || arr[i].list !=='') {el.setAttribute('list', arr[i].list)}
+            if(arr[i].disable || arr[i].disable !=='') {el.disabled = arr[i].disable}
+            const td = document.createElement('td');
+            td.appendChild(el);
+            if(i === 0) {
+                td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200 sticky left-0 z-10 font-semibold')
+                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
+            } else {
+                td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200')
+                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
+            }
+            data_tr.appendChild(td);
+        } else {
+        data_tr.setAttribute('data-id', `new-${counter}`);
+        }
+    }
+    data_tr.setAttribute(`data-filter`, filter);
+    trgt.insertBefore(data_tr, trgt.childNodes[1]);
+    return;
 }

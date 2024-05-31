@@ -1,18 +1,22 @@
-export const button = (ID, text, style) =>{
-    const sbmtBtn = document.createElement('button');
+export const button = (target, ID, text, style) =>{
+    const tgrt = document.querySelector(target);
+    const defBtn = document.createElement('button');
     if(text && text !== '') {
-        sbmtBtn.textContent = text;
+        defBtn.textContent = text;
     }
-    sbmtBtn.type = 'button';
+    defBtn.type = 'button';
     if(style && style !=='') {
-        sbmtBtn.setAttribute('class', style);
+        defBtn.setAttribute('class', style);
     } else {
-        sbmtBtn.setAttribute('class', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 hover:border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        defBtn.setAttribute('class', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
     }
-    sbmtBtn.id = 'btn__' + ID;
+    defBtn.id = 'btn__' + ID;
+    tgrt.appendChild(defBtn);
+    return;
 }
 
 export const addButton = (ID, style) =>{
+    const tgrt = document.querySelector(target);
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
     addBtn.setAttribute('class', 'plus');
@@ -20,4 +24,6 @@ export const addButton = (ID, style) =>{
         addBtn.classList.add(style);
     }
     addBtn.id = 'add_btn__' + ID;
+    tgrt.appendChild(addBtn);
+    return;
 }

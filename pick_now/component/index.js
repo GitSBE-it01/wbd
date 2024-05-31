@@ -9,12 +9,14 @@ import {header,
         section,
         aside,
         div} from './blocks/structure.js';
+import {form} from './cluster/form.js';
 import {navigation} from './cluster/navigation.js';
 import {searchbar} from './cluster/search.js';
 import {selectionRow,
         selectionCol,} from './cluster/selection.js';
 import {table,
-        inputTable} from './cluster/table.js';
+        inputTable,
+        inputEmptyRow} from './cluster/table.js';
 
 export {
         button,
@@ -28,10 +30,13 @@ export {
         section,
         aside,
         div,
+        form,
         navigation,
         searchbar,
         selectionRow,
         selectionCol,
         table,
-        inputTable
+        inputTable,
+        inputEmptyRow
 }
+

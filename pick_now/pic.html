@@ -9,13 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./utility/auth.js"></script>
-    <title>warehouse PIC</title>
+    <title>PIC Per Item</title>
 </head>
 <body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
-    <div class='loading'></div>
+    <div class='loading z-20'></div>
 <script type="module">
     // import module
-    import {button,
+    import {
+        button,
         addButton,
         dtlist,
         textInput,
@@ -26,40 +27,33 @@
         section,
         aside,
         div,
+        form,
         navigation,
         searchbar,
         selectionRow,
         selectionCol,
         table,
-        inputTable} from './component/index.js';
+        inputTable,
+        inputEmptyRow
+    } from './component/index.js';
     import {jsonToCsv, currentDate, activeLink, get_cache, curDate, 
         db_pic, pic_part
     } from './utility/index.js';
+    import {navArr} from './general.js';
 
     // navigation
-    navigation('Warehouse PIC', [    
-        {link: 'index.html', text: 'Home'},
-        {link: 'tallysheet.html', text: 'Tallysheet'},
-        {link: 'pic.html', text: 'PIC'},
-        {link: 'location.html', text: 'lokasi'},
-    ])
+    navigation('PIC Per Item', navArr)
 
     // header
     header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+        const pic_list = await db_pic.dbProcess('get','');
+        await dtlist('pic_list', pic_list, 'optr');
         const part = await pic_part.dbProcess('get','');
-        const list=[];
-        part.forEach(dt=>{
-            const data = dt.optr + '--' + dt.tipe + '--' + dt.part_cat;
-            if(!list.includes(data)) {
-                list.push(data);
-            } else {
-                console.log(dt.id);
-                console.log(dt.tipe);
-                console.log(data);
-            }
-        })
-        await dtlist('filter', list);
-        await searchbar('header', 'wh pic', 'filter');
+        await dtlist('filter', part);
+        console.log({pic_list,part});
+        button('header','dt_edit', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        button('header','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        await searchbar('header', 'wh pic', 'right-0', 'filter');
 
     // main
     main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
@@ -69,7 +63,7 @@
             if (a.part_cat !== b.part_cat) return a.part_cat.localeCompare(b.part_cat);
         })
         const tableArray = [
-            {header:'PIC', data: 'optr'},
+            {header:'PIC', data: 'optr', list: 'pic_list'},
             {header:'item number', data: 'tipe'},
             {header:'part kategori', data: 'part_cat'},
             {header:'ID', data: 'id', pk:'id'},
@@ -79,41 +73,37 @@
         mainPick.removeChild(document.querySelector('.loading'));    
 
     // event listener
-    // change event
-
-    document.addEventListener('change', async function(event) {
-        if(event.target.id.includes('filter__')) {
-            let filter1 = document.querySelector('#filter__pilih_pic').value !== 'All' ? document.querySelector('#filter__pilih_pic').value : '';
-            let filter2 = document.querySelector('#filter__pilih_item').value !== 'All' ? document.querySelector('#filter__pilih_item').value : '';
-            let filter3 = document.querySelector('#filter__pilih_kategori').value !== 'All' ? document.querySelector('#filter__pilih_kategori').value : '';
-            const valAll = filter1 + '--' + filter2 + '--' + filter3 + '--'
-            console.log(valAll);
-            const all = document.querySelectorAll(`[data-filter]`);
-            all.forEach(dt=>{
-                const cek = dt.getAttribute('data-filter');
-                dt.classList.toggle('hidden',!cek.toLowerCase().includes(valAll));
-            })
+    // change event listener
+    const tableDiv = document.querySelector('table');
+    tableDiv.addEventListener('change', async function(event) {
+        if(event.target.tagName.toLowerCase() === "input") {
+            const target = event.target;
+            const closestTr = target.closest('tr');
+            let val = closestTr.getAttribute('data-id');
+            val += '--change';
+            closestTr.setAttribute('data-id', val);
+            const btn = document.querySelector('#btn__dt_edit');
+            btn.classList.toggle('font-bold');
+            btn.classList.toggle('bg-red-500');
+            btn.classList.toggle('border-teal-200');
         }
-    })
 
+    })
+    let counter = 0;
     //click event
     document.addEventListener('click', async function(event) {
         if(event.target.id.includes('search_btn')) {
-            const inpValue = document.querySelector('#search_input__pick_now').value;
-            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const inpValue = document.querySelector('#search_input__wh_pic').value;
+            const target = document.querySelector(`table`);
             const allRow = target.querySelectorAll('[data-filter]');
             allRow.forEach(dt=>{
                 const valueCek = dt.getAttribute('data-filter');
-                if (!dt.classList.contains('hidden')) {
-                    dt.classList.add('hidden');
-                }
-                if (valueCek.toLowerCase().includes(inpValue.toLowerCase())) {
-                    dt.classList.remove('hidden');
-                }
+                dt.classList.toggle('hidden',!valueCek.toLowerCase().includes(inpValue.toLowerCase()))
             })
+            return;
         }
         if(event.target.id.includes('dl_btn')) {
-            const target = document.querySelector(`[data-table = "${deptVal}"]`);
+            const target = document.querySelector(`table`);
             const allRow = target.querySelectorAll('[data-filter]');
             let file = [];
             allRow.forEach(dt=>{
@@ -129,15 +119,80 @@
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.json_to_sheet(file);
             XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
-            XLSX.writeFile(workbook, 'pick_now.xlsx')
+            XLSX.writeFile(workbook, 'pick_now.xlsx');
+            return;
+        }
+
+        if(event.target.id === ('btn__dt_edit')) {
+            const btn = event.target;
+            btn.disabled =true;
+            const target = document.querySelector(`table`);
+            const allRow = target.querySelectorAll('[data-id *="--change"]');
+            let inputData = [];
+            let updateData = [];
+            allRow.forEach(dt=>{
+                const cek = dt.getAttribute('data-id');
+                const inp = dt.querySelectorAll('[data-field]');
+                let data = {};
+                inp.forEach(dt2=>{
+                    const key = dt2.getAttribute('data-field');
+                    data[key] = dt2.value;
+                })
+                if(!cek.includes('new')) {
+                    const id = cek.split('--');
+                    let updt = {data: data, filter:id[0]};
+                    updateData.push(updt);
+                } else {
+                    inputData.push(data);
+                }
+            })
+            console.log({inputData, updateData});
+            if (!inputData.length === 0) {
+                const result = await pic_part.dbProcess('insert',inputData);
+                if(!result.includes('fail')) {
+                    alert(inputData.length +' data successfully inserted');
+                    location.reload();
+                } else {
+                    alert('data fail to insert');
+                }
+            }
+            return;
+        }
+
+        if(event.target.id === ('btn__add_new')) {
+            await inputEmptyRow('table',counter, tableArray);
+            counter++;
+            return;
         }
     })
 
     // keydown event listener
     document.addEventListener('keydown', function(event) {
         if (event.key === "Enter") {
-            const submit_btn = document.querySelector('#search_btn__pick_now');
+            const submit_btn = document.querySelector('#search_btn__wh_pic');
             submit_btn.click();
+        }
+    })
+    document.addEventListener('keyup', function(event) {
+        if(event.target.getAttribute('data-field') === 'optr') {
+            const target = event.target;
+            const td = target.closest('td');
+            const val = event.target.value;
+            console.log(val);
+            let checking = pic_list.some(obj => Object.values(obj).includes(val));
+            if(!document.getElementById('alert')) {
+                if(!checking) {
+                    const div = document.createElement('div');
+                    div.id = 'alert';
+                    div.textContent = 'PIC tidak ada';
+                    div.setAttribute('class', 'z-30 bg-yellow-200 rounded px-2 text-red-500 float-right text-sm')
+                    td.appendChild(div);
+                } 
+            } else {
+                if(checking) {
+                    td.removeChild(document.getElementById('alert'));
+                }
+            }
         }
     })
 </script>

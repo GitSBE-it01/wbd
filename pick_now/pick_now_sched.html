@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="./utility/main.css" rel="stylesheet" />
+    <link href="./component/main.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./utility/auth.js"></script>
     <title>scheduler pick now</title>
 </head>
-<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 px-8 pt-4">
 <div id='root' class='container'>
     <div class='loading'></div>
 </div>
@@ -33,6 +32,7 @@
     console.log('step0 : inisiasi awal ')
     console.log('========================================================================================');
     const h1 = document.createElement('h1');
+    h1.setAttribute('class', 'text-center text-4xl font-bold');
     h1.textContent = 'Scheduler Pick Now';
     root.appendChild(h1);
     const demand = await wobb.dbProcess('get',''); // wod_det
@@ -421,6 +421,7 @@
     const endFinal = performance.now();
     const totalTime = (endFinal - initPage) /1000;
     const h2 = document.createElement('h3');
+    h2.setAttribute('class', 'text-xl font-semibold')
     h2.textContent = 'waktu proses total : ' + totalTime;
     root.removeChild(document.querySelector('.loading'));
     root.appendChild(report5);

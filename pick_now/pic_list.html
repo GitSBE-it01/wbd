@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="./utility/auth.js"></script>
-    <title>Lokasi Group</title>
+    <title>Detail PIC WH</title>
 </head>
 <body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
     <div class='loading z-20'></div>
@@ -37,29 +37,20 @@
         inputEmptyRow
     } from './component/index.js';
     import {jsonToCsv, currentDate, activeLink, get_cache, curDate, 
-        loc
+        db_pic
     } from './utility/index.js';
     import {navArr} from './general.js';
 
     // navigation
-    navigation('Lokasi Group', navArr)
-
-    // header
-    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
-
-        button('header','dt_edit', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
-        button('header','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
-        await searchbar('header', 'default', 'right-0', 'filter');
-
-        
+    navigation('Detail PIC WH', navArr)
+      
     // sidebar
-    aside('fixed flex flex-row top-[10vh] left-0 bg-teal-700 w-[25vw] h-[90vh]');
+    aside('fixed flex flex-row top-[5vh] left-0 bg-teal-700 w-[25vw] h-[95vh]');
         const article = document.createElement('article');
         article.innerHTML = `
             <u><strong>Catatan penting: </strong></u></br>
-            1. Lokasi yang dimasukkan di dalam data ini akan di gunakan menjadi filter <u>CONTAINS</u> dan bukan equals terhadap data lokasi di QAD.</br></br>
-            2. Penggolongan lokasi ini hanya berlaku untuk pick now dan berbeda dengan data lokasi departemen yang ada di QAD.</br></br>
-            3. Lokasi yang dimasukkan harus unik (tidak bisa di masukkan dengan kata-kata yang sama dan spasi sebelum karakter pertama dan sesudah karakter akhir akan di hapus).</br>
+            1. Jika merubah nama PIC maka data PIC di PIC per Item juga akan berganti sesuai perubahan.</br></br>
+            2. Jika PIC di delete dan sudah terdaftar sebagai PIC item tertentu, maka item tersebut akan tetap ada di database dengan PIC kosong. 
         `;
         article.setAttribute('class', 'px-4 leading-loose pt-4 text-white text-justify');
         const side = document.querySelector('aside');
@@ -67,16 +58,25 @@
 
 
     // main
-    main('fixed flex flex-row top-[10vh] right-0 bg-slate-300 w-[75vw] h-[90vh]');
-        const loc_dpt = await loc.dbProcess('get','');
-        loc_dpt.sort((a,b) => {
-            if (a.dept !== b.dept) return a.dept.localeCompare(b.dept);
+    main('fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[95vh]');
+        const title = document.createElement('h1');
+        title.textContent = 'List PIC WH';
+        title.setAttribute('class', 'text-4xl pl-12 leading-loose pt-2 font-bold  text-justify');
+        const mainDiv = document.querySelector('main');
+        mainDiv.appendChild(title);
+        await div('buttonDiv', 'main', 'w-full pl-10 bg-slate-600 flex flex-row py-2 gap-6');
+        button('#buttonDiv','dt_edit', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        button('#buttonDiv','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+
+        await div('formDiv', 'main', 'w-full h-full pl-10 bg-slate-300 scrollable py-4')
+        const pic = await db_pic.dbProcess('get','');
+        pic.sort((a,b) => {
+            if (a.optr !== b.optr) return a.optr.localeCompare(b.optr);
         })
-        const tableArray = [
-            {header:'Lokasi', data: 'loc'},
-            {header:'Departemen', data: 'dept'},
-        ];
-        await inputTable('main', 'all', tableArray, loc_dpt);
+        pic.forEach(dt=>{
+            form('#formDiv',dt.optr, dt.optr);
+
+        })
         const mainPick = document.querySelector('body');
         mainPick.removeChild(document.querySelector('.loading'));    
 
@@ -169,7 +169,6 @@
             submit_btn.click();
         }
     })
-    
 </script>
 <script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
 </body>

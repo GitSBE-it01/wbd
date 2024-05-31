@@ -12,11 +12,11 @@
     <title>pick now</title>
 </head>
 <body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
-        <div class='loading'></div>
-    
+        <div class='loading z-20'></div>
 <script type="module">
     // all Import module
-    import {button,
+    import {
+        button,
         addButton,
         dtlist,
         textInput,
@@ -27,23 +27,23 @@
         section,
         aside,
         div,
+        form,
         navigation,
         searchbar,
         selectionRow,
         selectionCol,
-        table,} from './component/index.js';
+        table,
+        inputTable,
+        inputEmptyRow
+    } from './component/index.js';
     import {
         jsonToCsv, currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
         pickNow, // class
     } from './utility/index.js';
+    import {navArr} from './general.js';
 
     // navigation
-    navigation('Pick Now', [      
-        {link: 'index.html', text: 'Home'},
-        {link: 'tallysheet.html', text: 'Tallysheet'},
-        {link: 'pic.html', text: 'PIC'},
-        {link: 'location.html', text: 'lokasi'},
-    ])
+    navigation('Pick Now', navArr)
 
 
     // header
@@ -60,13 +60,13 @@
         {val: 'WOODWORK',text:'WWA'},
     ]
     await selectionRow('header', 'Pilih Department', list);
-    await searchbar('header', 'pick_now');
+    await searchbar('header', 'pick_now','right-0','');
 
 
     // main
+    main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
     let deptVal = 'P1.ASSY';
     const date = curDate('');
-    const start = performance.now();
     let mainData = await get_cache(`${date}__${deptVal}`);
     const array = [
         {header:'komponen', data: 'komponen'},
@@ -86,18 +86,13 @@
         {header:'all lot', data: 'all_lot'},
         {header:'PIC WH', data: 'pic'},
     ];
-    main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
-    table('main', deptVal, array, mainData);
-    const body = document.querySelector('body');
-    body.removeChild(document.querySelector('.loading'));    
-    const last = performance.now();
-    const totalAll = (last - start) / 1000;
-    console.log(totalAll);
+    await table('main', deptVal, array, mainData);
+    const mainDiv = document.querySelector('body');
+    mainDiv.removeChild(document.querySelector('.loading'));    
 
 
     // event listener
     // change event listener
-    const mainDiv = document.querySelector('main');
     document.addEventListener('change', async function(event) {
         if(event.target.id.includes('filter_')) {
             const value = event.target.value;

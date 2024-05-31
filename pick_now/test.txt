@@ -17,3 +17,12 @@
 (LEFT(E2,8)="SBE-3WHR","SBE3",
 (LEFT(E2,5)="awhsu","prod3",
 (LEFT(E2,5)="pr02c","prod2",
+
+
+item_number	
+description	
+location	
+lot/serial	
+qty_on_hand-inv_detail	
+unit_of_measure	
+ref

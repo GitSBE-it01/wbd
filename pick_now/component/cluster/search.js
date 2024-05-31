@@ -1,15 +1,16 @@
 import {removeSpaces} from '../../utility/index.js';
 
-export const searchbar = async(target, ID, dtlist) => {
+export const searchbar = async(target, ID, pos, dtlist) => {
     const trgt = document.querySelector(target);
     const div= document.createElement('div');
-    div.setAttribute('class', 'flex flex-row mx-2 mt-3 fixed right-0 items-center');
+    div.setAttribute('class', 'flex flex-row mx-2 mt-3 fixed items-center');
+    div.classList.add(pos);
 
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = 'search';
     input.setAttribute('list', dtlist)
-    input.setAttribute('class', 'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300')
+    input.setAttribute('class', 'rounded px-4 w-[15vw] text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300')
     input.id = 'search_input__' + removeSpaces(ID, '_');
 
     const sbmtBtn = document.createElement('button');
