@@ -1,3 +1,5 @@
+import { minusButton } from "../index.js";
+
 export const table = async(target, tableID, arr, data) =>{
     const trgt = document.querySelector(target);
     const div = document.createElement('div');
@@ -40,7 +42,6 @@ export const table = async(target, tableID, arr, data) =>{
     trgt.appendChild(div);
 }
 
-
 export const inputTable = async(target, tableID, arr, data) =>{
     const trgt = document.querySelector(target);
     const div = document.createElement('div');
@@ -68,6 +69,7 @@ export const inputTable = async(target, tableID, arr, data) =>{
     data.forEach(dt=>{
         const data_tr = document.createElement('tr');
         let filter ='';
+        let idBtn = '';
         for (let i=0; i<arr.length; i++) {
             if(!arr[i].pk) {
                 const el = document.createElement('input');
@@ -89,9 +91,11 @@ export const inputTable = async(target, tableID, arr, data) =>{
                 }
                 data_tr.appendChild(td);
             } else {
-               data_tr.setAttribute('data-id', dt[`${arr[i].pk}`]);
+                idBtn = dt[`${arr[i].pk}`];
+                data_tr.setAttribute('data-id', dt[`${arr[i].pk}`]);
             }
         }
+        data_tr.appendChild(minusButton(idBtn, 'hidden w-3 v-3 fixed right-6'));
         data_tr.setAttribute(`data-filter`, filter);
         table.appendChild(data_tr)
     })

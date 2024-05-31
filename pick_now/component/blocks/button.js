@@ -16,14 +16,23 @@ export const button = (target, ID, text, style) =>{
 }
 
 export const addButton = (ID, style) =>{
-    const tgrt = document.querySelector(target);
     const addBtn = document.createElement('button');
     addBtn.type = 'button';
     addBtn.setAttribute('class', 'plus');
-    if(style && style !=='') {
-        addBtn.classList.add(style);
+    if(style || style !=='') {
+        addBtn.setAttribute('class', `plus ${style}`);
     }
     addBtn.id = 'add_btn__' + ID;
-    tgrt.appendChild(addBtn);
-    return;
+    return addBtn;
+}
+
+export const minusButton = (ID, style) =>{
+    const minBtn = document.createElement('button');
+    minBtn.type = 'button';
+    minBtn.setAttribute('class', 'minus');
+    if(style || style !=='') {
+        minBtn.setAttribute('class', `minus ${style}`);
+    }
+    minBtn.setAttribute = 'del_btn__' + ID;
+    return minBtn;
 }

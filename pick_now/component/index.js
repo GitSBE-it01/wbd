@@ -1,5 +1,6 @@
 import {button,
-        addButton} from './blocks/button.js';
+        addButton,
+        minusButton} from './blocks/button.js';
 import {dtlist} from './blocks/datalist.js';
 import {textInput,
         hiddenInput} from './blocks/input.js';
@@ -21,6 +22,7 @@ import {table,
 export {
         button,
         addButton,
+        minusButton,
         dtlist,
         textInput,
         hiddenInput,

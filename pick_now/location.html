@@ -49,6 +49,7 @@
 
         button('header','dt_edit', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
         button('header','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        button('header','del_dt', 'delete', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
         await searchbar('header', 'default', 'right-0', 'filter');
 
         
@@ -158,6 +159,16 @@
         if(event.target.id === ('btn__add_new')) {
             await inputEmptyRow('table',counter, tableArray);
             counter++;
+            return;
+        }
+        
+        if(event.target.id.includes('del_dt')) {
+            const target = document.querySelector(`table`);
+            const allRow = target.querySelectorAll('[data-filter]');
+            let file = [];
+            allRow.forEach(dt=>{
+                
+            })
             return;
         }
     })
