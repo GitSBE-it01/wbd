@@ -62,76 +62,42 @@ str to number with number of char and decimal
 export function numberToStr(number, minNumber, decimalMinimum) {
     const noStr = number.toString();
     const splitStr = noStr.split(".");
-    const intNo = splitStr[0];
-    const decNo = splitStr[1];
-    let resultInt = "";
+    let intNo = splitStr[0];
+    let decNo = splitStr[1];
     let resultDec = "";
-    if (intNo.length < minNumber) {
-        const diff = minNumber - intNo.length;
-        for (let i =0 ; i < diff; i++) {
-            resultInt += "0";
-        }
-        resultInt += intNo;
-    } else {
-        resultInt = intNo;
+    if (decNo === undefined || decimalMinimum === 0) {
+        return intNo;
     }
 
-    if (!decNo || decimalMinimum === 0) {
-        return resultInt;
-    }
-
-    if (decNo) {
+    if (decNo !== undefined) {
         if (decNo.length < decimalMinimum) {
-            const diff = decimalMinimum - intNo.length;
+            const diff = decimalMinimum - decNo.length;
             resultDec = "." + decNo;
             for (let i =0 ; i < diff; i++) {
                 resultDec += "0";
                 }
-            return resultInt + resultDec;
+            return intNo + resultDec;
         } 
-
-        const cek1 = decNo.substring(0, decimalMinimum);
-        const cek2 = decNo.substring(decimalMinimum, decimalMinimum+1);
-        const cek3 = decNo.substring(decimalMinimum, decimalMinimum+2);
-        let resultCek ="";
-
-        if (decimalMinimum === 1) {
-            if (parseInt(cek2) > 4) {
-                resultCek = (parseInt(cek1) + 1);
-                return resultInt + resultCek.toString();  
-            } 
-            return resultInt + "." + cek1;
-        } 
-        if (parseInt(cek3) > 4) {
-                resultCek = (parseInt(cek2) + 1);
-                return resultInt + resultCek.toString();  
+        if(decNo.length > decimalMinimum) {
+            const cek1 = decNo.substring(0, decimalMinimum);
+            const cek2 = decNo.substring(decimalMinimum, decimalMinimum+1);
+            console.log({cek1, cek2});
+            if(parseInt(cek2)>5) {
+                resultDec = (parseInt(cek1) + 1).toString();
+                console.log({resultDec});
+                console.log(resultDec.length);
+                console.log(cek1.length);
+                if(resultDec.length > cek1.length) {
+                    resultDec = resultDec.slice(1);
+                }
+                decNo = resultDec;
+                intNo = (parseInt(intNo) + 1).toString();
+            } else {
+                resultDec = cek1;
             }
-        return resultDec = resultInt + "." + cek1 + cek2;
-    }
-}
-
-/*-------------------------
-delete children node
--------------------------*/
-export function delChild(target) {
-    const container = document.getElementById(target);
-    if (container.childNodes.length > 0) {
-        container.removeChild(container.lastChild);
-        return;
-    }
-    alert('there is nothing to delete');
-}
-
-/*-------------------------
-remove container 
--------------------------*/
-export function rmvNode(...target) {
-    target.forEach(tgt=> {
-        if (document.getElementById(tgt)) {
-            document.getElementById(tgt).remove();
+            return intNo + "." + decNo;
         }
-    })
-    return;
+    }
 }
 
 /*-------------------------
@@ -250,9 +216,6 @@ export const activeLink2 = (target, styles) => {
 
 
 export const removeSpaces = (str, replaceChar) => {
-    // Regular expression to match any whitespace character
     const regex = /\s/g;
-  
-    // Replace all whitespace characters with the chosen character
     return str.replace(regex, replaceChar);
   }

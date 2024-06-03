@@ -26,7 +26,7 @@ export class Data {
                   'Content-Type': 'application/json',
                   'Ori': this.ori
               },
-              body: JSON.stringify({action: action, parameters: this.key, data})
+              body: JSON.stringify({action: action, parameters: this.key, data:data})
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');

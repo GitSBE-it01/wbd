@@ -54,7 +54,7 @@
     console.log({pic, oh, cekLoc});
 
 
-    const delete1 = await pickNow.dbProcess('delete',{data_date: getCustomDate(-2)});
+    const delete1 = await pickNow.dbProcess('delete',[{data_date: getCustomDate(-2)}]);
     console.log(delete1);
     
     console.log('************************************************************');

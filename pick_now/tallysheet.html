@@ -36,7 +36,7 @@
         inputTable,
         inputEmptyRow
     } from './component/index.js';
-    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, 
+    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,
         ld, pt_mstr
     } from './utility/index.js';
     import {navArr} from './general.js';
@@ -65,13 +65,13 @@
             if (a.ld_status !== b.ld_status) return a.ld_part.localeCompare(b.ld_part);
         })
         const tableArray = [
-            {header:'Item Number', data: 'ld_part'},
-            {header:'Deskripsi', data: 'desc'},
-            {header:'Lokasi', data: 'ld_loc'},
-            {header:'lot/serial', data: 'ld_lot'},
-            {header:'Qty OH-inv detail', data: 'ld_qty_oh'},
-            {header:'UM', data: 'um'},
-            {header:'ref', data: 'ld_ref'},
+            {header:'Item Number', field: 'ld_part'},
+            {header:'Deskripsi', field: 'desc'},
+            {header:'Lokasi', field: 'ld_loc'},
+            {header:'lot/serial', field: 'ld_lot'},
+            {header:'Qty OH-inv detail', field: 'ld_qty_oh'},
+            {header:'UM', field: 'um'},
+            {header:'ref', field: 'ld_ref'},
         ];
         await inputTable('main', 'all', tableArray, invDetail);
         const mainPick = document.querySelector('body');
@@ -81,33 +81,11 @@
     //click event
     document.addEventListener('click', async function(event) {
         if(event.target.id.includes('search_btn')) {
-            const inpValue = document.querySelector('#search_input__default').value;
-            const target = document.querySelector(`table`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            allRow.forEach(dt=>{
-                const valueCek = dt.getAttribute('data-filter');
-                dt.classList.toggle('hidden',!valueCek.toLowerCase().includes(inpValue.toLowerCase()))
-            })
+            await searchProcess('#search_input__default', 'table', 'data-filter');
             return;
         }
         if(event.target.id.includes('dl_btn')) {
-            const target = document.querySelector(`table`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            let file = [];
-            allRow.forEach(dt=>{
-                if (!dt.classList.contains('hidden')) {
-                    const td = dt.querySelectorAll('td');
-                    const data = {};
-                    for (let i=0; i<td.length; i++) {
-                        data[`${array[i].header}`] = td[i].textContent;
-                    }
-                    file.push(data);
-                }
-            })
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.json_to_sheet(file);
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
-            XLSX.writeFile(workbook, 'pick_now.xlsx');
+            await dl_process('table', 'tallysheet', tableArray);
             return;
         }
     })

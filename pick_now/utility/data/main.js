@@ -5,7 +5,9 @@ export const mainDataProcess = (src)=> {
     src.forEach(dt=> {
         let qtyNasehat = 0;
         if(dt.valAcc < 0 ) {
-            qtyNasehat = dt.valAcc;
+            console.log('data asli:', dt.valAcc);
+            qtyNasehat = numberToStr(dt.valAcc,0,2);
+            console.log({qtyNasehat});
         }
         const fltr = dt.id + '--' +
         dt.item + '--' +

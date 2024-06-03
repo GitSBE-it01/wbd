@@ -36,7 +36,7 @@
         inputTable,
         inputEmptyRow
     } from './component/index.js';
-    import {
+    import {dl_process, searchProcess,
         jsonToCsv, currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
         pickNow, // class
     } from './utility/index.js';
@@ -69,22 +69,22 @@
     const date = curDate('');
     let mainData = await get_cache(`${date}__${deptVal}`);
     const array = [
-        {header:'komponen', data: 'komponen'},
-        {header:'description', data: '_desc'},
-        {header:'departement', data: 'depmnt'},
-        {header:'keterangan', data: 'keterangan'},
-        {header:'date', data: 'dt_need'},
-        {header:'rel date', data: 'release_date'},
-        {header:'due date', data: 'due_date'},
-        {header:'lokasi', data: 'lokasi'},
-        {header:'id / Lot', data: 'lot__id'},
-        {header:'qty id/lot', data: 'qty'},
-        {header:'nasehat', data: 'nasehat'},
-        {header:'pick now', data: 'pick_now'},
-        {header:'qty OH WH', data: 'qty_OH_all'},
-        {header:'remarks', data: 'remarks'},
-        {header:'all lot', data: 'all_lot'},
-        {header:'PIC WH', data: 'pic'},
+        {header:'komponen', field: 'komponen'},
+        {header:'description', field: '_desc'},
+        {header:'departement', field: 'depmnt'},
+        {header:'keterangan', field: 'keterangan'},
+        {header:'date', field: 'dt_need'},
+        {header:'rel date', field: 'release_date'},
+        {header:'due date', field: 'due_date'},
+        {header:'lokasi', field: 'lokasi'},
+        {header:'id / Lot', field: 'lot__id'},
+        {header:'qty id/lot', field: 'qty'},
+        {header:'nasehat', field: 'nasehat'},
+        {header:'pick now', field: 'pick_now'},
+        {header:'qty OH WH', field: 'qty_OH_all'},
+        {header:'remarks', field: 'remarks'},
+        {header:'all lot', field: 'all_lot'},
+        {header:'PIC WH', field: 'pic'},
     ];
     await table('main', deptVal, array, mainData);
     const mainDiv = document.querySelector('body');
@@ -123,37 +123,12 @@
     // click event listener
     document.addEventListener('click', async function(event) {
         if(event.target.id.includes('search_btn')) {
-            const inpValue = document.querySelector('#search_input__pick_now').value;
-            const target = document.querySelector(`[data-table = "${deptVal}"]`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            allRow.forEach(dt=>{
-                const valueCek = dt.getAttribute('data-filter');
-                if (!dt.classList.contains('hidden')) {
-                    dt.classList.add('hidden');
-                }
-                if (valueCek.toLowerCase().includes(inpValue.toLowerCase())) {
-                    dt.classList.remove('hidden');
-                }
-            })
+            await searchProcess('#search_input__pick_now', 'table', 'data-filter');
+            return;
         }
         if(event.target.id.includes('dl_btn')) {
-            const target = document.querySelector(`[data-table = "${deptVal}"]`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            let file = [];
-            allRow.forEach(dt=>{
-                if (!dt.classList.contains('hidden')) {
-                    const td = dt.querySelectorAll('td');
-                    const data = {};
-                    for (let i=0; i<td.length; i++) {
-                        data[`${array[i].header}`] = td[i].textContent;
-                    }
-                    file.push(data);
-                }
-            })
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.json_to_sheet(file);
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
-            XLSX.writeFile(workbook, 'pick_now.xlsx')
+            await dl_process(`[data-table = "${deptVal}"]`, 'pick now', array)
+            return;
         }
     })
 

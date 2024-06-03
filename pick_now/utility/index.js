@@ -1,9 +1,7 @@
 import { 
-    delChild, 
     numberToStr, 
     currentDate,
     curDate,
-    rmvNode,
     jsonToCsv,
     jsonToExcel,
     convertDateFormat,
@@ -14,11 +12,9 @@ import {
 } from "./processing/process.js";
 
 export {
-    delChild, 
     numberToStr, 
     currentDate,
     curDate,
-    rmvNode,
     jsonToCsv,
     jsonToExcel,
     convertDateFormat,
@@ -28,28 +24,25 @@ export {
     removeSpaces
 };
 
-import {
-    mainDataProcess
-} from './data/main.js';
+import {mainDataProcess} from './data/main.js';
 export {mainDataProcess}
 
+import {delete_cache,cache,get_cache} from './processing/cache.js';
+export {delete_cache,cache,get_cache}
 
-import {
-    delete_cache,
-    cache,
-    get_cache
-} from './processing/cache.js';
-export {    
-    delete_cache,
-    cache,
-    get_cache
-}
+import {showDelBtn, del_process} from './processing/del_process.js';
+export {showDelBtn, del_process}
 
+import {dl_process} from './processing/dl_excel.js';
+export {dl_process}
 
-import {
-    Data
-} from './class.js';
+import {insertUpdateProcess} from './processing/insert_update.js';
+export {insertUpdateProcess}
 
+import {searchProcess} from './processing/search_process.js';
+export {searchProcess}
+
+import {Data} from './class.js';
 export const wobb = new Data('wobb');
 export const wo = new Data('wo');
 export const ld = new Data('ld');
