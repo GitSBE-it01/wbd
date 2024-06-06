@@ -57,50 +57,6 @@ export const convertDateFormat = (inputDate) => {
 }
 
 /*-------------------------
-str to number with number of char and decimal
--------------------------*/
-export function numberToStr(number, minNumber, decimalMinimum) {
-    const noStr = number.toString();
-    const splitStr = noStr.split(".");
-    let intNo = splitStr[0];
-    let decNo = splitStr[1];
-    let resultDec = "";
-    if (decNo === undefined || decimalMinimum === 0) {
-        return intNo;
-    }
-
-    if (decNo !== undefined) {
-        if (decNo.length < decimalMinimum) {
-            const diff = decimalMinimum - decNo.length;
-            resultDec = "." + decNo;
-            for (let i =0 ; i < diff; i++) {
-                resultDec += "0";
-                }
-            return intNo + resultDec;
-        } 
-        if(decNo.length > decimalMinimum) {
-            const cek1 = decNo.substring(0, decimalMinimum);
-            const cek2 = decNo.substring(decimalMinimum, decimalMinimum+1);
-            console.log({cek1, cek2});
-            if(parseInt(cek2)>5) {
-                resultDec = (parseInt(cek1) + 1).toString();
-                console.log({resultDec});
-                console.log(resultDec.length);
-                console.log(cek1.length);
-                if(resultDec.length > cek1.length) {
-                    resultDec = resultDec.slice(1);
-                }
-                decNo = resultDec;
-                intNo = (parseInt(intNo) + 1).toString();
-            } else {
-                resultDec = cek1;
-            }
-            return intNo + "." + decNo;
-        }
-    }
-}
-
-/*-------------------------
 export to csv 
 -------------------------*/
 export const jsonToCsv= async(jsonData, name) => {

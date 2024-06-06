@@ -2,9 +2,9 @@
 require_once "class.php";
 
 $master = new QueryInit('dbvjs_online.master_alat');
-$point = new QueryInit('dbvjs_online.master_point');
-$vjs_detail = new QueryInit('dbvjs_online.vjs_d');
+$point = new QueryInit('dbvjs_online.new_master_point');
 $vjs_month = new QueryInit('dbvjs_online.vjs_h');
+$vjs_detail = new QueryInit('dbvjs_online.new_vjs_d');
 
 
 $codeList = array(

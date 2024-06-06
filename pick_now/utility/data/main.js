@@ -1,16 +1,15 @@
-import {numberToStr} from '../index.js';
-
 export const mainDataProcess = (src)=> {
     const tableData =[];
     src.forEach(dt=> {
         let qtyNasehat = 0;
         if(dt.valAcc < 0 ) {
-            console.log('data asli:', dt.valAcc);
-            qtyNasehat = numberToStr(dt.valAcc,0,2);
-            console.log({qtyNasehat});
+            qtyNasehat = dt.valAcc;
         }
         const fltr = dt.id + '--' +
         dt.item + '--' +
+        dt._desc + '--' +
+        dt.item_id + '--' +
+        dt._desc2 + '--' +
         dt.dept + '--' +
         dt.remark + '--' +
         dt._date + '--' +
@@ -24,11 +23,14 @@ export const mainDataProcess = (src)=> {
         dt.qty_OH + '--' +
         dt.wo_rmks + '--' +
         dt.lotOH + '--' +
+        dt.id_new + '--' +
         dt.pic;
         const data = {
             id: dt.id,
             komponen: dt.item, 
             _desc: dt._desc,
+            item_id: dt.item_id, 
+            _desc2: dt._desc2,
             depmnt: dt.dept,
             keterangan: dt.remark,
             dt_need: dt._date,
@@ -36,13 +38,14 @@ export const mainDataProcess = (src)=> {
             due_date: dt.due_dt, 
             lokasi: dt.loc__line, 
             lot__id: dt.lot__id, 
-            qty: numberToStr(dt.qty,0,2),
-            nasehat: numberToStr(qtyNasehat,0,2), 
+            qty: dt.qty.toFixed(2).toString(),
+            nasehat: qtyNasehat.toFixed(2).toString(),
             pick_now: dt.pick, 
-            qty_OH_all: numberToStr(dt.qty_OH,0,2), 
+            qty_OH_all: dt.qty_OH.toFixed(2).toString(),
             remarks: dt.wo_rmks, 
             all_lot: dt.lotOH, 
             pic: dt.pic,
+            id_new: dt.id_new,
             filter: fltr
         }
         tableData.push(data);

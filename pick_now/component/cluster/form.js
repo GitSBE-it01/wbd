@@ -2,6 +2,7 @@ export const form = (target, ID, text) => {
     const trgt = document.querySelector(target);
     const div = document.createElement('div');
     div.setAttribute('class','px-2 py-3 gap-10 flex flex-row w-full');
+    div.setAttribute('data-form',`form__${ID}`);
     const card1 = document.createElement('div');
     card1.setAttribute('class','w-[25%]');
     const label = document.createElement('label');

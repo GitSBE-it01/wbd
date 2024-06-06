@@ -36,7 +36,7 @@
         inputTable,
         inputEmptyRow
     } from './component/index.js';
-    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,
+    import {currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,
         ld, pt_mstr
     } from './utility/index.js';
     import {navArr} from './general.js';
@@ -52,7 +52,6 @@
     main('fixed flex flex-row top-[10vh] right-0 bg-slate-300 w-full h-[90vh]');
         const invDetail = await ld.dbProcess('get','');
         const item = await pt_mstr.dbProcess('get','');
-        console.log({invDetail, item});
         invDetail.forEach(dt=>{
             const addData = item.find(obj1=> obj1['pt_part'].toLowerCase === dt['ld_part'].toLowerCase);
             dt['desc'] = addData ? addData.pt_desc1 + " " + addData.pt_desc1 : "";

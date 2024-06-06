@@ -47,9 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $response = get_cache($_SERVER['HTTP_PARAM']);
     } else {
         if(isset($_SESSION['username'])) {
-            $response = "success ";
+            $data = array(
+                'name'=>$_SESSION['absname'],
+                'dept'=>$_SESSION['divisi'],
+                'absen'=>$_SESSION['absen'],
+                'jabatan'=>$_SESSION['jabatan'],
+            );
+            $response = $data;
         } else {
-            $response = "failed ";
+            $response = 'failed';
         }
     }
     header("Cache-Control: public");

@@ -21,7 +21,7 @@
         loading, 
     } from './component/index.js';
     import {
-        jsonToCsv,jsonToExcel, getCustomDate,currentDate,
+        getCustomDate,currentDate,
         wobb, wo, ld, loc, dept, pickNow, pt_mstr,pic_part,
         convertDateFormat
     } from './utility/index.js';
@@ -213,6 +213,7 @@
             dept: dt.dept,
             qty: parseFloat(dt.wod_qty_req),
             lot__id: dt.wod_lot,
+            item_id: dt.item,
             date: cekDate,
             current: currentDate(),
         }
@@ -235,6 +236,7 @@
                 dept: dt.dept,
                 qty: dt.qty_OH,
                 lot__id: dt.lot,
+                item_id: '-',
                 date: '2000-01-01',
                 current: currentDate(),
                 detail: dt.detail
@@ -274,7 +276,7 @@
         dt.code =  codeCek;
         dt.valAcc = tempVal;
         dt.pick = action;
-        if(cekIDnewR.includes(dt.lot__id)) {
+        if(!cekIDnewR.includes(dt.lot__id)) {
             action = 'baru';
         } else { action = '';}
         dt.id_new = action;
@@ -346,12 +348,14 @@
         const OH = oh_all.filter(item=>item.item === dt.item);
         const wo = woR.filter(item => item.wo_lot === dt.lot__id);
         const it = item_mstr.filter( item => item.pt_part === dt.item);
+        const it2 = item_mstr.filter( item => item.pt_part === dt.item_id);
         const data = {
             ...dt,
             rel_date: wo && wo[0] && wo[0]['wo_rel_datex'] ? wo[0]['wo_rel_datex'] : '',
             due_date: wo && wo[0] && wo[0]['wo_due_datex']  ? wo[0]['wo_due_datex'] :'',
             rmks: wo && wo[0] && wo[0]['wo_rmks']  ? wo[0]['wo_rmks'] :'',
             desc: it && it[0] && it[0]['pt_desc1']? it[0]['pt_desc1'] : '',
+            desc2: it2 && it2[0] && it2[0]['pt_desc1']? it2[0]['pt_desc1'] : '',
             qtyOnHand: OH && OH[0] && OH[0]['qty_OH'] ? OH[0]['qty_OH'] : 0,
             all_lot: OH && OH[0] && OH[0]['lot'] ? OH[0]['lot'] : "-",
             pic: picCek ? picCek : "",
@@ -375,6 +379,8 @@
             data_date: currentDate(),
             item: finalResult[i]['item'],
             _desc: finalResult[i]['desc'],
+            item_id: finalResult[i]['item_id'],
+            _desc2: finalResult[i]['desc2'],
             remark: finalResult[i]['remark'],
             lot__id: finalResult[i]['lot__id'],
             loc__line: finalResult[i]['loc__line'],
@@ -462,33 +468,22 @@
         dataProcess.forEach(dt => {
             if(dt.depmnt === dpt) {dataTbl.push(dt)}
             if(dt.depmnt === 'WH' && itemReff[dpt].includes(dt.komponen)) {
-                console.log('testing');
                 dataTbl.push(dt)}
         });
         const cached = cache(dpt, dataTbl);
     })
 
     
-/*
-woR = woR
-item = item_mstr
-mainData = inputArr
-inventory = inpu
-
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(gabCek);
-    const worksheet1 = XLSX.utils.json_to_sheet(oh_all);
-    const worksheet2 = XLSX.utils.json_to_sheet(result_pick);
-    const worksheet3 = XLSX.utils.json_to_sheet(typePick);
-    const worksheet4 = XLSX.utils.json_to_sheet(ls_pick);
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'gabCek');
-    XLSX.utils.book_append_sheet(workbook, worksheet1, 'oh_all');
-    XLSX.utils.book_append_sheet(workbook, worksheet2, 'result_pick');
-    XLSX.utils.book_append_sheet(workbook, worksheet3, 'typePick');
-    XLSX.utils.book_append_sheet(workbook, worksheet4, 'ls_pick');
+    const worksheet = XLSX.utils.json_to_sheet(oh);
+    const worksheet1 = XLSX.utils.json_to_sheet(cekLoc);
+    const worksheet2 = XLSX.utils.json_to_sheet(oh_all);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'oh');
+    XLSX.utils.book_append_sheet(workbook, worksheet1, 'cekLoc');
+    XLSX.utils.book_append_sheet(workbook, worksheet2, 'oh_all');
     XLSX.writeFile(workbook, 'data.xlsx')
     
-*/
+
 
 
 </script>

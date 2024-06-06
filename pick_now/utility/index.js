@@ -1,5 +1,4 @@
 import { 
-    numberToStr, 
     currentDate,
     curDate,
     jsonToCsv,
@@ -12,7 +11,6 @@ import {
 } from "./processing/process.js";
 
 export {
-    numberToStr, 
     currentDate,
     curDate,
     jsonToCsv,
@@ -30,8 +28,8 @@ export {mainDataProcess}
 import {delete_cache,cache,get_cache} from './processing/cache.js';
 export {delete_cache,cache,get_cache}
 
-import {showDelBtn, del_process} from './processing/del_process.js';
-export {showDelBtn, del_process}
+import {showDelBtn, del_process, del_form_process} from './processing/del_process.js';
+export {showDelBtn, del_process, del_form_process}
 
 import {dl_process} from './processing/dl_excel.js';
 export {dl_process}

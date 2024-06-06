@@ -1,24 +1,33 @@
-export const dtlist = (ID, dataArr, keyPick) => {
+export const dtlist = (ID,separator, dataArr, ...keyPick) => {
     const target = document.querySelector('body');
     const dtlist = document.createElement('datalist');
     dtlist.id = ID;
     dataArr.forEach(dt=>{
         const key = Object.keys(dt);
         let defaultVal = '';
+        let valu = '';
         if(key.length>0) {
             key.forEach(dt2=>{
-                defaultVal += '-' + dt[dt2] + '-';
+                let cek = dt[dt2].toString().trim();
+                defaultVal +=  cek + separator.repeat(2);
             })
+            valu = defaultVal.replace(new RegExp(separator + "+$"), "");
         } else {
-            defaultVal = dt;
+            valu = dt;
         }
         const option = document.createElement('option');
         if(!keyPick || keyPick === '') {
-            option.value = defaultVal;
-            option.textContent = defaultVal;
+            option.value = valu;
+            option.textContent = valu;
         } else {
-            option.value = dt[keyPick];
-            option.textContent = dt[keyPick];
+            let val = ''
+            keyPick.forEach(dt2=>{
+                let cek = dt[dt2].toString().trim();
+                val += cek + separator.repeat(2);
+            })
+            val = val.replace(new RegExp(separator + "+$"), "");
+            option.value = val;
+            option.textContent = val;
         }
         dtlist.appendChild(option);
     })

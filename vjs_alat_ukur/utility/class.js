@@ -20,7 +20,6 @@ export class Data {
 
     async dbProcess (action, data) {
         try {
-            console.log(data);
             const response = await fetch(this.url, {
                 method: 'POST', 
                 headers: {

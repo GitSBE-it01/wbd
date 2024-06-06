@@ -36,7 +36,7 @@
         inputTable,
         inputEmptyRow
     } from './component/index.js';
-    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,insertUpdateProcess, showDelBtn, del_process,
+    import {currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,insertUpdateProcess, showDelBtn, del_process,
         db_pic, pic_part
     } from './utility/index.js';
     import {navArr} from './general.js';
@@ -47,9 +47,9 @@
     // header
     header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
         const pic_list = await db_pic.dbProcess('get','');
-        await dtlist('pic_list', pic_list, 'optr');
+        await dtlist('pic_list', '_',pic_list, 'optr');
         const part = await pic_part.dbProcess('get','');
-        await dtlist('filter', part);
+        await dtlist('filter','_', part);
         button('header','sbmt_change', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
         button('header','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
         button('header','del_dt', 'delete', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');

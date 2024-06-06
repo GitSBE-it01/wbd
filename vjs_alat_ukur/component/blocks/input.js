@@ -1,23 +1,33 @@
-export const textInput = (target, ID, text, data, style) =>{
-    const trgt = document.querySelector(target);
+export const textInput = (array) =>{
+    const trgt = document.querySelector(array.target);
     const input = document.createElement('input');
     input.type = 'text';
-    if(text && text !== '') {
-        input.placeholder = text;
+    input.autocomplete = 'off';
+    //placeholder
+    if(array.text && array.text !== '') {
+        input.placeholder = array.text;
     } else {
         input.placeholder = 'input';
     }
-    if(style && style !=='') {
-        input.setAttribute('class', style);
+    //style
+    if(array.style && array.style !=='') {
+        input.setAttribute('class', array.style);
     } else {
         input.setAttribute('class', 'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300')
     }
-    if(data && data !== '') {
-        input.value = data;
+    //value
+    if(array.data && array.data !== '') {
+        input.value = array.data;
     } 
-    input.id = 'input__' + ID;
+    //list
+    if(array.dtlist && array.dtlist !== '') {
+        input.setAttribute('list',array.dtlist);
+    } 
+    //disable
+    if(array[i].disable !==undefined) {el.disabled = true}
+    input.setAttribute('data-input',`input__${array.ID}`);
     trgt.appendChild(input);
-    return
+    return;
 }
 
 export const hiddenInput = (target, ID, data) =>{
@@ -29,3 +39,4 @@ export const hiddenInput = (target, ID, data) =>{
     trgt.appendChild(input);
     return;
 }
+

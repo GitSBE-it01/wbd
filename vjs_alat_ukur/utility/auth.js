@@ -1,4 +1,5 @@
 const auth = async() =>{
+    sessionStorage.clear();
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/${check[4]}/backend/api.php`;
     let ori =`http://${check[2]}`;
@@ -9,12 +10,14 @@ const auth = async() =>{
                 'Ori': ori
             }
         })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data =>{
-        if(data.includes('failed')) {
+        if(typeof data === 'string' && data.includes('failed')) {
             const check = window.location.href.split("/");
             const newURL = 'http://' + check[2] + '/sbe/index.php';
             window.location.href = newURL;
+        } else {
+            sessionStorage.setItem('userData', JSON.stringify(data));
         }
     })
     .catch(error=>{

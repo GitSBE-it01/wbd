@@ -10,6 +10,7 @@ import {header,
         section,
         aside,
         div} from './blocks/structure.js';
+import {text} from './blocks/text.js';
 import {form} from './cluster/form.js';
 import {navigation} from './cluster/navigation.js';
 import {searchbar} from './cluster/search.js';
@@ -32,6 +33,7 @@ export {
         section,
         aside,
         div,
+        text,
         form,
         navigation,
         searchbar,

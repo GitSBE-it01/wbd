@@ -37,7 +37,7 @@
         inputEmptyRow
     } from './component/index.js';
     import {dl_process, searchProcess,
-        jsonToCsv, currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
+        currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
         pickNow, // class
     } from './utility/index.js';
     import {navArr} from './general.js';
@@ -71,6 +71,8 @@
     const array = [
         {header:'komponen', field: 'komponen'},
         {header:'description', field: '_desc'},
+        {header:'item ID', field: 'item_id'},
+        {header:'description2', field: '_desc2'},
         {header:'departement', field: 'depmnt'},
         {header:'keterangan', field: 'keterangan'},
         {header:'date', field: 'dt_need'},
@@ -83,6 +85,7 @@
         {header:'pick now', field: 'pick_now'},
         {header:'qty OH WH', field: 'qty_OH_all'},
         {header:'remarks', field: 'remarks'},
+        {header:'ID baru', field: 'id_new'},
         {header:'all lot', field: 'all_lot'},
         {header:'PIC WH', field: 'pic'},
     ];

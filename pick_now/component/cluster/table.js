@@ -35,9 +35,9 @@ const tableDataDiv = async(dt, array) =>{
         filter += dt[`${array[i].field}`] + "--";
         td.setAttribute('data-field', array[i].field);
         if(i === 0) {
-            td.setAttribute('class','bg-slate-400 border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10')
+            td.setAttribute('class','bg-slate-400 whitespace-pre-line border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10')
         } else {
-            td.setAttribute('class','bg-slate-300 border-2 text-sm border-black p-2')
+            td.setAttribute('class','bg-slate-300 whitespace-pre-line border-2 text-sm border-black p-2')
         }
         if(array[i].pk !== undefined) {
             data_tr.setAttribute('data-id',dt[`${array[i].field}`])
@@ -90,10 +90,10 @@ const tableDataInput = async(dt, array) =>{
         // style utk td dan element dengan ketentuan yg paling atas atau paling kiri beda dengan yang lain
         if(i === 0) {
             td.setAttribute('class','bg-slate-400 border-2 text-sm border-black sticky left-0 z-10 font-semibold')
-            el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
+            el.setAttribute('class', 'px-4 whitespace-pre-line w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
         } else {
             td.setAttribute('class','bg-slate-300 border-2 text-sm border-black')
-            el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent');
+            el.setAttribute('class', 'px-4 whitespace-pre-line w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent');
         }
         idBtn = dt[`${array[i].pk}`];
         if(array[i].pk !== undefined) {
@@ -144,10 +144,10 @@ export const inputEmptyRow = async(target, counter, array) =>{
         td.appendChild(el);
         if(i === 0) {
             td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200 sticky left-0 z-10 font-semibold')
-            el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
+            el.setAttribute('class', 'px-4 whitespace-pre-line w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
         } else {
             td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200')
-            el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
+            el.setAttribute('class', 'px-4 whitespace-pre-line w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
         }
         if(array[i].pk !== undefined) {
             data_tr.setAttribute('data-id',`new-${counter}`)

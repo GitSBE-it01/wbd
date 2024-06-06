@@ -18,6 +18,7 @@
     import {
         button,
         addButton,
+        minusButton,
         dtlist,
         textInput,
         hiddenInput,
@@ -36,7 +37,7 @@
         inputTable,
         inputEmptyRow
     } from './component/index.js';
-    import {jsonToCsv, currentDate, activeLink, get_cache, curDate, 
+    import {currentDate, activeLink, get_cache, curDate, insertUpdateProcess, showDelBtn, del_process, del_form_process,
         db_pic
     } from './utility/index.js';
     import {navArr} from './general.js';
@@ -65,8 +66,9 @@
         const mainDiv = document.querySelector('main');
         mainDiv.appendChild(title);
         await div('buttonDiv', 'main', 'w-full pl-10 bg-slate-600 flex flex-row py-2 gap-6');
-        button('#buttonDiv','dt_edit', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        button('#buttonDiv','sbmt_change', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
         button('#buttonDiv','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        button('#buttonDiv','del_dt', 'delete', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
 
         await div('formDiv', 'main', 'w-full h-full pl-10 bg-slate-300 scrollable py-4')
         const pic = await db_pic.dbProcess('get','');
@@ -75,14 +77,15 @@
         })
         pic.forEach(dt=>{
             form('#formDiv',dt.optr, dt.optr);
-
+            const fDiv = document.querySelector(`[data-form ="form__${dt.optr}"]`);
+            fDiv.appendChild(minusButton(dt.optr, 'hidden w-4 h-4 mt-1 fixed right-6 z-20'))
         })
         const mainPick = document.querySelector('body');
         mainPick.removeChild(document.querySelector('.loading'));    
 
     // event listener
     // change event listener
-    const tableDiv = document.querySelector('table');
+    const tableDiv = document.querySelector('#formDiv');
     tableDiv.addEventListener('change', async function(event) {
         if(event.target.tagName.toLowerCase() === "input") {
             const target = event.target;
@@ -90,74 +93,38 @@
             let val = closestTr.getAttribute('data-id');
             val += '--change';
             closestTr.setAttribute('data-id', val);
-            const btn = document.querySelector('#btn__dt_edit');
+            const btn = document.querySelector('#btn__sbmt_change');
             btn.classList.toggle('font-bold');
             btn.classList.toggle('bg-red-500');
             btn.classList.toggle('border-teal-200');
         }
     })
     let counter = 0;
+    let deleteData = [];
     //click event
     document.addEventListener('click', async function(event) {
-        if(event.target.id.includes('search_btn')) {
-            const inpValue = document.querySelector('#search_input__default').value;
-            const target = document.querySelector(`table`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            allRow.forEach(dt=>{
-                const valueCek = dt.getAttribute('data-filter');
-                dt.classList.toggle('hidden',!valueCek.toLowerCase().includes(inpValue.toLowerCase()))
-            })
-            return;
-        }
-        if(event.target.id.includes('dl_btn')) {
-            const target = document.querySelector(`table`);
-            const allRow = target.querySelectorAll('[data-filter]');
-            let file = [];
-            allRow.forEach(dt=>{
-                if (!dt.classList.contains('hidden')) {
-                    const td = dt.querySelectorAll('td');
-                    const data = {};
-                    for (let i=0; i<td.length; i++) {
-                        data[`${array[i].header}`] = td[i].textContent;
-                    }
-                    file.push(data);
-                }
-            })
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.json_to_sheet(file);
-            XLSX.utils.book_append_sheet(workbook, worksheet, 'pick now');
-            XLSX.writeFile(workbook, 'pick_now.xlsx');
-            return;
-        }
-
-        if(event.target.id === ('btn__dt_edit')) {
-            const btn = event.target;
-            const target = document.querySelector(`table`);
-            const allRow = target.querySelectorAll('[data-id *="--change"]');
-            let inputData = []
-            allRow.forEach(dt=>{
-                const inp = dt.querySelectorAll('[data-field]');
-                let data = {};
-                inp.forEach(dt2=>{
-                    const key = dt2.getAttribute('data-field');
-                    data[key] = dt2.value;
-                })
-            })
-            if (inputData.length>0) {
-                const result = await pic_part.dbProcess('insert',inputData);
-                if(!result.includes('fail')) {
-                    alert(inputData.length +' data successfully inserted');
-                    location.reload();
-                } else {
-                    alert('data fail to insert');
-                }
+        if(event.target.id === ('btn__sbmt_change')) {
+            const result = await insertUpdateProcess('table', db_pic);
+            if(result['result'].includes('fail')) {
+                alert (result['message']);
+            } else {
+                alert(result['message']);
+                location.reload();
             }
             return;
         }
-
         if(event.target.id === ('btn__add_new')) {
-            await inputEmptyRow('table',counter, tableArray);
+            await inputEmptyRow('#formDiv',counter, tableArray);
             counter++;
+            return;
+        }
+        if(event.target.id.includes('del_dt')) {
+            await showDelBtn(event,'#formDiv', deleteData, db_pic);
+            return;
+        }
+        if(event.target.getAttribute('data-delbtn')) {
+            await del_form_process(event,'#btn__del_dt','optr', deleteData);
+            console.log(deleteData);
             return;
         }
     })
@@ -165,7 +132,7 @@
     // keydown event listener
     document.addEventListener('keydown', function(event) {
         if (event.key === "Enter") {
-            const submit_btn = document.querySelector('#search_btn__default');
+            const submit_btn = document.querySelector('#btn__sbmt_change');
             submit_btn.click();
         }
     })

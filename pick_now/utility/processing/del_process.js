@@ -14,7 +14,6 @@ export const showDelBtn = async(event, tableId, data, db_to_process) =>{
             })
             return;
         } else {
-            console.log('prepare delete data')
             const message = {message:'', result:''};
             if (data.length>0) {
                 const result = await db_to_process.dbProcess('delete',data);
@@ -74,6 +73,37 @@ export const del_process = async(event, masterBtn, array, result) =>{
             target.classList.toggle('minus_red');
             for(let i=0; i<result.length; i++) {
                 if(result[i][`${key}`] && result[i][`${key}`] === val) {
+                    result.splice(i,1);
+                    del_btn.classList.toggle('bg-red-500', result.length>0);
+                    return result;
+                }
+            }
+        }
+    } catch(error){
+        console.error('error: ', error);
+        return;
+    }
+}
+
+export const del_form_process = async(event, masterBtn, key, result) =>{
+    try{
+        const target = event.target;
+        const id = target.getAttribute('data-delBtn');
+        const idVal = id.split('__');
+        const del_btn = document.querySelector(masterBtn);
+        if(target.classList.contains('minus')) {
+            const data = {};
+            data[`${key}`] = idVal[1];
+            result.push(data);
+            target.classList.toggle('minus');
+            target.classList.toggle('minus_red');
+            del_btn.classList.toggle('bg-red-500', result.length>0);
+            return result;
+        } else {
+            target.classList.toggle('minus');
+            target.classList.toggle('minus_red');
+            for(let i=0; i<result.length; i++) {
+                if(result[i][`${key}`] && result[i][`${key}`] === idVal[1]) {
                     result.splice(i,1);
                     del_btn.classList.toggle('bg-red-500', result.length>0);
                     return result;
