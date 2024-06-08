@@ -45,5 +45,5 @@ export {searchProcess}
 import {Data} from './class.js';
 export const master = new Data('master');
 export const point = new Data('point');
-export const vjs_detail = new Data('vjs_detail');
-export const vjs_month = new Data('vjs_month');
+export const reff = new Data('reff');
+export const vjs_log = new Data('vjs_log');

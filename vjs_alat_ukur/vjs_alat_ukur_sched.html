@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="./component/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="../NEW-LOGO-SBE.png" type="image/ico" />
+    <title>scheduler vjs alat ukur</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 px-8 pt-4">
+<div id='root' class='container'>
+    <div class='loading'></div>
+</div>
+<script type='module'>
+    // all Import module
+    import {
+        button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        text,
+        form,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable,
+        inputEmptyRow,
+        customTable
+    } from './component/index.js';
+
+    import {
+        //proses
+        delete_cache,cache,get_cache,
+        showDelBtn, del_process,
+        dl_process,
+        insertUpdateProcess,
+        searchProcess,
+        numberToStr, 
+        currentDate,
+        curDate,
+        jsonToCsv,
+        jsonToExcel,
+        convertDateFormat,
+        getCustomDate,
+        activeLink,
+        activeLink2,
+        removeSpaces,
+        //class
+        master,
+        point,
+        vjs_detail,
+        vjs_month, 
+    } from './utility/index.js';
+    import {navArr} from './general.js';
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth(); 
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthString = monthNames[month];
+    const period = `${year}-${monthString}`;
+    const result1 = await 
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>

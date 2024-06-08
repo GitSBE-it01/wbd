@@ -1,0 +1,16 @@
+ALTER TABLE new_master_point
+ADD CONSTRAINT fk_alat FOREIGN KEY (alat) REFERENCES new_master_alat (nama_alat) ON DELETE SET NULL ON UPDATE cascade;
+
+('Multimeter RDC'),
+('Digital Caliper'),
+('Digital Thickness Gauge'),
+('Digital Three Point'),
+('Digital Micrometer'),
+('Digital Thermometer'),
+('Digital Multimeter'),
+('Digital Timbangan'),
+('Vernier Caliper'),
+('Vernier Depth Gauge'),
+('Vernier Height gauge '),
+('Vernier Micrometer'),
+('Vernier Three point'),

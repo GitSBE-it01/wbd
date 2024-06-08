@@ -24,7 +24,7 @@ export const textInput = (array) =>{
         input.setAttribute('list',array.dtlist);
     } 
     //disable
-    if(array[i].disable !==undefined) {el.disabled = true}
+    if(array.disable !==undefined) {input.disabled = true}
     input.setAttribute('data-input',`input__${array.ID}`);
     trgt.appendChild(input);
     return;

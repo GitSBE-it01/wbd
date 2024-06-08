@@ -1,5 +1,10 @@
 import { minusButton } from "../index.js";
 
+/*
+==============================================================================================
+table header
+==============================================================================================
+*/
 const tableHeader = async(array) =>{
     try {
         const header_tr = document.createElement('tr');
@@ -26,6 +31,11 @@ const tableHeader = async(array) =>{
     }
 }
 
+/*
+==============================================================================================
+text table
+==============================================================================================
+*/
 const tableDataDiv = async(dt, array) =>{
     const data_tr = document.createElement('tr');
     let filter ='';
@@ -75,6 +85,11 @@ export const table = async(target, tableID, tableArrayData, data) =>{
     }
 }
 
+/*
+==============================================================================================
+input table
+==============================================================================================
+*/
 const tableDataInput = async(dt, array) =>{
     try{
         const data_tr = document.createElement('tr');
@@ -144,7 +159,11 @@ export const inputTable = async(target, tableID, tableArrayData, data) =>{
     }
 }
 
-
+/*
+==============================================================================================
+empty row
+==============================================================================================
+*/
 export const inputEmptyRow = async(target, counter, array) =>{
     try{
         const trgt = document.querySelector(target);
@@ -184,5 +203,4 @@ export const inputEmptyRow = async(target, counter, array) =>{
         return;
     }
 }
-
 

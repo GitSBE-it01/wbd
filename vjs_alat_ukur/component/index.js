@@ -10,6 +10,12 @@ import {header,
         section,
         aside,
         div} from './blocks/structure.js';
+import {customTable,
+        createTr,
+        createTd,
+        td_input,
+        td_button,
+        td_select} from './blocks/table_block.js';
 import {text} from './blocks/text.js';
 import {form} from './cluster/form.js';
 import {navigation} from './cluster/navigation.js';
@@ -18,7 +24,7 @@ import {selectionRow,
         selectionCol,} from './cluster/selection.js';
 import {table,
         inputTable,
-        inputEmptyRow} from './cluster/table.js';
+        inputEmptyRow,} from './cluster/table.js';
 
 export {
         button,
@@ -33,6 +39,12 @@ export {
         section,
         aside,
         div,
+        customTable,
+        createTr,
+        createTd,
+        td_input,
+        td_button,
+        td_select,
         text,
         form,
         navigation,
@@ -41,6 +53,6 @@ export {
         selectionCol,
         table,
         inputTable,
-        inputEmptyRow
+        inputEmptyRow,
 }
 

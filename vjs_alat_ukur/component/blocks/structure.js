@@ -3,6 +3,7 @@ export const header = (style) =>{
     const hd = document.createElement('header');
     hd.setAttribute('class',style)
     target.appendChild(hd);
+    return;
 }
 
 export const main = (style) =>{
@@ -10,6 +11,7 @@ export const main = (style) =>{
     const main = document.createElement('main');
     main.setAttribute('class',style)
     target.appendChild(main);
+    return;
 }
 
 export const section = (secID, style) =>{
@@ -18,6 +20,7 @@ export const section = (secID, style) =>{
     sect.id = secID;
     sect.setAttribute('class',style)
     target.appendChild(sect);
+    return;
 }
 
 export const aside = (style) =>{
@@ -25,6 +28,7 @@ export const aside = (style) =>{
     const side = document.createElement('aside');
     side.setAttribute('class',style)
     target.appendChild(side);
+    return;
 }
 
 export const div = (secID, target, style) =>{
@@ -33,4 +37,5 @@ export const div = (secID, target, style) =>{
     div.id = secID;
     div.setAttribute('class',style)
     trgt.appendChild(div);
+    return;
 }

@@ -19,6 +19,7 @@
     import {
         button,
         addButton,
+        minusButton,
         dtlist,
         textInput,
         hiddenInput,
@@ -28,6 +29,12 @@
         section,
         aside,
         div,
+        customTable,
+        createTr,
+        createTd,
+        td_input,
+        td_button,
+        td_select,
         text,
         form,
         navigation,
@@ -36,7 +43,7 @@
         selectionCol,
         table,
         inputTable,
-        inputEmptyRow
+        inputEmptyRow,
     } from './component/index.js';
 
     import {
@@ -59,8 +66,8 @@
         //class
         master,
         point,
-        vjs_detail,
-        vjs_month, 
+        reff,
+        vjs_log, 
     } from './utility/index.js';
     import {navArr} from './general.js';
 
@@ -68,60 +75,100 @@
     navigation('VJS Alat Ukur', navArr)
 
     // header
-    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+    header('fixed flex flex-col top-[5vh] bg-slate-700 w-screen h-[18vh]');
         const alat_detail = await master.dbProcess('get','');
-        await dtlist('tool_list', '_', alat_detail, 'nama_alat', 'snid', 'description');
-        
-        text({target: 'header', text: 'Pilih Alat', ID: 'labelMain', style:'px-2 text-lg font-semibold text-white mt-3'})
-        textInput({target:'header', text: 'pilih alat', ID:'pickAlat', style:'rounded px-4 ml-4 text-lg h-[1.6rem] mt-3 w-[40vw]', dtlist: 'tool_list'});
-        button('header','add_new', 'add new', 'rounded bg-slate-100 fixed right-4 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-3 mb-2');
+        await dtlist('tool_list', '_', alat_detail, 'sn_id', 'new_subcat', '_desc', 'loc');
+        div('main_search', 'header','flex flex-row w-full');
+        text({target: `#main_search`, text: 'Pilih Alat', ID: 'labelMain', style:'pl-8 text-lg font-semibold text-white mt-3 w-[18vw]'})
+        textInput({target:`#main_search`, text: 'pilih alat', ID:'pickAlat', style:'rounded px-4 ml-4 text-lg h-[1.6rem] mt-3 w-[70vw]', dtlist: 'tool_list'});
+        const header_main = [
+            {divID: 'card1', text:'Deskripsi Alat', ID: 'desc'},
+            {divID: 'card2', text:'Kategori', ID: 'cat'},
+            {divID: 'card3', text:'No Seri', ID: 'no_seri'},
+            {divID: 'card3', text:'Lokasi', ID: 'lokasi'},
+        ]
+        header_main.forEach(dt=>{
+            div(dt.divID, 'header','flex flex-row w-full');
+            text({target: `#${dt.divID}`, text: dt.text, ID: dt.ID, style:'pl-8 w-[20vw] text-lg mt-3 text-white'})
+            textInput({target: `#${dt.divID}`, disable:'true', ID:dt.ID, data:dt.text, style:'w-[80vw] bg-transparent text-white text-xl font-bold mt-3'});
+        })
         const bodyDiv = document.querySelector('body');
         bodyDiv.removeChild(document.querySelector('.loading'));    
         
-    //aside 
-    aside('fixed flex flex-col top-[10vh] bg-slate-300 w-[15vw] h-[90vh] left-0');
-        const arraySide = [
-                {header:'Periode', field: 'period'},
-                {header:'', field: 'id_vjs_h', pk:''},
-            ];
 
     // main
-    main('fixed flex flex-row top-[10vh] bg-slate-300 w-[85vw] h-[90vh] right-0');
-        const mainDiv = document.querySelector('main');
-        let valueAlat = document.querySelector('[data-input = "input__pickAlat"]');
-        const arrayMain = [
-                {header:'Periode', field: 'period'},
-                {header:'', field: 'id_vjs_h', pk:''},
-            ];
+    main('fixed flex flex-row top-[23vh] bg-slate-300 w-full h-[77vh]');
+        let filterValue = document.querySelector('[data-input = "input__pickAlat"]');
+        let no_seri = document.querySelector('[data-input = "input__no_seri"]');
+        let cat_alat = document.querySelector('[data-input = "input__cat"]');
+        let desc_alat = document.querySelector('[data-input = "input__desc"]');
+        let location = document.querySelector('[data-input = "input__lokasi"]');
+        let detail = '';
+        let vjs_trans = [];
+        let check_point =[]; // for 
+        let period = []; // for period list
+        let vjs_date = []; // for detail date per period
+        customTable({
+                target: 'main',
+                divID: 'main_table',
+                tableID: 'value',
+                style: ''
+            },
+            {
+                th: [
+                    {text: 'point', style: 'fixed left-0 w-[10vw] bg-blue-700  h-[8vh] pt-5 border-2 border-black text-white uppercase'},
+                    {text: 'standard', style: 'fixed left-[10vw] w-[10vw] bg-blue-700 h-[8vh] pt-5 border-2 border-black text-white uppercase'},
+                    {text: 'Bulan', style: 'fixed left-[20vw] w-[80vw] bg-blue-700 h-[4vh] border-2 border-black text-white uppercase'},
+                ]
+            })
+        const tableDiv = document.querySelector('[data-table = "value"]');
+        tableDiv.appendChild(createTr('filter', 'pk'));
+        const tr = document.querySelector('[data-id = "pk"]');
+        tr.appendChild(createTd('','test','1'));
+        const td = document.querySelector()
 
-    
+        //vjs_trans.sort((a,b) => {
+        //        if (a.date !== b.date) return b.date.localeCompare(a.date);
+        //    })
+        
+        //const arrayDetail = [
+        //    {header:'cek day', field: 'day', type:'input'},
+        //    {header:'Point Check', field: 'check_point', type:'input'},
+        //    {header:'Standard', field: 'std', type:'input'},
+        //    {header:'hasil', field: 'answer', type:'input'},
+        //];
+        //customTable({target:`#main_section2`, ID:'detail'},vjs_daily,arrayDetail)
 
 
     // event listener
     // change event listener
-    let id ='';
-    let vjs_header = [];
-    document.addEventListener('change', async function(event) {
+     document.addEventListener('change', async function(event) {
         if(event.target.getAttribute('data-input') === 'input__pickAlat') {
-            const before = valueAlat;
-            valueAlat = event.target.value;
-            mainDiv.appendChild(loading('loading'));  
-            const valSplit = valueAlat.split('__');
-            vjs_header = await vjs_month.dbProcess('fetch',{no_seri: valSplit[1]});
-            vjs_header.sort((a,b) => {
-                if (a.date !== b.date) return b.date.localeCompare(a.date);
-            })
-            if(document.querySelector(`[data-table = "${before}"]`)) {
-                const target = document.querySelector(`[data-table = "${before}"]`)
-                target.classList.toggle('hidden');
+            filterValue = document.querySelector('[data-input = "input__pickAlat"]');
+            let splitValue = filterValue.value.split('__');
+            no_seri.value = splitValue[0];
+            cat_alat.value = splitValue[1];
+            desc_alat.value = splitValue[2];
+            location.value = splitValue[3];
+            vjs_trans = await vjs_log.dbProcess('fetch',{trans_date: currentDate()});
+            detail = alat_detail.filter(item=>item.sn_id === no_seri.value);
+            console.log(detail);
+            check_point = await point.dbProcess('fetch',{new_cat: cat_alat.value});
+            console.log({check_point});
+            if(vjs_trans.length === 0) {
+                const data = [{
+                    sn_id: no_seri.value,
+                    category: cat_alat.value,
+                    no_asset: '',
+                    check_point: '',
+                    standard: '',
+                    trans_date: currentDate(),
+                    period: '',
+                    result:''
+                }]
+                const result = await vjs_log.dbProcess('insert', data);
+                
             }
-            if(!document.querySelector(`[data-table = "${valueAlat}"]`)) {
-                await table('aside', valueAlat, arraySide, vjs_header);
-            } else {
-                const target = document.querySelector(`[data-table = "${valueAlat}"]`);
-                target.classList.toggle('hidden');
-            }
-            mainDiv.removeChild(document.querySelector('.loading')); 
             return;
         }
     })
@@ -129,9 +176,7 @@
     // click event listener
     document.addEventListener('click', async function(event) {
         if(event.target.getAttribute('data-filter')) {
-            const point_cek = await point.dbProcess('get','');
-            const detail = await vjs_detail.dbProcess('fetch',{id_vjs_h: id});
-            console.log({id, detail});
+
             return;
         }
     })

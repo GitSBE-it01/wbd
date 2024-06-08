@@ -345,7 +345,7 @@
     const finalResult = [];
     result_pick.forEach(dt=>{
         const picCek = pic.filter(item=>item.tipe === dt.item);
-        const OH = oh_all.filter(item=>item.item === dt.item);
+        const OH = oh_all.filter(item=>item.item === dt.item && item.dept === 'WH');
         const wo = woR.filter(item => item.wo_lot === dt.lot__id);
         const it = item_mstr.filter( item => item.pt_part === dt.item);
         const it2 = item_mstr.filter( item => item.pt_part === dt.item_id);
@@ -475,14 +475,9 @@
 
     
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(oh);
-    const worksheet1 = XLSX.utils.json_to_sheet(cekLoc);
-    const worksheet2 = XLSX.utils.json_to_sheet(oh_all);
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'oh');
-    XLSX.utils.book_append_sheet(workbook, worksheet1, 'cekLoc');
-    XLSX.utils.book_append_sheet(workbook, worksheet2, 'oh_all');
+    const worksheet = XLSX.utils.json_to_sheet(finalResult);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'finalResult');
     XLSX.writeFile(workbook, 'data.xlsx')
-    
 
 
 
