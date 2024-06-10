@@ -26,6 +26,18 @@
     cursor: pointer;
   }
 
+.open {
+    background-image: url('./symbol/open_detail.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.hide {
+    background-image: url('./symbol/hide_detail.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+  
 .plus {
     background-image: url('./symbol/plus min/add-plus-svgrepo-com.svg');
     background-size: cover;

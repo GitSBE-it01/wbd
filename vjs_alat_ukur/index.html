@@ -30,6 +30,7 @@
         aside,
         div,
         customTable,
+        createTh,
         createTr,
         createTd,
         td_input,
@@ -103,72 +104,83 @@
         let cat_alat = document.querySelector('[data-input = "input__cat"]');
         let desc_alat = document.querySelector('[data-input = "input__desc"]');
         let location = document.querySelector('[data-input = "input__lokasi"]');
-        let detail = '';
-        let vjs_trans = [];
-        let check_point =[]; // for 
-        let period = []; // for period list
-        let vjs_date = []; // for detail date per period
-        customTable({
-                target: 'main',
-                divID: 'main_table',
-                tableID: 'value',
-                style: ''
-            },
-            {
-                th: [
-                    {text: 'point', style: 'fixed left-0 w-[10vw] bg-blue-700  h-[8vh] pt-5 border-2 border-black text-white uppercase'},
-                    {text: 'standard', style: 'fixed left-[10vw] w-[10vw] bg-blue-700 h-[8vh] pt-5 border-2 border-black text-white uppercase'},
-                    {text: 'Bulan', style: 'fixed left-[20vw] w-[80vw] bg-blue-700 h-[4vh] border-2 border-black text-white uppercase'},
-                ]
-            })
-        const tableDiv = document.querySelector('[data-table = "value"]');
-        tableDiv.appendChild(createTr('filter', 'pk'));
-        const tr = document.querySelector('[data-id = "pk"]');
-        tr.appendChild(createTd('','test','1'));
-        const td = document.querySelector()
+        let cek = '';
+        let vjs_trans = []; // data transaction
+        let check_point =[]; // data point pengecekan 
 
-        //vjs_trans.sort((a,b) => {
-        //        if (a.date !== b.date) return b.date.localeCompare(a.date);
-        //    })
-        
-        //const arrayDetail = [
-        //    {header:'cek day', field: 'day', type:'input'},
-        //    {header:'Point Check', field: 'check_point', type:'input'},
-        //    {header:'Standard', field: 'std', type:'input'},
-        //    {header:'hasil', field: 'answer', type:'input'},
-        //];
-        //customTable({target:`#main_section2`, ID:'detail'},vjs_daily,arrayDetail)
 
 
     // event listener
     // change event listener
      document.addEventListener('change', async function(event) {
         if(event.target.getAttribute('data-input') === 'input__pickAlat') {
-            filterValue = document.querySelector('[data-input = "input__pickAlat"]');
-            let splitValue = filterValue.value.split('__');
+            filterValue = event.target.value;
+            let splitValue = filterValue.split('__');
+            console.log({splitValue})
             no_seri.value = splitValue[0];
             cat_alat.value = splitValue[1];
             desc_alat.value = splitValue[2];
             location.value = splitValue[3];
-            vjs_trans = await vjs_log.dbProcess('fetch',{trans_date: currentDate()});
-            detail = alat_detail.filter(item=>item.sn_id === no_seri.value);
-            console.log(detail);
-            check_point = await point.dbProcess('fetch',{new_cat: cat_alat.value});
-            console.log({check_point});
-            if(vjs_trans.length === 0) {
-                const data = [{
-                    sn_id: no_seri.value,
-                    category: cat_alat.value,
-                    no_asset: '',
-                    check_point: '',
-                    standard: '',
-                    trans_date: currentDate(),
-                    period: '',
-                    result:''
-                }]
-                const result = await vjs_log.dbProcess('insert', data);
-                
+            console.log('no seri',no_seri.value);
+            vjs_trans = await vjs_log.dbProcess('fetch',{sn_id: no_seri.value});
+            vjs_trans.sort((a,b) => {
+                if (a.check_point === 'remark') return -1; // Move remarks to the beginning
+                if (b.check_point === 'remark') return 1; // Move remarks to the beginning
+                if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+                return a.check_point.localeCompare(b.check_point);
+            })
+            console.log({vjs_trans});
+            cek = vjs_trans.find(obj=> obj.trans_date === currentDate());
+            console.log({cek});
+            if(!cek) {
+                check_point = await point.dbProcess('fetch',{new_cat: cat_alat.value});
+                console.log({check_point});
             }
+
+            customTable({target: 'main',tableID: no_seri.value});
+            createTh({
+                target:`[data-table = "${no_seri.value}"]`,
+                th: [
+                    {text: 'Date'},
+                    {text:'User'},
+                    {text:'Approved By'},
+                    {text:''},
+                ]
+            })
+            let date_check = '';
+            vjs_trans.forEach(dt=>{
+                const filter = dt.trans_date + no_seri.value + cat_alat.value;
+                if(date_check !== dt.trans_date) {
+                    date_check = dt.trans_date;
+                    createTr({target:`[data-table = "${no_seri.value}"]`,id: dt.data_group,filter: filter});
+                        createTd({target: `[data-tr = "${dt.data_group}"]`, field: 'trans_date',style:'bg-blue-300 border-2 text-lg border-black px-2 sticky top-[4vh] z-10', text:dt.trans_date });
+                        createTd({target: `[data-tr = "${dt.data_group}"]`, field:'user_input',style:'bg-blue-300 border-2 text-lg border-black px-2 sticky top-[4vh] z-10', text:dt.user_input});
+                        createTd({target: `[data-tr = "${dt.data_group}"]`, field:`approval_by`,style:'bg-blue-300 h-full border-2 text-lg border-black px-2 sticky top-[4vh] z-10 justify-right', text:dt.approval_by});
+                        createTd({target: `[data-tr = "${dt.data_group}"]`, style:'bg-blue-300 h-full border-2 text-lg border-black px-2 sticky top-[4vh] z-10 justify-right', id: `openHide__${dt.data_group}`});
+                            td_button({target: `[data-td = "openHide__${dt.data_group}"]`, style: 'open sticky top-[4vh] z-10 mt-[.3rem] w-8 h-8'})
+                    createTh({
+                        target:`[data-table = "${no_seri.value}"]`,
+                        defaultStyle:'bg-slate-400 border-2 font-semibold capitalize border-black p-2 sticky top-[9vh] z-10',
+                        ID: `${dt.data_group}__ThDetail"]`,
+                        th: [
+                            {text:'Poin Pengecekan'},
+                            {text:'Standard'},
+                            {text:'Hasil Cek'},
+                        ]
+                    })
+                } else {
+                    console.log('here');
+                    createTr({target:`[data-table = "${no_seri.value}"]`,id: `detail_${dt.data_group}__${dt.check_point}`, filter:filter,});
+                        createTd({target: `[data-tr = "detail_${dt.data_group}__${dt.check_point}`, field: 'check_point', text: dt.check_point });
+                        createTd({target: `[data-tr = "detail_${dt.data_group}__${dt.check_point}`, field: 'standard', text: dt.standard});
+                        createTd({target: `[data-tr = "detail_${dt.data_group}__${dt.check_point}`,id: `result__${dt.data_group}__${dt.check_point}`, style: 'bg-slate-100 border-2 text-sm border-black' });
+                            td_input({
+                                target: `[data-td="result__${dt.data_group}__${dt.check_point}"]`,
+                                field: dt.result, 
+                                
+                            })
+                    }
+                })
             return;
         }
     })
