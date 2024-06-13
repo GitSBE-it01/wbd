@@ -20,7 +20,6 @@
         button,
         addButton,
         minusButton,
-        symbolButton,
         dtlist,
         textInput,
         hiddenInput,
@@ -30,14 +29,14 @@
         section,
         aside,
         div,
-        initTable,
-        tableHeader,
+        customTable,
+        createTh,
+        createTr,
+        createTd,
         td_input,
         td_button,
         td_select,
-        td_logic,
-        td_span,
-        hidden_tr,
+        td_radio,
         text,
         custom_table,
         form,
@@ -48,17 +47,12 @@
         table,
         inputTable,
         inputEmptyRow,
-        createTable,
-        //mainTable,
-        //secondTable
     } from '../1.asset/index.js';
+    import {mainTable, secondTable} from '../1.asset/index.js';
     import {
         //proses
-        delete_cache,
-        cache,
-        get_cache,
-        showDelBtn, 
-        del_process,
+        delete_cache,cache,get_cache,
+        showDelBtn, del_process,
         dl_process,
         insertUpdateProcess,
         searchProcess,
@@ -79,7 +73,6 @@
             reff,
             vjs_log, 
     } from './general.js';
-    import {data_process} from './data/main.js';
 
     // navigation
     navigation('VJS Alat Ukur', navArr)
@@ -122,7 +115,6 @@
 
 
 
-
     // event listener
     // change event listener
      document.addEventListener('change', async function(event) {
@@ -147,50 +139,107 @@
                 tableTarget.classList.toggle('hidden');
             }
             vjs_trans = await vjs_log.dbProcess('fetch',{sn_id: no_seri.value});
-            let data_table = [];
-            await data_process(vjs_trans,splitValue, user, data_table);
-            if(document.querySelector('#mainTable') === null) {
-                div('mainTable', 'main', 'w-full h-full scrollable');
+            cek = vjs_trans.find(obj=> obj.trans_date === currentDate());
+            console.log({vjs_trans, cek});
+            if(!cek || vjs_trans.length === 0 ||cek === undefined) {
+                check_point = await point.dbProcess('fetch',{new_cat: cat_alat.value, status:1});
+                console.log(check_point);
+                check_point.forEach(dt=>{
+                    const data = {
+                        aprroval_by: "",
+                        category: dt.new_cat,
+                        check_point: dt.check_point,
+                        data_group: curDate("")+vjs_trans[0].sn_id,
+                        decision: "",
+                        no_asset:vjs_trans[0].no_asset,
+                        result: "NG",
+                        sn_id: splitValue[0],
+                        standard: dt.standard,
+                        trans_date: currentDate(),
+                        user_input: user.name + "-" + user.jabatan + "-" + user.dept + "-" + user.grade,
+                    }
+                    vjs_trans.push(data);
+                })
+                console.log(vjs_trans)
             }
-            createTable({
-                target: '#mainTable',
-                table: {id: splitValue[0], style: ''},
-                data_src: data_table,
-                hidden_tr: {field: 'data_group', colspan:4},
-                data_array: [
-                    {header:'', field: 'data_group', type:'text', pk:''},
-                    {header:'date', field: 'trans_date', type:'text'},
-                    {header:'user', field: 'user_input', type: 'input'},
-                    {header:'approve by', field: 'approval_by', type: 'text'},
-                    {header:'', type:'btnSet', id:'data_group', style:'w-6 h-6', set: 'open submit del'},
+            vjs_trans.sort((a,b) => {
+                if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+                if (a.check_point === 'remark') return -1; // Move remarks to the beginning
+                if (b.check_point === 'remark') return 1; // Move remarks to the beginning
+                return a.check_point.localeCompare(b.check_point);
+            })
+
+            if(document.querySelector('#tableDiv') === null) {
+                div('tableDiv', 'main', 'w-full h-full scrollable')
+            }
+
+            customTable({target: '#tableDiv',tableID: no_seri.value});
+            createTh({
+                target:`[data-table = "${no_seri.value}"]`,
+                th: [
+                    {text: 'Date'},
+                    {text:'User'},
+                    {text:'Approved By'},
+                    {text:''},
                 ]
             })
-            mainTag.removeChild(mainTag.querySelector('.loading'));    
+            let date_check = '';
+            let counter = 0;
+            vjs_trans.forEach(dt=>{
+                const filter = dt.trans_date + no_seri.value + cat_alat.value;
+                if(date_check !== dt.trans_date) {
+                    date_check = dt.trans_date;
+                    mainTable(dt, filter);
+                    createTh({
+                            target:`[data-table = "${dt.sn_id}"]`,
+                            trStyle : 'hidden',
+                            defaultStyle:'bg-slate-400 border-2 font-semibold capitalize border-black p-2 sticky top-[9vh] z-10',
+                            ID: `detail_${dt.data_group}__header`,
+                            th: [
+                                {text:'Poin Pengecekan'},
+                                {text:'Standard'},
+                                {text:'Hasil Cek'},
+                            ]
+                        })
+                } else {
+                    secondTable(dt,filter);
+                }
+            })
+            mainTag.removeChild(document.querySelector('.loading'));  
             return;
         }
         if(event.target.type === 'radio') {
             const trgt = event.target;
-            const value = trgt.id.split('__');
-            const td = trgt.closest('td');
+            const name = trgt.getAttribute('name');
+            const td = document.querySelector(`[data-td *="${name}"]`);
             const span = td.querySelector('span');
-            if(span.classList.contains('check')) {span.classList.remove('check')};
-            if(span.classList.contains('cross')) {span.classList.remove('cross')};
-            if (value === 'OK') {
+            if(!span.classList.contains('minus')) {
+                td.classList.toggle('bg-teal-400');
                 span.classList.toggle('check');
-            }
-            if (value === 'NG') {
+                td.classList.toggle('bg-red-300');
                 span.classList.toggle('cross');
+            } else {
+                span.classList.toggle('minus');
+                if(trgt.id.includes('opt1')) {
+                    td.classList.toggle('bg-teal-400');
+                    span.classList.toggle('check');
+                } else {
+                    td.classList.toggle('bg-red-300');
+                    span.classList.toggle('cross');
+                }
             }
             const tr = trgt.closest('tr');
             const valueGroup = tr.getAttribute('data-tr').split('_');
             tr.setAttribute('data-change', 'change');
-            const btn = document.querySelector(`[data-button = "submit__${valueGroup[0]}"]`);
+            const btn = document.querySelector(`[data-field = "submit__${valueGroup[1]}"]`);
             if (btn.disabled === true) {
                 btn.disabled = false;
+                btn.classList.toggle('hover:w-8');
+                btn.classList.toggle('hover:h-8');
             }
             return;
         }
-        /*if(event.target.type === 'text' ) {
+        if(event.target.type === 'text' ) {
             console.log('testing');
             const trgt = event.target;
             const tr = trgt.closest('tr');
@@ -212,54 +261,24 @@
             //    user_input: user.name + "-" + user.jabatan + "-" + user.dept + "-" + user.grade,
             //}
             return;
-        }*/
+        }
     })
 
     // click event listener
     document.addEventListener('click', async function(event) {
         if(event.target.tagName === 'BUTTON') {
-            if(event.target.getAttribute('data-button').includes('openHide__')) {
+            if(event.target.getAttribute('data-field').includes('openBtn__')) {
                 const btn = event.target;
+                const data_group = event.target.getAttribute('data-field');
+                const split = data_group.split("__");
                 btn.classList.toggle('open');
                 btn.classList.toggle('hide');
-                const tr = btn.closest('tr');
-                const value = btn.getAttribute('data-button');
-                const data_group = value.split('__');
-                const targetDiv = document.querySelector(`[data-id *="${data_group[1]}__detail"]`);
-                targetDiv.classList.toggle('hidden');
-                if(!targetDiv.hasChildNodes()) {
-                    targetDiv.appendChild(await loading('load'));
-                    let detailDataTable = await vjs_trans.filter(item=>item.data_group === data_group[1] && item.check_point !== 'remark');
-                    await createTable({
-                        target: `[data-id = "${data_group[1]}__detail"]`,
-                        table: {id: data_group[1], style: ''},
-                        data_src: detailDataTable,
-                        data_array: [
-                            {header:'', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'id', type:'text', pk:''},
-                            {header:'point', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'check_point', type:'text'},
-                            {header:'standard', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'standard', type:'text'},
-                            {header:'result', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'result', id:'check_point', type: 'logic'},
-                        ]
-                    })
-                    const tr = document.createElement('tr');
-                    const td1 = document.createElement('td');
-                    td1.textContent = 'Remark';
-                    td1.setAttribute('class',"bg-slate-300 border-2 text-sm border-black p-2")
-                    const td2 = document.createElement('td');
-                    td2.setAttribute('class',"bg-slate-300 border-2 text-sm border-black")
-                    td2.setAttribute('colspan',2);
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.autocomplete = 'off';
-                    input.setAttribute('class', 'w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100');
-                    console.log(`[data-table = "${data_group[1]}"]`);
-                    const targetTable = document.querySelector(`[data-table = "${data_group[1]}"]`);
-                    td2.appendChild(input);
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    targetTable.appendChild(tr);
-                }
-                const targetMain = tr.querySelectorAll(`td`);
+                const targetDiv = document.querySelectorAll(`[data-tr *="detail_${split[1]}"]`);
+                targetDiv.forEach(dt=>{
+                    dt.classList.toggle('hidden');
+                })
+                const target = curDate('') + split
+                const targetMain = document.querySelectorAll(`[data-tr ="${split[1]}"]`);
                 targetMain.forEach(dt=>{
                     const td = dt.querySelectorAll('td');
                     td.forEach(dt=>{
@@ -267,9 +286,7 @@
                         dt.classList.toggle('bg-teal-200')
                     })
                 })
-                if(targetDiv.querySelector('.load') !== null) {
-                    targetDiv.removeChild(targetDiv.querySelector('.load'));
-                }
+
                 return;
             }
         }

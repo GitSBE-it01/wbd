@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="./component/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./utility/auth.js"></script>
+    <title>PIC Per Item</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+    <div class='loading z-20'></div>
+<script type="module">
+    // import module
+    import {
+        button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        form,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable,
+        inputEmptyRow
+    } from './component/index.js';
+    import {currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,insertUpdateProcess, showDelBtn, del_process,
+        db_pic, pic_part
+    } from './utility/index.js';
+    import {navArr} from './general.js';
+
+    // navigation
+    navigation('PIC Per Item', navArr)
+
+    // header
+    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+        const pic_list = await db_pic.dbProcess('get','');
+        await dtlist('pic_list', '_',pic_list, 'optr');
+        const part = await pic_part.dbProcess('get','');
+        await dtlist('filter','_', part);
+        button('header','sbmt_change', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        button('header','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        button('header','del_dt', 'delete', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200 mt-4 mb-2');
+        await searchbar('header', 'wh pic', 'right-0', 'filter');
+
+    // main
+    main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
+        const detailPart = await pic_part.dbProcess('get','');
+        detailPart.sort((a,b) => {
+            if (a.optr !== b.optr) return a.optr.localeCompare(b.optr);
+            if (a.part_cat !== b.part_cat) return a.part_cat.localeCompare(b.part_cat);
+        })
+        const tableArray = [
+            {header:'PIC', field: 'optr', list: 'pic_list'},
+            {header:'item number', field: 'tipe'},
+            {header:'part kategori', field: 'part_cat'},
+            {header:'ID', field: 'id', pk:''},
+        ];
+        await inputTable('main', 'all', tableArray, detailPart);
+        const mainPick = document.querySelector('body');
+        mainPick.removeChild(document.querySelector('.loading'));    
+
+    // event listener
+    // change event listener
+    const tableDiv = document.querySelector('table');
+    tableDiv.addEventListener('change', async function(event) {
+        if(event.target.tagName.toLowerCase() === "input") {
+            const target = event.target;
+            const closestTr = target.closest('tr');
+            let val = closestTr.getAttribute('data-id');
+            val += '--change';
+            closestTr.setAttribute('data-id', val);
+            const btn = document.querySelector('#btn__sbmt_change');
+            btn.classList.toggle('font-bold');
+            btn.classList.toggle('bg-red-500');
+            btn.classList.toggle('border-teal-200');
+        }
+
+    })
+
+    let counter = 0;
+    let deleteData = [];
+    let inputData = [];
+    let updateData = [];
+    //click event
+    document.addEventListener('click', async function(event) {
+        if(event.target.id.includes('search_btn')) {
+            await searchProcess('#search_input__wh_pic', 'table', 'data-filter');
+            return;
+        }
+        if(event.target.id.includes('dl_btn')) {
+            await dl_process('table', 'wh pic', tableArray)
+            return;
+        }
+
+        if(event.target.id === ('btn__sbmt_change')) {
+            const result = await insertUpdateProcess('table', pic_part);
+            if(result['result'].includes('fail')) {
+                alert (result['message']);
+            } else {
+                alert(result['message']);
+                location.reload();
+            }
+            return;
+        }
+        if(event.target.id === ('btn__add_new')) {
+            await inputEmptyRow('table',counter, tableArray);
+            counter++;
+            return;
+        }
+        if(event.target.id.includes('del_dt')) {
+            await showDelBtn(event,'table', deleteData, pic_part);
+            return;
+        }
+        if(event.target.getAttribute('data-delbtn')) {
+            await del_process(event,'#btn__del_dt', tableArray, deleteData);
+            return;
+        }
+    })
+
+    // keydown event listener
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#search_btn__wh_pic');
+            submit_btn.click();
+        }
+    })
+    document.addEventListener('keyup', function(event) {
+        if(event.target.getAttribute('data-field') === 'optr') {
+            const target = event.target;
+            const td = target.closest('td');
+            const val = event.target.value;
+            console.log(val);
+            let checking = pic_list.some(obj => Object.values(obj).includes(val));
+            if(!document.getElementById('alert')) {
+                if(!checking) {
+                    const div = document.createElement('div');
+                    div.id = 'alert';
+                    div.textContent = 'PIC tidak ada';
+                    div.setAttribute('class', 'z-30 bg-yellow-200 rounded px-2 text-red-500 float-right text-sm')
+                    td.appendChild(div);
+                } 
+            } else {
+                if(checking) {
+                    td.removeChild(document.getElementById('alert'));
+                }
+            }
+        }
+    })
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>

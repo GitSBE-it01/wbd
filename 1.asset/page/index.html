@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="./component/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./utility/auth.js"></script>
+    <title>pick now</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+        <div class='loading z-20'></div>
+<script type="module">
+    // all Import module
+    import {
+        button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        form,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable,
+        inputEmptyRow
+    } from './component/index.js';
+    import {dl_process, searchProcess,
+        currentDate, mainDataProcess,activeLink, get_cache, curDate, // proses
+        pickNow, // class
+    } from './utility/index.js';
+    import {navArr} from './general.js';
+
+    // navigation
+    navigation('Pick Now', navArr)
+
+
+    // header
+    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+    const list = [
+        {val: 'P1.ASSY',text:'Prod1'},
+        {val: 'PROD1.VC',text:'VC'},
+        {val: 'WH_ASSY',text:'WHPR'},
+        {val: 'SBE3',text:'SBE3'},
+        {val: 'PROD2',text:'Prod2'},
+        {val: 'PROD3',text:'Prod3'},
+        {val: 'QA',text:'Servis'},
+        {val: 'SBE4',text:'Subcont'},
+        {val: 'WOODWORK',text:'WWA'},
+    ]
+    await selectionRow('header', 'Pilih Department', list);
+    await searchbar('header', 'pick_now','right-0','');
+
+
+    // main
+    main('fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[90vh]');
+    let deptVal = 'P1.ASSY';
+    const date = curDate('');
+    let mainData = await get_cache(`${date}__${deptVal}`);
+    const array = [
+        {header:'komponen', field: 'komponen'},
+        {header:'description', field: '_desc'},
+        {header:'item ID', field: 'item_id'},
+        {header:'description2', field: '_desc2'},
+        {header:'departement', field: 'depmnt'},
+        {header:'keterangan', field: 'keterangan'},
+        {header:'date', field: 'dt_need'},
+        {header:'rel date', field: 'release_date'},
+        {header:'due date', field: 'due_date'},
+        {header:'lokasi', field: 'lokasi'},
+        {header:'id / Lot', field: 'lot__id'},
+        {header:'qty id/lot', field: 'qty'},
+        {header:'nasehat', field: 'nasehat'},
+        {header:'pick now', field: 'pick_now'},
+        {header:'qty OH WH', field: 'qty_OH_all'},
+        {header:'remarks', field: 'remarks'},
+        {header:'ID baru', field: 'id_new'},
+        {header:'all lot', field: 'all_lot'},
+        {header:'PIC WH', field: 'pic'},
+    ];
+    await table('main', deptVal, array, mainData);
+    const mainDiv = document.querySelector('body');
+    mainDiv.removeChild(document.querySelector('.loading'));    
+
+
+    // event listener
+    // change event listener
+    document.addEventListener('change', async function(event) {
+        if(event.target.id.includes('filter_')) {
+            const value = event.target.value;
+            deptVal = value;
+            const all = document.querySelectorAll(`[data-table]`);
+            let avail = false;
+            mainDiv.appendChild(await loading('loading'));
+            all.forEach(dt=>{
+                if(!dt.classList.contains('hidden')) {
+                    dt.classList.add('hidden');
+                }
+                const cek = dt.getAttribute('data-table');
+                if(cek === value) {
+                    avail = true;
+                    dt.classList.remove('hidden');
+                }
+            })
+            if(avail === false) {
+                mainData = await get_cache(`${date}__${deptVal}`);
+                await table('main', deptVal, array, mainData);
+                mainDiv.removeChild(document.querySelector('.loading'));    
+                return;
+            } 
+            mainDiv.removeChild(document.querySelector('.loading'));    
+        }
+    })
+
+    // click event listener
+    document.addEventListener('click', async function(event) {
+        if(event.target.id.includes('search_btn')) {
+            await searchProcess('#search_input__pick_now', 'table', 'data-filter');
+            return;
+        }
+        if(event.target.id.includes('dl_btn')) {
+            await dl_process(`[data-table = "${deptVal}"]`, 'pick now', array)
+            return;
+        }
+    })
+
+    // keydown event listener
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#search_btn__pick_now');
+            submit_btn.click();
+        }
+    })
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>

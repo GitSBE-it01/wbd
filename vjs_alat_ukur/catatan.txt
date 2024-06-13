@@ -1,3 +1,5 @@
+<input type="text" autocomplete="off" placeholder="input text here" data-field="user_input" class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent">
+
 ALTER TABLE new_master_point
 ADD CONSTRAINT fk_alat FOREIGN KEY (alat) REFERENCES new_master_alat (nama_alat) ON DELETE SET NULL ON UPDATE cascade;
 
@@ -124,3 +126,14 @@ id_vjs_h = 3630 OR
 id_vjs_h = 3631 OR 
 id_vjs_h = 3632 OR 
 id_vjs_h = 3633;
+
+
+SELECT * FROM new_master_point WHERE
+new_cat = "Digital Timbangan" OR
+new_cat = "Digital Multimeter" OR
+new_cat = "Flexibility Damper" OR
+new_cat = "Gauss Meter" OR
+new_cat = "Height gauge" OR
+new_cat = "Ratchet knob" OR
+new_cat = "Stiker kalibrasi" OR
+new_cat = "Tension Meter"

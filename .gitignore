@@ -14,3 +14,4 @@ template/.env
 .env
 pick_now/cache
 */cache
+cache/

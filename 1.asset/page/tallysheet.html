@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="./component/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./utility/auth.js"></script>
+    <title>Tallysheet</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+    <div class='loading z-20'></div>
+<script type="module">
+    // import module
+    import {
+        button,
+        addButton,
+        dtlist,
+        textInput,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        form,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        table,
+        inputTable,
+        inputEmptyRow
+    } from './component/index.js';
+    import {currentDate, activeLink, get_cache, curDate, dl_process, searchProcess,
+        ld, pt_mstr
+    } from './utility/index.js';
+    import {navArr} from './general.js';
+
+    // navigation
+    navigation('Tallysheet', navArr)
+
+    // header
+    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[5vh]');
+        await searchbar('header', 'default', 'right-0', '');
+
+    // main
+    main('fixed flex flex-row top-[10vh] right-0 bg-slate-300 w-full h-[90vh]');
+        const invDetail = await ld.dbProcess('get','');
+        const item = await pt_mstr.dbProcess('get','');
+        invDetail.forEach(dt=>{
+            const addData = item.find(obj1=> obj1['pt_part'].toLowerCase === dt['ld_part'].toLowerCase);
+            dt['desc'] = addData ? addData.pt_desc1 + " " + addData.pt_desc1 : "";
+            dt['um'] = addData ? addData.pt_um : '';
+        })
+        invDetail.sort((a,b) => {
+            if (a.ld_part !== b.ld_part) return a.ld_part.localeCompare(b.ld_part);
+            if (a.ld_lot !== b.ld_lot) return a.ld_part.localeCompare(b.ld_part);
+            if (a.ld_loc !== b.ld_loc) return a.ld_part.localeCompare(b.ld_part);
+            if (a.ld_status !== b.ld_status) return a.ld_part.localeCompare(b.ld_part);
+        })
+        const tableArray = [
+            {header:'Item Number', field: 'ld_part'},
+            {header:'Deskripsi', field: 'desc'},
+            {header:'Lokasi', field: 'ld_loc'},
+            {header:'lot/serial', field: 'ld_lot'},
+            {header:'Qty OH-inv detail', field: 'ld_qty_oh'},
+            {header:'UM', field: 'um'},
+            {header:'ref', field: 'ld_ref'},
+        ];
+        await inputTable('main', 'all', tableArray, invDetail);
+        const mainPick = document.querySelector('body');
+        mainPick.removeChild(document.querySelector('.loading'));    
+
+    // event listener
+    //click event
+    document.addEventListener('click', async function(event) {
+        if(event.target.id.includes('search_btn')) {
+            await searchProcess('#search_input__default', 'table', 'data-filter');
+            return;
+        }
+        if(event.target.id.includes('dl_btn')) {
+            await dl_process('table', 'tallysheet', tableArray);
+            return;
+        }
+    })
+
+    // keydown event listener
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#search_btn__default');
+            submit_btn.click();
+        }
+    })
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>
