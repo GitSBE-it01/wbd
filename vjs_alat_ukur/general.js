@@ -7,5 +7,5 @@ export const vjs_log = new Data('vjs_log');
 export const navArr = [
     {link: 'index.html', text: 'Home'},
     {link: 'tool_data.html', text: 'Tool Data'},
-    {link: 'cek.html', text: 'Checklist'},
+    {link: 'point.html', text: 'Checklist'},
 ]

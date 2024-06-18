@@ -40,3 +40,29 @@ export const hiddenInput = (target, ID, data) =>{
     return;
 }
 
+export const textArea = (array) =>{
+    const trgt = document.querySelector(array.target);
+    const input = document.createElement('textarea');
+    input.autocomplete = 'off';
+    //placeholder
+    if(array.text && array.text !== '') {
+        input.placeholder = array.text;
+    } else {
+        input.placeholder = 'input';
+    }
+    //style
+    if(array.style && array.style !=='') {
+        input.setAttribute('class', array.style);
+    } else {
+        input.setAttribute('class', 'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300')
+    }
+    //value
+    if(array.data && array.data !== '') {
+        input.value = array.data;
+    } 
+    //disable
+    if(array.disable !==undefined) {input.disabled = true}
+    input.setAttribute('data-textarea',`textarea__${array.ID}`);
+    trgt.appendChild(input);
+    return;
+}

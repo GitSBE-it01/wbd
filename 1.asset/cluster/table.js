@@ -14,175 +14,47 @@ import {
 
 /*
 ==============================================================================================
-text table
-==============================================================================================
-*/
-const tableDataDiv = async(dt, array) =>{
-    const data_tr = document.createElement('tr');
-    let filter ='';
-    for (let i=0; i<array.length; i++) {
-        const td = document.createElement('td');
-        td.textContent = dt[`${array[i].field}`];
-        filter += dt[`${array[i].field}`] + "--";
-        td.setAttribute('data-field', array[i].field);
-        if(i === 0) {
-            td.setAttribute('class','bg-slate-400 border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10')
-        } else {
-            td.setAttribute('class','bg-slate-300 border-2 text-sm border-black p-2')
-        }
-        if(array[i].pk !== undefined) {
-            data_tr.setAttribute('data-id',dt[`${array[i].field}`])
-            if (array[i].pk === 'show') {
-                data_tr.appendChild(td);
-            }
-        } else {
-            data_tr.appendChild(td);
-        }
-    }
-    data_tr.setAttribute(`data-filter`, filter);
-    return data_tr;
-}
-
-export const table = async(target, tableID, tableArrayData, data) =>{
-    try {
-        const trgt = document.querySelector(target);
-        const div = document.createElement('div');
-        div.setAttribute('class', 'w-full h-full scrollable');
-        div.setAttribute('data-table',tableID);
-        const table = document.createElement('table');
-        table.setAttribute('class', 'w-full bg-teal-400 ');
-        //header 
-        table.appendChild(await tableHeader(tableArrayData));
-        // data 
-        for(let i =0; i<data.length; i++) {
-            table.appendChild(await tableDataDiv(data[i], tableArrayData));
-        }
-        div.appendChild(table);
-        trgt.appendChild(div);
-        return;
-    } catch(error) {
-        console.log('error', error);
-        return;
-    }
-}
-
-/*
-==============================================================================================
-input table
-==============================================================================================
-*/
-const tableDataInput = async(dt, array) =>{
-    try{
-        const data_tr = document.createElement('tr');
-        let filter ='';
-        let idBtn = '';
-        for (let i=0; i<array.length; i++) {
-            // create input
-            const el = document.createElement('input');
-            el.type = 'text';
-            el.value = dt[`${array[i].field}`] ? dt[`${array[i].field}`] : '';
-            el.autocomplete = 'off';
-            el.setAttribute('data-field', array[i].field);
-            if(array[i].list || array[i].list !=='') {el.setAttribute('list', array[i].list)}
-            if(array[i].disable !==undefined) {el.disabled = true}
-            // create td
-            const td = document.createElement('td');
-            td.appendChild(el);
-            // filter
-            filter += dt[`${array[i].field}`] + "--";
-            // style utk td dan element dengan ketentuan yg paling atas atau paling kiri beda dengan yang lain
-            if(i === 0) {
-                td.setAttribute('class','bg-slate-400 border-2 text-sm border-black sticky left-0 z-10 font-semibold')
-                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
-            } else {
-                td.setAttribute('class','bg-slate-300 border-2 text-sm border-black')
-                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent');
-            }
-            idBtn = dt[`${array[i].pk}`];
-            if(array[i].pk !== undefined) {
-                data_tr.setAttribute('data-id',dt[`${array[i].field}`])
-                if (array[i].pk === 'show') {
-                    data_tr.appendChild(td);
-                }
-            } else {
-                data_tr.appendChild(td);
-            }
-        }
-        data_tr.appendChild(minusButton(idBtn, 'hidden w-4 h-4 mt-1 fixed right-6 z-20'));
-        data_tr.setAttribute(`data-filter`, filter);
-        return data_tr;
-    }catch(error) {
-        console.log('error', error);
-        return;
-    }
-}
-
-export const inputTable = async(target, tableID, tableArrayData, data) =>{
-    try {
-        const trgt = document.querySelector(target);
-        const div = document.createElement('div');
-        div.setAttribute('class', 'w-full h-full bg-teal-100 scrollable');
-        div.setAttribute('data-table',tableID);
-        const table = document.createElement('table');
-        table.setAttribute('class', 'w-full bg-teal-400 ');
-        //header 
-        table.appendChild(await tableHeader(tableArrayData));
-        //data
-        for(let i =0; i<data.length; i++) {
-            table.appendChild(await tableDataInput(data[i], tableArrayData));
-        }
-        div.appendChild(table);
-        trgt.appendChild(div);
-        return;
-    }catch(error) {
-        console.log('error', error);
-        return;
-    }
-}
-
-/*
-==============================================================================================
 empty row
 ==============================================================================================
 */
-export const inputEmptyRow = async(target, counter, array) =>{
-    try{
-        const trgt = document.querySelector(target);
-        const data_tr = document.createElement('tr');
-        let filter ='';
-        for (let i=0; i<array.length; i++) {
-            const el = document.createElement('input');
-            el.type = 'text';
-            el.placeholder = array[i].header ? array[i].header : '';
-            el.autocomplete = 'off';
-            el.setAttribute('data-field', array[i].field);
-            if(array[i].list || array[i].list !=='') {el.setAttribute('list', array[i].list)}
-            if(array[i].disable !==undefined) {el.disabled = true}
-            const td = document.createElement('td');
-            td.appendChild(el);
-            if(i === 0) {
-                td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200 sticky left-0 z-10 font-semibold')
-                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
-            } else {
-                td.setAttribute('class','bg-slate-200 border-4 text-sm border-blue-200')
-                el.setAttribute('class', 'px-4 w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-100 focus:outline-blue-600 bg-transparent');
-            }
-            if(array[i].pk !== undefined) {
-                data_tr.setAttribute('data-id',`new-${counter}`)
-                if (array[i].pk === 'show') {
-                    data_tr.appendChild(td);
-                }
-            } else {
-                data_tr.appendChild(td);
-            }
+export const inputEmptyRow = async(target, counter, data_array) =>{
+    const data_tr = document.createElement('tr');
+    for (let i=0; i<data_array.length; i++) {
+        const td = document.createElement('td');
+        if (data_array[i].pk !== undefined) {
+            data_tr.setAttribute('data-tr', `new__${counter}`);
         }
-        data_tr.setAttribute(`data-filter`, filter);
-        trgt.insertBefore(data_tr, trgt.childNodes[1]);
-        return;
-    }catch(error) {
-        console.log('error', error);
+        if(data_array[i].pk === undefined || data_array[i].pk === 'show') {
+            if(i === 0) {
+                td.setAttribute('class','bg-slate-400 border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10')
+            } else {
+                td.setAttribute('class','bg-slate-300 border-2 text-sm border-black p-2')
+            }
+
+            if(data_array[i].type === 'text') {
+                td.setAttribute('data-field', data_array[i].field);
+                if(data_array[i].pk !== undefined) {
+                    data_tr.setAttribute('data-id', `new__${counter}`)
+            }}
+            if(data_array[i].type === 'input') {
+                td.appendChild(await td_input('new', data_array[i]));
+            }
+            if(data_array[i].type === 'logic') {
+                td.appendChild(await td_logic('new', data_array[i]));
+            }
+            if(data_array[i].type === 'btnSet') {
+                td.appendChild(await td_btnSet('new', data_array[i]));
+            }
+        data_tr.appendChild(td);
+        } 
+    }
+    data_tr.setAttribute(`data-filter`, 'new');
+    if(target !== '') {
+        const trgt = document.querySelector(target);
+        trgt.appendChild(data_tr);
         return;
     }
+    return data_tr;
 }
 
 /*
@@ -230,22 +102,23 @@ const tableData = async(dt, data_array) =>{
     let id_pk ='';
     for (let i=0; i<data_array.length; i++) {
         const td = document.createElement('td');
-
         filter += dt[`${data_array[i].field}`] + "--";
-        if(data_array[i].pk === undefined || data_array[i].pk !== '') {
+        if (data_array[i].pk !== undefined) {
+            id_pk = dt[`${data_array[i].field}`];
+            data_tr.setAttribute('data-tr', id_pk);
+        }
+        if(data_array[i].pk === undefined || data_array[i].pk === 'show') {
             if(i === 0) {
                 td.setAttribute('class','bg-slate-400 border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10')
             } else {
                 td.setAttribute('class','bg-slate-300 border-2 text-sm border-black p-2')
             }
+
             if(data_array[i].type === 'text') {
                 td.textContent = dt[`${data_array[i].field}`];
                 td.setAttribute('data-field', data_array[i].field);
                 if(data_array[i].pk !== undefined) {
                     data_tr.setAttribute('data-id',dt[`${data_array[i].field}`])
-                    if (data_array[i].pk === 'show') {
-                        data_tr.appendChild(td);
-                    }
             }}
             if(data_array[i].type === 'input') {
                 td.appendChild(await td_input(dt, data_array[i]));
@@ -257,11 +130,8 @@ const tableData = async(dt, data_array) =>{
                 td.appendChild(await td_btnSet(dt, data_array[i]));
             }
         data_tr.appendChild(td);
-        } else {
-            id_pk = dt[`${data_array[i].field}`];
-        }
+        } 
     }
-    data_tr.setAttribute('data-id', id_pk);
     data_tr.setAttribute(`data-filter`, filter);
     return data_tr;
 }
@@ -269,10 +139,70 @@ const tableData = async(dt, data_array) =>{
 const td_btnSet = async(dt, data_array) => {
     const div = document.createElement('div');
     div.setAttribute('class', 'flex flex-row w-full gap-2');
-    if(data_array.set.includes('open')) {div.appendChild(symbolButton('openHide', dt[data_array.id], `open ${data_array.style}`))}
-    if(data_array.set.includes('submit')) {div.appendChild(symbolButton('submit', dt[data_array.id], `enter ${data_array.style}`))}
-    if(data_array.set.includes('edit')) {div.appendChild(symbolButton('edit', dt[data_array.id], `edit ${data_array.style}`))}
-    if(data_array.set.includes('del')) {div.appendChild(symbolButton('delete', dt[data_array.id], `delete ${data_array.style}`))};
+    
+    //open
+    if(data_array.set.includes('open')) {
+        let disableSetup = '';
+        let styleSetup = `open ${data_array.style}`;
+        if(data_array.set.includes('open:disable')) {
+            disableSetup = true;
+            styleSetup += ' opacity-25'
+        }
+        div.appendChild(symbolButton({
+            style: styleSetup,
+            desc: 'open/hide detail',
+            ID: `openHide__${dt[data_array.id]}`,
+            disable: disableSetup
+        }))
+    }
+
+    //submit
+    if(data_array.set.includes('submit')) {
+        let disableSetup = '';
+        let styleSetup = `enter ${data_array.style}`;
+        if(data_array.set.includes('submit:disable')) {
+            disableSetup = true;
+            styleSetup += ' opacity-25'
+        }
+        div.appendChild(symbolButton({
+            style: styleSetup,
+            desc: 'submit change',
+            ID: `submit__${dt[data_array.id]}`,
+            disable: disableSetup
+        }))
+    }
+
+    //edit
+    if(data_array.set.includes('edit')) {
+        let disableSetup = '';
+        let styleSetup = `edit ${data_array.style}`;
+        if(data_array.set.includes('edit:disable')) {
+            disableSetup = true;
+            styleSetup += ' opacity-25'
+        }
+        div.appendChild(symbolButton({
+            style: styleSetup,
+            desc: 'edit data',
+            ID: `edit__${dt[data_array.id]}`,
+            disable: disableSetup
+        }))
+    }
+
+    //delete
+    if(data_array.set.includes('del')) {
+        let disableSetup = '';
+        let styleSetup = `minus ${data_array.style}`;
+        if(data_array.set.includes('del:disable')) {
+            disableSetup = true;
+            styleSetup += ' opacity-25'
+        }
+        div.appendChild(symbolButton({
+            style: styleSetup,
+            desc: 'delete data',
+            ID: `delete__${dt[data_array.id]}`,
+            disable: disableSetup
+    }))
+    }
     return div;
 }
 

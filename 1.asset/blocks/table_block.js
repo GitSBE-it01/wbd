@@ -12,7 +12,6 @@ export const initTable = async(array) =>{
 
 export const tableHeader = async(array) =>{
     try {
-        console.log(array);
         const header_tr = document.createElement('tr');
         for (let i=0; i<array.length; i++) {
             const th = document.createElement('th');
@@ -24,7 +23,6 @@ export const tableHeader = async(array) =>{
             }
 
             if(array[i].headerStyle !== undefined && array[i].headerStyle !== '') {
-                console.log('style here');
                  th.setAttribute('class', array[i].headerStyle);
             }
             if(array[i].pk !== undefined) {

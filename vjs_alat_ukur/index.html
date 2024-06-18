@@ -23,6 +23,7 @@
         symbolButton,
         dtlist,
         textInput,
+        textArea,
         hiddenInput,
         loading,
         header,
@@ -39,18 +40,14 @@
         td_span,
         hidden_tr,
         text,
-        custom_table,
+        customDtlist,
         form,
         navigation,
         searchbar,
         selectionRow,
         selectionCol,
-        table,
-        inputTable,
         inputEmptyRow,
         createTable,
-        //mainTable,
-        //secondTable
     } from '../1.asset/index.js';
     import {
         //proses
@@ -79,54 +76,143 @@
             reff,
             vjs_log, 
     } from './general.js';
-    import {data_process} from './data/main.js';
+    import {customTableRow, } from './custom/index.js';
+    import {data_process, insertUpdate} from './data/main.js';
 
     // navigation
     navigation('VJS Alat Ukur', navArr)
 
     // header
-    header('fixed flex flex-col top-[5vh] bg-slate-700 w-screen h-[18vh]');
+    header('fixed flex flex-row top-[5vh] bg-slate-700 w-screen h-[18vh]');
         const alat_detail = await master.dbProcess('get','');
-        await dtlist('tool_list', '_', alat_detail, 'sn_id', 'new_subcat', '_desc', 'loc');
-        div('main_search', 'header','flex flex-row w-full');
-        text({target: `#main_search`, text: 'Pilih Alat', ID: 'labelMain', style:'pl-8 text-lg font-semibold text-white mt-3 w-[18vw]'})
-        textInput({target:`#main_search`, text: 'pilih alat', ID:'pickAlat', style:'rounded px-4 ml-4 text-lg h-[1.6rem] mt-3 w-[70vw]', dtlist: 'tool_list'});
+        div('main_search', 'header','flex flex-col w-[50vw]');
+        text({target: `#main_search`, text: 'Pilih Alat', ID: 'labelMain', style:'pl-8 text-lg font-semibold text-white mt-2'})
+        div('search_div', '#main_search','w-full h-full');
+        textArea({target:`#search_div`, text: 'pilih alat', ID:'pickAlat', style:'rounded px-4 ml-4 text-lg h-[85%] mt-2 w-[90%] relative'});
+        await customDtlist({
+            target: `#search_div`,
+            ID: '',
+            src:alat_detail,
+            style: {
+                dtlist: 'w-[50%] h-[90%] ml-4 pl-4 top-[1vh] rounded scrollable absolute bg-slate-400 z-40 hidden right-8 whitespace-pre-line',
+                separator: 'w-[50%] h-[.2vh] bg-blue-200 flex items-center my-2'
+            },
+            field: ['no seri = sn_id', 'kategori alat = new_subcat', 'asset = no_asset', 'deskripsi alat = _desc']
+        })
         const header_main = [
             {divID: 'card1', text:'Deskripsi Alat', ID: 'desc'},
             {divID: 'card2', text:'Kategori', ID: 'cat'},
             {divID: 'card3', text:'No Seri', ID: 'no_seri'},
-            {divID: 'card3', text:'Lokasi', ID: 'lokasi'},
+            {divID: 'card4', text:'No Asset', ID: 'asset'},
         ]
+        div('main_desc', 'header','flex flex-col w-[50vw]');
         header_main.forEach(dt=>{
-            div(dt.divID, 'header','flex flex-row w-full');
-            text({target: `#${dt.divID}`, text: dt.text, ID: dt.ID, style:'pl-8 w-[20vw] text-lg mt-3 text-white'})
-            textInput({target: `#${dt.divID}`, disable:'true', ID:dt.ID, data:dt.text, style:'w-[80vw] bg-transparent text-white text-xl font-bold mt-3'});
+            div(dt.divID, '#main_desc','flex flex-row w-full');
+            text({target: `#${dt.divID}`, text: dt.text, ID: dt.ID, style:'pl-8 w-[40%] text-lg mt-3 text-white'})
+            textInput({target: `#${dt.divID}`, disable:'true', ID:dt.ID, data:dt.text, style:'w-[60%] bg-transparent text-white text-xl font-bold mt-3'});
         })
         const bodyDiv = document.querySelector('body');
         bodyDiv.removeChild(document.querySelector('.loading'));    
-        
 
     // main
-
     main('fixed flex flex-row top-[23vh] bg-slate-300 w-full h-[77vh]');
-        let filterValue = document.querySelector('[data-input = "input__pickAlat"]');
+        let filterValue = document.querySelector('[data-textarea = "textarea__pickAlat"]');
         let no_seri = document.querySelector('[data-input = "input__no_seri"]');
         let cat_alat = document.querySelector('[data-input = "input__cat"]');
         let desc_alat = document.querySelector('[data-input = "input__desc"]');
-        let location = document.querySelector('[data-input = "input__lokasi"]');
-        let cek = '';
-        let vjs_trans = []; // data transaction
-        let check_point =[]; // data point pengecekan 
+        let asset = document.querySelector('[data-input = "input__asset"]');
+        let splitValue = '';
+        let remark = '';
+        let vjs_trans = []; 
+        let check_point =[]; 
         const user = JSON.parse(sessionStorage.getItem("userData"));
         const mainTag = document.querySelector('main');
 
-
-
-
     // event listener
     // change event listener
-     document.addEventListener('change', async function(event) {
-        if(event.target.getAttribute('data-input') === 'input__pickAlat') {
+    document.addEventListener('change', async function(event) {
+        if(event.target.type === 'radio') {
+            const trgt = event.target;
+            const value = trgt.id.split('__');
+            const td = trgt.closest('td');
+            const span = td.querySelector('span');
+            if(span.classList.contains('check')) {span.classList.remove('check')};
+            if(span.classList.contains('cross')) {span.classList.remove('cross')};
+            if(span.classList.contains('minus')) {span.classList.remove('minus')};
+            if (value[1] === 'OK') {
+                span.setAttribute('data-value', 'OK');
+                span.classList.toggle('check');
+            }
+            if (value[1] === 'NG') {
+                span.setAttribute('data-value', 'NG');
+                span.classList.toggle('cross');
+            }
+            const table = trgt.closest('table');
+            const valueGroup = table.getAttribute('data-table');
+            const tr = trgt.closest('tr');
+            tr.setAttribute('data-change', 'change');
+            const btn = document.querySelector(`[data-button = "submit__${valueGroup}"]`);
+            if (btn.disabled === true) {
+                btn.disabled = false;
+                btn.classList.toggle('opacity-25');
+            }
+            return;
+        }
+        if(event.target.tagName === 'TEXTAREA' && !event.target.hasAttribute('data-textarea')) { //for remark
+            const trgt = event.target;
+            const tr = trgt.closest('tr');
+            tr.setAttribute('data-change', 'change');
+            const dataAll = tr.querySelectorAll('td');
+            const table = trgt.closest('table');
+            const valueGroup = table.getAttribute('data-table');
+            const btn = document.querySelector(`[data-button = "submit__${valueGroup}"]`);
+            if (btn.disabled === true) {
+                btn.disabled = false;
+                btn.classList.toggle('opacity-25');
+            }
+            return;
+        }
+
+    })
+
+    // click event listener
+    document.addEventListener('click', async function(event) {
+        if(document.querySelectorAll('[data-datalist]') !== null) {
+            const all = document.querySelectorAll('[data-datalist]');
+            all.forEach(dt=>{
+                if(dt.classList.contains('block')) {
+                    dt.classList.toggle('block');
+                    dt.classList.toggle('hidden');
+                }
+            })
+        }
+        if(event.target.getAttribute('data-textarea')==='textarea__pickAlat') {
+            const current = event.target;
+            const div = current.closest('div');
+            const datalist = div.querySelector('[data-datalist]');
+            if(datalist.classList.contains('hidden')) {
+                datalist.classList.toggle('hidden');
+                datalist.classList.toggle('block');
+            }
+            return;
+        }
+        if(event.target.hasAttribute('data-optionid')) {
+            const current = event.target;
+            filterValue.textContent = current.textContent;
+            const value = current.textContent.split(",");
+            const selected = current.getAttribute('data-optionid');
+            const dtls = current.closest('[data-datalist]');
+            const all = dtls.querySelectorAll('[data-optionid]');
+            splitValue = value;
+            all.forEach(dt=>{
+                const cek = dt.getAttribute('data-optionid');
+                if(dt.classList.contains('bg-blue-300')) {
+                    dt.classList.remove('bg-blue-300');
+                }
+                if(cek === selected) {
+                    dt.classList.add('bg-blue-300');
+                }
+            })
             if(document.querySelector('[data-table]') !== null) {
                 const allTable = document.querySelectorAll('[data-table]');
                 allTable.forEach(dt=>{
@@ -135,18 +221,21 @@
                     }
                 })
             }
+            if(event.target.value === '' || event.target.value === null ) {
+                console.log(event.target.value);
+                console.log(event.target.textContent);
+                return;
+            }
             mainTag.appendChild(await loading('loading'));
-            filterValue = event.target.value;
-            let splitValue = filterValue.split('__');
-            no_seri.value = splitValue[0];
-            cat_alat.value = splitValue[1];
-            desc_alat.value = splitValue[2];
-            location.value = splitValue[3];
+            no_seri.value = splitValue[0].split("=")[1].trim();
+            cat_alat.value = splitValue[1].split("=")[1].trim();
+            asset.value = splitValue[2].split("=")[1].trim();
+            desc_alat.value = splitValue[3].split("=")[1].trim();
             if(document.querySelector(`[data-table ="${splitValue[0]}"]`) !== null) {
                 const tableTarget = document.querySelector(`[data-table ="${splitValue[0]}"]`);
                 tableTarget.classList.toggle('hidden');
             }
-            vjs_trans = await vjs_log.dbProcess('fetch',{sn_id: no_seri.value});
+            vjs_trans = await vjs_log.dbProcess('fetch',{sn_id: splitValue[0].split("=")[1].trim()});
             let data_table = [];
             await data_process(vjs_trans,splitValue, user, data_table);
             if(document.querySelector('#mainTable') === null) {
@@ -154,69 +243,21 @@
             }
             createTable({
                 target: '#mainTable',
-                table: {id: splitValue[0], style: ''},
+                table: {id: filterValue[0], style: ''},
                 data_src: data_table,
                 hidden_tr: {field: 'data_group', colspan:4},
                 data_array: [
                     {header:'', field: 'data_group', type:'text', pk:''},
-                    {header:'date', field: 'trans_date', type:'text'},
+                    {header:'date', field: 'created_date', type:'text'},
                     {header:'user', field: 'user_input', type: 'input'},
                     {header:'approve by', field: 'approval_by', type: 'text'},
-                    {header:'', type:'btnSet', id:'data_group', style:'w-6 h-6', set: 'open submit del'},
+                    {header:'', type:'btnSet', id:'data_group', style:'w-6 h-6', set: 'open submit:disable del'},
                 ]
             })
             mainTag.removeChild(mainTag.querySelector('.loading'));    
             return;
         }
-        if(event.target.type === 'radio') {
-            const trgt = event.target;
-            const value = trgt.id.split('__');
-            const td = trgt.closest('td');
-            const span = td.querySelector('span');
-            if(span.classList.contains('check')) {span.classList.remove('check')};
-            if(span.classList.contains('cross')) {span.classList.remove('cross')};
-            if (value === 'OK') {
-                span.classList.toggle('check');
-            }
-            if (value === 'NG') {
-                span.classList.toggle('cross');
-            }
-            const tr = trgt.closest('tr');
-            const valueGroup = tr.getAttribute('data-tr').split('_');
-            tr.setAttribute('data-change', 'change');
-            const btn = document.querySelector(`[data-button = "submit__${valueGroup[0]}"]`);
-            if (btn.disabled === true) {
-                btn.disabled = false;
-            }
-            return;
-        }
-        /*if(event.target.type === 'text' ) {
-            console.log('testing');
-            const trgt = event.target;
-            const tr = trgt.closest('tr');
-            tr.setAttribute('data-change', 'change');
-            const dataAll = tr.querySelectorAll('td');
-            console.log({tr});
-            console.log({splitValue})
-            //const data = {
-            //    aprroval_by: "",
-            //    category: dt.new_cat,
-            //    check_point: dt.check_point,
-            //    data_group: curDate("")+vjs_trans[0].sn_id,
-            //    decision: "",
-            //    no_asset:vjs_trans[0].no_asset,
-            //    result: "NG",
-            //    sn_id: splitValue[0],
-            //    standard: dt.standard,
-            //    trans_date: currentDate(),
-            //    user_input: user.name + "-" + user.jabatan + "-" + user.dept + "-" + user.grade,
-            //}
-            return;
-        }*/
-    })
 
-    // click event listener
-    document.addEventListener('click', async function(event) {
         if(event.target.tagName === 'BUTTON') {
             if(event.target.getAttribute('data-button').includes('openHide__')) {
                 const btn = event.target;
@@ -225,39 +266,27 @@
                 const tr = btn.closest('tr');
                 const value = btn.getAttribute('data-button');
                 const data_group = value.split('__');
+                const currentDiv = document.querySelector(`[data-id ="${data_group[1]}"]`);
                 const targetDiv = document.querySelector(`[data-id *="${data_group[1]}__detail"]`);
                 targetDiv.classList.toggle('hidden');
                 if(!targetDiv.hasChildNodes()) {
                     targetDiv.appendChild(await loading('load'));
                     let detailDataTable = await vjs_trans.filter(item=>item.data_group === data_group[1] && item.check_point !== 'remark');
+                    remark = await vjs_trans.filter(item=>item.data_group === data_group[1] && item.check_point === 'remark');
                     await createTable({
                         target: `[data-id = "${data_group[1]}__detail"]`,
                         table: {id: data_group[1], style: ''},
                         data_src: detailDataTable,
                         data_array: [
-                            {header:'', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'id', type:'text', pk:''},
+                            {header:'', field: 'id', type:'text', pk:''},
                             {header:'point', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'check_point', type:'text'},
                             {header:'standard', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'standard', type:'text'},
+                            {header:'Last Mod', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'mod_by', type:'text'},
+                            {header:'Mod date', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'mod_date', type:'text'},
                             {header:'result', headerStyle: 'bg-teal-400 border-2 uppercase border-black p-2 sticky top-[4vh] z-10', field: 'result', id:'check_point', type: 'logic'},
                         ]
                     })
-                    const tr = document.createElement('tr');
-                    const td1 = document.createElement('td');
-                    td1.textContent = 'Remark';
-                    td1.setAttribute('class',"bg-slate-300 border-2 text-sm border-black p-2")
-                    const td2 = document.createElement('td');
-                    td2.setAttribute('class',"bg-slate-300 border-2 text-sm border-black")
-                    td2.setAttribute('colspan',2);
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.autocomplete = 'off';
-                    input.setAttribute('class', 'w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100');
-                    console.log(`[data-table = "${data_group[1]}"]`);
-                    const targetTable = document.querySelector(`[data-table = "${data_group[1]}"]`);
-                    td2.appendChild(input);
-                    tr.appendChild(td1);
-                    tr.appendChild(td2);
-                    targetTable.appendChild(tr);
+                    await customTableRow(data_group, remark);
                 }
                 const targetMain = tr.querySelectorAll(`td`);
                 targetMain.forEach(dt=>{
@@ -272,17 +301,79 @@
                 }
                 return;
             }
+
+            if(event.target.getAttribute('data-button').includes('submit__')) {
+                let update = [];
+                let insert = [];
+                await insertUpdate(event,splitValue, user, update, insert);
+                let message = '';
+                if (insert.length>0) {
+                    const result = await vjs_log.dbProcess('insert', insert);
+                    console.log('result insert', insert);
+                    if(!result.includes('fail')) {
+                        message += `${insert.length} data berhasil masuk ke database `;
+                    } else {
+                        message += 'data gagal masuk ke database ';
+                    }
+                }
+                if (update.length>0) {
+                    const result = await vjs_log.dbProcess('update', update);
+                    console.log('result update', update);
+                    if(!result.includes('fail')) {
+                        message += `${update.length} data berhasil di update`;
+                    } else {
+                        message += 'data gagal di update';
+                    }
+                }
+                alert(message);
+                if (!message.includes('gagal')) {
+                    location.reload();
+                }
+            }
         }
     })
 
+
     // keydown event listener
-    document.addEventListener('keydown', function(event) {
-        if (event.key === "Enter") {
-            const submit_btn = document.querySelector('#search_btn__pick_now');
-            submit_btn.click();
+    const areaKey = document.querySelector('[data-textarea ="textarea__pickAlat"]');
+    areaKey.addEventListener('keydown', async function(event) {
+        if(event.key === ' ') {
+            const current = event.target;
+            let filterVal = current.value;
+            filterVal = filterVal.replace(/\n$/,"");
+            const div = current.closest('div');
+            const dtlist = div.querySelector('[data-datalist]');
+            const option = dtlist.querySelectorAll('div');
+            let counter = 0;
+            let fltrVal = '';
+            option.forEach(dt=>{
+                if(dt.classList.contains('hidden')) {
+                    dt.classList.toggle('hidden');
+                }
+                if(dt.hasAttribute('data-sepID') && dt.getAttribute('data-sepid') === counter && !dt.classList.contains('hidden')) {
+                    dt.classList.toggle('hidden');
+                }
+                if(dt.hasAttribute('data-optfltr')) {
+                    fltrVal = dt.getAttribute('data-optfltr');
+                    if(!fltrVal.includes(filterVal) && !dt.classList.contains('hidden')) {
+                        dt.classList.toggle('hidden');
+                        counter = dt.getAttribute('data-optionid');
+                    }
+                    
+                }
+            })
+            if(current.querySelector('.load_up') !== null) {
+                current.removeChild(current.querySelector('.load_up'));    
+            }
+            if(current.querySelector('.load_up') !== null) {
+                    current.appendChild(loading('load_up'));
+                }
+            return;
         }
     })
+
+
 </script>
-<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+<script src="../1.asset/external_library/sheetjs/xlsx.full.min.js"></script>
 </body>
 </html>

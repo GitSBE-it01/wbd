@@ -12,7 +12,8 @@ import {delete_cache,
         cache,
         get_cache} from './processing/cache.js';
 import {showDelBtn, 
-        del_process} from './processing/del_process.js';
+        del_process,
+        del_form_process} from './processing/del_process.js';
 import {dl_process} from './processing/dl_excel.js';
 import {insertUpdateProcess} from './processing/insert_update.js';
 import {searchProcess} from './processing/search_process.js';
@@ -33,6 +34,7 @@ export {
     get_cache,
     showDelBtn,
     del_process,
+    del_form_process,
     dl_process,
     insertUpdateProcess,
     searchProcess,

@@ -85,3 +85,34 @@ export const del_process = async(event, masterBtn, array, result) =>{
         return;
     }
 }
+
+export const del_form_process = async(idTarget, event, masterBtn, key, result) =>{
+    try{
+        const target = event.target;
+        const id = target.getAttribute(idTarget);
+        const idVal = id.split('__');
+        const del_btn = document.querySelector(masterBtn);
+        if(target.classList.contains('minus')) {
+            const data = {};
+            data[`${key}`] = idVal[1];
+            result.push(data);
+            target.classList.toggle('minus');
+            target.classList.toggle('minus_red');
+            del_btn.classList.toggle('bg-red-500', result.length>0);
+            return result;
+        } else {
+            target.classList.toggle('minus');
+            target.classList.toggle('minus_red');
+            for(let i=0; i<result.length; i++) {
+                if(result[i][`${key}`] && result[i][`${key}`] === idVal[1]) {
+                    result.splice(i,1);
+                    del_btn.classList.toggle('bg-red-500', result.length>0);
+                    return result;
+                }
+            }
+        }
+    } catch(error){
+        console.error('error: ', error);
+        return;
+    }
+}

@@ -33,10 +33,29 @@ export const minusButton = (ID, style) =>{
     return minBtn;
 }
 
-export const symbolButton = (type, ID, style) =>{
+export const symbolButton = (btnArr) =>{
+    /* custom array 
+        {
+            style: '',
+            ID: '',
+            desc: '',
+            disable: '',
+        }
+    */
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.setAttribute('class', style);
-    btn.setAttribute(`data-button`, `${type}__${ID}`);
+
+    if(btnArr.desc !== undefined && btnArr.desc !== '') {
+        btn.setAttribute('title', btnArr.desc);
+    }
+    if(btnArr.disable !== undefined && btnArr.disable !== '') {
+        btn.disabled = true;
+    }
+    if(btnArr.style !== undefined && btnArr.style !== '') {
+        btn.setAttribute('class', btnArr.style);
+    }
+    if(btnArr.ID !== undefined && btnArr.ID !== '') {
+        btn.setAttribute(`data-button`, btnArr.ID);
+    }
     return btn;
 }

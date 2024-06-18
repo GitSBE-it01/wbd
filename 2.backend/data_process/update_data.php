@@ -4,8 +4,8 @@ update data
 =============================================================================*/
 function updateData($db, $query, $src) {
     $conn = connectToDatabase($db);
-    $data = $src['data'];
-    $filter = $src['filter'];
+    $data = $src[0]['data'];
+    $filter = $src[0]['filter'];
     $types = '';
     $bindParams = array();
     $wholeQuery = $query . " SET ";
@@ -40,15 +40,28 @@ function updateData($db, $query, $src) {
         die("Prepare failed: " . $conn->error);
     }
     set_time_limit(3600);
-    array_unshift($bindParams, $types);
-    call_user_func_array([$stmt, 'bind_param'], $bindParams);
-    if (!$stmt->execute()) {
-        die("Execute failed: " . $stmt->error);
-    } else {
-        echo "success ";
+
+    foreach($src as $set) {
+        $bindParams = array();
+        foreach($set['data'] as $key=>$value) {
+            ${'param' . $key} = $value;
+            $bindParams[] = &${'param' . $key};
+        }
+        foreach($set['filter'] as $key=>$value) {
+            ${'param' . $key} = $value;
+            $bindParams[] = &${'param' . $key};
+        }
+        array_unshift($bindParams, $types);
+        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        } else {
+            $result = "success ";
+        }
     }
     $stmt->close();
     $conn->close();
+    return $result;
 }
 
 ?>

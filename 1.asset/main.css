@@ -6,6 +6,10 @@
     overflow: auto;
 }
 
+.opacity-25 {
+    opacity: 0.25;
+}
+
 .capitalize {
     text-transform: capitalize;
 }
@@ -102,6 +106,15 @@
 }
 
 .load {
+    width: 6rem; 
+    height: 6rem;
+    animation: loading 1.8s linear infinite; 
+    background: url('./symbol/load_default.svg');
+    background-size: cover; 
+}
+
+.load_up {
+    z-index: 50;
     width: 6rem; 
     height: 6rem;
     animation: loading 1.8s linear infinite; 

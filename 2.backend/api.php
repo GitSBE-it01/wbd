@@ -1,7 +1,7 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "index.php";
-require_once "./app_connect/1.index.php";
+require_once "./data_access/1.index.php";
 
 session_start();
 $allowedOrigins = [

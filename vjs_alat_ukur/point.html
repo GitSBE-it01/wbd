@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="../1.asset/main.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../3.utility/auth.js"></script>
+    <link rel="icon" href="../1.asset/symbol/new_logo_sbe.png" type="image/ico" />
+    <title>Detail Poin Cek</title>
+</head>
+<body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
+    <div class='loading z-20'></div>
+<script type="module">
+    // import module
+    import {
+        button,
+        addButton,
+        minusButton,
+        symbolButton,
+        dtlist,
+        textInput,
+        textArea,
+        hiddenInput,
+        loading,
+        header,
+        main,
+        section,
+        aside,
+        div,
+        initTable,
+        tableHeader,
+        td_input,
+        td_button,
+        td_select,
+        td_logic,
+        td_span,
+        hidden_tr,
+        text,
+        customDtlist,
+        form,
+        navigation,
+        searchbar,
+        selectionRow,
+        selectionCol,
+        inputEmptyRow,
+        createTable,
+    } from '../1.asset/index.js';
+    import {
+        //proses
+        delete_cache,
+        cache,
+        get_cache,
+        showDelBtn, 
+        del_process,
+        dl_process,
+        insertUpdateProcess,
+        searchProcess,
+        numberToStr, 
+        currentDate,
+        curDate,
+        jsonToCsv,
+        jsonToExcel,
+        convertDateFormat,
+        getCustomDate,
+        activeLink,
+        activeLink2,
+        removeSpaces,
+    } from '../3.utility/index.js';
+    import {navArr,
+            master,
+            point,
+            reff,
+            vjs_log, 
+    } from './general.js';
+    import {customTableRow, } from './custom/index.js';
+    import {data_process, insertUpdate} from './data/main.js';
+    // navigation
+    navigation('Point Pengecekan', navArr)
+      
+    // sidebar
+    aside('fixed flex flex-row top-[5vh] left-0 bg-teal-700 w-[25vw] h-[95vh]');
+        const article = document.createElement('article');
+        article.innerHTML = `
+            <u><strong>Catatan penting: </strong></u></br>
+            1. Jika merubah nama PIC maka data PIC di PIC per Item juga akan berganti sesuai perubahan.</br></br>
+            2. Jika PIC di delete dan sudah terdaftar sebagai PIC item tertentu, maka item tersebut akan tetap ada di database dengan PIC kosong. 
+        `;
+        article.setAttribute('class', 'px-4 leading-loose pt-4 text-white text-justify');
+        const side = document.querySelector('aside');
+        side.appendChild(article);
+
+
+    // main
+    main('fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[95vh]');
+        const kategoriTool = await reff.dbProcess('get','');
+        await dtlist('kategoriTool', '_',kategoriTool, 'subcat');
+        const title = document.createElement('h1');
+        title.textContent = 'List Poin Cek';
+        title.setAttribute('class', 'text-4xl pl-12 leading-loose pt-2 font-bold  text-justify');
+        const mainDiv = document.querySelector('main');
+        mainDiv.appendChild(title);
+        await div('buttonDiv', 'main', 'w-full pl-10 bg-slate-600 flex flex-row py-2 gap-6');
+        button('#buttonDiv','sbmt_change', 'submit change', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        button('#buttonDiv','add_new', 'add new', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+        button('#buttonDiv','del_dt', 'delete', 'rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 hover:text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200');
+
+        await div('table_main', 'main', 'w-full h-full bg-slate-300 scrollable')
+        const srcData = await point.dbProcess('get','');
+        srcData.sort((a,b) => {
+            if (a.new_cat !== b.new_cat) return a.new_cat.localeCompare(b.new_cat);
+            if (a.check_point !== b.check_point) return a.check_point.localeCompare(b.check_point);
+        })
+
+        await createTable({
+            target: `#table_main`,
+            table: {id: 'all', style: ''},
+            data_src: srcData,
+            data_array: [
+            {header:'Jenis Alat', type: 'input', field: 'new_cat', list: 'kategoriTool'},
+            {header:'Poin Pengecekan', type: 'input', field: 'check_point'},
+            {header:'standard', type: 'input', field: 'standard'},
+            {header:'ID', type: 'input', field: 'id', pk:''},
+            ]
+        })
+        //await createTable('main', 'all', tableArray, detailPart);
+        const mainPick = document.querySelector('body');
+        mainPick.removeChild(document.querySelector('.loading'));    
+
+    // event listener
+    // change event listener
+    const tableDiv = document.querySelector('#table_main');
+    tableDiv.addEventListener('change', async function(event) {
+        if(event.target.tagName.toLowerCase() === "input") {
+            const target = event.target;
+            const closestTr = target.closest('tr');
+            let val = closestTr.getAttribute('data-id');
+            val += '--change';
+            closestTr.setAttribute('data-id', val);
+            const btn = document.querySelector('#btn__sbmt_change');
+            btn.classList.toggle('font-bold');
+            btn.classList.toggle('bg-red-500');
+            btn.classList.toggle('border-teal-200');
+        }
+    })
+    let counter = 0;
+    let deleteData = [];
+    //click event
+    document.addEventListener('click', async function(event) {
+        if(event.target.id === ('btn__sbmt_change')) {
+            const result = await insertUpdateProcess('table', db_pic);
+            if(result['result'].includes('fail')) {
+                alert (result['message']);
+            } else {
+                alert(result['message']);
+                location.reload();
+            }
+            return;
+        }
+        if(event.target.id === ('btn__add_new')) {
+            await inputEmptyRow('#formDiv',counter, tableArray);
+            counter++;
+            return;
+        }
+        if(event.target.id.includes('del_dt')) {
+            await showDelBtn(event,'#formDiv', deleteData, db_pic);
+            return;
+        }
+        if(event.target.getAttribute('data-delbtn')) {
+            await del_form_process(event,'#btn__del_dt','optr', deleteData);
+            console.log(deleteData);
+            return;
+        }
+    })
+
+    // keydown event listener
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            const submit_btn = document.querySelector('#btn__sbmt_change');
+            submit_btn.click();
+        }
+    })
+</script>
+<script src="../assets/template/library/sheetjs/xlsx.full.min.js"></script>
+</body>
+</html>

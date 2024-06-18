@@ -4,7 +4,8 @@ import {button,
         symbolButton} from './blocks/button.js';
 import {dtlist} from './blocks/datalist.js';
 import {textInput,
-        hiddenInput} from './blocks/input.js';
+        hiddenInput,
+        textArea} from './blocks/input.js';
 import {loading} from './blocks/load.js';
 import {header,
         main,
@@ -20,18 +21,15 @@ import {initTable,
         td_span,
         hidden_tr} from './blocks/table_block.js';
 import {text} from './blocks/text.js';
-import {custom_table} from './cluster/custom_table.js';
+import {customDtlist} from './cluster/datalist.js';
 import {form} from './cluster/form.js';
 import {navigation} from './cluster/navigation.js';
 import {searchbar} from './cluster/search.js';
 import {selectionRow,
         selectionCol,} from './cluster/selection.js';
-import {table,
-        inputTable,
-        inputEmptyRow,
+import {inputEmptyRow,
         createTable} from './cluster/table.js';
-//import {mainTable,
-//        secondTable} from './custom/table.js';
+
 
 export {
         button,
@@ -40,6 +38,7 @@ export {
         symbolButton,
         dtlist,
         textInput,
+        textArea,
         hiddenInput,
         loading,
         header,
@@ -56,17 +55,13 @@ export {
         td_span,
         hidden_tr,
         text,
-        custom_table,
+        customDtlist,
         form,
         navigation,
         searchbar,
         selectionRow,
         selectionCol,
-        table,
-        inputTable,
         inputEmptyRow,
         createTable,
-        //mainTable,
-        //secondTable
 }
 
