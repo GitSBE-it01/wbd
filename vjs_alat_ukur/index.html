@@ -6,8 +6,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="../1.asset/main.css" rel="stylesheet" />
+    <link href="../1.asset/output.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="../3.utility/auth.js"></script>
     <link rel="icon" href="../1.asset/symbol/new_logo_sbe.png" type="image/ico" />
     <title>VJS alat ukur</title>
@@ -90,7 +90,7 @@
         div('search_div', '#main_search','w-full h-full');
         textArea({target:`#search_div`, text: 'pilih alat', ID:'pickAlat', style:'rounded px-4 ml-4 text-lg h-[85%] mt-2 w-[90%] relative'});
         await customDtlist({
-            target: `#search_div`,
+            target: `body`,
             ID: '',
             src:alat_detail,
             style: {
@@ -187,9 +187,7 @@
             })
         }
         if(event.target.getAttribute('data-textarea')==='textarea__pickAlat') {
-            const current = event.target;
-            const div = current.closest('div');
-            const datalist = div.querySelector('[data-datalist]');
+            const datalist = document.querySelector('[data-datalist]');
             if(datalist.classList.contains('hidden')) {
                 datalist.classList.toggle('hidden');
                 datalist.classList.toggle('block');
