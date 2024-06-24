@@ -130,6 +130,7 @@
                 assyLine: data_wo.wo__chr04 ? data_wo.wo__chr04 :'-',
                 rel_dt: data_wo.wo_rel_date ? data_wo.wo_rel_date : 0,
                 due_dt: data_wo.wo_due_date ? data_wo.wo_due_date : 0,
+                wo_vend: data_wo.wo_vend ? data_wo.wo_vend :'-',
             }
             dmnd_new.push(data);
         }
@@ -214,6 +215,7 @@
             qty: parseFloat(dt.wod_qty_req),
             lot__id: dt.wod_lot,
             item_id: dt.item,
+            old_id: dt.wo_vend,
             date: cekDate,
             current: currentDate(),
         }
@@ -237,6 +239,7 @@
                 qty: dt.qty_OH,
                 lot__id: dt.lot,
                 item_id: '-',
+                old_id: '',
                 date: '2000-01-01',
                 current: currentDate(),
                 detail: dt.detail
@@ -395,7 +398,8 @@
             wo_rmks: finalResult[i]['rmks'],
             pic: finalResult[i]['picFix'] ? finalResult[i]['picFix'] : "-",
             pick: finalResult[i]['pick'],
-            id_new: finalResult[i]['id_new']
+            id_new: finalResult[i]['id_new'],
+            old_id: finalResult[i]['old_id'],
         }
         inputArr.push(data);
     }
@@ -473,12 +477,12 @@
         const cached = cache(dpt, dataTbl);
     })
 
-    
+    /*
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(finalResult);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'finalResult');
     XLSX.writeFile(workbook, 'data.xlsx')
-
+*/
 
 
 </script>

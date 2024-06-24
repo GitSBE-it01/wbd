@@ -30,6 +30,7 @@ function get_cache($param){
 function delete_cache(){
   $folderPath = "../cache/";  // Adjust the folder name and path as needed
   $files = glob($folderPath . "/*"); // Get all files in the folder
+  $result = 'no file to delete';
   foreach ($files as $file) {
      if (is_file($file)) { // Check if it's a file (not a directory)
        unlink($file);

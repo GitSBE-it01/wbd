@@ -24,6 +24,7 @@ export const mainDataProcess = (src)=> {
         dt.wo_rmks + '--' +
         dt.lotOH + '--' +
         dt.id_new + '--' +
+        dt.old_id + '--' +
         dt.pic;
         const data = {
             id: dt.id,
@@ -46,6 +47,7 @@ export const mainDataProcess = (src)=> {
             all_lot: dt.lotOH, 
             pic: dt.pic,
             id_new: dt.id_new,
+            old_id: dt.old_id,
             filter: fltr
         }
         tableData.push(data);

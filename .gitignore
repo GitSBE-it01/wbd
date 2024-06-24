@@ -14,5 +14,5 @@ template/.env
 .env
 pick_now/cache
 */cache
-cache/
+4.cache/
 1.asset/external_library
