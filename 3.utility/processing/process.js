@@ -5,15 +5,7 @@ Berikut adalah list FUNCTION  yang akan di pakai di prog VJS
 /*-------------------------
 Get date
 -------------------------*/
-export function currentDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2,'0');
-    const day = String(today.getDate()).padStart(2,'0');
-    return `${year}-${month}-${day}`;
-}
-
-export function curDate(separ) {
+export const currentDate = (separ) => {
     const today = new Date();
     const year = today.getFullYear();
     const month = String(today.getMonth() + 1).padStart(2,'0');
@@ -22,7 +14,7 @@ export function curDate(separ) {
     return result;
 }
 
-export function getCustomDate(number) {
+export const getCustomDate = (number) => {
     let dayDate = new Date();
     dayDate.setDate(dayDate.getDate() + (number));
     const year = dayDate.getFullYear();
@@ -59,7 +51,7 @@ export const convertDateFormat = (inputDate) => {
 /*-------------------------
 str to number with number of char and decimal
 -------------------------*/
-export function numberToStr(number, minNumber, decimalMinimum) {
+export const numberToStr = (number, minNumber, decimalMinimum) => {
     const noStr = number.toString();
     const splitStr = noStr.split(".");
     const intNo = splitStr[0];
@@ -111,92 +103,9 @@ export function numberToStr(number, minNumber, decimalMinimum) {
 }
 
 /*-------------------------
-export to csv 
--------------------------*/
-export const jsonToCsv= async(jsonData, name) => {
-    try {
-        const json = JSON.stringify(jsonData)
-        // Convert JSON data to array of objects
-        const data = JSON.parse(json);
-        // Extract column headers from the first object
-        const headers = Object.keys(data[0]);
-        
-        // Create CSV content
-        let csvContent = headers.join(',') + '\n'; // Header row
-        
-        // Append data rows
-        data.forEach(item => {
-            const row = headers.map(header => item[header]);
-            csvContent += row.join(',') + '\n';
-        });
-        const blob = new Blob([csvContent], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = name;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-        return;
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-export const jsonToExcel = async (jsonData, name) => {
-    try {
-        const json = JSON.stringify(jsonData);
-        // Convert JSON data to array of objects
-        const data = JSON.parse(json);
-        // Extract column headers from the first object
-        const headers = Object.keys(data[0]);
-
-        // Create an XML document
-        let xml = '<?xml version="1.0"?>\n';
-        xml += '<ss:Workbook xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">\n';
-        xml += ' <ss:Worksheet ss:Name="Sheet1">\n';
-        xml += '  <ss:Table>\n';
-
-        // Header row
-        xml += '   <ss:Row>\n';
-        headers.forEach(header => {
-            xml += `    <ss:Cell><ss:Data ss:Type="String">${header}</ss:Data></ss:Cell>\n`;
-        });
-        xml += '   </ss:Row>\n';
-
-        // Data rows
-        data.forEach(item => {
-            xml += '   <ss:Row>\n';
-            headers.forEach(header => {
-                xml += `    <ss:Cell><ss:Data ss:Type="String">${item[header]}</ss:Data></ss:Cell>\n`;
-            });
-            xml += '   </ss:Row>\n';
-        });
-
-        xml += '  </ss:Table>\n';
-        xml += ' </ss:Worksheet>\n';
-        xml += '</ss:Workbook>';
-
-        const blob = new Blob([xml], { type: 'application/vnd.ms-excel' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = name.endsWith('.xls') ? name : name + '.xls'; // Ensure file extension is .xls
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-        return;
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-/*-------------------------
 check active link
 -------------------------*/
-export const activeLink = (target, arrCls) => {
+export const activeLink = (target, cls) => {
     const container = document.getElementById(target);
     const aLink = container.querySelectorAll('a');
     aLink.forEach(link=> {
@@ -204,26 +113,10 @@ export const activeLink = (target, arrCls) => {
         const compare = currentUrl[currentUrl.length-1];
         const hrefValue = link.getAttribute('href');
         if (hrefValue === compare) {
-            arrCls.forEach(cls=> {
-                link.classList.add(cls);
-            })
+            link.setAttribute('class', cls);
         }
     })
 }
-
-export const activeLink2 = (target, styles) => {
-    const container = document.querySelector(target);
-    const aLink = container.querySelectorAll('a');
-    aLink.forEach(link=> {
-        const currentUrl = window.location.href.split('/');
-        const compare = currentUrl[currentUrl.length-1];
-        const hrefValue = link.getAttribute('href');
-        if (hrefValue === compare) {
-            link.setAttribute('style', styles);
-        }
-    })
-}
-
 
 export const removeSpaces = (str, replaceChar) => {
     const regex = /\s/g;

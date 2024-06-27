@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.open_white {
+    background-image: url('./symbol/open_detail_white.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+
 .hide {
     background-image: url('./symbol/hide_detail.svg');
     background-size: cover;

@@ -1,6 +1,6 @@
 <?php
 
-$init_js = '
-    <script type="module">
-        import {} from "./general.js";'
+
+$init_js = "<script type='module'>
+        import {} from './general.js';"
 ;

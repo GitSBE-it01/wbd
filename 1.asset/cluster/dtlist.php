@@ -1,32 +1,12 @@
 <?php
 
-function createTxt($tableArr) {
-    $init = '<div class="';
-    $id = '';
-    $class = 'class="p-2" ';
-    $textCont = '>submit';
-    $end = '
-        </div>
-    ';
+function dtlistArea($listArray) {
 
-    if (count($tableArr['data'])>0) {
-        foreach($tableArr['data'] as $key=>$value) {
-            $data = 'data-' . $key .'="' . $value . '" ' ;
-            $init .= $data;
-        }
-    }
-    if($tableArr['id'] !=='') {$id = 'id="' . $tableArr['id'] . '" ';}
-    if($tableArr['style'] !== '') {$class = 'class="' . $tableArr['style'] . '" ' ;}
-    if($tableArr['text'] !=='') {
-        $textCont = '>
-            ' . $tableArr['text'];
-    }
-
-    $finish = $init 
-        .$id
-        .$class 
-        .$textCont 
-        .$end;
+    $finish = "<div class='h-full w-full bg-black opacity-25 fixed z-30'></div>
+            <div class='h-[75vh] w-[80vw] bg-blue-300 top-[20vh] rounded fixed z-30 scrollable'>
+                <input type='text' class='w-full'>
+                <div
+            </div>";
     return $finish;
 }
 

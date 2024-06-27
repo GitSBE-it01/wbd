@@ -1,7 +1,7 @@
 <?php
 
 function text($txtArr) {
-    $init ='<div ';
+    $init ="<div ";
         if (isset($txtArr['data']) && count($txtArr['data'])>0) {
             foreach($txtArr['data'] as $key=>$value) {
                 $data = 'data-' . $key .'="' . $value . '" ' ;

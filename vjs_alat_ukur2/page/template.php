@@ -12,6 +12,7 @@ $nav_array = [
 ];
 
 $index = "
+    <div class='loading'></div>
     <nav class='fixed flex flex-row top-0 items-center bg-slate-950 w-screen h-[5vh]'>
         ".nav($nav_array)."
     </nav>"
@@ -34,4 +35,4 @@ $index = "
     <script type='module' src='./client_process/index.js';></script>
     ";
 
-createHTML(['body'=>$index, 'name'=>'index', 'title'=>"index"]);
+createHTML(['body'=>$index, 'name'=>'index', 'title'=>"vjs alat ukur"]);

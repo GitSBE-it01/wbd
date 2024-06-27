@@ -1,12 +1,11 @@
 import {
     currentDate,
-    curDate,
 } from '../../3.utility/index.js';
 
 import {point} from '../general.js';
 
 export const data_process = async(vjs_trans, value, user, data_table) =>{
-    let cek = vjs_trans.find(obj=> obj.trans_date === currentDate());
+    let cek = vjs_trans.find(obj=> obj.trans_date === currentDate("-"));
     if(!cek || vjs_trans.length === 0 || cek === undefined) {
         await createNewData(vjs_trans, user, value);
     }
@@ -40,7 +39,7 @@ const createNewData = async(vjs_trans, user, value) => {
             aprroval_by: "",
             category: dt.new_cat,
             check_point: dt.check_point,
-            data_group: curDate("")+vjs_trans[0].sn_id,
+            data_group: currentDate("")+vjs_trans[0].sn_id,
             decision: "",
             no_asset:vjs_trans[0].no_asset,
             result: "",

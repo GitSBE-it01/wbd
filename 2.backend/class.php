@@ -1,6 +1,5 @@
 <?php
 class QueryInit {
-    public $tableName;
     public $get;
     public $insert;
     public $update;

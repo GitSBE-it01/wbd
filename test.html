@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+    <select name="test" id="test" class="m-4 bg-slate-300 rounded">
+        <option value="">
+            <input type="text" name="testText" id="testText" class="hidden bg-teal-400">
+        </option>
+    </select>
+    <div>
+        
+    </div>
+<script type="module">
+    const test = document.getElementById('test');
+    document.addEventListener('click', async function(event) {
+        if(event.target.id === 'test') {
+            const inp = document.getElementById('testText');
+            console.log(inp);
+            inp.classList.toggle('hidden');
+        }
+    })
+
+
+
+</script>
+
+</body>
+</html>
