@@ -6,13 +6,20 @@ require_once 'index_temp.php';
 $nav_array = [
     'title'=>'template',
     'links'=>[
-        ['text'=>'test1', 'href'=>'#section1'],
-        ['text'=>'test2', 'href'=>'#section2'],
+        ['href'=> 'index.html', 'text'=> 'Home'],
+        ['href'=> 'tool_data.html', 'text'=> 'Tool Data'],
+        ['href'=> 'point.html', 'text'=> 'Checklist'],
     ]
 ];
 
 $index = "
-    <div class='loading'></div>
+    <div data-card='form' class='p-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400'>
+        <h2 class='text-xl font-semibold'>Detail Form</h2>
+        <div id='formTable' class ='w-full h-full scorllable'>
+            ".table($main_form_tbl)."
+        </div>
+    </div>
+    <div class='loading z-40'></div>
     <nav class='fixed flex flex-row top-0 items-center bg-slate-950 w-screen h-[5vh]'>
         ".nav($nav_array)."
     </nav>"

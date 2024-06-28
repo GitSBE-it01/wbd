@@ -18,4 +18,51 @@ function td_input($set) {
     return $finish;
 }
 
+function td_btn_set($set) {
+    $class = 'w-4 h-4';
+        if(isset($set['btn_style']) && $set['btn_style'] !== '') {$class = $set['btn_style'];}
+    $delimit = " ";
+    $btnset = explode($delimit, $set['set']);
+    $all ='';
+    foreach($btnset as $value){
+        switch($value) {
+            case "open_down":
+                $all .= "<button type='button' data-field='".$set['field']."' class='open ".$class."' data-method='open'>
+                </button>
+                ";
+                break;
+            case "open_right":
+                $all .= "<button type='button' data-field='".$set['field']."' class='arrow_right_black ".$class."' data-method='open'>
+                </button>
+                ";
+                break;
+            case "delete":
+                $all .= "<button type='button' data-field='".$set['field']."' class='minus ".$class."' data-method='delete'>
+                </button>
+                ";
+                break;
+            case "submit":
+                $all .= "<button type='button' data-field='".$set['field']."' class='enter ".$class."' data-method='submit'>
+                </button>
+                ";
+                break;
+            case "add":
+                $all .= "<button type='button' data-field='".$set['field']."' class='plus ".$class."' data-method='add'>
+                </button>
+                ";
+                break;
+            case "edit":
+                $all .= "<button type='button' data-field='".$set['field']."' class='edit ".$class."' data-method='edit'>
+                </button>
+                ";
+                break;
+            default: 
+                $all .= '';
+        }
+    }
+    return $all;
+}
 
+function logic_inp($set) {
+    $init = '';
+}

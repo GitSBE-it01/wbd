@@ -5,6 +5,7 @@ require_once 'blocks/select.php';
 require_once 'blocks/table_block.php';
 require_once 'blocks/text.php';
 
+require_once 'cluster/form.php';
 require_once 'cluster/navigation.php';
 require_once 'cluster/table.php';
 

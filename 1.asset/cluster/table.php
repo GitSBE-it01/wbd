@@ -11,7 +11,7 @@ function table($tableArr) {
     $id = "";
         if(isset($tableArr['table']['id']) && $tableArr['table']['id'] !=="") {$id = "id='" . $tableArr['table']['id'] . "' ";}
     $tbl_class = 'class="w-full" ';
-        if(isset($tableArr['table']['style']) && $tableArr['table']['style'] !== "") {$tbl_class = "class='" . $tableArr['table']['style'] . "'>" ;}
+        if(isset($tableArr['table']['style']) && $tableArr['table']['style'] !== "") {$tbl_class = "class='" . $tableArr['table']['style']."' ";}
     
     $th_all = "";
     $td_all = "";
@@ -30,45 +30,42 @@ function table($tableArr) {
         $tr_dt .= tdata($tableArr['data_array'][$i], $td_class_dflt);
     }
 
-    $header_all = "<tr>\n"
-        .$th_all."\n"
-        ."</tr>\n";
+    $th_row_class = '';
+        if(isset($tableArr['th_row_style']) && $tableArr['th_row_style'] !== "") {$th_row_class = "class='" . $tableArr['th_row_style'] . "' " ;}
+
+    $header_all = "<tr data-id='header' ".$th_row_class.">
+        ".$th_all
+            ."</tr>";
 
     $tr_dt_class = "class='w-full hidden' ";
         if(isset($tableArr['td_row_style']) && $tableArr['td_row_style'] !== "") {$tr_dt_class = "class='" . $tableArr['td_row_style'] . "' " ;}
 
-    for($i=0; $i<100; $i++) {
-        $td_all .= "<tr data-id="
-            .$i." "
-            .$tr_dt_class."'>\n"
-            .$tr_dt
-            ."</tr>\n";
+    for($i=0; $i<$tableArr['row_count']; $i++) {
+        $td_all .= "<tr data-id='".$i."' ".$tr_dt_class.">
+        ".$tr_dt."</tr>
+        ";
     }
-    $end = "</table>\n";
 
-    $finish = $init 
-        .$id
-        .$tbl_class 
-        .$header_all
-        .$td_all
-        .$end;
+    $finish = $init.$id.$tbl_class.">
+        ".$header_all."
+        ".$td_all."</table>";
     return $finish;
 }
 
 function theader($set, $th_class_dflt) {
-    $th_init = "<th ";
+    $th_init = "    <th ";
     $th_class = $th_class_dflt;
     if(isset($set['th_style']) && $set['th_style'] !== "") {
         $th_class = "class='" . $set['th_style'] . "' ";
     }
-    $th_text =">\n";
+    $th_text ="";
     if(isset($set['header']) && $set['header'] !== "") {
-        $th_text .= $set['header']."\n";
+        $th_text = $set['header']." ";
     }
-    $th = $th_init
-        .$th_class
-        .$th_text
-        ."</th>\n";
+    $th = $th_init.$th_class.">
+                ".$th_text."
+            </th>
+        ";
     return $th;
 }
 
@@ -78,20 +75,29 @@ function tdata($set, $td_class_dflt) {
         $field = "data-field='".$set['field']."' ";
         $td_class = $td_class_dflt;
         if(isset($set['td_style']) && $set['td_style'] !== "") {
-            $td_class = "class='" . $set['td_style'] . "'>\n";
+            $td_class = "class='" . $set['td_style']."'> ";
         }
         $body .= $field.$td_class;
     }
     if(isset($set['type']) && strtolower($set['type']) === 'input') {
         $td_class = "class='bg-slate-300 whitespace-normal border-2 text-sm border-black' ";
         if(isset($set['td_style']) && $set['td_style'] !== "") {
-            $td_class = "class='" . $set['td_style'] . "'>\n";
+            $td_class = "class='" . $set['td_style'] . "' ";
         }
-        $body .= $td_class.td_input($set);
+        $body .= $td_class.">
+                ".td_input($set);
     }
-    $td = "<td "
-        .$body
-        ."</td>\n";
+    if(isset($set['type']) && strtolower($set['type']) === 'set_btn') {
+        $td_class = "class='bg-slate-300 whitespace-normal flex flex-row border-2 text-sm border-black' ";
+        if(isset($set['td_style']) && $set['td_style'] !== "") {
+            $td_class = "class='" . $set['td_style'] . "' ";
+        }
+        $body .= $td_class.">
+                ".td_btn_set($set);
+    }
+    $td="    <td ".$body."
+            </td>
+        ";
     return $td;
 }
 /*
@@ -112,7 +118,6 @@ function tdata($set, $td_class_dflt) {
             'id'=> "", 
             'style'=> ""
         ],
-        'data_src'=> "",
         'hidden_tr'=>"",
         'td_row_style'=>"",
         'data_array'=> [

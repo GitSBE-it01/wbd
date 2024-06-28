@@ -4,3 +4,6 @@ export const point = new Data('vjs_alat_ukur_point');
 export const vjs_log = new Data('vjs_alat_ukur_vjs_log');
 export const reff = new Data('vjs_alat_ukur_reff');
 
+const n_calc = (data) => {
+    let x = Math.cedata.length/100;
+}

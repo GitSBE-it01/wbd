@@ -44,7 +44,9 @@ function inputText($inpTxtArr) {
         'value'=>''
         'placeholder'=>'',
         'list'=>'',
-        'style'=>''
+        'inp_style'=>'',
+        'label_style'=>'',
+        'text'=>''
     ]
 */
 

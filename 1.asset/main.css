@@ -88,6 +88,34 @@
     cursor: pointer;
 }
 
+.arrow_right {
+    background-image: url('./symbol/arrow_right.svg');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.arrow_right_black {
+    background-image: url('./symbol/arrow_right_no_color.svg');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.arrow_left {
+    background-image: url('./symbol/arrow_left.svg');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.edit {
+    background-image: url('./symbol/edit_dflt.svg');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 @keyframes loading {
     0% {
         transform: rotate(0deg); 
