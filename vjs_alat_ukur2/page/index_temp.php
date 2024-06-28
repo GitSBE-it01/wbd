@@ -30,6 +30,38 @@ $main_form_tbl = [
         'id'=> 'main_form_table', 
         'style'=>'w-full'
     ],
+    'data_array'=> [
+        [
+            'type'=>'text', 
+            'field'=> 'check_point', 
+            'header'=>'Point',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[22vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[22vw]'
+        ],
+        [
+            'type'=>'text',
+            'field'=> 'standard',
+            'header'=>'Standard',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[50vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[50vw]'
+        ],
+        [
+            'type'=>'set_btn',
+            'field'=> '',
+            'set'=>'ok ng',
+            'header'=>'Option',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[6vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black p-2 w-[6vw]',
+            'btn_style'=>'w-6 h-6'
+        ],
+        [
+            'type'=>'text',
+            'field'=> 'result',
+            'header'=>'Result',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[22vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[22vw]'
+        ],
+    ]
 ];
 
 
@@ -42,24 +74,33 @@ $mainTable = [
     'data_array'=> [
         [
             'type'=>'text', 
-            'field'=> 'check_point', 
-            'header'=>'Point',
-            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]',
-            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[30vw]'
+            'field'=> 'created_date', 
+            'header'=>'Date',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[22vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[22vw]'
         ],
         [
-            'type'=>'text',
-            'field'=> 'standard',
+            'type'=>'input',
+            'field'=> 'user_input',
             'header'=>'Standard',
-            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]',
-            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[30vw]'
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[50vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[50vw]'
         ],
         [
-            'type'=>'logic_inp',
-            'field'=> 'result',
-            'header'=>'Hasil',
-            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[6vw]',
-            'td_style'=>'bg-slate-300 whitespace-normal flex flex-col border-2 text-sm border-black p-2 w-[6vw]',
+            'type'=>'input',
+            'field'=> 'approval_by',
+            'header'=>'Approval',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[50vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[50vw]'
+        ],
+        [
+            'type'=>'set_btn',
+            'field'=> 'data_group',
+            'set'=>'open_right',
+            'header'=>'Detail',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[22vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black p-2 w-[22vw]',
+            'btn_style'=>'w-6 h-6'
         ]
     ]
 ];

@@ -56,13 +56,19 @@ function td_btn_set($set) {
                 </button>
                 ";
                 break;
+            case "ok":
+                $all .= "<button type='button' data-field='".$set['field']."' class='check ".$class."' data-method='value'>
+                </button>
+                ";
+                break;
+            case "ng":
+                $all .= "<button type='button' data-field='".$set['field']."' class='cross ".$class."' data-method='value'>
+                </button>
+                ";
+                break;
             default: 
                 $all .= '';
         }
     }
     return $all;
-}
-
-function logic_inp($set) {
-    $init = '';
 }
