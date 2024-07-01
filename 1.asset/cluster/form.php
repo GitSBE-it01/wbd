@@ -5,25 +5,45 @@ function formset($form_array) {
     if(isset($form_array['id']) && $form_array['id']!=='' ) {
         $id = $form_array['id'];
     }
-    $div_class = 'p-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400';
-    if(isset($form_array['div_style']) && $form_array['div_style']!=='' ) {
-        $div_class = $form_array['div_style'];
+    $title_style = '';
+    if(isset($form_array['title_style']) && $form_array['title_style']!=='' ) {
+        $title_style = $form_array['title_style'];
     }
-
     $title = 'Detail Form';
     if(isset($form_array['title']) && $form_array['title']!=='' ) {
         $title = $form_array['title'];
     }
     
     $formset = '';
-    foreach($form_array['list_field'] as $set) {
-        $formset .= inputText($set)."
-        ";
+    foreach($form_array['form_detail'] as $set) {
+        $type = $set['type'];
+        switch($type) {
+            case "radio":
+                $formset .= input_radio($set)."<br>
+                ";
+                break;
+            case "logic":
+                $formset .= logical_radio($set)."<br>
+                ";
+                break;
+            case "textarea":
+                $formset .= textarea($set)."<br>
+                ";
+                break;
+            case "text":
+                $formset .= input_text($set)."<br>
+                ";
+                break;
+            default: 
+                $formset .= '';
+                break;
+        }
     }
 
-    $all ="<div data-card='".$id."' class='".$div_class."'>
-        <h2 class='text-xl font-semibold'>".$title."</h2>
-        ".$formset."
-    </div>";
+    $all = "<form id='".$id."'>
+    <div class='".$title_style."'>".$title."</div>
+    ".$formset."
+    </form>";
     return $all;
 }
+

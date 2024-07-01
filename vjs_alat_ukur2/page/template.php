@@ -13,11 +13,13 @@ $nav_array = [
 ];
 
 $index = "
-    <div data-card='form' class='p-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400'>
-        <h2 class='text-xl font-semibold'>Detail Form</h2>
-        <div id='formTable' class ='w-full h-full scorllable'>
-            ".table($main_form_tbl)."
+    <div data-card='form' class='p-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 scrollable'>
+        <div class='text-2xl text-white font-bold'>
+            Detail Form
         </div>
+        <form id='submit_form'>
+        ".custom_mainform(20)."
+        </form>
     </div>
     <div class='loading z-40'></div>
     <nav class='fixed flex flex-row top-0 items-center bg-slate-950 w-screen h-[5vh]'>
@@ -25,14 +27,14 @@ $index = "
     </nav>"
     /*header*/."
 
-    <header class='fixed flex flex-col px-2 top-[5vh] bg-slate-700 w-screen h-[18vh]'>
-        ".$text.$btnOpen."
+    <header class='fixed px-2 top-[5vh] bg-slate-700 w-screen h-[18vh]'>
+        ".formset($header_form).$btn_open."
     </header>"
     /*main*/."
 
     <main class='fixed flex flex-row top-[23vh] bg-slate-300 w-full h-[72vh] custom_scroll'>
         <div id='mainTable' class='w-full h-full scrollable'>
-            ".table($mainTable)."
+            ".table($main_table)."
         </div>
     </main>"
     /*main*/."

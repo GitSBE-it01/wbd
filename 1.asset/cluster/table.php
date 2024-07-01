@@ -23,9 +23,9 @@ function table($tableArr) {
         }
         $th_all .= theader($tableArr['data_array'][$i], $th_class_dflt);
 
-        $td_class_dflt = "class='bg-slate-300 whitespace-normal border-2 text-sm border-black p-2' ";
+        $td_class_dflt = "class='bg-slate-300 whitespace-normal border-2 border-black p-2' ";
         if($i === 0) {
-            $td_class_dflt = "class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ";
+            $td_class_dflt = "class='bg-slate-400 whitespace-normal border-2 text-center font-semibold border-black p-2 sticky left-0 z-10' ";
         }
         $tr_dt .= tdata($tableArr['data_array'][$i], $td_class_dflt);
     }
@@ -40,7 +40,11 @@ function table($tableArr) {
     $tr_dt_class = "class='w-full hidden' ";
         if(isset($tableArr['td_row_style']) && $tableArr['td_row_style'] !== "") {$tr_dt_class = "class='" . $tableArr['td_row_style'] . "' " ;}
 
-    for($i=0; $i<$tableArr['row_count']; $i++) {
+    $row_count = 100;
+    if(isset($tableArr['row_count'])) {
+        $row_count = $tableArr['row_count'];
+    }
+    for($i=0; $i<$row_count; $i++) {
         $td_all .= "<tr data-id='".$i."' ".$tr_dt_class.">
         ".$tr_dt."</tr>
         ";
@@ -80,7 +84,7 @@ function tdata($set, $td_class_dflt) {
         $body .= $field.$td_class;
     }
     if(isset($set['type']) && strtolower($set['type']) === 'input') {
-        $td_class = "class='bg-slate-300 whitespace-normal border-2 text-sm border-black' ";
+        $td_class = "class='bg-slate-300 whitespace-normal border-2 border-black' ";
         if(isset($set['td_style']) && $set['td_style'] !== "") {
             $td_class = "class='" . $set['td_style'] . "' ";
         }
@@ -88,7 +92,7 @@ function tdata($set, $td_class_dflt) {
                 ".td_input($set);
     }
     if(isset($set['type']) && strtolower($set['type']) === 'set_btn') {
-        $td_class = "class='bg-slate-300 whitespace-normal flex flex-row border-2 text-sm border-black' ";
+        $td_class = "class='bg-slate-300 whitespace-normal flex flex-row border-2 border-black' ";
         if(isset($set['td_style']) && $set['td_style'] !== "") {
             $td_class = "class='" . $set['td_style'] . "' ";
         }

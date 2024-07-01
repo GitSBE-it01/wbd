@@ -38,7 +38,7 @@ const body = document.querySelector("body");
 let main_data = [];
 let show_data = [];
 let form_data = [];
-let n_numb = 0;
+let n_numb = 1;
 const label_desc = document.querySelector("#desc_alat");
 const label_cat = document.querySelector("#cat");
 const label_seri = document.querySelector("#seri");
@@ -89,71 +89,79 @@ document.addEventListener("click", async function (event) {
     const search_id = event.target.getAttribute('data-button');
     form_data = await vjs_log.dbProcess('fetch', {data_group: search_id});
     console.log(form_data);
-    form_data.forEach(dt=>{
-      const label = document.createElement('label');
-      
-      form_div.appendChild(label);
-    })
+
     return;
   }
 });
 
 document.addEventListener("change", async function (event) {
+  // search tool input
   if (event.target.getAttribute("data-input") === "input__alat_search") {
     load.classList.toggle("hidden");
     const value = event.target.value;
     const split = value.split("//");
-    label_desc.value = split[3].trim();
-    label_cat.value = split[1].trim();
-    label_seri.value = split[0].trim();
-    label_asset.value = split[2].trim();
+    label_desc.value = split[3] ? split[3].trim() : '';
+    label_cat.value = split[1] ? split[1].trim() : '';
+    label_seri.value = split[0] ? split[0].trim() : '';
+    label_asset.value = split[2] ? split[2].trim() : '';
     event.target.classList.toggle("hidden");
+    main_data = [];
     main_data = await vjs_log.dbProcess("fetch", { sn_id: split[0].trim() });
-    main_data.sort((a, b) => {
-      if (a.created_date !== b.created_date)
-        return b.created_date.localeCompare(a.created_date);
-    });
-    let check = [];
-    main_data.forEach((dt) => {
-      if (!check.includes(dt.created_date)) {
-        check.push(dt.created_date);
-        show_data.push(dt);
+    const hd_row = table_base.querySelector('[data-id="header"]');
+    if(main_data.length >0) {
+      main_data.sort((a, b) => {
+        if (a.created_date !== b.created_date)
+          return b.created_date.localeCompare(a.created_date);
+      });
+      let check = [];
+      main_data.forEach((dt) => {
+        if (!check.includes(dt.created_date)) {
+          check.push(dt.created_date);
+          show_data.push(dt);
+        }
+      });
+      n_numb = Math.ceil(show_data.length / 100);
+      if (show_data.length > 0) {
+        if (hd_row.classList.contains("hidden")) {
+          hd_row.classList.toggle("hidden");
+        }
+        for (let i = 0; i < show_data.length; i++) {
+          if (i === 100) {
+            break;
+          }
+          let n_val = i * n_numb;
+          let dt = show_data[n_val];
+          const row = table_base.querySelector(`[data-id='${i}']`);
+          row.setAttribute("data-value", n_val);
+          if (row.classList.contains("hidden")) {
+            row.classList.toggle("hidden");
+          }
+          const data = row.querySelectorAll("[data-field]");
+          data.forEach((d) => {
+            if (d.tagName === "TD") {
+              d.textContent = dt[`${d.getAttribute("data-field")}`];
+            }
+            if (d.tagName === "TEXTAREA" || d.tagName === "INPUT") {
+              d.value = dt[`${d.getAttribute("data-field")}`];
+            }
+            if (d.tagName === "BUTTON") {
+              d.setAttribute('data-button', dt[`${d.getAttribute("data-field")}`]);
+            }
+          });
+        }
       }
-    });
-    console.log({ show_data, main_data, check });
-    n_numb = Math.ceil(show_data.length / 100);
-    if (show_data.length > 0) {
-      const hd_row = table_base.querySelector('[data-id="header"]');
-      if (hd_row.classList.contains("hidden")) {
+    } else {
+      if (!hd_row.classList.contains("hidden")) {
         hd_row.classList.toggle("hidden");
       }
-      for (let i = 0; i < show_data.length; i++) {
-        if (i === 100) {
-          break;
+      const row = table_base.querySelectorAll(`[data-id]`);
+      row.forEach(dt=>{
+        if (!dt.classList.contains("hidden")) {
+          dt.classList.toggle("hidden");
         }
-        let n_val = i * n_numb;
-        let dt = show_data[n_val];
-        const row = table_base.querySelector(`[data-id='${i}']`);
-        row.setAttribute("data-value", n_val);
-        if (row.classList.contains("hidden")) {
-          row.classList.toggle("hidden");
-        }
-        const data = row.querySelectorAll("[data-field]");
-        data.forEach((d) => {
-          if (d.tagName === "TD") {
-            d.textContent = dt[`${d.getAttribute("data-field")}`];
-          }
-          if (d.tagName === "TEXTAREA" || d.tagName === "INPUT") {
-            d.value = dt[`${d.getAttribute("data-field")}`];
-          }
-          if (d.tagName === "BUTTON") {
-            d.setAttribute('data-button', dt[`${d.getAttribute("data-field")}`]);
-          }
-        });
-      }
-    }
+      })
+    };  
     load.classList.toggle("hidden");
     return;
   }
-  
-});
+})

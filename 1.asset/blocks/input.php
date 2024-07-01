@@ -1,39 +1,41 @@
 <?php
-function inputText($inpTxtArr) {
-    $init ="<input ";
-        if (isset($inpTxtArr['data']) && count($inpTxtArr['data'])>0) {
-            foreach($inpTxtArr['data'] as $key=>$value) {
-                $data = "data-" . $key ."='" . $value . "' " ;
-                $init .= $data;
-            }
-        }
-    $id = "";
-        if(isset($inpTxtArr['id']) && $inpTxtArr['id'] !=='') {$id = "id='" . $inpTxtArr['id'] . "' ";}
-    $type = "type='text' ";
-    $disable = "";
-        if(isset($inpTxtArr['disable'])) {$disable = "disabled ";}
-    $value_inp = "";
-        if(isset($inpTxtArr['value']) && $inpTxtArr['value'] !=='') {$value_inp = "value='" . $inpTxtArr['value'] . "' ";} 
-    $placeholder = "";
-        if(isset($inpTxtArr['placeholder']) && $inpTxtArr['placeholder'] !=='') {$placeholder = "placeholder='" . $inpTxtArr['placeholder'] . "' ";} 
-    $list = "";
-        if(isset($inpTxtArr['list']) && $inpTxtArr['list'] !=='') {$list = 'list="' . $inpTxtArr['list'] . '" ';} 
-    $class = "class='rounded ml-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300' ";
-        if(isset($inpTxtArr['inp_style']) && $inpTxtArr['inp_style'] !== '') {$class = "class='" . $inpTxtArr['inp_style'] . "' " ;}
-        
-    $label_class = "class='rounded m-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300' ";
-        if(isset($inpTxtArr['label_style']) && $inpTxtArr['label_style'] !== '') {$label_class = "class='" . $inpTxtArr['label_style'] . "' " ;}
-    $text = "label";
-        if(isset($inpTxtArr['text']) && $inpTxtArr['text'] !== '') {$text = $inpTxtArr['text'];}
 
-    $finish = "<label ".$label_class.">".$text."
-                ".$init.$id.$type.$disable.$value_inp .$placeholder .$list .$class.">
-            </label>";
-    return $finish;
+function input_text($input_array) {
+    $id = "";
+        if(isset($input_array['id']) && $input_array['id'] !=='') {$id = $input_array['id'];}
+
+    // label
+    $label = "";
+    if(isset($input_array['text']) && $input_array['text'] !=='') {
+        $label_class = "m-2 w-[10vw] inline-block ";
+            if(isset($input_array['label_style']) && $input_array['label_style'] !== '') {$label_class = $input_array['label_style'];}
+        $text = "label";
+            if(isset($input_array['text']) && $input_array['text'] !== '') {$text = $input_array['text'];}
+        $label = "<label for='".$id."' class='".$label_class."'>".$text."</label>
+    ";
+    }
+
+    // input
+    $field = "";
+        if(isset($input_array['field']) && $input_array['field']) {$field = $input_array['field'];}
+    $placeholder = "";
+        if(isset($input_array['placeholder']) && $input_array['placeholder'] !=='') {$placeholder = "placeholder='" . $input_array['placeholder'] . "' ";} 
+    $list = "";
+        if(isset($input_array['list']) && $input_array['list'] !=='') {$list = 'list="' . $input_array['list'] . '" ';} 
+    $value_inp = "";
+        if(isset($input_array['value']) && $input_array['value'] !=='') {$value_inp = "value='" . $input_array['value'] . "' ";} 
+    $disable = "";
+        if(isset($input_array['disable'])) {$disable = "disabled ";}
+    $inp_class = "rounded w-[30vw] bg-transparent focus:ring focus:ring-blue-200 focus:ring-width-4 focus:outline focus:outline-blue-200";
+        if(isset($input_array['inp_style']) && $input_array['inp_style'] !== '') {$inp_class = $input_array['inp_style'];}
+    $input = "<input type='text' id='".$id."' name='".$field."' ".$placeholder.$list.$value_inp.$disable." class='".$inp_class."'>";
+
+    $all = $label.$input;
+    return $all;
 }
 /*
     example 
-    $inpTxtArr = [
+    $input_array = [
         'data => [
             'detail' => 'main',
             'field' => 'dua',
@@ -50,46 +52,47 @@ function inputText($inpTxtArr) {
     ]
 */
 
-function textarea($inpTxtArr) {
-    $init ="<textarea ";
-    if (isset($inpTxtArr['data']) && count($inpTxtArr['data'])>0) {
-        foreach($inpTxtArr['data'] as $key=>$value) {
-            $data = "data-" . $key ."='" . $value . "' " ;
-            $init .= $data;
-        }
-    }
+function textarea($input_array) {
     $id = "";
-        if(isset($inpTxtArr['id']) && $inpTxtArr['id'] !=='') {$id = "id='" . $inpTxtArr['id'] . "' ";}
-    $disable = '';
-        if(isset($inpTxtArr['disable'])) {$disable = "disabled ";}
-    $value_inp = '';
-        if(isset($inpTxtArr['value']) && $inpTxtArr['value'] !=='') {$value_inp = "value='" . $inpTxtArr['value'] . "' ";} 
-    $placeholder = '';
-        if(isset($inpTxtArr['placeholder']) && $inpTxtArr['placeholder'] !=='') {$placeholder = "placeholder='" . $inpTxtArr['placeholder'] . "' ";} 
+    if(isset($input_array['id']) && $input_array['id'] !=='') {$id = $input_array['id'];}
+
+    // label
+    $label = "";
+    if(isset($input_array['text']) && $input_array['text'] !=='') {
+        $label_class = "m-2 w-full inline-block ";
+            if(isset($input_array['label_style']) && $input_array['label_style'] !== '') {$label_class = $input_array['label_style'];}
+        $text = "label";
+            if(isset($input_array['text']) && $input_array['text'] !== '') {$text = $input_array['text'];}
+        $label .= "<label for='".$id."' class='".$label_class."'>".$text."</label>
+    ";
+    }
+
+    // input
+    $field = "";
+        if(isset($input_array['field']) && $input_array['field']) {$field = $input_array['field'];}
+    $placeholder = "";
+        if(isset($input_array['placeholder']) && $input_array['placeholder'] !=='') {$placeholder = "placeholder='" . $input_array['placeholder'] . "' ";} 
     $rows = '';
-        if(isset($inpTxtArr['rows']) && $inpTxtArr['rows'] !=='') {$rows = "rows='" . $inpTxtArr['rows'] . "' ";} 
+        if(isset($input_array['rows']) && $input_array['rows'] !=='') {$rows = "rows='" . $input_array['rows'] . "' ";} 
     $cols = '';
-        if(isset($inpTxtArr['cols']) && $inpTxtArr['cols'] !=='') {$cols = "cols='" . $inpTxtArr['cols'] . "' ";} 
+        if(isset($input_array['cols']) && $input_array['cols'] !=='') {$cols = "cols='" . $input_array['cols'] . "' ";} 
     $maxlength = '';
-        if(isset($inpTxtArr['maxlength']) && $inpTxtArr['maxlength'] !=='') {$maxlength = "maxlength='" . $inpTxtArr['maxlength'] . "' ";} 
-    $class = "class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300' ";
-        if(isset($inpTxtArr['style']) && $inpTxtArr['style'] !== '') {$class = "class='" . $inpTxtArr['style'] . "' " ;}
+        if(isset($input_array['maxlength']) && $input_array['maxlength'] !=='') {$maxlength = "maxlength='" . $input_array['maxlength'] . "' ";} 
+    $value_inp = "";
+        if(isset($input_array['value']) && $input_array['value'] !=='') {$value_inp = "value='" . $input_array['value'] . "' ";} 
+    $disable = "";
+        if(isset($input_array['disable'])) {$disable = "disabled ";}
+    $inp_class = "rounded w-full mx-2 bg-transparent focus:ring focus:ring-blue-200 focus:ring-width-4 focus:outline focus:outline-blue-200";
+        if(isset($input_array['inp_style']) && $input_array['inp_style'] !== '') {$inp_class = $input_array['inp_style'];}
+    $input = "<textarea type='text' id='".$id."' name='".$field."' ".$placeholder.$rows.$cols.$maxlength.$value_inp.$disable." class='".$inp_class."'></textarea>";
 
-    $label_class = "class='rounded m-2 text-sm h-[1.6rem] focus:ring focus:ring-teal-300 focus:ring-width-4 focus:outline focus:outline-teal-300' ";
-        if(isset($inpTxtArr['label_style']) && $inpTxtArr['label_style'] !== '') {$label_class = "class='" . $inpTxtArr['label_style'] . "' " ;}
-    $text = "label";
-        if(isset($inpTxtArr['text']) && $inpTxtArr['text'] !== '') {$text = $inpTxtArr['text'];}
-
-    $finish =  "<label ".$label_class.">".$text."
-                ".$init.$id.$rows.$cols.$maxlength.$value_inp.$placeholder.$class.$disable."></textarea>
-            </label>";
-
-    return $finish;
+    $all = $label.$input;
+    return $all;
 }
 
 /*
     example 
-    $inpTxtArr = [
+    $input_array = [
         'data => [
             'detail' => 'main',
             'field' => 'dua',
@@ -103,3 +106,68 @@ function textarea($inpTxtArr) {
         'style'=>''
     ]
 */
+
+function input_radio($input_array) {
+    $label_class = 'cursor-pointer inline-block';
+    if(isset($input_array['label_style']) && $input_array['label_style']!=='' ) {
+        $label_class = $input_array['label_style'];
+    }
+    $inp_class = 'appearance-none';
+    if(isset($input_array['inp_style']) && $input_array['inp_style']!=='' ) {
+        $inp_class = $input_array['inp_style'];
+    }
+    $option = [];
+    if(isset($input_array['option']) && $input_array['option']!=='' ) {
+        $option = $input_array['option'];
+    }
+    $inp_name = "radio_input";
+    if(isset($input_array['inp_name']) && $input_array['inp_name']!=='' ) {
+        $inp_name = $input_array['inp_name'];
+    }
+    $input_all ="";
+    foreach($option as $opt) {
+        $input_all .="
+        <label class='".$label_class."'>".$opt."
+            <input type='radio' name='".$inp_name."' class='".$inp_class."'>
+        </label>";
+    }
+    return $input_all;
+}
+
+function logical_radio($input_array) {
+    $text = "label";
+        if(isset($input_array['text']) && $input_array['text'] !== '') {$text = $input_array['text'];}
+    $label_class = 'cursor-pointer inline-block';
+    if(isset($input_array['label_style']) && $input_array['label_style']!=='' ) {
+        $label_class = $input_array['label_style'];
+    }
+    $inp_class = 'appearance-none';
+    if(isset($input_array['inp_style']) && $input_array['inp_style']!=='' ) {
+        $inp_class = $input_array['inp_style'];
+    }
+    $div_class = 'appearance-none';
+    if(isset($input_array['div_style']) && $input_array['div_style']!=='' ) {
+        $div_class = $input_array['div_style'];
+    }
+    $option = ['OK', 'NG', '-'];
+    $inp_name = "radio_input";
+    if(isset($input_array['field']) && $input_array['field']!=='' ) {
+        $inp_name = $input_array['field'];
+    }
+    $input_all ="";
+    foreach($option as $opt) {
+        $input_all .="
+        <label class='".$label_class."'>".$opt."
+            <span class=''></span>
+        </label>
+        <input type='radio' name='".$inp_name."' class='".$inp_class."'>
+        ";
+    }
+
+    $fix_all = "<fieldlist>
+    <div data-logic='".$inp_name."' class='".$div_class."'>".$text."</div>
+    <div data-result='".$inp_name."' class='".$div_class."'>".$text."</div>
+    ".$input_all."
+    </fieldlist>";
+    return $fix_all;
+}

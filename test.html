@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='preconnect' href='https://fonts.googleapis.com'>
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+        <link href='1.asset/main.css' rel='stylesheet' />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
+        <link rel='icon' href='1.asset/symbol/new_logo_sbe.png' type='image/ico' />
+        <title>test</title>
+    </head>
 </head>
-<body>
-    <select name="test" id="test" class="m-4 bg-slate-300 rounded">
-        <option value="">
-            <input type="text" name="testText" id="testText" class="hidden bg-teal-400">
-        </option>
-    </select>
-    <div>
-        
-    </div>
-<script type="module">
-    const test = document.getElementById('test');
-    document.addEventListener('click', async function(event) {
-        if(event.target.id === 'test') {
-            const inp = document.getElementById('testText');
-            console.log(inp);
-            inp.classList.toggle('hidden');
-        }
-    })
+<body >
+    <fieldset class="m-10 flex flex-col bg-slate-300 w-[15vw] p-2">
+        <div class="flex justify-center mb-2">
+            <span class="check  h-20 w-20"></span>
+            <span class="cross hidden h-20 w-20"></span>
+            <span class="minus hidden h-20 w-20"></span>
+        </div>
+        <div class="flex flex-row">
+            <label for="test1" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-green-400 duration-300 rounded cursor-pointer ml-4">OK
+            </label>
+            <input type="radio" name="test" id="test1" class="appearance-none">
+
+            <label for="test2" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-slate-200 duration-300 rounded cursor-pointer ml-4">-
+                <span class=""></span>
+            </label>
+            <input type="radio" name="test" id="test2" class="appearance-none">
+
+            <label for="test3" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-red-400 duration-300 rounded cursor-pointer ml-4">NG
+                <span class=""></span>
+            </label>
+            <input type="radio" name="test" id="test3" class="appearance-none">
+        </div>
+    </fieldset>
 
 
-
-</script>
 
 </body>
 </html>
