@@ -36,7 +36,7 @@
     h1.textContent = 'Scheduler Pick Now';
     root.appendChild(h1);
     const demand = await wobb.dbProcess('get',''); // wod_det
-    const woR = await wo.dbProcess('fetch',{wo_status: 'R'}); // wo_mstr
+    const woR = await wo.dbProcess('custom',''); // wo_mstr
     const cekDept = await dept.dbProcess('get','');
     const item_mstr = await pt_mstr.dbProcess('get',''); // wo_mstr
     console.log('************************************************************');

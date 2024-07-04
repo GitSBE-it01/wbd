@@ -87,6 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = $queryStart->deleteQuery();
             $response = deleteData($db, $query, $dataParam);
             break;
+        case "custom":
+            $response = custom_fetch($db);
+            break;
+
         default:
             $response = 'Method not supported';
     }

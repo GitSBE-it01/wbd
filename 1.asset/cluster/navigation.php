@@ -13,7 +13,7 @@ function nav($navArray) {
             ]
         ]
     */
-    $home = "<li class='list-none w-[7vw] h-full hover:pt-2 hover:bg-slate-700 duration-200 pt-2 pl-10 pr-10 ease-in-out hover:border-b-4 hover:border-teal-300'>
+    $home = "<li class='list-none flex justify-center items-center w-[7vw] h-full hover:pt-2 hover:bg-slate-700 duration-200 pt-2 ease-in-out hover:border-b-4 hover:border-blue-500'>
             <a href='http://informationsystem.sbe.co.id:8080/sbe/index.php'>
                 <button class='home h-8 w-8 bg-transparent'>
                 </button>
@@ -23,10 +23,10 @@ function nav($navArray) {
     $dflt_list_style = "w-[63vw] h-full flex flex-row";
         if(isset($navArray['list_style']) && $navArray['list_style'] !=='') {$dflt_list_style = $navArray['list_style'];}
 
-    $dflt_link_style  = "h-full w-[10vw] pt-3 justify-center flex hover:bg-slate-700 duration-200 ease-in-out hover:border-teal-300 hover:font-semibold hover:border-b-4 hover:pt-2";
+    $dflt_link_style  = "h-full w-[10vw] justify-center items-center flex";
     if(isset($navArray['link_style']) && $navArray['link_style'] !=='') {$dflt_link_style = $navArray['link_style'];}
 
-    $dflt_a_style = "text-white ease-in-out duration-200";
+    $dflt_a_style = "flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200";
     if(isset($navArray['a_style']) && $navArray['a_style'] !=='') {$dflt_a_style = $navArray['a_style'];}
 
     $links = "";

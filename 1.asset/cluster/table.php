@@ -45,14 +45,21 @@ function table($tableArr) {
         $row_count = $tableArr['row_count'];
     }
     for($i=0; $i<$row_count; $i++) {
+        $new_tr = $tr_dt;
+        $new_tr = str_replace('ok__', 'ok__'.$i, $new_tr);
+        $new_tr = str_replace('ng__', 'ng__'.$i, $new_tr);
         $td_all .= "<tr data-id='".$i."' ".$tr_dt_class.">
-        ".$tr_dt."</tr>
+        ".$new_tr."</tr>
         ";
     }
+    $add_cust_row ='';
+        if(isset($tableArr['add_cust_row']) && $tableArr['add_cust_row']!== '') {
+            $add_cust_row = $tableArr['add_cust_row'];
+        }
 
     $finish = $init.$id.$tbl_class.">
         ".$header_all."
-        ".$td_all."</table>";
+        ".$td_all.$add_cust_row."</table>";
     return $finish;
 }
 
@@ -75,30 +82,59 @@ function theader($set, $th_class_dflt) {
 
 function tdata($set, $td_class_dflt) {
     $body = "";
-    if(!isset($set['type']) || strtolower($set['type']) === 'text') {
-        $field = "data-field='".$set['field']."' ";
-        $td_class = $td_class_dflt;
-        if(isset($set['td_style']) && $set['td_style'] !== "") {
-            $td_class = "class='" . $set['td_style']."'> ";
+    $type = strtolower($set['type']);
+    $td_class = $td_class_dflt;
+    switch($type) {
+        case "text":
+            $field = "name='".$set['field']."' ";
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class = "class='" . $set['td_style']."'> ";
+            }
+            $body .= $field.$td_class;
+            break;
+        case "input": 
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class = "class='" . $set['td_style'] . "' ";
+            }
+            $body .= $td_class.">
+                    ".td_input($set);
+            break;
+        case "date": 
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class = "class='" . $set['td_style'] . "' ";
+            }
+            $body .= $td_class.">
+                    ".td_date($set);
+            break;
+        case "textarea": 
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class = "class='" . $set['td_style'] . "' ";
+            }
+            $body .= $td_class.">
+                    ".td_textarea($set);
+            break;
+        case "set_btn":
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class = "class='" . $set['td_style'] . "' ";
+            }
+            $body .= $td_class.">
+                    ".td_btn_set($set);
+            break;
+        case "logic":
+            $insert_position = strpos($td_class, "='") + strlen("='");
+            $insert_text = "flex flex-row ";
+            $td_class_logic = substr_replace($td_class, $insert_text, $insert_position, 0);
+            if(isset($set['td_style']) && $set['td_style'] !== "") {
+                $td_class_logic = "class='" . $set['td_style'] . "' ";
+            }
+            $body .= $td_class_logic.">
+                    ".td_logic($set);
+            break;
+        default: 
+            $body .='';
+            break;
         }
-        $body .= $field.$td_class;
-    }
-    if(isset($set['type']) && strtolower($set['type']) === 'input') {
-        $td_class = "class='bg-slate-300 whitespace-normal border-2 border-black' ";
-        if(isset($set['td_style']) && $set['td_style'] !== "") {
-            $td_class = "class='" . $set['td_style'] . "' ";
-        }
-        $body .= $td_class.">
-                ".td_input($set);
-    }
-    if(isset($set['type']) && strtolower($set['type']) === 'set_btn') {
-        $td_class = "class='bg-slate-300 whitespace-normal flex flex-row border-2 border-black' ";
-        if(isset($set['td_style']) && $set['td_style'] !== "") {
-            $td_class = "class='" . $set['td_style'] . "' ";
-        }
-        $body .= $td_class.">
-                ".td_btn_set($set);
-    }
+
     $td="    <td ".$body."
             </td>
         ";

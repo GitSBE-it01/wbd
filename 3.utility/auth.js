@@ -6,7 +6,7 @@ const auth = async() =>{
     fetch(url, {
             method: 'GET', 
             headers: {
-                'Content-Type': 'applicatio n/json',
+                'Content-Type': 'application/json',
                 'Ori': ori
             }
         })

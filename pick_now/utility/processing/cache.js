@@ -50,7 +50,6 @@ export const get_cache = async(name) => {
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/${check[4]}/backend/api.php`;
     let ori =`http://${check[2]}`;
-    console.log({ori, url, name});
     try {
         const response = await fetch(url, {
             method: 'GET', 

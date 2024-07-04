@@ -1,7 +1,5 @@
-export const dtlist = (ID,separator, dataArr, ...keyPick) => {
-    const target = document.querySelector('body');
-    const dtlist = document.createElement('datalist');
-    dtlist.id = ID;
+export const dtlist = (target,separator, dataArr, ...keyPick) => {
+    const dtlist = document.querySelector(target);
     dataArr.forEach(dt=>{
         const key = Object.keys(dt);
         let defaultVal = '';
@@ -31,6 +29,5 @@ export const dtlist = (ID,separator, dataArr, ...keyPick) => {
         }
         dtlist.appendChild(option);
     })
-    target.appendChild(dtlist);
     return;
 }

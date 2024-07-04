@@ -14,30 +14,35 @@
     </head>
 </head>
 <body >
-    <fieldset class="m-10 flex flex-col bg-slate-300 w-[15vw] p-2">
-        <div class="flex justify-center mb-2">
-            <span class="check  h-20 w-20"></span>
-            <span class="cross hidden h-20 w-20"></span>
-            <span class="minus hidden h-20 w-20"></span>
+    <fieldset class="m-10 flex flex-row bg-slate-300 w-[15vw]">
+
+        <div class="flex flex-col">
+            <label for="test1" class="flex items-center w-10 border-2 h-[50%] justify-center hover:text-xl hover:bg-green-400 duration-300 cursor-pointer">OK
+            </label>
+            <input type="radio" name="test" id="test1">
+
+            <label for="test3" class="flex items-center w-10 border-2 h-[50%] justify-center hover:text-xl hover:bg-red-400 duration-300 cursor-pointer">NG
+                <span class=""></span>
+            </label>
+            <input type="radio" name="test" id="test3" checked>
         </div>
-        <div class="flex flex-row">
-            <label for="test1" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-green-400 duration-300 rounded cursor-pointer ml-4">OK
-            </label>
-            <input type="radio" name="test" id="test1" class="appearance-none">
-
-            <label for="test2" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-slate-200 duration-300 rounded cursor-pointer ml-4">-
-                <span class=""></span>
-            </label>
-            <input type="radio" name="test" id="test2" class="appearance-none">
-
-            <label for="test3" class="flex items-center w-10 h-10 rounded-full justify-center hover:text-xl hover:bg-red-400 duration-300 rounded cursor-pointer ml-4">NG
-                <span class=""></span>
-            </label>
-            <input type="radio" name="test" id="test3" class="appearance-none">
+        <div class="flex justify-center pl-2" name="'test">
+            <span class="check hidden h-20 w-20"></span>
+            <span class="cross h-20 w-20"></span>
+            <span class="minus hidden h-20 w-20"></span>
         </div>
     </fieldset>
 
 
 
 </body>
+<script>
+    const cek = document.querySelector('input[type="radio"]');
+    console.log(cek);
+    console.log(cek.labels[0]);
+    cek.checked = true;
+    const testing = "a b ddde kag apaan:test";
+    console.log(testing.split(" "));
+    
+</script>
 </html>

@@ -59,4 +59,26 @@ function fetchDataFilter($db, $query, $filterValues) {
     return $data;
 }
 
+function custom_fetch($db) {
+    $conn = connectToDatabase($db);
+    $query = "SELECT * FROM dbqad_live.wo_mstr WHERE wo_status != 'C'";
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
+    $result = $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    
+    $result->free();
+    $stmt->close();
+    $conn->close();
+    return $data;
+}
+
 ?>

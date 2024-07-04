@@ -60,8 +60,15 @@
     cursor: pointer;
 }
 
-.plus {
+.plus_green {
     background-image: url('./symbol/add_default.svg');
+    background-size: cover;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.plus {
+    background-image: url('./symbol/add_white.svg');
     background-size: cover;
     background-color: transparent;
     cursor: pointer;

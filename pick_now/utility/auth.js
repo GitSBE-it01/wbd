@@ -1,12 +1,14 @@
 const auth = async() =>{
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/${check[4]}/backend/api.php`;
-    let ori =`http://${check[2]}`;
+    let ori =`http://${check[2]}/`;
     fetch(url, {
             method: 'GET', 
             headers: {
-                'Content-Type': 'applicatio n/json',
-                'Ori': ori
+                'Content-Type': 'application/json',
+                'Ori': ori,
+                'Pragma': 'cache',
+                'test': 'hallo'
             }
         })
     .then(response => response.text())

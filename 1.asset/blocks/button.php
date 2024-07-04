@@ -11,7 +11,7 @@ function button($btnArr) {
         if(isset($btnArr['id']) && $btnArr['id'] !=='') {$id = "id='" . $btnArr['id'] . "' ";}
     $type = "type='button' ";
     $disable = '';
-        if(isset($btnArr['disable']) && $btnArr['disable'] !=='') {$disable = "disabled ";}
+        if(isset($btnArr['disable'])) {$disable = "disabled ";}
     $class = "class ='rounded bg-slate-100 px-4 py-1 text-sm ml-2 hover:border-b-4 hover:border-r-4 border-teal-200 text-slate-800  hover:font-bold hover:pt-[.2rem] hover:pb-0 duration-200' ";
         if(isset($btnArr['style']) && $btnArr['style'] !== '') {$class = "class='" . $btnArr['style'] . "' ";}
     $textCont = ">
