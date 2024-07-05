@@ -1,71 +1,34 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
-require_once "index.php";
-require_once "data_access/1.index.php";
+require_once "api/index.php";
+require_once "data_access/index.php";
+require_once "data_process/index.php";
+require_once "middleware/index.php";
+require_once "model/index.php";
 
 session_start();
-$allowedOrigins = [
-    'http://informationsystem.sbe.co.id:8080', 
-    'http://192.168.2.103:8080',
-    'informationsystem.sbe.co.id:8080', 
-    '192.168.2.103:8080',
-];
-
-$origin = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-if (in_array($origin, $allowedOrigins)) {
-    header('Access-Control-Allow-Origin: ' . $origin);
-} else {
-    http_response_code(403); 
-    exit(); 
-}
-header('Access-Control-Allow-Methods: GET, POST, DELETE, PUT, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
-
-// Handling preflight requests
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    header('HTTP/1.1 200 OK');
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    $response = delete_cache();
-    echo json_encode($response);
-    return;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+cors();
+function routes($model) {
     $data = json_decode(file_get_contents('php://input'), true);
-    $data_name = isset($data['parameters']) ? $data['parameters']:'';
-    $isi_data = isset($data['data']) ? $data['data']:'';
-    $response = cache_data($data_name, $isi_data);
-    echo json_encode($response);
-    return;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if(isset($_SERVER['HTTP_APP']) && $_SERVER['HTTP_APP'] === 'cache') {
-        $response = get_cache($_SERVER['HTTP_PARAM']);
-    } else {
-        if(isset($_SESSION['username'])) {
-            $data = array(
-                'name'=>$_SESSION['absname'],
-                'dept'=>$_SESSION['divisi'],
-                'absen'=>$_SESSION['absen'],
-                'jabatan'=>$_SESSION['jabatan'],
-                'grade'=>$_SESSION['grade'],
-            );
-            $response = $data;
-        } else {
-            $response = 'failed';
-        }
+    $method = $_SERVER['REQUEST_METHOD'];
+    $reff = explode("/",$_SERVER['HTTP_REFERER']);
+    $routes = $reff[4];
+    switch($routes) {
+        case "vjs_alat_ukur2" :
+            $response = vjs_alat_ukur_handle($data, $method, $model, $_SERVER['HTTP_REQ_DETAIL']);
+            break;
+        default: 
+            $response = 'wrong routes';
     }
+    
     header("Cache-Control: public");
     header("Content-Type: application/json");
     echo json_encode($response);
     return;
 }
+routes($model);
 
-
+/*
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db = 'db_wbd';
     $data = json_decode(file_get_contents('php://input'), true);
@@ -103,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo json_encode($response);
     return;
 } 
+*/
 
 
 

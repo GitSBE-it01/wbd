@@ -1,21 +1,28 @@
-import { master, point, reff, vjs_log } from "./general.js";
+import { master, point, vjs_log } from "./general.js";
 import { currentDate, dtlist, inputEmptyRow,activeLink } from "../../3.utility/index.js";
 
 /*
-  sn_id             : dari serial_id dari input search pertama 
-  category          : 
-  no_asset          : 
-  check_point       : 
-  standard          : 
-  eff_date          : 
-  result            : 
-  data_group        : 
-  user_input        : 
-  decision          : 
-  approval_by       : 
+master : master alat
+
+
+point: master point 
+
+
+vjs_log : detail input data
+  sn_id             : dari input search pertama 
+  category          : dari input search pertama 
+  no_asset          : dari input search pertama 
+  check_point       : ketika buka vjs utk hari baru
+  standard          : ketika buka vjs utk hari baru
+  eff_date          : hasil user input
+  result            : hasil user input
+  data_group        : sama dengan check point
+  user_input        : ambil dari user 
+  decision          : summary user input
+  approval_by       : user input
 */
 
-
+console.log(master);
 activeLink('');
 const body = document.querySelector("body");
 const load = body.querySelector(".loading");
@@ -27,22 +34,21 @@ let remark = [];
 let temp_logic ='';
 let n_numb = 1;
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
-const user = user_detail['name'] + " - " + user_detail['jabatan']+' - '+ user_detail['grade'];
-const today = currentDate("-");
+const user = user_detail['name'] + " - " + user_detail['jabatan']+' - '+ user_detail['grade']; // user_input atau approval_by
+const today = currentDate("-"); 
 let counter = 0;
 const label_desc = document.querySelector("#desc_alat");
 const label_cat = document.querySelector("#cat"); // category
 const serial_id = document.querySelector("#seri"); //sn_id
 const label_asset = document.querySelector("#asset"); // no_asset
 const label_form = document.querySelector("[data-title='form_title']");
-console.log((label_form))
 
 const table_base = document.querySelector("#table_index");
 const tbody_base = table_base.querySelector('tbody');
 const table_form = document.querySelector('#table_form_main')
 const form_div = document.querySelector('[data-card ="form"]');
 
-const alat_detail = await master.dbProcess("get", "");
+// const alat_detail = await master.dbProcess("get", "");
 dtlist("#alat_list","/",alat_detail,"sn_id","new_subcat","no_asset","_desc");
 load.classList.toggle("hidden");
 
@@ -59,13 +65,29 @@ document.addEventListener("click", async function (event) {
         dt.classList.toggle('opacity-25');
       }
     })
+    const row = table_form.querySelectorAll(`[data-value]`);
+    row.forEach(dt=>{
+      if(!dt.classList.contains('hidden')) {
+        dt.classList.add("hidden");
+      }
+      dt.removeAttribute('data-value');
+      const data = dt.querySelectorAll("[name]");
+      data.forEach(d=>{
+        if (d.tagName === "TEXTAREA" || d.type === "text") {
+          d.value = '';
+        }
+        if (d.type === "hidden") {
+          d.value = '';
+        }
+      })
+    })
     return;
   }
 
-  // insert new data 
+  // insert new line 
   if (event.target.id === "new__data") {
     const data_array = [
-      {type:'date', field: 'eff_date    ', def_value:today},
+      {type:'date', field: 'eff_date', def_value:today}, 
       {type:'input', field:'user_input', def_value:user},
       {type:'input', field: 'approval_by'},
       {type:'btnSet', field: 'data_group', btn_style:'w-6 h-6 border-0', set:'open:arrow_right_black', def_value:'new' },
@@ -82,24 +104,54 @@ document.addEventListener("click", async function (event) {
     return;
   }
 
+  // open input search field
+  if (event.target.id === "submit_form") {
+    const form = document.querySelector('#submit_form');
+    const formData = new FormData(form);
+    const point = formData.getAll('check_point');
+    const std = formData.getAll('standard');
+    const rslt = formData.getAll('result');
+    let dt_input =
+    point.forEach(dt=>{
+      console.log(dt);
+    })
+    return;
+  }
+
   // change logic value
   if (event.target.hasAttribute('data-logic')) {
     const td = event.target.closest('td');
-    const result = td.querySelector('input[name="result"]');
-    console.log(result);
-    if(!ok.classList.contains('bg-green-400')) {
-      ok.classList.toggle('bg-green-400');
+    const input = td.querySelector('input[name="result"]');
+    const span = td.querySelector('[data-logic ="result"]');
+    const val = event.target.getAttribute('data-logic');
+    const ok = td.querySelector('[data-logic="ok"]');
+    const ng = td.querySelector('[data-logic="ng"]');
+    if(event.target.getAttribute('data-logic').toLowerCase() !== input.getAttribute('data-old').toLowerCase()) {
+      console.log('yup');
+      const tr = event.target.closest('tr');
+      tr.setAttribute('data-change', 'change');
     }
-    if(!ng.classList.contains('bg-red-400')) {
-      ng.classList.toggle('bg-red-400');
+    if(input.value.toLowerCase() === val.toLowerCase()){
+      span.setAttribute('class', 'w-14 h-14 minus');
+      if(ok.classList.contains('bg-green-400')) {ok.classList.toggle('bg-green-400');}
+      if(ng.classList.contains('bg-red-400')) {ng.classList.toggle('bg-red-400');}
+      input.value = '';
+      return;
     }
-    if(!td.classList.contains('check')) {
-      td.classList.toggle('check');
+    if(input.value.toLowerCase() !== val.toLowerCase()) {
+      input.value = val;
+      if(val === 'ok') {
+        if(!ok.classList.contains('bg-green-400')) {ok.classList.toggle('bg-green-400');}
+        if(ng.classList.contains('bg-red-400')) {ng.classList.toggle('bg-red-400');}
+        span.setAttribute('class', 'w-14 h-14 check');
+      }        
+      if(val === 'ng') {
+        if(ok.classList.contains('bg-green-400')) {ok.classList.toggle('bg-green-400');}
+        if(!ng.classList.contains('bg-red-400')) {ng.classList.toggle('bg-red-400');}
+        span.setAttribute('class', 'w-14 h-14 cross');
+      } 
+      return;
     }
-    if(!td.classList.contains('cross')) {
-      td.classList.toggle('cross');
-    }
-    return;
   }
 
   // open form field
@@ -114,25 +166,26 @@ document.addEventListener("click", async function (event) {
     if(search_id !== 'new') {
       form_data = await vjs_log.dbProcess('fetch', {data_group: search_id});
     } else {
-      console.log(label_cat.value);
       form_data = await point.dbProcess('fetch', {new_cat: label_cat.value});
-      console.log(form_data);
     }
     const tr_ = event.target.closest('tr');
     const date_cek = tr_.querySelector('input[type="date"]').value;
-    console.log({date_cek, tr_});
     label_form.textContent = "VJS Detail tgl "+date_cek;
     show_form = form_data.filter(obj=>obj.check_point !== 'remark');
     remark = form_data.filter(obj=>obj.check_point === 'remark');
-    console.log(remark);
     show_form.sort((a,b) => {
       if (a.check_point !== b.check_point)
         return a.check_point.localeCompare(b.check_point);
     });
     for (let i=0; i<show_form.length; i++){
       const row = table_form.querySelector(`[data-id='${i}']`);
+      if(event.target.getAttribute('data-button') === 'new') {
+        row.setAttribute('data-change', 'change');
+      }
+
       if (row.classList.contains("hidden")) {
         row.classList.toggle("hidden");
+
       }
       row.setAttribute("data-value", i);
       const data = row.querySelectorAll("[name]");
@@ -142,6 +195,10 @@ document.addEventListener("click", async function (event) {
         }
         if (d.type === "hidden") {
           d.value = show_form[i][`${d.getAttribute("name")}`];
+          if(event.target.getAttribute('data-button') === 'new') {
+            d.value = 'ok';
+          }
+          d.setAttribute('data-old', d.value);
           temp_logic = show_form[i][`${d.getAttribute("name")}`];
         }
       })
@@ -198,6 +255,7 @@ document.addEventListener("change", async function (event) {
     serial_id.value = split[0] ? split[0].trim() : ''; //sn_id
     label_asset.value = split[2] ? split[2].trim() : ''; // no_asset
     event.target.classList.toggle("hidden");
+
     main_data = [];
     main_data = await vjs_log.dbProcess("fetch", {sn_id: split[0].trim() });
     const hd_row = table_base.querySelector('[data-id="header"]');

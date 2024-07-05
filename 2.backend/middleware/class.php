@@ -25,4 +25,24 @@ class QueryInit {
         return $this->delete;
     }
 }
+
+class Model {
+    public $table;
+    public $detail;
+    public $field;
+
+    public function __construct($table, $parameter) {
+        foreach($parameter as $value) {
+            $detail = explode("::", $value);
+            $data = [
+                'field' => $detail[0],
+                'type' => $detail[1]
+            ];
+            $this->detail[] = $data;
+            $this->field[] = $detail[0];
+            }
+        $this->table = $table;
+        return;
+    }
+}
 ?>

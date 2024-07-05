@@ -35,15 +35,15 @@
         </tr>
         <tr data-id='0' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -53,15 +53,15 @@
         </tr>
         <tr data-id='1' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -71,15 +71,15 @@
         </tr>
         <tr data-id='2' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -89,15 +89,15 @@
         </tr>
         <tr data-id='3' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -107,15 +107,15 @@
         </tr>
         <tr data-id='4' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -125,15 +125,15 @@
         </tr>
         <tr data-id='5' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -143,15 +143,15 @@
         </tr>
         <tr data-id='6' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -161,15 +161,15 @@
         </tr>
         <tr data-id='7' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -179,15 +179,15 @@
         </tr>
         <tr data-id='8' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -197,15 +197,15 @@
         </tr>
         <tr data-id='9' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -215,15 +215,15 @@
         </tr>
         <tr data-id='10' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -233,15 +233,15 @@
         </tr>
         <tr data-id='11' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -251,15 +251,15 @@
         </tr>
         <tr data-id='12' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -269,15 +269,15 @@
         </tr>
         <tr data-id='13' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -287,15 +287,15 @@
         </tr>
         <tr data-id='14' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -305,15 +305,15 @@
         </tr>
         <tr data-id='15' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -323,15 +323,15 @@
         </tr>
         <tr data-id='16' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -341,15 +341,15 @@
         </tr>
         <tr data-id='17' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -359,15 +359,15 @@
         </tr>
         <tr data-id='18' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -377,15 +377,15 @@
         </tr>
         <tr data-id='19' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                    <input type='text' name='check_point' value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
+                    <input type='text' name='check_point' disabled value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" >
             </td>
             <td class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]' >
                     <textarea name='standard' rows=4 cols=75 maxlength=50 value=''class="w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4" ></textarea>
             </td>
             <td class='flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0' >
                     <div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='result__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='result__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='result'>
     <div class='flex justify-center pl-2 pt-4'>
@@ -399,7 +399,7 @@
                 <input type='text' name='check_point' value=''class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'>
             </td>
             <td colspan=2 class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]'>
-                <textarea autocomplete='off' placeholder='pilih alat' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='remark'></textarea>
+                <textarea autocomplete='off' placeholder='pilih alat' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='result'></textarea>
             </td>
         </tr>
     </table>
@@ -438,7 +438,7 @@
     </nav>
     <header class='fixed px-2 top-[5vh] bg-slate-700 w-screen h-[18vh]'>
         <form id='main_formset'>
-    <div class='text-2xl text-white font-bold'>Tools Detail</div>
+    <div class='text-2xl text-white font-bold'>Detail Form</div>
     <label for='desc_alat' class='inline-block mx-2 mt-1 w-[20vw] text-white text-xl'>Deskripsi Alat</label>
     <input type='text' id='desc_alat' name='' disabled  class='w-[60%] bg-transparent text-white text-xl font-bold ml-4'><br>
                 <label for='cat' class='inline-block mx-2 mt-1 w-[20vw] text-white text-xl'>Kategori</label>

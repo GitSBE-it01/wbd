@@ -110,8 +110,8 @@ function td_logic($set) {
         if(isset($set['span_style']) && $set['span_style'] !== '') {$span_class = $set['span_style'];}
 
     $all = "<div class='flex flex-col h-full'>
-        <div data-logic='ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='ok' name='".$field."__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='ng' name='".$field."__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
     <input type='hidden' name='".$field."'>
     <div class='".$div_span_class."'>

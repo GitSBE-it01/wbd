@@ -38,6 +38,4 @@ export class Data {
             return Promise.reject(error);
         }
       }
-
 }
-

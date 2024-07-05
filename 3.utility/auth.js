@@ -1,7 +1,7 @@
 const auth = async() =>{
     sessionStorage.clear();
     const check = window.location.href.split("/");
-    let url =`http://${check[2]}/${check[3]}/2.backend/api.php`;
+    let url =`http://${check[2]}/${check[3]}/2.backend/auth.php`;
     let ori =`http://${check[2]}`;
     fetch(url, {
             method: 'GET', 

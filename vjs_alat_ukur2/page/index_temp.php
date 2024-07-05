@@ -13,7 +13,7 @@ $main_formset = [
                 <input type='text' name='check_point' value=''class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'>
             </td>
             <td colspan=2 class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]'>
-                <textarea autocomplete='off' placeholder='pilih alat' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='remark'></textarea>
+                <textarea autocomplete='off' placeholder='pilih alat' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='result'></textarea>
             </td>
         </tr>
     ",
@@ -21,6 +21,7 @@ $main_formset = [
         [
             'type'=>'input', 
             'field'=> 'check_point', 
+            'disable'=>'',
             'header'=>'poin pengecekan',
             'th_style'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[27vw]',
             'td_style'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]'
@@ -29,6 +30,7 @@ $main_formset = [
             'type'=>'textarea',
             'field'=> 'standard',
             'header'=>'standard',
+            'disable'=>'',
             'rows'=>'4',
             'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[55vw]',
             'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]'
@@ -48,7 +50,7 @@ $main_formset = [
 $header_form = [
     'id'=>'main_formset',
     'title_style'=>'text-2xl text-white font-bold',
-    'title'=>'Tools Detail',
+    'title'=>'',
     'form_detail'=> [
         [
             'type'=>'text',
