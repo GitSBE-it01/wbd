@@ -8,7 +8,8 @@ require_once "model/index.php";
 
 session_start();
 cors();
-function routes($model) {
+$db_conn = new DB_Access('db_wbd');
+function routes($model, $db_conn) {
     $data = json_decode(file_get_contents('php://input'), true);
     $method = $_SERVER['REQUEST_METHOD'];
     $reff = explode("/",$_SERVER['HTTP_REFERER']);
@@ -26,7 +27,7 @@ function routes($model) {
     echo json_encode($response);
     return;
 }
-routes($model);
+routes($model, $db_conn);
 
 /*
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
