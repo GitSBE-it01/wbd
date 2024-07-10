@@ -8,7 +8,6 @@ const auth = async() =>{
                 'Content-Type': 'application/json',
                 'Ori': ori,
                 'Pragma': 'cache',
-                'test': 'hallo'
             }
         })
     .then(response => response.text())

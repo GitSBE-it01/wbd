@@ -28,43 +28,50 @@ class QueryInit {
 
 class Model {
     public $table;
-    public $detail;
+    public $type;
     public $field;
+    public $primary_key;
     public $get;
     public $insert;
     public $update;
     public $delete;
 
-    public function __construct($table, $parameter) {
+    public function __construct($table, $parameter, $pk) {
         foreach($parameter as $value) {
-            $detail = explode("::", $value);
-            $data = [
-                'field' => $detail[0],
-                'type' => $detail[1]
-            ];
-            $this->detail[] = $data;
-            $this->field[] = $detail[0];
-            }
+            $raw = explode("::", $value);
+            $this->type[$raw[0]] = $raw[1];
+            $this->field[] = $raw[0];
+        }
+        $raw_pk = explode("::", $pk);
+        $this->primary_key =  [
+            'field'=>$raw_pk[0],
+            'type'=>$raw_pk[1]
+        ];
         $this->table = $table;
         return;
     }
 }
 
 class DB_Access {
-    public $connection; 
+    public $connection1; 
+    public $connection2; 
     public $get;
     public $insert;
     public $update;
     public $delete;
 
     public function __construct($db) {
-        $connection = connectToDatabase($db);
-        return $connection;
+        $this->connection1 = connectToDatabase($db);
+        $this->connection2 = connectToDatabaseNew($db);
+        return;
     }
 
-    public function getQuery($table) {
-        $query = 'SELECT * FROM ' . $table;
-        $conn = $this->connection;
+    public function getQuery($action, $model) {
+        $conn = $this->connection1;
+        if($action === 'get2') {
+            $conn = $this->connection2;
+        }
+        $query = 'SELECT * FROM ' . $model->table;
         $stmt = $conn->prepare($query);
         if (!$stmt) {
             die("Prepare failed: " . $conn->error);
@@ -73,23 +80,189 @@ class DB_Access {
             die("Execute failed: " . $stmt->error);
         }
         $result = $stmt->get_result();
-        $data = array(); 
+        $json_data = array(); 
         while ($row = $result->fetch_assoc()) {
-            $data[] = $row; 
+            $json_data[] = $row; 
         }
         $result->free();
         $stmt->close();
         $conn->close();
-        return $data;
+        return $json_data;
     }
-    public function insertQuery() {
-        return $this->insert;
+
+    public function fetchQuery($action, $model, $data) {
+        $conn = $this->connection1;
+        if($action === 'fetch2') {
+            $conn = $this->connection2;
+        }
+        $param =  '';
+        $types = '';
+        $bindParams = array();
+        foreach($data as $key=>$value) {
+            if ($value === NULL) {
+                $param .= "`$key` is NULL AND ";
+            } elseif ($value === 'IS NOT NULL') {
+                $param .= "`$key` IS NOT NULL AND ";
+            } else {
+                $param .= "`$key` = ? AND ";
+                $bindParams[] = &$data[$key];
+            }
+            $types .= $model->type[$key];
+        }
+        $param = rtrim($param, 'AND ');
+        $query = 'SELECT * FROM '.$model->table;
+
+        if (!empty($param)) {
+            $query .= " WHERE ".$param;
+        }
+
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+    
+        if (!empty($types)) {
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+        }
+    
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+    
+        $result = $stmt->get_result();
+        $json_data = array();
+        while ($row = $result->fetch_assoc()) {
+            $json_data[] = $row;
+        }
+        
+        $result->free();
+        $stmt->close();
+        $conn->close();
+        return $json_data;
     }
-    public function updateQuery() {
-        return $this->update;
+
+    public function insertQuery($action, $model, $data) {
+        $conn = $this->connection1;
+        if($action === 'insert2') {
+            $conn = $this->connection2;
+        }
+        $field ='';
+        $param = '';
+        $types = '';
+        $mdl = (array) $model->field;
+        sort($mdl);
+        foreach($mdl as $value) {
+            $field .= $value.", ";
+            $types .= $model->type[$value];
+            $param .= '?, ';
+        }
+        $field = rtrim($field, ', ');
+        $param = rtrim($param, ', ');
+
+        $query = "INSERT INTO ".$model->table." (".$field.") VALUES (".$param.")";
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        set_time_limit(3600);
+        foreach($data as $set) {
+            $bindParams = array();
+            ksort($set);
+            foreach($set as $key=>$value) {
+                ${'param' . $key} = $value;
+                $bindParams[] = &${'param' . $key};
+            }
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            } else {
+                $result = "success";
+            }
+        }
+        $stmt->close();
+        $conn->close();
+        return $result;
     }
-    public function deleteQuery() {
-        return $this->delete;
+
+    public function updateQuery($action, $model, $data) {
+        $conn = $this->connection1;
+        if($action === 'update2') {
+            $conn = $this->connection2;
+        }
+        $field ='';
+        $types = '';
+        $pk = $model->primary_key;
+        $param = $pk['field']."=?";
+        $mdl = (array) $model->field;
+        sort($mdl);
+        foreach($mdl as $value) {
+            $field .= $value."=?, ";
+            $types .= $model->type[$value];
+        }
+        $field = rtrim($field, ', ');
+        $types .=$pk['type'];
+        
+        $query = "UPDATE ".$model->table." SET ".$field." WHERE ".$param;
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+        set_time_limit(3600);
+        foreach($data as $set) {
+            $bindParams = array();
+            ksort($set);
+            foreach($mdl as $val) {
+                ${'param' . $val} = $set[$val];
+                $bindParams[] = &${'param' . $val};
+            }  
+            ${'param'.$pk['field']} = $set[$pk['field']];
+            $bindParams[] = &${'param'.$pk['field']};
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            } else {
+                $result = "success ";
+            }
+        }
+        $stmt->close();
+        $conn->close();
+        return $result;
+    }
+
+    public function deleteQuery($action, $model, $data) {
+        $conn = $this->connection1;
+        if($action === 'delete2') {
+            $conn = $this->connection2;
+        }
+        $pk = $model->primary_key;
+        $param = $pk['field']."=?";
+        $types =$pk['type'];
+        $query = "DELETE FROM ".$model->table." WHERE ".$param;
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        set_time_limit(3600);
+        foreach($data as $set) {
+            $bindParams = array();
+            ${'param'.$pk['field']} = $set[$pk['field']];
+            $bindParams[] = &${'param'.$pk['field']};
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            } else {
+                $result = "success ";
+            }
+        }
+        $stmt->close();
+        $conn->close();
+        return $result;
     }
 }
 ?>

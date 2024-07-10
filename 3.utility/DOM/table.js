@@ -26,7 +26,6 @@ export const inputEmptyRow = async(target, counter, data_array) =>{
                 td.classList.add('flex');
                 td.classList.add('flex-row');
                 const sets =  data_array[i].set.split(" ");
-                console.log(sets);
                 sets.forEach(dt=>{
                     td.appendChild(td_button(dt, data_array[i]));
                 })

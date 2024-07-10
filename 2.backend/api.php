@@ -8,20 +8,42 @@ require_once "model/index.php";
 
 session_start();
 cors();
+
 $db_conn = new DB_Access('db_wbd');
 function routes($model, $db_conn) {
     $data = json_decode(file_get_contents('php://input'), true);
+    $dt = $data['Data'];
     $method = $_SERVER['REQUEST_METHOD'];
     $reff = explode("/",$_SERVER['HTTP_REFERER']);
     $routes = $reff[4];
-    switch($routes) {
-        case "vjs_alat_ukur2" :
-            $response = vjs_alat_ukur_handle($data, $method, $model, $_SERVER['HTTP_REQ_DETAIL']);
+    $table = $_SERVER['HTTP_REQ_DETAIL'];
+    $action = $_SERVER['HTTP_REQ_METHOD'];
+    switch($method) {
+        case "GET":
+            $mdl = $model[$table];
+            $response  = $db_conn->getQuery($action,$mdl);
+            break;
+        case "POST":
+            $mdl = $model[$table];
+            if($action === 'insert' || $action === 'insert2') {
+                $response  = $db_conn->insertQuery($action,$mdl, $dt);
+            } else if($action === 'custom') {
+                $response = custom_handle($db_conn, $dt, $routes, $method, $model, $table);
+            } else {
+                $response  = $db_conn->fetchQuery($action,$mdl, $dt);
+            }
+            break;
+        case "PUT":
+            $mdl = $model[$table];
+            $response  = $db_conn->updateQuery($action,$mdl, $dt);
+            break;
+        case "DELETE":
+            $mdl = $model[$table];
+            $response  = $db_conn->deleteQuery($action,$mdl, $dt);
             break;
         default: 
             $response = 'wrong routes';
     }
-    
     header("Cache-Control: public");
     header("Content-Type: application/json");
     echo json_encode($response);

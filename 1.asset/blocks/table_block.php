@@ -35,14 +35,16 @@ function td_textarea($set) {
         if(isset($set['rows']) && $set['rows'] !=='') {$rows = "rows=" . $set['rows'] . " ";} 
     $cols = "cols=75 ";
         if(isset($set['cols']) && $set['cols'] !=='') {$cols = "cols=" . $set['cols'] . " ";} 
+    $disable = "";
+        if(isset($set['disable'])) {$disable = "disabled ";} 
     $maxlength = "maxlength=50 ";
         if(isset($set['maxlength']) && $set['maxlength'] !=='') {$maxlength = "maxlength=" . $set['maxlength'] . " ";} 
-    $value = "value=''";
+    $value = "value='' ";
         if(isset($set['value']) && $set['value'] !=='') {$value = "value='" . $set['value'] . "' ";} 
     $placeholder = '';
         if(isset($set['placeholder']) && $set['placeholder'] !=='') {$placeholder = "placeholder='" . $set['placeholder'] . "' ";} 
 
-    $finish = "<textarea ".$field.$rows.$cols.$maxlength.$value.$placeholder.$class."></textarea>";
+    $finish = "<textarea ".$field.$rows.$cols.$maxlength.$value.$disable.$placeholder.$class."></textarea>";
     return $finish;
 }
 
@@ -110,10 +112,10 @@ function td_logic($set) {
         if(isset($set['span_style']) && $set['span_style'] !== '') {$span_class = $set['span_style'];}
 
     $all = "<div class='flex flex-col h-full'>
-        <div data-logic='ok' name='".$field."__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
-        <div data-logic='ng' name='".$field."__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
+        <div data-logic='OK' name='".$field."__ok' class='flex items-center w-10 border-r-2 border-b-2  border-black h-[50%] justify-center hover:bg-green-400 duration-300 cursor-pointer'>OK</div>
+        <div data-logic='NG' name='".$field."__ng' class='flex items-center w-10 h-[50%] border-r-2 border-black justify-center hover:bg-red-400 duration-300 cursor-pointer'>NG</div>
     </div>
-    <input type='hidden' name='".$field."'>
+    <input type='hidden' name='".$field."' disabled>
     <div class='".$div_span_class."'>
         <span data-logic='result' class='minus ".$span_class."'></span>
     </div>";

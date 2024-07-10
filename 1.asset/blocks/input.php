@@ -78,7 +78,7 @@ function textarea($input_array) {
         if(isset($input_array['cols']) && $input_array['cols'] !=='') {$cols = "cols='" . $input_array['cols'] . "' ";} 
     $maxlength = '';
         if(isset($input_array['maxlength']) && $input_array['maxlength'] !=='') {$maxlength = "maxlength='" . $input_array['maxlength'] . "' ";} 
-    $value_inp = "";
+    $value_inp = " ";
         if(isset($input_array['value']) && $input_array['value'] !=='') {$value_inp = "value='" . $input_array['value'] . "' ";} 
     $disable = "";
         if(isset($input_array['disable'])) {$disable = "disabled ";}

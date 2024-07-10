@@ -37,5 +37,5 @@ export class Data {
             console.error('Error:', error);
             return Promise.reject(error);
         }
-      }
+    }
 }

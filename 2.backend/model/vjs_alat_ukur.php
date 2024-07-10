@@ -1,47 +1,48 @@
 <?php
-
-
 $model['vjs_log'] = new Model('dbvjs_online.new_vjs_log',
 [
-    'id::int', // primary key
-    'sn_id::string',
-    'category::string',
-    'no_asset::string',
-    'check_point::string',
-    'standard::string',
-    'eff_date::date',
-    'data_group::string',
-    'user_input::string',
-    'decision::bool',
-    'approval_by::string',
-]);
+    'sn_id::s',
+    'category::s',
+    'no_asset::s',
+    'check_point::s',
+    'standard::s',
+    'eff_date::s',
+    'result::s',
+    'data_group::s',
+    'user_input::s',
+    'decision::i',
+    'approval_by::s',
+],
+'id::i');
 
 $model['vjs_reff'] = new Model('dbvjs_online.new_reff',
 [
-    'subcat::string'
-]);
+    'subcat::s'
+], 
+'subcat::s');
 
 $model['vjs_point'] = new Model('dbvjs_online.new_master_point',
 [
-    'id::int', // primary key
-    'new_cat::string',  //foreign key to vjs_reff
-    'alat::string',
-    'check_point::string',
-    'standard::string',
-    'pilihan::date',
-    'status::string',
-]);
+    'new_cat::s',  //foreign key to vjs_reff
+    'alat::s',
+    'check_point::s',
+    'standard::s',
+    'pilihan::s',
+    'status::s',
+], 
+'id::i');
 
 $model['vjs_alat'] = new Model('dbvjs_online.new_master_alat',
 [
-    'sn_id::string', // primary key
-    'cat::string',
-    'new_subcat::string', //foreign key to vjs_reff
-    'no_asset::string',
-    '_desc::string',
-    'merk::string',
-    'install_date::date',
-    'loc::string',
-    'cal_by::string',
-    'subcat::string',
-]);
+    'sn_id::s',
+    'cat::s',
+    'new_subcat::s', //foreign key to vjs_reff
+    'no_asset::s',
+    '_desc::s',
+    'merk::s',
+    'install_date::s',
+    'loc::s',
+    'cal_by::s',
+    'subcat::s',
+], 
+'sn_id::s');

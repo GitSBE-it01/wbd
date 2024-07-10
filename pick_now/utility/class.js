@@ -29,6 +29,7 @@ export class Data {
               body: JSON.stringify({action: action, parameters: this.key, data:data})
             });
             if (!response.ok) {
+                console.log(response);
                 throw new Error('Network response was not ok');
             }
             const result = await response.json();

@@ -1,6 +1,4 @@
 <?php
-
-
 $main_formset = [
     'table'=> [
         'id'=> 'table_form_main', 
@@ -10,11 +8,21 @@ $main_formset = [
     'add_cust_row'=>"
         <tr data-id='remark' class='w-full hidden' >
             <td class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[27vw]' >
-                <input type='text' name='check_point' value=''class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'>
+                <input type='text' name='check_point' value=''class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' disabled>
             </td>
             <td colspan=2 class='bg-slate-300 whitespace-normal border-2 text-sm border-black w-[55vw]'>
-                <textarea autocomplete='off' placeholder='pilih alat' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='result'></textarea>
+                <textarea autocomplete='off' data-add_row='remark' placeholder='keterangan tambahan' class='w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' name='result'></textarea>
             </td>
+            <input type='hidden' name='id' disabled>
+            <input type='hidden' name='sn_id' disabled>
+            <input type='hidden' name='standard' disabled>
+            <input type='hidden' name='category' disabled>
+            <input type='hidden' name='no_asset' disabled>
+            <input type='hidden' name='eff_date' disabled>
+            <input type='hidden' name='data_group' disabled>
+            <input type='hidden' name='user_input' disabled>
+            <input type='hidden' name='decision' disabled>
+            <input type='hidden' name='approval_by' disabled>
         </tr>
     ",
     'data_array'=> [
@@ -44,9 +52,30 @@ $main_formset = [
             'td_style'=>'flex flex-row bg-slate-300 whitespace-normal border-2 text-sm border-black h-[10vh] w-[10vw] p-0',
             'span_style'=>'w-14 h-14'
         ],
+        ['type'=>'hidden','field'=>'id'],
+        ['type'=>'hidden','field'=>'sn_id'],
+        ['type'=>'hidden','field'=>'category'],
+        ['type'=>'hidden','field'=>'no_asset'],
+        ['type'=>'hidden','field'=>'eff_date'],
+        ['type'=>'hidden','field'=>'data_group'],
+        ['type'=>'hidden','field'=>'user_input'],
+        ['type'=>'hidden','field'=>'decision'],
+        ['type'=>'hidden','field'=>'approval_by'],
     ]
 ];
-
+/*
+sn_id
+category
+no_asset
+check_point
+standard
+eff_date
+result
+data_group
+user_input
+decision
+approval_by
+*/
 $header_form = [
     'id'=>'main_formset',
     'title_style'=>'text-2xl text-white font-bold',
@@ -95,13 +124,13 @@ $alat_search = "<input type='text' autocomplete='off' placeholder='input' class=
 
 
 $btn_submit_form = button([
-    'id'=>'submit_form',
+    'id'=>'submit_form_btn',
     'text'=>'submit',
     'style'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300'
 ]);
 
 $btn_close_form = button([
-    'id'=>'close_form',
+    'id'=>'close_form_btn',
     'text'=>'cancel',
     'style'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300'
 ]);
@@ -132,20 +161,27 @@ $main_table = [
             'header'=>'Date',
             'disable'=>'',
             'th_style'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[22vw]',
-            'td_style'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[22vw]'
+            'td_style'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[20vw]'
         ],
         [
             'type'=>'text',
             'field'=> 'user_input',
             'header'=>'user',
-            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[50vw]',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[40vw]',
             'td_style'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[50vw]'
+        ],
+        [
+            'type'=>'text',
+            'field'=> 'loc',
+            'header'=>'Lokasi',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[20vw]',
+            'td_style'=>'bg-slate-300 whitespace-normal border-2 p-2 text-sm border-black w-[22vw]'
         ],
         [
             'type'=>'text',
             'field'=> 'approval_by',
             'header'=>'Approval',
-            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[22vw]',
+            'th_style'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[14vw]',
             'td_style'=>'bg-slate-300 whitespace-normal border-2 p-2 text-sm border-black w-[22vw]'
         ],
         [

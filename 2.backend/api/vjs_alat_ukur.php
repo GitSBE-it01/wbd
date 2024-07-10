@@ -1,18 +1,9 @@
 <?php
-
-
-function vjs_alat_ukur_handle($data,$method, $model, $table) {
-    $data_req = $data['data']; 
-    $table_db =  $model[$table]->table;
+function vjs_alat_ukur_handle($db_conn, $data, $method, $model, $table) {
     switch($method) {
-        case "GET":
-            $query = 'SELECT * FROM '.$table_db;
-            $response = getData('db_wbd', $query);
-            break;
-        case "fetch":
-            $query = '';
-            $response = getData('db_wbd', $query, $data_req);
-            break;
+        case "POST":
+            $mdl = $model[$table];
+            $response  = $data;
         default:
             $response = "Method Not Allowed";
     }

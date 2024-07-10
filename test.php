@@ -1,15 +1,12 @@
 <?php
 require_once "2.backend/api/vjs_alat_ukur.php";
+require_once "2.backend/model/index.php";
 
-$test2 = 'adstaret';
-$test = [
-    'a'=>'testing'
-];
-$test3 = 'test2';
-echo ${$test3};
+
+$mdl = (array) $model['qad_wo']->field;
+echo 'test' . gettype($mdl);
+sort($mdl);
 echo '<pre>';
-print_r($model);
+print_r($mdl);
 echo '</pre>';
-echo '</br>'. $test['a'] . '</br>';
-echo 'test = ' . ($test['a'] === 'testing');
-echo (isset($test['b']));
+

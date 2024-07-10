@@ -21,7 +21,9 @@ function table($tableArr) {
         if($i === 0) {
             $th_class_dflt = "class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' " ;
         }
-        $th_all .= theader($tableArr['data_array'][$i], $th_class_dflt);
+        if($tableArr['data_array'][$i]['type'] !== 'hidden') {
+            $th_all .= theader($tableArr['data_array'][$i], $th_class_dflt);
+        }
 
         $td_class_dflt = "class='bg-slate-300 whitespace-normal border-2 border-black p-2' ";
         if($i === 0) {
@@ -91,6 +93,9 @@ function tdata($set, $td_class_dflt) {
                 $td_class = "class='" . $set['td_style']."'> ";
             }
             $body .= $field.$td_class;
+            $td="    <td ".$body
+            ."       </td>
+                ";
             break;
         case "input": 
             if(isset($set['td_style']) && $set['td_style'] !== "") {
@@ -98,6 +103,9 @@ function tdata($set, $td_class_dflt) {
             }
             $body .= $td_class.">
                     ".td_input($set);
+            $td="    <td ".$body
+            ."       </td>
+                ";
             break;
         case "date": 
             if(isset($set['td_style']) && $set['td_style'] !== "") {
@@ -105,6 +113,9 @@ function tdata($set, $td_class_dflt) {
             }
             $body .= $td_class.">
                     ".td_date($set);
+            $td="    <td ".$body
+            ."       </td>
+                ";
             break;
         case "textarea": 
             if(isset($set['td_style']) && $set['td_style'] !== "") {
@@ -112,6 +123,12 @@ function tdata($set, $td_class_dflt) {
             }
             $body .= $td_class.">
                     ".td_textarea($set);
+            $td="    <td ".$body
+            ."       </td>
+                ";
+            break;
+        case "hidden": 
+            $td = "<input type='hidden' name='".$set['field']."' disabled>";
             break;
         case "set_btn":
             if(isset($set['td_style']) && $set['td_style'] !== "") {
@@ -119,6 +136,9 @@ function tdata($set, $td_class_dflt) {
             }
             $body .= $td_class.">
                     ".td_btn_set($set);
+            $td="    <td ".$body
+            ."       </td>
+                ";
             break;
         case "logic":
             $insert_position = strpos($td_class, "='") + strlen("='");
@@ -129,15 +149,16 @@ function tdata($set, $td_class_dflt) {
             }
             $body .= $td_class_logic.">
                     ".td_logic($set);
+            $td="    <td ".$body
+            ."       </td>
+                ";
             break;
         default: 
             $body .='';
             break;
         }
 
-    $td="    <td ".$body."
-            </td>
-        ";
+
     return $td;
 }
 /*
