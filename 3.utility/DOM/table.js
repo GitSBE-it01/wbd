@@ -109,3 +109,61 @@ const td_button = (dt, data_array) =>{
 
     return btn;
 }
+
+
+export class tableDOM {
+    constructor(key) {
+        this.id = key;
+    }
+
+    async parseData (data, page) {
+        try {
+            const table = document.getElementById(this.id);
+            const tr = table.querySelectorAll('tr');
+            let count = 0;
+            if(page >1) {
+                count = 100 * (page-1);
+            }
+            tr.forEach(dt=>{
+                if(dt.getAttribute('data-id') !== 'header') {
+                    const td = dt.querySelectorAll("[name]");
+                    dt.setAttribute('data-value', count);
+                    if(data[count]) {
+                        dt.classList.toggle('hidden');
+                    }
+                    td.forEach(d2=>{
+                        const key_fld = d2.getAttribute('name');
+                        d2.textContent = data[count][`${key_fld}`];
+                    })
+                    count++;
+                }
+            })
+        } catch(error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+    }
+
+    async clearText() {
+        try {
+            const table = document.getElementById(this.id);
+            const tr = table.querySelectorAll('tr');
+            tr.forEach(dt=>{
+                if(dt.getAttribute('data-id') !== 'header') {
+                    const td = dt.querySelectorAll("[name]");
+                    dt.removeAttribute('data-value');
+                    if(!dt.classList.contains('hidden')) {
+                        dt.classList.toggle('hidden');
+                    }
+                    td.forEach(d2=>{
+                        d2.textContent = "";
+                    })
+                }
+            })
+        } catch(error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
+    }
+
+}

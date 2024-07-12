@@ -29,16 +29,16 @@ function button($btnArr) {
     return $finish;
 }
 
-/*
-    example 
-    $btnArr = [
-        'data => [
-            'detail' => 'main',
-            'field' => 'dua',
-        ],
-        'id'=>'',
-        'disable'=>''
-        'style'=>''
-        'text'=>'',
-    ]
-*/
+
+class Btn {
+    public $id;
+   
+    public function __construct($id) {
+        $this->id = $id;
+    }
+
+    public function textBtn($text) {
+        $btn = '';
+        return $btn;
+    }
+}

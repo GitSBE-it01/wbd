@@ -99,17 +99,17 @@ class DB_Access {
         $types = '';
         $bindParams = array();
         foreach($data as $key=>$value) {
-            if ($value === NULL) {
-                $param .= "`$key` is NULL AND ";
+            if ($value === " ") {
+                $param .= "`$key` is NULL OR ";
             } elseif ($value === 'IS NOT NULL') {
-                $param .= "`$key` IS NOT NULL AND ";
+                $param .= "`$key` IS NOT NULL OR ";
             } else {
-                $param .= "`$key` = ? AND ";
+                $param .= "`$key` = ? OR ";
                 $bindParams[] = &$data[$key];
             }
             $types .= $model->type[$key];
         }
-        $param = rtrim($param, 'AND ');
+        $param = rtrim($param, 'OR ');
         $query = 'SELECT * FROM '.$model->table;
 
         if (!empty($param)) {
@@ -263,6 +263,52 @@ class DB_Access {
         $stmt->close();
         $conn->close();
         return $result;
+    }
+
+    public function customQuery($db, $query, $types, $data) {
+        $conn = $this->connection1;
+        if($db === 'new') {
+            $conn = $this->connection2;
+        }
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        set_time_limit(3600);
+        $counter = 0;
+        $bindParams = array();
+        foreach($data as $set) {
+            if(is_array($set)) {
+                foreach($set as $value ){
+                    ${'param'.$counter} = $value;
+                    $bindParams[] = &${'param'.$counter};
+                    $counter++;
+                }
+            } else {
+                foreach($set as $key=>$value ){
+                    ${'param'.$counter} = $value;
+                    $bindParams[] = &${'param'.$counter};
+                    $counter++;
+                }
+            }
+        }
+        array_unshift($bindParams, $types);
+        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+        if (!$stmt->execute()) {
+            die("Execute failed: " . $stmt->error);
+        }
+        $result = $stmt->get_result();
+        $json_data = array();
+        while ($row = $result->fetch_assoc()) {
+            $json_data[] = $row;
+        }
+        
+        $result->free();
+        $stmt->close();
+        $conn->close();
+        return $json_data;
+
     }
 }
 ?>

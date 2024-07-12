@@ -1,16 +1,22 @@
 import {dtlist} from './DOM/datalist.js';
-import {activeLink} from './DOM/nav.js';
-import {inputEmptyRow} from './DOM/table.js';
+import {activeLink,
+        Pagination} from './DOM/nav.js';
+import {inputEmptyRow,
+        tableDOM} from './DOM/table.js';
 import {api_access} from './utils/data_access.js';
-import {currentDate} from './utils/date.js';
+import {currentDate,
+        getCustomDate} from './utils/date.js';
 import {removeSpaces} from'./utils/string.js';
 
 export {
     dtlist,
     activeLink,
+    Pagination,
     inputEmptyRow,
+    tableDOM,
     api_access,
     currentDate,
+    getCustomDate,
     removeSpaces,
 };
 

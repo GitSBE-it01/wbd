@@ -2,17 +2,12 @@ export const api_access = async(action, table, data) =>{
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/2.backend/api.php`;
     let resp = '';
-    if(action === 'get') {resp = await get(url, table, "get","GET")};
-    if(action === 'fetch') {resp = await execute(url, table,'fetch', "POST", data)};
-    if(action === 'insert') {resp = await execute(url, table,'insert', "POST", data)};
-    if(action === 'update') {resp = await execute(url, table,'update', "PUT", data)};
-    if(action === 'delete') {resp = await execute(url, table,'delete', "DELETE", data)};
-    if(action === 'get2') {resp = await get(url, table, "get2","GET")};
-    if(action === 'fetch2') {resp = await execute(url, table,'fetch2', "POST", data)};
-    if(action === 'insert2') {resp = await execute(url, table,'insert', "POST", data)};
-    if(action === 'update2') {resp = await execute(url, table,'update', "PUT", data)};
-    if(action === 'delete2') {resp = await execute(url, table,'delete', "DELETE", data)};
-    if(action === 'custom') {resp = await execute(url, table,'custom', "POST", data)};
+    if(action === 'get') {resp = await get(url, table, "get","GET")}
+    else if(action.includes('fetch')) {resp = await execute(url, table,action, "POST", data);}
+    else if(action.includes('insert')) {resp = await execute(url, table,action, "POST", data)}
+    else if(action.includes('update')) {resp = await execute(url, table,action, "PUT", data)}
+    else if(action.includes('delete')) {resp = await execute(url, table,action, "DELETE", data)}
+    else {resp = await execute(url, table,'custom', "POST", data)}
     return resp;
 }
 

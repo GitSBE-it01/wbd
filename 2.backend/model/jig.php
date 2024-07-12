@@ -1,7 +1,6 @@
 <?php
 $model['jig_trans'] = new Model('db_jig.jig_trans',
 [
-    'id::i',
     'code::s',
     'loc::s',
     'qty::i',
@@ -21,7 +20,6 @@ $model['emp_code'] = new Model('db_jig.emp_code',
 
 $model['jig_func'] = new Model('db_jig.jig_function',
 [
-    'id::i',
     'item_jig::s',
     'item_type::s',
     'opt_on::i',
@@ -43,7 +41,6 @@ $model['jig_mstr'] = new Model('db_jig.jig_master',
 
 $model['jig_usg'] = new Model('db_jig.jig_usage',
 [
-    'id::i',
     'tr_date::s',
     'jig::s',
     'desc_jig::s',
