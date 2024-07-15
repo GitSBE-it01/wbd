@@ -7,6 +7,12 @@ require_once 'nav.php';
 INDEX HTML
 =============================================================================== */
 $index = "
+    <div data-card='hidden_table' class='px-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll'>
+        <div data-title='title_switch' class='text-2xl w-full pt-2 h-[5vh] bg-slate-400 sticky z-20 top-0 font-bold'>
+            Lokasi
+        </div>
+        ".table($loc_table).table($use_table)."
+    </div>
     <div class='loading z-40'></div>
     <nav class='fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]'>
         ".nav($nav_array)."

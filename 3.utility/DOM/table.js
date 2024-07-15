@@ -116,7 +116,7 @@ export class tableDOM {
         this.id = key;
     }
 
-    async parseData (data, page) {
+    async table_parse_data (data, page) {
         try {
             const table = document.getElementById(this.id);
             const tr = table.querySelectorAll('tr');
@@ -125,7 +125,7 @@ export class tableDOM {
                 count = 100 * (page-1);
             }
             tr.forEach(dt=>{
-                if(dt.getAttribute('data-id') !== 'header') {
+                if(dt.getAttribute('data-id') !== 'header' && data[count]) {
                     const td = dt.querySelectorAll("[name]");
                     dt.setAttribute('data-value', count);
                     if(data[count]) {
@@ -144,7 +144,7 @@ export class tableDOM {
         }
     }
 
-    async clearText() {
+    async table_clear() {
         try {
             const table = document.getElementById(this.id);
             const tr = table.querySelectorAll('tr');

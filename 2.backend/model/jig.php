@@ -59,6 +59,18 @@ $model['jig_usg'] = new Model('db_jig.jig_usage',
 ],
 'id::i');
 
+$model['jig_loc'] = new Model('db_jig.jig_loc2',
+[
+    'item_jig::s',
+    'qty_per_unit::i',
+    'unit::s',
+    'lokasi::s',
+    'status::s',
+    'urut::i',
+    'toleransi::i',
+    'code::s',
+],
+'id::i');
 
 
 
