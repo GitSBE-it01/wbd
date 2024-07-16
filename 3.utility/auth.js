@@ -7,7 +7,7 @@ const auth = async() =>{
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
-                'Ori': ori
+                'Ori': ori,
             }
         })
     .then(response => response.json())

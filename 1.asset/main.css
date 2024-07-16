@@ -10,6 +10,10 @@
     opacity: 0.25;
 }
 
+.transparent-slate-200 {
+    background-color: rgba(226, 232, 240, .8);
+  }
+
 .capitalize {
     text-transform: capitalize;
 }
@@ -56,6 +60,12 @@
 
 .cross {
     background-image: url('./symbol/cross.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.cross_gray {
+    background-image: url('./symbol/cross_gray.svg');
     background-size: cover;
     cursor: pointer;
 }

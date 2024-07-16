@@ -118,7 +118,7 @@ export class tableDOM {
 
     async table_parse_data (data, page) {
         try {
-            const table = document.getElementById(this.id);
+            const table = document.querySelector(this.id);
             const tr = table.querySelectorAll('tr');
             let count = 0;
             if(page >1) {
@@ -146,7 +146,7 @@ export class tableDOM {
 
     async table_clear() {
         try {
-            const table = document.getElementById(this.id);
+            const table = document.querySelector(this.id);
             const tr = table.querySelectorAll('tr');
             tr.forEach(dt=>{
                 if(dt.getAttribute('data-id') !== 'header') {

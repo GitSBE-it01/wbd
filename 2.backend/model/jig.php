@@ -28,6 +28,19 @@ $model['jig_func'] = new Model('db_jig.jig_function',
 ],
 'id::i');
 
+$model['log_func'] = new Model('db_jig.log_function',
+[
+    'id::i',
+    'item_jig::s',
+    'item_type::s',
+    'opt_on::i',
+    'opt_off::i',
+    'status::s',
+    'remark::s',
+    'trans_date::s',
+],
+'id_log::i');
+
 $model['jig_mstr'] = new Model('db_jig.jig_master',
 [
     'item_jig::s',
@@ -38,6 +51,19 @@ $model['jig_mstr'] = new Model('db_jig.jig_master',
     'drawing::s',
 ],
 'item_jig::s');
+
+$model['log_mstr'] = new Model('db_jig.log_master',
+[
+    'item_jig::s',
+    'desc_jig::s',
+    'status_jig::s',
+    'material::s',
+    'type::s',
+    'trans_date::s',
+    'remark::s',
+    'drawing::s',
+],
+'id_log::i');
 
 $model['jig_usg'] = new Model('db_jig.jig_usage',
 [
@@ -71,6 +97,23 @@ $model['jig_loc'] = new Model('db_jig.jig_loc2',
     'code::s',
 ],
 'id::i');
+
+$model['log_loc'] = new Model('db_jig.log_location',
+[
+    'code::s',
+    'item_jig::s',
+    'qty_per_unit::i',
+    'unit::s',
+    'lokasi::s',
+    'trans_date::s',
+    'remark::s',
+    'status::s',
+    'urut::i',
+    'toleransi::i',
+    'addSub::s',
+    'qty_change::i',
+],
+'id_log::i');
 
 
 

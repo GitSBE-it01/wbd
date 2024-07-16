@@ -24,7 +24,6 @@ function auth() {
         return;
     }
 }
-
 auth();
 
 ?>

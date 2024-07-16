@@ -276,27 +276,31 @@ class DB_Access {
         }
 
         set_time_limit(3600);
-        $counter = 0;
-        $bindParams = array();
-        foreach($data as $set) {
-            if(is_array($set)) {
-                foreach($set as $value ){
-                    ${'param'.$counter} = $value;
-                    $bindParams[] = &${'param'.$counter};
-                    $counter++;
-                }
-            } else {
-                foreach($set as $key=>$value ){
-                    ${'param'.$counter} = $value;
+        if($types !=='') {
+            $counter = 0;
+            $bindParams = array();
+            foreach($data as $set) {
+                if(is_array($set)) {
+                    foreach($set as $value ){
+                        ${'param'.$counter} = $value;
+                        $bindParams[] = &${'param'.$counter};
+                        $counter++;
+                    }
+                } else {
+                    ${'param'.$counter} = $set;
                     $bindParams[] = &${'param'.$counter};
                     $counter++;
                 }
             }
-        }
-        array_unshift($bindParams, $types);
-        call_user_func_array([$stmt, 'bind_param'], $bindParams);
-        if (!$stmt->execute()) {
-            die("Execute failed: " . $stmt->error);
+            array_unshift($bindParams, $types);
+            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            }
+        } else {
+            if (!$stmt->execute()) {
+                die("Execute failed: " . $stmt->error);
+            }
         }
         $result = $stmt->get_result();
         $json_data = array();

@@ -1,10 +1,22 @@
 <?php
-function cache_data($data_name, $data){
+function check_cache($folder, $param){
+  $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/";  // Adjust the folder name and path as needed
+  $files = glob($folderPathBase.$folder. "/*"); // Get all files in the folder
+  $result = false;
+  foreach ($files as $file) {
+    if (strpos($file, $param) !== false) { // Check if it's a file (not a directory)
+        $result = true;
+      }
+  }
+  return $result;
+}
+
+function cache_data($data_name, $folder, $data){
     $json_data = json_encode($data);
-    $folderPath = "../cache/";  // Adjust the folder name and path as needed
+    $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/";  // Adjust the folder name and path as needed
     $today = date('Ymd');
     $fileName = $today. "__". $data_name. ".json";
-    $filePath = $folderPath . $fileName;
+    $filePath = $folderPathBase.$folder."/".$fileName;
     $inputedInto = file_put_contents($filePath, $json_data);
     if ($inputedInto === false) {
         $result =  " Error saving JSON file.";
@@ -14,10 +26,10 @@ function cache_data($data_name, $data){
     return $result;
 }
 
-function get_cache($param){
-  $folderPath = "../cache/";  // Adjust the folder name and path as needed
-  $files = glob($folderPath . "/*"); // Get all files in the folder
-  $result = [$files];
+function get_cache($folder, $param){
+  $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/";  // Adjust the folder name and path as needed
+  $files = glob($folderPathBase.$folder. "/*"); // Get all files in the folder
+  $result = [];
   foreach ($files as $file) {
     if (strpos($file, $param) !== false) { // Check if it's a file (not a directory)
         $data = file_get_contents($file);
@@ -27,9 +39,10 @@ function get_cache($param){
   return $result;
 }
 
-function delete_cache(){
-  $folderPath = "../cache/";  // Adjust the folder name and path as needed
-  $files = glob($folderPath . "/*"); // Get all files in the folder
+
+function delete_cache($folder){
+  $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/";  // Adjust the folder name and path as needed
+  $files = glob($folderPathBase.$folder. "/*"); // Get all files in the folder
   foreach ($files as $file) {
      if (is_file($file)) { // Check if it's a file (not a directory)
        unlink($file);
@@ -37,4 +50,20 @@ function delete_cache(){
      }
    }
   return $result;
+}
+
+
+function delete_cache2($folder, $wordToFind) {
+  $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/"; // Adjust the folder name and path as needed
+  $files = scandir($folderPathBase . $folder); // Get all files and directories
+  $result = "";
+  foreach ($files as $file) {
+    if (is_file($folderPathBase . $folder . "/" . $file) && !in_array($file, ['.', '..'])) { // Check if it's a file (not a directory) and exclude '.' and '..'
+      if (stripos($file, $wordToFind) !== false) { // Case-insensitive search for the word
+        unlink($folderPathBase . $folder . "/" . $file);
+        $result .= "Deleted file: " . $file . "<br>"; // Append result for each deleted file
+      }
+    }
+  }
+  return $result; // Return accumulated results
 }

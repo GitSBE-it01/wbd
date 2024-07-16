@@ -43,3 +43,8 @@ $btn_search = button([
     'style'=>'z-30 rounded bg-gray-300 text-sm my-3 px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300'
 ]);
 
+$btn_close = button([
+    'id'=>'close_form_btn',
+    'text'=>'',
+    'style'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300'
+]);

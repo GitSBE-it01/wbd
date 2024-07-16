@@ -18,14 +18,6 @@ function formset($form_array) {
     foreach($form_array['form_detail'] as $set) {
         $type = $set['type'];
         switch($type) {
-            case "radio":
-                $formset .= input_radio($set)."<br>
-                ";
-                break;
-            case "logic":
-                $formset .= logical_radio($set)."<br>
-                ";
-                break;
             case "textarea":
                 $formset .= textarea($set)."<br>
                 ";

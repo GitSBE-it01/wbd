@@ -12,6 +12,11 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $types = 'ss';
             $response  = $db_conn->customQuery('new', $query, $types, $data);
             break;
+        case "fetch_jig_func_w_desc":
+            $query = 'SELECT jf.id, jf.item_jig, jf.item_type, jf.opt_on, jf.opt_off, jf.status, pt.pt_desc1, pt.pt_desc2, pt.pt_status FROM '.$mdl.' jf JOIN dbqad_live.pt_mstr pt ON jf.item_type = pt.pt_part WHERE jf.item_jig=?';
+            $types = 's';
+            $response  = $db_conn->customQuery('', $query, $types, $data);
+            break;
         default:
             $response = "action not available";
     }

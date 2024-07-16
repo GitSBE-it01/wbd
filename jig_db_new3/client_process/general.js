@@ -1,13 +1,31 @@
-/*
-import {Data} from '../../3.utility/class.js';
-export const master = new Data('vjs_alat_ukur_master');
-export const point = new Data('vjs_alat_ukur_point');
-export const vjs_log = new Data('vjs_alat_ukur_vjs_log');
-export const reff = new Data('vjs_alat_ukur_reff');
-*/
-
 import {api_access} from '../../3.utility/index.js';
-export const master = await api_access('get','vjs_alat', '');
-export const point = await api_access('vjs_point');
-export const vjs_log = await api_access('vjs_log');
-export const reff = await api_access('vjs_reff');
+
+export let master = await api_access('get','jig_mstr', '');
+export let loc = await api_access('get','jig_loc', '');
+export let log_loc = await api_access('get','log_loc', '');
+
+
+const gabungan = {};
+loc.forEach(dt=>{
+  if(gabungan[dt.item_jig]) {
+    gabungan[dt.item_jig]['qty_total'] += parseInt(dt.qty_per_unit);
+  } else {
+    const data = {
+      ...dt,
+      qty_total: parseInt(dt.qty_per_unit)
+    }
+    gabungan[dt.item_jig] = data;
+  }
+})
+
+master.forEach(dt=>{
+  const fltr = dt.item_jig+ "--"+
+    dt.desc_jig+ "--"+
+    dt.status_jig+ "--"+
+    dt.material+ "--"+
+    dt.type+ "--"+
+    dt.drawing;
+  const qty = gabungan[dt.item_jig] ? gabungan[dt.item_jig].qty_total :0;
+  dt['filter'] = fltr;
+  dt['qty'] = qty;
+})

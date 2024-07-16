@@ -1,3 +1,4 @@
+import {buttonDOM} from './DOM/button.js';
 import {dtlist} from './DOM/datalist.js';
 import {activeLink,
         Pagination} from './DOM/nav.js';
@@ -9,15 +10,16 @@ import {currentDate,
 import {removeSpaces} from'./utils/string.js';
 
 export {
-    dtlist,
-    activeLink,
-    Pagination,
-    inputEmptyRow,
-    tableDOM,
-    api_access,
-    currentDate,
-    getCustomDate,
-    removeSpaces,
+        buttonDOM,
+        dtlist,
+        activeLink,
+        Pagination,
+        inputEmptyRow,
+        tableDOM,
+        api_access,
+        currentDate,
+        getCustomDate,
+        removeSpaces,
 };
 
 

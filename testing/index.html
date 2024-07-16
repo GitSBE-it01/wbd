@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RichTextEditor Image Upload Example</title>
+    <link rel="stylesheet" type="text/css" href="path/to/richtexteditor.css">
+    <script src="path/to/richtexteditor.js"></script>
+</head>
+<body>
+    <textarea id="editor"></textarea>
+    <script>
+        var editor = new RichTextEditor("#editor", {
+            // Configuration options
+            height: 400,
+            toolbar: [
+                'bold', 'italic', 'underline', '|', 
+                'orderedlist', 'unorderedlist', '|', 
+                'link', 'image', '|', 
+                'sourcecode'
+            ],
+            imageUploadHandler: 'path/to/upload_handler.php',
+            language: 'en'
+        });
+    </script>
+</body>
+</html>

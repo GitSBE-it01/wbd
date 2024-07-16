@@ -2,23 +2,31 @@ export const api_access = async(action, table, data) =>{
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/2.backend/api.php`;
     let resp = '';
-    if(action === 'get') {resp = await get(url, table, "get","GET")}
-    else if(action.includes('fetch')) {resp = await execute(url, table,action, "POST", data);}
-    else if(action.includes('insert')) {resp = await execute(url, table,action, "POST", data)}
-    else if(action.includes('update')) {resp = await execute(url, table,action, "PUT", data)}
-    else if(action.includes('delete')) {resp = await execute(url, table,action, "DELETE", data)}
-    else {resp = await execute(url, table,'custom', "POST", data)}
+    if(action.includes('get')) {resp = await get(url, table, action, "GET")}
+    else if(action.includes('fetch')) {resp = await execute(url, table, action, "POST", data);}
+    else if(action.includes('insert')) {resp = await execute(url, table, action, "POST", data)}
+    else if(action.includes('update')) {resp = await execute(url, table, action, "PUT", data)}
+    else if(action.includes('delete')) {resp = await execute(url, table, action, "DELETE", data)}
+    else {resp = await execute(url, table, action, "POST", data)}
     return resp;
 }
 
 const get = async(url, table, action, method) => {
     try {
+        let fix_action = action;
+        let cache = 'no-cache';
+        if(action.includes("cache")) {
+            let splt = action.split("__");
+            fix_action = splt[0];
+            cache = 'cache';
+        }
         const response = await fetch(url, {
             method: method, 
             headers: {
               'Content-Type': 'application/json',
               'Req-Detail': table,
-              'Req-Method': action
+              'Req-Method': fix_action,
+              'Cache-Control': cache
           },
         });
         if (!response.ok) {
@@ -34,12 +42,20 @@ const get = async(url, table, action, method) => {
 
 const execute = async(url, table, action, method, data)=>{
     try {
+        let fix_action = action;
+        let cache = 'no-cache';
+        if(action.includes("cache")) {
+            let splt = action.split("__");
+            fix_action = splt[0];
+            cache = 'cache';
+        }
         const response = await fetch(url, {
             method: method, 
             headers: {
               'Content-Type': 'application/json',
               'Req-Detail': table,
-              'Req-Method': action
+              'Req-Method': fix_action,
+              'Cache-Control': cache
           },
           body: JSON.stringify({Data:data})
         });

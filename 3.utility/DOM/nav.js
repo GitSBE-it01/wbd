@@ -30,12 +30,12 @@ export class Pagination {
     }
 
     pagination_init(data, table) {
+        const div = document.querySelector(this.key);
         const dt_cnt = data.length;
-        const tbl = document.getElementById(table);
+        const tbl = document.querySelector(table);
         const tr = tbl.querySelectorAll('tr');
         const tr_cnt = tr.length -1; //-1 utk header
         const max_page = Math.ceil(dt_cnt/tr_cnt);
-        const div = document.getElementById(this.key);
         const pagi = div.querySelectorAll('[data-id]');
         pagi.forEach(dt=>{
             const pg = dt.getAttribute('data-page');
@@ -69,7 +69,7 @@ export class Pagination {
     }
 
     page_active(page) {
-        const div = document.getElementById(this.key);
+        const div = document.querySelector(this.key);
         const pagi = div.querySelectorAll('[data-id]');
         const max = div.querySelector('[data-id = "7"]').getAttribute('data-page');
         pagi.forEach(dt=>{
@@ -85,7 +85,6 @@ export class Pagination {
                 })
             }
             if(!dt.disabled) {
-                console.log(dt);
                 this.mute.forEach(cls=>{
                     if(!dt.classList.contains(cls)) {
                         dt.classList.toggle(cls);
@@ -222,7 +221,7 @@ export class Pagination {
                             }
                         })
                     }
-                    if(page<(parseInt(max)-2) && dt.textContent!=="...") {
+                    if(page<(parseInt(max)-3) && dt.textContent!=="...") {
                         dt.disabled = true;
                         dt.textContent = "...";
                         this.mute.forEach(cls=>{
@@ -232,7 +231,7 @@ export class Pagination {
                         })
                     }
 
-                    if(page>=(parseInt(max)-2)) {
+                    if(page>=(parseInt(max)-3)) {
                         dt.disabled = false;
                         const curPage = parseInt(max)-1;
                         dt.textContent= curPage;
