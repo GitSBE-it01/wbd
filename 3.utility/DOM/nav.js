@@ -36,7 +36,7 @@ export class Pagination {
         const tr = tbl.querySelectorAll('tr');
         const tr_cnt = tr.length -1; //-1 utk header
         const max_page = Math.ceil(dt_cnt/tr_cnt);
-        const pagi = div.querySelectorAll('[data-id]');
+        const pagi = div.querySelectorAll('[data-group]');
         pagi.forEach(dt=>{
             const pg = dt.getAttribute('data-page');
             if(!dt.classList.contains("hidden")) {

@@ -312,7 +312,6 @@ class DB_Access {
         $stmt->close();
         $conn->close();
         return $json_data;
-
     }
 }
 ?>

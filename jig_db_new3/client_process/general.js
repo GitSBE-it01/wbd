@@ -2,7 +2,6 @@ import {api_access} from '../../3.utility/index.js';
 
 export let master = await api_access('get','jig_mstr', '');
 export let loc = await api_access('get','jig_loc', '');
-export let log_loc = await api_access('get','log_loc', '');
 
 
 const gabungan = {};

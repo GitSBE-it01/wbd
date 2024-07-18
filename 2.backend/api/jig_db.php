@@ -17,6 +17,11 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $types = 's';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
+        case "fetch_distinct_jig":
+            $query = 'SELECT distinct(jf.item_type), concat(pt.pt_desc1, " ", pt.pt_desc2) AS description FROM '.$mdl.' jf JOIN dbqad_live.pt_mstr pt ON jf.item_type = pt.pt_part;';
+            $types = '';
+            $response  = $db_conn->customQuery('', $query, $types, $data);
+            break;
         default:
             $response = "action not available";
     }

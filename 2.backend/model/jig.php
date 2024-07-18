@@ -115,6 +115,12 @@ $model['log_loc'] = new Model('db_jig.log_location',
 ],
 'id_log::i');
 
+$model['list_loc'] = new Model('db_jig.list_location',
+[
+    'name::s',
+],
+'id::i');
+
 
 
 

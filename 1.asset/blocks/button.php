@@ -28,17 +28,3 @@ function button($btnArr) {
         .$end;
     return $finish;
 }
-
-
-class Btn {
-    public $id;
-   
-    public function __construct($id) {
-        $this->id = $id;
-    }
-
-    public function textBtn($text) {
-        $btn = '';
-        return $btn;
-    }
-}

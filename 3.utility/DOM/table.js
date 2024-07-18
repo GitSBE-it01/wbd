@@ -122,18 +122,35 @@ export class tableDOM {
             const tr = table.querySelectorAll('tr');
             let count = 0;
             if(page >1) {
-                count = 100 * (page-1);
+                count = tr.length * (page-1);
             }
             tr.forEach(dt=>{
+                if(dt.getAttribute('data-id') !== 'header' && !dt.classList.contains('hidden')) {
+                    dt.classList.toggle('hidden');
+                }
                 if(dt.getAttribute('data-id') !== 'header' && data[count]) {
-                    const td = dt.querySelectorAll("[name]");
-                    dt.setAttribute('data-value', count);
-                    if(data[count]) {
+                    const fld = dt.querySelectorAll("[name]");
+                    if(dt.classList.contains('hidden')) {
                         dt.classList.toggle('hidden');
                     }
-                    td.forEach(d2=>{
+                    dt.setAttribute('data-value', count);
+                    fld.forEach(d2=>{
                         const key_fld = d2.getAttribute('name');
-                        d2.textContent = data[count][`${key_fld}`];
+                        const currVal = data[count][`${key_fld}`] ? data[count][`${key_fld}`] : '';
+                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
+                            d2.value = currVal;
+                            const td = d2.closest('td');
+                            td.innerHTML += currVal;
+                        }
+                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
+                            d2.value = currVal;
+                        }
+                        if(d2.tagName === 'SELECT') {
+                            d2.value = currVal;
+                        }
+                        if(d2.tagName === 'TD') {
+                            d2.textContent = currVal;
+                        }
                     })
                     count++;
                 }
@@ -156,7 +173,21 @@ export class tableDOM {
                         dt.classList.toggle('hidden');
                     }
                     td.forEach(d2=>{
-                        d2.textContent = "";
+                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
+                            d2.value = '';
+                            const td = d2.closest('td');
+                            const newVal = td.innerHTML.split('>'); 
+                            td.innerHTML = newVal[0]+">";
+                        }
+                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
+                            d2.value = '';
+                        }
+                        if(d2.tagName === 'SELECT') {
+                            d2.value = '';
+                        }
+                        if(d2.tagName === 'TD') {
+                            d2.textContent = '';
+                        }
                     })
                 }
             })

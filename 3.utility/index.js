@@ -1,5 +1,6 @@
 import {buttonDOM} from './DOM/button.js';
-import {dtlist} from './DOM/datalist.js';
+import {dtlist,
+        DtlistDOM} from './DOM/datalist.js';
 import {activeLink,
         Pagination} from './DOM/nav.js';
 import {inputEmptyRow,
@@ -12,6 +13,7 @@ import {removeSpaces} from'./utils/string.js';
 export {
         buttonDOM,
         dtlist,
+        DtlistDOM,
         activeLink,
         Pagination,
         inputEmptyRow,

@@ -13,40 +13,32 @@
         <title>test</title>
     </head>
 </head>
-<body >
-    <div class="h-[100vh] w-[100vw] block bg-slate-300 z-40 opacity-50">
+<body class="bg-slate-700">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    haloo
+                    <input type="text" value="testing">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="abc">
+        <select name="test" id="asdfab">
+            <option value="1234">12345</option>
+            <option value="abc">abc</option>
+        </select>
     </div>
-    <div class='loading z-40'></div>
-    <button type='button' data-method='close' class='cross_gray bg-transparent h-8 w-8 fixed top-[20vh] right-[18vw]'></button>
-    <fieldset class="m-10 flex flex-row bg-slate-300 w-[15vw]">
 
-        <div class="flex flex-col">
-            <label for="test1" class="flex items-center w-10 border-2 h-[50%] justify-center hover:text-xl hover:bg-green-400 duration-300 cursor-pointer">OK
-            </label>
-            <input type="radio" name="test" id="test1">
-
-            <label for="test3" class="flex items-center w-10 border-2 h-[50%] justify-center hover:text-xl hover:bg-red-400 duration-300 cursor-pointer">NG
-                <span class=""></span>
-            </label>
-            <input type="radio" name="test" id="test3" checked>
-        </div>
-        <div class="flex justify-center pl-2" name="'test">
-            <span class="check hidden h-20 w-20"></span>
-            <span class="cross h-20 w-20"></span>
-            <span class="minus hidden h-20 w-20"></span>
-        </div>
-    </fieldset>
-
-
+    <button type="button" id="submit-button" class="home w-10 h-10"></button>
 
 </body>
 <script>
-    const cek = document.querySelector('input[type="radio"]');
-    console.log(cek);
-    console.log(cek.labels[0]);
-    cek.checked = true;
-    const testing = "a b ddde kag apaan:test";
-    console.log(testing.split(" "));
-    
+    const sbmtBtn = document.querySelector('#submit-button');
+    sbmtBtn.addEventListener('click', function(event) {
+        console.log('clicked here')
+    })
 </script>
 </html>
