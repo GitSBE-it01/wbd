@@ -6,8 +6,10 @@ class Component {
     public $class;
     public $type_attr;
     public $id;
+    public $for;
     public $name;
     public $list;
+    public $require;
     public $placeholder;
     public $disable;
     public $data_attr;
@@ -23,10 +25,12 @@ class Component {
         $this->class = isset($array['class']) ? "class='".$array['class']."' " : '';
         $this->type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : '';
         $this->id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $this->for = isset($array['for']) ? "for='".$array['for']."' " : '';
         $this->name = isset($array['name']) ? "name='".$array['name']."' " : '';
         $this->list = isset($array['list']) ? "list='".$array['list']."' " : '';
         $this->placeholder = isset($array['placeholder']) ? "placeholder='".$array['placeholder']."' " : '';
         $this->disable = isset($array['disable']) ? "disabled " : '';
+        $this->require = isset($array['require']) ? "required " : '';
         $this->value = isset($array['value']) ? "value='".$array['value']."' " : '';
         $this->cols = isset($array['cols']) ? "colspan='".$array['cols']."' " : '';
         $this->rows = isset($array['rows']) ? "rowspan='".$array['rows']."' " : '';
@@ -55,6 +59,7 @@ class Component {
 
     public function create($array) {
         $id = isset($array['id']) ? "id='".$array['id']."' " : $this->id;
+        $for = isset($array['for']) ? "for='".$array['for']."' " : $this->for;
 
         $name = isset($array['name']) ? "name='".$array['name']."' " : $this->name;
 
@@ -73,7 +78,8 @@ class Component {
 
         $class = isset($array['class']) ? "class='".$array['class']."' " : $this->class;
 
-        $disable = isset($array['disable']) ? $array['disable']." " : $this->disable;
+        $disable = isset($array['disable']) ? "disabled " : $this->disable;
+        $require = isset($array['require']) ? "required " : $this->require;
 
         $data_attr = '';   
         if(isset($array['data_attr'])) {
@@ -101,6 +107,7 @@ class Component {
         if($this->end) {
             $component = "<".$this->element." "
             .$id
+            .$for
             .$name
             .$type_attr
             .$list
@@ -111,12 +118,14 @@ class Component {
             .$cols
             .$maxlength
             .$data_attr
+            .$require
             .$class
             .$disable.">"
             .$body;
         } else {
             $component = "<".$this->element." "
             .$id
+            .$for
             .$name
             .$type_attr
             .$list
@@ -127,6 +136,7 @@ class Component {
             .$cols
             .$maxlength
             .$data_attr
+            .$require
             .$class
             .$disable.">"
             .$body

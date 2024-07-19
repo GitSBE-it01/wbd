@@ -36,11 +36,9 @@ document.addEventListener("click", async function (event) {
     hist_tbl.table_clear();
     load.classList.toggle("hidden");
     let val_search = document.querySelector('#stock_search').value.split('--');
-    console.log(val_search);
     let fix_val = val_search[0].toLowerCase();
     // data stock
     stock_data = await api_access('fetch','jig_loc', {item_jig:fix_val});
-    console.log(stock_data);
     stock_tbl.table_parse_data(stock_data,stock_pg);
     stock_page.pagination_init(stock_data, '#stock_table');
     // data history
@@ -90,48 +88,75 @@ document.addEventListener("click", async function (event) {
   if(event.target.hasAttribute('data-field')) {
     const trgt = event.target;
     if(trgt.querySelector('input')) {
-      const inp_hidden = trgt.querySelector('input');
-      if(inp_hidden.classList.contains('hidden')) {
-        inp_hidden.classList.toggle('hidden');
-        inp_hidden.classList.toggle('z-20');
+      const inpt = trgt.querySelector('input');
+      if(inpt.disabled === false) {
+        const inp_hidden = trgt.querySelector('input');
+        const inp_lbl = trgt.querySelector('label');
+        if(inp_hidden.classList.contains('hidden')) {
+          inp_hidden.classList.toggle('hidden');
+          inp_hidden.classList.toggle('z-20');
+          inp_lbl.classList.toggle('hidden');
+        }
+        inpt.focus();
       }
+      return
+    } 
+    if(trgt.tagName === "LABEL") {
+      const inpt = document.querySelector(`#${trgt.getAttribute('for')}`);
+      if(inpt.disabled === false) {
+        if(inpt.classList.contains('hidden')) {
+          inpt.classList.toggle('hidden');
+          inpt.classList.toggle('z-20');
+          trgt.classList.toggle('hidden');
+        }
+        inpt.focus();
+      }
+      return;
     }
   }
-
   /* ---------------------------------------------------------
    switch
   --------------------------------------------------------- */
-  if(event.target.hasAttribute('data-switch')) {
+  if(event.target.getAttribute('data-method')==='switch') {
     const trgt = event.target;
-    const cek = event.target.getAttribute('data-switch');
-    const table_loc = document.querySelector('#table_loc_jig');
-    const table_use = document.querySelector('#table_use_jig');
-    const page_loc = document.querySelector('#loc_page');
-    const page_use = document.querySelector('#use_page');
-    if(cek === 'lokasi') {
-      const sets = document.querySelector('[data-switch="tipe"]');
-      if(!table_use.classList.contains('hidden')) {
-        table_use.classList.toggle('hidden');
-        page_use.classList.toggle('hidden');
+    let code = '';
+    const array = [
+      'stock',
+      'stock_search',
+      'stock_div',
+      'detail',
+      'detail_search',
+      'detail_div',
+      'usage',
+      'usage_search',
+      'usage_div',
+    ]
+    if(trgt.id === 'stock') {code = 'stock'}
+    if(trgt.id === 'detail') {code = 'detail'}
+    if(trgt.id === 'usage') {code = 'usage'}
+    array.forEach(dt=>{
+      const trgt = document.querySelector(`#${dt}`);
+      if(dt.includes(code)){
+        if(dt !== code && trgt.classList.contains('hidden')) {
+          trgt.classList.toggle('hidden');
+        } 
+        if(dt === code && !trgt.classList.contains('text-xl')) {
+          trgt.classList.toggle('text-xl');
+          trgt.classList.toggle('bg-blue-700');
+          trgt.classList.toggle('font-bold');
+        }
       }
-      if(table_loc.classList.contains('hidden')) {
-        table_loc.classList.toggle('hidden');
-        page_loc.classList.toggle('hidden');
+      if(!dt.includes(code)){
+        if(dt.includes('_') && !trgt.classList.contains('hidden')) {
+          trgt.classList.toggle('hidden');
+        } 
+        if(!dt.includes('_') && trgt.classList.contains('text-xl')) {
+          trgt.classList.toggle('text-xl');
+          trgt.classList.toggle('bg-blue-700');
+          trgt.classList.toggle('font-bold');
+        }
       }
-      sets.setAttribute('class',"flex duration-300 justify-center items-center hover:font-bold text-lg sticky top-0 z-20 cursor-pointer h-[5vh] w-[50%] border-black border-2 hover:bg-slate-950 hover:text-2xl hover:text-white");
-    } else {
-      if(table_use.classList.contains('hidden')) {
-        table_use.classList.toggle('hidden');
-        page_use.classList.toggle('hidden');
-      }
-      if(!table_loc.classList.contains('hidden')) {
-        table_loc.classList.toggle('hidden');
-        page_loc.classList.toggle('hidden');
-      }
-      const sets = document.querySelector('[data-switch="lokasi"]');
-      sets.setAttribute('class',"flex duration-300 justify-center items-center hover:font-bold text-lg sticky top-0 z-20 cursor-pointer h-[5vh] w-[50%] border-black border-2 hover:bg-slate-950 hover:text-2xl hover:text-white");
-    }
-    trgt.setAttribute('class',"flex duration-300 justify-center items-center font-bold text-2xl sticky top-0 z-20 h-[5vh] w-[50%] border-black border-2 hover:bg-slate-950 cursor-pointer hover:text-white bg-slate-950 text-white");
+    })
     return;
   }
 })
@@ -152,24 +177,29 @@ document.addEventListener('keydown', function(event) {
 =============================================================================== */
 document.addEventListener('focusout', function(event) {
     /* ---------------------------------------------------------
-    close and open form div
+    close input 
   --------------------------------------------------------- */
   if(event.target.tagName === 'INPUT' && event.target.getAttribute('type')==='text' && event.target.hasAttribute('name')) {
     const trgt = event.target;
-    if(!trgt.classList.contains('hidden')) {
-      trgt.classList.toggle('hidden');
-      trgt.classList.toggle('z-20');
-    }
     const value = trgt.value;
-    const td = trgt.closest('td');
-    let curr = '';
-    if(td.innerHTML.includes('value')) {
-      curr = td.innerHTML.split("value");
-    } else {
-      curr = td.innerHTML.split(">");
+    let valid = true;
+    if(trgt.hasAttribute('list')) {
+      const ls = event.target.getAttribute('list');
+      if(ls ==='loc_list') {
+        loc_ls.validation_input(value, `#${trgt.id}`);
+        if(!trgt.checkValidity()) {valid = false;}
+      }
     }
-    console.log(curr);
-    td.innerHTML = curr[0]+"value='"+value+"'>"+value;
+    if(valid) {
+      const lbl = document.querySelector(`label[for="${trgt.id}"]`);
+      lbl.textContent = value;
+      if(!trgt.classList.contains('hidden')) {
+        trgt.classList.toggle('hidden');
+        trgt.classList.toggle('z-20');
+        lbl.classList.toggle('hidden');
+      }
+    }
     return;
   }
 })
+

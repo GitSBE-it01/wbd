@@ -138,9 +138,9 @@ export class tableDOM {
                         const key_fld = d2.getAttribute('name');
                         const currVal = data[count][`${key_fld}`] ? data[count][`${key_fld}`] : '';
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
-                            d2.value = currVal;
-                            const td = d2.closest('td');
-                            td.innerHTML += currVal;
+                            d2.setAttribute('value', currVal);
+                            const lbl = document.querySelector(`[for="${d2.id}"]`);
+                            lbl.textContent= currVal;
                         }
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
                             d2.value = currVal;
@@ -174,10 +174,9 @@ export class tableDOM {
                     }
                     td.forEach(d2=>{
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
-                            d2.value = '';
-                            const td = d2.closest('td');
-                            const newVal = td.innerHTML.split('>'); 
-                            td.innerHTML = newVal[0]+">";
+                            d2.setAttribute('value', '');
+                            const lbl = document.querySelector(`[for="${d2.id}"]`);
+                            lbl.textContent = '';
                         }
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
                             d2.value = '';

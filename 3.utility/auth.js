@@ -1,4 +1,4 @@
-const auth = async() =>{
+const auth = () =>{
     sessionStorage.clear();
     const check = window.location.href.split("/");
     let url =`http://${check[2]}/${check[3]}/2.backend/auth.php`;

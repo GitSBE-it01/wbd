@@ -39,16 +39,16 @@ function table_create($array) {
     global $tr;
     global $th;
     global $td;
-    global $input_text;
     global $input_hidden;
     global $select;
     global $option;
     global $button;
-    global $label;
 
     $_th = '';
-    foreach($array['th'] as $val) {
-        $_th .= $th->create($val);
+    foreach($array['data_array'] as $set) {
+        if(isset($set['th'])) {
+            $_th .= $th->create($set['th']);
+        }
     }
     $thd = $thead->create([
         'body'=> $tr->create([
@@ -67,9 +67,9 @@ function table_create($array) {
             switch ($type_td) {
                 case "input":
                     $td_attr = $set['td'];
+                    $set['inp']['id'] = $set['inp']['name']."__".$i;
                     $td_attr['body'] = [
-                        $label->create([$set['label']]),
-                        $input_text->create($set['inp'])
+                        create_input($set['inp'])
                     ];
                     $_td = $td->create($td_attr);
                     break;
@@ -97,7 +97,7 @@ function table_create($array) {
                     $_td = $input_hidden->create($set);
                     break;
                 default: 
-                    $_td = $td->create($set);
+                    $_td = $td->create($set['td']);
             }
             $td_full .= $_td;
         }

@@ -70,4 +70,22 @@ export class DtlistDOM {
         })
         return;
     }
+
+    validation_input (value, input) {
+        const dtlist = document.querySelector(this.key);
+        const inpt = document.querySelector(input);
+        const opt = dtlist.querySelectorAll('option');
+        let valid = false;
+        for( let i=0; i<opt.length; i++) {
+            if(opt[i].value.includes(value)) {
+                valid = true;
+                return;
+            }
+        }
+        if(!valid) {
+            inpt.setCustomValidity("Data tidak termasuk dalam list");
+            inpt.reportValidity();
+        }
+        return;
+    }
 }
