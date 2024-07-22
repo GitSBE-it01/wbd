@@ -6,6 +6,14 @@
     overflow: auto;
 }
 
+.scrollable-x {
+    overflow-x: auto;
+}
+
+.scrollable-y {
+    overflow-y: auto;
+}
+
 .opacity-25 {
     opacity: 0.25;
 }

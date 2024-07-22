@@ -1,4 +1,5 @@
 export class DOM {
+    // input dan datalist
     static dtList_parse_opt (key, separator, dataArr, ...keyPick) {
         const dtlist = document.querySelector(key);
         dataArr.forEach(dt=>{
@@ -33,6 +34,19 @@ export class DOM {
         return;
     }
 
+    static select_first_opt(value_search, dtlist, trgt) {
+        const target = document.querySelector(trgt);
+        const datalist = document.querySelector(dtlist);
+        const option = datalist.querySelectorAll('option');
+        for (let i=0; i<option.length; i++) {
+            if(option[i].value.toLowerCase().includes(value_search.toLowerCase())) {
+              target.value = option[i].value;
+              break;
+            }
+          }
+          return;
+    }
+
     static input_valid (key, value, input) {
         const dtlist = document.querySelector(key);
         const inpt = document.querySelector(input);
@@ -51,6 +65,7 @@ export class DOM {
         return;
     }
 
+    // pagination 
     static pgList_init(key, data, table) {
         const div = document.querySelector(key);
         const dt_cnt = data.length;
@@ -278,6 +293,7 @@ export class DOM {
         return;
     }
 
+    // table 
     static async table_parse_data (key, data, page) {
         try {
             const table = document.querySelector(key);
@@ -299,14 +315,15 @@ export class DOM {
                     fld.forEach(d2=>{
                         const key_fld = d2.getAttribute('name');
                         const currVal = data[count][`${key_fld}`] ? data[count][`${key_fld}`] : '';
-                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
-                            d2.setAttribute('value', currVal);
-                            const lbl = document.querySelector(`[for="${d2.id}"]`);
-                            lbl.textContent= currVal;
-                        }
-                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
-                            d2.value = currVal;
-                        }
+                        if(d2.tagName === 'INPUT')
+                            if(d2.getAttribute('type')==='text' || d2.getAttribute('type')==='date') {
+                                d2.setAttribute('value', currVal);
+                                const lbl = document.querySelector(`[for="${d2.id}"]`);
+                                lbl.textContent= currVal;
+                            }   
+                            if(d2.getAttribute('type')==='hidden') {
+                                d2.value = currVal;
+                            }
                         if(d2.tagName === 'SELECT') {
                             d2.value = currVal;
                         }
@@ -360,6 +377,39 @@ export class DOM {
         }
     }
 
+    static table_insert_row(tbl,counter) {
+        const table = document.querySelector(tbl);
+        const tbody = table.querySelector('tbody')
+        const row_dt = table.querySelector('[data-id="0"]');
+        const new_row = row_dt.cloneNode(true);
+        new_row.setAttribute('data-id', `new__${counter}`);
+        new_row.removeAttribute('data-value');
+        const td = new_row.querySelectorAll('td');
+        console.log({new_row,td});
+        td.forEach(dt=>{
+            if(dt.hasChildNodes()) {
+                console.log(dt);
+                console.log(dt.textContent);
+                console.log(typeof(dt.textContent));
+                dt.textContent = '';
+            } else {
+                if(dt.querySelector('input')) {
+                    const inp = dt.querySelector('input');
+                    inp.disabled = false;
+                    inp.setAttribute('value',"");
+                    const label = dt.querySelector('label');
+                    label.textContent = '';
+                    if(inp.classList.contains('hidden')) {
+                        inp.classList.remove('hidden');
+                        label.classList.add('hidden');
+                    }
+                }
+            }
+        })
+        tbody.insertBefore(new_row,tbody.rows[0]);
+    }
+
+    // navigation 
     static active_link(cls) {
         const container = document.querySelector('nav');
         const ul = container.querySelector('ul');
@@ -379,27 +429,59 @@ export class DOM {
         return;
     }
 
+    // general 
     static rmv_class(trgt, ...cls) {
         const target = document.querySelector(trgt);
+        let valid = false;
         cls.forEach(dt=>{
             if(target.classList.contains(dt)) {
                 target.classList.remove(dt);
+                valid = true;
             }
         })
-        return;
+        return valid;
     }
 
     static add_class(trgt, ...cls) {
         const target = document.querySelector(trgt);
+        let valid = false;
         cls.forEach(dt=>{
             if(!target.classList.contains(dt)) {
                 target.classList.add(dt);
+                valid = true;
             }
         })
-        return;
+        return valid;
     }
 
-    static form_parse_data() {
+    static rmv_attr(trgt, attr) {
+        const target = document.querySelector(trgt);
+        let valid = false;
+        if(target.hasAttribute(attr)) {
+            target.removeAttribute(attr);
+            valid = true;
+        }
+        return valid;
+    }
 
+    static set_attr(trgt, attr, attr_val) {
+        const target = document.querySelector(trgt);
+        let valid = false;
+        if(!target.hasAttribute(attr) || target.getAttribute(attr)!== attr_val) {
+            target.setAttribute(attr, attr_val);
+            valid = true;
+        }
+        return valid;
+    }
+
+    // form 
+    static form_parse_data(key, data) {
+        const target = document.querySelector(key);
+        const inp_name = target.querySelectorAll('[name]');
+        inp_name.forEach(dt=>{
+            const field = dt.getAttribute('name');
+            dt.value = data[`${field}`] ? data[`${field}`] :'';
+        })
+        return;
     }
 }

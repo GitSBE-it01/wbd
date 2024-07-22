@@ -14,7 +14,7 @@
     </head>
 </head>
 <body class="bg-slate-200">
-    <div class="w-screen h-screen absolute z-40 flex justify-center items-center">
+    <div class="w-screen h-screen absolute z-40 flex justify-center hidden items-center">
         <div class="h-full w-full opacity-75 absolute bg-slate-200"></div>
         <div class="loading2"></div>
     </div>
@@ -39,7 +39,12 @@
     <button type="button" id="submit-button" class="home w-10 h-10"></button>
 
     <div>
-        <input  id="mencoba" type="text" value="set2test2test566test2abadvae">
+        <input  id="mencoba" type="text" list="list_coba">
+        <datalist id="list_coba">
+            <option value="test</br>abc"></option>
+            <option value="test2\ndec"></option>
+            <option value="test3\napakah"></option>
+        </datalist>
     </div>
 </body>
 <script>
@@ -47,5 +52,6 @@
     const index = test.indexOf('test2');
     const result = test.replace(('test2'),'');
     console.log({result, index});
+
 </script>
 </html>

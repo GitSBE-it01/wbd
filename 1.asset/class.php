@@ -125,7 +125,8 @@ class Component {
             .$require
             .$class
             .$disable.">"
-            .$body;
+            .$body."
+            ";
         } else {
             $component = "<".$this->element." "
             .$id
@@ -144,8 +145,8 @@ class Component {
             .$require
             .$class
             .$disable.">"
-            .$body
-            ."</".$this->element.">";
+            .$body."
+            </".$this->element.">";
         }
         return $component;
     }

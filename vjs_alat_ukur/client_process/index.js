@@ -3,30 +3,20 @@ import {api_access, DOM} from '../../3.utility/index.js';
 
 DOM.active_link('');
 let main_data = [];
-let show_data = [];
+let outer_data = [];
 let form_data = [];
 let show_form = [];
 let remark = [];
-let temp_logic ='';
-let n_numb = 1;
+let page = 1;
 let sbmt_dt = [];
 let temp_dt = {};
-let search_value = '';
-
 const today = currentDate("-"); 
 let counter = 0;
-const label_desc = document.querySelector("#desc_alat");
-const label_cat = document.querySelector("#cat"); // category
-const serial_id = document.querySelector("#seri"); //sn_id
-const label_asset = document.querySelector("#asset"); // no_asset
-const label_form = document.querySelector("[data-title='form_title']");
 
-const table_base = document.querySelector("#table_index");
-const tbody_base = table_base.querySelector('tbody');
-const table_form = document.querySelector('#table_form_main')
-const form_div = document.querySelector('[data-card ="form"]');
 const master = await api_access('get','vjs_alat', '');
-DOM.dtList_parse_opt("#alat_list","-",master,"sn_id","new_subcat","no_asset","_desc");
+console.log({master});
+let master_filter =[];
+DOM.dtList_parse_opt("#alat_list","/",master,"sn_id","new_subcat","no_asset","_desc");
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + " - " + user_detail['jabatan']+' - '+ user_detail['grade']; // user_input atau approval_by
 DOM.add_class('#load',"hidden");
@@ -36,6 +26,22 @@ DOM.add_class('#load',"hidden");
   click add even listener
 =============================================================================== */
 document.addEventListener("click", async function (event) {
+/* show hidden input, hanya ganti display
+--------------------------------------------------------- */
+if (event.target.id === "open_dtlist") {
+  if (!DOM.rmv_class('#input__alat_search',"hidden")) {
+    DOM.add_class('#input__alat_search',"hidden");
+  }
+  return;
+}
+
+/* insert new line di table main
+--------------------------------------------------------- */
+if (event.target.id === "new__data") {
+  DOM.table_insert_row('#table_index', counter);
+  counter++;
+  return;
+}
 /* ---------------------------------------------------------
   close and open form div
 --------------------------------------------------------- */
@@ -83,29 +89,7 @@ document.addEventListener("click", async function (event) {
     return;
   }
 
-/* ---------------------------------------------------------
-  insert new line di table main
---------------------------------------------------------- */
-  if (event.target.id === "new__data") {
-    const data_array = [
-      {type:'date', field: 'eff_date', def_value:today}, 
-      {type:'input', field:'user_input', def_value:user},
-      {type:'input', field: 'approval_by'},
-      {type:'btnSet', field: 'data_group', btn_style:'w-6 h-6 border-0', set:'open:arrow_right_black', def_value:'new' },
-    ]
-    tbody_base.insertBefore(await inputEmptyRow('',counter, data_array),tbody_base.childNodes[1]);
-    counter++;
-    return;
-  }
 
-/* ---------------------------------------------------------
-  show hidden input, hanya ganti display
---------------------------------------------------------- */
-  if (event.target.id === "open_dtlist") {
-    const inp = document.querySelector('[data-input ="input__alat_search"]');
-    inp.classList.toggle("hidden");
-    return;
-  }
 
 /* ---------------------------------------------------------
   submit form 
@@ -354,79 +338,37 @@ document.addEventListener("click", async function (event) {
   change add even listener
 =============================================================================== */
 document.addEventListener("change", async function (event) {
-/* ---------------------------------------------------------
-search tool input
+/* search tool input
 --------------------------------------------------------- */
-  if (event.target.getAttribute("data-input") === "input__alat_search") {
-    load.classList.toggle("hidden");
-    const split = search_value.split("//");
-    label_desc.value = split[3] ? split[3].trim() : '';
-    label_cat.value = split[1] ? split[1].trim() : '';
-    serial_id.value = split[0] ? split[0].trim() : ''; //sn_id
-    label_asset.value = split[2] ? split[2].trim() : ''; // no_asset
-    event.target.classList.toggle("hidden");
-    
+  if (event.target.id === "input__alat_search") {
+    const split = event.target.value.split("//");
+    master_filter = await master.find(obj=>obj.sn_id === split[0]);
+    DOM.form_parse_data('#detail_form', master_filter);
+    DOM.rmv_class('#load',"hidden");
+    if (!DOM.add_class('#input__alat_search',"hidden")) {
+      DOM.rmv_class('#input__alat_search',"hidden");
+    }
+    event.target.blur();
     main_data = [];
-    main_data = await api_access('fetch','vjs_log',  {sn_id: split[0].trim()});
-    const hd_row = table_base.querySelector('[data-id="header"]');
-    show_data =[];
-    if(main_data.length >0) {
-      main_data.sort((a, b) => {
-        if (a.eff_date     !== b.eff_date   )
-          return b.eff_date   .localeCompare(a.eff_date   );
-      });
-      let btn = document.querySelector('#new__data');
-      btn.classList.toggle('opacity-50');
-      btn.disabled = false;
-      let check = [];
-      main_data.forEach((dt) => {
-        if (!check.includes(dt.eff_date   )) {
-          check.push(dt.eff_date    );
-          show_data.push(dt);
-        }
-      });
-      n_numb = Math.ceil(show_data.length / 100);
-      if (show_data.length>0) {
-        if (hd_row.classList.contains("hidden")) {
-          hd_row.classList.toggle("hidden");
-        }
-        for (let i = 0; i < show_data.length; i++) {
-          if (i === 100) {
-            break;
-          }
-          let n_val = i * n_numb;
-          let dt = show_data[n_val];
-          const row = table_base.querySelector(`[data-id='${i}']`);
-          row.setAttribute("data-value", n_val);
-          if (row.classList.contains("hidden")) {
-            row.classList.toggle("hidden");
-          }
-          const data = row.querySelectorAll("[name]");
-          data.forEach((d) => {
-            if (d.tagName === "TD") {
-              d.textContent = dt[`${d.getAttribute("name")}`];
-            }
-            if (d.tagName === "TEXTAREA" || d.tagName === "INPUT") {
-              d.value = dt[`${d.getAttribute("name")}`];
-            }
-            if (d.tagName === "BUTTON") {
-              d.setAttribute('data-button', dt[`${d.getAttribute("name")}`]);
-            }
-          });
-        }
+    main_data = await api_access('fetch','vjs_log', {sn_id: master_filter.sn_id});
+    outer_data = [];
+    let cek = [];
+    main_data.forEach(dt=>{
+      if(!cek.includes(dt.eff_date)){
+        cek.push(dt.eff_date);
+        outer_data.push(dt);
       }
-    } else {
-      if (!hd_row.classList.contains("hidden")) {
-        hd_row.classList.toggle("hidden");
+    })
+
+    if(DOM.rmv_attr('#new__data','disabled')) {
+      DOM.rmv_attr('#new__data','disabled');
+      if (!DOM.add_class('#new__data',"opacity-50")) {
+        DOM.rmv_class('#new__data',"opacity-50");
       }
-      const row = table_base.querySelectorAll(`[data-id]`);
-      row.forEach(dt=>{
-        if (!dt.classList.contains("hidden")) {
-          dt.classList.toggle("hidden");
-        }
-      })
-    };  
-    load.classList.toggle("hidden");
+    }
+    DOM.pgList_init('#main_page', outer_data, '#table_index');
+    DOM.table_parse_data('#table_index', outer_data, page);
+    DOM.add_class('#load',"hidden");
     return;
   }
 
@@ -448,17 +390,15 @@ penanda utk perubahan di kolom remark
   change add even listener
 =============================================================================== */
 document.addEventListener("keydown", async function (event) {
-  if (event.target.getAttribute("data-input") === "input__alat_search") {
-    const dtlist = document.querySelector('#alat_list');
-    const input = event.target;
-    const opt = dtlist.querySelectorAll('option');
-    for (let i=0; i<opt.length; i++) {
-      if(opt[i].value.toLowerCase().includes(input.value.toLowerCase())) {
-        search_value = opt[i].value;
-        break;
-      }
+  if (event.target.id === "input__alat_search" && event.key ==='Enter') {
+      DOM.select_first_opt(event.target.value,'#alat_list','#input__alat_search');
+      return;
     }
-    return;
-  }
 })
-  
+
+/* ===============================================================================
+  change add even listener
+=============================================================================== */
+document.addEventListener("blur", async function (event) {
+
+})

@@ -6,7 +6,7 @@ $main_table = [
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         [
-            'type'=>'date',
+            'type'=>'input',
             'th'=>[
                 'body'=>'Date',
                 'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[20vw]',
@@ -19,7 +19,7 @@ $main_table = [
                 'type_attr'=>'date', 
                 'disable'=>'',
                 'name'=> 'eff_date', 
-                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
@@ -36,6 +36,7 @@ $main_table = [
                 'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'user_input', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
@@ -46,7 +47,7 @@ $main_table = [
             ],
             'td'=>[
                 'name'=>'loc',
-                'class'=>'bg-slate-300 whitespace-normal border-2 p-2 text-sm border-black w-[20vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[20vw]'
             ],
         ],
         [
@@ -57,7 +58,7 @@ $main_table = [
             ],
             'td'=>[
                 'name'=>'approval_by',
-                'class'=>'bg-slate-300 whitespace-normal border-2 p-2 text-sm border-black w-[14vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[14vw]'
             ],
         ],
         [
@@ -68,7 +69,7 @@ $main_table = [
             ],
             'td'=>[
                 'data_attr'=>['field::data_group'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm border-black p-2 w-[6vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[6vw]'
             ],
             'button'=>[
                 [

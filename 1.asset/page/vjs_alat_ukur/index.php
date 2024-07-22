@@ -38,6 +38,13 @@ $index = $datalist->create(['id'=>'alat_list'])
                 'class'=>'text-2xl underline w-full capitalize font-bold text-slate-200',
                 'body'=>'Detail Form'
             ]),
+            $input->create([
+                'id'=>'input__alat_search',
+                'list'=>'alat_list',
+                'placeholder'=>'input alat disini',
+                'autocomplete'=>'off',
+                'class'=>'rounded hidden px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 fixed top-[6vh] z-30 duration-300 right-10 shadow-md w-[40vw]'
+            ]),
             $div->create([
                 'class'=>'flex flex-row w-full h-full justify-center items-center',
                 'body'=>create_formset($detail_form)
@@ -59,7 +66,7 @@ $index = $datalist->create(['id'=>'alat_list'])
         ]
     ])."
     ".$main->create([
-        'class'=>'fixed flex flex-col top-[23vh] bg-slate-300 w-screen h-[72vh] custom_scroll',
+        'class'=>'fixed flex flex-col top-[23vh] bg-slate-300 w-screen h-[72vh] scrollable-y',
         'body'=>table_create($main_table),
     ])."
     ".$footer->create([
