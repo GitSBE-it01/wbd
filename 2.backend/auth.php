@@ -20,8 +20,10 @@ function auth() {
                 'grade'=>$_SESSION['grade'],
             );
             $role = custom_handle($db_conn, ['absen'=>$_SESSION['absen'], 'abs_name'=>$_SESSION['absname'], 'apps'=>$routes], 'auth', 'auth_fetch', $model, 'auth');
-            if(isset($role)) {
+            if(count($role) === 1) {
                 $data['role'] = $role[0]['role'];
+            } else {
+                $data['role'] = 'user';
             }
             $response = $data;
         } else {

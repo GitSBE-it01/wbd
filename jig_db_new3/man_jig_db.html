@@ -15,40 +15,35 @@
         const start = performance.now();
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
-        const otb = await api_access('fetch2','ng_dly', {op_tran_date: yesterday});
-        //const trans = await api_access('get', 'jig_trans','');
-        const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
-        const trans2 = await api_access('fetch', 'jig_trans',{end_date:yesterdayDate()});
-        const trans3 = await api_access('fetch', 'jig_trans',{status:'open'});
+        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', yesterday]});
+        const trans = await api_access('get', 'jig_trans','');
+        //const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
+        //const trans2 = await api_access('fetch', 'jig_trans',{end_date:yesterdayDate()});
+        //const trans3 = await api_access('fetch', 'jig_trans',{status:'open'});
         //const usg = await api_access('get', 'jig_usg','');
         const emp = await api_access('get','emp_code','');
         const func = await api_access('get','jig_func','');
         const mstr = await api_access('get','jig_mstr','');
+        /*
         const cekTrans = [];
-        const cek_jig_use = [];
         trans.forEach(dt=>{
             if(!cekTrans.includes(dt.id)) {
                 cekTrans.push(dt.id);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
             }
         })
         trans2.forEach(dt=>{
             if(!cekTrans.includes(dt.id)) {
                 cekTrans.push(dt.id);
                 trans.push(dt);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
             }
         })
         trans3.forEach(dt=>{
             if(!cekTrans.includes(dt.id)) {
                 cekTrans.push(dt.id);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
+                trans.push(dt);
             }
         })
-
+        */
         console.log({otb, trans, emp, func, mstr});
 
 const codeEmp = {};
@@ -248,44 +243,52 @@ for (let i=0; i<newLabor.length; i++) {
     a.qty_usage = 0;
     a.codeAll = '';
     
-    if(a.cat === 'a.pinjam') { 
-        a.count = 1;
-        if ( codeFilter === codeFilter2) {
-            a.codeAll = b.codeAll + a.code;
-            a.codeCount += 1 + b.codeCount;
-            a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
-        } else {
-            a.codeAll = a.code ;
-            a.codeCount += 1 ;
-            a.qty_jig = parseFloat(a.qty_pinjam);  
-        }
+    let ii = i-1;
+    const b = newLabor[ii];
+    let codeFilter2 = '';
+    if(b) {
+        codeFilter2 = b.jig + b.loc;
     }
-    if(a.cat === 'c.kembali') { 
-        a.count = 1;
-        if ( codeFilter === codeFilter2) {
-            a.codeAll = b.codeAll.replace((`${a.code}`),'');
-            a.codeCount = b.codeCount - 1;
-            a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
-        } else {
-            a.codeCount = 0 ;
-            a.codeAll = '';
-            a.qty_jig = 0; 
-        }
-    } 
-    if(a.cat === 'b.use') { 
-        if ( codeFilter === codeFilter2) {
-            if (b.codeCount === 0) { a.count = 0;} else {a.count = b.count;}
-            a.codeCount = b.codeCount;
-            a.codeAll = b.codeAll;
-            a.qty_jig = b.qty_jig;
-            if (a.count === 0) {a.code = '';} else {a.code = b.code;}
-            if (a.qty_jig === 0) {
-                a.qty_usage = 0
+    if( codeFilter2 ) {
+        if(a.cat === 'a.pinjam') { 
+            a.count = 1;
+            if ( codeFilter === codeFilter2) {
+                a.codeAll = b.codeAll + a.code;
+                a.codeCount += 1 + b.codeCount;
+                a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
             } else {
-                a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
+                a.codeAll = a.code ;
+                a.codeCount += 1 ;
+                a.qty_jig = parseFloat(a.qty_pinjam);  
             }
         }
-    }
+        if(a.cat === 'c.kembali') { 
+            a.count = 1;
+            if ( codeFilter === codeFilter2) {
+                a.codeAll = b.codeAll.replace((`${a.code}`),'');
+                a.codeCount = b.codeCount - 1;
+                a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
+            } else {
+                a.codeCount = 0 ;
+                a.codeAll = '';
+                a.qty_jig = 0; 
+            }
+        } 
+        if(a.cat === 'b.use') { 
+            if ( codeFilter === codeFilter2) {
+                if (b.codeCount === 0) { a.count = 0;} else {a.count = b.count;}
+                a.codeCount = b.codeCount;
+                a.codeAll = b.codeAll;
+                a.qty_jig = b.qty_jig;
+                if (a.count === 0) {a.code = '';} else {a.code = b.code;}
+                if (a.qty_jig === 0) {
+                    a.qty_usage = 0
+                } else {
+                    a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
+                }
+            }
+        }
+    } 
 }
 newLabor.sort((a,b) => {
     if (a.jig < b.jig) return -1;

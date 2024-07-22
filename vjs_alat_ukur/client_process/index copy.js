@@ -1,7 +1,9 @@
-import { currentDate} from "../../3.utility/index.js";
-import {api_access, DOM} from '../../3.utility/index.js';
+import { currentDate, dtlist, inputEmptyRow,activeLink } from "../../3.utility/index.js";
+import {api_access} from '../../3.utility/index.js';
 
-DOM.active_link('');
+activeLink('');
+const body = document.querySelector("body");
+const load = body.querySelector(".loading");
 let main_data = [];
 let show_data = [];
 let form_data = [];
@@ -12,7 +14,8 @@ let n_numb = 1;
 let sbmt_dt = [];
 let temp_dt = {};
 let search_value = '';
-
+const user_detail = JSON.parse(sessionStorage.getItem('userData'));
+const user = user_detail['name'] + " - " + user_detail['jabatan']+' - '+ user_detail['grade']; // user_input atau approval_by
 const today = currentDate("-"); 
 let counter = 0;
 const label_desc = document.querySelector("#desc_alat");
@@ -26,10 +29,8 @@ const tbody_base = table_base.querySelector('tbody');
 const table_form = document.querySelector('#table_form_main')
 const form_div = document.querySelector('[data-card ="form"]');
 const master = await api_access('get','vjs_alat', '');
-DOM.dtList_parse_opt("#alat_list","-",master,"sn_id","new_subcat","no_asset","_desc");
-const user_detail = JSON.parse(sessionStorage.getItem('userData'));
-const user = user_detail['name'] + " - " + user_detail['jabatan']+' - '+ user_detail['grade']; // user_input atau approval_by
-DOM.add_class('#load',"hidden");
+dtlist("#alat_list","/",master,"sn_id","new_subcat","no_asset","_desc");
+load.classList.toggle("hidden");
 
 
 /* ===============================================================================

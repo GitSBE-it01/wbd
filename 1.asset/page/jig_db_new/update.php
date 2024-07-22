@@ -50,7 +50,7 @@ $update = $datalist->create(['id'=>'jig_list'])
                         'id'=>'stock_search',
                         'class'=>'w-full h-[5vh] flex flex-row pl-4 gap-2',
                         'body'=>[
-                            $input_text->create(['id'=>'stock_search', 'list'=>'jig_list']),
+                            $input->create(['id'=>'stock_search_inp', 'list'=>'jig_list']),
                             $button->create(['id'=>'stock_btn', 'body'=>'search'])
                         ]
                     ]),
@@ -58,7 +58,7 @@ $update = $datalist->create(['id'=>'jig_list'])
                         'id'=>'detail_search',
                         'class'=>'w-full h-[5vh] flex flex-row pl-4 gap-2 hidden',
                         'body'=>[
-                            $input_text->create(['id'=>'detail_search', 'list'=>'jig_list']),
+                            $input->create(['id'=>'detail_search_inp', 'list'=>'jig_list']),
                             $button->create(['id'=>'detail_btn','body'=>'search'])
                         ]
                     ]),
@@ -66,7 +66,7 @@ $update = $datalist->create(['id'=>'jig_list'])
                         'id'=>'usage_search',
                         'class'=>'w-full h-[5vh] flex flex-row pl-4 gap-2 hidden',
                         'body'=>[
-                            $input_text->create(['id'=>'usage_search', 'list'=>'spk_list']),
+                            $input->create(['id'=>'usage_search_inp', 'list'=>'spk_list']),
                             $button->create(['id'=>'usage_btn','body'=>'search'])
                         ]
                     ]),

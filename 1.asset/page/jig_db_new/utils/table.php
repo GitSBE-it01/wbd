@@ -5,11 +5,11 @@ $stock_table_new = [
     'row_count' =>50,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
-        ['type'=>'hidden','name'=>'item_jig'],
-        ['type'=>'hidden','name'=>'urut'],
-        ['type'=>'hidden','name'=>'trans_date'],
-        ['type'=>'hidden','name'=>'status'],
-        ['type'=>'hidden','name'=>'toleransi'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'urut'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'toleransi'],
         [
             'th'=>[
                 'body'=>'Code',
@@ -24,7 +24,7 @@ $stock_table_new = [
                 'for'=>'code'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'disable'=>'',
                 'name'=> 'code', 
@@ -42,7 +42,7 @@ $stock_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'lokasi', 
                 'list'=>'loc_list',
@@ -61,7 +61,7 @@ $stock_table_new = [
                 'class'=>'bg-slate-600 whitespace-normal border-2 text-sm p-2 border-black w-[12vw] text-white'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'qty_per_unit', 
                 'disable'=>'',
@@ -98,7 +98,7 @@ $stock_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[8vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'qty_change', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden'
@@ -115,7 +115,7 @@ $stock_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[8vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'unit', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden'
@@ -132,7 +132,7 @@ $stock_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[23vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'remark', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden'
@@ -353,7 +353,7 @@ $usage_table_new = [
     'row_count' =>50,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
-        ['type'=>'hidden','name'=>'id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
         [
             'th'=>[
                 'body'=>'Item Number jig',
@@ -365,7 +365,7 @@ $usage_table_new = [
                 'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'item_jig', 
                 'list'=>'jig_list',
@@ -383,7 +383,7 @@ $usage_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'opt_on', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
@@ -400,7 +400,7 @@ $usage_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'opt_off', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
@@ -417,7 +417,7 @@ $usage_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'status', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
@@ -434,7 +434,7 @@ $usage_table_new = [
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
             ],
             'inp'=>[
-                'type'=>'input', 
+                'type'=>'text', 
                 'placeholder'=>'',
                 'name'=> 'remark', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden'

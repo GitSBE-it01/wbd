@@ -13,10 +13,14 @@ require_once 'cluster/navigation.php';
 require_once 'cluster/table.php';
 
 require_once 'class.php';
+require_once 'comp/button.php';
 require_once 'comp/form.php';
+require_once 'comp/list.php';
 require_once 'comp/pagination.php';
 require_once 'comp/selection.php';
+require_once 'comp/structure.php';
 require_once 'comp/table.php';
+require_once 'comp/text.php';
 
 function createHTML($array) {
   /*

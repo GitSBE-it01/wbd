@@ -15,6 +15,7 @@ class Component {
     public $data_attr;
     public $cols;
     public $rows;
+    public $autocomplete;
     public $maxlength;
     public $value;
     public $href;
@@ -34,6 +35,7 @@ class Component {
         $this->value = isset($array['value']) ? "value='".$array['value']."' " : '';
         $this->cols = isset($array['cols']) ? "colspan='".$array['cols']."' " : '';
         $this->rows = isset($array['rows']) ? "rowspan='".$array['rows']."' " : '';
+        $this->autocomplete = isset($array['autocomplete']) ? "autocomplete='".$array['autocomplete']."' " : '';
         $this->maxlength = isset($array['maxlength']) ? "maxlength='".$array['maxlength']."' " : '';
         $this->href = isset($array['href']) ? "href='".$array['href']."' " : '';
         $this->body = '';
@@ -72,6 +74,7 @@ class Component {
         $value = isset($array['value']) ? "value='".$array['value']."' " : $this->value;
 
         $href = isset($array['href']) ? "href='".$array['href']."' " : $this->href;
+        $autocomplete = isset($array['autocomplete']) ? "autocomplete='".$array['autocomplete']."' " : $this->autocomplete;
         $cols = isset($array['cols']) ? "colspan='".$array['cols']."' " : $this->cols;
         $rows = isset($array['rows']) ? "rowspan='".$array['rows']."' " : $this->rows;
         $maxlength = isset($array['maxlength']) ? "maxlength='".$array['maxlength']."' " : $this->maxlength;
@@ -114,6 +117,7 @@ class Component {
             .$placeholder
             .$value
             .$href
+            .$autocomplete
             .$rows
             .$cols
             .$maxlength
@@ -132,6 +136,7 @@ class Component {
             .$placeholder
             .$value
             .$href
+            .$autocomplete
             .$rows
             .$cols
             .$maxlength
@@ -146,73 +151,3 @@ class Component {
     }
 }
 
-
-$button = new Component([
-    'element'=> 'button',
-    'class'=> 'rounded bg-gray-300 text-sm px-4 my-3 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 h-[1.6rem] duration-300',
-    'type_attr'=> 'button',
-]);
-
-
-/* =======================================================
-    structure 
-======================================================= */
-$div = new Component([
-    'element'=>'div',
-]);
-
-$load = $div->create(['class'=>'loading z-40']);
-
-$nav = new Component([
-    'element'=>'nav',
-    'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
-]);
-
-$header = new Component([
-    'element'=>'header',
-    'class'=>'fixed top-[5vh] bg-slate-700 w-screen h-[5vh]'
-]);
-
-$main = new Component([
-    'element'=>'main',
-    'class'=>'fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] custom_scroll'
-]);
-
-$aside = new Component([
-    'element'=>'aside',
-    'class'=>'fixed flex flex-row top-[10vh] left-0 bg-teal-700 w-[25vw] h-[85vh]'
-]);
-
-$footer = new Component([
-    'element'=>'footer',
-    'class'=>'fixed bottom-0 bg-slate-500 w-screen h-[5vh]'
-]);
-
-/* =======================================================
-
-======================================================= */
-
-$li = new Component([
-    'element'=>'li',
-    'class'=>'h-full w-[10vw] justify-center items-center flex',
-]);
-
-$a = new Component([
-    'element'=>'a',
-    'class'=>'h-full w-[10vw] text-white justify-center items-center flex hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 bg-blue-800 border-blue-300 border-b-4 font-semibold'
-]);
-
-$ul = new Component([
-    'element'=>'ul',
-    'class'=>'w-[63vw] h-full flex flex-row'
-]);
-
-$title = new Component([
-    'element'=>'h1',
-    'class'=>'text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]'
-]);
-
-$form = new Component([
-    'element'=>'form',
-    'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[34vw]'
-]);

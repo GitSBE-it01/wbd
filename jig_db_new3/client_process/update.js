@@ -35,7 +35,7 @@ document.addEventListener("click", async function (event) {
     stock_tbl.table_clear();
     hist_tbl.table_clear();
     load.classList.toggle("hidden");
-    let val_search = document.querySelector('#stock_search').value.split('--');
+    let val_search = document.querySelector('#stock_search_inp').value.split('--');
     let fix_val = val_search[0].toLowerCase();
     // data stock
     stock_data = await api_access('fetch','jig_loc', {item_jig:fix_val});
