@@ -9,22 +9,31 @@ INDEX HTML
 =============================================================================== */
 
 $index = $datalist->create(['id'=>'alat_list'])
+    .Comp::dtlist(['id'=>'user_list'])
+    .Comp::dtlist(['id'=>'loc_list'])
     .$load2."
     ".$div->create([
         'data_attr'=>['card::detail'],
-        'class'=>'px-4 z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
+        'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
         'body'=>[
             table_create($detail_table),
-            $button->create([
-                'id'=>'submit_form_btn',
-                'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300',
-                'body'=>'submit'
-            ]),
-            $button->create([
-                'id'=>'close_form_btn',
-                'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300',
-                'body'=>'cancel'
-            ]),
+            table_create($add_table),
+            Comp::div([
+                'class'=>'w-full h-[5vh] bg-slate-700 flex items-center',
+                'body'=>[
+                    $button->create([
+                        'id'=>'submit_form_btn',
+                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
+                        'body'=>'submit'
+                    ]),
+                    $button->create([
+                        'id'=>'close_form_btn',
+                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300',
+                        'body'=>'cancel'
+                    ]),
+                ]
+            ])
+            
         ]
     ])."
     ".$nav->create([

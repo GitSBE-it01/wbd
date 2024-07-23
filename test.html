@@ -30,8 +30,8 @@
     </table>
 
     <div id="abc">
-        <select name="test" id="asdfab">
-            <option value="1234">12345</option>
+        <select name="test" id="asdfab" class="bg-red-300">
+            <option value="1234" class='bg-green-400'>12345</option>
             <option value="abc">abc</option>
         </select>
     </div>
@@ -41,17 +41,18 @@
     <div>
         <input  id="mencoba" type="text" list="list_coba">
         <datalist id="list_coba">
-            <option value="test</br>abc"></option>
+            <option value="test abc"></option>
             <option value="test2\ndec"></option>
             <option value="test3\napakah"></option>
         </datalist>
     </div>
 </body>
 <script>
-    const test =  document.querySelector('#mencoba').value;
-    const index = test.indexOf('test2');
-    const result = test.replace(('test2'),'');
-    console.log({result, index});
+    const test =  document.querySelector('#asdfab');
+    document.addEventListener('change', function(event){
+        console.log(test.value);
+    })
+
 
 </script>
 </html>

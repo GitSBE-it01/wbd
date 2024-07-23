@@ -14,6 +14,7 @@ require_once 'cluster/table.php';
 
 require_once 'class.php';
 require_once 'comp/button.php';
+require_once 'comp/component.php';
 require_once 'comp/form.php';
 require_once 'comp/list.php';
 require_once 'comp/pagination.php';

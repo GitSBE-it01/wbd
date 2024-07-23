@@ -43,8 +43,8 @@ export class DOM {
               target.value = option[i].value;
               break;
             }
-          }
-          return;
+        }
+        return;
     }
 
     static input_valid (key, value, input) {
@@ -318,7 +318,7 @@ export class DOM {
                         if(d2.tagName === 'INPUT')
                             if(d2.getAttribute('type')==='text' || d2.getAttribute('type')==='date') {
                                 d2.setAttribute('value', currVal);
-                                const lbl = document.querySelector(`[for="${d2.id}"]`);
+                                const lbl = table.querySelector(`[for="${d2.id}"]`);
                                 lbl.textContent= currVal;
                             }   
                             if(d2.getAttribute('type')==='hidden') {
@@ -384,26 +384,36 @@ export class DOM {
         const new_row = row_dt.cloneNode(true);
         new_row.setAttribute('data-id', `new__${counter}`);
         new_row.removeAttribute('data-value');
-        const td = new_row.querySelectorAll('td');
-        console.log({new_row,td});
-        td.forEach(dt=>{
-            if(dt.hasChildNodes()) {
-                console.log(dt);
-                console.log(dt.textContent);
-                console.log(typeof(dt.textContent));
-                dt.textContent = '';
-            } else {
-                if(dt.querySelector('input')) {
-                    const inp = dt.querySelector('input');
-                    inp.disabled = false;
-                    inp.setAttribute('value',"");
-                    const label = dt.querySelector('label');
-                    label.textContent = '';
-                    if(inp.classList.contains('hidden')) {
-                        inp.classList.remove('hidden');
-                        label.classList.add('hidden');
-                    }
+        const tr = new_row.querySelectorAll('td');
+        console.log({new_row,tr});
+        tr.forEach(dt=>{
+            if(dt.getAttribute('data-id') !== 'header') {
+                const td = dt.querySelectorAll("[name]");
+                dt.removeAttribute('data-value');
+                if(!dt.classList.contains('hidden')) {
+                    dt.classList.toggle('hidden');
                 }
+                td.forEach(d2=>{
+                    if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
+                        d2.setAttribute('value', '');
+                        const new_Id = d2.id.split("__");
+                        const lbl = document.querySelector(`[for="${d2.id}"]`);
+                        lbl.textContent = '';
+                        d2.id = new_Id[0]+"__new__"+counter;
+                        lbl.setAttribute('for', new_Id[0]+"__new__"+counter);
+                    }
+                    if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
+                        d2.value = '';
+                    }
+                    if(d2.tagName === 'SELECT') {
+                        d2.value = '';
+                        const new_Id = d2.id.split("__");
+                        d2.id = new_Id[0]+"__new__"+counter;
+                    }
+                    if(d2.tagName === 'TD') {
+                        d2.textContent = '';
+                    }
+                })
             }
         })
         tbody.insertBefore(new_row,tbody.rows[0]);
@@ -482,6 +492,12 @@ export class DOM {
             const field = dt.getAttribute('name');
             dt.value = data[`${field}`] ? data[`${field}`] :'';
         })
+        return;
+    }
+
+    static label_parse_value(key, value) {
+        const target = document.querySelector(key);
+        target.textContent = value;
         return;
     }
 }

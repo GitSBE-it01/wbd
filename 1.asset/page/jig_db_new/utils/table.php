@@ -83,8 +83,8 @@ $stock_table_new = [
                 'class'=>'w-full h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-300 px-4'
             ],
             'option'=>[
-                ['body'=>'Tambah'],
-                ['body'=>'Kurang'],
+                ['value'=>'tambah', 'body'=>'Tambah'],
+                ['value'=>'kurang', 'body'=>'Kurang'],
             ]
         ],
         [

@@ -46,3 +46,9 @@ $model['vjs_alat'] = new Model('dbvjs_online.new_master_alat',
     'subcat::s',
 ], 
 'sn_id::s');
+
+$model['vjs_loc'] = new Model('dbvjs_online.new_vjs_loc',
+[
+    'location::s',  
+], 
+'location::s');
