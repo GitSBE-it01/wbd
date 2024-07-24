@@ -59,6 +59,44 @@ class Comp {
         return $component;
     }
 
+    static function button($array) {
+        $title = isset($array['title']) ? "title='".$array['title']."' " : '';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : '';
+        $type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : "type='button' ";
+        $id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $name = isset($array['name']) ? "name='".$array['name']."' " : '';
+        $disable = isset($array['disable']) ? "disabled " : '';
+        $body = '';
+        if(isset($array['body'])) {
+            if(is_array($array['body'])) {
+                foreach($array['body'] as $val) {
+                    $body .= $val;
+                }
+            } else {
+                $body = $array['body'];
+            }
+        }
+        $data_attr = '';
+        if(isset($array['data_attr'])) {
+            foreach($array['data_attr'] as $val2) {
+                $data_att = explode('::', $val2);
+                $data_attr .= 'data-'.$data_att[0]."='".$data_att[1]."' ";
+            }
+        }
+        $component = "<button " 
+        .$title
+        .$id
+        .$name
+        .$type_attr
+        .$data_attr
+        .$class
+        .$disable.">"
+        .$body."
+        </button>";
+
+        return $component;
+    }
+
     // structure
     static function div($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
@@ -293,7 +331,7 @@ class Comp {
     static function input($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
         $class = isset($array['class']) ? "class='".$array['class']."' " : 'rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]';
-        $type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : 'text';
+        $type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : "type='text' ";
         $id = isset($array['id']) ? "id='".$array['id']."' " : '';
         $name = isset($array['name']) ? "name='".$array['name']."' " : '';
         $list = isset($array['list']) ? "list='".$array['list']."' " : '';
@@ -344,7 +382,8 @@ class Comp {
         $name = isset($array['name']) ? "name='".$array['name']."' " : '';
         $disable = isset($array['disable']) ? "disabled " : '';
         $require = isset($array['require']) ? "required " : '';
-        $value = isset($array['value']) ? "value='".$array['value']."' " : '';
+        $multiple = isset($array['multiple']) ? "multiple " : '';
+        $size = isset($array['size']) ? "size='".$array['size']."' " : '';
         $body = '';
         if(isset($array['body'])) {
             if(is_array($array['body'])) {
@@ -366,7 +405,8 @@ class Comp {
         .$title
         .$id
         .$name
-        .$value
+        .$multiple
+        .$size
         .$data_attr
         .$require
         .$class
@@ -379,6 +419,8 @@ class Comp {
 
     static function option($array) {
         $value = isset($array['value']) ? "value='".$array['value']."' " : '';
+        $select = isset($array['select']) ? "selected ": '';
+        $disable = isset($array['disable']) ? "disabled ": '';
         $body = '';
         if(isset($array['body'])) {
             if(is_array($array['body'])) {
@@ -390,8 +432,11 @@ class Comp {
             }
         }
         $component = "<option " 
-        .$value.">"
-        .$body."
+        .$value
+        .$select
+        .$disable
+        .">
+        ".$body."
         </option>";
 
         return $component;
@@ -430,6 +475,232 @@ class Comp {
     }
 
     // table
+    static function create_table($array) {
+        /*
+        $array = [
+            'table'=>[
+                'id'=>'',
+            ],
+            'row_count'=>'',
+            'class'=>[
+                'table'=>'',
+                'tr'=>'',
+                'th_first'=>'',
+                'th'=>'',
+                'td_first'=>'',
+                'td'=>'',
+            ],
+            'tr'=>[
+                [
+                    'type'=>'text',
+                    'th'=>[
+                        'body'=>'text here', 
+                        'class'=>'custom class here'
+                    ],
+                    'td'=>[
+                        'data_attr'=>['custom_attribute::value_custom_attribute'],
+                        'body'=>'text here', 
+                        'class'=>'custom class here'
+                    ],
+                ],
+                [
+                    'type'=>'input',
+                    'th'=>[
+                        'body'=>'text here', 
+                        'class'=>'custom class here'
+                    ],
+                    'td'=>[
+                        'data_attr'=>[
+                            'custom_attribute::value_custom_attribute'
+                        ],
+                        'class'=>'custom class here'
+                    ],
+                    'inp'=>[
+                        'type_attr'=>'type input here', 
+                        'name'=> 'eff_date',
+                        'class'=>'custom class here'
+                    ]
+                ],
+                [
+                    'type'=>'select',
+                    'th'=>[
+                        'body'=>'text here', 
+                        'class'=>'custom class here'
+                    ],
+                    'td'=>[
+                        'data_attr'=>[
+                            'custom_attribute::value_custom_attribute'
+                        ],
+                        'class'=>'custom class here'
+                    ],
+                    'sel'=>[
+                        'type_attr'=>'type input here', 
+                        'name'=> 'field in database',
+                        'class'=>'custom class here',
+                    ],
+                    'opt'=>[
+                        [
+                            'body'=>'',
+                            'select'=>'', //if needed for default option selected
+                            'disable'=>'', //if needed for disabled option to be selected
+                        ],
+                    ],
+                ],
+                [
+                    'type'=>'hidden',
+                    'inp'=>['type_attr'=>'hidden', 'name'=> 'field in database', 'value'=>'value of value in input hidden']
+                ],
+                [
+                    'type'=>'set_btn',
+                    'th'=>[
+                        'body'=>'text here', 
+                        'class'=>'custom class here'
+                    ],
+                    'td'=>[
+                        'data_attr'=>[
+                            'custom_attribute::value_custom_attribute'
+                        ],
+                        'class'=>'custom class here'
+                    ],
+                    'btn'=>[
+                        [
+                            'data_attr'=>['method::open'],
+                            'class'=>'w-6 h-6 arrow_right_black'
+                        ],
+                        [
+                            'data_attr'=>['method::delete'],
+                            'class'=>'w-6 h-6 ml-2 minus'
+                        ],
+                    ]
+                ],
+            ],
+        ];*/
+
+        //class
+        $cls = $array['class'];
+        $array['table']['class'] = isset($cls['table']) ? $cls['table'] : 'w-full scrollable';
+        $class_tr = isset($cls['tr']) ? $cls['tr'] : 'hidden';
+        $class_th_first = isset($cls['th_first']) ? $cls['th_first'] : 'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 ';
+        $class_th = isset($cls['th']) ? $cls['th'] : 'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 ';
+        $class_td_first = isset($cls['td_first']) ? $cls['td_first'] : 'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[20vw]';
+        $class_td = isset($cls['td']) ? $cls['td'] : 'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ';
+
+        // header
+        $th = '';
+        for($i=0; $i<count($array['tr']); $i++) {
+            $tr = $array['tr'][$i];
+            if(isset($tr['th'])) {
+                if(!isset($tr['th']['class'])) {
+                    if($i=0) {
+                        $tr['th']['class']= $class_th_first;
+                    } else {
+                        $tr['th']['class']= $class_th;
+                    }
+                }
+                $th .= self::th($array['th'][$i]);
+            }
+        }
+        $tr_head = self::tr([
+            'data_attr'=>['id::header'],
+            'body'=>$th
+        ]);
+
+        // body
+        $row_count = isset($array['row_count']) ? $array['row_count'] : 50;
+        $tr_body = '';
+        for ($i=0; $i<$row_count; $i++) {
+            $td='';
+            for($ii=0; $ii<count($array['tr']); $ii++) {
+                $tr = $array['tr'][$ii];
+                if(!isset($tr['td']['class'])) {
+                    if($ii=0) {
+                        $tr['td']['class']= $class_td_first;
+                    } else {
+                        $tr['td']['class']= $class_td;
+                    }
+                }
+                $type = $tr['type'];
+                switch ($type) {
+                    case 'text':
+                        $td .= self::td($tr['td']);
+                        break;
+                    case 'input':
+                        $td_container = $tr['td'];
+                        // give id to input
+                        $tr['inp']['id'] = $tr['inp']['name']."__".$i;
+                        // give value to label and input
+                        $val = isset($tr['inp']['value']) ? $tr['inp']['value'] : '';
+                        // give data-field in td
+                        $td_container['data_attr'][] = 'field::'.$tr['inp']['name'];
+                        // give body detail of td
+                        $td_container['body'] = [
+                            self::label([
+                                'for'=>$tr['inp']['id'],
+                                'data_attr'=>['field::'.$tr['inp']['name']],
+                                'body'=>$val
+                            ]),
+                            self::input($tr['inp']),
+                        ];
+                        $td .= self::td($td_container);
+                        break;
+                    case 'select':
+                        $td_container = $tr['td'];
+                        // give id to selection
+                        $tr['sel']['id'] = $tr['sel']['name']."__".$i;
+                        // give value to label and input
+                        $val = isset($tr['sel']['value']) ? $tr['sel']['value'] : '';
+                        // give data-field in td
+                        $td_container['data_attr'][] = 'field::'.$tr['sel']['name'];
+                        // give option to selection
+                        $tr['sel']['body'] = '';
+                        foreach($tr['option'] as $set) {
+                            $set['value'] = $set['body'];
+                            $tr['sel']['body'] .= self::option($set);
+                        }
+                        // give body detail of td
+                        $td_container['body'] = [
+                            self::label([
+                                'for'=>$tr['sel']['id'],
+                                'data_attr'=>['field::'.$tr['sel']['name']],
+                                'body'=>$val
+                            ]),
+                            self::select($tr['sel']),
+                        ];
+                        $td .= self::td($td_container);
+                        break;
+                    case 'hidden':
+                        $td .= self::input($tr['inp']);
+                        break;
+                    case 'set_btn':
+                        $td_container = $tr['td'];
+                        $td_container['body']='';
+                        foreach($tr['btn'] as $set) {
+                            $td_container['body'] .= self::button($set);
+                        }
+                        $td .= self::td($td_container);
+                        break;
+                    default:
+                        exit("Error: Invalid type = ".$type);
+                }
+    
+            }
+            $tr_body .= self::tr([
+                'data_attr'=>['id::'.$i],
+                'class'=>$class_tr,
+                'body'=>$td
+            ]);
+        }
+
+            
+        $array['table']['body'] = [
+            self::thead(['body'=>$tr_head]),
+            self::tbody(['body'=>$tr_body])
+        ];
+
+        $component = self::table($array['table']);
+        return $component;
+    }
+
     static function table($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
         $class = isset($array['class']) ? "class='".$array['class']."' " : '';

@@ -1,4 +1,86 @@
 <?php
+$template_new = [
+    'table'=>[
+        'id'=>'new_main',
+    ],
+    'row_count'=>1,
+    'class'=>[
+        'table'=>'hidden',
+        'tr'=>'',
+        'th_first'=>'',
+        'th'=>'',
+        'td_first'=>'',
+        'td'=>'',
+    ],
+    'tr'=>[
+        [
+            'type'=>'hidden',
+            'inp'=>['type_attr'=>'hidden', 'name'=> 'data_group']
+        ],[
+            'type'=>'input',
+            'td'=>[
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[20vw]',
+            ],
+            'inp'=>[
+                'type_attr'=>'date', 
+                'name'=> 'eff_date', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],[
+            'type'=>'input',
+            'td'=>[
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[40vw]'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'user_input', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],[
+            'type'=>'input',
+            'td'=>[
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[20vw]'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'loc_list',
+                'name'=>'loc',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],[
+            'type'=>'input',
+            'td'=>[
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[14vw]'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'approval_by', 
+                'list'=> 'user_list', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],[
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[6vw]'
+            ],
+            'btn'=>[
+                [
+                    'data_attr'=>['method::open'],
+                    'class'=>'w-6 h-6 arrow_right_black'
+                ],
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ],
+];
+
 $main_table = [
     'id'=> 'table_index', 
     'class'=>'w-screen',
@@ -210,7 +292,6 @@ $add_table = [
             ],
             'inp'=>[
                 'type'=>'text', 
-                'disable'=>'',
                 'name'=> 'check_point', 
                 'class'=>'w-full h-full flex hidden justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
             ]

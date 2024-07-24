@@ -42,8 +42,30 @@ if (event.target.id === "open_dtlist") {
 /* insert new line di table main
 --------------------------------------------------------- */
 if (event.target.id === "new__data") {
-  DOM.table_insert_row('#table_index', counter);
-  counter++;
+  let inserting = false;
+  while(!inserting) {
+    inserting = DOM.table_insert_row('#new_main','#table_index', counter);
+  }
+  if(inserting) {
+    const table = document.querySelector('#table_index');
+    const tr_new = table.querySelector(`[data-id ="new__${counter}"]`);
+    const td = tr_new.querySelectorAll('td');
+    td.forEach(dt=>{
+      if(dt.getAttribute('data-field') === 'eff_date') {
+        const input = dt.querySelector('INPUT');
+        input.setAttribute('value',today);
+        const label = dt.querySelector('label');
+        label.textContent = today;
+      }
+      if(dt.getAttribute('data-field') === 'user_input') {
+        const input = dt.querySelector('INPUT');
+        input.setAttribute('value',user);
+        const label = dt.querySelector('label');
+        label.textContent = user;
+      }
+    })
+    counter++;
+  }
   return;
 }
 
@@ -68,6 +90,7 @@ if (event.target.hasAttribute('data-field')) {
   if (!DOM.add_class(`#${id}`,"hidden") && !input.disabled) {
     DOM.rmv_class(`#${id}`,"hidden");
     DOM.add_class(`[for="${id}"]`, 'hidden');
+    input.focus();
   }
   if(input.disabled) {
     input.setCustomValidity("Data tidak bisa di rubah");
@@ -86,12 +109,20 @@ if (event.target.getAttribute('data-method') === "open") {
     DOM.rmv_class('[data-card="detail"]','hidden')
   }
   const tr = event.target.closest('tr');
-  const fltr = tr.querySelector('[name="data_group"]').value;
-  detail_data = main_data.filter(obj=>obj.data_group === fltr && obj.check_point !=='remark');
-  DOM.table_parse_data('#detail_table', detail_data, 1);
-  remark_data = main_data.filter(obj=>obj.data_group === fltr && obj.check_point ==='remark');
-  console.log({detail_data, remark_data});
-  DOM.table_parse_data('#add_table', remark_data, 1);
+  if(tr.getAttribute('data-id').includes('new_')) {
+    show_form = await api_access('fetch', 'vjs_point', {new_cat:master_filter.new_subcat});
+    detail_data = show_form.filter(obj=>obj.check_point !=='remark');
+    console.log(detail_data);
+    DOM.table_parse_data('#detail_table', detail_data, 1);
+    remark_data = show_form.filter(obj=>obj.check_point ==='remark');
+    DOM.table_parse_data('#add_table', remark_data, 1);
+  } else {
+    const fltr = tr.querySelector('[name="data_group"]').value;
+    detail_data = main_data.filter(obj=>obj.data_group === fltr && obj.check_point !=='remark');
+    DOM.table_parse_data('#detail_table', detail_data, 1);
+    remark_data = main_data.filter(obj=>obj.data_group === fltr && obj.check_point ==='remark');
+    DOM.table_parse_data('#add_table', remark_data, 1);
+  }
   DOM.add_class('#load',"hidden");
   return;
 }
@@ -100,7 +131,12 @@ if (event.target.getAttribute('data-method') === "open") {
 --------------------------------------------------------- */
   if(event.target.id === 'close_form_btn'){
     DOM.rmv_class('#load',"hidden");
-    DOM.rmv_attr(`#${event.target.id}`, 'disabled');
+    const btn = document.querySelectorAll('[data-method = "open"]');
+    btn.forEach(dt=>{
+      if(dt.id) {
+        DOM.rmv_attr(`#${dt.id}`, 'disabled');
+      }
+    })
     if(!DOM.rmv_class('[data-card="detail"]','hidden')) {
       DOM.add_class('[data-card="detail"]','hidden')
     }
@@ -222,14 +258,31 @@ document.addEventListener("change", async function (event) {
     DOM.add_class('#load',"hidden");
     return;
   }
+/* auto pick first option in datalist
+--------------------------------------------------------- */
+  if (event.target.hasAttribute('name') && event.target.hasAttribute('list') ) {
+    const id = event.target.id;
+    DOM.label_parse_value(`[for="${id}"]`, event.target.value);
+    event.target.blur();
+    return;
+  }
 /* approval input
 --------------------------------------------------------- */
-if (event.target.getAttribute('name') === 'approval_by' || event.target.getAttribute('name') === 'loc' || event.target.getAttribute('name') === 'eff_date') {
-  const id = event.target.id;
-  DOM.label_parse_value(`[for="${id}"]`, event.target.value);
-  event.target.blur();
-  return;
-}
+  if (event.target.hasAttribute('name') && event.target.tagName === 'SELECT' ) {
+    const id = event.target.id;
+    const opt = event.target.querySelectorAll('option');
+    console.log(opt);
+    let val = '';
+    for(let i=0; i<opt.length; i++) {
+      if(opt[i].selected === true) {
+        val = opt[i].value;
+        break;
+      }
+    }
+    DOM.label_parse_value(`[for="${id}"]`, val);
+    event.target.blur();
+    return;
+  }
 })
 
 /* ===============================================================================
@@ -264,29 +317,9 @@ document.addEventListener("keydown", async function (event) {
   focus out add even listener
 =============================================================================== */
 document.addEventListener("focusout", async function (event) {
-  /* approval input
+  /* general input
 --------------------------------------------------------- */
-if (event.target.getAttribute('name') === 'approval_by') {
-  const id = event.target.id;
-  if (!DOM.rmv_class(`#${id}`,"hidden")) {
-    DOM.add_class(`#${id}`,"hidden");
-    DOM.rmv_class(`[for="${id}"]`, 'hidden');
-  }
-  return;
-}
-/* lokasi input
---------------------------------------------------------- */
-if (event.target.getAttribute('name') === 'loc') {
-  const id = event.target.id;
-  if (!DOM.rmv_class(`#${id}`,"hidden")) {
-    DOM.add_class(`#${id}`,"hidden");
-    DOM.rmv_class(`[for="${id}"]`, 'hidden');
-  }
-  return;
-}
-/* lokasi input
---------------------------------------------------------- */
-if (event.target.getAttribute('name') === 'eff_date') {
+if (event.target.hasAttribute('name')) {
   const id = event.target.id;
   if (!DOM.rmv_class(`#${id}`,"hidden")) {
     DOM.add_class(`#${id}`,"hidden");

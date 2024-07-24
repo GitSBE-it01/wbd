@@ -76,7 +76,10 @@ $index = $datalist->create(['id'=>'alat_list'])
     ])."
     ".$main->create([
         'class'=>'fixed flex flex-col top-[23vh] bg-slate-300 w-screen h-[72vh] scrollable-y',
-        'body'=>table_create($main_table),
+        'body'=>[
+            table_create($main_table),
+            Comp::create_table($template_new)
+        ]
     ])."
     ".$footer->create([
         'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',

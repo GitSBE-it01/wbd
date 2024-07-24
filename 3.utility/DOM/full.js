@@ -325,7 +325,12 @@ export class DOM {
                                 d2.value = currVal;
                             }
                         if(d2.tagName === 'SELECT') {
-                            d2.value = currVal;
+                            const opt = d2.querySelectorAll('option');
+                            opt.forEach(dt=>{
+                                if(dt.value === currVal){
+                                    dt.selected = true;
+                                }
+                            })
                         }
                         if(d2.tagName === 'TD') {
                             d2.textContent = currVal;
@@ -362,7 +367,12 @@ export class DOM {
                             d2.value = '';
                         }
                         if(d2.tagName === 'SELECT') {
-                            d2.value = '';
+                            const opt = d2.querySelectorAll('option');
+                            opt.forEach(dt=>{
+                                if(dt.hasAttribute('selected')){
+                                    dt.removeAttribute('selected');
+                                }
+                            })
                         }
                         if(d2.tagName === 'TD') {
                             d2.textContent = '';
@@ -377,46 +387,39 @@ export class DOM {
         }
     }
 
-    static table_insert_row(tbl,counter) {
-        const table = document.querySelector(tbl);
-        const tbody = table.querySelector('tbody')
+    static table_insert_row(template_tbl, tbl,counter) {
+        const target = document.querySelector(tbl);
+        const tbody = target.querySelector('tbody')
+        const table = document.querySelector(template_tbl);
         const row_dt = table.querySelector('[data-id="0"]');
         const new_row = row_dt.cloneNode(true);
         new_row.setAttribute('data-id', `new__${counter}`);
-        new_row.removeAttribute('data-value');
-        const tr = new_row.querySelectorAll('td');
-        console.log({new_row,tr});
-        tr.forEach(dt=>{
-            if(dt.getAttribute('data-id') !== 'header') {
-                const td = dt.querySelectorAll("[name]");
-                dt.removeAttribute('data-value');
-                if(!dt.classList.contains('hidden')) {
-                    dt.classList.toggle('hidden');
+        const td = new_row.querySelectorAll('td');
+        td.forEach(dt=>{
+            if(dt.hasAttribute('data-field')) {
+                if(dt.querySelectorAll('INPUT').length>0) {
+                    const input = dt.querySelectorAll("INPUT");
+                    for(let i=0; i<input.length; i++) {
+                        input[i].id = input[i].id+"__new";
+                    }
                 }
-                td.forEach(d2=>{
-                    if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
-                        d2.setAttribute('value', '');
-                        const new_Id = d2.id.split("__");
-                        const lbl = document.querySelector(`[for="${d2.id}"]`);
-                        lbl.textContent = '';
-                        d2.id = new_Id[0]+"__new__"+counter;
-                        lbl.setAttribute('for', new_Id[0]+"__new__"+counter);
+                if(dt.querySelectorAll('LABEL').length>0) {
+                    const label = dt.querySelectorAll("LABEL");
+                    for(let i=0; i<label.length; i++) {
+                        let old = label[i].getAttribute('for');
+                        label[i].setAttribute('for',old+"__new");
                     }
-                    if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
-                        d2.value = '';
+                }
+                if(dt.querySelectorAll('BUTTON').length>0) {
+                    const button = dt.querySelectorAll("BUTTON");
+                    for(let i=0; i<button.length; i++) {
+                        button[i].id = button[i].getAttribute('data-method')+"__"+counter+"__new";
                     }
-                    if(d2.tagName === 'SELECT') {
-                        d2.value = '';
-                        const new_Id = d2.id.split("__");
-                        d2.id = new_Id[0]+"__new__"+counter;
-                    }
-                    if(d2.tagName === 'TD') {
-                        d2.textContent = '';
-                    }
-                })
+                }
             }
         })
         tbody.insertBefore(new_row,tbody.rows[0]);
+        return true;
     }
 
     // navigation 
