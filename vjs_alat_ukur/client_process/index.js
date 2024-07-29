@@ -2,7 +2,7 @@ import { currentDate,customPeriod, sort_array} from "../../3.utility/index.js";
 import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
 
 GeneralDOM.td_input_default();
-DOM.active_link('');
+NavDOM.active_link('nav','');
 let hd_data = [];
 let log_data = [];
 let detail_data = [];
@@ -76,37 +76,6 @@ if (event.target.id === "new__data") {
     })
 
     counter++;
-  }
-  return;
-}
-
-/* show input in table main
---------------------------------------------------------- 
-if (event.target.hasAttribute('data-field')) {
-  let id = '';
-  if(event.target.tagName === 'TD') {
-    if(event.target.querySelector(`INPUT`)) {
-      const inp = event.target.querySelector(`INPUT`);
-      id = inp.id;
-    }
-    if(event.target.querySelector(`SELECT`)) {
-      const inp = event.target.querySelector(`SELECT`);
-      id = inp.id;
-    }
-  } 
-  if(event.target.tagName === 'LABEL') {
-    id = event.target.getAttribute('for');
-  }
-  let input = document.querySelector(`#${id}`);
-  if (!DOM.add_class(`#${id}`,"hidden") && !input.disabled) {
-    DOM.rmv_class(`#${id}`,"hidden");
-    DOM.add_class(`[for="${id}"]`, 'hidden');
-    input.focus();
-  }
-  if(input.disabled) {
-    input.setCustomValidity("Data tidak bisa di rubah");
-    input.reportValidity();
-    input.setCustomValidity("");
   }
   return;
 }
@@ -239,7 +208,7 @@ if (event.target.getAttribute('data-method') === "open") {
     } else {
       const result = await DOM.update_dataset_table(trgt, 'vjs_log');
       if(!result.includes('fail')) {
-        alert ('data updated menjadi baru');
+        alert ('data updated');
         location.reload();
       }
     }

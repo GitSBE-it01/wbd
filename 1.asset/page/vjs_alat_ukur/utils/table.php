@@ -561,3 +561,146 @@ $tool_new = [
         ],
     ]
 ];
+
+$point_table = [
+    'id'=> 'point_table', 
+    'class'=>'w-screen',
+    'row_count' =>50,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'alat'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Kategori',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::new_cat'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'new_cat', 
+                'disable'=>'',
+                'list'=>'reff_list',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Point Pengecekan',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::check_point'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'check_point', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Standard',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::standard'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'standard', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'piliihan'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>''],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+$point_new = [
+    'id'=> 'point_new', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>'bg-blue-200'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'alat'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::new_cat'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'new_cat', 
+                'list'=>'reff_list',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::check_point'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'check_point', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::standard'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'standard', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'piliihan'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>''],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];

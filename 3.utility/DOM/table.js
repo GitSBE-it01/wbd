@@ -1,3 +1,5 @@
+import {DOM} from '../../3.utility/index.js';
+
 export const inputEmptyRow = async(target, counter, data_array) =>{
     const data_tr = document.createElement('tr');
     data_tr.classList.add('w-full');
@@ -112,6 +114,19 @@ const td_button = (dt, data_array) =>{
 
 
 export class TableDOM {
+    static async parse_onclick(key, data, page_key) {
+        document.addEventListener('click', async function(event) {
+            if(event.target.hasAttribute(page_key)) {
+                console.log(page_key);
+                DOM.rmv_class('#load',"hidden");
+                let page = parseInt(event.target.getAttribute('data-page'));
+                await TableDOM.parse_data(key,data,page);
+                DOM.add_class('#load',"hidden");
+                return;
+            }
+        })
+    }
+
     static async parse_data (key, data, page) {
         try {
             let table = '';

@@ -20,6 +20,8 @@ ButtonDOM.insert_row('#new__data','#tool_new', '#tool_table', counter);
 ButtonDOM.show_hidden('#del_data', '[data-field = "data_group"]');
 InputDOM.input_validity('[name ="loc"]');
 InputDOM.input_validity('[name ="new_subcat"]');
+NavDOM.pgList_active('tool_page', page);
+await TableDOM.parse_onclick('#tool_table', show_data, 'data-group');
 
 document.addEventListener('change', function(event) {
     if(event.target.hasAttribute('name')) {

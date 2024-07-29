@@ -22,7 +22,7 @@ function pagination_create($id, $class) {
         'class'=>$div_cls,
         'body'=> [
             $button->create([
-                'data_attr'=>['group::'.$id, 'page::1', 'id::1'],
+                'data_attr'=>['group::'.$id, 'page::1', 'id::1', 'pagi::active'],
                 'class'=>$btn_cls_act,
                 'body'=>'1'
             ]),

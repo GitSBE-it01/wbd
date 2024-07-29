@@ -5,6 +5,7 @@ $nav_array = [
     'links'=>[
         ['href'=> 'index.html', 'text'=> 'Home'],
         ['href'=> 'tool.html', 'text'=> 'Tool Data'],
+        ['href'=> 'reff_vjs.html', 'text'=> 'Reference Data'],
         ['href'=> 'point.html', 'text'=> 'Checklist'],
     ]
 ];
