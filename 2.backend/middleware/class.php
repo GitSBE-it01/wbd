@@ -31,10 +31,6 @@ class Model {
     public $type;
     public $field;
     public $primary_key;
-    public $get;
-    public $insert;
-    public $update;
-    public $delete;
 
     public function __construct($table, $parameter, $pk) {
         foreach($parameter as $value) {
@@ -171,8 +167,10 @@ class DB_Access {
             $bindParams = array();
             ksort($set);
             foreach($set as $key=>$value) {
-                ${'param' . $key} = $value;
-                $bindParams[] = &${'param' . $key};
+                if(in_array($key,$mdl)) {
+                    ${'param' . $key} = $value;
+                    $bindParams[] = &${'param' . $key};
+                }
             }
             array_unshift($bindParams, $types);
             call_user_func_array([$stmt, 'bind_param'], $bindParams);
@@ -302,16 +300,20 @@ class DB_Access {
                 die("Execute failed: " . $stmt->error);
             }
         }
-        $result = $stmt->get_result();
-        $json_data = array();
-        while ($row = $result->fetch_assoc()) {
-            $json_data[] = $row;
-        }
-        
-        $result->free();
-        $stmt->close();
-        $conn->close();
-        return $json_data;
+
+        if (substr($query,0, 6) === 'SELECT') {
+            $result = $stmt->get_result();
+            $json_data = array();
+            while ($row = $result->fetch_assoc()) {
+                $json_data[] = $row;
+            }
+            
+            $result->free();
+            $stmt->close();
+            $conn->close();
+            return $json_data;
+        } 
+        return 'success';
     }
 }
 ?>

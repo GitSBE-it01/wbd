@@ -69,7 +69,7 @@ function table_create($array) {
             switch ($type_td) {
                 case "input":
                     $td_attr = $set['td'];
-                    $set['inp']['id'] = $set['inp']['name']."__".$i;
+                    $set['inp']['id'] = $set['inp']['name']."__".$array['id'].$i;
                     $td_attr['body'] = [
                         create_input($set['inp'])
                     ];
@@ -77,7 +77,7 @@ function table_create($array) {
                     break;
                 case "select":
                     $td_attr = $set['td'];
-                    $set['select']['id'] = $set['select']['name']."__".$i;
+                    $set['select']['id'] = $set['select']['name']."__".$array['id'].$i;
 
                     $val_label = isset($set['select']['value']) ? $set['select']['value'] : '';
                     $lbl = [
@@ -100,7 +100,7 @@ function table_create($array) {
                     $td_attr['body'] = '';
                     foreach($set['button'] as $st) {
                         $id = explode('::',$st['data_attr'][0]);
-                        $st['id'] = $id[1]."__".$i;
+                        $st['id'] = $id[1]."__".$array['id'].$i;
                         $td_attr['body'] .= $button->create($st);
                     }
                     $_td = $td->create($td_attr);
@@ -115,7 +115,7 @@ function table_create($array) {
             $td_full .= $_td;
         }
         $_tr['body'] = $td_full;
-        $_tr['data_attr'] = ['id::'.$i];
+        $_tr['data_attr'] = ['id::'.$array['id'].$i];
         $full_tr .= $tr->create($_tr);
         $count++;
     }

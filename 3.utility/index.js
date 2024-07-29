@@ -1,28 +1,36 @@
-import {buttonDOM} from './DOM/button.js';
+import {ButtonDOM} from './DOM/button.js';
 import {dtlist,
         DtlistDOM} from './DOM/datalist.js';
+import {InputDOM} from './DOM/form.js';
 import {DOM} from './DOM/full.js';
+import {GeneralDOM} from './DOM/general.js';
 import {activeLink,
-        Pagination} from './DOM/nav.js';
+        NavDOM} from './DOM/nav.js';
 import {inputEmptyRow,
-        tableDOM} from './DOM/table.js';
+        TableDOM} from './DOM/table.js';
+import {sort_array} from './utils/array.js';
 import {api_access} from './utils/data_access.js';
 import {currentDate,
-        getCustomDate} from './utils/date.js';
+        getCustomDate,
+        customPeriod} from './utils/date.js';
 import {removeSpaces} from'./utils/string.js';
 
 export {
-        buttonDOM,
+        ButtonDOM,
         dtlist,
         DtlistDOM,
+        InputDOM,
         DOM,
+        GeneralDOM,
         activeLink,
-        Pagination,
+        NavDOM,
         inputEmptyRow,
-        tableDOM,
+        TableDOM,
+        sort_array,
         api_access,
         currentDate,
         getCustomDate,
+        customPeriod,
         removeSpaces,
 };
 

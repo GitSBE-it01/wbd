@@ -16,21 +16,47 @@ export const activeLink = (cls) => {
     })
 }
 
-export class Pagination {
-    constructor(key) {
-        this.key = key;
-        this.active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
-        this.mute = [
+export class NavDOM {
+
+    static active_link(key, cls) {
+        let container = '';
+        if(key.nodeType) {
+            container = key;
+        } else {
+            container = document.querySelector(key);
+        }
+        const ul = container.querySelector('ul');
+        const aLink = ul.querySelectorAll('a');
+        let styleClass = "h-full w-[10vw] text-white justify-center items-center flex hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 bg-blue-800 border-blue-300 border-b-4 font-semibold";
+        if(cls!=='') {styleClass = cls;}
+        aLink.forEach(link=> {
+            const currentUrl = window.location.href.split('/');
+            const compare = currentUrl[currentUrl.length-1];
+            const hrefValue = link.getAttribute('href');
+            if (hrefValue === compare) {
+                link.setAttribute('class', styleClass);
+            }
+        })
+        return;
+    }
+
+    static pgList_init(key, data, table, ...cls) {
+        let div = '';
+        let mute = [
             'hover:font-bold',
             'hover:bg-blue-700',
             'hover:text-white',
             'hover:border-black',
             'cursor-pointer'
         ];
-    }
-
-    pagination_init(data, table) {
-        const div = document.querySelector(this.key);
+        if (!cls === '') {
+            mute = cls;
+        }
+        if(key.nodeType) {
+            div = key;
+        } else {
+            div = document.querySelector(key);
+        }
         const dt_cnt = data.length;
         const tbl = document.querySelector(table);
         const tr = tbl.querySelectorAll('tr');
@@ -51,7 +77,7 @@ export class Pagination {
                 if(pg==='6') {
                     dt.disabled = true;
                     dt.textContent="...";
-                    this.mute.forEach(cls=>{
+                    mute.forEach(cls=>{
                         if(dt.classList.contains(cls)) {
                             dt.classList.toggle(cls);
                         }
@@ -66,16 +92,30 @@ export class Pagination {
                 }
             }
         })
+        return;
     }
 
-    page_active(page) {
-        const div = document.querySelector(this.key);
+    static pgList_active(key, page) {
+        let div = '';
+        let mute = [
+            'hover:font-bold',
+            'hover:bg-blue-700',
+            'hover:text-white',
+            'hover:border-black',
+            'cursor-pointer'
+        ];
+        let active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
+        if(key.nodeType) {
+            div = key;
+        } else {
+            div = document.querySelector(key);
+        }
         const pagi = div.querySelectorAll('[data-id]');
         const max = div.querySelector('[data-id = "7"]').getAttribute('data-page');
         pagi.forEach(dt=>{
             const id = dt.getAttribute('data-id');
             if(!dt.disabled) {
-                this.active.forEach(cls=>{
+                active.forEach(cls=>{
                     if(cls !== 'bg-slate-200' && dt.classList.contains(cls)) {
                         dt.classList.toggle(cls);
                     }
@@ -85,7 +125,7 @@ export class Pagination {
                 })
             }
             if(!dt.disabled) {
-                this.mute.forEach(cls=>{
+                mute.forEach(cls=>{
                     if(!dt.classList.contains(cls)) {
                         dt.classList.toggle(cls);
                     }
@@ -94,7 +134,7 @@ export class Pagination {
             if(max>7) {
                 if(id==="1") {
                     if(page === 1) {
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -108,7 +148,7 @@ export class Pagination {
                     if(page === 2) {
                         dt.disabled = false;
                         dt.textContent="2";
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -125,7 +165,7 @@ export class Pagination {
                     if(page>4 && dt.textContent!=="...") {
                         dt.disabled = true;
                         dt.textContent = "...";
-                        this.mute.forEach(cls=>{
+                        mute.forEach(cls=>{
                             if(dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -135,7 +175,7 @@ export class Pagination {
                 if(id==="3"){
                     if(page === 3) {
                         dt.textContent="3";
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -161,7 +201,7 @@ export class Pagination {
                     if(page<(parseInt(max)-2) && page>3) {
                         dt.textContent=page;
                         dt.setAttribute('data-page', `${page}`);
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -185,7 +225,7 @@ export class Pagination {
                         const curPage = parseInt(max)-2;
                         dt.textContent = curPage;
                         dt.setAttribute('data-page', `${curPage}`);
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -195,8 +235,8 @@ export class Pagination {
                         })
                     }
                     if(page<(parseInt(max)-2) && page>4) {
-                        dt.setAttribute('data-page', `${page+1}`);
-                        dt.textContent = page+1;
+                        dt.setAttribute('data-page', `${parseInt(page)+1}`);
+                        dt.textContent = parseInt(page)+1;
                     }
                     if(page>=(parseInt(max)-2)) {
                         dt.setAttribute('data-page', `${parseInt(max)-2}`);
@@ -212,7 +252,7 @@ export class Pagination {
                         dt.disabled = false;
                         dt.textContent= page;
                         dt.setAttribute('data-page', `${page}`);
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -224,7 +264,7 @@ export class Pagination {
                     if(page<(parseInt(max)-3) && dt.textContent!=="...") {
                         dt.disabled = true;
                         dt.textContent = "...";
-                        this.mute.forEach(cls=>{
+                        mute.forEach(cls=>{
                             if(dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -240,7 +280,7 @@ export class Pagination {
                 }
                 if(id==="7") {
                     if(page === parseInt(max)) {
-                        this.active.forEach(cls=>{
+                        active.forEach(cls=>{
                             if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
                                 dt.classList.toggle(cls);
                             }
@@ -252,5 +292,7 @@ export class Pagination {
                 }
             }
         })
+        return;
     }
+
 }

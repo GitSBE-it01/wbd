@@ -958,6 +958,10 @@ video {
   height: 77vh;
 }
 
+.h-\[80vh\] {
+  height: 80vh;
+}
+
 .h-\[85\%\] {
   height: 85%;
 }

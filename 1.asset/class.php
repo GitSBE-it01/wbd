@@ -12,6 +12,7 @@ class Component {
     public $require;
     public $placeholder;
     public $disable;
+    public $select;
     public $data_attr;
     public $cols;
     public $rows;
@@ -31,6 +32,7 @@ class Component {
         $this->list = isset($array['list']) ? "list='".$array['list']."' " : '';
         $this->placeholder = isset($array['placeholder']) ? "placeholder='".$array['placeholder']."' " : '';
         $this->disable = isset($array['disable']) ? "disabled " : '';
+        $this->select = isset($array['select']) ? "selected " : '';
         $this->require = isset($array['require']) ? "required " : '';
         $this->value = isset($array['value']) ? "value='".$array['value']."' " : '';
         $this->cols = isset($array['cols']) ? "colspan='".$array['cols']."' " : '';
@@ -82,6 +84,7 @@ class Component {
         $class = isset($array['class']) ? "class='".$array['class']."' " : $this->class;
 
         $disable = isset($array['disable']) ? "disabled " : $this->disable;
+        $select = isset($array['select']) ? "selected " : $this->select;
         $require = isset($array['require']) ? "required " : $this->require;
 
         $data_attr = '';   
@@ -123,6 +126,7 @@ class Component {
             .$maxlength
             .$data_attr
             .$require
+            .$select
             .$class
             .$disable.">"
             .$body."
@@ -143,6 +147,7 @@ class Component {
             .$maxlength
             .$data_attr
             .$require
+            .$select
             .$class
             .$disable.">"
             .$body."

@@ -16,6 +16,7 @@
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
         const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', yesterday]});
+        console.log({otb});
         const trans = await api_access('get', 'jig_trans','');
         //const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
         //const trans2 = await api_access('fetch', 'jig_trans',{end_date:yesterdayDate()});
@@ -342,7 +343,6 @@ const result = await api_access('insert','jig_usg', arrInp);
 const end = performance.now();
 const totalTime = (end - start) /1000;
 console.log('total time = ' + totalTime);
-
 
 const h1 = document.createElement('h1');
 const body = document.querySelector('body');

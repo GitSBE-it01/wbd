@@ -1,7 +1,9 @@
 <?php
-require_once "2.backend/api/vjs_alat_ukur.php";
+require_once "2.backend/api.php";
 require_once "2.backend/model/index.php";
 require_once "1.asset/index.php";
+
+
 
 ?>
 <!DOCTYPE html>
@@ -20,21 +22,10 @@ require_once "1.asset/index.php";
     </head>
 </head>
 <body class="bg-slate-700">
-    <label for='test'></label>
-    <input type="text" id="test" required>
 </body>
-<script>
-    const test = document.querySelector('[for="test"]');
-    const input = document.querySelector('input');
-    input.addEventListener('input', function() {
-        console.log(input.value);
-        if(input.value === 'test') {
-            input.setCustomValidity('cannot contain test');
-        } else {
-            input.setCustomValidity('');
-        }
-        input.reportValidity();
-    })
-
+<script type='module'>
+    import {api_access} from '3.utility/index.js';
+    const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', yesterday]});
+    console.log(otb);
 </script>
 </html>

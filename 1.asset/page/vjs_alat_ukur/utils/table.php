@@ -1,25 +1,20 @@
 <?php
 $template_new = [
-    'table'=>[
-        'id'=>'new_main',
-    ],
-    'row_count'=>1,
-    'class'=>[
-        'table'=>'hidden',
-        'tr'=>'',
-        'th_first'=>'',
-        'th'=>'',
-        'td_first'=>'',
-        'td'=>'',
-    ],
-    'tr'=>[
+    'id'=> 'new_main', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'data_group'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'sn_id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'no_asset'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'period'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'category'],
         [
-            'type'=>'hidden',
-            'inp'=>['type_attr'=>'hidden', 'name'=> 'data_group']
-        ],[
             'type'=>'input',
             'td'=>[
-                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[20vw]',
+                'data_attr'=>['field::eff_date'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[15vw]',
             ],
             'inp'=>[
                 'type_attr'=>'date', 
@@ -29,7 +24,8 @@ $template_new = [
         ],[
             'type'=>'input',
             'td'=>[
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[40vw]'
+                'data_attr'=>['field::user_input'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[30vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -40,7 +36,8 @@ $template_new = [
         ],[
             'type'=>'input',
             'td'=>[
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[20vw]'
+                'data_attr'=>['field::loc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -52,7 +49,8 @@ $template_new = [
         ],[
             'type'=>'input',
             'td'=>[
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[14vw]'
+                'data_attr'=>['field::approval_by'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -62,12 +60,25 @@ $template_new = [
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],[
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::decision'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black '
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'decision', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],[
             'type'=>'set_btn',
             'td'=>[
                 'data_attr'=>['field::data_group'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[6vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]'
             ],
-            'btn'=>[
+            'button'=>[
                 [
                     'data_attr'=>['method::open'],
                     'class'=>'w-6 h-6 arrow_right_black'
@@ -88,15 +99,19 @@ $main_table = [
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'data_group'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'sn_id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'no_asset'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'period'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'category'],
         [
             'type'=>'input',
             'th'=>[
                 'body'=>'Date',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[20vw]',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]',
             ],
             'td'=>[
                 'data_attr'=>['field::eff_date'],
-                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[20vw]'
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
             ],
             'inp'=>[
                 'type_attr'=>'date', 
@@ -108,11 +123,11 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'User',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[40vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::user_input'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[40vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -126,11 +141,11 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'Lokasi',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[20vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::loc'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[20vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -144,11 +159,11 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'Approval',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[14vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::approval_by'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[14vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -159,14 +174,32 @@ $main_table = [
             ]
         ],
         [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Decision',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::decision'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black '
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'decision', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
             'type'=>'set_btn',
             'th'=>[
                 'body'=>'Detail',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[6vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::data_group'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[6vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'button'=>[
                 [
@@ -183,6 +216,7 @@ $main_table = [
 ];
 
 
+
 $detail_table = [
     'id'=> 'detail_table', 
     'class'=>'w-full h-[45vh] scrollable-y',
@@ -190,14 +224,7 @@ $detail_table = [
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'sn_id'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'category'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'no_asset'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'eff_date'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'data_group'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'user_input'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'decision'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'approval_by'],
         [
             'type'=>'input',
             'th'=>[
@@ -240,13 +267,14 @@ $detail_table = [
             ],
             'td'=>[
                 'data_attr'=>['field::result'],
-                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 text-sm border-black w-[12vw] h-full',
+                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 text-sm border-black w-[12vw] h-full justify-center items-center font-lg',
             ],
             'select'=>[
                 'name'=> 'result', 
                 'class'=>'w-[12vw] h-full hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
             ],
             'option'=>[
+                ['value'=>'-', 'body'=>'-', 'select'=>''],
                 ['value'=>'OK', 'body'=>'OK'],
                 ['value'=>'NG', 'body'=>'NG'],
             ]
@@ -292,10 +320,244 @@ $add_table = [
             ],
             'inp'=>[
                 'type'=>'text', 
-                'name'=> 'check_point', 
+                'name'=> 'result', 
                 'class'=>'w-full h-full flex hidden justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
             ]
         ],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'result'],
+    ]
+];
+
+
+
+$tool_table = [
+    'id'=> 'tool_table', 
+    'class'=>'w-screen',
+    'row_count' =>50,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'cat'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'subcat'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'No Seri',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::sn_id'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'sn_id', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Kategori',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::new_subcat'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'new_subcat', 
+                'list'=> 'reff_list', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'No Asset',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::no_asset'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'no_asset', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Deskripsi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::_desc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> '_desc', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Merek',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::merk'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'merk', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Lokasi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::loc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'loc', 
+                'list'=>'loc_list',
+                'require'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+$tool_new = [
+    'id'=> 'tool_new', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>'bg-blue-200'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'cat'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'subcat'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::sn_id'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'sn_id', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::new_subcat'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'new_subcat', 
+                'list'=> 'reff_list', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::no_asset'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'no_asset', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::_desc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> '_desc', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::merk'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'merk', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::loc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'loc', 
+                'list'=>'loc_list',
+                'require'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
     ]
 ];

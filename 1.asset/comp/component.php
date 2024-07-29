@@ -328,6 +328,51 @@ class Comp {
         return $component;
     }
 
+    static function textarea($array) {
+        $title = isset($array['title']) ? "title='".$array['title']."' " : '';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : 'rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]';
+        $type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : "type='text' ";
+        $id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $name = isset($array['name']) ? "name='".$array['name']."' " : '';
+        $list = isset($array['list']) ? "list='".$array['list']."' " : '';
+        $disable = isset($array['disable']) ? "disabled " : '';
+        $require = isset($array['require']) ? "required " : '';
+        $value = isset($array['value']) ? "value='".$array['value']."' " : '';
+        $body = '';
+        if(isset($array['body'])) {
+            if(is_array($array['body'])) {
+                foreach($array['body'] as $val) {
+                    $body .= $val;
+                }
+            } else {
+                $body = $array['body'];
+            }
+        }
+        $data_attr = '';
+        if(isset($array['data_attr'])) {
+            foreach($array['data_attr'] as $val2) {
+                $data_att = explode('::', $val2);
+                $data_attr .= 'data-'.$data_att[0]."='".$data_att[1]."' ";
+            }
+        }
+
+        $component = "<textarea " 
+        .$title
+        .$id
+        .$name
+        .$type_attr
+        .$list
+        .$value."
+        autocomplete='off' "
+        .$data_attr
+        .$require
+        .$class
+        .$disable.">"
+        .$body."
+        </textarea>";
+        return $component;
+    }
+
     static function input($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
         $class = isset($array['class']) ? "class='".$array['class']."' " : 'rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]';
@@ -534,7 +579,6 @@ class Comp {
                         'class'=>'custom class here'
                     ],
                     'sel'=>[
-                        'type_attr'=>'type input here', 
                         'name'=> 'field in database',
                         'class'=>'custom class here',
                     ],
@@ -586,7 +630,7 @@ class Comp {
         $class_td = isset($cls['td']) ? $cls['td'] : 'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ';
 
         // header
-        $th = '';
+        $th = [];
         for($i=0; $i<count($array['tr']); $i++) {
             $tr = $array['tr'][$i];
             if(isset($tr['th'])) {
@@ -597,98 +641,62 @@ class Comp {
                         $tr['th']['class']= $class_th;
                     }
                 }
-                $th .= self::th($array['th'][$i]);
+                $th[] = $tr['th'];
             }
         }
-        $tr_head = self::tr([
-            'data_attr'=>['id::header'],
-            'body'=>$th
-        ]);
+
+        $tr_head = self::create_tbl_header($th);
 
         // body
         $row_count = isset($array['row_count']) ? $array['row_count'] : 50;
+
+        $td='';
+        for($ii=0; $ii<count($array['tr']); $ii++) {
+            $tr = $array['tr'][$ii];
+            if(!isset($tr['td']['class'])) {
+                if($ii=0) {
+                    $tr['td']['class']= $class_td_first;
+                } else {
+                    $tr['td']['class']= $class_td;
+                }
+            }
+            $type = $tr['type'];
+            switch ($type) {
+                case 'text':
+                    $td .= self::td($tr['td']);
+                    break;
+                case 'input':
+                    $td .= self::create_tbl_data_inp_text($tr);
+                    break;
+                case 'select':
+                    $td .= self::create_tbl_data_select($tr);
+                    break;
+                case 'hidden':
+                    //$td .= self::input($tr['inp']);
+                    break;
+                case 'set_btn':
+                    $td_container = $tr['td'];
+                    $td_container['body']='';
+                    foreach($tr['btn'] as $set) {
+                        $td_container['body'] .= self::button($set);
+                    }
+                    $td .= self::td($td_container);
+                    break;
+                default:
+                    exit("Error: Invalid type = ".$type);
+            }
+
+        }
+
+        $tr_full = self::tr([
+            'data_attr'=>['id::specificid'],
+            'class'=>$class_tr,
+            'body'=>$td
+        ]);
+
         $tr_body = '';
         for ($i=0; $i<$row_count; $i++) {
-            $td='';
-            for($ii=0; $ii<count($array['tr']); $ii++) {
-                $tr = $array['tr'][$ii];
-                if(!isset($tr['td']['class'])) {
-                    if($ii=0) {
-                        $tr['td']['class']= $class_td_first;
-                    } else {
-                        $tr['td']['class']= $class_td;
-                    }
-                }
-                $type = $tr['type'];
-                switch ($type) {
-                    case 'text':
-                        $td .= self::td($tr['td']);
-                        break;
-                    case 'input':
-                        $td_container = $tr['td'];
-                        // give id to input
-                        $tr['inp']['id'] = $tr['inp']['name']."__".$i;
-                        // give value to label and input
-                        $val = isset($tr['inp']['value']) ? $tr['inp']['value'] : '';
-                        // give data-field in td
-                        $td_container['data_attr'][] = 'field::'.$tr['inp']['name'];
-                        // give body detail of td
-                        $td_container['body'] = [
-                            self::label([
-                                'for'=>$tr['inp']['id'],
-                                'data_attr'=>['field::'.$tr['inp']['name']],
-                                'body'=>$val
-                            ]),
-                            self::input($tr['inp']),
-                        ];
-                        $td .= self::td($td_container);
-                        break;
-                    case 'select':
-                        $td_container = $tr['td'];
-                        // give id to selection
-                        $tr['sel']['id'] = $tr['sel']['name']."__".$i;
-                        // give value to label and input
-                        $val = isset($tr['sel']['value']) ? $tr['sel']['value'] : '';
-                        // give data-field in td
-                        $td_container['data_attr'][] = 'field::'.$tr['sel']['name'];
-                        // give option to selection
-                        $tr['sel']['body'] = '';
-                        foreach($tr['option'] as $set) {
-                            $set['value'] = $set['body'];
-                            $tr['sel']['body'] .= self::option($set);
-                        }
-                        // give body detail of td
-                        $td_container['body'] = [
-                            self::label([
-                                'for'=>$tr['sel']['id'],
-                                'data_attr'=>['field::'.$tr['sel']['name']],
-                                'body'=>$val
-                            ]),
-                            self::select($tr['sel']),
-                        ];
-                        $td .= self::td($td_container);
-                        break;
-                    case 'hidden':
-                        $td .= self::input($tr['inp']);
-                        break;
-                    case 'set_btn':
-                        $td_container = $tr['td'];
-                        $td_container['body']='';
-                        foreach($tr['btn'] as $set) {
-                            $td_container['body'] .= self::button($set);
-                        }
-                        $td .= self::td($td_container);
-                        break;
-                    default:
-                        exit("Error: Invalid type = ".$type);
-                }
-    
-            }
-            $tr_body .= self::tr([
-                'data_attr'=>['id::'.$i],
-                'class'=>$class_tr,
-                'body'=>$td
-            ]);
+            $tr_body .= str_replace('specificid', $i, $tr_full);
         }
 
             
@@ -699,6 +707,70 @@ class Comp {
 
         $component = self::table($array['table']);
         return $component;
+    }
+
+    static function create_tbl_header($array) {
+        $th_full = '';
+        foreach($array as $set) {
+            $th_full .= self::th($set);
+        }
+
+        $tr_head = self::tr([
+            'data_attr'=>['id::header'],
+            'body'=>$th_full
+        ]);
+
+        return $tr_head;
+    }
+
+    static function create_tbl_data_inp_text($tr) {
+        $td_container = $tr['td'];
+        // give id to input
+        $tr['inp']['id'] = $tr['inp']['name']."__specificid";
+        // give value to label and input
+        $val = isset($tr['inp']['value']) ? $tr['inp']['value'] : '';
+        // give data-field in td
+        $td_container['data_attr'][] = 'field::'.$tr['inp']['name'];
+        // give body detail of td
+        $td_container['body'] = [
+            self::label([
+                'for'=>$tr['inp']['id'],
+                'data_attr'=>['field::'.$tr['inp']['name']],
+                'body'=>$val
+            ]),
+            self::input($tr['inp']),
+        ];
+        $td = self::td($td_container);
+
+        return $td;
+    }
+
+    static function create_tbl_data_select($tr) {
+        $td_container = $tr['td'];
+        // give id to selection
+        $tr['sel']['id'] = $tr['sel']['name']."__specificid";
+        // give value to label and input
+        $val = isset($tr['sel']['value']) ? $tr['sel']['value'] : '';
+        // give data-field in td
+        $td_container['data_attr'][] = 'field::'.$tr['sel']['name'];
+        // give option to selection
+        $tr['sel']['body'] = '';
+        foreach($tr['option'] as $set) {
+            $set['value'] = $set['body'];
+            $tr['sel']['body'] .= self::option($set);
+        }
+        // give body detail of td
+        $td_container['body'] = [
+            self::label([
+                'for'=>$tr['sel']['id'],
+                'data_attr'=>['field::'.$tr['sel']['name']],
+                'body'=>$val
+            ]),
+            self::select($tr['sel']),
+        ];
+        $td = self::td($td_container);
+
+        return $td;
     }
 
     static function table($array) {

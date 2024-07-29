@@ -33,12 +33,13 @@ export const dtlist = (target,separator, dataArr, ...keyPick) => {
 }
 
 export class DtlistDOM {
-    constructor(key) {
-        this.key = key;
-    }
-
-    parse_option (separator, dataArr, ...keyPick) {
-        const dtlist = document.querySelector(this.key);
+    static parse_opt (key, separator, dataArr, ...keyPick) {
+        let target = '';
+        if(key.nodeType) {
+            target = key;
+        } else {
+            target = document.querySelector(key);
+        }
         dataArr.forEach(dt=>{
             const key = Object.keys(dt);
             let defaultVal = '';
@@ -66,26 +67,8 @@ export class DtlistDOM {
                 option.value = val;
                 option.textContent = val;
             }
-            dtlist.appendChild(option);
+            target.appendChild(option);
         })
-        return;
-    }
-
-    validation_input (value, input) {
-        const dtlist = document.querySelector(this.key);
-        const inpt = document.querySelector(input);
-        const opt = dtlist.querySelectorAll('option');
-        let valid = false;
-        for( let i=0; i<opt.length; i++) {
-            if(opt[i].value.includes(value)) {
-                valid = true;
-                return;
-            }
-        }
-        if(!valid) {
-            inpt.setCustomValidity("Data tidak termasuk dalam list");
-            inpt.reportValidity();
-        }
         return;
     }
 }

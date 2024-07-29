@@ -23,6 +23,14 @@ require_once 'comp/structure.php';
 require_once 'comp/table.php';
 require_once 'comp/text.php';
 
+$home_btn = Comp::link([
+  'href'=>'http://informationsystem.sbe.co.id:8080/sbe/index.php',
+  'body'=>Comp::button([
+      'class'=> 'home h-8 w-8 rounded bg-slate-700',
+  ])
+]);
+
+
 function createHTML($array) {
   /*
     [

@@ -16,3 +16,10 @@ export const getCustomDate = (number, separ) => {
     const result = `${year}${separ}${month}${separ}${day}`
     return result;
 }
+
+
+export const customPeriod = (inpt_dt) =>{
+    let splt = inpt_dt.split('-');
+    let period = splt[0]+".b"+splt[1].padStart(2,'0');
+    return period;
+}

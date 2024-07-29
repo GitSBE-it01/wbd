@@ -111,23 +111,25 @@ const td_button = (dt, data_array) =>{
 }
 
 
-export class tableDOM {
-    constructor(key) {
-        this.id = key;
-    }
-
-    async table_parse_data (data, page) {
+export class TableDOM {
+    static async parse_data (key, data, page) {
         try {
-            const table = document.querySelector(this.id);
+            let table = '';
+            if(key.nodeType) {
+                table = key;
+            } else {
+                table = document.querySelector(key);
+            }
             const tr = table.querySelectorAll('tr');
             let count = 0;
             if(page >1) {
-                count = tr.length * (page-1);
+                count = (tr.length-1) * (page-1);
             }
             tr.forEach(dt=>{
                 if(dt.getAttribute('data-id') !== 'header' && !dt.classList.contains('hidden')) {
                     dt.classList.toggle('hidden');
                 }
+                let fltr = '';
                 if(dt.getAttribute('data-id') !== 'header' && data[count]) {
                     const fld = dt.querySelectorAll("[name]");
                     if(dt.classList.contains('hidden')) {
@@ -137,33 +139,48 @@ export class tableDOM {
                     fld.forEach(d2=>{
                         const key_fld = d2.getAttribute('name');
                         const currVal = data[count][`${key_fld}`] ? data[count][`${key_fld}`] : '';
-                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
-                            d2.setAttribute('value', currVal);
-                            const lbl = document.querySelector(`[for="${d2.id}"]`);
-                            lbl.textContent= currVal;
-                        }
-                        if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
-                            d2.value = currVal;
-                        }
+                        fltr += currVal + "----";
+                        if(d2.tagName === 'INPUT')
+                            if(d2.getAttribute('type')==='text' || d2.getAttribute('type')==='date') {
+                                d2.value = currVal;
+                                d2.setAttribute('data-current', currVal);
+                                const lbl = table.querySelector(`[for="${d2.id}"]`);
+                                lbl.textContent= currVal;
+                            }   
+                            if(d2.getAttribute('type')==='hidden') {
+                                d2.value = currVal;
+                                d2.setAttribute('data-current', currVal);
+                            }
                         if(d2.tagName === 'SELECT') {
+                            d2.setAttribute('data-current', currVal);
                             d2.value = currVal;
+                            const opt = d2.querySelectorAll('option');
+                            opt.forEach(dt=>{
+                                if(dt.value === currVal){
+                                    dt.setAttribute("selected", true);
+                                }
+                            })
+                            const lbl = table.querySelector(`[for="${d2.id}"]`);
+                            lbl.textContent= currVal;
                         }
                         if(d2.tagName === 'TD') {
                             d2.textContent = currVal;
+                            d2.setAttribute('data-current', currVal);
                         }
                     })
                     count++;
                 }
             })
+            return;
         } catch(error) {
             console.error('Error:', error);
             return Promise.reject(error);
         }
     }
 
-    async table_clear() {
+    static async clear(key) {
         try {
-            const table = document.querySelector(this.id);
+            const table = document.querySelector(key);
             const tr = table.querySelectorAll('tr');
             tr.forEach(dt=>{
                 if(dt.getAttribute('data-id') !== 'header') {
@@ -175,25 +192,38 @@ export class tableDOM {
                     td.forEach(d2=>{
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='text') {
                             d2.setAttribute('value', '');
+                            d2.removeAttribute('data-current');
                             const lbl = document.querySelector(`[for="${d2.id}"]`);
                             lbl.textContent = '';
                         }
                         if(d2.tagName === 'INPUT' && d2.getAttribute('type')==='hidden') {
                             d2.value = '';
+                            d2.removeAttribute('data-current');
                         }
                         if(d2.tagName === 'SELECT') {
-                            d2.value = '';
+                            d2.removeAttribute('data-current');
+                            const opt = d2.querySelectorAll('option');
+                            opt.forEach(dt=>{
+                                if(dt.hasAttribute('selected')){
+                                    dt.removeAttribute('selected');
+                                }
+                            })
+                            const lbl = table.querySelector(`[for="${d2.id}"]`);
+                            lbl.textContent= '';
                         }
                         if(d2.tagName === 'TD') {
+                            d2.removeAttribute('data-current');
                             d2.textContent = '';
                         }
                     })
                 }
             })
+            return;
         } catch(error) {
             console.error('Error:', error);
             return Promise.reject(error);
         }
     }
 
+    
 }

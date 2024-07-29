@@ -1,19 +1,27 @@
 <?php
 $model['vjs_log'] = new Model('dbvjs_online.new_vjs_log',
 [
-    'sn_id::s',
-    'category::s',
-    'no_asset::s',
+    'data_group::s',
     'check_point::s',
     'standard::s',
-    'eff_date::s',
     'result::s',
-    'data_group::s',
-    'user_input::s',
-    'decision::i',
-    'approval_by::s',
 ],
 'id::i');
+
+$model['vjs_hd'] = new Model('dbvjs_online.new_vjs_hd',
+[
+    'data_group::s',
+    'sn_id::s',
+    'no_asset::s',
+    'eff_date::s',
+    'period::s',
+    'category::s',
+    'user_input::s',
+    'approval_by::s',
+    'loc::s',
+    'decision::i',
+],
+'data_group::s');
 
 $model['vjs_reff'] = new Model('dbvjs_online.new_reff',
 [
@@ -40,9 +48,7 @@ $model['vjs_alat'] = new Model('dbvjs_online.new_master_alat',
     'no_asset::s',
     '_desc::s',
     'merk::s',
-    'install_date::s',
     'loc::s',
-    'cal_by::s',
     'subcat::s',
 ], 
 'sn_id::s');

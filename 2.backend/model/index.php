@@ -8,6 +8,7 @@ $model['auth'] = new Model('access',
 ],
 'id::i');
 require_once "jig.php";
+require_once "new_type_report.php";
 require_once "ngvar.php";
 require_once "qad.php";
 require_once "sbe.php";

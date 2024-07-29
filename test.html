@@ -23,7 +23,7 @@
             <tr>
                 <td>
                     haloo
-                    <input type="text" value="testing">
+                    <input type="text" value="testing" disabled>
                 </td>
             </tr>
         </tbody>
@@ -46,13 +46,80 @@
             <option value="test3\napakah"></option>
         </datalist>
     </div>
+    <div>
+        <input  id="ok" name="coba2" type="radio">ok
+        <input  id="ng" name="coba2" type="radio">ng
+        <input  id="abstain" name="coba2" type="radio">abstain
+
+    </div>
+    <a href="http://informationsystem.sbe.co.id:8080/sbe/index.php">
+        <button type='button' class="home h-8 w-8 bg-transparent">
+        </button>
+    </a>
+
+    <table>
+        <tr>
+            <th>test1</th>
+            <th>test2</th>
+        </tr>
+        <tr>
+            <td>utk testing saja</td>
+            <td>
+                <label for="inputTD"></label>
+                <input type="text" id="inputTD" class="hidden">
+            </td>
+        </tr>
+    </table>
+
 </body>
 <script>
-    const test =  document.querySelector('#asdfab');
-    document.addEventListener('change', function(event){
-        console.log(test.value);
+
+
+    const testTD = () => {
+        document.addEventListener('click', function(event){
+            console.log(event.target)
+            if(event.target.querySelector('input')!==null) {
+                const inp = event.target.querySelector('input');
+                console.log(!inp.disabled);
+            }
+        })
+        document.addEventListener('change', function(event) {
+            if(event.target.closest('td') !== null) {
+                console.log(event.target.value);
+            }
+        })
+    }
+
+    console.log(document.querySelector('#test_textarea'));
+    testTD('td');
+
+    const data = [370, 380, 554, 552, 550]
+    const n = data.length;
+    let sum = 0;
+    data.forEach(dt=>{
+        sum += dt;
     })
-
-
+    let x = sum /n;
+    function standardDeviation(values) {
+        const avg = values.reduce((total, value) => total + value, 0) / values.length;
+        const variance = values.reduce((total, value) => total + Math.pow(value - avg, 2), 0) / (values.length - 1);
+        return Math.sqrt(variance);
+    }
+    const s = standardDeviation(data);
+    const konstanta = n/((n-1) * (n-2));
+    let valu_data = 0;
+    data.forEach(xi=>{
+        const upper = xi-x;
+        const per_s = upper/s;
+        const pangkat3 = per_s*per_s*per_s;
+        console.log({upper, per_s, pangkat3})
+        valu_data += pangkat3;
+    })
+    const skew = konstanta * valu_data;
+    console.log('konstanta : ', konstanta);
+    console.log('stddev : ', s);
+    console.log('valu data : ', valu_data);
+    console.log('mean : ', x);
+    console.log('skew : ', skew);
 </script>
 </html>
