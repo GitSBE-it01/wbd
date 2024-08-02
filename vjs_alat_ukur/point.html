@@ -8,13 +8,12 @@
         <link href='../1.asset/main.css' rel='stylesheet' />
         <link href='../1.asset/output.css' rel='stylesheet' />
         <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
-        <script src='../3.utility/auth.js'></script>
         <link rel='icon' href='../1.asset/symbol/new_logo_sbe.png' type='image/ico' />
         <title>Detail Checkpoint List</title>
     </head>
     <body class='font-[Poppins] h-screen w-screen bg-slate-300 custom_scroll'>
     <datalist id='reff_list' >
-        </datalist><div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div class='h-full w-full opacity-75 absolute bg-slate-400' >
+        </datalist><div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
             </div><div class='loading2' >
             </div>
             </div>
@@ -40,19 +39,29 @@
                     Checklist
                 </a>
             </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='reff_vjs.html'>
+                    Reference Data
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='../../mra/vjs_online/index.php'>
+                    Old Data
+                </a>
+            </li>
         </ul>
         <div class='w-[30vw] h-full flex'>
             <h1 class='text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]'>
-                VJS Alat Ukur
+                Point Pengecekan
             </h1>
         </div>
         </nav>
     <header class='fixed px-2 top-[5vh] bg-slate-700 w-screen h-[5vh] flex flex-row' ><input id='input__tool_search' type='text' placeholder='input alat disini' 
         autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 z-30 shadow-md w-[40vw] my-3' >
         <button id='search_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >search
-        </button><button id='submit_form_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md text-slate-200 hover:font-semibold  duration-300' disabled >submit
-        </button><button id='new__data' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >add new
-        </button><button id='del_data' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >delete
+        </button><button id='submit_form_btn' type='button' data-role='admin' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md text-slate-200 hover:font-semibold  duration-300' disabled >submit
+        </button><button id='new__data' type='button' data-role='admin' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >add new
+        </button><button id='del_data' type='button' data-role='admin' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >delete
         </button>
         </header>
     <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><table id='point_table' class='w-screen' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Kategori
@@ -73,7 +82,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table1' class='hidden' ><input name='id' type='hidden' class='' >
@@ -89,7 +98,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table1' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table1' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table2' class='hidden' ><input name='id' type='hidden' class='' >
@@ -105,7 +114,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table2' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table2' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table3' class='hidden' ><input name='id' type='hidden' class='' >
@@ -121,7 +130,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table3' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table3' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table4' class='hidden' ><input name='id' type='hidden' class='' >
@@ -137,7 +146,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table4' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table4' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table5' class='hidden' ><input name='id' type='hidden' class='' >
@@ -153,7 +162,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table5' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table5' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table6' class='hidden' ><input name='id' type='hidden' class='' >
@@ -169,7 +178,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table6' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table6' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table7' class='hidden' ><input name='id' type='hidden' class='' >
@@ -185,7 +194,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table7' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table7' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table8' class='hidden' ><input name='id' type='hidden' class='' >
@@ -201,7 +210,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table8' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table8' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table9' class='hidden' ><input name='id' type='hidden' class='' >
@@ -217,7 +226,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table9' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table9' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table10' class='hidden' ><input name='id' type='hidden' class='' >
@@ -233,7 +242,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table10' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table10' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table11' class='hidden' ><input name='id' type='hidden' class='' >
@@ -249,7 +258,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table11' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table11' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table12' class='hidden' ><input name='id' type='hidden' class='' >
@@ -265,7 +274,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table12' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table12' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table13' class='hidden' ><input name='id' type='hidden' class='' >
@@ -281,7 +290,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table13' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table13' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table14' class='hidden' ><input name='id' type='hidden' class='' >
@@ -297,7 +306,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table14' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table14' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table15' class='hidden' ><input name='id' type='hidden' class='' >
@@ -313,7 +322,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table15' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table15' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table16' class='hidden' ><input name='id' type='hidden' class='' >
@@ -329,7 +338,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table16' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table16' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table17' class='hidden' ><input name='id' type='hidden' class='' >
@@ -345,7 +354,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table17' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table17' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table18' class='hidden' ><input name='id' type='hidden' class='' >
@@ -361,7 +370,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table18' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table18' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table19' class='hidden' ><input name='id' type='hidden' class='' >
@@ -377,7 +386,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table19' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table19' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table20' class='hidden' ><input name='id' type='hidden' class='' >
@@ -393,7 +402,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table20' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table20' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table21' class='hidden' ><input name='id' type='hidden' class='' >
@@ -409,7 +418,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table21' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table21' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table22' class='hidden' ><input name='id' type='hidden' class='' >
@@ -425,7 +434,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table22' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table22' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table23' class='hidden' ><input name='id' type='hidden' class='' >
@@ -441,7 +450,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table23' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table23' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table24' class='hidden' ><input name='id' type='hidden' class='' >
@@ -457,7 +466,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table24' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table24' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table25' class='hidden' ><input name='id' type='hidden' class='' >
@@ -473,7 +482,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table25' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table25' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table26' class='hidden' ><input name='id' type='hidden' class='' >
@@ -489,7 +498,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table26' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table26' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table27' class='hidden' ><input name='id' type='hidden' class='' >
@@ -505,7 +514,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table27' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table27' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table28' class='hidden' ><input name='id' type='hidden' class='' >
@@ -521,7 +530,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table28' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table28' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table29' class='hidden' ><input name='id' type='hidden' class='' >
@@ -537,7 +546,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table29' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table29' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table30' class='hidden' ><input name='id' type='hidden' class='' >
@@ -553,7 +562,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table30' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table30' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table31' class='hidden' ><input name='id' type='hidden' class='' >
@@ -569,7 +578,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table31' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table31' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table32' class='hidden' ><input name='id' type='hidden' class='' >
@@ -585,7 +594,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table32' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table32' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table33' class='hidden' ><input name='id' type='hidden' class='' >
@@ -601,7 +610,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table33' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table33' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table34' class='hidden' ><input name='id' type='hidden' class='' >
@@ -617,7 +626,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table34' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table34' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table35' class='hidden' ><input name='id' type='hidden' class='' >
@@ -633,7 +642,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table35' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table35' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table36' class='hidden' ><input name='id' type='hidden' class='' >
@@ -649,7 +658,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table36' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table36' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table37' class='hidden' ><input name='id' type='hidden' class='' >
@@ -665,7 +674,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table37' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table37' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table38' class='hidden' ><input name='id' type='hidden' class='' >
@@ -681,7 +690,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table38' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table38' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table39' class='hidden' ><input name='id' type='hidden' class='' >
@@ -697,7 +706,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table39' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table39' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table40' class='hidden' ><input name='id' type='hidden' class='' >
@@ -713,7 +722,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table40' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table40' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table41' class='hidden' ><input name='id' type='hidden' class='' >
@@ -729,7 +738,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table41' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table41' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table42' class='hidden' ><input name='id' type='hidden' class='' >
@@ -745,7 +754,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table42' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table42' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table43' class='hidden' ><input name='id' type='hidden' class='' >
@@ -761,7 +770,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table43' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table43' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table44' class='hidden' ><input name='id' type='hidden' class='' >
@@ -777,7 +786,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table44' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table44' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table45' class='hidden' ><input name='id' type='hidden' class='' >
@@ -793,7 +802,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table45' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table45' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table46' class='hidden' ><input name='id' type='hidden' class='' >
@@ -809,7 +818,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table46' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table46' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table47' class='hidden' ><input name='id' type='hidden' class='' >
@@ -825,7 +834,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table47' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table47' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table48' class='hidden' ><input name='id' type='hidden' class='' >
@@ -841,7 +850,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table48' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table48' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='point_table49' class='hidden' ><input name='id' type='hidden' class='' >
@@ -857,7 +866,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table49' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table49' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr>
@@ -877,7 +886,7 @@
             
             </td><input name='piliihan' type='hidden' class='' >
             <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_new0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_new0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr>

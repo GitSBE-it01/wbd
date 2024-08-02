@@ -60,6 +60,21 @@ $template_new = [
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],[
+            'type'=>'select',
+            'td'=>[
+                'data_attr'=>['field::decision'],
+                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg',
+            ],
+            'select'=>[
+                'name'=> 'decision', 
+                'class'=>'w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
+            ],
+            'option'=>[
+                ['value'=>'-', 'body'=>'-', 'select'=>''],
+                ['value'=>'OK', 'body'=>'OK'],
+                ['value'=>'NG', 'body'=>'NG'],
+            ]
+            /*
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::decision'],
@@ -71,7 +86,7 @@ $template_new = [
                 'name'=> 'decision', 
                 'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
+            ]*/
         ],[
             'type'=>'set_btn',
             'td'=>[
@@ -174,6 +189,25 @@ $main_table = [
             ]
         ],
         [
+            'type'=>'select',
+            'th'=>[
+                'body'=>'Decision',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[12vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::decision'],
+                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg',
+            ],
+            'select'=>[
+                'name'=> 'decision', 
+                'class'=>'w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4'
+            ],
+            'option'=>[
+                ['value'=>'-', 'body'=>'-', 'select'=>''],
+                ['value'=>'OK', 'body'=>'OK'],
+                ['value'=>'NG', 'body'=>'NG'],
+            ]
+            /*
             'type'=>'input',
             'th'=>[
                 'body'=>'Decision',
@@ -189,7 +223,7 @@ $main_table = [
                 'name'=> 'decision', 
                 'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
+            ]*/
         ],
         [
             'type'=>'set_btn',
@@ -207,7 +241,7 @@ $main_table = [
                     'class'=>'w-6 h-6 arrow_right_black'
                 ],
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete', 'role::admin'],
                     'class'=>'w-6 h-6 ml-2 minus'
                 ],
             ]
@@ -450,7 +484,7 @@ $tool_table = [
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete', 'role::admin'],
                     'class'=>'w-6 h-6 ml-2 minus'
                 ],
             ]
@@ -554,7 +588,7 @@ $tool_new = [
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete', 'role::admin'],
                     'class'=>'w-6 h-6 ml-2 minus'
                 ],
             ]
@@ -632,7 +666,7 @@ $point_table = [
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete', 'role::admin'],
                     'class'=>'w-6 h-6 ml-2 minus'
                 ],
             ]
@@ -694,6 +728,160 @@ $point_new = [
             'td'=>[
                 'data_attr'=>['field::data_group'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete', 'role::admin'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+
+$loc_table = [
+    'id'=> 'loc_table', 
+    'class'=>'w-full',
+    'row_count' =>50,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        [    
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Lokasi',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[45vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::location'],
+                'class'=>'bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'location', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'th'=>[
+                'body'=>'Del',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[5vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+$reff_table = [
+    'id'=> 'reff_table', 
+    'class'=>'w-full',
+    'row_count' =>50,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        [    
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Kategori',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[45vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::subcat'],
+                'class'=>'bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'subcat', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'th'=>[
+                'body'=>'Del',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[5vw]',
+            ],
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+
+$new_loc_table = [
+    'id'=> 'new_loc_table', 
+    'class'=>'hidden',
+    'row_count'=>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        [    
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::location'],
+                'class'=>'bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'location', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'button'=>[
+                [
+                    'data_attr'=>['method::delete'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
+            ]
+        ],
+    ]
+];
+
+$new_reff_table = [
+    'id'=> 'new_reff_table', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        [    
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::subcat'],
+                'class'=>'bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'subcat', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'set_btn',
+            'td'=>[
+                'data_attr'=>['field::data_group'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'button'=>[
                 [

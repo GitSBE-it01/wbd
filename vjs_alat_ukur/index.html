@@ -8,7 +8,6 @@
         <link href='../1.asset/main.css' rel='stylesheet' />
         <link href='../1.asset/output.css' rel='stylesheet' />
         <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
-        <script src='../3.utility/auth.js'></script>
         <link rel='icon' href='../1.asset/symbol/new_logo_sbe.png' type='image/ico' />
         <title>VJS Alat ukur</title>
     </head>
@@ -16,7 +15,7 @@
     <datalist id='alat_list' >
             </datalist><datalist id='user_list' >
         </datalist><datalist id='loc_list' >
-        </datalist><div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div class='h-full w-full opacity-75 absolute bg-slate-400' >
+        </datalist><div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
             </div><div class='loading2' >
             </div>
             </div>
@@ -435,6 +434,16 @@
                     Checklist
                 </a>
             </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='reff_vjs.html'>
+                    Reference Data
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='../../mra/vjs_online/index.php'>
+                    Old Data
+                </a>
+            </li>
         </ul>
         <div class='w-[30vw] h-full flex'>
             <h1 class='text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]'>
@@ -467,7 +476,7 @@
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >User
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >Lokasi
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >Approval
-            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >Decision
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[12vw]' >Decision
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Detail
             </th>
             </tr>
@@ -488,11 +497,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index0' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index0' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index0' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index0' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index0' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index0' data-field='decision' >
+        </label><select id='decision__table_index0' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index0' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index1' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -512,11 +527,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index1' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index1' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index1' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index1' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index1' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index1' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index1' data-field='decision' >
+        </label><select id='decision__table_index1' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index1' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index1' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index2' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -536,11 +557,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index2' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index2' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index2' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index2' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index2' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index2' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index2' data-field='decision' >
+        </label><select id='decision__table_index2' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index2' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index2' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index3' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -560,11 +587,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index3' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index3' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index3' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index3' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index3' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index3' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index3' data-field='decision' >
+        </label><select id='decision__table_index3' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index3' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index3' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index4' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -584,11 +617,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index4' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index4' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index4' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index4' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index4' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index4' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index4' data-field='decision' >
+        </label><select id='decision__table_index4' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index4' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index4' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index5' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -608,11 +647,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index5' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index5' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index5' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index5' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index5' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index5' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index5' data-field='decision' >
+        </label><select id='decision__table_index5' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index5' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index5' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index6' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -632,11 +677,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index6' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index6' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index6' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index6' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index6' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index6' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index6' data-field='decision' >
+        </label><select id='decision__table_index6' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index6' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index6' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index7' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -656,11 +707,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index7' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index7' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index7' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index7' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index7' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index7' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index7' data-field='decision' >
+        </label><select id='decision__table_index7' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index7' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index7' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index8' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -680,11 +737,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index8' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index8' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index8' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index8' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index8' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index8' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index8' data-field='decision' >
+        </label><select id='decision__table_index8' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index8' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index8' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index9' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -704,11 +767,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index9' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index9' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index9' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index9' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index9' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index9' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index9' data-field='decision' >
+        </label><select id='decision__table_index9' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index9' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index9' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index10' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -728,11 +797,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index10' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index10' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index10' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index10' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index10' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index10' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index10' data-field='decision' >
+        </label><select id='decision__table_index10' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index10' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index10' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index11' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -752,11 +827,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index11' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index11' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index11' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index11' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index11' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index11' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index11' data-field='decision' >
+        </label><select id='decision__table_index11' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index11' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index11' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index12' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -776,11 +857,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index12' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index12' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index12' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index12' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index12' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index12' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index12' data-field='decision' >
+        </label><select id='decision__table_index12' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index12' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index12' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index13' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -800,11 +887,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index13' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index13' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index13' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index13' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index13' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index13' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index13' data-field='decision' >
+        </label><select id='decision__table_index13' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index13' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index13' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index14' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -824,11 +917,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index14' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index14' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index14' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index14' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index14' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index14' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index14' data-field='decision' >
+        </label><select id='decision__table_index14' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index14' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index14' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index15' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -848,11 +947,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index15' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index15' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index15' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index15' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index15' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index15' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index15' data-field='decision' >
+        </label><select id='decision__table_index15' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index15' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index15' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index16' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -872,11 +977,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index16' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index16' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index16' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index16' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index16' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index16' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index16' data-field='decision' >
+        </label><select id='decision__table_index16' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index16' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index16' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index17' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -896,11 +1007,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index17' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index17' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index17' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index17' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index17' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index17' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index17' data-field='decision' >
+        </label><select id='decision__table_index17' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index17' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index17' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index18' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -920,11 +1037,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index18' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index18' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index18' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index18' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index18' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index18' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index18' data-field='decision' >
+        </label><select id='decision__table_index18' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index18' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index18' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index19' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -944,11 +1067,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index19' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index19' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index19' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index19' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index19' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index19' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index19' data-field='decision' >
+        </label><select id='decision__table_index19' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index19' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index19' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index20' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -968,11 +1097,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index20' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index20' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index20' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index20' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index20' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index20' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index20' data-field='decision' >
+        </label><select id='decision__table_index20' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index20' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index20' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index21' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -992,11 +1127,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index21' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index21' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index21' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index21' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index21' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index21' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index21' data-field='decision' >
+        </label><select id='decision__table_index21' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index21' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index21' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index22' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1016,11 +1157,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index22' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index22' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index22' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index22' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index22' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index22' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index22' data-field='decision' >
+        </label><select id='decision__table_index22' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index22' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index22' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index23' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1040,11 +1187,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index23' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index23' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index23' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index23' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index23' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index23' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index23' data-field='decision' >
+        </label><select id='decision__table_index23' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index23' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index23' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index24' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1064,11 +1217,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index24' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index24' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index24' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index24' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index24' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index24' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index24' data-field='decision' >
+        </label><select id='decision__table_index24' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index24' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index24' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index25' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1088,11 +1247,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index25' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index25' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index25' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index25' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index25' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index25' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index25' data-field='decision' >
+        </label><select id='decision__table_index25' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index25' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index25' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index26' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1112,11 +1277,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index26' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index26' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index26' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index26' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index26' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index26' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index26' data-field='decision' >
+        </label><select id='decision__table_index26' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index26' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index26' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index27' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1136,11 +1307,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index27' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index27' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index27' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index27' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index27' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index27' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index27' data-field='decision' >
+        </label><select id='decision__table_index27' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index27' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index27' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index28' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1160,11 +1337,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index28' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index28' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index28' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index28' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index28' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index28' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index28' data-field='decision' >
+        </label><select id='decision__table_index28' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index28' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index28' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index29' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1184,11 +1367,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index29' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index29' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index29' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index29' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index29' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index29' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index29' data-field='decision' >
+        </label><select id='decision__table_index29' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index29' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index29' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index30' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1208,11 +1397,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index30' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index30' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index30' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index30' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index30' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index30' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index30' data-field='decision' >
+        </label><select id='decision__table_index30' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index30' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index30' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index31' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1232,11 +1427,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index31' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index31' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index31' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index31' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index31' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index31' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index31' data-field='decision' >
+        </label><select id='decision__table_index31' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index31' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index31' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index32' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1256,11 +1457,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index32' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index32' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index32' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index32' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index32' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index32' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index32' data-field='decision' >
+        </label><select id='decision__table_index32' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index32' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index32' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index33' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1280,11 +1487,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index33' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index33' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index33' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index33' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index33' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index33' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index33' data-field='decision' >
+        </label><select id='decision__table_index33' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index33' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index33' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index34' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1304,11 +1517,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index34' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index34' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index34' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index34' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index34' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index34' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index34' data-field='decision' >
+        </label><select id='decision__table_index34' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index34' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index34' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index35' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1328,11 +1547,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index35' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index35' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index35' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index35' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index35' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index35' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index35' data-field='decision' >
+        </label><select id='decision__table_index35' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index35' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index35' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index36' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1352,11 +1577,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index36' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index36' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index36' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index36' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index36' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index36' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index36' data-field='decision' >
+        </label><select id='decision__table_index36' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index36' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index36' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index37' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1376,11 +1607,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index37' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index37' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index37' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index37' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index37' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index37' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index37' data-field='decision' >
+        </label><select id='decision__table_index37' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index37' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index37' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index38' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1400,11 +1637,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index38' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index38' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index38' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index38' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index38' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index38' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index38' data-field='decision' >
+        </label><select id='decision__table_index38' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index38' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index38' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index39' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1424,11 +1667,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index39' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index39' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index39' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index39' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index39' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index39' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index39' data-field='decision' >
+        </label><select id='decision__table_index39' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index39' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index39' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index40' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1448,11 +1697,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index40' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index40' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index40' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index40' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index40' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index40' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index40' data-field='decision' >
+        </label><select id='decision__table_index40' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index40' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index40' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index41' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1472,11 +1727,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index41' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index41' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index41' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index41' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index41' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index41' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index41' data-field='decision' >
+        </label><select id='decision__table_index41' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index41' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index41' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index42' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1496,11 +1757,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index42' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index42' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index42' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index42' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index42' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index42' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index42' data-field='decision' >
+        </label><select id='decision__table_index42' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index42' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index42' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index43' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1520,11 +1787,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index43' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index43' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index43' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index43' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index43' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index43' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index43' data-field='decision' >
+        </label><select id='decision__table_index43' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index43' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index43' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index44' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1544,11 +1817,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index44' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index44' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index44' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index44' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index44' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index44' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index44' data-field='decision' >
+        </label><select id='decision__table_index44' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index44' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index44' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index45' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1568,11 +1847,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index45' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index45' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index45' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index45' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index45' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index45' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index45' data-field='decision' >
+        </label><select id='decision__table_index45' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index45' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index45' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index46' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1592,11 +1877,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index46' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index46' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index46' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index46' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index46' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index46' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index46' data-field='decision' >
+        </label><select id='decision__table_index46' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index46' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index46' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index47' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1616,11 +1907,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index47' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index47' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index47' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index47' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index47' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index47' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index47' data-field='decision' >
+        </label><select id='decision__table_index47' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index47' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index47' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index48' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1640,11 +1937,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index48' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index48' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index48' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index48' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index48' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index48' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index48' data-field='decision' >
+        </label><select id='decision__table_index48' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index48' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index48' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr><tr data-id='table_index49' class='hidden' ><input name='data_group' type='hidden' class='' >
@@ -1664,11 +1967,17 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='approval_by__table_index49' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__table_index49' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__table_index49' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__table_index49' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index49' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
-            </button><button id='delete__table_index49' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__table_index49' data-field='decision' >
+        </label><select id='decision__table_index49' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='open__table_index49' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </button><button id='delete__table_index49' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>
             </tr>
@@ -1692,10 +2001,16 @@
             </td><td data-field='approval_by' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='approval_by__new_main0' data-field='approval_by' class='p-2 w-[30%]' >
             </label><input id='approval_by__new_main0' name='approval_by' type='text' list='user_list' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='decision' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black ' ><label for='decision__new_main0' data-field='decision' class='p-2 w-[30%]' >
-            </label><input id='decision__new_main0' name='decision' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='open__new_main0' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
+            </td><td data-field='decision' class='bg-slate-300 flex flex-row whitespace-normal border-2 border-black h-[10vh] justify-center items-center font-lg' ><label for='decision__new_main0' data-field='decision' >
+        </label><select id='decision__new_main0' name='decision' class='w-[12vw] h-[10vh] hidden flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4' ><option value='-' selected >
+        -
+        </option><option value='OK' >
+        OK
+        </option><option value='NG' >
+        NG
+        </option>
+        </select>
+        </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='open__new_main0' type='button' data-method='open' class='w-6 h-6 arrow_right_black' >
             </button><button id='delete__new_main0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
             </button>
             </td>

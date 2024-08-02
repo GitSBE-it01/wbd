@@ -9,22 +9,18 @@ function auth() {
     global $db_conn;
     global $model;
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $reff = explode("/",$_SERVER['HTTP_REFERER']);
-        $routes = $reff[4];
-        if(isset($_SESSION['username'])) {
+        if(isset($_SESSION['nik'])) {
+            $db_src = custom_handle($db_conn, [
+                'EmployeeID'=>$_SESSION['username']], 'auth', 'auth_mstr', $model, 'auth_mstr');
             $data = array(
-                'name'=>$_SESSION['absname'],
-                'dept'=>$_SESSION['divisi'],
-                'absen'=>$_SESSION['absen'],
-                'jabatan'=>$_SESSION['jabatan'],
-                'grade'=>$_SESSION['grade'],
+                'name'=>$db_src[0]['Name'],
+                'dept'=>$db_src[0]['Department'],
+                'absen'=>$db_src[0]['Absensi'],
+                'jabatan'=>$db_src[0]['Position'],
+                'grade'=>$db_src[0]['Grade'],
+                'role'=>isset($db_src[0]['role']) ? $db_src[0]['role'] : 'user',
             );
-            $role = custom_handle($db_conn, ['absen'=>$_SESSION['absen'], 'abs_name'=>$_SESSION['absname'], 'apps'=>$routes], 'auth', 'auth_fetch', $model, 'auth');
-            if(count($role) === 1) {
-                $data['role'] = $role[0]['role'];
-            } else {
-                $data['role'] = 'user';
-            }
+            if($data['dept'] === "INFORMATION TECHNOLOGY") { $data['role'] = 'super';}
             $response = $data;
         } else {
             $response = 'failed';

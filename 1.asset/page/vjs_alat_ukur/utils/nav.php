@@ -1,11 +1,11 @@
 <?php
 // create index.html
 $nav_array = [
-    'title'=>'VJS Alat Ukur',
     'links'=>[
         ['href'=> 'index.html', 'text'=> 'Home'],
         ['href'=> 'tool.html', 'text'=> 'Tool Data'],
-        ['href'=> 'reff_vjs.html', 'text'=> 'Reference Data'],
         ['href'=> 'point.html', 'text'=> 'Checklist'],
+        ['href'=> 'reff_vjs.html', 'text'=> 'Reference Data', 'data_attr'=>['role::admin']],
+        ['href'=> '../../mra/vjs_online/index.php', 'text'=> 'Old Data'],
     ]
 ];

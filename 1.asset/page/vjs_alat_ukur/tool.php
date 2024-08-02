@@ -7,7 +7,7 @@ require_once 'utils/table.php';
 /* ===============================================================================
 tool HTML
 =============================================================================== */
-
+$nav_array['title'] = 'Detail Tool';
 $tool = Comp::dtlist(['id'=>'reff_list'])
     .Comp::dtlist(['id'=>'loc_list'])
     .$load2."
@@ -31,16 +31,19 @@ $tool = Comp::dtlist(['id'=>'reff_list'])
             Comp::button([
                 'id'=>'submit_form_btn',
                 'disable'=>'',
+                'data_attr'=>['role::admin'],
                 'body'=>'submit',
                 'class'=>'rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md text-slate-200 hover:font-semibold  duration-300'
             ]),
             Comp::button([
                 'id'=>'new__data',
+                'data_attr'=>['role::admin'],
                 'body'=>'add new',
                 'class'=>'rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
             ]),
             Comp::button([
                 'id'=>'del_data',
+                'data_attr'=>['role::admin'],
                 'body'=>'delete',
                 'class'=>'rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
             ])

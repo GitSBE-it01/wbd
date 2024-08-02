@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='preconnect' href='https://fonts.googleapis.com'>
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+        <link href='../1.asset/main.css' rel='stylesheet' />
+        <link href='../1.asset/output.css' rel='stylesheet' />
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
+        <link rel='icon' href='../1.asset/symbol/new_logo_sbe.png' type='image/ico' />
+        <title>Data Reference</title>
+    </head>
+    <body class='font-[Poppins] h-screen w-screen bg-slate-300 custom_scroll'>
+    <div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
+            </div><div class='loading2' >
+            </div>
+            </div>
+    <nav class='fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]' ><li class='list-none flex justify-center items-center w-[7vw] h-full hover:pt-2 hover:bg-slate-700 duration-200 pt-2 ease-in-out hover:border-b-4 hover:border-blue-500'>
+            <a href='http://informationsystem.sbe.co.id:8080/sbe/index.php'>
+                <button class='home h-8 w-8 bg-transparent'>
+                </button>
+            </a>
+        </li>
+        <ul class='w-[63vw] h-full flex flex-row'>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='index.html'>
+                    Home
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='tool.html'>
+                    Tool Data
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='point.html'>
+                    Checklist
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='reff_vjs.html'>
+                    Reference Data
+                </a>
+            </li>
+            <li class='h-full w-[10vw] justify-center items-center flex'>
+                <a class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' href='../../mra/vjs_online/index.php'>
+                    Old Data
+                </a>
+            </li>
+        </ul>
+        <div class='w-[30vw] h-full flex'>
+            <h1 class='text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]'>
+                Reference
+            </h1>
+        </div>
+        </nav>
+    <main class='fixed flex flex-row top-[5vh] bg-slate-300 w-screen h-[95vh] scrollable-y' ><div class='flex flex-col w-[50vw] h-full border-r-2 border-black' ><div id='title_loc' class='w-full h-[5vh] ml-4 flex items-center gap-2' ><label for='loc_inp' >Lokasi
+        </label><input id='loc_inp' type='text' 
+        autocomplete='off' class='rounded p-2 focus:ring h-[1.6rem] focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md' >
+        <button id='submit_loc_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >submit
+        </button><button id='add_loc_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >add
+        </button>
+        </div><div id='table_loc' class='w-full h-[85vh] scrollable-y' ><table id='loc_table' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[45vw]' >Lokasi
+            </th><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[5vw]' >Del
+            </th>
+            </tr>
+            </thead><tbody ><tr data-id='loc_table0' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table0' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table0' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table1' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table1' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table1' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table1' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table2' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table2' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table2' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table2' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table3' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table3' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table3' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table3' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table4' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table4' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table4' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table4' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table5' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table5' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table5' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table5' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table6' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table6' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table6' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table6' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table7' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table7' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table7' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table7' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table8' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table8' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table8' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table8' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table9' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table9' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table9' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table9' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table10' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table10' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table10' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table10' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table11' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table11' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table11' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table11' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table12' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table12' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table12' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table12' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table13' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table13' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table13' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table13' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table14' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table14' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table14' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table14' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table15' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table15' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table15' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table15' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table16' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table16' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table16' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table16' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table17' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table17' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table17' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table17' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table18' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table18' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table18' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table18' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table19' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table19' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table19' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table19' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table20' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table20' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table20' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table20' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table21' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table21' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table21' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table21' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table22' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table22' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table22' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table22' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table23' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table23' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table23' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table23' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table24' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table24' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table24' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table24' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table25' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table25' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table25' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table25' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table26' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table26' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table26' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table26' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table27' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table27' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table27' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table27' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table28' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table28' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table28' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table28' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table29' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table29' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table29' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table29' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table30' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table30' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table30' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table30' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table31' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table31' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table31' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table31' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table32' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table32' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table32' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table32' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table33' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table33' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table33' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table33' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table34' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table34' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table34' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table34' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table35' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table35' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table35' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table35' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table36' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table36' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table36' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table36' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table37' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table37' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table37' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table37' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table38' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table38' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table38' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table38' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table39' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table39' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table39' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table39' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table40' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table40' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table40' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table40' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table41' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table41' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table41' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table41' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table42' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table42' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table42' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table42' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table43' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table43' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table43' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table43' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table44' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table44' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table44' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table44' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table45' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table45' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table45' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table45' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table46' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table46' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table46' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table46' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table47' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table47' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table47' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table47' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table48' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table48' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table48' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table48' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='loc_table49' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__loc_table49' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__loc_table49' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__loc_table49' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr>
+            </tbody>
+            </table><table id='new_loc_table' class='hidden' ><thead ><tr data-id='header' >
+            </tr>
+            </thead><tbody ><tr data-id='new_loc_table0' class='' ><td data-field='location' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='location__new_loc_table0' data-field='location' class='p-2 w-[30%]' >
+            </label><input id='location__new_loc_table0' name='location' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__new_loc_table0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+        </div><div id='footer_loc' class='w-full h-[5vh] bg-slate-700' ><div id='loc_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='loc_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
+            </button><button type='button' data-group='loc_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
+            </button><button type='button' data-group='loc_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
+            </button><button type='button' data-group='loc_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
+            </button><button type='button' data-group='loc_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
+            </button><button type='button' data-group='loc_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
+            </button><button type='button' data-group='loc_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
+            </button>
+            </div>
+        </div>
+        </div><div class='flex flex-col w-[50vw] h-full' ><div id='title_reff' class='w-full h-[5vh] ml-4 flex items-center gap-2' ><label for='reff_inp' >Reff
+        </label><input id='reff_inp' type='text' 
+        autocomplete='off' class='rounded p-2 focus:ring h-[1.6rem] focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md' >
+        <button id='submit_reff_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >submit
+        </button><button id='add_reff_btn' type='button' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >add
+        </button>
+        </div><div id='table_reff' class='w-full h-[85vh] scrollable-y' ><table id='reff_table' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[45vw]' >Kategori
+            </th><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[5vw]' >Del
+            </th>
+            </tr>
+            </thead><tbody ><tr data-id='reff_table0' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table0' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table0' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table1' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table1' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table1' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table1' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table2' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table2' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table2' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table2' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table3' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table3' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table3' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table3' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table4' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table4' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table4' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table4' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table5' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table5' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table5' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table5' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table6' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table6' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table6' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table6' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table7' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table7' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table7' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table7' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table8' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table8' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table8' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table8' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table9' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table9' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table9' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table9' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table10' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table10' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table10' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table10' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table11' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table11' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table11' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table11' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table12' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table12' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table12' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table12' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table13' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table13' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table13' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table13' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table14' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table14' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table14' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table14' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table15' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table15' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table15' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table15' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table16' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table16' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table16' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table16' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table17' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table17' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table17' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table17' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table18' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table18' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table18' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table18' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table19' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table19' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table19' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table19' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table20' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table20' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table20' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table20' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table21' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table21' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table21' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table21' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table22' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table22' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table22' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table22' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table23' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table23' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table23' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table23' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table24' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table24' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table24' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table24' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table25' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table25' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table25' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table25' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table26' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table26' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table26' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table26' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table27' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table27' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table27' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table27' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table28' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table28' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table28' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table28' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table29' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table29' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table29' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table29' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table30' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table30' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table30' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table30' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table31' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table31' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table31' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table31' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table32' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table32' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table32' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table32' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table33' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table33' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table33' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table33' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table34' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table34' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table34' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table34' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table35' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table35' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table35' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table35' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table36' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table36' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table36' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table36' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table37' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table37' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table37' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table37' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table38' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table38' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table38' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table38' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table39' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table39' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table39' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table39' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table40' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table40' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table40' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table40' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table41' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table41' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table41' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table41' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table42' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table42' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table42' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table42' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table43' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table43' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table43' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table43' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table44' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table44' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table44' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table44' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table45' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table45' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table45' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table45' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table46' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table46' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table46' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table46' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table47' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table47' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table47' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table47' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table48' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table48' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table48' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table48' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr><tr data-id='reff_table49' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__reff_table49' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__reff_table49' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__reff_table49' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr>
+            </tbody>
+            </table><table id='new_reff_table' class='hidden' ><thead ><tr data-id='header' >
+            </tr>
+            </thead><tbody ><tr data-id='new_reff_table0' class='' ><td data-field='subcat' class='bg-slate-200 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='subcat__new_reff_table0' data-field='subcat' class='p-2 w-[30%]' >
+            </label><input id='subcat__new_reff_table0' name='subcat' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><button id='delete__new_reff_table0' type='button' data-method='delete' class='w-6 h-6 ml-2 minus' >
+            </button>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+        </div><div id='footer_reff' class='w-full h-[5vh] bg-slate-700' ><div id='reff_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='reff_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
+            </button><button type='button' data-group='reff_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
+            </button><button type='button' data-group='reff_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
+            </button><button type='button' data-group='reff_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
+            </button><button type='button' data-group='reff_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
+            </button><button type='button' data-group='reff_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
+            </button><button type='button' data-group='reff_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
+            </button>
+            </div>
+        </div>
+        </div>
+        </main>
+    <script type='module' src='./client_process/reff_vjs.js';></script>
+    <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>
+    </body>
+    </html>
+    

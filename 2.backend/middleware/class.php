@@ -270,7 +270,7 @@ class DB_Access {
         }
         $stmt = $conn->prepare($query);
         if (!$stmt) {
-            die("Prepare failed: " . $conn->error);
+            die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
         }
 
         set_time_limit(3600);

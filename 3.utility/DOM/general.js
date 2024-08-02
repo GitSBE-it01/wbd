@@ -1,4 +1,39 @@
 export class GeneralDOM {
+    static async init(page_role) {
+        let user_dtl = JSON.parse(sessionStorage.getItem('userData'));
+        const check = window.location.href.split("/");
+        const newURL = 'http://'+check[2]+'/'+check[3]+'/'+check[4]+'/index.html';
+        if(user_dtl !== null) {
+            if(page_role === '') {page_role = 'user';}
+            if(page_role !== 'user' && user_dtl.role === 'user') {
+                window.location.replace(newURL);
+                return;
+            }
+            if(page_role === 'super' && user_dtl.role ==='admin') {
+                window.location.replace(newURL);
+                return;
+            }
+            if (user_dtl.role === 'admin' && page_role !=='super') {
+                const del_node = document.querySelectorAll('[data-role]');
+                del_node.forEach(dt=>{
+                    const role = dt.getAttribute('data-role')
+                    if(role === 'super') {
+                        dt.remove();
+                    }
+                })
+            }
+            if (user_dtl.role === 'user' && page_role === 'user') {
+                const del_node = document.querySelectorAll('[data-role]');
+                del_node.forEach(dt=>{
+                    dt.remove();
+                })
+            }
+            const screen = document.getElementById('loadscreen');
+            screen.classList.toggle('opacity-75');
+        }
+        return;
+    }
+
     static td_input_default() {
         document.addEventListener('click', function(event){
             if(event.target.tagName === 'TD' || event.target.closest('td')) {
@@ -53,4 +88,11 @@ export class GeneralDOM {
         })
         return;
     }
+
+    static filter_data_table(data, filter_id) {
+        const fltr_val = document.getElementById(filter_id).value;
+        const result = data.filter(obj=>obj.filter.toLowerCase().includes(fltr_val.toLowerCase()));
+        return result; 
+    }
+
 }

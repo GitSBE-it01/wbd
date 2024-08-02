@@ -1,31 +1,12 @@
 <?php
-require_once "2.backend/api.php";
-require_once "2.backend/model/index.php";
-require_once "1.asset/index.php";
+$test = " apakah bisa di test utk hal ini? apakah bisa di dapatkan?";
+$word = "bisa";
 
+if (strpos($test, $word) !== false) {
+    echo "The text contains the word " . $word . "</br>";
+  }
+
+  echo is_bool(strpos($test, $word));
 
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <head>
-        <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <link rel='preconnect' href='https://fonts.googleapis.com'>
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-        <link href='1.asset/main.css' rel='stylesheet' />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
-        <link rel='icon' href='1.asset/symbol/new_logo_sbe.png' type='image/ico' />
-        <title>test</title>
-    </head>
-</head>
-<body class="bg-slate-700">
-</body>
-<script type='module'>
-    import {api_access} from '3.utility/index.js';
-    const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', yesterday]});
-    console.log(otb);
-</script>
-</html>

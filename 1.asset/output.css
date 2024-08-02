@@ -1094,6 +1094,10 @@ video {
   width: 40vw;
 }
 
+.w-\[45vw\] {
+  width: 45vw;
+}
+
 .w-\[50\%\] {
   width: 50%;
 }
@@ -1104,6 +1108,10 @@ video {
 
 .w-\[55vw\] {
   width: 55vw;
+}
+
+.w-\[5vw\] {
+  width: 5vw;
 }
 
 .w-\[60\%\] {
@@ -1162,6 +1170,10 @@ video {
   width: 100vw;
 }
 
+.w-\[70vw\] {
+  width: 70vw;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1194,6 +1206,14 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -1547,6 +1567,18 @@ video {
 
 .text-justify {
   text-align: justify;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-bottom {
+  vertical-align: bottom;
 }
 
 .font-\[Poppins\] {

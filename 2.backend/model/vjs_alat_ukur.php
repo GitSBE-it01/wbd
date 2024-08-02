@@ -19,7 +19,7 @@ $model['vjs_hd'] = new Model('dbvjs_online.new_vjs_hd',
     'user_input::s',
     'approval_by::s',
     'loc::s',
-    'decision::i',
+    'decision::s',
 ],
 'data_group::s');
 

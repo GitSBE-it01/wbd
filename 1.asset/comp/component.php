@@ -375,7 +375,7 @@ class Comp {
 
     static function input($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
-        $class = isset($array['class']) ? "class='".$array['class']."' " : 'rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : 'class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" ';
         $type_attr = isset($array['type_attr']) ? "type='".$array['type_attr']."' " : "type='text' ";
         $id = isset($array['id']) ? "id='".$array['id']."' " : '';
         $name = isset($array['name']) ? "name='".$array['name']."' " : '';
@@ -1088,4 +1088,67 @@ class Comp {
         return $component;
     }
 
+    static function li($array) {
+        $title = isset($array['title']) ? "title='".$array['title']."' " : '';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : '';
+        $id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $body = '';
+        if(isset($array['body'])) {
+            if(is_array($array['body'])) {
+                foreach($array['body'] as $val) {
+                    $body .= $val;
+                }
+            } else {
+                $body = $array['body'];
+            }
+        }
+        $data_attr = '';
+        if(isset($array['data_attr'])) {
+            foreach($array['data_attr'] as $val2) {
+                $data_att = explode('::', $val2);
+                $data_attr .= 'data-'.$data_att[0]."='".$data_att[1]."' ";
+            }
+        }
+        $component = "<li " 
+        .$title
+        .$id
+        .$data_attr
+        .$class.">"
+        .$body."
+        </li>";
+
+        return $component;
+    }
+    
+    static function ul($array) {
+        $title = isset($array['title']) ? "title='".$array['title']."' " : '';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : '';
+        $id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $body = '';
+        if(isset($array['body'])) {
+            if(is_array($array['body'])) {
+                foreach($array['body'] as $val) {
+                    $body .= $val;
+                }
+            } else {
+                $body = $array['body'];
+            }
+        }
+        $data_attr = '';
+        if(isset($array['data_attr'])) {
+            foreach($array['data_attr'] as $val2) {
+                $data_att = explode('::', $val2);
+                $data_attr .= 'data-'.$data_att[0]."='".$data_att[1]."' ";
+            }
+        }
+        $component = "<ul " 
+        .$title
+        .$id
+        .$data_attr
+        .$class.">"
+        .$body."
+        </ul>";
+
+        return $component;
+    }
 }

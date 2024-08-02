@@ -8,14 +8,14 @@ require_once 'utils/table.php';
 /* ===============================================================================
 UPDATE HTML
 =============================================================================== */
-$nav_array_new['title'] = 'Update Jig Data';
+$nav_array['title'] = 'Update Jig Data';
 $update = Comp::dtlist(['id'=>'jig_list'])
     .Comp::dtlist(['id'=>'spk_list'])
     .Comp::dtlist(['id'=>'loc_list'])
     .$load2
     .Comp::nav([
         'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
-        'body'=>navi($nav_array_new)
+        'body'=>nav($nav_array)
     ])."
     ".Comp::header([
         'class'=>'fixed top-[5vh] flex flex-col w-screen h-[10vh]',
@@ -191,7 +191,7 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                     Comp::div([
                         'class'=>'w-full h-[40vh] scrollable',
                         'body'=>[
-                            table_create($type_table_upd),
+                            table_create($type_table),
                             table_create($type_table_new),
                             Comp::div([
                                 'class'=>'w-full h-[5vh] block bg-slate-500 fixed bottom-[45vh] z-20',

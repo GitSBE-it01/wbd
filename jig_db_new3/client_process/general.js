@@ -1,30 +1,26 @@
-import {api_access} from '../../3.utility/index.js';
+import {DOM} from '../../3.utility/index.js';
 
-export let master = await api_access('get','jig_mstr', '');
-export let loc = await api_access('get','jig_loc', '');
+export const data_switch = (pick, array1, array2) =>{
+  array1.forEach(dt=>{
+    array2.forEach(d2=>{
+      const fltr = dt+"_"+d2;
+      if(dt===pick) {
+        if(d2 === 'switch') {
+          DOM.add_class(`#${fltr}`, 'bg-blue-600', 'text-xl', 'font-bold');
+          DOM.rmv_class(`#${fltr}`, 'bg-blue-800');
+        } else {
+          DOM.rmv_class(`#${fltr}`, 'hidden');
+        }
+      } else {
+        if(d2 === 'switch') {
+          DOM.rmv_class(`#${fltr}`, 'bg-blue-600', 'text-xl', 'font-bold');
+          DOM.add_class(`#${fltr}`, 'bg-blue-800');
+        } else {
+          DOM.add_class(`#${fltr}`, 'hidden');
+        }
+      }
+    })
+  })
+}
 
 
-const gabungan = {};
-loc.forEach(dt=>{
-  if(gabungan[dt.item_jig]) {
-    gabungan[dt.item_jig]['qty_total'] += parseInt(dt.qty_per_unit);
-  } else {
-    const data = {
-      ...dt,
-      qty_total: parseInt(dt.qty_per_unit)
-    }
-    gabungan[dt.item_jig] = data;
-  }
-})
-
-master.forEach(dt=>{
-  const fltr = dt.item_jig+ "--"+
-    dt.desc_jig+ "--"+
-    dt.status_jig+ "--"+
-    dt.material+ "--"+
-    dt.type+ "--"+
-    dt.drawing;
-  const qty = gabungan[dt.item_jig] ? gabungan[dt.item_jig].qty_total :0;
-  dt['filter'] = fltr;
-  dt['qty'] = qty;
-})

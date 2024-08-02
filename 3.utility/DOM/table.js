@@ -1,4 +1,4 @@
-import {DOM} from '../../3.utility/index.js';
+import {DOM, NavDOM} from '../../3.utility/index.js';
 
 export const inputEmptyRow = async(target, counter, data_array) =>{
     const data_tr = document.createElement('tr');
@@ -114,10 +114,38 @@ const td_button = (dt, data_array) =>{
 
 
 export class TableDOM {
-    static async parse_onclick(key, data, page_key) {
+    static async filter_data(key, data, result, button_id, filter_id, pagi_key) {
         document.addEventListener('click', async function(event) {
-            if(event.target.hasAttribute(page_key)) {
-                console.log(page_key);
+            if(event.target.id === button_id) {
+                DOM.rmv_class('#load',"hidden");
+                const fltr_val = document.getElementById(filter_id).value;
+                result = data.filter(obj=>obj.filter.toLowerCase().includes(fltr_val.toLowerCase()));
+                await TableDOM.parse_data(key,result,1);
+                NavDOM.pgList_init(pagi_key, result, key);
+                DOM.add_class('#load',"hidden");
+                console.log(result);
+                return result;
+            }
+        })
+    }
+    
+    static async direct_filter_data(key, data, result, filter_id, pagi_key) {
+        document.addEventListener('keyup', async function(event) {
+            if(event.target.id === filter_id && event.key !=='Enter') {
+                DOM.rmv_class('#load',"hidden");
+                const fltr_val = document.getElementById(filter_id).value;
+                result = data.filter(obj=>obj.filter.toLowerCase().includes(fltr_val.toLowerCase()));
+                await TableDOM.parse_data(key,result,1);
+                NavDOM.pgList_init(pagi_key, result, key);
+                DOM.add_class('#load',"hidden");
+                return result;
+            }
+        })
+    }
+
+    static async parse_onclick(key, data, page_key, page_id) {
+        document.addEventListener('click', async function(event) {
+            if(event.target.getAttribute(page_key) === page_id) {
                 DOM.rmv_class('#load',"hidden");
                 let page = parseInt(event.target.getAttribute('data-page'));
                 await TableDOM.parse_data(key,data,page);
@@ -232,6 +260,9 @@ export class TableDOM {
                         }
                     })
                 }
+                if(dt.getAttribute('data-id').includes('new')) {
+                    dt.remove();
+                } 
             })
             return;
         } catch(error) {
@@ -239,6 +270,22 @@ export class TableDOM {
             return Promise.reject(error);
         }
     }
-
     
+    static set_default_new_row(table_key, data, array) {
+        const tbl = table_key.nodeType ? table_key : document.querySelector(table_key);
+        const tbody = tbl.querySelector('tbody');
+        const tr = tbody.querySelector(`tr`)
+        const field = tr.querySelectorAll("[name]");
+        field.forEach(dt=>{
+            const field_name = dt.getAttribute('name');
+            if(array.includes(field_name)) {
+                if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
+                    dt.value = data[0][`${field_name}`];
+                } else {
+                    dt.textContent = data[`${field_name}`]
+                }
+            }
+        })
+        return;
+    }
 }

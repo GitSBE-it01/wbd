@@ -1,6 +1,9 @@
-import { currentDate,customPeriod, sort_array} from "../../3.utility/index.js";
+import { ButtonDOM, currentDate,customPeriod, sort_array} from "../../3.utility/index.js";
 import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
+import {auth2} from '../../3.utility/auth.js';
 
+await auth2();
+GeneralDOM.init('');
 GeneralDOM.td_input_default();
 NavDOM.active_link('nav','');
 let hd_data = [];
@@ -17,6 +20,15 @@ let counter = 0;
 const user_list = await api_access('get','user','');
 const loc_list = await api_access('get','vjs_loc','');
 const master = await api_access('get','vjs_alat', '');
+master.forEach(dt=>{
+  const keys = Object.keys(dt)
+  let filter = '';
+  keys.forEach(d2=>{
+      filter += dt[d2] + '____';
+  })
+  dt['filter'] = filter;
+})
+let show_data = master;
 let master_filter =[];
 DtlistDOM.parse_opt("#alat_list","/",master,"sn_id","new_subcat","no_asset","_desc");
 DtlistDOM.parse_opt("#user_list","-",user_list,"Name","Position","Grade");
@@ -24,7 +36,8 @@ DtlistDOM.parse_opt("#loc_list","-",loc_list,"location");
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 DOM.add_class('#load',"hidden");
-
+ButtonDOM.show_hidden('#open_dtlist', '#input__alat_search');
+ButtonDOM.delete_data_table('[data-method ="delete"]', 'vjs_hd', 'id');
 
 /* ===============================================================================
 ===============================================================================
@@ -32,15 +45,6 @@ DOM.add_class('#load',"hidden");
 ===============================================================================
 =============================================================================== */
 document.addEventListener("click", async function (event) {
-/* show hidden input, hanya ganti display
---------------------------------------------------------- */
-if (event.target.id === "open_dtlist") {
-  if (!DOM.rmv_class('#input__alat_search',"hidden")) {
-    DOM.add_class('#input__alat_search',"hidden");
-  }
-  return;
-}
-
 /* insert new line di table main
 --------------------------------------------------------- */
 if (event.target.id === "new__data") {
@@ -99,38 +103,44 @@ if (event.target.getAttribute('data-method') === "open") {
     btn_sbmt.setAttribute('data-method', 'insert');
     point_data = [];
     point_data = await api_access('fetch', 'vjs_point', {new_cat:master_filter.new_subcat});
-    detail_data = point_data.filter(obj=>obj.check_point !=='remark');
-    DOM.table_parse_data('#detail_table', detail_data, 1);
-    remark_data = point_data.filter(obj=>obj.check_point ==='remark');
-    DOM.table_parse_data('#add_table', remark_data, 1);
-    const tbl_dtl = document.querySelector('#detail_table');
-    const tr_dtl = tbl_dtl.querySelectorAll('tr');
-    tr_dtl.forEach(dt=>{
-      if(dt.hasAttribute('data-value')) {
-        dt.setAttribute('data-change', 'new');
-      }
-      if(dt.getAttribute('data-id') !== 'header') {
-        let dt_group = dt.querySelector('[name = "data_group"]');
-        dt_group.value = dflt_arr['data_group'];
-        let new_id = dt.querySelector('[name = "id"]');
-        new_id.value = '';
-      }
-    })
-    const tbl_add = document.querySelector('#add_table');
-    const tr_add = tbl_add.querySelectorAll('tr');
-    tr_add.forEach(dt=>{
-      if(dt.hasAttribute('data-value')) {
-        dt.setAttribute('data-change', 'new');
-      }
-      if(dt.getAttribute('data-id') !== 'header') {
-        let dt_group = dt.querySelector('[name = "data_group"]');
-        dt_group.value = dflt_arr['data_group'];
-        let new_id = dt.querySelector('[name = "id"]');
-        new_id.value = '';
-      }
-    })
-
+    if(point_data.length > 0) {
+      detail_data = point_data.filter(obj=>obj.check_point !=='remark');
+      DOM.table_parse_data('#detail_table', detail_data, 1);
+      remark_data = point_data.filter(obj=>obj.check_point ==='remark');
+      DOM.table_parse_data('#add_table', remark_data, 1);
+      const tbl_dtl = document.querySelector('#detail_table');
+      const tr_dtl = tbl_dtl.querySelectorAll('tr');
+      tr_dtl.forEach(dt=>{
+        if(dt.hasAttribute('data-value')) {
+          dt.setAttribute('data-change', 'new');
+        }
+        if(dt.getAttribute('data-id') !== 'header') {
+          let dt_group = dt.querySelector('[name = "data_group"]');
+          dt_group.value = dflt_arr['data_group'];
+          let new_id = dt.querySelector('[name = "id"]');
+          new_id.value = '';
+        }
+      })
+      const tbl_add = document.querySelector('#add_table');
+      const tr_add = tbl_add.querySelectorAll('tr');
+      tr_add.forEach(dt=>{
+        if(dt.hasAttribute('data-value')) {
+          dt.setAttribute('data-change', 'new');
+        }
+        if(dt.getAttribute('data-id') !== 'header') {
+          let dt_group = dt.querySelector('[name = "data_group"]');
+          dt_group.value = dflt_arr['data_group'];
+          let new_id = dt.querySelector('[name = "id"]');
+          new_id.value = '';
+        }
+      })
+    } else{
+      alert('belum ada standard pengecekan, silahkan menghubungi kalibrasi');
+    }
   } else {
+    if(tr.hasAttribute('data-change') && tr.getAttribute('data-change') === 'change') {
+      await DOM.update_data(tr, 'vjs_hd');
+    }
     const fltr = tr.querySelector('[name="data_group"]').value;
     btn_sbmt.setAttribute('data-method', 'update');
     log_data = [];
@@ -181,7 +191,7 @@ if (event.target.getAttribute('data-method') === "open") {
   }
 
 /* delete data
---------------------------------------------------------- */
+--------------------------------------------------------- 
   if(event.target.getAttribute('data-method') === 'delete'){
     DOM.rmv_class('#load',"hidden");
     const tr = event.target.closest('tr');
@@ -361,10 +371,7 @@ document.addEventListener("focusout", async function (event) {
 --------------------------------------------------------- */
 if (event.target.hasAttribute('name')) {
   const id = event.target.id;
-  if (!DOM.rmv_class(`#${id}`,"hidden")) {
-    DOM.add_class(`#${id}`,"hidden");
-    DOM.rmv_class(`[for="${id}"]`, 'hidden');
-  }
+  DOM.add_class(`#${id}`,"hidden");
   return;
 }
 /* input utama

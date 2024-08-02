@@ -7,7 +7,7 @@ require_once 'utils/table.php';
 /* ===============================================================================
 INDEX HTML
 =============================================================================== */
-
+$nav_array['title'] = 'Detail Tool';
 $index = $datalist->create(['id'=>'alat_list'])
     .Comp::dtlist(['id'=>'user_list'])
     .Comp::dtlist(['id'=>'loc_list'])

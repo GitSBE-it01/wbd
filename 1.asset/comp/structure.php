@@ -9,7 +9,8 @@ $load2 = $div->create([
     'class'=>'w-screen h-screen absolute z-40 flex justify-center items-center',
     'body'=>[
         $div->create([
-            'class'=>'h-full w-full opacity-75 absolute bg-slate-400'
+            'id'=> 'loadscreen',
+            'class'=>'h-full w-full absolute bg-slate-400'
         ]),
         $div->create([
             'class'=>'loading2'

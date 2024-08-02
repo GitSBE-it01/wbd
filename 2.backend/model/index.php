@@ -1,10 +1,9 @@
 <?php
 $model=[];
 require_once "D:/xampp/htdocs/wbd/2.backend/middleware/class.php";
-$model['auth'] = new Model('access',
+$model['auth_mstr'] = new Model('db_sb3employee.employee',
 [
-    'apps::s',
-    '::s',
+    'EmployeeID::s'
 ],
 'id::i');
 require_once "jig.php";

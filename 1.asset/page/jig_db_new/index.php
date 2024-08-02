@@ -1,46 +1,138 @@
 <?php 
 require_once '../../index.php';
-require_once 'utils/jig_db_table.php';
 require_once 'utils/nav.php';
+require_once 'utils/form.php';
+require_once 'utils/table.php';
 
 /* ===============================================================================
 INDEX HTML
 =============================================================================== */
-$index = "
-    <div class='loading z-40'></div>
-    <div data-card='hidden_table' class='w-screen h-screen fixed top-0 hidden transparent-slate-200 z-30'>
-    <button type='button' data-id='close__detail' data-method='close' class='cross_gray rounded-full block bg-white h-8 w-8  fixed top-[16vh] right-[16vw]'></button>
-        <div class='shadow-lg shadow-slate-800 z-30 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll flex flex-col'>
-            <div data-title='title_switch' class='flex flex-row w-full'>
-                <div data-switch='lokasi' class='flex duration-300 justify-center items-center font-bold text-2xl sticky top-0 z-20 h-[5vh] w-[50%] border-black border-2 hover:bg-slate-950 cursor-pointer hover:text-white bg-slate-950 text-white'>Lokasi</div>
-                <div data-switch='tipe' class='flex duration-300 justify-center items-center hover:font-bold text-lg sticky top-0 z-20 cursor-pointer h-[5vh] w-[50%] border-black border-2 hover:bg-slate-950 hover:text-2xl hover:text-white'>Tipe Speaker</div>
-            </div>
-            <div class='w-full h-[55vh] scrollable'>
-            ".table($loc_table).table($use_table)."
-            </div>
-            <div class='w-full h-[5vh] z-40 bottom-[0%] bg-slate-500 pt-2'>
-                ".pagination('loc_page',"flex flex-row items-center justify-center").pagination('use_page', "flex flex-row items-center justify-center hidden")."
-            </div>
-        </div>
-    </div>
-    <nav class='fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]'>
-        ".nav($nav_array)."
-    </nav>"
-    /*header*/."
-    <header class='fixed px-2 top-[5vh] bg-slate-700 w-screen h-[5vh] flex flex-row gap-2'>
-        ".$search_bar_dflt.$btn_search.$btn_submit_form2."
-    </header>"
-    /*main*/."
-    <main class='fixed flex flex-row top-[10vh] bg-slate-300 w-full h-[85vh] custom_scroll'>
-        <div id='mainTable' class='w-full h-full scrollable'>
-            ".table($jig_table)."
-        </div>
-    </main>"
-    /*main*/."
-    <footer class='fixed bottom-0 bg-slate-500 w-screen h-[5vh]'>
-        ".pagination('main_page','')."
-    </footer>
+$nav_array_new['title'] = 'Jig Database';
+$index = 
+    $load2."
+    ".Comp::div([
+        'data_attr'=>['card::detail'],
+        'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
+        'body'=>[
+            table_create($detail_type_jig),
+            table_create($detail_loc_jig),
+            Comp::div([
+                'class'=>'w-full h-[5vh] bg-slate-700 flex items-center',
+                'body'=>[
+                    $button->create([
+                        'id'=>'close_detail',
+                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
+                        'body'=>'submit'
+                    ])
+                ]
+            ])
+            
+        ]
+    ])."
+    ".Comp::nav([
+        'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
+        'body'=>navi($nav_array_new)
+    ])."
+    ".Comp::header([
+        'class'=>'fixed top-[5vh] flex flex-col w-screen h-[10vh]',
+        'body'=>[
+            Comp::div([
+                'class'=>'flex flex-row h-[5vh] w-full bg-blue-700 items-center',
+                'body'=>[
+                    Comp::div([
+                        'id'=>'jig_switch',
+                        'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50vw] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold',
+                        'body'=>'Detail Jig'
+                    ]),
+                    Comp::div([
+                        'id'=>'type_switch',
+                        'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50vw] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                        'body'=>'Detail Speaker Usage Jig'
+                    ]),
+                ]
+            ]),
+            Comp::div([
+                'class'=>'gap-4 p-2 h-[5vh] w-full bg-slate-700 items-center',
+                'body'=>[
+                    Comp::div([
+                        'id'=>'jig_div_search',
+                        'class'=>'flex flex-row gap-4 h-full w-full items-center',
+                        'body'=>[
+                            Comp::input([
+                                'id'=>'input__jig',
+                                'placeholder'=>'input jig disini',
+                                'autocomplete'=>'off',
+                                'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
+                            ]),
+                            $button->create([
+                                'id'=>'search_jig',
+                                'body'=>'search',
+                                'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                            ]),
+                            $button->create([
+                                'id'=>'dl_jig',
+                                'body'=>'dl excel',
+                                'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                            ])
+                        ]
+                    ]),
+                    Comp::div([
+                        'id'=>'type_div_search',
+                        'class'=>'flex flex-row gap-4 h-full w-full items-center hidden',
+                        'body'=>[
+                            Comp::input([
+                                'id'=>'input__type',
+                                'placeholder'=>'input type disini',
+                                'autocomplete'=>'off',
+                                'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
+                            ]),
+                            $button->create([
+                                'id'=>'search_type',
+                                'body'=>'search',
+                                'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                            ]),
+                            $button->create([
+                                'id'=>'dl_type',
+                                'body'=>'dl excel',
+                                'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                            ])
+                        ]
+                    ])
+                ]
+            ])
+        ]
+    ])."
+    ".Comp::main([
+        'class'=>'fixed flex flex-col top-[15vh] bg-slate-300 w-screen h-[80vh] scrollable-y',
+        'body'=>[
+            table_create($jig_table),
+            table_create($type_table)
+        ]
+    ])."
+    ".Comp::footer([
+        'class'=>'fixed bottom-0 bg-slate-700 w-screen h-[5vh]',
+        'body'=>[
+            Comp::div([
+                'id'=>'jig_page_div',
+                'class'=>'w-full h-full',
+                'body'=>pagination_create('jig_page', ''),
+            ]),
+            Comp::div([
+                'id'=>'type_page_div',
+                'class'=>'w-full h-full hidden',
+                'body'=>pagination_create('type_page', ''),
+            ]),
+
+        ]
+    ])."
     <script type='module' src='./client_process/index.js';></script>
     ";
 
-createHTML(['body'=>$index, 'name'=>'index', 'title'=>"Jig Database"]);
+createHTML([
+    'body'=>$index, 
+    'name'=>'index', 
+    'title'=>"Jig Database",
+    'path'=>'jig_db_new3'
+]);
+
+

@@ -121,6 +121,15 @@ $model['list_loc'] = new Model('db_jig.list_location',
 ],
 'id::i');
 
+$model['list_mtnc'] = new Model('db_jig.list_mtnc',
+[
+    'type_jig::s',
+    'mtnc_std_lifetime::i',
+    'mtnc_by::s',
+    'lftm_unit::s',
+],
+'type_jig::s');
+
 
 
 
