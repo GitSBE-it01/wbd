@@ -3,7 +3,7 @@
 $jig_table = [
     'id'=> 'jig_table', 
     'class'=>'w-full',
-    'row_count' =>25,
+    'row_count' =>50,
     'tr'=>['class'=>''],
     'data_array'=> [
         [
@@ -85,7 +85,6 @@ $jig_table = [
             'button'=>[
                 [
                     'data_attr'=>['method::detail'],
-                    'disable'=>'',
                     'class'=>'w-6 h-6 arrow_right_black cursor-pointer'
                 ]
             ]
@@ -96,7 +95,7 @@ $jig_table = [
 $type_table = [
     'id'=> 'type_table', 
     'class'=>'w-full hidden',
-    'row_count' =>25,
+    'row_count' =>50,
     'tr'=>['class'=>''],
     'data_array'=> [
         [
@@ -205,13 +204,13 @@ $detail_type_jig = [
     'id'=> 'detail_type_jig', 
     'class'=>'w-full hidden',
     'row_count' =>25,
-    'tr'=>['class'=>'flex flex-row'],
+    'tr'=>['class'=>'hidden'],
     'data_array'=> [
         [
             'type'=>'text',
             'th'=>[
                 'body'=>'Item Number Speaker',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'item_type',
@@ -222,7 +221,7 @@ $detail_type_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Desc Speaker',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'_desc',
@@ -233,7 +232,7 @@ $detail_type_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Status Speaker',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'status',
@@ -244,7 +243,7 @@ $detail_type_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Put On',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'opt_on',
@@ -255,7 +254,7 @@ $detail_type_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Pull Off',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'opt_off',
@@ -267,15 +266,15 @@ $detail_type_jig = [
 
 $detail_loc_jig = [
     'id'=> 'detail_loc_jig', 
-    'class'=>'w-full hidden',
+    'class'=>'w-full',
     'row_count' =>25,
-    'tr'=>['class'=>'flex flex-row'],
+    'tr'=>['class'=>'hidden'],
     'data_array'=> [
         [
             'type'=>'text',
             'th'=>[
                 'body'=>'Item Number Jig',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'code',
@@ -286,7 +285,7 @@ $detail_loc_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Lokasi',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'lokasi',
@@ -297,7 +296,7 @@ $detail_loc_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Qty',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'qty_per_unit',
@@ -308,7 +307,7 @@ $detail_loc_jig = [
             'type'=>'text',
             'th'=>[
                 'body'=>'Unit',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 flex flex-1',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
                 'name'=>'unit',
@@ -1295,10 +1294,45 @@ $trans_detail_table = [
 $table_list = [
     'id'=> 'table_list', 
     'class'=>'w-full',
-    'row_count' =>20,
+    'row_count' =>50,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::code'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'code'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'disable'=>'',
+                'name'=> 'code', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+// add data table
+$new_loc_jig_form = [
+    'id'=> 'add_loc_jig_form', 
+    'class'=>'w-full mt-4',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'urut'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'toleransi'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'qty_change'],
         [
             'type'=>'input',
             'th'=>[
@@ -1315,8 +1349,382 @@ $table_list = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
-                'disable'=>'',
                 'name'=> 'code', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Lokasi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::lokasi'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'loc_list',
+                'name'=>'lokasi',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Qty',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::qty_per_unit'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'qty_per_unit',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Unit',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::unit'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'unit',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$new_temp_loc_jig_form = [
+    'id'=> 'add_loc_jig_new_form', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'urut'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'toleransi'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'qty_change'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::code'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'code'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'code', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::lokasi'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'loc_list',
+                'name'=>'lokasi',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::qty_per_unit'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'qty_per_unit',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+
+            'td'=>[
+                'data_attr'=>['field::unit'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'unit',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$new_type_jig_form = [
+    'id'=> 'add_type_jig_form', 
+    'class'=>'w-full',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Type Speaker',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_type'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'item_type'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'type_list',
+                'name'=> 'item_type', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Put On Ops',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::opt_on'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'input', 
+                'placeholder'=>'',
+                'name'=>'opt_on',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Pull Out Ops',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::opt_off'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'opt_off',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$new_temp_type_jig_form = [
+    'id'=> 'add_type_jig_new_form', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::item_type'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'item_type'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'type_list',
+                'name'=> 'item_type', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::opt_on'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'input', 
+                'placeholder'=>'',
+                'name'=>'opt_on',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::opt_off'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'opt_off',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$add_speaker_type_jig_form = [
+    'id'=> 'add_type_jig_form', 
+    'class'=>'w-full',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Type jig',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_jig'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'item_jig'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'type_list',
+                'name'=> 'item_jig', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Put On Ops',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::opt_on'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'input', 
+                'placeholder'=>'',
+                'name'=>'opt_on',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Pull Out Ops',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::opt_off'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'opt_off',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$add_new_speaker_type_jig_form = [
+    'id'=> 'add_new_speaker_type_jig_form', 
+    'class'=>'hidden',
+    'row_count' =>1,
+    'tr'=>['class'=>''],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::item_jig'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'label'=>[
+                'for'=>'item_jig'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'list'=>'type_list',
+                'name'=> 'item_jig', 
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::opt_on'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'input', 
+                'placeholder'=>'',
+                'disable'=>'',
+                'name'=>'opt_on',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::opt_off'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=>'opt_off',
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],

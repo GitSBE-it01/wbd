@@ -52,3 +52,27 @@ function navi($navArray) {
     $nav = $home.$mid_nav.$title_div;
     return $nav;
 }
+
+function custom_nav($array) {
+    $links = "";
+    foreach($array['links'] as $set) {
+        if(!isset($set['link']['class'])) {
+            $set['link']['class'] ="flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200";
+        }
+        $set['li']['body']= Comp::link($set['link']);
+        $li = Comp::li($set['li']);
+        $links .= $li;
+    }
+    $ul_class = "w-full h-full flex flex-row";
+    if(isset($array['ul']['class'])) {
+        $ul_class = $array['ul']['class'];
+    }
+    $nav = Comp::div([
+        'class'=>"w-full h-full",
+        'body'=>Comp::ul([
+            'class'=> $ul_class,
+            'body'=>$links
+        ])
+    ]);
+    return $nav;
+}

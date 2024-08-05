@@ -14,6 +14,8 @@
     <body class='font-[Poppins] h-screen w-screen bg-slate-300 custom_scroll'>
     <datalist id='loc_list' >
         </datalist><datalist id='type_list' >
+        </datalist><datalist id='jig_list' >
+        </datalist><datalist id='jig_type_list' >
         </datalist><div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
             </div><div class='loading2' >
             </div>
@@ -39,225 +41,223 @@
         </h1>
         </div>
         </nav>
-    <aside class='fixed top-[5vh] flex flex-col gap-4 w-[25vw] bg-slate-700 h-[95vh] items-center pl-4' ><table id='table_list' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Code
+    <aside class='fixed top-[5vh] w-[25vw] bg-blue-800 h-[95vh]' ><div id='jig_switch' class='flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-600 text-xl font-bold' >New Jig
+        </div><div id='speaker_switch' class='flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ' >New Speaker
+        </div><div id='loc_switch' class='flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ' >New Location
+        </div><div id='type_jig_switch' class='flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ' >New Jig Type
+        </div><div id='user_switch' data-role='super' class='flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ' >User
+        </div>
+        </aside>
+    <main class='fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[90vh] scrollable-y' ><div id='jig_add' class='w-full h-full flex flex-col scrollable-y' ><h1 class='text-4xl font-bold underline my-4' >Add New Jig
+        </h1><form id='add_jig_form' class='flex flex-col gap-4 w-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='p-2 w-[30%]' >Item Number Jig
+            </label><input id='item_jig' name='item_jig' type='text' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
+            </label><input id='desc_jig' name='desc_jig' type='text' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
+            </label><input id='status_jig' name='status_jig' type='text' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
+            </label><input id='material' name='material' type='text' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
+            </label><input id='type' name='type' type='text' list='jig_type_list' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
+            </label><input id='drawing' name='drawing' type='text' autocomplete='off' class='rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div>
+            </form><h1 class='text-xl font-semibold m-2' >Detail Lokasi Jig
+        </h1><form id='add_jig_loc_form' class='flex flex-col gap-4 w-full pl-4 mb-4' ><div class='flex flex-row w-full' ><label for='qty_total' class='p-2 w-[30%]' >Qty Total
+            </label><input id='qty_total' type='text' autocomplete='off' class='rounded text-white px-2 h-full bg-slate-700 shadow-md w-[50%]' disabled >
+            
+            </div><div class='flex flex-row w-full' ><label for='tol' class='p-2 w-[30%]' >Toleransi
+            </label><input id='tol' name='toleransi' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div>
+            </form><table id='add_loc_jig_form' class='w-full mt-4' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Code
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Lokasi
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Qty
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Unit
             </th>
             </tr>
-            </thead><tbody ><tr data-id='table_list0' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list0' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list0' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            </thead><tbody ><tr data-id='add_loc_jig_form0' class='' ><input name='item_jig' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <input name='urut' type='hidden' class='' >
+            <input name='toleransi' type='hidden' class='' >
+            <input name='addSub' type='hidden' class='' >
+            <input name='qty_change' type='hidden' class='' >
+            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__add_loc_jig_form0' data-field='code' class='p-2 w-[30%]' >
+            </label><input id='code__add_loc_jig_form0' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td>
-            </tr><tr data-id='table_list1' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list1' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list1' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            </td><td data-field='lokasi' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='lokasi__add_loc_jig_form0' data-field='lokasi' class='p-2 w-[30%]' >
+            </label><input id='lokasi__add_loc_jig_form0' name='lokasi' type='text' list='loc_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td>
-            </tr><tr data-id='table_list2' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list2' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list2' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            </td><td data-field='qty_per_unit' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='qty_per_unit__add_loc_jig_form0' data-field='qty_per_unit' class='p-2 w-[30%]' >
+            </label><input id='qty_per_unit__add_loc_jig_form0' name='qty_per_unit' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td>
-            </tr><tr data-id='table_list3' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list3' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list3' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list4' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list4' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list4' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list5' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list5' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list5' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list6' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list6' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list6' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list7' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list7' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list7' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list8' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list8' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list8' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list9' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list9' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list9' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list10' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list10' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list10' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list11' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list11' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list11' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list12' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list12' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list12' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list13' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list13' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list13' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list14' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list14' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list14' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list15' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list15' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list15' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list16' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list16' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list16' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list17' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list17' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list17' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list18' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list18' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list18' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
-            
-            </td>
-            </tr><tr data-id='table_list19' class='hidden' ><input name='id' type='hidden' class='' >
-            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__table_list19' data-field='code' class='p-2 w-[30%]' >
-            </label><input id='code__table_list19' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            </td><td data-field='unit' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='unit__add_loc_jig_form0' data-field='unit' class='p-2 w-[30%]' >
+            </label><input id='unit__add_loc_jig_form0' name='unit' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td>
             </tr>
             </tbody>
-            </table>
-        </aside>
-    <main class='fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[95vh] scrollable-y' ><div id='add_jig' class='w-full h-full flex flex-col' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
-            </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
+            </table><table id='add_loc_jig_new_form' class='hidden' ><thead ><tr data-id='header' >
+            </tr>
+            </thead><tbody ><tr data-id='add_loc_jig_new_form0' class='' ><input name='item_jig' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <input name='urut' type='hidden' class='' >
+            <input name='toleransi' type='hidden' class='' >
+            <input name='addSub' type='hidden' class='' >
+            <input name='qty_change' type='hidden' class='' >
+            <td data-field='code' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='code__add_loc_jig_new_form0' data-field='code' class='p-2 w-[30%]' >
+            </label><input id='code__add_loc_jig_new_form0' name='code' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
-            </label><input id='desc_jig' name='desc_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </td><td data-field='lokasi' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='lokasi__add_loc_jig_new_form0' data-field='lokasi' class='p-2 w-[30%]' >
+            </label><input id='lokasi__add_loc_jig_new_form0' name='lokasi' type='text' list='loc_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
-            </label><input id='status_jig' name='status_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </td><td data-field='qty_per_unit' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='qty_per_unit__add_loc_jig_new_form0' data-field='qty_per_unit' class='p-2 w-[30%]' >
+            </label><input id='qty_per_unit__add_loc_jig_new_form0' name='qty_per_unit' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
-            </label><input id='material' name='material' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </td><td data-field='unit' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='unit__add_loc_jig_new_form0' data-field='unit' class='p-2 w-[30%]' >
+            </label><input id='unit__add_loc_jig_new_form0' name='unit' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
-            </label><input id='type' name='type' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </td>
+            </tr>
+            </tbody>
+            </table><button id='add_loc_row' type='button' class='border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300' >add new location
+        </button><h1 class='text-xl font-semibold m-2' >Detail Penggunaan Jig
+        </h1><table id='add_type_jig_form' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Type Speaker
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Put On Ops
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Pull Out Ops
+            </th>
+            </tr>
+            </thead><tbody ><tr data-id='add_type_jig_form0' class='' ><input name='item_jig' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <td data-field='item_type' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='item_type__add_type_jig_form0' data-field='item_type' class='p-2 w-[30%]' >
+            </label><input id='item_type__add_type_jig_form0' name='item_type' type='text' list='type_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
-            </label><input id='drawing' name='drawing' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_on__add_type_jig_form0' data-field='opt_on' class='p-2 w-[30%]' >
+            </label><input id='opt_on__add_type_jig_form0' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_off' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_off__add_type_jig_form0' data-field='opt_off' class='p-2 w-[30%]' >
+            </label><input id='opt_off__add_type_jig_form0' name='opt_off' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td>
+            </tr>
+            </tbody>
+            </table><table id='add_type_jig_new_form' class='hidden' ><thead ><tr data-id='header' >
+            </tr>
+            </thead><tbody ><tr data-id='add_type_jig_new_form0' class='' ><input name='item_jig' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <td data-field='item_type' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='item_type__add_type_jig_new_form0' data-field='item_type' class='p-2 w-[30%]' >
+            </label><input id='item_type__add_type_jig_new_form0' name='item_type' type='text' list='type_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_on__add_type_jig_new_form0' data-field='opt_on' class='p-2 w-[30%]' >
+            </label><input id='opt_on__add_type_jig_new_form0' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_off' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_off__add_type_jig_new_form0' data-field='opt_off' class='p-2 w-[30%]' >
+            </label><input id='opt_off__add_type_jig_new_form0' name='opt_off' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td>
+            </tr>
+            </tbody>
+            </table><button id='add_type_row' type='button' class='border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300' >add new speaker
+        </button>
+        </div><div id='speaker_add' class='w-full h-full hidden flex flex-col' ><h1 class='text-4xl font-bold underline my-4' >Add New Speaker
+        </h1><form id='add_speaker_jig_form' class='flex flex-col gap-4 w-full pl-4 mb-4' ><div class='flex flex-row w-full' ><label for='item_type' class='p-2 w-[30%]' >Item Number Speaker
+            </label><input id='item_type' name='item_type' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
+            
+            </div>
+            </form><table id='add_type_jig_form' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Type jig
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Put On Ops
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Pull Out Ops
+            </th>
+            </tr>
+            </thead><tbody ><tr data-id='add_type_jig_form0' class='' ><input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='item_jig__add_type_jig_form0' data-field='item_jig' class='p-2 w-[30%]' >
+            </label><input id='item_jig__add_type_jig_form0' name='item_jig' type='text' list='type_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_on__add_type_jig_form0' data-field='opt_on' class='p-2 w-[30%]' >
+            </label><input id='opt_on__add_type_jig_form0' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_off' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_off__add_type_jig_form0' data-field='opt_off' class='p-2 w-[30%]' >
+            </label><input id='opt_off__add_type_jig_form0' name='opt_off' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td>
+            </tr>
+            </tbody>
+            </table><table id='add_new_speaker_type_jig_form' class='hidden' ><thead ><tr data-id='header' >
+            </tr>
+            </thead><tbody ><tr data-id='add_new_speaker_type_jig_form0' class='' ><input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
+            <input name='remark' type='hidden' class='' >
+            <input name='status' type='hidden' class='' >
+            <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='item_jig__add_new_speaker_type_jig_form0' data-field='item_jig' class='p-2 w-[30%]' >
+            </label><input id='item_jig__add_new_speaker_type_jig_form0' name='item_jig' type='text' list='type_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_on__add_new_speaker_type_jig_form0' data-field='opt_on' class='p-2 w-[30%]' >
+            </label><input id='opt_on__add_new_speaker_type_jig_form0' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+            </td><td data-field='opt_off' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='opt_off__add_new_speaker_type_jig_form0' data-field='opt_off' class='p-2 w-[30%]' >
+            </label><input id='opt_off__add_new_speaker_type_jig_form0' name='opt_off' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td>
+            </tr>
+            </tbody>
+            </table><button id='add_jig_row' type='button' class='border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300' >add new Jig
+        </button>
+        </div><div id='loc_add' class='w-full h-full hidden flex flex-col' ><h1 class='text-4xl font-bold underline my-4' >Add New Location
+        </h1><form id='add_location_form' class='flex flex-col gap-4 w-full pl-4 mb-4' ><div class='flex flex-row w-full' ><label for='item_type' class='p-2 w-[30%]' >Location Name
+            </label><input id='item_type' name='name' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
             </div>
             </form>
-        </div><div id='add_speaker' class='w-full h-full flex flex-col' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
-            </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
+        </div><div id='type_jig_add' class='w-full h-full hidden flex flex-col' ><h1 class='text-4xl font-bold underline my-4' >Add New Jig Type
+        </h1><form id='add_jig_type_form' class='flex flex-col gap-4 w-full pl-4 mb-4' ><div class='flex flex-row w-full' ><label for='type_jig' class='p-2 w-[30%]' >Jig Type
+            </label><input id='type_jig' name='type_jig' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
-            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
-            </label><input id='desc_jig' name='desc_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </div><div class='flex flex-row w-full' ><label for='std_lftm' class='p-2 w-[30%]' >Standard Lifetime
+            </label><input id='std_lftm' name='mtnc_std_lifetime' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
-            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
-            </label><input id='status_jig' name='status_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </div><div class='flex flex-row w-full' ><label for='lftm_unit' class='p-2 w-[30%]' >Unit of Measurement
+            </label><input id='lftm_unit' name='lftm_unit' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
-            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
-            </label><input id='material' name='material' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
-            </label><input id='type' name='type' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
-            </label><input id='drawing' name='drawing' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </div><div class='flex flex-row w-full' ><label for='mtnc_by' class='p-2 w-[30%]' >Maintenance By
+            </label><input id='mtnc_by' name='mtnc_by' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
             </div>
             </form>
-        </div><div id='add_loc' class='w-full h-full flex flex-col' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
-            </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
+        </div><div id='user_add' data-role='super' class='w-full h-full hidden flex flex-col' ><h1 class='text-4xl font-bold underline my-4' >Add New Jig Type
+        </h1><input name='apps' type='text' 
+        autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
+        <form id='user_role' class='flex flex-col gap-4 w-full pl-4 mb-4' ><div class='flex flex-row w-full' ><label for='absen' class='p-2 w-[30%]' >No Absen
+            </label><input id='absen' name='absen' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
-            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
-            </label><input id='desc_jig' name='desc_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </div><div class='flex flex-row w-full' ><label for='abs_name' class='p-2 w-[30%]' >Nama User
+            </label><input id='abs_name' name='abs_name' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
             
-            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
-            </label><input id='status_jig' name='status_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
-            </label><input id='material' name='material' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
-            </label><input id='type' name='type' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
-            </label><input id='drawing' name='drawing' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div>
-            </form>
-        </div><div id='add_type_jig' class='w-full h-full flex flex-col' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
-            </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
-            
-            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
-            </label><input id='desc_jig' name='desc_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
-            </label><input id='status_jig' name='status_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
-            </label><input id='material' name='material' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
-            </label><input id='type' name='type' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
-            </label><input id='drawing' name='drawing' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div>
-            </form>
-        </div><div id='add_mtnc' class='w-full h-full flex flex-col' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
-            </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
-            
-            </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
-            </label><input id='desc_jig' name='desc_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='status_jig' class='p-2 w-[30%]' >Status
-            </label><input id='status_jig' name='status_jig' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='material' class='p-2 w-[30%]' >Material
-            </label><input id='material' name='material' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='type' class='p-2 w-[30%]' >Tipe Jig
-            </label><input id='type' name='type' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
-            
-            </div><div class='flex flex-row w-full' ><label for='drawing' class='p-2 w-[30%]' >Drawing
-            </label><input id='drawing' name='drawing' type='text' class='rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' disabled >
+            </div><div class='flex flex-row w-full' ><label for='role' class='p-2 w-[30%]' >Role
+            </label><input id='role' name='role' type='text' autocomplete='off' class='rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]' >
             
             </div>
             </form>
         </div>
         </main>
-    <footer class='fixed bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='type_page_div' class='w-full h-full' ><div id='trans_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='trans_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
-            </button><button type='button' data-group='trans_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
-            </button><button type='button' data-group='trans_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
-            </button><button type='button' data-group='trans_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
-            </button><button type='button' data-group='trans_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
-            </button><button type='button' data-group='trans_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
-            </button><button type='button' data-group='trans_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
-            </button>
-            </div>
-        </div>
+    <footer class='fixed bottom-0 right-0 bg-slate-700 w-[75vw] h-[5vh] flex items-center' ><button id='submit_button' type='button' class='z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4' >submit
+        </button>
         </footer>
     <script type='module' src='./client_process/add.js';></script>
     <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>

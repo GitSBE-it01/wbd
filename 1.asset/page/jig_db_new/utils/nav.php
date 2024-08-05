@@ -55,3 +55,63 @@ $nav_array_new = [
         ],
     ]
 ];
+
+$side_bar_data = [
+    'ul'=> [
+        'id'=>'sidebar',
+        'class'=>'w-full h-full flex flex-col'
+    ],
+    'links'=>[
+        [
+            'li'=>[
+                'class'=>'h-[10vh] w-full justify-center items-center flex',
+            ],
+            'link'=>[
+                'href'=> '#jig_add', 
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-full w-full items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold',
+                'body'=> 'New Jig'
+            ]
+        ],
+        [
+            'li'=>[
+                'class'=>'h-[10vh] w-full justify-center items-center flex',
+            ],
+            'link'=>[
+                'href'=> '#speaker_add', 
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-full w-full items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                'body'=> 'New Speaker'
+            ]
+        ],
+        [
+            'li'=>[
+                'class'=>'h-[10vh] w-full justify-center items-center flex',
+            ],
+            'link'=>[
+                'href'=> '#loc_add', 
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-full w-full items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                'body'=> 'New Location'
+            ]
+        ],
+        [
+            'li'=>[
+                'class'=>'h-[10vh] w-full justify-center items-center flex',
+            ],
+            'link'=>[
+                'href'=> '#type_jig_add', 
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-full w-full items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                'body'=> 'New Jig Type'
+            ]
+        ],
+        [
+            'li'=>[
+                'data_attr'=>['role::super'],
+                'class'=>'h-[10vh] w-full justify-center items-center flex',
+            ],
+            'link'=>[
+                'href'=> '#user_add', 
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-full w-full items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                'body'=> 'User'
+            ]
+        ],
+    ]
+];

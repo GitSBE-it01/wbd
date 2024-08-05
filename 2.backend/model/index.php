@@ -6,6 +6,14 @@ $model['auth_mstr'] = new Model('db_sb3employee.employee',
     'EmployeeID::s'
 ],
 'id::i');
+$model['role'] = new Model('db_wbd.access',
+[
+    'apps::s',
+    'role::s',
+    'absen::s',
+    'abs_name::s',
+],
+'id::i');
 require_once "jig.php";
 require_once "new_type_report.php";
 require_once "ngvar.php";

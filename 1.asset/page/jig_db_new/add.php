@@ -12,54 +12,146 @@ UPDATE HTML
 $nav_array_new['title'] = 'Add Data Jig';
 $add = Comp::dtlist(['id'=>'loc_list'])
     .Comp::dtlist(['id'=>'type_list'])
+    .Comp::dtlist(['id'=>'jig_list'])
+    .Comp::dtlist(['id'=>'jig_type_list'])
     .$load2."
     ".Comp::nav([
         'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
         'body'=>navi($nav_array_new)
     ])."
     ".Comp::aside([
-        'class'=>'fixed top-[5vh] flex flex-col gap-4 w-[25vw] bg-slate-700 h-[95vh] items-center pl-4',
+        'class'=>'fixed top-[5vh] w-[25vw] bg-blue-800 h-[95vh]',
         'body'=>[
-            table_create($table_list)
+            Comp::div([
+                'id'=>'jig_switch',
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-600 text-xl font-bold',
+                'body'=>'New Jig'
+            ]),
+            Comp::div([
+                'id'=>'speaker_switch',
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ',
+                'body'=>'New Speaker'
+            ]),
+            Comp::div([
+                'id'=>'loc_switch',
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ',
+                'body'=>'New Location'
+            ]),
+            Comp::div([
+                'id'=>'type_jig_switch',
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ',
+                'body'=>'New Jig Type'
+            ]),
+            Comp::div([
+                'id'=>'user_switch',
+                'data_attr'=>['role::super'],
+                'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[10vh] w-full text-white items-center duration-300 hover:text-xl hover:font-bold bg-blue-800 ',
+                'body'=>'User'
+            ]),
         ]
     ])."
     ".Comp::main([
-        'class'=>'fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[95vh] scrollable-y',
+        'class'=>'fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[90vh] scrollable-y',
         'body'=>[
             Comp::div([
-                'id'=>'add_jig',
-                'class'=>'w-full h-full flex flex-col',
-                'body'=>create_formset($detail_form)
+                'id'=>'jig_add',
+                'class'=>'w-full h-full flex flex-col scrollable-y',
+                'body'=>[
+                    Comp::title([
+                        'class'=>'text-4xl font-bold underline my-4',
+                        'body'=>'Add New Jig'
+                    ]),
+                    create_formset($add_jig_form),
+                    Comp::title([
+                        'class'=>'text-xl font-semibold m-2',
+                        'body'=>'Detail Lokasi Jig'
+                    ]),
+                    create_formset($add_jig_loc_form),
+                    table_create($new_loc_jig_form),
+                    table_create($new_temp_loc_jig_form),
+                    Comp::button([
+                        'id'=>'add_loc_row',
+                        'class'=>'border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300',
+                        'body'=>'add new location'
+                    ]),
+                    Comp::title([
+                        'class'=>'text-xl font-semibold m-2',
+                        'body'=>'Detail Penggunaan Jig'
+                    ]),
+                    table_create($new_type_jig_form),
+                    table_create($new_temp_type_jig_form),
+                    Comp::button([
+                        'id'=>'add_type_row',
+                        'class'=>'border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300',
+                        'body'=>'add new speaker'
+                    ]),
+                ]
             ]),
             Comp::div([
-                'id'=>'add_speaker',
-                'class'=>'w-full h-full flex flex-col',
-                'body'=>create_formset($detail_form)
+                'id'=>'speaker_add',
+                'class'=>'w-full h-full hidden flex flex-col',
+                'body'=>[
+                    Comp::title([
+                        'class'=>'text-4xl font-bold underline my-4',
+                        'body'=>'Add New Speaker'
+                    ]),
+                    create_formset($add_speaker_jig_form),
+                    table_create($add_speaker_type_jig_form),
+                    table_create($add_new_speaker_type_jig_form),
+                    Comp::button([
+                        'id'=>'add_jig_row',
+                        'class'=>'border-2 bg-gray-400 hover:bg-blue-700 active:bg-blue-500 hover:text-white hover:font-bold hover:text-lg rounded broder-slate-300 duration-300',
+                        'body'=>'add new Jig'
+                    ]),
+                ]
             ]),
             Comp::div([
-                'id'=>'add_loc',
-                'class'=>'w-full h-full flex flex-col',
-                'body'=>create_formset($detail_form)
+                'id'=>'loc_add',
+                'class'=>'w-full h-full hidden flex flex-col',
+                'body'=>[
+                    Comp::title([
+                        'class'=>'text-4xl font-bold underline my-4',
+                        'body'=>'Add New Location'
+                    ]),
+                    create_formset($add_location_form)
+                ]
             ]),
             Comp::div([
-                'id'=>'add_type_jig',
-                'class'=>'w-full h-full flex flex-col',
-                'body'=>create_formset($detail_form)
+                'id'=>'type_jig_add',
+                'class'=>'w-full h-full hidden flex flex-col',
+                'body'=>[
+                    Comp::title([
+                        'class'=>'text-4xl font-bold underline my-4',
+                        'body'=>'Add New Jig Type'
+                    ]),
+                    create_formset($add_jig_type_form)
+                ]
             ]),
             Comp::div([
-                'id'=>'add_mtnc',
-                'class'=>'w-full h-full flex flex-col',
-                'body'=>create_formset($detail_form)
+                'id'=>'user_add',
+                'data_attr'=>['role::super'],
+                'class'=>'w-full h-full hidden flex flex-col',
+                'body'=>[
+                    Comp::title([
+                        'class'=>'text-4xl font-bold underline my-4',
+                        'body'=>'Add New Jig Type'
+                    ]),
+                    Comp::input([
+                        'type'=>'hidden',
+                        'name'=>'apps'
+                    ]),
+                    create_formset($user_role)
+                ]
             ]),
         ]
     ])."
     ".Comp::footer([
-        'class'=>'fixed bottom-0 bg-slate-700 w-screen h-[5vh]',
+        'class'=>'fixed bottom-0 right-0 bg-slate-700 w-[75vw] h-[5vh] flex items-center',
         'body'=>[
-            Comp::div([
-                'id'=>'type_page_div',
-                'class'=>'w-full h-full',
-                'body'=>pagination_create('trans_page', ''),
+            Comp::button([
+                'id'=>'submit_button',
+                'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
+                'body'=>'submit'
             ]),
         ]
     ])."

@@ -125,7 +125,6 @@ export class NavDOM {
         document.addEventListener('click', function(event) {
             if(event.target.getAttribute('data-group') === key) {
                 let page = parseInt(event.target.getAttribute('data-page'));
-                console.log(page);
                 const div = event.target.closest('div');
                 const pagi = div.querySelectorAll('[data-id]');
                 const max = div.querySelector('[data-id = "7"]').getAttribute('data-page');

@@ -14,15 +14,46 @@ $index =
         'data_attr'=>['card::detail'],
         'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
         'body'=>[
-            table_create($detail_type_jig),
-            table_create($detail_loc_jig),
             Comp::div([
-                'class'=>'w-full h-[5vh] bg-slate-700 flex items-center',
+                'class'=>'w-full h-[5vh] flex flex-row',
                 'body'=>[
-                    $button->create([
-                        'id'=>'close_detail',
-                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
-                        'body'=>'submit'
+                    Comp::div([
+                        'id'=>'detail_loc_switch',
+                        'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50%] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold',
+                        'body'=>'Detail Lokasi'
+                    ]),
+                    Comp::div([
+                        'id'=>'detail_type_switch',
+                        'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50%] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
+                        'body'=>'Detail Usage'
+                    ]),
+                ]
+            ]),
+            Comp::div([
+                'class'=>'w-full h-[50vh] scrollable',
+                'body'=>[
+                    table_create($detail_loc_jig),
+                    table_create($detail_type_jig),
+                ]
+            ]),
+            Comp::div([
+                'class'=>'w-full h-[5vh] flex items-center',
+                'body'=>[
+                    Comp::div([
+                        'class'=>'w-[20%] bg-slate-700 z-10 h-full items-center justify-center flex',
+                        'body'=>
+                            $button->create([
+                                'id'=>'close_detail',
+                                'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
+                                'body'=>'close'
+                            ])
+                    ]),
+                    Comp::div([
+                        'class'=>'w-[80%] h-full bg-slate-700 z-10 items-end',
+                        'body'=>[
+                            pagination_create('detail_loc_jig_page', ''),
+                            pagination_create('detail_type_jig_page', ''),
+                        ]
                     ])
                 ]
             ])
@@ -42,12 +73,12 @@ $index =
                     Comp::div([
                         'id'=>'jig_switch',
                         'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50vw] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold',
-                        'body'=>'Detail Jig'
+                        'body'=>'Jig Based Search'
                     ]),
                     Comp::div([
                         'id'=>'type_switch',
                         'class'=>'flex cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] w-[50vw] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
-                        'body'=>'Detail Speaker Usage Jig'
+                        'body'=>'Speaker Based Search'
                     ]),
                 ]
             ]),
