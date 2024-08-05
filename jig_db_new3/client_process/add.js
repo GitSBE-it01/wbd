@@ -117,28 +117,34 @@ document.addEventListener('change', function(event) {
       const row_new_spk = new_spk.querySelector('[name="item_jig"]');
       row_new_spk.value = event.target.value;
       const code_main_loc = main_loc.querySelectorAll('[name="code"]');
-      let cek_count ='';
+      let new_counter = 1;
       code_main_loc.forEach(dt=>{
-        if(counter_loc<10) {
-          cek_count += '00' + counter_loc;
-        } else if(counter_loc<100) {
-          cek_count += '0' + counter_loc;
+        let cek_count ='';
+        if(new_counter<10) {
+          cek_count += '00' + new_counter;
+        } else if(new_counter<100) {
+          cek_count += '0' + new_counter;
         } else {
-          cek_count += counter_loc;
+          cek_count += new_counter;
         }
         dt.value = event.target.value + "--" + cek_count;
-        counter_loc++;
+        const label = document.querySelector(`[for="${dt.id}"]`);
+        label.textContent= event.target.value + "--" + cek_count;
+        new_counter++;
       })
       const code_new_loc = new_loc.querySelectorAll('[name="code"]');
       code_new_loc.value = event.target.value;
       return;
     }
+  })
+
+  document.addEventListener('click', function(event) {
     if(event.target.id === 'add_loc_row') {
+      console.log('test');
       TableDOM.insert_row('#add_loc_jig_new_form', '#add_loc_jig_form', counter_row);
       const new_tr = document.querySelector(`new__#add_loc_jig_form__${counter_row}`);
       const code = new_tr.querySelector('[name="code"]');
       let cek_count ='';
-      dt.value = event.target.value + "--" + cek_count;
       if(counter_loc<10) {
         cek_count += '00' + counter_loc;
       } else if(counter_loc<100) {
@@ -148,17 +154,14 @@ document.addEventListener('change', function(event) {
       }
       counter_loc++;
       counter_row++;
-      const code_main_loc = main_loc.querySelectorAll('[name="code"]');
-
-      const code_new_loc = new_loc.querySelectorAll('[name="code"]');
-      code_new_loc.value = event.target.value
+      return;
     }
-})
+  })
 
 //----------------------------------------------
 // insert row to table
 //----------------------------------------------
-ButtonDOM.insert_row('#add_loc_row','#add_loc_jig_new_form', '#add_loc_jig_form', counter);
-ButtonDOM.insert_row('#add_type_row','#add_type_jig_new_form', '#add_type_jig_form', counter);
-ButtonDOM.insert_row('#add_jig_row','#add_new_speaker_type_jig_form', '#add_type_jig_form', counter);
+//ButtonDOM.insert_row('#add_loc_row','#add_loc_jig_new_form', '#add_loc_jig_form', counter);
+//ButtonDOM.insert_row('#add_type_row','#add_type_jig_new_form', '#add_type_jig_form', counter);
+//ButtonDOM.insert_row('#add_jig_row','#add_new_speaker_type_jig_form', '#add_type_jig_form', counter);
 
