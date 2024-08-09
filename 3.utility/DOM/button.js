@@ -205,6 +205,75 @@ export class ButtonDOM {
         })
     }
 
+    static async submit_dataset_and_log_table(button,table, model) {
+        document.addEventListener('click', async function(event) {
+            if(event.target.getAttribute('data-method') === 'submit') {
+                let btn = '';
+                if(button.nodeType) {
+                    btn = button;
+                } else {
+                    btn = document.querySelector(button);
+                }
+                let tbl = '';
+                if(table.nodeType) {
+                    tbl = table;
+                } else {
+                    tbl = document.querySelector(table);
+                }
+                if(btn && tbl) {
+                    DOM.rmv_class('#load',"hidden");
+                    let update =[];
+                    let insert =[];
+                    const tr = tbl.querySelectorAll('tr');
+                    tr.forEach(dt=>{
+                        if(dt.getAttribute('data-change') === 'change') {
+                            let data = {};
+                            const name = dt.querySelectorAll('[name]');
+                            name.forEach(d2=>{
+                                data[d2.getAttribute('name')] = d2.value;
+                            })
+                            update.push(data);
+                        };
+                        if(dt.getAttribute('data-change') === 'new') {
+                            let data = {};
+                            const name = dt.querySelectorAll('[name]');
+                            name.forEach(d2=>{
+                                data[d2.getAttribute('name')] = d2.value;
+                            })
+                            insert.push(data);
+                        };
+                    }) 
+
+                    console.log({update, insert});
+                    let msg ='';
+                    if(update.length>0) {
+                        let result1 = await api_access('update',model[0], update);
+                        if(result1.includes('fail')) {
+                            msg += 'update data gagal';
+                        } else {
+                            let result3 = await api_access('insert',model[1], update);
+                            msg += update.length + 'data di update';
+                        }
+                    }
+
+                    if(insert.length>0) {
+                        let result2 = await api_access('insert',model[0], insert);
+                        if(result2.includes('fail')) {
+                            msg += ' insert data gagal';
+                        } else {
+                            let result4 = await api_access('insert',model[1], insert);
+                            msg += insert.length + ' data di insert';
+                        }
+                    }
+                    alert (msg);
+                    DOM.add_class('#load',"hidden");
+                    location.reload();
+                    return;
+                }
+            }
+        })
+    }
+
     static check_valid_input(source) {
         let src = '';
         if(source.nodeType) {
@@ -390,6 +459,51 @@ export class ButtonDOM {
                         if(result1.includes('fail')) {
                             msg += 'update data gagal';
                         } else {
+                            msg += update.length + 'data di update';
+                        }
+                    }
+                    alert (msg);
+                    DOM.add_class('#load',"hidden");
+                    location.reload();
+                    return;
+                }
+            }
+        })
+    }
+
+    static async submit_dataset_and_log_form(button,form, model) {
+        document.addEventListener('click', async function(event) {
+            if(event.target.getAttribute('data-method') === 'submit') {
+                let btn = '';
+                if(button.nodeType) {
+                    btn = button;
+                } else {
+                    btn = document.querySelector(button);
+                }
+                let frm = '';
+                if(form.nodeType) {
+                    frm = form;
+                } else {
+                    frm = document.querySelector(form);
+                }
+                if(btn && frm) {
+                    DOM.rmv_class('#load',"hidden");
+                    let update =[];
+                    const name = frm.querySelectorAll('[name]');
+                    let data ={};
+                    name.forEach(dt=>{
+                        data[dt.getAttribute('name')] = dt.value;
+                    })
+                    update.push(data);
+
+                    console.log({update});
+                    let msg ='';
+                    if(update.length>0) {
+                        let result1 = await api_access('update',model[0], update);
+                        if(result1.includes('fail')) {
+                            msg += 'update data gagal';
+                        } else {
+                            let result2 = await api_access('insert',model[1], update);
                             msg += update.length + 'data di update';
                         }
                     }

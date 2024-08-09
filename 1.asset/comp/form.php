@@ -118,7 +118,7 @@ function create_formset($array) {
                 $container['body'] .= $select->create($sel);
                 break;
             case "hidden":
-                $container['body'] .= $input->create($set);
+                $container['body'] .= Comp::input($set['input']);
                 break;
             default: 
                 $container['body'] .= create_input($set);
@@ -127,4 +127,11 @@ function create_formset($array) {
     }
     $result = $form->create($formset);
     return $result;
+}
+
+
+function create_filter_form($array) {
+    $container = '';
+
+    
 }

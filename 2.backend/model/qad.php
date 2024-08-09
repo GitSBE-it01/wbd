@@ -83,4 +83,24 @@ $model['qad_item'] = new Model('dbqad_live.pt_mstr',
 ],
 'id::i');
 
+$model['qad_rout'] = new Model('dbqad_live.ro_det',
+[
+    'log::s',
+    'ro_routing::s',
+    'ro_op::s',
+    'ro_start::s',
+    'ro_end::s',
+    'ro_desc::s',
+    'ro_wkctr::s',
+    'ro_mch_op::s',
+    'ro_wait::s',
+    'ro_setup_men::s',
+    'ro_men_mch::s',
+    'ro_setup::s',
+    'ro_vend::s',
+    'ro__chr01::s',
+    'ro_run::s',
+],
+'id::i');
+
 

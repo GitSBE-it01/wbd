@@ -317,4 +317,37 @@ export class TableDOM {
         tbody.insertBefore(new_row,tbody.rows[0]);
         return;
     }
+
+    static insert_row2(template_tbl, tbl, counter, pos) {
+        const target = document.querySelector(tbl);
+        const tbody = target.querySelector('tbody')
+        const table = document.querySelector(template_tbl);
+        const tbodyRow = table.querySelector('tbody');
+        const row_dt = tbodyRow.querySelector('tr');
+        const new_row = row_dt.cloneNode(true);
+        new_row.setAttribute('data-id', `new__${tbl}__${counter}`);
+        new_row.setAttribute('data-change', `new`);
+        const name = new_row.querySelectorAll('[name]');
+        name.forEach(dt=>{
+            if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
+                const name = dt.getAttribute('name');
+                let td = '';
+                if(dt.disabled) {dt.disabled = false;}
+                if(dt.closest('td') !== null) {
+                    td = dt.closest('td');
+                    const label = td.querySelector('label');
+                    if(dt.hasAttribute('id')) {
+                        dt.id = `${name}__${target.id}__new__${counter}`;
+                        label.setAttribute('for', `${name}__${target.id}__new__${counter}`)
+                    }
+                }
+            }
+        })
+        if(pos === '') {
+            tbody.insertBefore(new_row,tbody.rows[0]);
+        } else {
+            tbody.appendChild(new_row);
+        }
+        return;
+    }
 }

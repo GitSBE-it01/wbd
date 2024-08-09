@@ -17,6 +17,13 @@ export const navigation = { //nav list
                 text: 'Home',
                 divStyle:['ml5','mt3', 'scale-120'],
                 linkStyle: ['f-sl7', 'fs-m', 'fw-blk']
+            },
+            {
+                link: 'list.php',
+                type: 'txt', // if btn then create a button, if txt then create span
+                text: 'Detail',
+                divStyle:['ml5','mt3', 'scale-120'],
+                linkStyle: ['f-sl7', 'fs-m', 'fw-blk']
             }
         ]
 }

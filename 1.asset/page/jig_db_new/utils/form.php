@@ -7,6 +7,11 @@ $detail_form = [
     ],
     'form'=>[
         [
+            'type'=>'hidden',
+            'input'=>['id'=>'trans_date','name'=>'trans_date', 'type_attr'=>'hidden'
+            ]
+        ],
+        [
             'type'=>'text',
             'label'=>['for'=>'item_jig','class'=>'hidden'],
             'input'=>['id'=>'item_jig','name'=>'item_jig','class'=>'hidden']
@@ -63,11 +68,20 @@ $add_jig_form = [
     ],
     'form'=>[
         [
+            'type'=>'hidden',
+            'input'=>['id'=>'trans_date','name'=>'trans_date', 'type_attr'=>'hidden'
+            ]
+        ],
+        [
+            'type'=>'hidden',
+            'input'=>['id'=>'remark','name'=>'remark', 'type_attr'=>'hidden', 'value'=>'data awal'
+            ]
+        ],
+        [
             'type'=>'text',
             'label'=>['for'=>'item_jig', 'body'=>'Item Number Jig'],
             'input'=>[
-'autocomplete'=>'off',
-
+                'autocomplete'=>'off',
                 'id'=>'item_jig',
                 'name'=>'item_jig',
                 'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
@@ -77,8 +91,7 @@ $add_jig_form = [
             'type'=>'text',
             'label'=>['for'=>'desc_jig','body'=>'Deskripsi'],
             'input'=>[
-'autocomplete'=>'off',
-
+                'autocomplete'=>'off',
                 'id'=>'desc_jig',
                 'name'=>'desc_jig',
                 'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
@@ -90,7 +103,9 @@ $add_jig_form = [
             'input'=>[
                 'autocomplete'=>'off',
                 'id'=>'status_jig','name'=>'status_jig',
-                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'disable'=>'',
+                'value'=>'active',
+                'class'=> 'rounded text-white px-2 h-full bg-slate-700 shadow-md w-[50%]'
             ]
         ],
         [
@@ -147,7 +162,7 @@ $add_jig_loc_form = [
                 'autocomplete'=>'off',
                 'id'=>'tol',
                 'name'=>'toleransi',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
     
@@ -167,7 +182,8 @@ $add_speaker_jig_form = [
                 'autocomplete'=>'off',
                 'id'=>'item_type',
                 'name'=>'item_type',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'list'=>'type_list',
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
     
@@ -187,7 +203,7 @@ $add_location_form = [
                 'autocomplete'=>'off',
                 'id'=>'item_type',
                 'name'=>'name',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
     
@@ -207,7 +223,7 @@ $add_jig_type_form = [
                 'autocomplete'=>'off',
                 'id'=>'type_jig',
                 'name'=>'type_jig',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
         [
@@ -217,7 +233,7 @@ $add_jig_type_form = [
                 'autocomplete'=>'off',
                 'id'=>'std_lftm',
                 'name'=>'mtnc_std_lifetime',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
         [
@@ -227,7 +243,7 @@ $add_jig_type_form = [
                 'autocomplete'=>'off',
                 'id'=>'lftm_unit',
                 'name'=>'lftm_unit',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
         [
@@ -237,7 +253,7 @@ $add_jig_type_form = [
                 'autocomplete'=>'off',
                 'id'=>'mtnc_by',
                 'name'=>'mtnc_by',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
     ]
@@ -256,7 +272,8 @@ $user_role = [
                 'autocomplete'=>'off',
                 'id'=>'absen',
                 'name'=>'absen',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'list'=>'users',
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
         [
@@ -267,7 +284,7 @@ $user_role = [
                 'id'=>'abs_name',
                 'name'=>'abs_name',
                 'disable'=>'',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
         [
@@ -277,7 +294,7 @@ $user_role = [
                 'autocomplete'=>'off',
                 'id'=>'role',
                 'name'=>'role',
-                'class'=> 'rounded text-white px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+                'class'=> 'rounded px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
     ]

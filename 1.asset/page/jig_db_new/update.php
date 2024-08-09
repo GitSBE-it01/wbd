@@ -26,12 +26,12 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                     Comp::div([
                         'id'=>'stock_switch',
                         'class'=>'flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold',
-                        'body'=>'Detail Jig'
+                        'body'=>'Detail Stock'
                     ]),
                     Comp::div([
                         'id'=>'detail_switch',
                         'class'=>'flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ',
-                        'body'=>'Detail Speaker Usage Jig'
+                        'body'=>'Detail Jig'
                     ]),
                     Comp::div([
                         'id'=>'type_switch',

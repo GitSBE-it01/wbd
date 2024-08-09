@@ -7,39 +7,9 @@ require_once 'utils/table.php';
 /* ===============================================================================
 INDEX HTML
 =============================================================================== */
-$nav_array['title'] = 'New Type Report';
-$index = Comp::dtlist(['id'=>'wo_list'])
-    .Comp::dtlist(['id'=>'item_list'])
-    .$load2."
-    ".Comp::div([
-        'id'=>'input_data',
-        'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
-        'body'=>[
-            Comp::title([
-                'body'=>'masukkan data disini'
-            ]),
-            Comp::textarea([
-                'title'=>'copy paste angkanya dari excel',
-                'class'=>'w-full h-[[40vh]'
-            ]),
-            Comp::div([
-                'class'=>'w-full h-[5vh] bg-slate-700 flex items-center',
-                'body'=>[
-                    Comp::button([
-                        'id'=>'submit_form_btn',
-                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
-                        'body'=>'submit'
-                    ]),
-                    Comp::button([
-                        'id'=>'close_form_btn',
-                        'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300',
-                        'body'=>'cancel'
-                    ]),
-                ]
-            ])
-            
-        ]
-    ])."
+$nav_array['title'] = 'Input Data';
+$input = 
+    $load2."
     ".Comp::nav([
         'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
         'body'=>navi($nav_array)
@@ -128,12 +98,12 @@ $index = Comp::dtlist(['id'=>'wo_list'])
         'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',
         'body'=>pagination_create('main_page', '')
     ])."
-    <script type='module' src='./client_process/index.js';></script>
+    <script type='module' src='./client_process/input.js';></script>
     ";
 
 createHTML([
-    'body'=>$index, 
-    'name'=>'index', 
+    'body'=>$input, 
+    'name'=>'input', 
     'title'=>"New Type Report",
     'path'=>'new_type_report'
 ]);

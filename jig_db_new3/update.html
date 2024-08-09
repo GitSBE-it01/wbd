@@ -31,16 +31,14 @@
         </a>
         </li><li data-role='admin' class='h-full w-[10vw] justify-center items-center flex' ><a href='add_new.html' class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' >Add New
         </a>
-        </li><li data-role='user' class='h-full w-[10vw] justify-center items-center flex' ><a href='user.html' class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' >User
-        </a>
         </li>
         </ul>
         </div><div class='w-[30vw] h-full flex' ><h1 class='text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]' >Update Jig Data
         </h1>
         </div>
         </nav>
-    <header class='fixed top-[5vh] flex flex-col w-screen h-[10vh]' ><div class='flex flex-row h-[5vh] w-full bg-blue-700 items-center' ><div id='stock_switch' class='flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold' >Detail Jig
-        </div><div id='detail_switch' class='flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ' >Detail Speaker Usage Jig
+    <header class='fixed top-[5vh] flex flex-col w-screen h-[10vh]' ><div class='flex flex-row h-[5vh] w-full bg-blue-700 items-center' ><div id='stock_switch' class='flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-600 text-xl font-bold' >Detail Stock
+        </div><div id='detail_switch' class='flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ' >Detail Jig
         </div><div id='type_switch' class='flex flex-1 cursor-pointer hover:bg-blue-600 justify-center items-center h-[5vh] items-center duration-300 hover:text-xl hover:font-bold text-white bg-blue-800 ' >Detail Speaker Usage Jig
         </div>
         </div><div class='gap-4 p-2 h-[5vh] w-full bg-slate-700 items-center' ><div id='stock_div_search' class='flex flex-row gap-4 h-full w-full items-center' ><input id='input__stock' type='text' list='jig_list' placeholder='input jig disini' 
@@ -1222,7 +1220,10 @@
             </div>
         </div>
         </div>
-        </div><div id='detail_div' class='h-full w-full hidden' ><div class='w-full h-[40vh] scrollable' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
+        </div><div id='detail_div' class='h-full w-full hidden' ><div class='w-full h-[40vh] scrollable' ><form id='detail_form' class='flex flex-col gap-4 w-full h-full pl-4' ><div class='flex flex-row w-full' ><input id='trans_date' name='trans_date' type='hidden' 
+        autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
+        
+            </div><div class='flex flex-row w-full' ><label for='item_jig' class='hidden' >
             </label><input id='item_jig' name='item_jig' type='text' class='hidden' >
             
             </div><div class='flex flex-row w-full' ><label for='desc_jig' class='p-2 w-[30%]' >Deskripsi
@@ -1516,6 +1517,7 @@
         </div>
         </div>
         </div><div id='type_div' class='h-full w-full hidden' ><div class='w-full h-[40vh] scrollable' ><table id='type_table' class='w-full' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[18vw]' >Item Number jig
+            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]' >Deskripsi Jig
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]' >Ops Put On
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]' >Ops Pull Out
             </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]' >Status
@@ -1525,8 +1527,12 @@
             </tr>
             </thead><tbody ><tr data-id='type_table0' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table0' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table0' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table0' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table0' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table0' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table0' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1545,8 +1551,12 @@
             </td>
             </tr><tr data-id='type_table1' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table1' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table1' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table1' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table1' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table1' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table1' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1565,8 +1575,12 @@
             </td>
             </tr><tr data-id='type_table2' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table2' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table2' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table2' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table2' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table2' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table2' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1585,8 +1599,12 @@
             </td>
             </tr><tr data-id='type_table3' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table3' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table3' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table3' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table3' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table3' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table3' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1605,8 +1623,12 @@
             </td>
             </tr><tr data-id='type_table4' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table4' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table4' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table4' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table4' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table4' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table4' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1625,8 +1647,12 @@
             </td>
             </tr><tr data-id='type_table5' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table5' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table5' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table5' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table5' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table5' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table5' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1645,8 +1671,12 @@
             </td>
             </tr><tr data-id='type_table6' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table6' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table6' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table6' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table6' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table6' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table6' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1665,8 +1695,12 @@
             </td>
             </tr><tr data-id='type_table7' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table7' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table7' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table7' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table7' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table7' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table7' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1685,8 +1719,12 @@
             </td>
             </tr><tr data-id='type_table8' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table8' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table8' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table8' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table8' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table8' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table8' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1705,8 +1743,12 @@
             </td>
             </tr><tr data-id='type_table9' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table9' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table9' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table9' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table9' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table9' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table9' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1725,8 +1767,12 @@
             </td>
             </tr><tr data-id='type_table10' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table10' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table10' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table10' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table10' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table10' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table10' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1745,8 +1791,12 @@
             </td>
             </tr><tr data-id='type_table11' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table11' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table11' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table11' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table11' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table11' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table11' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1765,8 +1815,12 @@
             </td>
             </tr><tr data-id='type_table12' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table12' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table12' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table12' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table12' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table12' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table12' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1785,8 +1839,12 @@
             </td>
             </tr><tr data-id='type_table13' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table13' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table13' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table13' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table13' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table13' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table13' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1805,8 +1863,12 @@
             </td>
             </tr><tr data-id='type_table14' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table14' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table14' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table14' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table14' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table14' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table14' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1825,8 +1887,12 @@
             </td>
             </tr><tr data-id='type_table15' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table15' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table15' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table15' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table15' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table15' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table15' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1845,8 +1911,12 @@
             </td>
             </tr><tr data-id='type_table16' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table16' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table16' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table16' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table16' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table16' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table16' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1865,8 +1935,12 @@
             </td>
             </tr><tr data-id='type_table17' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table17' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table17' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table17' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table17' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table17' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table17' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1885,8 +1959,12 @@
             </td>
             </tr><tr data-id='type_table18' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table18' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table18' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table18' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table18' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table18' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table18' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1905,8 +1983,12 @@
             </td>
             </tr><tr data-id='type_table19' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table19' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table19' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table19' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table19' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table19' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table19' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1925,8 +2007,12 @@
             </td>
             </tr><tr data-id='type_table20' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table20' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table20' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table20' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table20' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table20' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table20' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1945,8 +2031,12 @@
             </td>
             </tr><tr data-id='type_table21' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table21' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table21' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table21' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table21' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table21' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table21' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1965,8 +2055,12 @@
             </td>
             </tr><tr data-id='type_table22' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table22' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table22' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table22' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table22' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table22' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table22' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -1985,8 +2079,12 @@
             </td>
             </tr><tr data-id='type_table23' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table23' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table23' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table23' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table23' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table23' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table23' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
@@ -2005,8 +2103,12 @@
             </td>
             </tr><tr data-id='type_table24' class='hidden' ><input name='id' type='hidden' class='' >
             <input name='item_type' type='hidden' class='' >
+            <input name='trans_date' type='hidden' class='' >
             <td data-field='item_jig' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]' ><label for='item_jig__type_table24' data-field='item_jig' class='p-2 w-[30%]' >
             </label><input id='item_jig__type_table24' name='item_jig' type='text' list='jig_list' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
+            
+            </td><td data-field='desc_jig' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='desc_jig__type_table24' data-field='desc_jig' class='p-2 w-[30%]' >
+            </label><input id='desc_jig__type_table24' name='desc_jig' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
             </td><td data-field='opt_on' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='opt_on__type_table24' data-field='opt_on' class='p-2 w-[30%]' >
             </label><input id='opt_on__type_table24' name='opt_on' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >

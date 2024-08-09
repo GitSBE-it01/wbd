@@ -15,7 +15,7 @@
         const start = performance.now();
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
-        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', yesterday]});
+        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-07-20', yesterday]});
         console.log({otb});
         const trans = await api_access('get', 'jig_trans','');
         //const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
@@ -239,7 +239,7 @@ for (let i=0; i<newLabor.length; i++) {
     const a = newLabor[i];
     const codeFilter = a.jig + a.loc;
     a.count = 0;
-    a.codeCount = 0;
+    a.code_count = 0;
     a.qty_jig = 0;
     a.qty_usage = 0;
     a.codeAll = '';
@@ -255,11 +255,11 @@ for (let i=0; i<newLabor.length; i++) {
             a.count = 1;
             if ( codeFilter === codeFilter2) {
                 a.codeAll = b.codeAll + a.code;
-                a.codeCount += 1 + b.codeCount;
+                a.code_count += 1 + b.code_count;
                 a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
             } else {
                 a.codeAll = a.code ;
-                a.codeCount += 1 ;
+                a.code_count += 1 ;
                 a.qty_jig = parseFloat(a.qty_pinjam);  
             }
         }
@@ -267,18 +267,18 @@ for (let i=0; i<newLabor.length; i++) {
             a.count = 1;
             if ( codeFilter === codeFilter2) {
                 a.codeAll = b.codeAll.replace((`${a.code}`),'');
-                a.codeCount = b.codeCount - 1;
+                a.code_count = b.code_count - 1;
                 a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
             } else {
-                a.codeCount = 0 ;
+                a.code_count = 0 ;
                 a.codeAll = '';
                 a.qty_jig = 0; 
             }
         } 
         if(a.cat === 'b.use') { 
             if ( codeFilter === codeFilter2) {
-                if (b.codeCount === 0) { a.count = 0;} else {a.count = b.count;}
-                a.codeCount = b.codeCount;
+                if (b.code_count === 0) { a.count = 0;} else {a.count = b.count;}
+                a.code_count = b.code_count;
                 a.codeAll = b.codeAll;
                 a.qty_jig = b.qty_jig;
                 if (a.count === 0) {a.code = '';} else {a.code = b.code;}
@@ -308,11 +308,12 @@ for (let i=0; i<newLabor.length; i++) {
         const dJig = mstr.find(item => item.item_jig === a.jig);
         const basicDt = {
             ...a,
-            desc_jig: dJig.desc_jig
+            desc_jig: dJig.desc_jig,
+            count_dt: 1,
         }
         arrInp.push(basicDt);
         if (a.cat === 'b.use') {
-        for (let i2=1; i2<a.codeCount; i2++) {
+        for (let i2=1; i2<a.code_count; i2++) {
             const len = a.code.length;
             const codeNew = a.codeAll.substring((len*(i2-1)),(len*i2));
             const data = {
@@ -326,8 +327,8 @@ for (let i=0; i<newLabor.length; i++) {
                 wo_id: a.wo_id,
                 type: a.type,
                 qty_total: a.qty_total,
-                count: a.count,
-                codeCount: a.codeCount,
+                count_dt: 1,
+                code_count: a.code_count,
                 qty_jig: a.qty_jig,
                 qty_usage: a.qty_usage,
                 codeAll: a.codeAll,

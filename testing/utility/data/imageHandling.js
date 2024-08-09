@@ -26,7 +26,8 @@ export class MyUploadAdapter {
 
     _initRequest() {
         const xhr = this.xhr = new XMLHttpRequest();
-        xhr.open( 'POST', 'http://informationsystem.sbe.co.id:8080/wbd/testing/imageHandler.php', true );
+        const check = window.location.href.split("/");
+        xhr.open( 'POST', 'http://'+check[2]+'/wbd/'+ check[4] + 'imageHandler.php', true );
         xhr.responseType = 'json';
     }
 

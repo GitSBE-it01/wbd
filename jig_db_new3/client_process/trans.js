@@ -39,8 +39,6 @@ loc.forEach(dt=>{
     } else {
       qty_per_role = parseInt(dt.qty_per_unit);
     }
-    console.log('ori = ', parseInt(dt.qty_per_unit))
-    console.log('di kurangi toleransi = ', parseInt(dt.qty_per_unit) * (1- parseInt(dt.toleransi) / 100))
     if(loc_sum[`${dt.item_jig}`]) {
       loc_sum[`${dt.item_jig}`]['qty_total'] += qty_per_role;
     } else {

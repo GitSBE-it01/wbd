@@ -1,0 +1,13 @@
+homepage : 
+menunjukkan list tipe baru
+hal yang di anggap penting : 
+1. harus ada status, yg terlist kan hanya yang blum mass pro
+2. harus ada page utk history data yg sudah OK 
+3. page utk input, search item number nya dan ada link dari homepage utk ke input page
+4. homepage opsi nya otomatis masuk item number barunya dari status QAD atau di masukkan manual??
+5. kriteria pass nya utk new type report ini berdasarkan apa saja? 
+    * CPK
+
+
+status develop????
+lgsg masuk 

@@ -21,6 +21,7 @@ $main_table = [
                 'type_attr'=>'text', 
                 'name'=> 'item_number', 
                 'list'=>'item_list',
+                'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -54,6 +55,7 @@ $main_table = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
+                'disable'=>'',
                 'name'=>'fo_before_brk_in',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -71,6 +73,7 @@ $main_table = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
+                'disable'=>'',
                 'name'=> 'tol_fo_before', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -88,6 +91,7 @@ $main_table = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
+                'disable'=>'',
                 'name'=> 'fo_after_brk_in', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -105,6 +109,7 @@ $main_table = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
+                'disable'=>'',
                 'name'=> 'tol_fo_after', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -128,6 +133,10 @@ $main_table = [
                     'data_attr'=>['method::delete'],
                     'class'=>'w-6 h-6 ml-2 minus'
                 ],
+                [
+                    'data_attr'=>['method::edit'],
+                    'class'=>'w-6 h-6 ml-2 minus'
+                ],
             ]
         ],
     ]
@@ -149,6 +158,7 @@ $template_new = [
             'inp'=>[
                 'type_attr'=>'text', 
                 'name'=> 'item_number', 
+                'disable'=>'',
                 'list'=>'item_list',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]

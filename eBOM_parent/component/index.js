@@ -40,7 +40,8 @@ import {
 } from './array/header.js';
 
 import { 
-   mainTbl
+   mainTbl,
+   mainTbl2,
 } from './array/tblArr.js';
 
 import {
@@ -50,7 +51,8 @@ import {
 export {
     navigation,
     searchBarMain,
-    mainTbl
+    mainTbl,
+    mainTbl2,
 }
    
 // html component folder

@@ -1,4 +1,8 @@
 VJS-pr01/.env
+testing/
+test.html
+test.php
+readme.txt
 jig_db_new/.env
 routing/.env
 VJS-pr01/data_upload/
@@ -19,5 +23,3 @@ pick_now/cache
 1.asset/js_old
 1.asset/index_old.js
 3.utility/old
-
-

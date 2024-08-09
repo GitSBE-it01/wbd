@@ -9,7 +9,6 @@
     <link href='../1.asset/main.css' rel='stylesheet' />
     <link href='../1.asset/output.css' rel='stylesheet' />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>scheduler pick now</title>
 </head>
 <body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 px-8 pt-4">
@@ -26,6 +25,7 @@
         wobb, wo, ld, loc, dept, pickNow, pt_mstr,pic_part,
         convertDateFormat
     } from './utility/index.js';
+    import {api_access} from '../3.utility/index.js';
     
     // initiation data
     const root = document.getElementById('root');
@@ -36,6 +36,8 @@
     h1.setAttribute('class', 'text-center text-4xl font-bold');
     h1.textContent = 'Scheduler Pick Now';
     root.appendChild(h1);
+    const rout = await api_access('fetch_rout_active_subcon', 'qad_rout', '');
+    console.log({rout});
     const demand = await wobb.dbProcess('get',''); // wod_det
     const woR = await wo.dbProcess('fetch',{wo_status:"R"}); // wo_mstr
     const cekDept = await dept.dbProcess('get','');
@@ -143,6 +145,12 @@
             dt['dept'] = data.dept;
         } else {
             dt['dept'] = '';
+        }
+        const subcont = rout.find(obj=>obj.ro_routing === dt.item);
+        if(subcont) {
+            let data2 = dt;
+            data2['dept'] = "SUBCON";
+            dmnd_new.push(data2);
         }
     })
     console.log('------------------------------------------------------------');
@@ -465,15 +473,22 @@
         'PROD2',
         'PROD3',
         'QA',
-        'SBE4',
+        'SUBCON',
         'WOODWORK',
     ]
     textContArr.forEach(dpt=> {
         let dataTbl = []
         dataProcess.forEach(dt => {
             if(dt.depmnt === dpt) {dataTbl.push(dt)}
-            if(dt.depmnt === 'WH' && itemReff[dpt].includes(dt.komponen)) {
-                dataTbl.push(dt)}
+            if(dpt !== 'SUBCON') {
+                if(dt.depmnt === 'WH' && itemReff[dpt].includes(dt.komponen)) {
+                    dataTbl.push(dt)
+                }
+            } else {
+                if(dt.lokasi.includes('WHSUP') && itemReff[dpt].includes(dt.komponen)) {
+                    dataTbl.push(dt)
+                }
+            }
         });
         const cached = cache(dpt, dataTbl);
     })

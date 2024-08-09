@@ -46,13 +46,6 @@ $nav_array_new = [
             ],
             'link'=>['href'=> 'add_new.html', 'body'=> 'Add New'] 
         ],
-        [
-            'li'=>[
-                'data_attr'=>['role::user'],
-                'class'=>'h-full w-[10vw] justify-center items-center flex',
-            ],
-            'link'=>['href'=> 'user.html', 'body'=> 'User']
-        ],
     ]
 ];
 

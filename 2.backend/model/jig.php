@@ -30,7 +30,6 @@ $model['jig_func'] = new Model('db_jig.jig_function',
 
 $model['log_func'] = new Model('db_jig.log_function',
 [
-    'id::i',
     'item_jig::s',
     'item_type::s',
     'opt_on::i',

@@ -681,6 +681,7 @@ $type_table_upd = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
         [
             'th'=>[
                 'body'=>'Item Number jig',
@@ -696,6 +697,23 @@ $type_table_upd = [
                 'placeholder'=>'',
                 'name'=> 'item_jig', 
                 'list'=>'jig_list',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'th'=>[
+                'body'=>'Deskripsi Jig',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+            ],
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::desc_jig'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'desc_jig', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -1327,11 +1345,11 @@ $new_loc_jig_form = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>'active'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'urut'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'toleransi'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub', 'value'=>'tambah'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'qty_change'],
         [
             'type'=>'input',
@@ -1416,11 +1434,11 @@ $new_temp_loc_jig_form = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>'active'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'urut'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'toleransi'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'addSub', 'value'=>'tambah'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'qty_change'],
         [
             'type'=>'input',
@@ -1490,8 +1508,8 @@ $new_type_jig_form = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>'active'],
         [
             'type'=>'input',
             'th'=>[
@@ -1558,8 +1576,8 @@ $new_temp_type_jig_form = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_jig'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>'active'],
         [
             'type'=>'input',
             'td'=>[
@@ -1607,15 +1625,15 @@ $new_temp_type_jig_form = [
 ];
 
 $add_speaker_type_jig_form = [
-    'id'=> 'add_type_jig_form', 
+    'id'=> 'add_speaker_type_jig_form', 
     'class'=>'w-full',
     'row_count' =>1,
     'tr'=>['class'=>''],
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>'active'],
         [
             'type'=>'input',
             'th'=>[
@@ -1632,7 +1650,7 @@ $add_speaker_type_jig_form = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
-                'list'=>'type_list',
+                'list'=>'jig_list',
                 'name'=> 'item_jig', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -1682,8 +1700,8 @@ $add_new_speaker_type_jig_form = [
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'remark', 'value'=>'data awal'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value' =>'active'],
         [
             'type'=>'input',
             'td'=>[
@@ -1696,7 +1714,7 @@ $add_new_speaker_type_jig_form = [
             'inp'=>[
                 'type'=>'text', 
                 'placeholder'=>'',
-                'list'=>'type_list',
+                'list'=>'jig_list',
                 'name'=> 'item_jig', 
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -1727,6 +1745,137 @@ $add_new_speaker_type_jig_form = [
                 'name'=>'opt_off',
                 'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
+        ],
+    ]
+];
+
+// usage table 
+$usage_table = [
+    'id'=> 'usage_table', 
+    'class'=>'w-full',
+    'row_count' =>50,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Item Number Jig',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'name'=>'jig',
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Desc Jig',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'desc_jig',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Code',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'code',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Transaksi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'tr_date',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Lokasi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'loc',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Tipe Transaksi',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'cat',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Qty Jig',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'qty_jig',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'ID',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'wo_id',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Item Number Speaker',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'type',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Qty Jalan',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'qty_total',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Qty Use Per Jig',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'qty_usage',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
         ],
     ]
 ];

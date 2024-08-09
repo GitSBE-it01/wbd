@@ -22,6 +22,11 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $types = '';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
+        case "fetch_jig_usg_filter_date":
+            $query = 'SELECT * FROM '.$mdl.' WHERE tr_date  BETWEEN ? AND ?';
+            $types = 'ss';
+            $response  = $db_conn->customQuery('', $query, $types, $data);
+            break;
         default:
             $response = "action not available";
     }

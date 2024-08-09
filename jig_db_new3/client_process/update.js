@@ -1,4 +1,4 @@
-import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM} from '../../3.utility/index.js';
+import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, currentDate} from '../../3.utility/index.js';
 import {auth2} from '../../3.utility/auth.js';
 import {data_switch} from './general.js';
 
@@ -59,10 +59,9 @@ ButtonDOM.delete_data_table('[data-method ="delete"]', 'jig_func', 'id');
 
 // submit button to insert and update data 
 //----------------------------------------------
-ButtonDOM.submit_dataset_table('#submit_stock[data-method ="submit"]', '#stock_table', 'jig_loc');
-ButtonDOM.submit_dataset_table('#submit_type[data-method ="submit"]', '#type_table', 'jig_func');
-ButtonDOM.submit_dataset_form('#submit_detail[data-method ="submit"]', '#detail_form', 'jig_mstr');
-ButtonDOM.submit_dataset_form('#submit_detail[data-method ="submit"]', '#detail_form', 'log_mstr');
+ButtonDOM.submit_dataset_and_log_table('#submit_stock[data-method ="submit"]', '#stock_table', ['jig_loc', 'log_loc']);
+ButtonDOM.submit_dataset_and_log_table('#submit_type[data-method ="submit"]', '#type_table', ['jig_func', 'log_func']);
+ButtonDOM.submit_dataset_and_log_form('#submit_detail[data-method ="submit"]', '#detail_form', ['jig_mstr', 'log_mstr']);
 
 // input change trigger submit button style and attribute
 //----------------------------------------------
@@ -127,7 +126,8 @@ document.addEventListener('click', async function(event) {
     let src = document.getElementById('input__stock');
     let valid = src.checkValidity();
     if(!valid) {
-        src.reportValidity();
+      src.reportValidity();
+      event.target.disabled = false;
         return;
     }
     DOM.rmv_class('#load',"hidden");
@@ -154,6 +154,9 @@ document.addEventListener('click', async function(event) {
     }
     loc_show = loc.filter(obj=>obj.item_jig === splt[0]);
     log_loc_show = log_loc.filter(obj=>obj.item_jig === splt[0]);
+    log_loc_show.sort((a,b)=>{
+      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+    })
     console.log({loc, log_loc, loc_show, log_loc_show});
     if(loc_show.length > 0) {
       TableDOM.parse_data('#stock_table', loc_show, 1);
@@ -176,7 +179,8 @@ document.addEventListener('click', async function(event) {
     let src = document.getElementById('input__type');
     let valid = src.checkValidity();
     if(!valid) {
-        src.reportValidity();
+      src.reportValidity();
+      event.target.disabled = false;
         return;
     }
     DOM.rmv_class('#load',"hidden");
@@ -192,17 +196,24 @@ document.addEventListener('click', async function(event) {
     if(func.find(obj=>obj.item_type === splt[0]) === undefined) {
       let data = await api_access('fetch','jig_func',{item_type: splt[0]});
       data.forEach(dt=>{
+        const desc = master.find(obj=>obj.item_jig === dt.item_jig);
+        dt['desc_jig'] = desc.desc_jig
         func.push(dt);
       })
     }
     if(log_func.find(obj=>obj.item_type === splt[0]) === undefined) {
       let data = await api_access('fetch','log_func',{item_type: splt[0]});
       data.forEach(dt=>{
+        const desc = master.find(obj=>obj.item_jig === dt.item_jig);
+        dt['desc_jig'] = desc.desc_jig
         log_func.push(dt);
       })
     }
     func_show = func.filter(obj=>obj.item_type === splt[0]);
     log_func_show = log_func.filter(obj=>obj.item_type === splt[0]);
+    log_func_show.sort((a,b)=>{
+      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+    })
     console.log({func, log_func, func_show, log_func_show});
     if(func_show.length > 0 ) {
       TableDOM.parse_data('#type_table', func_show, 1);
@@ -225,7 +236,8 @@ document.addEventListener('click', async function(event) {
     let src = document.getElementById('input__detail');
     let valid = src.checkValidity();
     if(!valid) {
-        src.reportValidity();
+      src.reportValidity();
+      event.target.disabled = false;
         return;
     }
     DOM.rmv_class('#load',"hidden");
@@ -251,6 +263,9 @@ document.addEventListener('click', async function(event) {
     }
     detail_show = detail.filter(obj=>obj.item_jig === splt[0]);
     log_detail_show = log_detail.filter(obj=>obj.item_jig === splt[0]);
+    log_detail_show.sort((a,b)=>{
+      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+    })
     console.log({detail, log_detail, detail_show, log_detail_show});
     if(detail_show.length > 0 ) {
       InputDOM.form_parse_data('#detail_form', detail_show);
@@ -288,6 +303,8 @@ document.addEventListener('change', function(event) {
     qty_curr.value = qty_new;
     let label = tr.querySelector(`[for = "${qty_curr.id}"]`);
     label.textContent = qty_new;
+    const tgl = tr.querySelector('[name="trans_date"]');
+    tgl.value = currentDate("-");
     return;
   }
 
@@ -299,6 +316,17 @@ document.addEventListener('change', function(event) {
     const new_urut = parseInt(urut[1]);
     const urut_node = tr.querySelector('[name="urut"]');
     urut_node.value = new_urut;
+    return;
+  } 
+
+  // code and no urut
+  if(event.target.hasAttribute('name')) {
+    const div = event.target.closest('div');
+    const form = div.closest('form');
+    if(form.id === 'detail_form') {
+      const date = form.querySelector('#trans_date');
+      date.value =currentDate('-');
+    }
     return;
   } 
 })

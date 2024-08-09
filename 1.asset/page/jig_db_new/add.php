@@ -13,6 +13,7 @@ $nav_array_new['title'] = 'Add Data Jig';
 $add = Comp::dtlist(['id'=>'loc_list'])
     .Comp::dtlist(['id'=>'type_list'])
     .Comp::dtlist(['id'=>'jig_list'])
+    .Comp::dtlist(['id'=>'users'])
     .Comp::dtlist(['id'=>'jig_type_list'])
     .$load2."
     ".Comp::nav([
@@ -20,7 +21,7 @@ $add = Comp::dtlist(['id'=>'loc_list'])
         'body'=>navi($nav_array_new)
     ])."
     ".Comp::aside([
-        'class'=>'fixed top-[5vh] w-[25vw] bg-blue-800 h-[95vh]',
+        'class'=>'fixed top-[5vh] w-[20vw] bg-blue-800 h-[95vh]',
         'body'=>[
             Comp::div([
                 'id'=>'jig_switch',
@@ -51,7 +52,7 @@ $add = Comp::dtlist(['id'=>'loc_list'])
         ]
     ])."
     ".Comp::main([
-        'class'=>'fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[75vw] h-[90vh] scrollable-y',
+        'class'=>'fixed flex flex-col top-[5vh] right-0 bg-slate-300 w-[80vw] h-[90vh] scrollable-y',
         'body'=>[
             Comp::div([
                 'id'=>'jig_add',
@@ -134,10 +135,10 @@ $add = Comp::dtlist(['id'=>'loc_list'])
                 'body'=>[
                     Comp::title([
                         'class'=>'text-4xl font-bold underline my-4',
-                        'body'=>'Add New Jig Type'
+                        'body'=>'User Role'
                     ]),
                     Comp::input([
-                        'type'=>'hidden',
+                        'type_attr'=>'hidden',
                         'name'=>'apps'
                     ]),
                     create_formset($user_role)
@@ -146,10 +147,11 @@ $add = Comp::dtlist(['id'=>'loc_list'])
         ]
     ])."
     ".Comp::footer([
-        'class'=>'fixed bottom-0 right-0 bg-slate-700 w-[75vw] h-[5vh] flex items-center',
+        'class'=>'fixed bottom-0 right-0 bg-slate-700 w-[80vw] h-[5vh] flex items-center',
         'body'=>[
             Comp::button([
                 'id'=>'submit_button',
+                'data_attr'=>['method::jig_submit'],
                 'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
                 'body'=>'submit'
             ]),

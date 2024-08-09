@@ -50,6 +50,92 @@ export const mainTbl = (data) => ({ // data table
             },
         ]
 })
+
+export const mainTbl2 = (data) => ({ // data table
+    target:`main`, 
+    tblID: `tblMain`, 
+    dbsrc: data, 
+    tblStyle: 
+        {
+            contStyle: ['m4'],
+            thdStyle:['flex-r', 'fs-l', 'fw-blk', 'mb3', 'tl3', 'f-wht', 'p2'],
+            thrStyle:['f-child'],
+            trowStyle:['flex-r', 'px2'],
+            tdtStyle:['f-child', 'mb2', 'pt1', 'newLine', 'bt-White1'],
+            selStyle:[],
+            btnStyle:[],
+        }, 
+    tblData: 
+        [
+            {
+                header:'Component',
+                db_field:'part', 
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Comp Description',
+                db_field:'part_desc', 
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                header:'Parent',
+                db_field:'parent', 
+                dt_type:'text',
+                mark:{
+                    dbfield:'',
+                    text:''
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+            {
+                db_field:'fltr', 
+                dt_type:'hidden',
+                mark:{
+                    dbfield:'part',
+                    text:'part'
+                },
+                param:{
+                    list: '',
+                    disable: false
+                },
+                js:{
+                    attr:'',
+                    value:''
+                }
+            },
+        ]
+})
 /*
 contoh lengkap ============================================
 
