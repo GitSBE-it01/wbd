@@ -18,11 +18,12 @@ DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
 
 // get data from DB
 // -------------------------------------------------------
-const loc = await api_access('get','jig_loc','');
+let loc = await api_access('get','jig_loc','');
 const trans = await api_access('fetch','jig_trans',{status:'open'});
 const master = await api_access('get','jig_mstr','');
 let loc_sum = [];
 let detail_show = [];
+console.log({loc, trans, master});
 
 // calculation for getting total qty per item jig
 // -------------------------------------------------------
@@ -116,6 +117,7 @@ document.addEventListener('click', async function(event) {
       trans_dt.status = 'open';
       if(cek !== undefined) {
         trans_dt.start_date =  cek.start_date;
+        trans_dt.status = 'close';
         trans_dt.end_date =  currentDate("-");
         trans_dt.loc = cek.loc;
         trans_dt.id = cek.id;
@@ -127,13 +129,12 @@ document.addEventListener('click', async function(event) {
     TableDOM.parse_data('#trans_detail_table', detail_show, 1);
     NavDOM.pgList_init('#trans_detail_page', detail_show, '#trans_detail_table');
     const tbl = document.querySelector('#trans_detail_table');
-    const tr_all = tbl.querySelectorAll('tr[data-value]');
-    console.log(tr_all);
+    const tr_all = tbl.querySelectorAll('[data-value]');
     tr_all.forEach(dt=>{
       if(dt.querySelector('[name="loc"]').value !== '' ){
         const inp = dt.querySelector('[name="loc"]');
         inp.disabled = true;
-        const btn = dt.querySelector('[data-method="submit"]');
+        const btn = dt.querySelector('[data-submit_type]');
         btn.setAttribute('data-method', 'update');
         btn.classList.toggle('arrow_right');
         btn.classList.toggle('arrow_left');
@@ -151,7 +152,24 @@ document.addEventListener('click', async function(event) {
     DOM.add_class('#load',"z-40" , 'hidden');
     DOM.rmv_class('#loadscreen',"z-10");
     DOM.rmv_class('.loading2',"hidden");
+    const main_div = document.querySelector('[data-card="detail"]');
+    const tr = main_div.querySelectorAll('[data-value]');
+    console.log(tr);
+    tr.forEach(dt=>{
+      const btn = dt.querySelectorAll('.arrow_left');
+      btn.forEach(d2=>{
+        d2.classList.toggle('arrow_left');
+        d2.classList.toggle('arrow_right');
+        d2.setAttribute('data-method', 'submit');
+      })
+      const loc = dt.querySelector('[name="loc"]');
+      if(loc.disabled) {
+        loc.disabled = false;
+      }
+
+    })
     const trgt = document.querySelector('[data-card="detail"]');
+
     DOM.add_class(trgt, 'hidden');
     TableDOM.clear('#trans_detail_table');
     return;
@@ -174,6 +192,10 @@ ButtonDOM.enter_keydown('#search_jig', '#input__jig');
 
 document.addEventListener('click', async function(event) {
   if(event.target.getAttribute('data-method') === 'submit') {
+    DOM.rmv_class('#loadscreen',"z-10");
+    DOM.add_class('#loadscreen',"z-40");
+    DOM.rmv_class('.loading2',"hidden");
+    DOM.add_class('.loading2',"z-40");
     event.target.disabled = true;
     console.log('submit');
     const td = event.target.closest('td');
@@ -182,6 +204,10 @@ document.addEventListener('click', async function(event) {
     if(check.value === '') {
       alert("Harap masukan peminjam");
       event.target.disabled = false;
+      DOM.add_class('#loadscreen',"z-10");
+      DOM.rmv_class('#loadscreen',"z-40");
+      DOM.add_class('.loading2',"hidden");
+      DOM.rmv_class('.loading2',"z-40");
       return;
     }
     const tr_field = tr.querySelectorAll('[name]');
@@ -198,7 +224,7 @@ document.addEventListener('click', async function(event) {
       }
     })
     data.push(dtl);
-    console.log(data);
+    console.log({data, dtl});
     let msg ='';
     let result = await api_access('insert','jig_trans', data);
     if(result.includes('fail')) {
@@ -209,10 +235,19 @@ document.addEventListener('click', async function(event) {
     alert (msg);
     console.log(result)
     event.target.disabled = false;
+    DOM.add_class('#loadscreen',"z-10");
+    DOM.rmv_class('#loadscreen',"z-40");
+    DOM.add_class('.loading2',"hidden");
+    DOM.rmv_class('.loading2',"z-40");
+    location.reload();
     return;
   }
 
   if(event.target.getAttribute('data-method') === 'update') {
+    DOM.rmv_class('#loadscreen',"z-10");
+    DOM.add_class('#loadscreen',"z-40");
+    DOM.rmv_class('.loading2',"hidden");
+    DOM.add_class('.loading2',"z-40");
     event.target.disabled = true;
     console.log('update');
     const td = event.target.closest('td');
@@ -231,7 +266,7 @@ document.addEventListener('click', async function(event) {
       }
     })
     data.push(dtl);
-    console.log(data);
+    console.log({data, dtl});
     let msg ='';
     let result = await api_access('update','jig_trans', data);
     if(result.includes('fail')) {
@@ -242,6 +277,11 @@ document.addEventListener('click', async function(event) {
     alert (msg);
     console.log(result)
     event.target.disabled = false;
+    DOM.add_class('#loadscreen',"z-10");
+    DOM.rmv_class('#loadscreen',"z-40");
+    DOM.add_class('.loading2',"hidden");
+    DOM.rmv_class('.loading2',"z-40");
+    location.reload();
     return;
   }
 })

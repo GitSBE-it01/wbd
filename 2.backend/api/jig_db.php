@@ -27,6 +27,11 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $types = 'ss';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
+        case "fetch_jig_trans_sched":
+            $query = 'SELECT * FROM '.$mdl.' WHERE end_date = DATE_SUB(CURDATE(), INTERVAL 1 DAY) or status = "open"';
+            $types = '';
+            $response  = $db_conn->customQuery('', $query, $types, $data);
+            break;
         default:
             $response = "action not available";
     }

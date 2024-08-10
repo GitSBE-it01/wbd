@@ -16,42 +16,15 @@
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
         const otb = await api_access('fetch2','ng_dly', {op_tran_date: yesterday});
-        //const trans = await api_access('get', 'jig_trans','');
-        const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
-        const trans2 = await api_access('fetch', 'jig_trans',{end_date:yesterdayDate()});
-        const trans3 = await api_access('fetch', 'jig_trans',{status:'open'});
-        //const usg = await api_access('get', 'jig_usg','');
+        const trans = await api_access('fetch_jig_trans_sched', 'jig_trans','');
         const emp = await api_access('get','emp_code','');
         const func = await api_access('get','jig_func','');
         const mstr = await api_access('get','jig_mstr','');
         const cekTrans = [];
         const cek_jig_use = [];
-        trans.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
-            }
-        })
-        trans2.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-                trans.push(dt);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
-            }
-        })
-        trans3.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-                const new_dt = dt.code+dt.loc;
-                cek_jig_use.push(new_dt);
-            }
-        })
-
         console.log({otb, trans, emp, func, mstr});
 
-const codeEmp = {};
+        const codeEmp = {};
 emp.forEach(em=> {
     if(!codeEmp[em.emp_code]) {
         codeEmp[em.emp_code] = em.loc_name;
@@ -143,13 +116,7 @@ const fnKey = Object.keys(listJig);
 //})
 
 trans.forEach(tr=> {
-    const yearStart = tr.start_date.split("-");
-    let yearEnd = [null];
-    if (tr.end_date !== null) {
-        yearEnd = tr.end_date.split("-");
-    }
-
-    if(yearStart[0] === '2024') {
+    if(tr.start_date === getCustomDate(-1, '-')) {
         const data = {
             tr_date: tr.start_date,
             jig: tr.item_jig,
@@ -163,38 +130,8 @@ trans.forEach(tr=> {
         }
         newLabor.push(data);
     } 
-    
-    if(yearStart[0] !== '2024' && yearEnd[0] === '2024') {
-        const data = {
-            tr_date: '2024-01-01',
-            jig: tr.item_jig,
-            code: tr.code,
-            cat: 'a.pinjam',
-            loc: tr.loc,
-            qty_pinjam: tr.qty,
-            wo_id: '',
-            type: '',
-            qty_total: ''
-        }
-        newLabor.push(data);
-    }  
-
-    if(yearStart[0] !== '2024' && yearEnd[0] === null) {
-        const data = {
-            tr_date: '2024-01-01',
-            jig: tr.item_jig,
-            code: tr.code,
-            cat: 'a.pinjam',
-            loc: tr.loc,
-            qty_pinjam: tr.qty,
-            wo_id: '',
-            type: '',
-            qty_total: ''
-        }
-        newLabor.push(data);
-    } 
-    
-    if(yearEnd[0] === '2024' ) {
+      
+    if(tr.end_date !== '0000-00-00' && tr.end_date !== null ) {
         const data = {
             tr_date: tr.end_date,
             jig: tr.item_jig,
@@ -243,50 +180,59 @@ for (let i=0; i<newLabor.length; i++) {
     const a = newLabor[i];
     const codeFilter = a.jig + a.loc;
     a.count = 0;
-    a.codeCount = 0;
+    a.code_count = 0;
     a.qty_jig = 0;
     a.qty_usage = 0;
     a.codeAll = '';
     
-    if(a.cat === 'a.pinjam') { 
-        a.count = 1;
-        if ( codeFilter === codeFilter2) {
-            a.codeAll = b.codeAll + a.code;
-            a.codeCount += 1 + b.codeCount;
-            a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
-        } else {
-            a.codeAll = a.code ;
-            a.codeCount += 1 ;
-            a.qty_jig = parseFloat(a.qty_pinjam);  
-        }
+    let ii = i-1;
+    const b = newLabor[ii];
+    let codeFilter2 = '';
+    if(b) {
+        codeFilter2 = b.jig + b.loc;
     }
-    if(a.cat === 'c.kembali') { 
-        a.count = 1;
-        if ( codeFilter === codeFilter2) {
-            a.codeAll = b.codeAll.replace((`${a.code}`),'');
-            a.codeCount = b.codeCount - 1;
-            a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
-        } else {
-            a.codeCount = 0 ;
-            a.codeAll = '';
-            a.qty_jig = 0; 
-        }
-    } 
-    if(a.cat === 'b.use') { 
-        if ( codeFilter === codeFilter2) {
-            if (b.codeCount === 0) { a.count = 0;} else {a.count = b.count;}
-            a.codeCount = b.codeCount;
-            a.codeAll = b.codeAll;
-            a.qty_jig = b.qty_jig;
-            if (a.count === 0) {a.code = '';} else {a.code = b.code;}
-            if (a.qty_jig === 0) {
-                a.qty_usage = 0
+    if( codeFilter2 ) {
+        if(a.cat === 'a.pinjam') { 
+            a.count = 1;
+            if ( codeFilter === codeFilter2) {
+                a.codeAll = b.codeAll + a.code;
+                a.code_count += 1 + b.code_count;
+                a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
             } else {
-                a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
+                a.codeAll = a.code ;
+                a.code_count += 1 ;
+                a.qty_jig = parseFloat(a.qty_pinjam);  
             }
         }
-    }
+        if(a.cat === 'c.kembali') { 
+            a.count = 1;
+            if ( codeFilter === codeFilter2) {
+                a.codeAll = b.codeAll.replace((`${a.code}`),'');
+                a.code_count = b.code_count - 1;
+                a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
+            } else {
+                a.code_count = 0 ;
+                a.codeAll = '';
+                a.qty_jig = 0; 
+            }
+        } 
+        if(a.cat === 'b.use') { 
+            if ( codeFilter === codeFilter2) {
+                if (b.code_count === 0) { a.count = 0;} else {a.count = b.count;}
+                a.code_count = b.code_count;
+                a.codeAll = b.codeAll;
+                a.qty_jig = b.qty_jig;
+                if (a.count === 0) {a.code = '';} else {a.code = b.code;}
+                if (a.qty_jig === 0) {
+                    a.qty_usage = 0
+                } else {
+                    a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
+                }
+            }
+        }
+    } 
 }
+console.log({newLabor});
 newLabor.sort((a,b) => {
     if (a.jig < b.jig) return -1;
     if (a.jig > b.jig) return 1;
@@ -304,11 +250,12 @@ for (let i=0; i<newLabor.length; i++) {
         const dJig = mstr.find(item => item.item_jig === a.jig);
         const basicDt = {
             ...a,
-            desc_jig: dJig.desc_jig
+            desc_jig: dJig.desc_jig,
+            count_dt: 1,
         }
         arrInp.push(basicDt);
         if (a.cat === 'b.use') {
-        for (let i2=1; i2<a.codeCount; i2++) {
+        for (let i2=1; i2<a.code_count; i2++) {
             const len = a.code.length;
             const codeNew = a.codeAll.substring((len*(i2-1)),(len*i2));
             const data = {
@@ -322,8 +269,8 @@ for (let i=0; i<newLabor.length; i++) {
                 wo_id: a.wo_id,
                 type: a.type,
                 qty_total: a.qty_total,
-                count: a.count,
-                codeCount: a.codeCount,
+                count_dt: 1,
+                code_count: a.code_count,
                 qty_jig: a.qty_jig,
                 qty_usage: a.qty_usage,
                 codeAll: a.codeAll,
@@ -335,22 +282,28 @@ for (let i=0; i<newLabor.length; i++) {
 console.log({arrInp});
 
 console.log('array input : ');
-const result = await api_access('insert','jig_usg', arrInp);
-const end = performance.now();
-const totalTime = (end - start) /1000;
-console.log('total time = ' + totalTime);
-
-
 const h1 = document.createElement('h1');
-const body = document.querySelector('body');
-body.appendChild(h1);
-if(!result.includes('fail')) {
-    h1.textContent = `${arrInp.length} data successfully inserted to database after ${totalTime} seconds`;
+    const body = document.querySelector('body');
+    body.appendChild(h1);
+const cek = await api_access('fetch', 'jig_usg', {tr_date:yesterday});
+console.log({cek});
+if(cek.length===0) {
+    const result = await api_access('insert','jig_usg', arrInp);
+    const end = performance.now();
+    const totalTime = (end - start) /1000;
+    console.log('total time = ' + totalTime);
+    
+    
+    if(!result.includes('fail')) {
+        h1.textContent = `${arrInp.length} data successfully inserted to database after ${totalTime} seconds`;
+    } else {
+        h1.textContent = `something went wrong`;
+        const p = document.createElement('p');
+        p.innerHTML = `${result}`;
+        body.appendChild(p);
+    }
 } else {
-    h1.textContent = `something went wrong`;
-    const p = document.createElement('p');
-    p.innerHTML = `${result}`;
-    body.appendChild(p);
+    h1.textContent = `data already available`;
 }
 
 /*

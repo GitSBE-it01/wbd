@@ -15,7 +15,7 @@
         const start = performance.now();
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
-        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-07-20', yesterday]});
+        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-08-07', yesterday]});
         console.log({otb});
         const trans = await api_access('get', 'jig_trans','');
         //const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});

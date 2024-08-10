@@ -11,3 +11,22 @@ hal yang di anggap penting :
 
 status develop????
 lgsg masuk 
+
+
+incoming 
+inprocess
+final 
+
+hasil :
+cp 
+cpk
+grafik distribusi
+
+yg harus tampil data 
+fo speaker 
+before 
+after sweeper
+semua pengukuran iqc
+fo DAAS
+before
+after break in
