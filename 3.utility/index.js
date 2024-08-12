@@ -26,6 +26,7 @@ export {
         NavDOM,
         inputEmptyRow,
         TableDOM,
+        TableDOM2,
         sort_array,
         api_access,
         currentDate,
@@ -34,5 +35,11 @@ export {
         removeSpaces,
 };
 
-
-
+export const globalEvent = (type, selector, callback, parent=document) =>{
+        parent.addEventListener(type, e =>{
+                if(e.target.matches(selector)) {
+                callback(e);
+                }
+        })
+}
+    

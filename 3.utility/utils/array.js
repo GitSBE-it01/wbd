@@ -1,5 +1,4 @@
 export const sort_array = (array, ...sort) =>{
-    console.log({array, sort});
     return array.sort((a, b) => {
         for (let i = 0; i < sort.length; i++) {
             const splt = sort[i].split('::');

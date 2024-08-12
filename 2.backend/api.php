@@ -13,7 +13,11 @@ function routes($model, $db_conn) {
     $dt = $data['Data'];
     $method = $_SERVER['REQUEST_METHOD'];
     $reff = explode("/",$_SERVER['HTTP_REFERER']);
-    $routes = $reff[4];
+    if(strpos($reff[4], 'qad') !== false) {
+        $routes = $reff[4];
+    } else {
+        $routes = 'general';
+    }
     $cache = $_SERVER['HTTP_CACHE_CONTROL'];
     $table = $_SERVER['HTTP_REQ_DETAIL'];
     $action = $_SERVER['HTTP_REQ_METHOD'];

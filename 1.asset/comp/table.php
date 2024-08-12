@@ -32,23 +32,14 @@ $td = new Component([
 
 
 function table_create($array) {
-    global $table;
-    global $thead;
-    global $tbody;
-    global $tr;
-    global $th;
-    global $td;
-    global $input;
-    global $button;
-
     $_th = '';
     foreach($array['data_array'] as $set) {
         if(isset($set['th'])) {
-            $_th .= $th->create($set['th']);
+            $_th .= Comp::th($set['th']);
         }
     }
-    $thd = $thead->create([
-        'body'=> $tr->create([
+    $thd = Comp::thead([
+        'body'=> Comp::tr([
             'data_attr'=>['id::header'],
             'body'=>$_th
         ])
@@ -73,7 +64,7 @@ function table_create($array) {
                     $td_attr['body'] = [
                         create_input($set['inp'])
                     ];
-                    $_td = $td->create($td_attr);
+                    $_td = Comp::td($td_attr);
                     break;
                 case "select":
                     $td_attr = $set['td'];
@@ -101,27 +92,124 @@ function table_create($array) {
                     foreach($set['button'] as $st) {
                         $id = explode('::',$st['data_attr'][0]);
                         $st['id'] = $id[1]."__".$array['id'].$i;
-                        $td_attr['body'] .= $button->create($st);
+                        $td_attr['body'] .= Comp::button($st);
                     }
-                    $_td = $td->create($td_attr);
+                    $_td = Comp::td($td_attr);
                     break;
                 case "hidden":
                     $set['class'] = '';
-                    $_td = $input->create($set);
+                    $_td = Comp::input($set);
                     break;
                 default: 
-                    $_td = $td->create($set['td']);
+                    $_td = Comp::td($set['td']);
             }
             $td_full .= $_td;
         }
         $_tr['body'] = $td_full;
         $_tr['data_attr'] = ['id::'.$array['id'].$i];
-        $full_tr .= $tr->create($_tr);
+        $full_tr .= Comp::tr($_tr);
         $count++;
     }
-    $tbd = $tbody->create(['body'=>$full_tr]);
+    $tbd = Comp::tbody(['body'=>$full_tr]);
 
-    $tbl = $table->create([
+    $tbl = Comp::table([
+        'id'=>$array['id'],
+        'class'=>$array['class'],
+        'body'=>[$thd, $tbd]
+    ]);
+
+    return $tbl;
+}
+
+function table_create2($array) {
+    // setup header
+    $_th = '';
+    foreach($array['data_array'] as $set) {
+        if(isset($set['th'])) {
+            $_th .= Comp::th($set['th']);
+        }
+    }
+    $thd = Comp::thead([
+        'body'=> Comp::tr([
+            'data_attr'=>['id::header'],
+            'body'=>$_th
+        ])
+    ]);
+
+
+
+    // setting 
+    $trow = '';
+    foreach($array['data_array'] as $set) {
+        $type_td = $set['type'];
+        $_td = '';
+        switch ($type_td) {
+            case "input":
+                $td_attr = $set['td'];
+                $set['inp']['id'] = $set['inp']['name']."__".$array['id'].'specifiid';
+                $td_attr['body'] = [
+                    create_input($set['inp'])
+                ];
+                $_td = Comp::td($td_attr);
+                break;
+            case "select":
+                $td_attr = $set['td'];
+                $set['select']['id'] = $set['select']['name']."__".$array['id'].'specifiid';
+
+                $val_label = isset($set['select']['value']) ? $set['select']['value'] : '';
+                $lbl = [
+                    'for'=>$set['select']['id'],
+                    'data_attr'=>['field::'.$set['select']['name']],
+                    'body'=>$val_label
+                ];
+                $td_attr['body'] = Comp::label($lbl);
+
+                $sel = $set['select'];
+                $sel['body']='';
+                foreach($set['option'] as $val_opt) {
+                    $sel['body'] .= Comp::option($val_opt);
+                }
+                $td_attr['body'] .= Comp::select($sel);
+                $_td = Comp::td($td_attr);
+                break;
+            case "set_btn":
+                $td_attr = $set['td'];
+                $td_attr['body'] = '';
+                foreach($set['button'] as $st) {
+                    $id = explode('::',$st['data_attr'][0]);
+                    $st['id'] = $id[1]."__".$array['id'].'specifiid';
+                    $td_attr['body'] .= Comp::button($st);
+                }
+                $_td = Comp::td($td_attr);
+                break;
+            case "hidden":
+                $set['class'] = '';
+                $_td = Comp::input($set);
+                break;
+            default: 
+                $_td = Comp::td($set['td']);
+        }
+        $trow .= $_td;
+    }
+        
+    // setting template tr
+    $_tr = '';
+    if(isset($array['tr'])) {
+        $_tr = $array['tr'];
+    }
+    $_tr['body'] = $trow;
+    $_tr['data_attr'] = ['id::'.$array['id'].'__specifiid'];
+
+    $count_row = !isset($array['row_count']) ? 50 : $array['row_count'];
+    $full_tr = str_replace('specifiid','template',Comp::tr($_tr));
+    for($i=0; $i<$count_row; $i++) {
+        $row = Comp::tr($_tr);
+        $mod = str_replace('specifiid', $i,$row);
+        $full_tr .= $mod;
+    }
+    $tbd = Comp::tbody(['body'=>$full_tr]);
+
+    $tbl = Comp::table([
         'id'=>$array['id'],
         'class'=>$array['class'],
         'body'=>[$thd, $tbd]

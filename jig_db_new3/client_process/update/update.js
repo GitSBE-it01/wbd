@@ -1,7 +1,8 @@
-import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, currentDate} from '../../3.utility/index.js';
-import {auth2} from '../../3.utility/auth.js';
-import {data_switch} from './general.js';
+import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, currentDate} from '../../../3.utility/index.js';
+import {auth2} from '../../../3.utility/auth.js';
+import {data_switch} from '../general.js';
 
+document.addEventListener('DOMContentLoaded', async()=>{
 /* ====================================================================
   Initialize page
 ==================================================================== */
@@ -21,17 +22,26 @@ let detail = [];
 let detail_show = [];
 let log_detail = [];
 let log_detail_show = [];
-const start = performance.now();
+let start = performance.now();
 const ls_loc = await api_access('get','list_loc','');
+let end = performance.now();
+console.log('ls_loc ', (end-start)/1000, ' ms');
+start = performance.now();
 const master = await api_access('get','jig_mstr','');
+end = performance.now();
+console.log('master ', (end-start)/1000, ' ms');
+start = performance.now();
 const item = await api_access('fetch_item__cache','qad_item','');
-const end = performance.now();
-console.log('time ', (end-start));
+end = performance.now();
+console.log('item ', (end-start)/1000, ' ms');
 // datalist parsing option
 //----------------------------------------------
+start = performance.now();
 DtlistDOM.parse_opt("#jig_list","-",master,"item_jig", 'desc_jig');
 DtlistDOM.parse_opt("#spk_list","-",item,"pt_part", 'pt_desc1', 'pt_desc2');
 DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
+end = performance.now();
+console.log('datalist loaded data ', (end-start)/1000, ' ms');
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 DOM.add_class('#load',"hidden");
@@ -56,12 +66,6 @@ ButtonDOM.enter_keydown('#search_type', '#input__type');
 //----------------------------------------------
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'jig_loc', 'id');
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'jig_func', 'id');
-
-// submit button to insert and update data 
-//----------------------------------------------
-ButtonDOM.submit_dataset_and_log_table('#submit_stock[data-method ="submit"]', '#stock_table', ['jig_loc', 'log_loc']);
-ButtonDOM.submit_dataset_and_log_table('#submit_type[data-method ="submit"]', '#type_table', ['jig_func', 'log_func']);
-ButtonDOM.submit_dataset_and_log_form('#submit_detail[data-method ="submit"]', '#detail_form', ['jig_mstr', 'log_mstr']);
 
 // input change trigger submit button style and attribute
 //----------------------------------------------
@@ -331,6 +335,9 @@ document.addEventListener('change', function(event) {
   } 
 })
 
+//----------------------------------------------
+// focusout 
+//----------------------------------------------
 document.addEventListener('focusout', function(event){
   if(event.target.hasAttribute('name') && event.target.getAttribute('name') === 'code') {
     const td = event.target.closest('td');
@@ -377,3 +384,10 @@ document.addEventListener('focusout', function(event){
 })
 
 
+// submit button to insert and update data 
+//----------------------------------------------
+ButtonDOM.submit_dataset_and_log_table('#submit_stock[data-method ="submit"]', '#stock_table', ['jig_loc', 'log_loc']);
+ButtonDOM.submit_dataset_and_log_table('#submit_type[data-method ="submit"]', '#type_table', ['jig_func', 'log_func']);
+ButtonDOM.submit_dataset_and_log_form('#submit_detail[data-method ="submit"]', '#detail_form', ['jig_mstr', 'log_mstr']);
+
+})

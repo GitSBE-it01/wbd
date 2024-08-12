@@ -13,7 +13,12 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         case "fetch_wo_prot_with_desc":
-            $query = 'SELECT * FROM '.$mdl.' wo JOIN dbqad_live.pt_mstr mt on wo.wo_part = mt.pt_part WHERE wo.wo_status="R" AND wo.wo_nbr LIKE "%prot%"';
+            $query = 'SELECT 
+            distinct(a.wo_part) AS item_number,
+	        CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc FROM '.$mdl.' a 
+            JOIN dbqad_live.pt_mstr b 
+            ON a.wo_part = b.pt_part 
+            WHERE a.wo_nbr LIKE "%prot%" AND `wo_status` != "C"';
             $types = '';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;

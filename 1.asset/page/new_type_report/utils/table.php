@@ -49,7 +49,7 @@ $main_table = [
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'td'=>[
-                'data_attr'=>['field::	fo_before_brk_in'],
+                'data_attr'=>['field::fo_before_brk_in'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
@@ -135,7 +135,7 @@ $main_table = [
                 ],
                 [
                     'data_attr'=>['method::edit'],
-                    'class'=>'w-6 h-6 ml-2 minus'
+                    'class'=>'w-6 h-6 ml-2 edit'
                 ],
             ]
         ],

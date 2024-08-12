@@ -1,32 +1,38 @@
+purposes : 
+    detail of new type QA report. 
+    the data including :
+        - FO speaker measurement
+        - part measurement 
+        - capability study and distribution graphic
+
+database : 
+    new type report (ntr)
+    - ntr_data :
+        detail data inputted for speaker and part 
+    - ntr_hd :
+        list of code to group ntr_data
+    - ntr_master :
+        list of item number new type with FO as specification
+    - ntr_measure_list
+        list of category measurement list Finish Good or component
+
+
+-----PAGES-----
 homepage : 
-menunjukkan list tipe baru
-hal yang di anggap penting : 
-1. harus ada status, yg terlist kan hanya yang blum mass pro
-2. harus ada page utk history data yg sudah OK 
-3. page utk input, search item number nya dan ada link dari homepage utk ke input page
-4. homepage opsi nya otomatis masuk item number barunya dari status QAD atau di masukkan manual??
-5. kriteria pass nya utk new type report ini berdasarkan apa saja? 
-    * CPK
+    *list of items from ntr_master
+    *has link to get detail data
+    *create, read and update for master data
+        **delete will not delete the data just changing status
+    *has detail in one pages
+        ** option scheduler utk narik data wo stat not c and check if still not in ntr_mstr than add new data
+
+Input data : 
+    *inputting data measurement (ntr_data)
+    *
+
+updating :
+    *ntr_measure_list
+    *
 
 
-status develop????
-lgsg masuk 
 
-
-incoming 
-inprocess
-final 
-
-hasil :
-cp 
-cpk
-grafik distribusi
-
-yg harus tampil data 
-fo speaker 
-before 
-after sweeper
-semua pengukuran iqc
-fo DAAS
-before
-after break in

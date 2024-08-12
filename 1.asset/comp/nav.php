@@ -29,6 +29,9 @@ function navi($navArray) {
         if(!isset($set['link']['class'])) {
             $set['link']['class'] ="flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200";
         }
+        if(!isset($set['li']['class'])) {
+            $set['li']['class'] ="h-full w-[10vw] justify-center items-center flex";
+        }
         $set['li']['body']= Comp::link($set['link']);
         $li = Comp::li($set['li']);
         $links .= $li;

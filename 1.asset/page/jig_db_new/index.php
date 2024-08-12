@@ -42,7 +42,7 @@ $index =
                     Comp::div([
                         'class'=>'w-[20%] bg-slate-700 z-10 h-full items-center justify-center flex',
                         'body'=>
-                            $button->create([
+                            Comp::button([
                                 'id'=>'close_detail',
                                 'class'=>'z-30 rounded sticky bottom-0 right-0 bg-gray-300 text-sm px-4 border-2 border-slate-400 shadow-md hover:font-semibold hover:bg-gray-200 duration-300 mx-4',
                                 'body'=>'close'
@@ -95,12 +95,12 @@ $index =
                                 'autocomplete'=>'off',
                                 'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
                             ]),
-                            $button->create([
+                            Comp::button([
                                 'id'=>'search_jig',
                                 'body'=>'search',
                                 'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
                             ]),
-                            $button->create([
+                            Comp::button([
                                 'id'=>'dl_jig',
                                 'body'=>'dl excel',
                                 'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
@@ -117,12 +117,12 @@ $index =
                                 'autocomplete'=>'off',
                                 'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
                             ]),
-                            $button->create([
+                            Comp::button([
                                 'id'=>'search_type',
                                 'body'=>'search',
                                 'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
                             ]),
-                            $button->create([
+                            Comp::button([
                                 'id'=>'dl_type',
                                 'body'=>'dl excel',
                                 'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
