@@ -1,13 +1,10 @@
 */.env
 .env
-/testing
+testing/
 test.html
 test.php
-VJS-pr01/data_upload/
-assets/svg_file/
-assets/template/
+assets/
 jig_db_new/trash
-assets/css/test.html
 VJS-pr01/test
 */cache
 4.cache/
