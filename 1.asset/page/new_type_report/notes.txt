@@ -36,3 +36,30 @@ updating :
 
 
 
+-----updates-----
+13 Agustus 2024
+design database awal ok 
+proses homepage : 
+    create template
+    proses js blum 
+    data table awal sudah keluar dengan ketentuan di ambil otomatis dari WOB prot yg status nya tidak c
+
+roadmap : 
+    edit button utk buka disable dari 1 row dan di beri tanda
+    detail button utk buka list ID 
+    buat page baru utk detail data 
+    di page baru (browse saja): 
+        keterangan lengkap dari ID dan semua pengukuran SPC mulai dari part sampai finish good terkait dengan ID tersebut
+
+    Input page : 
+        bentuk form utk masukkan data pengukuran ke database
+        masukkan ID, item component (jika dibutuhkan)
+        ada tombol plus utk tambah pengecekan baru 
+        kemudian keluar input, jika di tekan enter maka keluar baris baru dan begitu seterusnya sampai di pencet submit
+        submit tidak reload page tetapi hanya hide data yang baru dimasukkan
+
+    reff page : 
+        utk memasukkan reference baru :
+            pengetesan dan UM nya 
+
+            

@@ -7,7 +7,8 @@ import {GeneralDOM} from './DOM/general.js';
 import {activeLink,
         NavDOM} from './DOM/nav.js';
 import {inputEmptyRow,
-        TableDOM} from './DOM/table.js';
+        TableDOM,
+        TableDOM2} from './DOM/table.js';
 import {sort_array} from './utils/array.js';
 import {api_access} from './utils/data_access.js';
 import {currentDate,

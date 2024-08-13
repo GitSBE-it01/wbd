@@ -33,7 +33,7 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         default:
-            $response = "action not available";
+            $response = "action not available in jig db handle";
     }
     return $response;
 }

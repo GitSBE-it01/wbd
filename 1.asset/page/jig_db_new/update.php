@@ -189,10 +189,15 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                 'class'=>'h-full w-full hidden',
                 'body'=> [
                     Comp::div([
-                        'class'=>'w-full h-[40vh] scrollable',
+                        'class'=>'w-full h-[40vh]',
                         'body'=>[
-                            table_create($type_table_upd),
-                            table_create($type_table_new),
+                            Comp::div([
+                                'class'=>'w-full h-[35vh] z-20 scrollable',
+                                'body'=>[
+                                    table_create($type_table_upd),
+                                    table_create($type_table_new),
+                                ]
+                            ]),
                             Comp::div([
                                 'class'=>'w-full h-[5vh] block bg-slate-500 fixed bottom-[45vh] z-20',
                                 'body'=>pagination_create('type_page', '')
@@ -200,9 +205,14 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                         ]
                     ]),
                     Comp::div([
-                        'class'=>'w-full h-[45vh] scrollable',
+                        'class'=>'w-full h-[45vh] ',
                         'body'=>[
-                            table_create($type_table_hist),
+                            Comp::div([
+                                'class'=>'w-full h-[40vh] z-20 scrollable',
+                                'body'=>[
+                                    table_create($type_table_hist),
+                                ]
+                            ]),
                             Comp::div([
                                 'class'=>'w-full h-[5vh] block bg-slate-500 fixed bottom-[0%] z-20',
                                 'body'=>pagination_create('type_hist_page', '')

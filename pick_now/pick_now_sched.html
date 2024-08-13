@@ -36,8 +36,21 @@
     h1.setAttribute('class', 'text-center text-4xl font-bold');
     h1.textContent = 'Scheduler Pick Now';
     root.appendChild(h1);
-    const rout = await api_access('fetch_rout_active_subcon', 'qad_rout', '');
-    console.log({rout});
+    const rout_src = await api_access('fetch_rout_active_subcon', 'qad_rout', '');
+    let rout = [];
+    console.log(currentDate(''));
+    const cekDt = currentDate('').split('-');
+    const fixDt = parseInt(cekDt[0].substring(2,4)+ cekDt[1]+ cekDt[2]);
+    console.log(fixDt);
+    rout_src.forEach(dt=>{
+        const cekNbr = dt.ro_end.split('/');
+        const fix = parseInt(cekNbr[2] + cekNbr[1]+ cekNbr[0]);
+        if(fix > fixDt || dt.ro_end === '?') {
+            const data = {...dt};
+            rout.push(data)
+        }
+    })
+    console.log({rout_src, rout});
     const demand = await wobb.dbProcess('get',''); // wod_det
     const woR = await wo.dbProcess('fetch',{wo_status:"R"}); // wo_mstr
     const cekDept = await dept.dbProcess('get','');

@@ -1,7 +1,7 @@
 <?php
 
 $main_table = [
-    'id'=> 'table_index', 
+    'id'=> 'main_table', 
     'class'=>'w-screen scrollable-y',
     'row_count' =>50,
     'tr'=>['class'=>'hidden'],

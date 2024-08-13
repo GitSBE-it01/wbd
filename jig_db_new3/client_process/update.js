@@ -1,6 +1,6 @@
-import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, currentDate} from '../../../3.utility/index.js';
-import {auth2} from '../../../3.utility/auth.js';
-import {data_switch} from '../general.js';
+import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, currentDate} from '../../3.utility/index.js';
+import {auth2} from '../../3.utility/auth.js';
+import {data_switch} from './general.js';
 
 document.addEventListener('DOMContentLoaded', async()=>{
 /* ====================================================================
@@ -201,15 +201,20 @@ document.addEventListener('click', async function(event) {
       let data = await api_access('fetch','jig_func',{item_type: splt[0]});
       data.forEach(dt=>{
         const desc = master.find(obj=>obj.item_jig === dt.item_jig);
-        dt['desc_jig'] = desc.desc_jig
+        if(desc !== undefined) {
+          dt['desc_jig'] = desc.desc_jig
+        }
         func.push(dt);
       })
     }
     if(log_func.find(obj=>obj.item_type === splt[0]) === undefined) {
       let data = await api_access('fetch','log_func',{item_type: splt[0]});
+      console.log({data});
       data.forEach(dt=>{
         const desc = master.find(obj=>obj.item_jig === dt.item_jig);
-        dt['desc_jig'] = desc.desc_jig
+        if(desc !== undefined) {
+          dt['desc_jig'] = desc.desc_jig
+        }
         log_func.push(dt);
       })
     }
@@ -327,7 +332,8 @@ document.addEventListener('change', function(event) {
   if(event.target.hasAttribute('name')) {
     const div = event.target.closest('div');
     const form = div.closest('form');
-    if(form.id === 'detail_form') {
+    console.log(form);
+    if(form !== null && form.id === 'detail_form') {
       const date = form.querySelector('#trans_date');
       date.value =currentDate('-');
     }

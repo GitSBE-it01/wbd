@@ -8,7 +8,7 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         case "fetch_rout_active_subcon":
-            $query = 'SELECT * FROM '.$mdl.' WHERE ro_end > '.date("m/d/y").' AND ro_wkctr ="subcont"';
+            $query = 'SELECT * FROM '.$mdl.' WHERE ro_wkctr ="subcont"';
             $types = '';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;

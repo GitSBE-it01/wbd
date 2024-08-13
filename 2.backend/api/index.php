@@ -7,10 +7,6 @@ require_once "new_type_report.php";
 require_once "jig_db.php";
 
 function custom_handle($db_conn, $dt, $routes, $action, $model, $table) {
-    if(is_int(strpos($table,'qad'))) {
-        $response = general_handle($db_conn, $dt, $action, $model, $table);
-        return $response;
-    } else {
         switch($routes) {
             case "vjs_alat_ukur":
                 $response = vjs_alat_ukur_handle($db_conn, $dt, $action, $model, $table);
@@ -24,12 +20,14 @@ function custom_handle($db_conn, $dt, $routes, $action, $model, $table) {
             case "auth":
                 $response = auth_handle($db_conn, $dt, $action, $model, $table);
                 break;
+            case "general":
+                $response = general_handle($db_conn, $dt, $action, $model, $table);
+                break;
             default: 
                 $response = 'wrong routes';
         }
         return $response;
     }
-}
 
 function auth_handle($db_conn, $data, $action, $model, $table) {
     $mdl = $model[$table]->table;
@@ -40,7 +38,7 @@ function auth_handle($db_conn, $data, $action, $model, $table) {
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         default:
-            $response = "action not available";
+            $response = "action not available for auth";
     }
     return $response;
 }

@@ -18,15 +18,19 @@ DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
 
 // get data from DB
 // -------------------------------------------------------
+let start =performance.now();
 let loc = await api_access('get','jig_loc','');
 const trans = await api_access('fetch','jig_trans',{status:'open'});
 const master = await api_access('get','jig_mstr','');
 let loc_sum = [];
 let detail_show = [];
 console.log({loc, trans, master});
+let end = performance.now();
+console.log('total penarikan data = ', (end-start)/1000)
 
 // calculation for getting total qty per item jig
 // -------------------------------------------------------
+start =performance.now();
 loc.forEach(dt=>{
     const keys = Object.keys(dt)
     let filter = '';
@@ -51,9 +55,11 @@ loc.forEach(dt=>{
     }
 })
 console.log({loc_sum});
-
+end = performance.now();
+console.log('total proses 1 = ', (end-start)/1000)
 // instance data for main table
 // -------------------------------------------------------
+start =performance.now();
 let header_master = [];
 master.forEach(dt=>{
     const bor = trans.filter(obj=>obj.item_jig === dt.item_jig);
@@ -77,6 +83,8 @@ master.forEach(dt=>{
 })
 let header_show = header_master;
 console.log({loc, master, header_master});
+end = performance.now();
+console.log('total proses 2 = ', (end-start)/1000)
 
 // parsing data to table
 // -------------------------------------------------------

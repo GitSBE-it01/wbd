@@ -37,10 +37,12 @@ wo_list.forEach(dt=>{
     }
     master.push(data);
 })
-const test = new TableDOM2()
-TableDOM.parse_data('#table_index', show_data, page);
+console.log({master});
+const test = new TableDOM2('main_table', master, 'main_page');
+await test.table_parse_data();
+await test.table_pagination_init();
+await test.table_pagination_response();
 DtlistDOM.parse_opt("#wo_list","-",wo_list,"wo_lot");
 DtlistDOM.parse_opt("#item_list","-",wo_list,"wo_part");
-NavDOM.pgList_init('#main_page', master, '#table_index');
 DOM.add_class('#load',"hidden");
 
