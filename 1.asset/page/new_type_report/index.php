@@ -1,5 +1,6 @@
 <?php 
 require_once '../../index.php';
+require_once 'utils/custom.php';
 require_once 'utils/nav.php';
 require_once 'utils/form.php';
 require_once 'utils/table.php';
@@ -14,9 +15,7 @@ createHTML([
     'title'=>"New Type Report",
     'path'=>'new_type_report',
     'body'=>
-        Comp::dtlist(['id'=>'wo_list'])
-        .Comp::dtlist(['id'=>'item_list'])
-        .$load2."
+        $load2."
         ".Comp::nav([
             'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
             'body'=>navi($nav_array)
@@ -48,19 +47,7 @@ createHTML([
                     'body'=>[
                         table_create2($main_table)
                     ]
-                ]),
-                Comp::div([
-                    'id'=> 'detail',
-                    'class'=>'w-full h-full hidden flex flex-row',
-                    'body'=>[
-                        Comp::div([
-                            'class'=>'h-full w-[20vh] bg-blue-200',
-                            'body'=>[
-                                table_create2($detail_table)
-                            ]
-                        ])
-                    ]
-                ]),
+                ])
             ]
         ])."
         ".Comp::footer([
@@ -72,7 +59,43 @@ createHTML([
         .Comp::div([
             'id'=>'detail',
             'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
-            'body'=>''
+            'body'=>[
+                Comp::div([
+                    'class'=>'w-full h-[10vh] bg-blue-700 flex items-center',
+                    'body'=>[
+                        Comp::title([
+                            'id'=>'detail_title',
+                            'class'=>'text-white px-4 font-bold text-xl whitespace-pre-line',
+                        ])
+                    ]
+                ]),
+                Comp::div([
+                    'class'=>'w-full h-[45vh]',
+                    'body'=>table_create2($id_table)
+                ]),
+                Comp::div([
+                    'class'=>'w-full h-[5vh] bg-slate-700 flex flex-row',
+                    'body'=>[
+                        Comp::div([
+                            'class'=>'justify-center py-2 px-4 items-center w-[30%]',
+                            'body'=>[
+                                Comp::button([
+                                    'id'=>'close_btn',
+                                    'data_attr'=>['method::close'],
+                                    'class'=>'cursor-pointer w-full bg-slate-200 rounded hover:bg-slate-400 duration-300 hover:font-bold h-full',
+                                    'body'=>'close'
+                                ])
+                            ]
+                        ]),
+                        Comp::div([
+                            'class'=>'w-[70%] h-full flex items-center justify-center',
+                            'body'=>[
+                                pagination_create('id_page', '')
+                            ]
+                        ])
+                    ]
+                ]),
+            ]
         ])."
         <script type='module' src='./client_process/index.js';></script>
         "

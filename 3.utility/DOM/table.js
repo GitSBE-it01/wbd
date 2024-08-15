@@ -146,10 +146,8 @@ export class TableDOM {
     static async parse_onclick(key, data, page_key, page_id) {
         document.addEventListener('click', async function(event) {
             if(event.target.getAttribute(page_key) === page_id) {
-                DOM.rmv_class('#load',"hidden");
                 let page = parseInt(event.target.getAttribute('data-page'));
                 await TableDOM.parse_data(key,data,page);
-                DOM.add_class('#load',"hidden");
                 return;
             }
         })
@@ -356,11 +354,73 @@ export class TableDOM {
 export class TableDOM2 {
     constructor(key, src, pagination_id) {
         this.id = key;
+        this.pagination_id = pagination_id;
         this.table = document.getElementById(this.id);
         this.data = src;
         this.page_node = document.getElementById(pagination_id);
         this.page = 1;
         this.show_data = this.data;
+    }
+
+    async table_parse_data() {
+        try {
+            const tr = this.table.querySelectorAll('tbody tr');
+            let count = 0;
+            if(this.page >1) {
+                count = (tr.length-1) * (this.page-1);
+            }
+            tr.forEach(dt=>{
+                if(!dt.getAttribute('data-id').includes('template') && !dt.classList.contains('hidden')) {
+                    dt.classList.toggle('hidden');
+                }
+                let fltr = '';
+                if(!dt.getAttribute('data-id').includes('template') && this.show_data[count]) {
+                    const fld = dt.querySelectorAll("[name]");
+                    if(dt.classList.contains('hidden')) {
+                        dt.classList.toggle('hidden');
+                    }
+                    dt.setAttribute('data-value', count);
+                    fld.forEach(d2=>{
+                        const key_fld = d2.getAttribute('name');
+                        const currVal = this.show_data[count][`${key_fld}`] ? this.show_data[count][`${key_fld}`] : '';
+                        fltr += currVal + "----";
+                        if(d2.tagName === 'INPUT')
+                            if(d2.getAttribute('type')==='text' || d2.getAttribute('type')==='date') {
+                                d2.value = currVal;
+                                d2.setAttribute('data-current', currVal);
+                                const lbl = this.table.querySelector(`[for="${d2.id}"]`);
+                                lbl.textContent= currVal;
+                            }   
+                            if(d2.getAttribute('type')==='hidden') {
+                                d2.value = currVal;
+                                d2.setAttribute('data-current', currVal);
+                            }
+                        if(d2.tagName === 'SELECT') {
+                            d2.setAttribute('data-current', currVal);
+                            d2.value = currVal;
+                            const opt = d2.querySelectorAll('option');
+                            opt.forEach(dt=>{
+                                if(dt.value === currVal){
+                                    dt.setAttribute("selected", true);
+                                }
+                            })
+                            const lbl = this.table.querySelector(`[for="${d2.id}"]`);
+                            lbl.textContent= currVal;
+                        }
+                        if(d2.tagName === 'TD') {
+                            d2.textContent = currVal;
+                            d2.setAttribute('data-current', currVal);
+                        }
+                    })
+                    count++;
+                }
+            })
+            this.table_pagination_init;
+            return;
+        } catch(error) {
+            console.error('Error:', error);
+            return Promise.reject(error);
+        }
     }
 
     async table_clear() {
@@ -517,10 +577,10 @@ export class TableDOM2 {
         ];
         let active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
         if(this.page_node.nodeType) {
-            this.page_node.addEventListener('click', async function(event) {
-                if(event.target.getAttribute('data-group') === this.id) {
-                    this.table_clear();
+            this.page_node.addEventListener('click', async (event) => {
+                if(event.target.getAttribute('data-group') === this.pagination_id) {
                     this.page = parseInt(event.target.getAttribute('data-page'));
+                    this.table_parse_data();
                     const div = event.target.closest('div');
                     const pagi = div.querySelectorAll('[data-id]');
                     const max = div.querySelector('[data-id = "7"]').getAttribute('data-page');
@@ -713,63 +773,37 @@ export class TableDOM2 {
         }
     }
 
-    async table_parse_data() {
-        try {
-            const tr = this.table.querySelectorAll('tbody tr');
-            let count = 0;
-            if(this.page >1) {
-                count = (tr.length-1) * (this.page-1);
-            }
-            tr.forEach(dt=>{
-                if(!dt.getAttribute('data-id').includes('template') && !dt.classList.contains('hidden')) {
-                    dt.classList.toggle('hidden');
-                }
-                let fltr = '';
-                if(!dt.getAttribute('data-id').includes('template') && this.data[count]) {
-                    const fld = dt.querySelectorAll("[name]");
-                    if(dt.classList.contains('hidden')) {
-                        dt.classList.toggle('hidden');
-                    }
-                    dt.setAttribute('data-value', count);
-                    fld.forEach(d2=>{
-                        const key_fld = d2.getAttribute('name');
-                        const currVal = this.data[count][`${key_fld}`] ? this.data[count][`${key_fld}`] : '';
-                        fltr += currVal + "----";
-                        if(d2.tagName === 'INPUT')
-                            if(d2.getAttribute('type')==='text' || d2.getAttribute('type')==='date') {
-                                d2.value = currVal;
-                                d2.setAttribute('data-current', currVal);
-                                const lbl = this.table.querySelector(`[for="${d2.id}"]`);
-                                lbl.textContent= currVal;
-                            }   
-                            if(d2.getAttribute('type')==='hidden') {
-                                d2.value = currVal;
-                                d2.setAttribute('data-current', currVal);
-                            }
-                        if(d2.tagName === 'SELECT') {
-                            d2.setAttribute('data-current', currVal);
-                            d2.value = currVal;
-                            const opt = d2.querySelectorAll('option');
-                            opt.forEach(dt=>{
-                                if(dt.value === currVal){
-                                    dt.setAttribute("selected", true);
-                                }
-                            })
-                            const lbl = this.table.querySelector(`[for="${d2.id}"]`);
-                            lbl.textContent= currVal;
-                        }
-                        if(d2.tagName === 'TD') {
-                            d2.textContent = currVal;
-                            d2.setAttribute('data-current', currVal);
-                        }
-                    })
-                    count++;
-                }
+    async table_filter_data_on_click(button_key, input_key) {
+        let btn = '';
+        if(button_key.nodeType) {
+            btn = button_key
+        } else {
+            btn = document.querySelector(button_key);
+        }
+        let inp = '';
+        if(input_key.nodeType) {
+            inp = input_key
+        } else {
+            inp = document.querySelector(input_key);
+        }
+        if(btn && inp) {
+            btn.addEventListener('Click', async()=>{
+                DOM.rmv_class('#load',"hidden");
+                this.show_data = this.data.filter(obj=>obj.filter.includes(inp.value));
+                this.page = 1;
+                this.table_parse_data();
+                DOM.add_class('#load',"hidden");
+                return;
             })
-            return;
-        } catch(error) {
-            console.error('Error:', error);
-            return Promise.reject(error);
         }
     }
+
+    async table_filter_data(filter_val) {
+        this.show_data = this.data.filter(obj=>obj.filter.includes(filter_val));
+        console.log(this.show_data);
+        this.page = 1;
+        this.table_parse_data();
+        return;
+    }
+
 }

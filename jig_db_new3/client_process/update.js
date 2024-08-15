@@ -166,9 +166,13 @@ document.addEventListener('click', async function(event) {
       TableDOM.parse_data('#stock_table', loc_show, 1);
       TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code'])
       NavDOM.pgList_init('#stock_page', loc_show, '#stock_table');
+      TableDOM.parse_onclick('#stock_table',  loc_show, 'data-group','stock_page');
+      NavDOM.pgList_active('stock_page');
       if(log_loc_show.length > 0) {
         TableDOM.parse_data('#stock_table_hist', log_loc_show, 1);
         NavDOM.pgList_init('#stock_hist_page', log_loc_show, '#stock_table_hist');
+        TableDOM.parse_onclick('#stock_table_hist',  log_loc_show, 'data-group','stock_hist_page');
+        NavDOM.pgList_active('stock_hist_page');
       }
     }
     event.target.disabled = false;
@@ -228,9 +232,13 @@ document.addEventListener('click', async function(event) {
       TableDOM.parse_data('#type_table', func_show, 1);
       TableDOM.set_default_new_row('#type_table_new', func_show, ['item_type'])
       NavDOM.pgList_init('#type_page', func_show, '#type_table');
+      TableDOM.parse_onclick('#type_table',  func_show, 'data-group','type_page');
+      NavDOM.pgList_active('type_page');
       if(log_func_show.length> 0 ) {
         TableDOM.parse_data('#type_table_hist', log_func_show, 1);
         NavDOM.pgList_init('#type_hist_page', log_func_show, '#type_table_hist');
+        TableDOM.parse_onclick('#type_table_hist',  log_func_show, 'data-group','type_hist_page');
+        NavDOM.pgList_active('type_hist_page');
       }
     }
     event.target.disabled = false;
@@ -281,6 +289,8 @@ document.addEventListener('click', async function(event) {
       if(log_detail_show.length> 0 ) {
         TableDOM.parse_data('#dtl_hist_table', log_detail_show, 1);
         NavDOM.pgList_init('#detail_hist_page', log_detail_show, '#dtl_hist_table');
+        TableDOM.parse_onclick('#dtl_hist_table',  log_detail_show, 'data-group','detail_hist_page');
+        NavDOM.pgList_active('detail_hist_page');
       }
     }
     event.target.disabled = false;

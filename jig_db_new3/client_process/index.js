@@ -72,6 +72,7 @@ TableDOM.parse_data('#jig_table', mstr_show, 1);
 NavDOM.pgList_init('#jig_page', mstr_show, '#jig_table');
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 NavDOM.pgList_active('jig_page');
+TableDOM.parse_onclick('#jig_table',  mstr_show, 'data-group','jig_page');
 DOM.add_class('#load',"hidden");
 
 
@@ -136,9 +137,12 @@ document.addEventListener('click', async function(event) {
     } else {
       dtl_func_show = func.filter(obj=>obj.item_jig === fltr);
     }
+    console.log({dtl_func_show});
     TableDOM.parse_data('#detail_type_jig', dtl_func_show, 1);
     NavDOM.pgList_init('#detail_type_jig_page', dtl_func_show, '#detail_type_jig');
     NavDOM.pgList_active('detail_type_jig_page');
+    TableDOM.parse_onclick('#detail_type_jig',  dtl_func_show, 'data-group','detail_type_jig_page');
+    DOM.rmv_class('#load', 'hidden');
     DOM.add_class('.loading2',"hidden");
     DOM.rmv_class('.loading2',"z-40");
     DOM.rmv_class('#loadscreen',"z-40");
@@ -173,6 +177,7 @@ document.addEventListener('click', async function(event) {
     TableDOM.parse_data('#type_table', func_show, 1);
     NavDOM.pgList_init('#type_page', func_show, '#type_table');
     NavDOM.pgList_active('type_page');
+    TableDOM.parse_onclick('#type_table',  dtl_func_show, 'data-group','type_page');
     DOM.add_class('#load', 'hidden');
     return;
   }
@@ -233,6 +238,3 @@ document.addEventListener('click', async function(event) {
 })
 ButtonDOM.enter_keydown('#search_type', '#input__type');
 ButtonDOM.enter_keydown('#search_jig', '#input__jig');
-
-// ButtonDOM.dl_excel_dt('#dl_type','type_speaker_usage', func_show );
-// ButtonDOM.dl_excel_dt('#dl_jig', 'jig_detail', mstr_show, func_show, loc);

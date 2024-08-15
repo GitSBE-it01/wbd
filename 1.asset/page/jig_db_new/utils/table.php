@@ -235,7 +235,7 @@ $detail_type_jig = [
                 'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
-                'name'=>'status',
+                'name'=>'status_spk',
                 'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
             ],
         ],

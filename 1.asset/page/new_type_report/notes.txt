@@ -62,4 +62,14 @@ roadmap :
         utk memasukkan reference baru :
             pengetesan dan UM nya 
 
-            
+
+14 Agustus 2024
+detail button utk buka list ID :
+    sudah bisa show hidden 
+    datanya blum kluar 
+
+15 agustus 2024 
+detail button utk buka list ID : 
+    data sudah ok
+    link url belum jalan karena page blum ada
+input page : 
