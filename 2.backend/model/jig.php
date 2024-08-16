@@ -81,6 +81,7 @@ $model['jig_usg'] = new Model('db_jig.jig_usage',
     'qty_jig::i',
     'qty_usage::i',
     'codeAll::s',
+    'id_trans::s',
 ],
 'id::i');
 

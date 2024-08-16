@@ -15,7 +15,7 @@
         const start = performance.now();
         import {api_access, getCustomDate} from '../3.utility/index.js';
         const yesterday= getCustomDate(-1,"-");
-        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-08-10', yesterday]});
+        const otb = await api_access('fetch_op_tran','ng_dly', {op_tran_date:['2024-01-01', '2024-05-31']});
         console.log({otb});
         const trans = await api_access('get', 'jig_trans','');
         //const trans = await api_access('fetch', 'jig_trans',{start_date:yesterdayDate()});
@@ -25,26 +25,6 @@
         const emp = await api_access('get','emp_code','');
         const func = await api_access('get','jig_func','');
         const mstr = await api_access('get','jig_mstr','');
-        /*
-        const cekTrans = [];
-        trans.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-            }
-        })
-        trans2.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-                trans.push(dt);
-            }
-        })
-        trans3.forEach(dt=>{
-            if(!cekTrans.includes(dt.id)) {
-                cekTrans.push(dt.id);
-                trans.push(dt);
-            }
-        })
-        */
         console.log({otb, trans, emp, func, mstr});
 
 const codeEmp = {};
@@ -54,7 +34,7 @@ emp.forEach(em=> {
     }
 })
 console.log('codeEmp');
-console.log(codeEmp);
+console.log({codeEmp});
 
 const newOTB = new Map();
 otb.forEach(tr=> {
@@ -87,7 +67,7 @@ otb.forEach(tr=> {
 })
 const labor2 = Array.from(newOTB.values());
 console.log('labor2 summary per operation per date qty run ');
-console.log(labor2);
+console.log({labor2});
 
 const labor3 = new Map();
 labor2.forEach(lbr => {
@@ -115,7 +95,7 @@ labor2.forEach(lbr => {
 })
 const labor4 = Array.from(labor3.values());
 console.log('labor4 ignoring operation, pick the biggest qty run total');
-console.log(labor4);
+console.log({labor4});
 
 const listJig = {};
 func.forEach(fn=> {
@@ -126,26 +106,14 @@ func.forEach(fn=> {
     }
 })
 console.log('listJig');
-console.log(listJig);
+console.log({listJig});
 
 const newLabor = [];
 const fnKey = Object.keys(listJig);
-//const cekDt = [];
-//usg.forEach(dt=>{
-//    const flt = dt.code+dt.tr_date+dt.cat;
-//    if(!cekDt.includes(flt)) {
-//        cekDt.push(flt);
-//    }
-//})
-
+const id = [];
 trans.forEach(tr=> {
-    const yearStart = tr.start_date.split("-");
-    let yearEnd = [null];
-    if (tr.end_date !== null) {
-        yearEnd = tr.end_date.split("-");
-    }
-
-    if(yearStart[0] === '2024') {
+    const marked1 = tr.id + 'a.pinjam';
+    if(!id.includes(marked1)) {
         const data = {
             tr_date: tr.start_date,
             jig: tr.item_jig,
@@ -155,42 +123,15 @@ trans.forEach(tr=> {
             qty_pinjam: tr.qty,
             wo_id: '',
             type: '',
-            qty_total: ''
+            qty_total: '',
+            id_trans: tr.id
         }
+        id.push(marked1);
         newLabor.push(data);
-    } 
-    
-    if(yearStart[0] !== '2024' && yearEnd[0] === '2024') {
-        const data = {
-            tr_date: '2024-01-01',
-            jig: tr.item_jig,
-            code: tr.code,
-            cat: 'a.pinjam',
-            loc: tr.loc,
-            qty_pinjam: tr.qty,
-            wo_id: '',
-            type: '',
-            qty_total: ''
-        }
-        newLabor.push(data);
-    }  
-
-    if(yearStart[0] !== '2024' && yearEnd[0] === null) {
-        const data = {
-            tr_date: '2024-01-01',
-            jig: tr.item_jig,
-            code: tr.code,
-            cat: 'a.pinjam',
-            loc: tr.loc,
-            qty_pinjam: tr.qty,
-            wo_id: '',
-            type: '',
-            qty_total: ''
-        }
-        newLabor.push(data);
-    } 
-    
-    if(yearEnd[0] === '2024' ) {
+    }
+        
+    const marked2 = tr.id + 'c.kembali';
+    if(!id.includes(marked2) && tr.end_date !== null && tr.end_date !=='' && tr.end_date !== '0000-00-00') {
         const data = {
             tr_date: tr.end_date,
             jig: tr.item_jig,
@@ -200,8 +141,10 @@ trans.forEach(tr=> {
             qty_pinjam: tr.qty,
             wo_id: '',
             type: '',
-            qty_total: ''
+            qty_total: '',
+            id_trans: tr.id
         }
+        id.push(marked2);
         newLabor.push(data);
     }
 })
@@ -219,12 +162,14 @@ labor4.forEach(lb=> {
                 wo_id: lb.wo_id,
                 type: lb.type,
                 qty_total: lb.qty_total,
+                id_trans: ''
             }
             newLabor.push(data);
         })
     }
 })
 
+console.log({newLabor});
 newLabor.sort((a,b) => {
     if (a.jig < b.jig) return -1;
     if (a.jig > b.jig) return 1;
@@ -332,6 +277,7 @@ for (let i=0; i<newLabor.length; i++) {
                 qty_jig: a.qty_jig,
                 qty_usage: a.qty_usage,
                 codeAll: a.codeAll,
+                id_trans: ''
             }
             arrInp.push(data);
         }}
@@ -367,6 +313,7 @@ XLSX.utils.book_append_sheet(workbook, worksheet2, 'newLabor');
 XLSX.utils.book_append_sheet(workbook, worksheet3, 'otb');
 XLSX.writeFile(workbook, 'db_jig_Total.xlsx')
 */
+
     </script>
     <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>
     </body>

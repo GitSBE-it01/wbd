@@ -85,7 +85,5 @@ function routes($model, $db_conn) {
     return;
 }
 
-if(isset($_SESSION['username'])) {
-    routes($model, $db_conn);
-}
+routes($model, $db_conn);
 ?>

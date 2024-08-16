@@ -15,7 +15,7 @@ function general_handle($db_conn, $data, $action, $model, $table) {
         case "fetch_wo_prot_with_desc":
             $query = 'SELECT 
             distinct(a.wo_part) AS item_number,
-	        CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc FROM '.$mdl.' a 
+	        CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc FROM '.$mdl.' a
             JOIN dbqad_live.pt_mstr b 
             ON a.wo_part = b.pt_part 
             WHERE a.wo_nbr LIKE "%prot%" AND `wo_status` != "C"';
@@ -24,7 +24,7 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             break;
         case "fetch_wo_prot_specific_item":
             $query = 'SELECT 
-            distinct(a.wo_part) AS item_number,
+            a.wo_part AS item_number,
 	        CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc,
             a.wo_status as _status,
             a.wo_lot as wo_id,

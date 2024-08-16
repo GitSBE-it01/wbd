@@ -10,6 +10,8 @@ function input_spc ($col_count, $row_count) {
                 'id'=>$count,
                 'type_attr'=>'text',
                 'placeholder'=>$count,
+                'name'=>'result',
+                'data_attr'=>['name::no_repeat'],
                 'class'=>'rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]'
             ]);
             $count++;
@@ -21,7 +23,7 @@ function input_spc ($col_count, $row_count) {
         ]);
     }
     $result = Comp::div([
-        'class'=>'w-full h-[50%]',
+        'class'=>'w-full h-[50%] p-2 rounded-b bg-slate-500',
         'body'=>$all
     ]);
     return $result;
