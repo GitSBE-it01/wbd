@@ -33,7 +33,7 @@ function auth_handle($db_conn, $data, $action, $model, $table) {
     $mdl = $model[$table]->table;
     switch($action) {
         case "auth_mstr":
-            $query = 'SELECT * FROM '.$mdl.' em LEFT JOIN db_wbd.access ac ON em.Absensi = ac.absen WHERE Absensi=? ';
+            $query = 'SELECT * FROM '.$mdl.' em LEFT JOIN db_wbd.access ac ON em.EmployeeID = ac.nik WHERE EmployeeID=? ';
             $types = 's';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;

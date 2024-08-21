@@ -415,7 +415,7 @@ export class TableDOM2 {
                     count++;
                 }
             })
-            this.table_pagination_init;
+            this.table_pagination_init();
             return;
         } catch(error) {
             console.error('Error:', error);
@@ -786,16 +786,27 @@ export class TableDOM2 {
         } else {
             inp = document.querySelector(input_key);
         }
-        if(btn && inp) {
-            btn.addEventListener('Click', async()=>{
+        if(btn) {
+            btn.addEventListener('click', async()=>{
                 DOM.rmv_class('#load',"hidden");
-                this.show_data = this.data.filter(obj=>obj.filter.includes(inp.value));
+                this.show_data = this.data.filter(obj=>obj.filter.toLowerCase().includes(inp.value.toLowerCase()));
                 this.page = 1;
                 this.table_parse_data();
                 DOM.add_class('#load',"hidden");
-                return;
             })
         }
+        if(inp) {
+            inp.addEventListener('keyup', async(e)=>{
+                if(e.key === 'Enter') {
+                    DOM.rmv_class('#load',"hidden");
+                    this.show_data = this.data.filter(obj=>obj.filter.toLowerCase().includes(inp.value.toLowerCase()));
+                    this.page = 1;
+                    this.table_parse_data();
+                    DOM.add_class('#load',"hidden");
+                }
+            })
+        }
+        return;
     }
 
     async table_filter_data(filter_val) {

@@ -29,7 +29,9 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             a.wo_status as _status,
             a.wo_lot as wo_id,
             a.wo_nbr as wo, 
-            a.wo_qty_ord as qty_ord
+            a.wo_qty_ord as qty_ord,
+            a.wo_rel_datex as rel_date,
+            a.wo_due_datex as due_date
             FROM '.$mdl.' a
             JOIN dbqad_live.pt_mstr b 
             ON a.wo_part = b.pt_part 

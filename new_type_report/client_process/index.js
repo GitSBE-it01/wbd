@@ -5,8 +5,6 @@ import {auth2} from '../../3.utility/auth.js';
 /* ====================================================================
   Initialize page
 ==================================================================== */
-
-
 await auth2();
 await GeneralDOM.init('');
 GeneralDOM.td_input_default();
@@ -42,8 +40,11 @@ wo_list.forEach(dt=>{
     }
     master.push(data);
 })
+
+
 master.sort((a,b)=>{
   if (a.item_number !== b.item_number) return a.item_number.localeCompare(b.item_number);
+  return;
 })
 
 detail_data.forEach(dt=>{
@@ -52,13 +53,15 @@ detail_data.forEach(dt=>{
 })
 detail_data.sort((a,b)=>{
   if (a.item_number !== b.item_number) return a.item_number.localeCompare(b.item_number);
+  if (a.rel_date !== b.rel_date) return a.rel_date.localeCompare(b.rel_date);
+  return;
 })
-console.log({master, detail_data});
-const test = new TableDOM2('main_table', master, 'main_page');
+console.log({master, detail_data, mstr_dt});
+const main_dom = new TableDOM2('main_table', master, 'main_page');
 let id_tabl = new TableDOM2('id_table', detail_data, 'id_page');
-await test.table_parse_data();
-await test.table_pagination_response();
-await test.table_filter_data_on_click('#search_jig', '#input__jig');
+await main_dom.table_parse_data();
+await main_dom.table_pagination_response();
+await main_dom.table_filter_data_on_click('#search_type', '#input__type');
 DOM.add_class('#load',"hidden");
 
 document.addEventListener('click', async(e)=>{
@@ -110,5 +113,27 @@ document.addEventListener('click', async(e)=>{
         }
       }
     })
+  }
+// open new tab for detail data
+// -----------------------------------------------------------
+  if(e.target.getAttribute('data-method') === 'link') {
+    DOM.add_class('#loadscreen',"z-40");
+    DOM.rmv_class('#loadscreen',"z-10");
+    DOM.rmv_class('.loading2',"hidden");
+    const td = e.target.closest('td');
+    const tr = td.closest('tr');
+    const desc = tr.querySelector('[name="wo_id"]').value;
+    const data = {
+      group_code: data_filter_val+'__'+desc
+    }
+    //ButtonDOM.open_tab_with_data(e.target, "http://informationsystem.sbe.co.id:8080/wbd/new_type_report/browse.html", data);
+    const base_url = "http://informationsystem.sbe.co.id:8080/wbd/new_type_report/browse.html";
+    let url = base_url + '?';
+    for (let key in data) {
+      url += key + '=' + encodeURIComponent(data[key]) + '&';
+    }
+    url = url.slice(0, -1);
+    console.log({url});
+    window.open(url, '_blank');
   }
 })

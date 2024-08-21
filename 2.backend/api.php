@@ -1,7 +1,6 @@
 <?php
 require_once "D:/xampp/htdocs/CONNECTION/config.php";
 require_once "api/index.php";
-require_once "data_access/index.php";
 require_once "data_process/index.php";
 require_once "middleware/index.php";
 require_once "model/index.php";

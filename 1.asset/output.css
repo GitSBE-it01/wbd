@@ -696,6 +696,10 @@ video {
   top: 23vh;
 }
 
+.top-\[25vh\] {
+  top: 25vh;
+}
+
 .top-\[4vh\] {
   top: 4vh;
 }
@@ -710,10 +714,6 @@ video {
 
 .top-\[8vh\] {
   top: 8vh;
-}
-
-.top-\[25vh\] {
-  top: 25vh;
 }
 
 .z-10 {
@@ -925,6 +925,10 @@ video {
   height: 10vh;
 }
 
+.h-\[15vh\] {
+  height: 15vh;
+}
+
 .h-\[18vh\] {
   height: 18vh;
 }
@@ -1019,10 +1023,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[15vh\] {
-  height: 15vh;
 }
 
 .w-10 {
@@ -1213,6 +1213,26 @@ video {
   width: 100vw;
 }
 
+.w-\[2\.5vw\] {
+  width: 2.5vw;
+}
+
+.w-\[2vw\] {
+  width: 2vw;
+}
+
+.w-\[3\.5vw\] {
+  width: 3.5vw;
+}
+
+.w-\[3vw\] {
+  width: 3vw;
+}
+
+.w-\[4vw\] {
+  width: 4vw;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1285,6 +1305,18 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-7 {
+  gap: 1.75rem;
 }
 
 .whitespace-normal {

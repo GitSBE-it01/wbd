@@ -2,7 +2,7 @@
 
 $main_table = [
     'id'=> 'main_table', 
-    'class'=>'w-screen scrollable-y',
+    'class'=>'w-full scrollable-y',
     'row_count' =>50,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
@@ -45,7 +45,7 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'FO before Break In',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::fo_before_brk_in'],
@@ -63,7 +63,7 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'Toleransi FO before',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::tol_fo_before'],
@@ -81,7 +81,7 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'FO after Break In',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::fo_after_brk_in'],
@@ -99,7 +99,7 @@ $main_table = [
             'type'=>'input',
             'th'=>[
                 'body'=>'Toleransi FO after',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::tol_fo_after'],
@@ -117,7 +117,7 @@ $main_table = [
             'type'=>'set_btn',
             'th'=>[
                 'body'=>'Detail',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::data_group'],
@@ -139,7 +139,7 @@ $main_table = [
 
 $id_table = [
     'id'=> 'id_table', 
-    'class'=>'w-full scrollable-y',
+    'class'=>'w-full',
     'row_count' =>10,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
@@ -159,6 +159,40 @@ $id_table = [
                 'type_attr'=>'text', 
                 'name'=> 'wo_id', 
                 'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Release Date',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::rel_date'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'rel_date', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Due Date',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::due_date'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'due_date', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],

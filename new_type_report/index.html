@@ -29,18 +29,18 @@
         </h1>
         </div>
         </nav>
-        <header class='fixed top-[5vh] flex flex-row gap-4 w-screen bg-slate-700 h-[5vh] items-center pl-4' ><input id='input__jig' type='text' placeholder='input jig disini' 
+        <header class='fixed top-[5vh] flex flex-row gap-4 w-screen bg-slate-700 h-[5vh] items-center pl-4' ><input id='input__type' type='text' placeholder='input type disini' 
         autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]' >
-        <button id='search_jig' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >search
+        <button id='search_type' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >search
         </button>
         </header>
-        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' ><table id='main_table' class='w-screen scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Item Number
+        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' ><table id='main_table' class='w-full scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Item Number
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Deskripsi
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >FO before Break In
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >Toleransi FO before
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >FO after Break In
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]' >Toleransi FO after
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Detail
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >FO before Break In
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Toleransi FO before
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >FO after Break In
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Toleransi FO after
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]' >Detail
         </th>
         </tr>
         </thead><tbody><tr data-id='main_table__template' class='hidden' ><input name='id' type='hidden' 
@@ -1284,7 +1284,9 @@
         </footer>
         <div id='detail' class='z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll' ><div class='w-full h-[10vh] bg-blue-700 flex items-center' ><h1 id='detail_title' class='text-white px-4 font-bold text-xl whitespace-pre-line' >
         </h1>
-        </div><div class='w-full h-[45vh]' ><table id='id_table' class='w-full scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >ID
+        </div><div class='w-full h-[45vh] scrollable-y' ><table id='id_table' class='w-full' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >ID
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Release Date
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Due Date
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >WO status
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Qty Order
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Detail
@@ -1296,6 +1298,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_tabletemplate' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_tabletemplate' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_tabletemplate' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_tabletemplate' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_tabletemplate' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_tabletemplate' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_tabletemplate' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_tabletemplate' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1313,6 +1321,12 @@
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table0' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table0' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table0' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table0' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table0' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table0' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table0' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table0' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1328,6 +1342,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table1' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table1' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table1' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table1' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table1' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table1' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table1' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table1' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1345,6 +1365,12 @@
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table2' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table2' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table2' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table2' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table2' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table2' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table2' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table2' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1360,6 +1386,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table3' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table3' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table3' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table3' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table3' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table3' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table3' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table3' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1377,6 +1409,12 @@
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table4' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table4' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table4' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table4' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table4' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table4' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table4' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table4' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1392,6 +1430,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table5' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table5' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table5' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table5' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table5' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table5' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table5' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table5' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1409,6 +1453,12 @@
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table6' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table6' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table6' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table6' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table6' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table6' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table6' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table6' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1424,6 +1474,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table7' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table7' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table7' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table7' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table7' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table7' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table7' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table7' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1441,6 +1497,12 @@
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table8' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table8' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table8' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table8' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table8' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table8' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table8' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table8' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1456,6 +1518,12 @@
         autocomplete='off' class='' >
         <td data-field='wo_id' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='wo_id__id_table9' data-field='wo_id' class='p-2 w-[30%]' >
             </label><input id='wo_id__id_table9' name='wo_id' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='rel_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='rel_date__id_table9' data-field='rel_date' class='p-2 w-[30%]' >
+            </label><input id='rel_date__id_table9' name='rel_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='due_date' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='due_date__id_table9' data-field='due_date' class='p-2 w-[30%]' >
+            </label><input id='due_date__id_table9' name='due_date' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='_status' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_status__id_table9' data-field='_status' class='p-2 w-[30%]' >
             </label><input id='_status__id_table9' name='_status' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >

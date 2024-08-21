@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='preconnect' href='https://fonts.googleapis.com'>
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+        <link href='../1.asset/main.css' rel='stylesheet' />
+        <link href='../1.asset/output.css' rel='stylesheet' />
+        <link href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet'>
+        <link rel='icon' href='../1.asset/symbol/new_logo_sbe.png' type='image/ico' />
+        <title>Detail Data</title>
+    </head>
+    <body class='font-[Poppins] h-screen w-screen bg-slate-300 custom_scroll'>
+    <div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
+            </div><div class='loading2' >
+            </div>
+            </div><header class='fixed top-0 flex flex-col w-screen bg-slate-700 h-[5vh] pl-4' ><div class='w-full h-[5vh] px-2 gap-2 items-center flex flex-row' ><input id='id_input' type='text' list='wo_list' placeholder='input WO ID disini' 
+        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[45vw]' >
+        
+        </div>
+        </header>
+        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' >
+        </div>
+        </main>
+        <footer class='fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='detail_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='detail_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
+            </button><button type='button' data-group='detail_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
+            </button><button type='button' data-group='detail_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
+            </button><button type='button' data-group='detail_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
+            </button><button type='button' data-group='detail_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
+            </button><button type='button' data-group='detail_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
+            </button><button type='button' data-group='detail_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
+            </button>
+            </div>
+        </footer>
+        <script type='module' src='./client_process/browse.js';></script>
+        <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>
+    </body>
+    </html>
+    

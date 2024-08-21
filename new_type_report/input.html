@@ -31,248 +31,274 @@
         </h1>
         </div>
         </nav>
-        <header class='fixed top-[5vh] flex flex-col w-screen bg-slate-700 h-[20vh] pl-4' ><div class='w-full h-[5vh] px-2 gap-2 items-center flex flex-row' ><input id='id_input' type='text' list='wo_list' placeholder='input WO ID disini' 
-        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[45vw]' >
-        <div id='item_nbr' class='bg-transparent mx-2 text-white' >
+        <header class='fixed top-[5vh] flex flex-col w-screen bg-slate-700 h-[5vh] pl-4' ><div class='w-full h-[5vh] gap-2 items-center flex flex-row' ><input id='id_input' type='text' list='wo_list' placeholder='Pilih ID disini' 
+        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[10vw]' >
+        <div class='bg-transparent w-[30vw] flex flex-row mx-2 text-white' ><div class='bg-transparent mx-2 text-white' >Item Parent : 
+        </div><div id='item_nbr' class='bg-transparent mx-2 text-white' >
+        </div>
+        </div><div class='bg-transparent w-[30vw] flex flex-row mx-2 text-white' ><div class='bg-transparent mx-2 text-white' >Description : 
         </div><div id='_desc' class='bg-transparent mx-2 text-white' >
         </div>
-        </div><div class='w-full h-[15vh] px-2 mt-2 flex flex-col' ><div class='w-full h-[5vh] gap-2 flex flex-row' ><input id='comp_item' type='text' list='item_list' placeholder='input komponen disini' 
-        autocomplete='off' required class='rounded bg-slate-700 text-white px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[25vw]' disabled >
-        <div id='comp_desc' class='bg-transparent mx-2 text-white' >
-        </div>
-        </div><div class='w-full h-[5vh] gap-2 flex flex-row' ><input id='lot' type='text' placeholder='No lot' 
-        autocomplete='off' required class='rounded bg-slate-700 text-white px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[25vw]' disabled >
-        
-        </div><div class='w-full h-[5vh] gap-2 flex flex-row' ><select id='jenis_ukur' required class='rounded bg-slate-700 text-white  px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[25vw]' disabled >
-        </select><input id='um' type='text' placeholder='satuan' 
-        autocomplete='off' required class='rounded bg-slate-700 text-white  px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[10vw]' disabled >
-        <button id='add_check' type='button' class='rounded bg-gray-300 text-white  w-[10vw] h-[1.6rem] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' disabled >add
+        </div><button id='add_new' type='button' class='h-6 w-6 plus fixed right-2 opacity-25' disabled >
         </button>
         </div>
-        </div>
         </header>
-        <main class='fixed flex flex-col top-[25vh] bg-slate-300 w-screen h-[75vh] scrollable-y' ><div id='primary' class='w-full h-full ' ><div id='template' class='hidden m-2 pb-2 border-2 border-slate-300' ><div data-detail='dtl' class='rounded-t w-full h-[5vh] bg-blue-600 flex items-center px-4' ><div data-detail='title' class='font-bold underline text-white text-lg flex items-center' >
-        </div><input name='hd_code' type='hidden' 
+        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[90vh] scrollable-y' ><div id='primary' class='w-full h-full' ><div id='template' data-detail='template' class='my-2 hidden w-full flex flex-row bg-blue-200' ><div id='detail' class='w-[50%] bg-blue-600 flex flex-col gap-4 p-4' ><input name='create_date' type='hidden' 
         autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
-        <input name='msr_type' type='hidden' 
+        <input name='item_number' type='hidden' 
         autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
-        <input name='um' type='hidden' 
+        <input name='id' type='hidden' 
         autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
-        <input name='item_comp' type='hidden' 
+        <input name='part_prod' type='hidden' 
         autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
-        <input name='no_lot' type='hidden' 
-        autocomplete='off' class="rounded p-2 focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[70%]" >
+        <div class='w-full flex flex-row gap-2' ><label for='comp' class='text-white bg-transparent w-[30%]' >Item Komponen
+        </label><input id='comp' name='item_comp' type='text' list='item_list' 
+        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full h-[50%] p-2 rounded-b bg-slate-500' ><div class='w-full block' ><input id='1' type='text' placeholder='1' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='2' type='text' placeholder='2' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='3' type='text' placeholder='3' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='4' type='text' placeholder='4' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='5' type='text' placeholder='5' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='6' type='text' placeholder='6' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='7' type='text' placeholder='7' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='8' type='text' placeholder='8' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='9' type='text' placeholder='9' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='10' type='text' placeholder='10' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='comp_item' class='text-white bg-transparent w-[30%]' >Desc Komponen
+        </label><input id='comp_item' type='text' 
+        autocomplete='off' data-name='desc_comp' class='px-2 text-sm h-[1.6rem] bg-transparent underline text-bold text-white right-10 w-[70%]' disabled >
         
-        </div><div class='w-full block' ><input id='11' type='text' placeholder='11' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='12' type='text' placeholder='12' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='13' type='text' placeholder='13' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='14' type='text' placeholder='14' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='15' type='text' placeholder='15' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='16' type='text' placeholder='16' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='17' type='text' placeholder='17' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='18' type='text' placeholder='18' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='19' type='text' placeholder='19' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='20' type='text' placeholder='20' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='measure' class='text-white bg-transparent w-[30%]' >Tipe Pengukuran
+        </label><input id='measure' name='measure' type='text' 
+        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='21' type='text' placeholder='21' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='22' type='text' placeholder='22' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='23' type='text' placeholder='23' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='24' type='text' placeholder='24' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='25' type='text' placeholder='25' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='26' type='text' placeholder='26' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='27' type='text' placeholder='27' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='28' type='text' placeholder='28' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='29' type='text' placeholder='29' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='30' type='text' placeholder='30' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='um' class='text-white bg-transparent w-[30%]' >Satuan
+        </label><input id='um' name='um' type='text' 
+        autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='31' type='text' placeholder='31' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='32' type='text' placeholder='32' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='33' type='text' placeholder='33' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='34' type='text' placeholder='34' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='35' type='text' placeholder='35' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='36' type='text' placeholder='36' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='37' type='text' placeholder='37' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='38' type='text' placeholder='38' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='39' type='text' placeholder='39' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='40' type='text' placeholder='40' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='no_lot' class='text-white bg-transparent w-[30%]' >No Lot
+        </label><input id='no_lot' name='no_lot' type='text' 
+        autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='41' type='text' placeholder='41' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='42' type='text' placeholder='42' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='43' type='text' placeholder='43' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='44' type='text' placeholder='44' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='45' type='text' placeholder='45' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='46' type='text' placeholder='46' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='47' type='text' placeholder='47' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='48' type='text' placeholder='48' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='49' type='text' placeholder='49' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='50' type='text' placeholder='50' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='std_min' class='text-white bg-transparent w-[30%]' >Min
+        </label><input id='std_min' name='std_min' type='text' 
+        autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='51' type='text' placeholder='51' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='52' type='text' placeholder='52' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='53' type='text' placeholder='53' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='54' type='text' placeholder='54' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='55' type='text' placeholder='55' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='56' type='text' placeholder='56' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='57' type='text' placeholder='57' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='58' type='text' placeholder='58' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='59' type='text' placeholder='59' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='60' type='text' placeholder='60' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='std_max' class='text-white bg-transparent w-[30%]' >Max
+        </label><input id='std_max' name='std_max' type='text' 
+        autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='61' type='text' placeholder='61' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='62' type='text' placeholder='62' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='63' type='text' placeholder='63' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='64' type='text' placeholder='64' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='65' type='text' placeholder='65' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='66' type='text' placeholder='66' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='67' type='text' placeholder='67' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='68' type='text' placeholder='68' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='69' type='text' placeholder='69' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='70' type='text' placeholder='70' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><label for='sample' class='text-white bg-transparent w-[30%]' >Jumlah Sample
+        </label><input id='sample' type='text' 
+        autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]' >
         
-        </div><div class='w-full block' ><input id='71' type='text' placeholder='71' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='72' type='text' placeholder='72' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='73' type='text' placeholder='73' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='74' type='text' placeholder='74' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='75' type='text' placeholder='75' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='76' type='text' placeholder='76' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='77' type='text' placeholder='77' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='78' type='text' placeholder='78' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='79' type='text' placeholder='79' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='80' type='text' placeholder='80' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full flex flex-row gap-2' ><button id='submit_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300' >submit
+        </button><button id='edit_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300' >edit
+        </button><button id='del_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300' >delete
+        </button>
+        </div>
+        </div><div id='data_input' class='w-[50%]' ><div class='w-full h-full p-2 bg-blue-300 gap-2 flex flex-col items-center' ><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='1' 
+        autocomplete='off' data-name='no_repeat' data-id='1' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='2' 
+        autocomplete='off' data-name='no_repeat' data-id='2' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='3' 
+        autocomplete='off' data-name='no_repeat' data-id='3' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='4' 
+        autocomplete='off' data-name='no_repeat' data-id='4' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='5' 
+        autocomplete='off' data-name='no_repeat' data-id='5' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='6' 
+        autocomplete='off' data-name='no_repeat' data-id='6' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='7' 
+        autocomplete='off' data-name='no_repeat' data-id='7' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='8' 
+        autocomplete='off' data-name='no_repeat' data-id='8' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='9' 
+        autocomplete='off' data-name='no_repeat' data-id='9' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='10' 
+        autocomplete='off' data-name='no_repeat' data-id='10' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
         
-        </div><div class='w-full block' ><input id='81' type='text' placeholder='81' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='82' type='text' placeholder='82' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='83' type='text' placeholder='83' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='84' type='text' placeholder='84' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='85' type='text' placeholder='85' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='86' type='text' placeholder='86' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='87' type='text' placeholder='87' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='88' type='text' placeholder='88' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='89' type='text' placeholder='89' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='90' type='text' placeholder='90' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='11' 
+        autocomplete='off' data-name='no_repeat' data-id='11' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='12' 
+        autocomplete='off' data-name='no_repeat' data-id='12' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='13' 
+        autocomplete='off' data-name='no_repeat' data-id='13' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='14' 
+        autocomplete='off' data-name='no_repeat' data-id='14' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='15' 
+        autocomplete='off' data-name='no_repeat' data-id='15' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='16' 
+        autocomplete='off' data-name='no_repeat' data-id='16' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='17' 
+        autocomplete='off' data-name='no_repeat' data-id='17' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='18' 
+        autocomplete='off' data-name='no_repeat' data-id='18' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='19' 
+        autocomplete='off' data-name='no_repeat' data-id='19' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='20' 
+        autocomplete='off' data-name='no_repeat' data-id='20' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
         
-        </div><div class='w-full block' ><input id='91' type='text' placeholder='91' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='92' type='text' placeholder='92' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='93' type='text' placeholder='93' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='94' type='text' placeholder='94' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='95' type='text' placeholder='95' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='96' type='text' placeholder='96' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='97' type='text' placeholder='97' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='98' type='text' placeholder='98' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='99' type='text' placeholder='99' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
-        <input id='100' type='text' placeholder='100' 
-        autocomplete='off' class='rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]' >
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='21' 
+        autocomplete='off' data-name='no_repeat' data-id='21' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='22' 
+        autocomplete='off' data-name='no_repeat' data-id='22' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='23' 
+        autocomplete='off' data-name='no_repeat' data-id='23' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='24' 
+        autocomplete='off' data-name='no_repeat' data-id='24' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='25' 
+        autocomplete='off' data-name='no_repeat' data-id='25' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='26' 
+        autocomplete='off' data-name='no_repeat' data-id='26' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='27' 
+        autocomplete='off' data-name='no_repeat' data-id='27' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='28' 
+        autocomplete='off' data-name='no_repeat' data-id='28' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='29' 
+        autocomplete='off' data-name='no_repeat' data-id='29' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='30' 
+        autocomplete='off' data-name='no_repeat' data-id='30' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
         
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='31' 
+        autocomplete='off' data-name='no_repeat' data-id='31' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='32' 
+        autocomplete='off' data-name='no_repeat' data-id='32' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='33' 
+        autocomplete='off' data-name='no_repeat' data-id='33' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='34' 
+        autocomplete='off' data-name='no_repeat' data-id='34' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='35' 
+        autocomplete='off' data-name='no_repeat' data-id='35' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='36' 
+        autocomplete='off' data-name='no_repeat' data-id='36' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='37' 
+        autocomplete='off' data-name='no_repeat' data-id='37' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='38' 
+        autocomplete='off' data-name='no_repeat' data-id='38' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='39' 
+        autocomplete='off' data-name='no_repeat' data-id='39' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='40' 
+        autocomplete='off' data-name='no_repeat' data-id='40' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='41' 
+        autocomplete='off' data-name='no_repeat' data-id='41' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='42' 
+        autocomplete='off' data-name='no_repeat' data-id='42' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='43' 
+        autocomplete='off' data-name='no_repeat' data-id='43' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='44' 
+        autocomplete='off' data-name='no_repeat' data-id='44' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='45' 
+        autocomplete='off' data-name='no_repeat' data-id='45' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='46' 
+        autocomplete='off' data-name='no_repeat' data-id='46' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='47' 
+        autocomplete='off' data-name='no_repeat' data-id='47' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='48' 
+        autocomplete='off' data-name='no_repeat' data-id='48' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='49' 
+        autocomplete='off' data-name='no_repeat' data-id='49' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='50' 
+        autocomplete='off' data-name='no_repeat' data-id='50' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='51' 
+        autocomplete='off' data-name='no_repeat' data-id='51' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='52' 
+        autocomplete='off' data-name='no_repeat' data-id='52' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='53' 
+        autocomplete='off' data-name='no_repeat' data-id='53' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='54' 
+        autocomplete='off' data-name='no_repeat' data-id='54' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='55' 
+        autocomplete='off' data-name='no_repeat' data-id='55' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='56' 
+        autocomplete='off' data-name='no_repeat' data-id='56' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='57' 
+        autocomplete='off' data-name='no_repeat' data-id='57' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='58' 
+        autocomplete='off' data-name='no_repeat' data-id='58' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='59' 
+        autocomplete='off' data-name='no_repeat' data-id='59' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='60' 
+        autocomplete='off' data-name='no_repeat' data-id='60' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='61' 
+        autocomplete='off' data-name='no_repeat' data-id='61' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='62' 
+        autocomplete='off' data-name='no_repeat' data-id='62' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='63' 
+        autocomplete='off' data-name='no_repeat' data-id='63' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='64' 
+        autocomplete='off' data-name='no_repeat' data-id='64' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='65' 
+        autocomplete='off' data-name='no_repeat' data-id='65' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='66' 
+        autocomplete='off' data-name='no_repeat' data-id='66' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='67' 
+        autocomplete='off' data-name='no_repeat' data-id='67' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='68' 
+        autocomplete='off' data-name='no_repeat' data-id='68' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='69' 
+        autocomplete='off' data-name='no_repeat' data-id='69' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='70' 
+        autocomplete='off' data-name='no_repeat' data-id='70' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='71' 
+        autocomplete='off' data-name='no_repeat' data-id='71' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='72' 
+        autocomplete='off' data-name='no_repeat' data-id='72' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='73' 
+        autocomplete='off' data-name='no_repeat' data-id='73' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='74' 
+        autocomplete='off' data-name='no_repeat' data-id='74' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='75' 
+        autocomplete='off' data-name='no_repeat' data-id='75' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='76' 
+        autocomplete='off' data-name='no_repeat' data-id='76' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='77' 
+        autocomplete='off' data-name='no_repeat' data-id='77' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='78' 
+        autocomplete='off' data-name='no_repeat' data-id='78' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='79' 
+        autocomplete='off' data-name='no_repeat' data-id='79' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='80' 
+        autocomplete='off' data-name='no_repeat' data-id='80' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='81' 
+        autocomplete='off' data-name='no_repeat' data-id='81' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='82' 
+        autocomplete='off' data-name='no_repeat' data-id='82' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='83' 
+        autocomplete='off' data-name='no_repeat' data-id='83' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='84' 
+        autocomplete='off' data-name='no_repeat' data-id='84' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='85' 
+        autocomplete='off' data-name='no_repeat' data-id='85' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='86' 
+        autocomplete='off' data-name='no_repeat' data-id='86' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='87' 
+        autocomplete='off' data-name='no_repeat' data-id='87' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='88' 
+        autocomplete='off' data-name='no_repeat' data-id='88' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='89' 
+        autocomplete='off' data-name='no_repeat' data-id='89' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='90' 
+        autocomplete='off' data-name='no_repeat' data-id='90' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div><div class='w-full block flex flex-row gap-2' ><input name='result' type='text' placeholder='91' 
+        autocomplete='off' data-name='no_repeat' data-id='91' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='92' 
+        autocomplete='off' data-name='no_repeat' data-id='92' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='93' 
+        autocomplete='off' data-name='no_repeat' data-id='93' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='94' 
+        autocomplete='off' data-name='no_repeat' data-id='94' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='95' 
+        autocomplete='off' data-name='no_repeat' data-id='95' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='96' 
+        autocomplete='off' data-name='no_repeat' data-id='96' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='97' 
+        autocomplete='off' data-name='no_repeat' data-id='97' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='98' 
+        autocomplete='off' data-name='no_repeat' data-id='98' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='99' 
+        autocomplete='off' data-name='no_repeat' data-id='99' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        <input name='result' type='text' placeholder='100' 
+        autocomplete='off' data-name='no_repeat' data-id='100' class='rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden' >
+        
+        </div>
         </div>
         </div>
         </div>

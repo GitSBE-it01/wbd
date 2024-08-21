@@ -316,4 +316,81 @@ class DB_Access {
         return 'success';
     }
 }
+
+class DB {
+    static $db = 'db_wbd';
+    
+    static function execQuery($query, $types, $data=[], $_db='') {
+        $conn = connectToDatabase(DB::$db);
+        if($_db === 'new') {
+            $conn = connectToDatabaseNew(DB::$db);
+        }
+
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
+        $cek = explode(" ", $query);
+        set_time_limit(3600);
+        switch($cek[0]){
+            case "SELECT":
+                $bindParams = array();
+                if(count($data) !== 0) {
+                    foreach($data as $key=>$value) {
+                        $bindParams[] = &$data[$key];
+                    }
+                    array_unshift($bindParams, $types);
+                    call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                }
+                if (!$stmt->execute()) {
+                    die("Execute failed: " . $stmt->error);
+                }
+                $result = $stmt->get_result();
+                $response = array();
+                while ($row = $result->fetch_assoc()) {
+                    $response[] = $row;
+                }
+                $result->free();
+                break;
+            case "INSERT":
+            case "UPDATE":
+            case "DELETE":
+                if(isset($data[0])) {
+                    foreach($data as $set) {
+                        $bindParams = array();
+                        foreach($set as $key=>$value) {
+                            ${'param' . $key} = $value;
+                            $bindParams[] = &${'param' . $key};
+                        }
+                        array_unshift($bindParams, $types);
+                        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                        if (!$stmt->execute()) {
+                            die("Execute failed: " . $stmt->error);
+                        } else {
+                            $response = "success";
+                        }
+                    }
+                } else {
+                    $bindParams = array();
+                    foreach($data as $key=>$value) {
+                        $bindParams[] = &$data[$key];
+                    }
+                    array_unshift($bindParams, $types);
+                    call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                    if (!$stmt->execute()) {
+                        die("Execute failed: " . $stmt->error);
+                    } else {
+                        $response = "success";
+                    }
+                }
+                break;
+            default:
+                echo "Query process not supported";
+        }
+        $stmt->close();
+        $conn->close();
+        return $response;
+    }
+}
 ?>

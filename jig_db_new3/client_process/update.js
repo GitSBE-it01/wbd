@@ -162,19 +162,15 @@ document.addEventListener('click', async function(event) {
       if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
     })
     console.log({loc, log_loc, loc_show, log_loc_show});
-    if(loc_show.length > 0) {
       TableDOM.parse_data('#stock_table', loc_show, 1);
       TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code'])
       NavDOM.pgList_init('#stock_page', loc_show, '#stock_table');
       TableDOM.parse_onclick('#stock_table',  loc_show, 'data-group','stock_page');
       NavDOM.pgList_active('stock_page');
-      if(log_loc_show.length > 0) {
         TableDOM.parse_data('#stock_table_hist', log_loc_show, 1);
         NavDOM.pgList_init('#stock_hist_page', log_loc_show, '#stock_table_hist');
         TableDOM.parse_onclick('#stock_table_hist',  log_loc_show, 'data-group','stock_hist_page');
         NavDOM.pgList_active('stock_hist_page');
-      }
-    }
     event.target.disabled = false;
     DOM.add_class('#load',"hidden");
     return;

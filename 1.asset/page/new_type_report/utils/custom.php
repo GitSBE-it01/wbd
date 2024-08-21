@@ -7,29 +7,27 @@ function input_spc ($col_count, $row_count) {
         $row_total = '';
         for($ii=0; $ii<$col_count; $ii++) {
             $input = Comp::input([
-                'id'=>$count,
                 'type_attr'=>'text',
                 'placeholder'=>$count,
                 'name'=>'result',
-                'data_attr'=>['name::no_repeat'],
-                'class'=>'rounded border-2 mx-2 mt-2 px-2 border-black w-[5vw]'
+                'data_attr'=>['name::no_repeat','id::'.$count],
+                'class'=>'rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden'
             ]);
             $count++;
             $row_total .= $input;
         }
         $all .= Comp::div([
-            'class'=>'w-full block',
+            'class'=>'w-full block flex flex-row gap-2',
             'body'=>$row_total
         ]);
     }
     $result = Comp::div([
-        'class'=>'w-full h-[50%] p-2 rounded-b bg-slate-500',
+        'class'=>'w-full h-full p-2 bg-blue-300 gap-2 flex flex-col items-center',
         'body'=>$all
     ]);
     return $result;
 }
 
-$form = input_spc(10,10);
 
 
 

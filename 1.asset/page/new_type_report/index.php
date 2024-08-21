@@ -26,13 +26,13 @@ createHTML([
             'class'=>'fixed top-[5vh] flex flex-row gap-4 w-screen bg-slate-700 h-[5vh] items-center pl-4',
             'body'=>[
                 Comp::input([
-                    'id'=>'input__jig',
-                    'placeholder'=>'input jig disini',
+                    'id'=>'input__type',
+                    'placeholder'=>'input type disini',
                     'autocomplete'=>'off',
                     'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
                 ]),
                 Comp::button([
-                    'id'=>'search_jig',
+                    'id'=>'search_type',
                     'body'=>'search',
                     'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
                 ]),
@@ -70,7 +70,7 @@ createHTML([
                     ]
                 ]),
                 Comp::div([
-                    'class'=>'w-full h-[45vh]',
+                    'class'=>'w-full h-[45vh] scrollable-y',
                     'body'=>table_create2($id_table)
                 ]),
                 Comp::div([

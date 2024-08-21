@@ -8,24 +8,16 @@ require_once 'utils/table.php';
 /* ===============================================================================
 INDEX HTML
 =============================================================================== */
-$nav_array['title'] = 'Input Measurement Data';
+$nav_array['title'] = 'Data Browse';
 
 createHTML([
-    'name'=>'input', 
-    'title'=>"Input Data",
+    'name'=>'browse', 
+    'title'=>"Detail Data",
     'path'=>'new_type_report',
     'body'=>
-        Comp::dtlist(['id'=>'item_list'])
-        .Comp::dtlist(['id'=>'wo_list'])
-        .$load2."
-        ".Comp::nav([
-            'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
-            'body'=>navi($nav_array)
-        ])."
-        " 
-        // main view
+        $load2
         .Comp::header([
-            'class'=>'fixed top-[5vh] flex flex-col w-screen bg-slate-700 h-[5vh] pl-4',
+            'class'=>'fixed top-0 flex flex-col w-screen bg-slate-700 h-[5vh] pl-4',
             'body'=>[
                 Comp::div([
                     'class'=>'w-full h-[5vh] px-2 gap-2 items-center flex flex-row',
@@ -57,15 +49,8 @@ createHTML([
         ".Comp::footer([
             'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',
             'body'=>pagination_create('detail_page', '')
-        ])
-        .Comp::div([
-            'data_attr'=>['card::detail'],
-            'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
-            'body'=>[
-                
-            ]
         ])."
-        <script type='module' src='./client_process/input.js';></script>
+        <script type='module' src='./client_process/browse.js';></script>
         "
 ]);
     
