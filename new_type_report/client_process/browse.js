@@ -1,4 +1,4 @@
-import {api_access, DOM, GeneralDOM, TableDOM2, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, globalEvent} from '../../3.utility/index.js';
+import {api_access, DOM, GeneralDOM, TableDOM2, TableDOM, DtlistDOM, NavDOM, ButtonDOM, InputDOM, globalEvent,calculateMean, calculateStdDev, calculateCPK,} from '../../3.utility/index.js';
 import {auth2} from '../../3.utility/auth.js';
 
 
@@ -98,10 +98,17 @@ wo_id.textContent = _id[1];
 
 DOM.add_class('#load',"hidden");
 
+const result = [];
+data_all['FO cone'].forEach(dt=>{
+  result.push(dt.result);
+})
+console.log(result);
 const usl ='';
 const lsl ='';
-const mean ='';
-const stdev ='';
+const mean = calculateMean(result);
+const stdev = calculateStdDev(result);
+const cpk = calculateCPK(mean, stdev, 90, 70);
+console.log({mean, stdev, cpk})
 //Cpk = Min[(USL - Mean) / (3σ), (Mean - LSL) / (3σ)]
 //Cp = (USL - LSL) / (6σ)
 

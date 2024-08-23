@@ -10,6 +10,10 @@ import {inputEmptyRow,
         TableDOM,
         TableDOM2} from './DOM/table.js';
 import {sort_array} from './utils/array.js';
+import {calculateMean,
+        calculateStdDev,
+        calculateCP,
+        calculateCPK} from './utils/calculation.js';
 import {api_access} from './utils/data_access.js';
 import {currentDate,
         getCustomDate,
@@ -29,6 +33,10 @@ export {
         TableDOM,
         TableDOM2,
         sort_array,
+        calculateMean,
+        calculateStdDev,
+        calculateCP,
+        calculateCPK,
         api_access,
         currentDate,
         getCustomDate,
