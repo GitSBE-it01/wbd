@@ -17,38 +17,67 @@ createHTML([
     'body'=>
         $load2
         .Comp::header([
-            'class'=>'fixed top-0 flex flex-col w-screen bg-slate-700 h-[5vh] pl-4',
+            'class'=>'fixed top-0 flex flex-col w-screen bg-slate-700 h-[10vh] pl-4',
             'body'=>[
                 Comp::div([
                     'class'=>'w-full h-[5vh] px-2 gap-2 items-center flex flex-row',
                     'body'=>[
-                        Comp::input([
-                            'id'=>'id_input',
-                            'placeholder'=>'input WO ID disini',
-                            'autocomplete'=>'off',
-                            'list'=>'wo_list',
-                            'require'=>'',
-                            'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[45vw]'
+                        Comp::div([
+                            'class'=>'w-[50%] h-full flex flex-row',
+                            'body'=>[
+                                Comp::div([
+                                    'class'=>'w-[30%] text-white text-lg font-semibold h-full flex items-center',
+                                    'body'=>'Item Number : '
+                                ]),
+                                Comp::div([
+                                    'id'=>'item',
+                                    'class'=>'w-[70%] text-white text-lg font-semibold  h-full flex items-center',
+                                ]),
+                            ]
+                        ]),
+                        Comp::div([
+                            'class'=>'w-[50%] h-full flex flex-row',
+                            'body'=>[
+                                Comp::div([
+                                    'class'=>'w-[30%] text-white text-lg font-semibold  h-full flex items-center',
+                                    'body'=>'Description : '
+                                ]),
+                                Comp::div([
+                                    'id'=>'_desc',
+                                    'class'=>'w-[70%] text-white text-lg font-semibold  h-full flex items-center',
+                                ]),
+                            ]
+                        ]),
+      
+                      ]
+                ]),
+                Comp::div([
+                    'class'=>'w-[50%] h-[5vh] px-2 gap-2 items-center flex flex-row',
+                    'body'=>[
+                        Comp::div([
+                            'class'=>'w-[30%] h-full text-white text-lg font-semibold flex items-center',
+                            'body'=>'ID : '
+                        ]),
+                        Comp::div([
+                            'id'=>'wo_id',
+                            'class'=>'w-[70%] h-full text-white text-lg font-semibold flex items-center',
                         ]),
                       ]
                 ]),
             ]
         ])."
         ".Comp::main([
-            'class'=>'fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y',
+            'class'=>'fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[90vh] scrollable-y',
             'body'=>[
                 Comp::div([
                     'id'=> 'primary',
-                    'class'=>'w-full h-full ',
+                    'class'=>'w-full flex flex-row scrollable-y',
                     'body'=>[
                         
+                        table_create2($browse_table)
                     ]
                 ])
             ]
-        ])."
-        ".Comp::footer([
-            'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',
-            'body'=>pagination_create('detail_page', '')
         ])."
         <script type='module' src='./client_process/browse.js';></script>
         "

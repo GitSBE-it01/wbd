@@ -516,26 +516,15 @@ export class ButtonDOM {
         })
     }
 
-    static open_tab_with_data(button_key, base_url, data) {
-        let btn = '';
-        if(button_key.nodeType) {
-            btn = button_key;
-        } else {
-            btn = document.querySelector(button_key);
+    static open_tab_with_data(base_url, data) {
+        let url = base_url + '?';
+        for (let key in data) {
+            url += key + '=' + encodeURIComponent(data[key]) + '&';
         }
-        if(btn) {
-            btn.addEventListener('click', ()=>{
-                let url = base_url + '?';
-                for (let key in data) {
-                  url += key + '=' + encodeURIComponent(data[key]) + '&';
-                }
-                url = url.slice(0, -1);
-                console.log({url});
-                window.open(url, '_blank');
-            })
-        }
+        url = url.slice(0, -1);
+        console.log({url});
+        window.open(url, '_blank');
     }
-
 }
 
     

@@ -415,7 +415,6 @@ export class TableDOM2 {
                     count++;
                 }
             })
-            this.table_pagination_init();
             return;
         } catch(error) {
             console.error('Error:', error);

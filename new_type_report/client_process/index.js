@@ -60,6 +60,7 @@ console.log({master, detail_data, mstr_dt});
 const main_dom = new TableDOM2('main_table', master, 'main_page');
 let id_tabl = new TableDOM2('id_table', detail_data, 'id_page');
 await main_dom.table_parse_data();
+await main_dom.table_pagination_init();
 await main_dom.table_pagination_response();
 await main_dom.table_filter_data_on_click('#search_type', '#input__type');
 DOM.add_class('#load',"hidden");
@@ -117,23 +118,15 @@ document.addEventListener('click', async(e)=>{
 // open new tab for detail data
 // -----------------------------------------------------------
   if(e.target.getAttribute('data-method') === 'link') {
-    DOM.add_class('#loadscreen',"z-40");
-    DOM.rmv_class('#loadscreen',"z-10");
-    DOM.rmv_class('.loading2',"hidden");
     const td = e.target.closest('td');
     const tr = td.closest('tr');
-    const desc = tr.querySelector('[name="wo_id"]').value;
+    const id = tr.querySelector('[name="wo_id"]').value;
+    const desc = document.querySelector('#detail_title').textContent;
     const data = {
-      group_code: data_filter_val+'__'+desc
-    }
-    //ButtonDOM.open_tab_with_data(e.target, "http://informationsystem.sbe.co.id:8080/wbd/new_type_report/browse.html", data);
-    const base_url = "http://informationsystem.sbe.co.id:8080/wbd/new_type_report/browse.html";
-    let url = base_url + '?';
-    for (let key in data) {
-      url += key + '=' + encodeURIComponent(data[key]) + '&';
-    }
-    url = url.slice(0, -1);
-    console.log({url});
-    window.open(url, '_blank');
+      group_code: data_filter_val+'__'+id,
+      _desc: desc
+    };
+    ButtonDOM.open_tab_with_data("http://informationsystem.sbe.co.id:8080/wbd/new_type_report/browse.html", data);
+    return;
   }
 })

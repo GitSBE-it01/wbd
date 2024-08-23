@@ -15,24 +15,330 @@
     <div id='load' class='w-screen h-screen absolute z-40 flex justify-center items-center' ><div id='loadscreen' class='h-full w-full absolute bg-slate-400' >
             </div><div class='loading2' >
             </div>
-            </div><header class='fixed top-0 flex flex-col w-screen bg-slate-700 h-[5vh] pl-4' ><div class='w-full h-[5vh] px-2 gap-2 items-center flex flex-row' ><input id='id_input' type='text' list='wo_list' placeholder='input WO ID disini' 
-        autocomplete='off' required class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[45vw]' >
-        
+            </div><header class='fixed top-0 flex flex-col w-screen bg-slate-700 h-[10vh] pl-4' ><div class='w-full h-[5vh] px-2 gap-2 items-center flex flex-row' ><div class='w-[50%] h-full flex flex-row' ><div class='w-[30%] text-white text-lg font-semibold h-full flex items-center' >Item Number : 
+        </div><div id='item' class='w-[70%] text-white text-lg font-semibold  h-full flex items-center' >
+        </div>
+        </div><div class='w-[50%] h-full flex flex-row' ><div class='w-[30%] text-white text-lg font-semibold  h-full flex items-center' >Description : 
+        </div><div id='_desc' class='w-[70%] text-white text-lg font-semibold  h-full flex items-center' >
+        </div>
+        </div>
+        </div><div class='w-[50%] h-[5vh] px-2 gap-2 items-center flex flex-row' ><div class='w-[30%] h-full text-white text-lg font-semibold flex items-center' >ID : 
+        </div><div id='wo_id' class='w-[70%] h-full text-white text-lg font-semibold flex items-center' >
+        </div>
         </div>
         </header>
-        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' >
+        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[90vh] scrollable-y' ><div id='primary' class='w-full flex flex-row scrollable-y' ><table id='browse_table_temp' class='hidden' ><thead><tr data-id='header' ><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Result
+        </th>
+        </tr>
+        </thead><tbody><tr data-id='browse_table_temp__template' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__0' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__1' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__2' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__3' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__4' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__5' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__6' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__7' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__8' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__9' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__10' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__11' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__12' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__13' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__14' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__15' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__16' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__17' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__18' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__19' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__20' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__21' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__22' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__23' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__24' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__25' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__26' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__27' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__28' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__29' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__30' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__31' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__32' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__33' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__34' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__35' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__36' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__37' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__38' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__39' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__40' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__41' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__42' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__43' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__44' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__45' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__46' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__47' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__48' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__49' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__50' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__51' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__52' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__53' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__54' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__55' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__56' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__57' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__58' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__59' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__60' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__61' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__62' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__63' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__64' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__65' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__66' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__67' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__68' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__69' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__70' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__71' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__72' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__73' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__74' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__75' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__76' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__77' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__78' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__79' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__80' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__81' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__82' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__83' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__84' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__85' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__86' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__87' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__88' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__89' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__90' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__91' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__92' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__93' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__94' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__95' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__96' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__97' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__98' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr><tr data-id='browse_table_temp__99' class='hidden' ><td name='no_repeat' class='bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td><td name='result' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' >
+        </td>
+        </tr>
+        </tbody>
+        </table>
         </div>
         </main>
-        <footer class='fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='detail_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='detail_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
-            </button><button type='button' data-group='detail_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
-            </button><button type='button' data-group='detail_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
-            </button><button type='button' data-group='detail_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
-            </button><button type='button' data-group='detail_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
-            </button><button type='button' data-group='detail_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
-            </button><button type='button' data-group='detail_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
-            </button>
-            </div>
-        </footer>
         <script type='module' src='./client_process/browse.js';></script>
         <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>
     </body>

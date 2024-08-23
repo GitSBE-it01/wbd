@@ -252,7 +252,7 @@ $id_table = [
 
 
 $detail_table = [
-    'id'=> 'detailt_table', 
+    'id'=> 'detail_table', 
     'class'=>'w-screen scrollable-y',
     'row_count' =>100,
     'tr'=>['class'=>'hidden'],
@@ -384,5 +384,38 @@ $detail_table = [
                 ],
             ]
         ],
+    ]
+];
+
+$browse_table = [
+    'id'=> 'browse_table_temp', 
+    'class'=>'hidden',
+    'row_count' =>100,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'no_repeat',
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-sm p-2 border-black'
+            ]
+        ],
+        [
+            'type'=>'text',
+            'th'=>[
+                'body'=>'Result',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'name'=>'result',
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ]
+        ],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'repeat_code'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'hd_code'],
     ]
 ];
