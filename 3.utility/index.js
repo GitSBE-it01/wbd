@@ -13,7 +13,8 @@ import {sort_array} from './utils/array.js';
 import {calculateMean,
         calculateStdDev,
         calculateCP,
-        calculateCPK} from './utils/calculation.js';
+        calculateCPK,
+        checkRange} from './utils/calculation.js';
 import {api_access} from './utils/data_access.js';
 import {currentDate,
         getCustomDate,
@@ -37,6 +38,7 @@ export {
         calculateStdDev,
         calculateCP,
         calculateCPK,
+        checkRange,
         api_access,
         currentDate,
         getCustomDate,
