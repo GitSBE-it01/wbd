@@ -6,6 +6,9 @@ await auth2();
 GeneralDOM.init('');
 GeneralDOM.td_input_default();
 NavDOM.active_link('nav','');
+const user_detail = JSON.parse(sessionStorage.getItem('userData'));
+const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
+console.log(user);
 let hd_data = [];
 let log_data = [];
 let detail_data = [];
@@ -33,8 +36,7 @@ let master_filter =[];
 DtlistDOM.parse_opt("#alat_list","/",master,"sn_id","new_subcat","no_asset","_desc");
 DtlistDOM.parse_opt("#user_list","-",user_list,"Name","Position","Grade");
 DtlistDOM.parse_opt("#loc_list","-",loc_list,"location");
-const user_detail = JSON.parse(sessionStorage.getItem('userData'));
-const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
+
 DOM.add_class('#load',"hidden");
 ButtonDOM.show_hidden('#open_dtlist', '#input__alat_search');
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'vjs_hd', 'id');

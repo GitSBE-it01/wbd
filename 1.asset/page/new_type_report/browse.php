@@ -73,13 +73,24 @@ createHTML([
                     'id'=> 'primary',
                     'class'=>'w-full flex flex-row scrollable-y',
                     'body'=>[
-                        
                         table_create2($browse_table)
                     ]
                 ])
             ]
+        ])
+        // hidden div 
+        .Comp::div([
+            'id'=>'spc_graph',
+            'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-200 custom_scroll',
+            'body'=>[
+                Comp::button([
+                    'id'=>'close_detail',
+                    'class'=>'w-6 h-6 cross_gray rounded-full top-[20vh] right-[18vw] fixed border-2 border-black'
+                ])
+            ]
         ])."
         <script type='module' src='./client_process/browse.js';></script>
+        <script src='https://cdn.jsdelivr.net/npm/chart.js'></script>
         "
 ]);
     

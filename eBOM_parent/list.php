@@ -21,6 +21,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     <div class='loading'></div>
 </div>
 <script type='module'>
+    import { currentDate} from "../3.utility/index.js";
     const initPage = performance.now();
     import {
         loading, 
@@ -45,16 +46,23 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     // start up web page
     const root = document.getElementById('root');
     await createNav(navigation);
-    const bomDt = await bom.getData();
+    const bomSrc = await bom.getData();
     activeLink('navID', ['f-or7']);
     await createSearch(searchBarMain);
     root.removeChild(document.querySelector('.loading'));
     
-    console.log(bomDt);
     const endInit = performance.now();
     const dlDt = (endInit - initPage) / 1000;
     console.log('waktu inisiasi dan penarikan data : ' + dlDt);
-
+    const bomDt = [];
+    const today = currentDate('-');
+    console.log(today);
+    bomSrc.forEach(dt=>{
+        if(dt['End_Effective'] === null || dt['End_Effective'] > today) {
+            bomDt.push(dt);
+        }
+    })
+    console.log({bomSrc,bomDt});
     const start1 = performance.now();
     const comp = [];
     bomDt.forEach(dt=>{
@@ -62,7 +70,6 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         if(!comp.includes(data)) {
             comp.push(data);
         }
-
     })
     
     const parent = {};

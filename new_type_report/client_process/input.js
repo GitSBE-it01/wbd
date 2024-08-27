@@ -21,9 +21,12 @@ let code_data_hd = '';
 let code_data_hd_1 = '';
 let code_data_hd_2 = '';
 let grp_code = '';
-const item = await api_access('get','qad_item', '');
-const reff = await api_access('get','nt_reff', '');
-const wo_list = await api_access('fetch_wo_prot_specific_item__cache','qad_wo', '');
+const [item, reff, wo_list] = await Promise.all([
+  await api_access('get','qad_item', ''),
+  await api_access('get','nt_reff', ''),
+  await api_access('fetch_wo_prot_specific_item__cache','qad_wo', '')
+]);
+
 console.log({item, wo_list, reff});
 DtlistDOM.parse_opt('#wo_list', '-', wo_list, 'wo_id', 'wo','item_number', '_desc');
 DtlistDOM.parse_opt('#item_list', '-', item, 'pt_part', 'pt_desc1', 'pt_desc2');
@@ -70,11 +73,14 @@ document.addEventListener('change', async(e) =>{
         cek_id.forEach(d2=>{
           d2.id += '__'+dt.id;
         })
-        const field = new_tmp.querySelectorAll('[name]');
+        const field = new_tmp.querySelectorAll('input');
         field.forEach(d2=>{
           const fld = d2.getAttribute('name');
           if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
             d2.value = dt[`${fld}`];
+            if(dt[`${fld}`] === undefined) {
+              d2.value ='';
+            }
             d2.disabled = true;
             d2.classList.toggle('bg-slate-700');
             d2.classList.toggle('text-white');
@@ -101,7 +107,7 @@ document.addEventListener('change', async(e) =>{
     return;
   }
 
-    // utk show hidden result 
+  // utk show hidden result 
   // ------------------------------------------------------
   if(e.target.getAttribute('name') === 'item_comp' ) {
     const val = e.target.value.split('--');
@@ -110,11 +116,13 @@ document.addEventListener('change', async(e) =>{
     const dsc = dtl.querySelector('[data-name="desc_comp"]');
     code_data_hd_1 = code_data_hd + '__'+val[0] + '__';
     const par_prod = dtl.querySelector('[name="part_prod"]');
-    if(val[0] === itm_inp.value) {
+    console.log(itm_inp.textContent);
+    if(val[0] === itm_inp.textContent) {
       par_prod.value = 'product';
     } else {
       par_prod.value = 'part';
     }
+    console.log(par_prod);
     if(val.length === 3) {
       dsc.value = val[1]+" "+val[2];
     } else {
@@ -241,6 +249,15 @@ document.addEventListener('click', async(e) =>{
         alert('data inputted to database')
       }
     }
+    const inp_all = main.querySelectorAll('input');
+    inp_all.forEach(dt=>{
+      dt.disabled = true;
+      dt.classList.toggle('bg-slate-700');
+      dt.classList.toggle('text-white');
+    })
+    const sbmt_btn = main.querySelector('[data-method="submit"]');
+    sbmt_btn.disabled = true;
+    sbmt_btn.classList.toggle('text-white');
     DOM.add_class('#load', 'hidden');
     return;
   }
@@ -250,13 +267,20 @@ document.addEventListener('click', async(e) =>{
   if(e.target.id.includes('edit')) {
     DOM.rmv_class('#load', 'hidden');
     const cont = e.target.closest('[data-detail]');
+    console.log({cont});
     const disbl = cont.querySelectorAll('input[disabled], select[disabled]')
     console.log(disbl);
     disbl.forEach(dt=>{
       dt.disabled =false;
-      d2.classList.toggle('bg-slate-700');
-      d2.classList.toggle('text-white');
+      dt.classList.toggle('bg-slate-700');
+      dt.classList.toggle('text-white');
     })
+    const sbmt_btn = cont.querySelectorAll('button[disabled]');
+    sbmt_btn.forEach(dt=>{
+      dt.disabled =false;
+      dt.classList.toggle('text-white');
+    })
+
     DOM.add_class('#load', 'hidden');
     return;
   }

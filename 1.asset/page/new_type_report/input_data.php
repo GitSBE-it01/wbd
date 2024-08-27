@@ -243,16 +243,19 @@ createHTML([
                                             'body'=>[
                                                 Comp::button([
                                                     'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300',
+                                                    'data_attr'=>['method::submit'],
                                                     'id'=>'submit_btn',
                                                     'body'=>'submit'
                                                 ]),
                                                 Comp::button([
                                                     'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300',
+                                                    'data_attr'=>['method::edit'],
                                                     'id'=>'edit_btn',
                                                     'body'=>'edit'
                                                 ]),
                                                 Comp::button([
                                                     'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:bg-slate-600 hover:font-semibold duration-300',
+                                                    'data_attr'=>['method::del'],
                                                     'id'=>'del_btn',
                                                     'body'=>'delete'
                                                 ]),

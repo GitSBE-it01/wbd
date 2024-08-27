@@ -13,9 +13,13 @@ const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const role = user_detail.role;
 
 let data_filter_val = '';
-const mstr_dt = await api_access('get','nt_mstr', '');
-const wo_list = await api_access('fetch_wo_prot_with_desc__cache','qad_wo', '');
-const detail_data = await api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', '');
+const [mstr_dt, wo_list, detail_data] = await Promise.all([
+  await api_access('get','nt_mstr', ''),
+  await api_access('fetch_wo_prot_with_desc__cache','qad_wo', ''),
+  await api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', ''),
+]);
+
+
 let master = [];
 
 wo_list.forEach(dt=>{

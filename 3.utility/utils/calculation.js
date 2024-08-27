@@ -24,20 +24,7 @@ export const calculateCPK = (mean, standardDeviation, upperSpecLimit, lowerSpecL
   return Math.min(CPK1, CPK2);
 }
 
-export const checkRange = (data, usl, lsl)=>{
-  data.push(usl);
-  data.push(lsl);
-  const max = Math.max(...data);
-  const min = Math.min(...data);
-  const diff = (max-min)/10;
-  let result = 0;
-  if(diff>100) {return result = diff.toFixed(0);}
-  if(diff>10) {return result = diff.toFixed(2);}
-  if(diff>0.1) {return result = diff.toFixed(4);}
-  if(diff>0.01) {return result = diff.toFixed(6);}
-}
-
-export const checkRange2 = (usl, lsl)=>{
+export const checkRange = (usl, lsl)=>{
   const diff = usl - lsl;
   let result = 0;
   if(diff>100) {return result = 0;}

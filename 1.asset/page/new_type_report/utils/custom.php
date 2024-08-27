@@ -11,7 +11,7 @@ function input_spc ($col_count, $row_count) {
                 'placeholder'=>$count,
                 'name'=>'result',
                 'data_attr'=>['name::no_repeat','id::'.$count],
-                'class'=>'rounded border-2 px-2 flex items-center justify-center border-black w-[3vw] hidden'
+                'class'=>'rounded border-2 px-2 flex items-center justify-center border-black w-[4vw] hidden'
             ]);
             $count++;
             $row_total .= $input;
@@ -27,8 +27,4 @@ function input_spc ($col_count, $row_count) {
     ]);
     return $result;
 }
-
-
-
-
 ?>

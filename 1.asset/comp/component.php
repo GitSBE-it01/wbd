@@ -132,6 +132,40 @@ class Comp {
         return $component;
     }
 
+    static function canvas($array) {
+        $title = isset($array['title']) ? "title='".$array['title']."' " : '';
+        $class = isset($array['class']) ? "class='".$array['class']."' " : '';
+        $id = isset($array['id']) ? "id='".$array['id']."' " : '';
+        $name = isset($array['name']) ? "name='".$array['name']."' " : '';
+        $body = '';
+        if(isset($array['body'])) {
+            if(is_array($array['body'])) {
+                foreach($array['body'] as $val) {
+                    $body .= $val;
+                }
+            } else {
+                $body = $array['body'];
+            }
+        }
+        $data_attr = '';
+        if(isset($array['data_attr'])) {
+            foreach($array['data_attr'] as $val2) {
+                $data_att = explode('::', $val2);
+                $data_attr .= 'data-'.$data_att[0]."='".$data_att[1]."' ";
+            }
+        }
+        $component = "<canvas " 
+        .$title
+        .$id
+        .$name
+        .$data_attr
+        .$class.">"
+        .$body."
+        </canvas>";
+
+        return $component;
+    }
+
     static function nav($array) {
         $title = isset($array['title']) ? "title='".$array['title']."' " : '';
         $class = isset($array['class']) ? "class='".$array['class']."' " : '';
