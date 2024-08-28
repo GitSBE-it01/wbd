@@ -82,11 +82,10 @@ ButtonDOM.edit_form_button('#edit_detail','#submit_detail', '#detail_form', ['fo
 //----------------------------------------------
 let counter =0;
 if(document.querySelector('#add_new_stock') !== null) {
-
-  ButtonDOM.insert_row('#add_new_stock','#stock_table_new', '#stock_table', counter);
+  ButtonDOM.insert_row2('#add_new_stock','#stock_table_new', '#stock_table', counter, 'bot');
 }
 if(document.querySelector('#add_new_type') !== null) {
-  ButtonDOM.insert_row('#add_new_type','#type_table_new', '#type_table', counter);
+  ButtonDOM.insert_row2('#add_new_type','#type_table_new', '#type_table', counter, 'bot');
 }
 
 /* ====================================================================

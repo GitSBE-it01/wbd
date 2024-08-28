@@ -20,16 +20,15 @@ function routes($model, $db_conn) {
         $routes = $reff[4];
     }
     $action = $_SERVER['HTTP_REQ_METHOD'];
-    $today = date('Ymd');
-    $param =  $today."__".$table."__".$action;
+    $param =  $table."__".$action;
     switch($method) {
         case "GET":
             $mdl = $model[$table];
             if($cache === 'cache') {
                 if(!check_cache($routes, $param)) {
-                    delete_cache2($routes, $table);
+                    delete_cache($routes, $param);
                     $response  = $db_conn->getQuery($action,$mdl);
-                    cache_data($param, $routes, $response);
+                    cache_data($routes, $param, $response);
                 } else {
                     $response = get_cache($routes, $param);
                 }
@@ -44,9 +43,9 @@ function routes($model, $db_conn) {
             } else if($action === 'fetch' || $action=== 'fetch2') {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
-                        delete_cache2($routes, $table);
+                        delete_cache($routes, $param);
                         $response  = $db_conn->fetchQuery($action,$mdl, $dt);
-                        cache_data($param, $routes, $response);
+                        cache_data($routes, $param, $response);
                     } else {
                         $response = get_cache($routes, $param);
                     }
@@ -56,9 +55,9 @@ function routes($model, $db_conn) {
             } else {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
-                        delete_cache2($routes, $table);
+                        delete_cache($routes, $param);
                         $response = custom_handle($db_conn, $dt, $routes, $action, $model, $table);
-                        cache_data($param, $routes, $response);
+                        cache_data($routes, $param, $response);
                     } else {
                         $response = get_cache($routes, $param);
                     }

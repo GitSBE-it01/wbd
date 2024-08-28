@@ -103,4 +103,26 @@ $model['qad_rout'] = new Model('dbqad_live.ro_det',
 ],
 'id::i');
 
+$model['qad_wobb'] = new Model('dbqad_live.wod_det',
+[
+    'log::s',
+    'wod_lot::s',
+    'wod_part::s',
+    'wod_qty_req::i',
+],
+'id::i');
+
+$model['qad_loc'] = new Model('dbqad_live.ld_det',
+[
+    'log::s',
+    'ld_part::s',
+    'ld_qty_oh::i',
+    'ld_loc::s',
+    'ld_lot::s',
+    'ld_status::s',
+    'ld_ref::s',
+    'ld_site::s',
+],
+'id::i');
+
 

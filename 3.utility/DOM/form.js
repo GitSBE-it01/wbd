@@ -64,6 +64,9 @@ export class InputDOM {
         field.forEach(dt=>{
             const fld_name = dt.getAttribute('name');
             dt.value = data[0][`${fld_name}`];
+            if(data[0][`${fld_name}`] === undefined){
+                dt.value = '';
+            }
         })
         return;
     }
@@ -84,14 +87,15 @@ export class InputDOM {
         if(tbl && btn) {
           tbl.addEventListener('change', function(event) {
             if(event.target.hasAttribute('name')) {
-              const td = event.target.closest('td');
-              const tr = td.closest('tr');
-              if(tr.hasAttribute('data-change')) {
-                  DOM.add_class(btn, 'font-bold', 'bg-red-400');
-                  DOM.rmv_class(btn, 'bg-gray-300', 'text-slate-200');
-                  DOM.rmv_attr(btn, 'disabled');
-                  DOM.set_attr(btn, 'data-method', 'submit');
-                  return;
+                const td = event.target.closest('td');
+                const tr = td.closest('tr');
+                if(!tr.hasAttribute('data-change') && tr.getAttribute('data-change') !== 'new' && event.target.getAttribute('data-current') !== event.target.value) {
+                    tr.setAttribute('data-change', 'change');
+                    DOM.add_class(btn, 'font-bold', 'bg-red-400');
+                    DOM.rmv_class(btn, 'bg-gray-300', 'text-slate-200');
+                    DOM.rmv_attr(btn, 'disabled');
+                    DOM.set_attr(btn, 'data-method', 'submit');
+                    return;
               }
               const table = tr.closest('table');
               const tr_all = table.querySelectorAll('tr');

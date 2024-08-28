@@ -58,6 +58,14 @@ $detail_form = [
                 'class'=> 'rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
             ]
         ],
+        [
+            'type'=>'text',
+            'label'=>['for'=>'remark','body'=>'Remark'],
+            'input'=>['id'=>'remark','name'=>'remark',
+                'disable'=>'',
+                'class'=> 'rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+            ]
+        ],
     ]
 ];
 
