@@ -17,6 +17,7 @@ createHTML([
     'body'=>
         Comp::dtlist(['id'=>'item_list'])
         .Comp::dtlist(['id'=>'wo_list'])
+        .Comp::dtlist(['id'=>'reff'])
         .$load2."
         ".Comp::nav([
             'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
@@ -150,9 +151,8 @@ createHTML([
                                                     'class'=>'text-white bg-transparent w-[30%]',
                                                     'body'=>'Tipe Pengukuran'
                                                 ]),
-                                                Comp::input([
+                                                Comp::select([
                                                     'id'=>'measure',
-                                                    'type_attr'=>'text',
                                                     'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]',
                                                     'require'=>"",
                                                     'name'=>'measure'
@@ -169,6 +169,7 @@ createHTML([
                                                 ]),
                                                 Comp::input([
                                                     'id'=>'um',
+                                                    'disable'=>'',
                                                     'type_attr'=>'text',
                                                     'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]',
                                                     'name'=>'um'

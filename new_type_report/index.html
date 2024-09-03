@@ -23,6 +23,8 @@
         </a>
         </li><li class='h-full w-[10vw] justify-center items-center flex' ><a href='input.html' class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' >Input
         </a>
+        </li><li class='h-full w-[10vw] justify-center items-center flex' ><a href='reff.html' class='flex justify-center items-center hover:bg-slate-700 duration-200 ease-in-out hover:border-blue-500 hover:font-semibold hover:border-b-4 h-full w-full text-white ease-in-out duration-200' >Reference
+        </a>
         </li>
         </ul>
         </div><div class='w-[30vw] h-full flex' ><h1 class='text-2xl underline h-full w-full pt-2 capitalize font-bold italic text-slate-200 text-right mr-[1vw]' >New Type Report
@@ -36,11 +38,12 @@
         </header>
         <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' ><table id='main_table' class='w-full scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Item Number
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Deskripsi
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]' >Status
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >FO before Break In
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Toleransi FO before
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >FO after Break In
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Toleransi FO after
-        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]' >Detail
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]' >Detail
         </th>
         </tr>
         </thead><tbody><tr data-id='main_table__template' class='hidden' ><input name='id' type='hidden' 
@@ -50,6 +53,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_tabletemplate' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_tabletemplate' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_tabletemplate' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_tabletemplate' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_tabletemplate' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_tabletemplate' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -75,6 +81,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table0' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table0' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table0' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table0' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table0' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table0' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -98,6 +107,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table1' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table1' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table1' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table1' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table1' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table1' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -123,6 +135,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table2' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table2' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table2' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table2' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table2' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table2' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -146,6 +161,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table3' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table3' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table3' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table3' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table3' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table3' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -171,6 +189,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table4' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table4' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table4' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table4' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table4' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table4' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -194,6 +215,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table5' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table5' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table5' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table5' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table5' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table5' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -219,6 +243,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table6' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table6' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table6' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table6' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table6' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table6' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -242,6 +269,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table7' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table7' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table7' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table7' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table7' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table7' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -267,6 +297,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table8' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table8' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table8' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table8' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table8' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table8' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -290,6 +323,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table9' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table9' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table9' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table9' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table9' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table9' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -315,6 +351,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table10' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table10' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table10' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table10' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table10' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table10' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -338,6 +377,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table11' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table11' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table11' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table11' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table11' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table11' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -363,6 +405,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table12' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table12' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table12' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table12' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table12' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table12' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -386,6 +431,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table13' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table13' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table13' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table13' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table13' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table13' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -411,6 +459,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table14' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table14' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table14' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table14' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table14' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table14' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -434,6 +485,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table15' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table15' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table15' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table15' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table15' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table15' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -459,6 +513,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table16' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table16' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table16' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table16' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table16' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table16' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -482,6 +539,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table17' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table17' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table17' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table17' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table17' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table17' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -507,6 +567,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table18' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table18' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table18' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table18' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table18' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table18' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -530,6 +593,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table19' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table19' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table19' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table19' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table19' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table19' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -555,6 +621,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table20' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table20' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table20' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table20' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table20' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table20' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -578,6 +647,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table21' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table21' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table21' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table21' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table21' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table21' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -603,6 +675,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table22' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table22' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table22' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table22' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table22' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table22' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -626,6 +701,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table23' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table23' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table23' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table23' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table23' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table23' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -651,6 +729,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table24' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table24' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table24' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table24' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table24' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table24' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -674,6 +755,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table25' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table25' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table25' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table25' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table25' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table25' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -699,6 +783,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table26' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table26' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table26' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table26' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table26' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table26' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -722,6 +809,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table27' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table27' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table27' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table27' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table27' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table27' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -747,6 +837,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table28' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table28' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table28' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table28' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table28' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table28' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -770,6 +863,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table29' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table29' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table29' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table29' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table29' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table29' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -795,6 +891,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table30' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table30' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table30' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table30' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table30' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table30' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -818,6 +917,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table31' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table31' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table31' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table31' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table31' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table31' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -843,6 +945,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table32' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table32' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table32' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table32' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table32' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table32' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -866,6 +971,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table33' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table33' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table33' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table33' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table33' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table33' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -891,6 +999,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table34' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table34' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table34' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table34' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table34' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table34' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -914,6 +1025,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table35' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table35' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table35' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table35' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table35' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table35' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -939,6 +1053,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table36' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table36' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table36' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table36' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table36' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table36' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -962,6 +1079,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table37' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table37' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table37' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table37' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table37' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table37' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -987,6 +1107,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table38' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table38' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table38' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table38' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table38' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table38' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1010,6 +1133,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table39' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table39' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table39' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table39' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table39' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table39' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1035,6 +1161,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table40' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table40' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table40' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table40' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table40' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table40' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1058,6 +1187,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table41' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table41' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table41' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table41' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table41' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table41' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1083,6 +1215,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table42' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table42' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table42' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table42' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table42' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table42' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1106,6 +1241,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table43' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table43' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table43' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table43' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table43' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table43' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1131,6 +1269,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table44' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table44' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table44' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table44' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table44' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table44' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1154,6 +1295,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table45' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table45' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table45' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table45' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table45' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table45' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1179,6 +1323,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table46' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table46' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table46' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table46' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table46' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table46' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1202,6 +1349,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table47' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table47' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table47' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table47' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table47' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table47' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
@@ -1227,6 +1377,9 @@
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table48' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table48' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table48' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table48' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table48' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table48' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
@@ -1250,6 +1403,9 @@
             
         </td><td data-field='_desc' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='_desc__main_table49' data-field='_desc' class='p-2 w-[30%]' >
             </label><input id='_desc__main_table49' name='_desc' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
+            
+        </td><td data-field='status_wo' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='status_wo__main_table49' data-field='status_wo' class='p-2 w-[30%]' >
+            </label><input id='status_wo__main_table49' name='status_wo' type='text' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
         </td><td data-field='fo_before_brk_in' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='fo_before_brk_in__main_table49' data-field='fo_before_brk_in' class='p-2 w-[30%]' >
             </label><input id='fo_before_brk_in__main_table49' name='fo_before_brk_in' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >

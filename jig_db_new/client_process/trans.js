@@ -21,6 +21,7 @@ DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
 let start =performance.now();
 let loc = await api_access('get','jig_loc','');
 const trans = await api_access('fetch','jig_trans',{status:'open'});
+const header_master = await api_access('fetch_OH_summary__cache','jig_trans','');
 const master = await api_access('get','jig_mstr','');
 let loc_sum = [];
 let detail_show = [];
@@ -31,6 +32,7 @@ console.log('total penarikan data = ', (end-start)/1000)
 // calculation for getting total qty per item jig
 // -------------------------------------------------------
 start =performance.now();
+/*
 loc.forEach(dt=>{
     const keys = Object.keys(dt)
     let filter = '';
@@ -81,15 +83,16 @@ master.forEach(dt=>{
     dt['qty_br'] = qty_bor,
     header_master.push(data);
 })
-let header_show = header_master;
-console.log({loc, master, header_master});
+*/
+//let header_show = header_master;
+//console.log({loc, master, header_master});
 end = performance.now();
 console.log('total proses 2 = ', (end-start)/1000)
 
 // parsing data to table
 // -------------------------------------------------------
-TableDOM.parse_data('#trans_header_table', header_show, 1);
-NavDOM.pgList_init('#trans_page', header_show, '#trans_header_table');
+TableDOM.parse_data('#trans_header_table', trans, 1);
+NavDOM.pgList_init('#trans_page', trans, '#trans_header_table');
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 DOM.add_class('#load',"hidden");

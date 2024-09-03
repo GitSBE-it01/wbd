@@ -30,6 +30,14 @@ const [item, reff, wo_list] = await Promise.all([
 console.log({item, wo_list, reff});
 DtlistDOM.parse_opt('#wo_list', '-', wo_list, 'wo_id', 'wo','item_number', '_desc');
 DtlistDOM.parse_opt('#item_list', '-', item, 'pt_part', 'pt_desc1', 'pt_desc2');
+const tmplt = document.querySelector('#template');
+const slct = tmplt.querySelector('#measure');
+reff.forEach(dt=>{
+  const opt = document.createElement('option');
+  opt.value = dt.type;
+  opt.textContent = dt.type;
+  slct.appendChild(opt);
+})
 DOM.add_class('#load',"hidden");
 
 
@@ -88,6 +96,22 @@ document.addEventListener('change', async(e) =>{
             d2.textContent = dt[`${fld}`];
           }
         })
+        const field2 = new_tmp.querySelectorAll('select');
+        field2.forEach(d2=>{
+          const fld = d2.getAttribute('name');
+          if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
+            d2.value = dt[`${fld}`];
+            if(dt[`${fld}`] === undefined) {
+              d2.value ='';
+            }
+            d2.disabled = true;
+            d2.classList.toggle('bg-slate-700');
+            d2.classList.toggle('text-white');
+          } else {
+            d2.textContent = dt[`${fld}`];
+          }
+        })
+
         const detail_data = await api_access('fetch', 'nt_data', {hd_code:dt.id});
         console.log({detail_data});
         for(let ii=0; ii<detail_data.length; ii++) {
@@ -178,6 +202,8 @@ document.addEventListener('change', async(e) =>{
     }
     return;
   }
+  
+
 })
 
 
@@ -271,9 +297,11 @@ document.addEventListener('click', async(e) =>{
     const disbl = cont.querySelectorAll('input[disabled], select[disabled]')
     console.log(disbl);
     disbl.forEach(dt=>{
-      dt.disabled =false;
-      dt.classList.toggle('bg-slate-700');
-      dt.classList.toggle('text-white');
+      if(dt.getAttribute('name') !== 'um') {
+        dt.disabled =false;
+        dt.classList.toggle('text-white');
+        dt.classList.toggle('bg-slate-700');
+      }
     })
     const sbmt_btn = cont.querySelectorAll('button[disabled]');
     sbmt_btn.forEach(dt=>{
@@ -309,6 +337,17 @@ document.addEventListener('click', async(e) =>{
     }
     cont.remove();
     DOM.add_class('#load', 'hidden');
+    return;
+  }
+
+  // autoset um
+  // ------------------------------------------------------
+  if(e.target.getAttribute('name')==='measure') {
+    const val = e.target.value;
+    const div_dtl = e.target.closest('[data-detail]');
+    const um = div_dtl.querySelector('[name = "um"]');
+    const val_all = reff.find(obj=>obj.type === val);
+    um.value = val_all.um;
     return;
   }
 })

@@ -44,6 +44,23 @@ $main_table = [
         [
             'type'=>'input',
             'th'=>[
+                'body'=>'Status',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]'
+            ],
+            'td'=>[
+                'data_attr'=>['field::status_wo'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'status_wo', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
                 'body'=>'FO before Break In',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
@@ -117,7 +134,7 @@ $main_table = [
             'type'=>'set_btn',
             'th'=>[
                 'body'=>'Detail',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[5vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
                 'data_attr'=>['field::data_group'],
@@ -418,5 +435,48 @@ $browse_table = [
         ],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'repeat_code'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'hd_code'],
+    ]
+];
+
+$reff_table = [
+    'id'=> 'reff_table', 
+    'class'=>'w-full scrollable-y',
+    'row_count' =>100,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Tipe',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'data_attr'=>['field::type'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'type', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Satuan',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::um'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'um', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
     ]
 ];

@@ -40,6 +40,7 @@ $model['nt_data'] = new Model('db_wbd.ntr_data',
 $model['nt_reff'] = new Model('db_wbd.ntr_measure_list',
 [
     'type::s',
+    'um::s',
 ],
 'type::s');
 

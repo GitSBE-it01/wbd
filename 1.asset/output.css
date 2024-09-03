@@ -655,6 +655,9 @@ video {
 .right-8 {
   right: 2rem;
 }
+.right-10 {
+  right: 2.5rem;
+}
 
 .right-\[16vw\] {
   right: 16vw;

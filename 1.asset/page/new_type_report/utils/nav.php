@@ -16,5 +16,11 @@ $nav_array = [
                 'body'=> 'Input'
             ]
         ],
+        [
+            'link'=>[
+                'href'=> 'reff.html', 
+                'body'=> 'Reference'
+            ]
+        ],
     ]
 ];

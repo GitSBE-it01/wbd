@@ -13,40 +13,16 @@ const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const role = user_detail.role;
 
 let data_filter_val = '';
-const [mstr_dt, wo_list, detail_data] = await Promise.all([
+const [mstr_dt, detail_data] = await Promise.all([
   await api_access('get','nt_mstr', ''),
-  await api_access('fetch_wo_prot_with_desc__cache','qad_wo', ''),
+  //await api_access('fetch_wo_prot_with_desc__cache','qad_wo', ''),
   await api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', ''),
 ]);
 
-
-let master = [];
-
-wo_list.forEach(dt=>{
-  const cek = mstr_dt.find(obj=>obj.item_number === dt.item_number);
-  let data = '';
-  const filter = Object.values(dt).map(value => String(value)).join('--');
-  if(cek !== undefined) {
-    data = {
-      ...dt,
-      fo_before_brk_in: cek.fo_before_brk_in,
-      tol_fo_before: cek.tol_fo_before,
-      fo_after_brk_in: cek.fo_after_brk_in,
-      tol_fo_after: cek.tol_fo_after,
-      added: cek.added,
-      filter: filter
-    } 
-  }else {
-      data = {
-        ...dt,
-        filter:filter
-      }
-    }
-    master.push(data);
-})
-
+let master = mstr_dt;
 
 master.sort((a,b)=>{
+  if (a.status_wo !== b.status_wo) return b.status_wo.localeCompare(a.status_wo);
   if (a.item_number !== b.item_number) return a.item_number.localeCompare(b.item_number);
   return;
 })
@@ -57,7 +33,7 @@ detail_data.forEach(dt=>{
 })
 detail_data.sort((a,b)=>{
   if (a.item_number !== b.item_number) return a.item_number.localeCompare(b.item_number);
-  if (a.rel_date !== b.rel_date) return a.rel_date.localeCompare(b.rel_date);
+  if (a.rel_date !== b.rel_date) return b.rel_date.localeCompare(a.rel_date);
   return;
 })
 console.log({master, detail_data, mstr_dt});
