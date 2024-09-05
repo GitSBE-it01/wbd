@@ -19,8 +19,11 @@ const [mstr_dt, detail_data] = await Promise.all([
   await api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', ''),
 ]);
 
+mstr_dt.forEach(dt=>{
+  const filter = Object.values(dt).map(value => String(value)).join('--');
+  dt['filter']=filter;
+})
 let master = mstr_dt;
-
 master.sort((a,b)=>{
   if (a.status_wo !== b.status_wo) return b.status_wo.localeCompare(a.status_wo);
   if (a.item_number !== b.item_number) return a.item_number.localeCompare(b.item_number);

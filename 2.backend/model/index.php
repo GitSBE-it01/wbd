@@ -14,6 +14,13 @@ $model['role'] = new Model('db_wbd.access',
     'abs_name::s',
 ],
 'id::i');
+$model['wb_test'] = new Model('db_wbd.wbd_test',
+[
+    'test1::s',
+    'test2::s',
+    'comment::s',
+],
+'id::i');
 require_once "jig.php";
 require_once "new_type_report.php";
 require_once "ngvar.php";

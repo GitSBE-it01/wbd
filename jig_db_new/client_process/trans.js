@@ -21,8 +21,7 @@ DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
 let start =performance.now();
 let loc = await api_access('get','jig_loc','');
 const trans = await api_access('fetch','jig_trans',{status:'open'});
-const header_master = await api_access('fetch_OH_summary__cache','jig_trans','');
-const master = await api_access('get','jig_mstr','');
+const master = await api_access('get__cache','jig_mstr','');
 let loc_sum = [];
 let detail_show = [];
 console.log({loc, trans, master});
@@ -32,7 +31,6 @@ console.log('total penarikan data = ', (end-start)/1000)
 // calculation for getting total qty per item jig
 // -------------------------------------------------------
 start =performance.now();
-/*
 loc.forEach(dt=>{
     const keys = Object.keys(dt)
     let filter = '';
@@ -63,6 +61,7 @@ console.log('total proses 1 = ', (end-start)/1000)
 // -------------------------------------------------------
 start =performance.now();
 let header_master = [];
+let header_show = [];
 master.forEach(dt=>{
     const bor = trans.filter(obj=>obj.item_jig === dt.item_jig);
     let qty_bor = 0;
@@ -83,16 +82,16 @@ master.forEach(dt=>{
     dt['qty_br'] = qty_bor,
     header_master.push(data);
 })
-*/
+
 //let header_show = header_master;
-//console.log({loc, master, header_master});
+console.log({loc, master, header_master});
 end = performance.now();
 console.log('total proses 2 = ', (end-start)/1000)
 
 // parsing data to table
 // -------------------------------------------------------
-TableDOM.parse_data('#trans_header_table', trans, 1);
-NavDOM.pgList_init('#trans_page', trans, '#trans_header_table');
+TableDOM.parse_data('#trans_header_table', header_master, 1);
+NavDOM.pgList_init('#trans_page', header_master, '#trans_header_table');
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 DOM.add_class('#load',"hidden");
@@ -136,7 +135,6 @@ document.addEventListener('click', async function(event) {
       }
       detail_show.push(trans_dt);
     })
-    console.log(detail_show);
     TableDOM.parse_data('#trans_detail_table', detail_show, 1);
     NavDOM.pgList_init('#trans_detail_page', detail_show, '#trans_detail_table');
     const tbl = document.querySelector('#trans_detail_table');
@@ -165,7 +163,6 @@ document.addEventListener('click', async function(event) {
     DOM.rmv_class('.loading2',"hidden");
     const main_div = document.querySelector('[data-card="detail"]');
     const tr = main_div.querySelectorAll('[data-value]');
-    console.log(tr);
     tr.forEach(dt=>{
       const btn = dt.querySelectorAll('.arrow_left');
       btn.forEach(d2=>{

@@ -21,7 +21,6 @@ createHTML([
             'body'=>navi($nav_array)
         ])."
         " 
-        // main view
         .Comp::header([
             'class'=>'fixed top-[5vh] flex flex-row gap-4 w-screen bg-slate-700 h-[5vh] items-center pl-4',
             'body'=>[

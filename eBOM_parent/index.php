@@ -41,11 +41,13 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     import {
         bom
     } from './utility/index.js';
+    import {api_access} from '../3.utility/index.js';
     
     // start up web page
     const root = document.getElementById('root');
     await createNav(navigation);
     const bomSrc = await bom.getData();
+    const item = await api_access('fetch_item__cache','qad_item','');
     activeLink('navID', ['f-or7']);
     await createSearch(searchBarMain);
     root.removeChild(document.querySelector('.loading'));
@@ -75,7 +77,9 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     
     const parent = {};
     bomDt.forEach(dt => {
-        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
+        const cekItem = item.find(obj=>obj.pt_part === dt.Parent_Item);
+        const status = cekItem ? cekItem['pt_status'] : "OBSOLETE";
+        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + status +")";
         const data = dt.Component_Item + " -- " + dt.Description_2 + "(" + dt.Stats +")";
         
         if(!parent[fltr] && fltr[0] === '1') {
@@ -87,7 +91,9 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
 
     const allParent = {};
     bomDt.forEach(dt=> {
-        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + dt.Stats +")";
+        const cekItem = item.find(obj=>obj.pt_part === dt.Parent_Item);
+        const status = cekItem ? cekItem['pt_status'] : "OBSOLETE";
+        const fltr = dt.Parent_Item + " -- " + dt.Description_1 + "(" + status +")";
         const data = dt.Component_Item + " -- " + dt.Description_2 + "(" + dt.Stats +")" ;
         if(!allParent[fltr]) {
             allParent[fltr] = [data];

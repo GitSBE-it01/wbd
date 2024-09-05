@@ -360,6 +360,7 @@ export class TableDOM2 {
         this.page_node = document.getElementById(pagination_id);
         this.page = 1;
         this.show_data = this.data;
+        this.counter = 0;
     }
 
     async table_parse_data() {
@@ -474,9 +475,10 @@ export class TableDOM2 {
     async table_new_row(post = 'upper') {
         const template = this.table.querySelector('[data-id *="template"]');
         const new_row = template.cloneNode(true);
-        new_row.setAttribute('data-id', `new__${tbl}__${counter}`);
+        new_row.setAttribute('data-id', `new__${this.id}__${this.counter}`);
         new_row.setAttribute('data-change', `new`);
         const name = new_row.querySelectorAll('[name]');
+        new_row.classList.remove('hidden');
         name.forEach(dt=>{
             if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
                 const name = dt.getAttribute('name');
@@ -486,12 +488,14 @@ export class TableDOM2 {
                     td = dt.closest('td');
                     const label = td.querySelector('label');
                     if(dt.hasAttribute('id')) {
-                        dt.id = `${name}__${target.id}__new__${counter}`;
-                        label.setAttribute('for', `${name}__${target.id}__new__${counter}`)
+                        dt.id = `${name}__${this.id}__new__${this.counter}`;
+                        label.setAttribute('for', `${name}__${this.id}__new__${this.counter}`)
                     }
                 }
             }
         })
+        this.counter++;
+        const tbody = this.table.querySelector('tbody');
         if(post === 'upper') {
             tbody.insertBefore(new_row,tbody.rows[0]);
         } else {
@@ -816,4 +820,45 @@ export class TableDOM2 {
         return;
     }
 
+    async submit_change_style_table(button_key) {
+        let btn = '';
+        if(button_key.nodeType) {
+            btn = button_key;
+        } else {
+            btn = document.querySelector(button_key);
+        }
+        if(btn) {
+            this.table.addEventListener('change', async(e)=>{
+                if(e.target.hasAttribute('name')) {
+                    const td = e.target.closest('td');
+                    const tr = td.closest('tr');
+                    if(!tr.hasAttribute('data-change') && tr.getAttribute('data-change') !== 'new' && e.target.getAttribute('data-current') !== e.target.value) {
+                        tr.setAttribute('data-change', 'change');
+                        DOM.add_class(btn, 'font-bold', 'bg-red-400');
+                        DOM.rmv_class(btn, 'bg-gray-300', 'text-slate-200');
+                        DOM.rmv_attr(btn, 'disabled');
+                        DOM.set_attr(btn, 'data-method', 'submit');
+                        return;
+                  } else {
+                    DOM.rmv_attr(tr,'data-change');
+                  }
+                  const tr_all = this.table.querySelectorAll('tr');
+                  let valid = false;
+                  tr_all.forEach(dt=>{
+                      if(dt.hasAttribute('data-change')) {
+                            console.log(dt)
+                          valid = true;
+                      }
+                  })
+                  if(!valid) {
+                      DOM.rmv_class(btn, 'font-bold', 'bg-red-400');
+                      DOM.add_class(btn, 'bg-gray-300', 'text-slate-200');
+                      DOM.set_attr(btn, 'disabled', 'true');
+                      DOM.rmv_attr(btn, 'data-method');
+                  }
+                }
+            })
+        }
+        return;
+      }
 }

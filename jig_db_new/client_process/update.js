@@ -157,8 +157,9 @@ document.addEventListener('click', async function(event) {
     }
     loc_show = loc.filter(obj=>obj.item_jig === splt[0]);
     log_loc_show = log_loc.filter(obj=>obj.item_jig === splt[0]);
+    console.log(log_loc_show);
     log_loc_show.sort((a,b)=>{
-      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.     trans_date);
     })
     console.log({loc, log_loc, loc_show, log_loc_show});
       TableDOM.parse_data('#stock_table', loc_show, 1);

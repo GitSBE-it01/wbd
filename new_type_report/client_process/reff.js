@@ -22,3 +22,12 @@ await main_dom.table_parse_data();
 await main_dom.table_pagination_init();
 await main_dom.table_pagination_response();
 DOM.add_class('#load',"hidden");
+
+await main_dom.submit_change_style_table('#submit');
+document.addEventListener('click', async(e)=>{
+  if(e.target.id === 'add') {
+    await main_dom.table_new_row();
+    return;
+  }
+})
+

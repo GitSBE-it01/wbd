@@ -84,7 +84,7 @@ createHTML([
 'body'=>$trans, 
 'name'=>'trans', 
 'title'=>"Jig Transaction",
-'path'=>'jig_db_new3'
+'path'=>'jig_db_new'
 ]);
 
 

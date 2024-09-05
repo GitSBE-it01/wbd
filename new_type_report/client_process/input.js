@@ -20,6 +20,7 @@ const desc_inp = document.querySelector('#_desc');
 let code_data_hd = '';
 let code_data_hd_1 = '';
 let code_data_hd_2 = '';
+let nt_hd_dt= [];
 let grp_code = '';
 const [item, reff, wo_list] = await Promise.all([
   await api_access('get','qad_item', ''),
@@ -49,7 +50,14 @@ document.addEventListener('change', async(e) =>{
   // ------------------------------------------------------
   if(e.target.id === 'id_input' ) {
     DOM.rmv_class('#load', 'hidden');
-    data_filter_val = e.target.value.split('--');
+    const cont = document.querySelector('#primary');
+    const child = cont.childNodes;
+    console.log(child);
+    console.log(child.length);
+    if(child.length>0) {
+      cont.innerHTML='';
+    }
+    data_filter_val = e.target.value.split('--'); 
     e.target.value = data_filter_val[0];
     itm_inp.textContent = data_filter_val[2];
     desc_inp.textContent = data_filter_val[3];
@@ -61,70 +69,72 @@ document.addEventListener('change', async(e) =>{
     }
     grp_code = data_filter_val[2]+'__'+data_filter_val[0];
     console.log(grp_code);
-    const nt_hd_dt = await api_access('fetch', 'nt_hd', {group_code:grp_code})
+    nt_hd_dt = await api_access('fetch', 'nt_hd', {group_code:grp_code})
     console.log({nt_hd_dt});
     const templ = document.querySelector('#template');
     if(nt_hd_dt.length>0) {
       for(let i=0; i<nt_hd_dt.length; i++) {
         const dt = nt_hd_dt[i];
-        const new_tmp = templ.cloneNode(true);
-        new_tmp.id = 'data__'+dt.id;
-        const btn_submit = new_tmp.querySelector(`#submit_btn`);
-        btn_submit.id += '__'+dt.id;
-        btn_submit.disabled = true;
-        btn_submit.classList.toggle('text-white')
-        new_tmp.setAttribute('data-detail', dt.id);
-        if(new_tmp.classList.contains('hidden')) {
-          new_tmp.classList.toggle('hidden');
-        }
-        const cek_id = new_tmp.querySelectorAll('[id]');
-        cek_id.forEach(d2=>{
-          d2.id += '__'+dt.id;
-        })
-        const field = new_tmp.querySelectorAll('input');
-        field.forEach(d2=>{
-          const fld = d2.getAttribute('name');
-          if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
-            d2.value = dt[`${fld}`];
-            if(dt[`${fld}`] === undefined) {
-              d2.value ='';
+        if(dt['part_prod'] !== 'remark') {
+          const new_tmp = templ.cloneNode(true);
+          new_tmp.id = 'data__'+dt.id;
+          const btn_submit = new_tmp.querySelector(`#submit_btn`);
+          btn_submit.id += '__'+dt.id;
+          btn_submit.disabled = true;
+          btn_submit.classList.toggle('text-white')
+          new_tmp.setAttribute('data-detail', dt.id);
+          if(new_tmp.classList.contains('hidden')) {
+            new_tmp.classList.toggle('hidden');
+          }
+          const cek_id = new_tmp.querySelectorAll('[id]');
+          cek_id.forEach(d2=>{
+            d2.id += '__'+dt.id;
+          })
+          const field = new_tmp.querySelectorAll('input');
+          field.forEach(d2=>{
+            const fld = d2.getAttribute('name');
+            if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
+              d2.value = dt[`${fld}`];
+              if(dt[`${fld}`] === undefined) {
+                d2.value ='';
+              }
+              d2.disabled = true;
+              d2.classList.toggle('bg-slate-700');
+              d2.classList.toggle('text-white');
+            } else {
+              d2.textContent = dt[`${fld}`];
             }
-            d2.disabled = true;
-            d2.classList.toggle('bg-slate-700');
-            d2.classList.toggle('text-white');
-          } else {
-            d2.textContent = dt[`${fld}`];
-          }
-        })
-        const field2 = new_tmp.querySelectorAll('select');
-        field2.forEach(d2=>{
-          const fld = d2.getAttribute('name');
-          if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
-            d2.value = dt[`${fld}`];
-            if(dt[`${fld}`] === undefined) {
-              d2.value ='';
+          })
+          const field2 = new_tmp.querySelectorAll('select');
+          field2.forEach(d2=>{
+            const fld = d2.getAttribute('name');
+            if(d2.tagName === 'INPUT' || d2.tagName==='SELECT') {
+              d2.value = dt[`${fld}`];
+              if(dt[`${fld}`] === undefined) {
+                d2.value ='';
+              }
+              d2.disabled = true;
+              d2.classList.toggle('bg-slate-700');
+              d2.classList.toggle('text-white');
+            } else {
+              d2.textContent = dt[`${fld}`];
             }
-            d2.disabled = true;
-            d2.classList.toggle('bg-slate-700');
-            d2.classList.toggle('text-white');
-          } else {
-            d2.textContent = dt[`${fld}`];
+          })
+  
+          const detail_data = await api_access('fetch', 'nt_data', {hd_code:dt.id});
+          console.log({detail_data});
+          for(let ii=0; ii<detail_data.length; ii++) {
+            let count = ii+1;
+            const inp = new_tmp.querySelector(`[data-id="${count}"]`);
+            inp.value = detail_data[ii].result;
+            if(inp.classList.contains('hidden')){
+              inp.classList.toggle('hidden');
+            }
           }
-        })
-
-        const detail_data = await api_access('fetch', 'nt_data', {hd_code:dt.id});
-        console.log({detail_data});
-        for(let ii=0; ii<detail_data.length; ii++) {
-          let count = ii+1;
-          const inp = new_tmp.querySelector(`[data-id="${count}"]`);
-          inp.value = detail_data[ii].result;
-          if(inp.classList.contains('hidden')){
-            inp.classList.toggle('hidden');
-          }
+          console.log({detail_data});
+          const primary = document.querySelector('#primary');
+          primary.insertBefore(new_tmp, primary.firstChild);
         }
-        console.log({detail_data});
-        const primary = document.querySelector('#primary');
-        primary.insertBefore(new_tmp, primary.firstChild);
       }
     }
     DOM.add_class('#load', 'hidden');
@@ -267,7 +277,24 @@ document.addEventListener('click', async(e) =>{
       inp_dt_data['repeat_code'] = code_data_hd+'__'+dt.getAttribute('data-id');
       inp_dt.push(inp_dt_data);
     })
-    console.log({inp_dt});
+    console.log({inp_dt, nt_hd_dt});
+    if(nt_hd_dt.length=== 0) {
+      const data ={
+        create_date:currentDate("-"),
+        group_code:grp_code,
+        id: grp_code+'__'+itm_inp.value+"__remark",
+        item_comp:itm_inp.value,
+        item_number: itm_inp.value,
+        measure: "remark",
+        no_lot:"",
+        part_prod:"remark",
+        std_max:0,
+        std_min:0,
+        um:"",
+        wo_id:wo_id_inp.value,
+      }
+      inp_hd.push(data);
+    }
     const result1 = await api_access('insert', 'nt_hd', inp_hd);
     if(!result1.includes('fail')){
       const result2 = await api_access('insert', 'nt_data', inp_dt);

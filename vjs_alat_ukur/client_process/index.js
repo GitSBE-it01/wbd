@@ -240,7 +240,9 @@ document.addEventListener("change", async function (event) {
   if (event.target.id === "input__alat_search") {
     const split = event.target.value.split("//");
     master_filter = await master.find(obj=>obj.sn_id === split[0]);
-
+    console.log({master_filter});
+    console.log(master_filter !== undefined);
+    console.log(master_filter !== null);
     DOM.form_parse_data('#detail_form', master_filter);
     DOM.rmv_class('#load',"hidden");
     event.target.blur();

@@ -411,26 +411,38 @@ $browse_table = [
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         [
-            'type'=>'text',
+            'type'=>'input',
             'th'=>[
                 'body'=>'',
                 'data_attr'=>['graph::cpk'],
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 cursor-pointer hover:text-xl duration-300 h-[10vh] w-[8vw] underline'
             ],
             'td'=>[
-                'name'=>'no_repeat',
-                'class'=>'bg-slate-400 whitespace-normal border-2 py-2 px-4 border-black'
+                'data_attr'=>['field::no_repeat'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'no_repeat', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
-            'type'=>'text',
+            'type'=>'input',
             'th'=>[
                 'body'=>'Result',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[10vw]'
             ],
             'td'=>[
-                'name'=>'result',
-                'class'=>'bg-slate-300 whitespace-normal border-2 py-2 px-4 border-black'
+                'data_attr'=>['field::result'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'name'=> 'result', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'repeat_code'],
@@ -457,7 +469,6 @@ $reff_table = [
             'inp'=>[
                 'type_attr'=>'text', 
                 'name'=> 'type', 
-                'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -473,7 +484,6 @@ $reff_table = [
             ],
             'inp'=>[
                 'type'=>'text', 
-                'disable'=>'',
                 'name'=> 'um', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]

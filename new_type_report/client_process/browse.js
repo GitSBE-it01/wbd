@@ -30,7 +30,7 @@ const desc2 = mod2[1].split(' -- ');
 // get data nt_had
 const nt_hd = await api_access('fetch','nt_hd', {group_code: group_code[1]});
 nt_hd.sort((a,b)=> {
-  if (a.part_prod !== b.part_prod) return a.part_prod.localeCompare(b.data_group);
+  if (a.part_prod !== b.part_prod) return a.part_prod.localeCompare(b.part_prod);
 })
 let data_all = [];
 let counter = 0;
@@ -46,15 +46,17 @@ for(let i=0; i<nt_hd.length; i++) {
   data_all[`${dt['measure']}`]['max']=dt['std_max'];
   data_all[`${dt['measure']}`]['min']=dt['std_min'];
 }
-console.log({data_all});
+console.log({data_all, nt_hd});
 
 const keys = Object.keys(data_all);
 let max = 0;
 keys.forEach(dt=>{
   const ky = data_all[dt];
-  const count = ky['data'].length-1;
-  if(ky['data'][count]['no_repeat']> max) {
-    max= ky['data'][count]['no_repeat']
+  if(ky['data'].length !== 0) {
+    const count = ky['data'].length-1;
+    if(ky['data'][count]['no_repeat']> max) {
+      max= ky['data'][count]['no_repeat']
+    }
   }
 })
 
@@ -62,43 +64,118 @@ for(let i=0; i<nt_hd.length; i++) {
   const dt = nt_hd[i];
   const tbl_temp = document.querySelector('#browse_table_temp');
   const new_tbl = tbl_temp.cloneNode(true);
-  new_tbl.id = 'table__'+counter;
+  new_tbl.id = 'table__'+dt['measure'];
   new_tbl.classList.remove('hidden');
+  if(dt['measure'].toLowerCase() === 'remark') {
+    const disable = new_tbl.querySelectorAll(':disabled');
+    disable.forEach(d2=>{
+      d2.disabled = false;
+    })
+  }
   const prime = document.querySelector('#primary');
+  const tr_temp = new_tbl.querySelector(`[data-id="browse_table_temp__template"]`);
+  const max_tr = tr_temp.cloneNode(true);
+  max_tr.classList.remove('hidden');
+  max_tr.setAttribute('data-id', dt['measure']+'__max');
+  const max_td = max_tr.querySelectorAll('[name]');
+
+  max_td.forEach(dt2=>{
+    const fld = dt2.getAttribute('name');
+    dt2.id = dt['measure']+'__'+fld+'max';
+    const td2 = dt2.closest('td');
+    if(td2 !== null) {
+      const lbl = td2.querySelector('label');
+      lbl.setAttribute('for', dt2.id);
+      if(dt2.getAttribute('name') === 'no_repeat') {
+        dt2.value = 'Std Max';
+        lbl.textContent = 'Std Max';
+      }
+      if(dt2.getAttribute('name') === 'result') {
+        dt2.value = dt['std_max'];
+        lbl.textContent = dt['std_max'];
+      }
+    }
+  })
+  const min_tr = tr_temp.cloneNode(true);
+  min_tr.classList.remove('hidden');
+  min_tr.setAttribute('data-id', dt['measure']+'__min');
+  const min_td = min_tr.querySelectorAll('[name]');
+  min_td.forEach(dt2=>{
+    const fld = dt2.getAttribute('name');
+    dt2.id = dt['measure']+'__'+fld+'min';
+    const td2 = dt2.closest('td');
+    if(td2 !== null) {
+      const lbl = td2.querySelector('label');
+      lbl.setAttribute('for', dt2.id);
+      if(dt2.getAttribute('name') === 'no_repeat') {
+        dt2.textContent = 'Std Min';
+        lbl.textContent = 'Std Min';
+      }
+      if(dt2.getAttribute('name') === 'result') {
+        dt2.textContent = dt['std_min'];
+        lbl.textContent = dt['std_min'];
+      }
+    }
+  })
   prime.appendChild(new_tbl);
+  const new_tbl_body = new_tbl.querySelector('tbody');
+  new_tbl_body.insertBefore(min_tr,new_tbl_body.rows[0]);
+  new_tbl_body.insertBefore(max_tr,new_tbl_body.rows[0]);
   const tr_header = new_tbl.querySelectorAll('thead tr th');
   tr_header.forEach(d2=>{
     if(d2.hasAttribute('data-graph')) {
-      console.log(d2)
       d2.textContent = dt['measure'];
     }
     if(dt['part_prod'] === 'product') {
       d2.classList.toggle('bg-blue-600');
       d2.classList.toggle('bg-teal-600');
     }
+    if(dt['part_prod'].toLowerCase() === 'remark') {
+      d2.classList.toggle('bg-blue-600');
+      d2.classList.toggle('bg-slate-600');
+    }
   })
   for(let ii=1; ii<=max; ii++) {
     const tr = new_tbl.querySelector(`[data-id="browse_table_temp__${ii-1}"]`);
     tr.classList.toggle('hidden');
     tr.setAttribute('data-id', dt['measure']+'__'+ii);
-    const td = tr.querySelectorAll('td');
+    const td = tr.querySelectorAll('[name]');
     const data2 = data_all[dt['measure']]['data'].find(obj=>obj.no_repeat === ii);
-    if(data2 !== undefined) {
-      td.forEach(d2=>{
-        const field = d2.getAttribute('name');
-        d2.textContent = data2[`${field}`];
-      })
-    } else {
-      td.forEach(d2=>{
-        const field = d2.getAttribute('name');
-        if(field === 'no_repeat') {
-          d2.textContent = ii;
+    td.forEach(d2=>{
+      const field = d2.getAttribute('name');
+      d2.id = dt['measure']+'__'+field+ii;
+      const td2 = d2.closest('td');
+      if(td2 !==null) {
+        const lbl = td2.querySelector('label');
+        lbl.setAttribute('for', d2.id);
+        if(data2 !== undefined) {
+          d2.value = data2[`${field}`];
+          lbl.textContent = data2[`${field}`];
+        } else {
+          if(field === 'no_repeat') {
+            d2.value = ii;
+            lbl.textContent = ii;
+          }
+          if(field === 'result') {
+            d2.value = '-';
+            lbl.textContent = '-';
+          }
         }
-        if(field === 'result') {
-          d2.textContent = '-'  ;
+      } else {
+        if(data2 !== undefined) {
+          d2.value = data2[`${field}`];
+        } else {
+          if(dt['measure'].toLowerCase() === 'remark') {
+            if(field === 'repeat_code') {
+              d2.value = dt['id']+'__'+ii;
+            }
+            if(field === 'hd_code') {
+              d2.value = dt['id'];;
+            }
+          }
         }
-      })
-    }
+      }
+    })
   }
   counter++;
 }
@@ -111,7 +188,6 @@ const wo_id =document.querySelector('#wo_id');
 wo_id.textContent = _id[1];
 
 DOM.add_class('#load',"hidden");
-
 // data
 document.addEventListener('click', async(e)=>{
   if(e.target.hasAttribute('data-graph')) {
@@ -153,7 +229,6 @@ document.addEventListener('click', async(e)=>{
       graph_dt.push({x:parseFloat(temp_dt.toFixed(range)),y:normal_distribution});
     }
     console.log({graph_dt});
-
     
     // Prepare data for Chart.js
     const data2 = {

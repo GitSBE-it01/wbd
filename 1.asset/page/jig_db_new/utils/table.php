@@ -1293,15 +1293,17 @@ $trans_detail_table = [
             'type'=>'set_btn',
             'th'=>[
                 'body'=>'Detail',
+                'data_attr'=>['role::admin'],
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
                 'data_attr'=>['field::btn_set'],
+                'data_attr'=>['role::admin'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[6vw]'
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::submit', 'submit_type::trans_jig'],
+                    'data_attr'=>['method::submit', 'submit_type::trans_jig', 'role::admin'],
                     'class'=>'w-6 h-6 arrow_right cursor-pointer'
                 ]
             ]

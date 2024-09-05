@@ -20,31 +20,36 @@ createHTML([
             'class'=>'fixed flex flex-row top-0 bg-slate-950 w-screen h-[5vh]',
             'body'=>navi($nav_array)
         ])."
+        " 
+        // header view
+        .Comp::header([
+            'class'=>'fixed top-[5vh] flex flex-row gap-4 w-screen bg-slate-700 h-[5vh] items-center pl-4',
+            'body'=>[
+                Comp::button([
+                    'id'=>'submit',
+                    'body'=>'Submit',
+                    'disable'=>'',
+                    'class'=>'rounded w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 bg-gray-300 text-slate-200'
+                ]),
+                Comp::button([
+                    'id'=>'add',
+                    'body'=>'Add New',
+                    'data_attr'=>['method::add'],
+                    'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                ]),
+
+            ]
+        ])."
         ".Comp::main([
-            'class'=>'fixed flex flex-col top-[5vh] bg-slate-300 w-screen h-[90vh] scrollable-y',
+            'class'=>'fixed flex flex-row top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y',
             'body'=>[
                 Comp::div([
                     'id'=> 'primary',
                     'class'=>'w-full h-full flex justify-center',
                     'body'=> Comp::div([
-                        'class'=>'h-full w-[80vw]',
+                        'class'=>'h-full w-[50%]',
                         'body'=>table_create2($reff_table),
                     ])
-                ]),
-                Comp::div([
-                    'class'=>'fixed top-[6vh] right-10',
-                    'body'=> [
-                        Comp::button([
-                            'id'=>'submit',
-                            'data_attr'=>['method::submit'],
-                            'class'=>'w-6 h-6 enter mx-2'
-                        ]),
-                        Comp::button([
-                            'id'=>'add',
-                            'data_attr'=>['method::add'],
-                            'class'=>'w-6 h-6 plus'
-                        ]),
-                    ]
                 ]),
             ]
         ])."
