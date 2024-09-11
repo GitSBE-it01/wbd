@@ -393,4 +393,21 @@ class DB {
         return $response;
     }
 }
+
+class odbc_qad {
+    static function execQuery($query, $_db='test') {
+        $conn = odbcConnect('QADProdRealtime');
+        if($_db === 'test') {
+            $conn = odbcConnect('QADTEST22');
+        }
+        $execQuery= odbc_exec($conn,$query);
+        $response = [];
+        while($row = odbc_fetch_array($execQuery)) {
+            $response[] = $row;
+        }
+        odbc_free_result($execQuery);
+        odbc_close($conn);
+        return $response;
+    }
+}
 ?>

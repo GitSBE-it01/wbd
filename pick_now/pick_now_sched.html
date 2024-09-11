@@ -54,7 +54,7 @@
     const demand = await wobb.dbProcess('get',''); // wod_det
     const woR = await wo.dbProcess('fetch',{wo_status:"R"}); // wo_mstr
     const cekDept = await dept.dbProcess('get','');
-    const item_mstr = await pt_mstr.dbProcess('get',''); // wo_mstr
+    const item_mstr = await api_access('fetch_item__cache','qad_item', ''); // wo_mstr
     console.log('************************************************************');
     console.log('data raw utk demand dari WOBB dan WO yang R');
     console.log('------------------------------------------------------------');
