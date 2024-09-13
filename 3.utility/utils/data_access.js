@@ -15,6 +15,8 @@ const get = async(url, table, action, method) => {
     try {
         let fix_action = action;
         let cache = 'no-cache';
+        let check = url.split('/');
+        let ori = `http://${check[2]}`;
         if(action.includes("cache")) {
             let splt = action.split("__");
             fix_action = splt[0];
@@ -24,6 +26,7 @@ const get = async(url, table, action, method) => {
             method: method, 
             headers: {
               'Content-Type': 'application/json',
+              'Ori': ori,
               'Req-Detail': table,
               'Req-Method': fix_action,
               'Cache-Control': cache
@@ -44,6 +47,8 @@ const execute = async(url, table, action, method, data)=>{
     try {
         let fix_action = action;
         let cache = 'no-cache';
+        let check = url.split('/');
+        let ori = `http://${check[2]}`;
         if(action.includes("cache")) {
             let splt = action.split("__");
             fix_action = splt[0];
@@ -53,6 +58,7 @@ const execute = async(url, table, action, method, data)=>{
             method: method, 
             headers: {
               'Content-Type': 'application/json',
+              'Ori': ori,
               'Req-Detail': table,
               'Req-Method': fix_action,
               'Cache-Control': cache

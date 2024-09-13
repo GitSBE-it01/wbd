@@ -79,7 +79,7 @@
     const cekNew = await pickNow.dbProcess('fetch',{data_date: getCustomDate(-1)});
     const cekIDnewR = [];
     cekNew.forEach(dt=>{
-        if(!cekNew.includes(dt.lot__id)) {
+        if(!cekIDnewR.includes(dt.lot__id)) {
             cekIDnewR.push(dt.lot__id);
         }
     })
@@ -113,8 +113,8 @@
     console.log('list dept');
     const ls_dept = [];
     cekDept.forEach(dt=>{
-        if(!ls_dept.includes(dt.dept)) {
-            ls_dept.push(dt.dept)
+        if(!ls_dept.includes(dt.dept.toLowerCase)) {
+            ls_dept.push(dt.dept.toLowerCase)
         }
     })
     console.log('------------------------------------------------------------');
@@ -187,6 +187,8 @@
     console.log('akumulasi OH per dept per item number dari data oh');
     const invDet = new Map();
     oh.forEach(dt=>{
+        const part = dt.ld_part ? dt.ld_part : '';
+        const dept = dt.dept ? dt.dept : '';
         const fltr = dt.ld_part + dt.dept;
         if(invDet.has(fltr)) {
             const exst = invDet.get(fltr);
@@ -207,7 +209,7 @@
     })
     const oh_all = Array.from(invDet.values());
     console.log('------------------------------------------------------------');
-    console.log({oh_all});
+    console.log({invDet,oh_all});
 
     console.log('************************************************************');
     const end2 = performance.now();

@@ -17,6 +17,7 @@ console.log(role);
 // -------------------------------------------------------
 const loc = await api_access('get','jig_loc','');
 const master = await api_access('get','jig_mstr','');
+let dtl_func_data = await api_access('get','jig_func', '');
 let dtl_loc_show = [];
 let item =  await api_access('get','qad_item','');;
 let func = [];
@@ -121,8 +122,8 @@ document.addEventListener('click', async function(event) {
     if(func.length === 0) {
       const cek = dtl_func.find(obj=>obj.item_jig === fltr);
       if(cek === undefined){
-        let dtl_func_data = await api_access('fetch','jig_func', {item_jig: fltr});
-        dtl_func_data.forEach(dt=>{
+        let dtl_func_data2 = dt_func_data.filter(obj=>obj.item_jig === fltr);
+        dtl_func_data2.forEach(dt=>{
           dtl_func.push(dt);
         });
       }
@@ -213,7 +214,24 @@ document.addEventListener('click', async function(event) {
     DOM.add_class('#load',"hidden");
     return;
   }
-
+  // download to excel
+  if(event.target.id === 'dl_jig') {
+    DOM.rmv_class('#load',"hidden");
+    const fltr_val = document.querySelector('#input__jig').value;
+    console.log({loc, dtl_func_data, fltr_val})
+    const loc_dt = loc.filter(obj=> obj.item_jig.includes(fltr_val));
+    const func_dt = dtl_func_data.filter(obj=> obj.item_jig.includes(fltr_val));
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(mstr_show);
+    const worksheet2 = XLSX.utils.json_to_sheet(loc_dt);
+    const worksheet3 = XLSX.utils.json_to_sheet(func_dt);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
+    XLSX.utils.book_append_sheet(workbook, worksheet2, 'loc');
+    XLSX.utils.book_append_sheet(workbook, worksheet3, 'function');
+    XLSX.writeFile(workbook, 'data.xlsx')
+    DOM.add_class('#load',"hidden");
+    return;
+  }
 })
 
 // search and parsing pagination

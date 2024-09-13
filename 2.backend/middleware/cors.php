@@ -5,12 +5,14 @@ function cors() {
         'http://informationsystem.sbe.co.id:8080', 
         'http://192.168.2.103:8080',
         'http://localhost:5173',
+        'http://182.16.168.187:62898',
         'informationsystem.sbe.co.id:8080', 
+        '182.16.168.187:62898',
         '192.168.2.103:8080',
         'localhost:5173',
     ];
 
-    $origin = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+    $origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';
     if (in_array($origin, $allowedOrigins)) {
         header('Access-Control-Allow-Origin: ' . $origin);
     } else {
@@ -32,7 +34,9 @@ function cors2() {
         'http://informationsystem.sbe.co.id:8080', 
         'http://192.168.2.103:8080',
         'http://localhost:5173',
+        'http://182.16.168.187:62898',
         'informationsystem.sbe.co.id:8080', 
+        '182.16.168.187:62898',
         '192.168.2.103:8080',
         'localhost:5173',
     ];
