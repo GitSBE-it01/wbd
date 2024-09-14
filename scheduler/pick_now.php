@@ -256,9 +256,10 @@ function pick_now_sched() {
     echo 'summary data qty OH per item number per departement (invDet)</br>';
         $invDet =[];
         foreach($oh_new as $set) {
-            $part = isset($set['ld_part']) ? $set['ld_part'] :'';
-            $dept = isset($set['dept']) ? $set['dept'] :'';
+            $part = isset($set['ld_part']) ? $set['ld_part'] :'N';
+            $dept = isset($set['dept']) ? $set['dept'] :'N';
             $fltr = strtolower($part.$dept);
+            echo $fltr;
             if(isset($invDet[$fltr])) {
                 $exst = $invDet[$fltr];
                 $exst['qty_OH'] += floatval($set['ld_qty_oh']);
