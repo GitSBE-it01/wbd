@@ -12,6 +12,8 @@ function custom_handle($db_conn, $dt, $routes, $action, $model, $table) {
                 $response = vjs_alat_ukur_handle($db_conn, $dt, $action, $model, $table);
                 break;
             case "jig_db_new3":
+            case "jig_db_new":
+            case "jig_db_new_sb3":
                 $response = jig_db_handle($db_conn, $dt, $action, $model, $table);
                 break;
             case "new_type_report":

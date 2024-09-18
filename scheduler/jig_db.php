@@ -13,6 +13,7 @@ function jig_db_sched() {
             $data = DB::execQuery($set['query'],'');
             cache_data('jig_db_new', $set['param'], $data);
             echo $set['param']." has ".count($data).' data </br>';
+            $data = null;
         } else {
             echo $set['param']." already cached</br>";
         }

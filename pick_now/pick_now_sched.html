@@ -113,8 +113,8 @@
     console.log('list dept');
     const ls_dept = [];
     cekDept.forEach(dt=>{
-        if(!ls_dept.includes(dt.dept.toLowerCase)) {
-            ls_dept.push(dt.dept.toLowerCase)
+        if(!ls_dept.includes(dt.dept.toLowerCase())) {
+            ls_dept.push(dt.dept.toLowerCase())
         }
     })
     console.log('------------------------------------------------------------');
@@ -177,8 +177,14 @@
         cekLoc.forEach(dt2=>{
             if(current.includes(dt2.loc.toLowerCase())) {
                 dt['dept'] = dt2.dept;
-            }
+                if(current === 'pr01'){
+                    console.log('before : ',dt['dept']);
+                }
+            } 
         })
+        if(dt['dept'] === undefined) {
+            dt['dept'] ='';
+        }
     })
     console.log('------------------------------------------------------------');
     console.log({oh});
@@ -253,8 +259,13 @@
 
     console.log('************************************************************');
     console.log('data gabungan demand dan OH all yg');
+    let cnt =0;
     oh_all.forEach(dt=>{
-        if (ls_dept.includes(dt.dept) && item.includes(dt.item)) {
+        if(dt.dept === 'p1.assy') {
+            console.log(cnt);
+            cnt++
+        }
+        if (ls_dept.includes(dt.dept.toLowerCase()) && item.includes(dt.item)) {
             let data = {
                 item: dt.item,
                 remark: '1.on hand',

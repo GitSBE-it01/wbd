@@ -15,9 +15,9 @@ console.log(role);
 
 // get data from database
 // -------------------------------------------------------
-const loc = await api_access('get','jig_loc','');
-const master = await api_access('get','jig_mstr','');
-let dtl_func_data = await api_access('get','jig_func', '');
+const loc = await api_access('get','loc_data_sb3','');
+const master = await api_access('get','master_data_sb3','');
+let dtl_func_data = await api_access('get','func_data_sb3', '');
 let dtl_loc_show = [];
 let item =  await api_access('get','qad_item','');;
 let func = [];
@@ -156,7 +156,7 @@ document.addEventListener('click', async function(event) {
     DOM.rmv_class('#load', 'hidden');
     data_switch('type', code_array, target_array); 
     if(func.length === 0){
-      func = await api_access('get','jig_func','');
+      func = await api_access('get','func_data_sb3','');
       func.forEach(dt=>{
         const desc = item.find(obj=>obj.pt_part === dt.item_type);
         const desc1 = desc ? desc.pt_desc1 :'';

@@ -31,14 +31,12 @@ function get_cache($routes, $param){
   $folderPathBase = "D:/xampp/htdocs/wbd/4.cache/";  // Adjust the folder name and path as needed
   $today = date('Ymd');
   $files = glob($folderPathBase.$routes. "/*"); // Get all files in the folder
-  $result = [];
   foreach ($files as $file) {
     if (strpos($file, $today."__".$param) !== false) { // Check if it's a file (not a directory)
         $data = file_get_contents($file);
-        $result = json_decode($data);
       }
   }
-  return $result;
+  return json_decode($data);
 }
 
 

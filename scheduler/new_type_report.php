@@ -56,7 +56,8 @@ function ntr_master_sched() {
     } else {
         echo 'data is up to date </br>';
     }
-
+    $input_fix =null;
+    $input_dt =null;
     echo 'NTR Scheduler Succesfully run </br>';
     return;
 }
