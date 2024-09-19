@@ -41,24 +41,16 @@ $elapsed_time = $end_time - $start_time;
 echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
 echo "********************************************************************</br></br>";
 
-/*
-echo "====================================================================</br>";
-echo "Jig DB sched</br>";
-echo "====================================================================</br>";
-$start_time = microtime(true);
-jig_db_sched($model);
-$end_time = microtime(true);
-$elapsed_time = $end_time - $start_time;
-echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
-echo "********************************************************************</br></br>";
-*/
-
 echo "====================================================================</br>";
 echo "Pick Now sched</br>";
 echo "====================================================================</br>";
-$start_time = microtime(true);
-pick_now_sched();
-$end_time = microtime(true);
-$elapsed_time = $end_time - $start_time;
-echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
+echo "Opening new tab for pick now scheduler</br>";
+?>
+<script>
+    window.open('http://informationsystem.sbe.co.id:8080/wbd/pick_now/pick_now_sched.html', '_blank');
+</script>
+<?php 
 echo "********************************************************************</br></br>";
+
+
+?>

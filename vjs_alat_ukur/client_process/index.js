@@ -1,11 +1,12 @@
-import { ButtonDOM, currentDate,customPeriod, sort_array} from "../../3.utility/index.js";
-import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
+import { ButtonDOM, currentDate,customPeriod} from "../../3.utility/index.js";
+import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
 import {auth2} from '../../3.utility/auth.js';
 
 await auth2();
 GeneralDOM.init('');
 GeneralDOM.td_input_default();
 NavDOM.active_link('nav','');
+let start = performance.now();
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
 console.log(user);
@@ -21,8 +22,16 @@ let period = customPeriod(today);
 let counter = 0;
 
 const user_list = await api_access('get','user','');
+let end = performance.now();
+console.log('total time user_list = ',(end-start) / 1000);
+start = performance.now();
 const loc_list = await api_access('get','vjs_loc','');
+end = performance.now();
+console.log('total time loc_list = ',(end-start) / 1000);
+start = performance.now();
 const master = await api_access('get','vjs_alat', '');
+end = performance.now();
+console.log('total time master0 = ',(end-start) / 1000);
 master.forEach(dt=>{
   const keys = Object.keys(dt)
   let filter = '';
@@ -31,12 +40,14 @@ master.forEach(dt=>{
   })
   dt['filter'] = filter;
 })
-let show_data = master;
+//let show_data = master;
 let master_filter =[];
+start = performance.now();
 DtlistDOM.parse_opt("#alat_list","/",master,"sn_id","new_subcat","no_asset","_desc");
 DtlistDOM.parse_opt("#user_list","-",user_list,"Name","Position","Grade");
 DtlistDOM.parse_opt("#loc_list","-",loc_list,"location");
-
+end = performance.now();
+console.log('total time2 = ',(end-start) / 1000);
 DOM.add_class('#load',"hidden");
 ButtonDOM.show_hidden('#open_dtlist', '#input__alat_search');
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'vjs_hd', 'id');
@@ -378,12 +389,13 @@ if (event.target.hasAttribute('name')) {
   DOM.add_class(`#${id}`,"hidden");
   return;
 }
+
 /* input utama
 --------------------------------------------------------- */
 if (event.target.id === "input__alat_search") {
-  if (!DOM.add_class('#input__alat_search',"hidden")) {
-    DOM.rmv_class('#input__alat_search',"hidden");
+    if (!DOM.add_class('#input__alat_search',"hidden")) {
+      DOM.rmv_class('#input__alat_search',"hidden");
+    }
+    return;
   }
-  return;
-}
 })

@@ -1,13 +1,13 @@
 <?php
 function pick_now_sched() {
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-    echo '-------------------</br>';
-    echo 'const data </br>';
+    //echo '-------------------</br>';
+    //echo 'const data </br>';
         $yesterday = date('Y-m-d', strtotime('yesterday'));
-    echo 'yesterday date = '.$yesterday.'</br>';
+    //echo 'yesterday date = '.$yesterday.'</br>';
         $fix_date = (int)date('ymd');
-    echo 'fix date = '.$fix_date.'</br>';
-    echo '</br>-------------------</br>';
+    //echo 'fix date = '.$fix_date.'</br>';
+    //echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     echo '</br>-------------------</br>';
@@ -28,10 +28,10 @@ function pick_now_sched() {
             }
         }
         $rout_src =null;
-    echo 'count : '.count($rout).'</br>';
-    echo 'type : '.gettype($rout).'</br>';
-    echo 'type of each data: '.gettype($rout[0]).'</br>';
-    print_r($rout[0]);
+    // echo 'count : '.count($rout).'</br>';
+    // echo 'type : '.gettype($rout).'</br>';
+    // echo 'type of each data: '.gettype($rout[0]).'</br>';
+    // print_r($rout[0]);
     /*
         print_r($rout[1758]);
         echo '</br>';
@@ -44,20 +44,20 @@ function pick_now_sched() {
     echo '</br>-------------------</br>';
     echo 'data demand (demand)</br>';
         $demand = get_cache('general', 'qad_wobb__fetch_wobb');
-    echo 'count: '.count($demand).'</br>';
-    echo 'type : '.gettype($demand).'</br>';
-    echo 'type of each data : '.gettype($demand[0]).'</br>';
-    print_r($demand[0]);
+    //echo 'count: '.count($demand).'</br>';
+    //echo 'type : '.gettype($demand).'</br>';
+    //echo 'type of each data : '.gettype($demand[0]).'</br>';
+    //print_r($demand[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     echo '</br>-------------------</br>';
     echo 'data wo release (woR)</br>';
         $woR = get_cache('general', 'qad_wo__fetch_wo_r');
-    echo 'count: '.count($woR).'</br>';
-    echo 'type : '.gettype($woR).'</br>';
-    echo 'type of each data : '.gettype($woR[0]).'</br>';
-    print_r($woR[0]);
+    //echo 'count: '.count($woR).'</br>';
+    //echo 'type : '.gettype($woR).'</br>';
+    //echo 'type of each data : '.gettype($woR[0]).'</br>';
+    //print_r($woR[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -65,10 +65,10 @@ function pick_now_sched() {
     echo 'data lokasi (cekLoc)</br>';
         $query8 = 'SELECT * FROM dbpick_now.loc_dept';
         $cekLoc = DB::execQuery($query8, '');
-    echo 'count: '.count($cekLoc).'</br>';
-    echo 'type : '.gettype($cekLoc).'</br>';
-    echo 'type of each data : '.gettype($cekLoc[0]).'</br>';
-    print_r($cekLoc[0]);
+    //echo 'count: '.count($cekLoc).'</br>';
+    //echo 'type : '.gettype($cekLoc).'</br>';
+    //echo 'type of each data : '.gettype($cekLoc[0]).'</br>';
+    //print_r($cekLoc[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -76,10 +76,10 @@ function pick_now_sched() {
     echo 'data PIC (pic)</br>';
         $query6 = 'SELECT * FROM dbpick_now.pic_part_category ';
         $pic = DB::execQuery($query6, '');
-    echo 'count: '.count($pic).'</br>';
-    echo 'type : '.gettype($pic).'</br>';
-    echo 'type of each data : '.gettype($pic[0]).'</br>';
-    print_r($pic[0]);
+    //echo 'count: '.count($pic).'</br>';
+    //echo 'type : '.gettype($pic).'</br>';
+    //echo 'type of each data : '.gettype($pic[0]).'</br>';
+    //print_r($pic[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -87,10 +87,10 @@ function pick_now_sched() {
     echo 'data current result (cekNew)</br>';
         $query10 = 'SELECT * FROM dbpick_now.result_fix WHERE data_date="'.$yesterday.'"';
         $cekNew = DB::execQuery($query10, '');
-    echo 'count: '.count($cekNew).'</br>';
-    echo 'type : '.gettype($cekNew).'</br>';
-    echo 'type of each data : '.gettype($cekNew[0]).'</br>';
-    print_r($cekNew[0]);
+    //echo 'count: '.count($cekNew).'</br>';
+    //echo 'type : '.gettype($cekNew).'</br>';
+    //echo 'type of each data : '.gettype($cekNew[0]).'</br>';
+    //print_r($cekNew[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -102,23 +102,23 @@ function pick_now_sched() {
                 $cekIDnewR[]=strtoupper($set['lot__id']);
             }
         }
-    echo 'count: '.count($cekIDnewR).'</br>';
-    echo 'type : '.gettype($cekIDnewR).'</br>';
-    echo 'type of each data : '.gettype($cekIDnewR[0]).'</br>';
-    print_r($cekIDnewR[0]);
+    //echo 'count: '.count($cekIDnewR).'</br>';
+    //echo 'type : '.gettype($cekIDnewR).'</br>';
+    //echo 'type of each data : '.gettype($cekIDnewR[0]).'</br>';
+    //print_r($cekIDnewR[0]);
     echo '</br>-------------------</br>';
 
     
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-echo '</br>-------------------</br>';
-echo 'data departement (cekDept)</br>';
-    $query4 = 'SELECT * FROM dbpick_now.dept_new'; 
-    $cekDept = DB::execQuery($query4, '');
-echo 'count: '.count($cekDept).'</br>';
-echo 'type : '.gettype($cekDept).'</br>';
-echo 'type of each data: '.gettype($cekDept[0]).'</br>';
-print_r($cekDept[0]);
-echo '</br>-------------------</br>';
+    echo '</br>-------------------</br>';
+    echo 'data departement (cekDept)</br>';
+        $query4 = 'SELECT * FROM dbpick_now.dept_new'; 
+        $cekDept = DB::execQuery($query4, '');
+    //echo 'count: '.count($cekDept).'</br>';
+    //echo 'type : '.gettype($cekDept).'</br>';
+    //echo 'type of each data: '.gettype($cekDept[0]).'</br>';
+    //print_r($cekDept[0]);
+    echo '</br>-------------------</br>';
 
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -131,27 +131,27 @@ echo '</br>-------------------</br>';
             }
         }
 
-    echo 'count: '.count($ls_dept).'</br>';
-    echo 'type : '.gettype($ls_dept).'</br>';
-    echo 'type of each data : '.gettype($ls_dept[0]).'</br>';
-    print_r($ls_dept[0]);
+    //cho 'count: '.count($ls_dept).'</br>';
+    //cho 'type : '.gettype($ls_dept).'</br>';
+    //cho 'type of each data : '.gettype($ls_dept[0]).'</br>';
+    //rint_r($ls_dept[0]);
     echo '</br>-------------------</br>';
 
     
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-echo '</br>-------------------</br>';
-echo 'data reff utk cek ID yg Release dari QAD (id_R)</br>';
-    $id_R = [];
-    foreach($woR as $set) {
-        if(!in_array(strtoupper($set->wo_lot),$id_R)) {
-            $id_R[]=strtoupper($set->wo_lot);
+    echo '</br>-------------------</br>';
+    echo 'data reff utk cek ID yg Release dari QAD (id_R)</br>';
+        $id_R = [];
+        foreach($woR as $set) {
+            if(!in_array(strtoupper($set->wo_lot),$id_R)) {
+                $id_R[]=strtoupper($set->wo_lot);
+            }
         }
-    }
-echo 'count: '.count($id_R).'</br>';
-echo 'type : '.gettype($id_R).'</br>';
-echo 'type of each data : '.gettype($id_R[0]).'</br>';
-print_r($id_R[0]);
-echo '</br>-------------------</br>';
+    //echo 'count: '.count($id_R).'</br>';
+    //echo 'type : '.gettype($id_R).'</br>';
+    //echo 'type of each data : '.gettype($id_R[0]).'</br>';
+    //print_r($id_R[0]);
+    echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     echo '</br>-------------------</br>';
@@ -181,10 +181,10 @@ echo '</br>-------------------</br>';
         }
         $demand = null;
         $id_R = null;
-    echo 'count: '.count($dmnd_new).'</br>';
-    echo 'type : '.gettype($dmnd_new).'</br>';
-    echo 'type of each data : '.gettype($dmnd_new[0]).'</br>';
-    print_r($dmnd_new[0]);
+    //echo 'count: '.count($dmnd_new).'</br>';
+    //echo 'type : '.gettype($dmnd_new).'</br>';
+    //echo 'type of each data : '.gettype($dmnd_new[0]).'</br>';
+    //print_r($dmnd_new[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -216,21 +216,21 @@ echo '</br>-------------------</br>';
         $dmnd_new = null;
         $cekDept = null;
         $rout = null;
-    echo 'count: '.count($dmnd_new2).'</br>';
-    echo 'type : '.gettype($dmnd_new2).'</br>';
-    echo 'type of each data : '.gettype($dmnd_new2[0]).'</br>';
-    print_r($dmnd_new2[0]);
+    //echo 'count: '.count($dmnd_new2).'</br>';
+    //echo 'type : '.gettype($dmnd_new2).'</br>';
+    //echo 'type of each data : '.gettype($dmnd_new2[0]).'</br>';
+    //print_r($dmnd_new2[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-echo '</br>-------------------</br>';
-echo 'data On Hand (oh)</br>';
-    $oh = get_cache('general', 'qad_loc__fetch_qad_loc');
-echo 'count: '.count($oh).'</br>';
-echo 'type : '.gettype($oh).'</br>';
-echo 'type of each data : '.gettype($oh[0]).'</br>';
-print_r($oh[0]);
-echo '</br>-------------------</br>';
+    echo '</br>-------------------</br>';
+    echo 'data On Hand (oh)</br>';
+        $oh = get_cache('general', 'qad_loc__fetch_qad_loc');
+    //echo 'count: '.count($oh).'</br>';
+    //echo 'type : '.gettype($oh).'</br>';
+    //echo 'type of each data : '.gettype($oh[0]).'</br>';
+    //print_r($oh[0]);
+    echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
     echo '</br>-------------------</br>';
@@ -250,10 +250,10 @@ echo '</br>-------------------</br>';
             $data =null;
         }
         $oh =null;
-    echo 'count: '.count($oh_new).'</br>';
-    echo 'type : '.gettype($oh_new).'</br>';
-    echo 'type of each data : '.gettype($oh_new[0]).'</br>';
-    print_r($oh_new[0]);
+    //echo 'count: '.count($oh_new).'</br>';
+    //echo 'type : '.gettype($oh_new).'</br>';
+    //echo 'type of each data : '.gettype($oh_new[0]).'</br>';
+    //print_r($oh_new[0]);
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -264,7 +264,6 @@ echo '</br>-------------------</br>';
             $part = isset($set['ld_part']) ? $set['ld_part'] :'N';
             $dept = isset($set['dept']) ? $set['dept'] :'N';
             $fltr = strtolower($part.$dept);
-            echo $fltr;
             if(isset($invDet[$fltr])) {
                 $exst = $invDet[$fltr];
                 $exst['qty_OH'] += floatval($set['ld_qty_oh']);
@@ -287,19 +286,19 @@ echo '</br>-------------------</br>';
             }
         }
         $oh_new = null;
-    echo 'count: '.count($invDet).'</br>';
-    echo 'type : '.gettype($invDet).'</br>';
-    $count_invDet = 0;
-    $count_cek = 0;
-    foreach($invDet as $set) {
-        $count_cek += $set['count'];
-        if($count_invDet<2) {
-            print_r($set);
-            echo '</br>';
-        }
-        $count_invDet++;
-    }
-    echo 'checking data count ='.$count_cek.'</br>';
+    //echo 'count: '.count($invDet).'</br>';
+    //echo 'type : '.gettype($invDet).'</br>';
+    //$count_invDet = 0;
+    //$count_cek = 0;
+    //foreach($invDet as $set) {
+    //    $count_cek += $set['count'];
+    //    if($count_invDet<2) {
+    //        print_r($set);
+    //        echo '</br>';
+    //    }
+    //    $count_invDet++;
+    //}
+    //echo 'checking data count ='.$count_cek.'</br>';
     echo '</br>-------------------</br>';
 
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -343,7 +342,7 @@ echo '</br>-------------------</br>';
             $gabCek[]=$data;
             $data = null;
         }
-    echo '</br>-------------------</br>';
+    echo '-------------------</br>';
     echo 'gabCek data </br>';
     echo 'count: '.count($gabCek).'</br>';
     echo 'type : '.gettype($gabCek).'</br>';

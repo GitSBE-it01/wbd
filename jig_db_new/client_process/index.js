@@ -17,6 +17,7 @@ console.log(role);
 // -------------------------------------------------------
 const loc = await api_access('get','jig_loc','');
 const master = await api_access('get','jig_mstr','');
+console.log({loc})
 let dtl_func_data = await api_access('get','jig_func', '');
 let dtl_loc_show = [];
 let item =  await api_access('get','qad_item','');;
@@ -42,14 +43,26 @@ loc.forEach(dt=>{
     } else {
       qty__unit = parseInt(dt.qty_per_unit);
     }
-    if(loc_sum[`${dt.item_jig}`]) {
-      loc_sum[`${dt.item_jig}`]['qty_total'] += qty__unit;
+    if(dt['lokasi'] !== 'FGWH') {
+      if(loc_sum[`${dt.item_jig}`]) {
+        loc_sum[`${dt.item_jig}`]['qty_total'] += qty__unit;
+      } else {
+        let data = {
+          ...dt,
+          qty_total: qty__unit
+        };
+        loc_sum[`${dt.item_jig}`] = data; 
+      }
     } else {
-      let data = {
-        ...dt,
-        qty_total: qty__unit
-      };
-      loc_sum[`${dt.item_jig}`] = data; 
+      if(loc_sum[`${dt.item_jig}`]) {
+        loc_sum[`${dt.item_jig}`]['qty_total'] += 0;
+      } else {
+        let data = {
+          ...dt,
+          qty_total: 0
+        };
+        loc_sum[`${dt.item_jig}`] = data; 
+      }
     }
 })
 
@@ -122,7 +135,7 @@ document.addEventListener('click', async function(event) {
     if(func.length === 0) {
       const cek = dtl_func.find(obj=>obj.item_jig === fltr);
       if(cek === undefined){
-        let dtl_func_data2 = dt_func_data.filter(obj=>obj.item_jig === fltr);
+        let dtl_func_data2 = dtl_func_data.filter(obj=>obj.item_jig === fltr);
         dtl_func_data2.forEach(dt=>{
           dtl_func.push(dt);
         });
