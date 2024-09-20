@@ -49,7 +49,7 @@ function cors2() {
         exit(); 
     }
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Req-Detail, cache-control,Req-Method');
+    header('Access-Control-Allow-Headers: Content-Type, Ori, Req-Detail, cache-control,Req-Method');
 
     if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header('HTTP/1.1 200 OK');

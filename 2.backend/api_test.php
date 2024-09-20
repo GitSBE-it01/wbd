@@ -74,7 +74,7 @@ function routes($model, $db_conn) {
     }
     header("Cache-Control: public");
     header("Content-Type: application/json");
-    echo json_encode($response);
+    echo json_encode($_SERVER);
     return;
 }
 
