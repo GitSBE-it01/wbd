@@ -32,6 +32,7 @@ start = performance.now();
 const master = await api_access('get','vjs_alat', '');
 end = performance.now();
 console.log('total time master0 = ',(end-start) / 1000);
+console.log({user_list, loc_list, master});
 master.forEach(dt=>{
   const keys = Object.keys(dt)
   let filter = '';

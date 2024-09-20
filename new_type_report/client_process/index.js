@@ -14,9 +14,9 @@ const role = user_detail.role;
 
 let data_filter_val = '';
 const [mstr_dt, detail_data] = await Promise.all([
-  await api_access('get','nt_mstr', ''),
+  api_access('get','nt_mstr', ''),
   //await api_access('fetch_wo_prot_with_desc__cache','qad_wo', ''),
-  await api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', ''),
+  api_access('fetch_wo_prot_specific_item__cache', 'qad_wo', ''),
 ]);
 
 mstr_dt.forEach(dt=>{

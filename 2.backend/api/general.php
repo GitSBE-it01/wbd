@@ -27,6 +27,7 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             a.wo_part AS item_number,
 	        CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc,
             a.wo_status as _status,
+            a.wo_nbr as work_order,
             a.wo_lot as wo_id,
             a.wo_nbr as wo, 
             a.wo_qty_ord as qty_ord,
@@ -35,7 +36,7 @@ function general_handle($db_conn, $data, $action, $model, $table) {
             FROM '.$mdl.' a
             JOIN dbqad_live.pt_mstr b 
             ON a.wo_part = b.pt_part 
-            WHERE wo_nbr LIKE "%prot%" AND wo_status != "C"';
+            WHERE wo_nbr LIKE "%prot%"';
             $types = '';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;

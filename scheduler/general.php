@@ -26,6 +26,7 @@ function cache_qad_data() {
                 a.wo_part AS item_number,
                 CONCAT(b.pt_desc1," ", b.pt_desc2) AS _desc,
                 a.wo_status as _status,
+                a.wo_nbr as work_order,
                 a.wo_lot as wo_id,
                 a.wo_nbr as wo, 
                 a.wo_qty_ord as qty_ord,
