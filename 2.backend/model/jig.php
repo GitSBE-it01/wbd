@@ -85,6 +85,28 @@ $model['jig_usg'] = new Model('db_jig.jig_usage',
 ],
 'id::i');
 
+// testing usage 
+$model['jig_usg_test'] = new Model('db_jig_new.sb_usage_log',
+[
+    'tr_date::s',
+    'jig::s',
+    'desc_jig::s',
+    'code::s',
+    'cat::s',
+    'loc::s',
+    'qty_pinjam::i',
+    'wo_id::s',
+    'type::s',
+    'qty_total::i',
+    'count_dt::i',
+    'code_count::i',
+    'qty_jig::i',
+    'qty_usage::i',
+    'codeAll::s',
+    'id_trans::s',
+],
+'id::i');
+
 $model['jig_loc'] = new Model('db_jig.jig_loc2',
 [
     'item_jig::s',

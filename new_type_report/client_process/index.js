@@ -98,6 +98,7 @@ document.addEventListener('click', async(e)=>{
       }
     })
   }
+
 // open new tab for detail data
 // -----------------------------------------------------------
   if(e.target.getAttribute('data-method') === 'link') {

@@ -13,7 +13,7 @@ function routes($model, $db_conn) {
     $method = $_SERVER['REQUEST_METHOD'];
     $cache = $_SERVER['HTTP_CACHE_CONTROL'];
     $table = $_SERVER['HTTP_REQ_DETAIL'];
-    $routes = '';
+    $routes = $_SERVER['HTTP_ROUTE'];
     $action = $_SERVER['HTTP_REQ_METHOD'];
     $param =  $table."__".$action;
     switch($method) {
@@ -74,7 +74,7 @@ function routes($model, $db_conn) {
     }
     header("Cache-Control: public");
     header("Content-Type: application/json");
-    echo json_encode($_SERVER);
+    echo json_encode($response);
     return;
 }
 

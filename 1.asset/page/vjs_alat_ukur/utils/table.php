@@ -301,7 +301,7 @@ $detail_table = [
             ],
             'td'=>[
                 'data_attr'=>['field::result'],
-                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 text-sm border-black w-[12vw] h-full justify-center items-center font-lg',
+                'class'=>'bg-slate-300 flex flex-row whitespace-normal border-2 text-sm border-black w-[12vw] h-[10vh] justify-center items-center font-lg',
             ],
             'select'=>[
                 'name'=> 'result', 

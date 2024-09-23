@@ -8,7 +8,7 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         case "fetch_op_tran":
-            $query = 'SELECT * FROM '.$mdl.' WHERE op_tran_date BETWEEN ? AND ?';
+            $query = 'SELECT * FROM '.$mdl.' WHERE op_tran_date BETWEEN ? AND ? AND op_type="LABOR"';
             $types = 'ss';
             $response  = $db_conn->customQuery('new', $query, $types, $data);
             break;
@@ -25,6 +25,11 @@ function jig_db_handle($db_conn, $data, $action, $model, $table) {
         case "fetch_jig_usg_filter_date":
             $query = 'SELECT * FROM '.$mdl.' WHERE tr_date  BETWEEN ? AND ?';
             $types = 'ss';
+            $response  = $db_conn->customQuery('', $query, $types, $data);
+            break;
+        case "fetch_jig_usg_check":
+            $query = "SELECT * FROM ".$mdl." WHERE cat = 'a.pinjam' or cat = 'c.kembali' AND id_trans != 0 AND id_trans IS NOT NULL";
+            $types = '';
             $response  = $db_conn->customQuery('', $query, $types, $data);
             break;
         case "fetch_jig_trans_sched":

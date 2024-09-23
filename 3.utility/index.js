@@ -15,7 +15,9 @@ import {calculateMean,
         calculateCP,
         calculateCPK,
         checkRange} from './utils/calculation.js';
-import {api_access} from './utils/data_access.js';
+import {api_access,
+        api_access2
+} from './utils/data_access.js';
 import {currentDate,
         getCustomDate,
         customPeriod} from './utils/date.js';
@@ -40,6 +42,7 @@ export {
         calculateCPK,
         checkRange,
         api_access,
+        api_access2,
         currentDate,
         getCustomDate,
         customPeriod,

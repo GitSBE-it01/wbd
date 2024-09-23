@@ -155,7 +155,13 @@ createHTML([
                                             'id'=>'measure',
                                             'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[70%]',
                                             'require'=>"",
-                                            'name'=>'measure'
+                                            'name'=>'measure',
+                                            'body'=>[
+                                                Comp::option([
+                                                    'value'=>'',
+                                                    'body'=>'-Choose-',
+                                                ])
+                                            ]
                                         ]),
                                     ]
                                 ]),

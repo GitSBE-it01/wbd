@@ -14,7 +14,7 @@ $index = $datalist->create(['id'=>'alat_list'])
     .$load2."
     ".$div->create([
         'data_attr'=>['card::detail'],
-        'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll',
+        'class'=>'z-30 block hidden shadow-lg shadow-slate-800 rounded fixed w-[60vw] h-[60vh] mx-[20vw] my-[20vh] bg-slate-400 custom_scroll scrollable-y',
         'body'=>[
             table_create($detail_table),
             table_create($add_table),

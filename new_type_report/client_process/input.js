@@ -249,6 +249,13 @@ document.addEventListener('click', async(e) =>{
   if(e.target.id.includes('submit')) {
     DOM.rmv_class('#load', 'hidden');
     const main = e.target.closest('[data-detail]');
+    const cek = main.querySelector('[name *="measure"]');
+    console.log(cek.value);
+    if(cek.value ===''){
+      alert('pilih tipe pengukuran');
+      DOM.add_class('#load', 'hidden');
+      return;
+    }
     const counter_btn = e.target.id.split('__');
     const dtl = main.querySelector(`#detail__${counter_btn[1]}`);
     const dt_inp = main.querySelector(`#data_input__${counter_btn[1]}`);

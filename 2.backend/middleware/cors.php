@@ -20,7 +20,7 @@ function cors() {
         exit(); 
     }
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Req-Detail, cache-control,Req-Method');
+    header('Access-Control-Allow-Headers: Content-Type, Route, Req-Detail, cache-control,Req-Method');
 
     if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header('HTTP/1.1 200 OK');
@@ -41,7 +41,7 @@ function cors2() {
         'localhost:5173',
     ];
 
-    $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+    $origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';
     if (in_array($origin, $allowedOrigins)) {
         header('Access-Control-Allow-Origin: ' . $origin);
     } else {
@@ -49,7 +49,7 @@ function cors2() {
         exit(); 
     }
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Ori, Req-Detail, cache-control,Req-Method');
+    header('Access-Control-Allow-Headers: Content-Type, Ori, Route, Req-Detail, cache-control,Req-Method');
 
     if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header('HTTP/1.1 200 OK');
