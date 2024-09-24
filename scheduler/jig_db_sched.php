@@ -44,7 +44,6 @@
                             if(typeof dt === 'string') {
                                 text += dt+', ';
                             } else {
-                                console.log('here');
                                 const key = Object.keys(dt);
                                 key.forEach(dd=>{
                                     text += `${dd} = ${dt[dd]}`+"</br>";
@@ -96,29 +95,23 @@
                 }
             })
         }
-        import {api_access2, api_access, getCustomDate} from '../3.utility/index.js';
+        import {api_access2, api_access, getCustomDate, currentDate} from '../3.utility/index.js';
         const [yesterday, cekTrans, cek_jig_use] = [
             getCustomDate(-1,"-"),
             [],
             []
         ]
         const [otb, trans, emp, func, mstr, cek] = await Promise.all([
-            api_access2('fetch_op_tran','jig_db_new', 'ng_dly', {op_tran_date:['2024-09-10', '2024-09-23']}),
-            //api_access2('fetch2','jig_db_new','ng_dly', {op_tran_date: yesterday}),
-            api_access2('get', 'jig_db_new','jig_trans',''),
+            //api_access2('fetch_op_tran','jig_db_new', 'ng_dly', {op_tran_date:['2024-09-10', '2024-09-23']}),
+            api_access2('fetch2','jig_db_new','ng_dly', {op_tran_date: yesterday}),
+            api_access2('fetch', 'jig_db_new','jig_trans',{status: 'open'}),
             api_access2('get','jig_db_new','emp_code',''),
             api_access2('get','jig_db_new','jig_func',''),
             api_access2('get','jig_db_new','jig_mstr',''),
-            api_access2('fetch_jig_usg_check','jig_db_new','jig_usg_test',''),
+            api_access2('fetch_jig_usg_check','jig_db_new','jig_usg',''),
         ])
-        result_check([
-            {data_array: otb, title:'otb data '},
-            {data_array: trans, title:'trans data '},
-            {data_array: emp, title:'emp data '},
-            {data_array: func, title:'func data '},
-            {data_array: mstr, title:'mstr data '},
-        ]);
         
+        console.log({otb, trans, emp, func, mstr, cek});
     /*===================================================================
     cek code employee
     ===================================================================*/
@@ -128,9 +121,6 @@
                 codeEmp[em.emp_code] = em.loc_name;
             }
         })
-        result_check([
-            {data_array: emp, title:'emp code data '}
-        ]);
 
     /*===================================================================
     summary qty run labor per item number, per eff date, per id dan per operation 
@@ -171,9 +161,6 @@
             }
         })
         const labor2 = Array.from(newOTB.values());
-        result_check([
-            {data_array: labor2, title:'labor2 summary per operation per date qty run'}
-        ]);
 
     /*===================================================================
     dari 1 id per harinya dari semua operation di pick yang qty run total dari proses sebelumnya yang paling besar (menjadi labor4)
@@ -203,9 +190,6 @@
             }
         })
         const labor4 = Array.from(labor3.values());
-        result_check([
-            {data_array: labor4, title:'labor4 ignoring operation, pick the biggest qty run total'}
-        ]);
 
     /*===================================================================
     list jig utk 1 item number menggunakan jig apa saja
@@ -218,10 +202,6 @@
                 listJig[fn.item_type] = [fn.item_jig];
             }
         })
-        console.log(listJig);
-        result_check([
-            {data_array: listJig, title:'list jig'}
-        ]);
 
     /*===================================================================
     adding data utk pinjam dan kembali ke data array
@@ -230,8 +210,9 @@
         const fnKey = Object.keys(listJig);
         const id = [];
         trans.forEach(tr=> {
+            const marked1 = tr.id + 'a.pinjam';
+            const marked2 = tr.id + 'c.kembali';
             if( cek.filter(obj=> obj.id_trans === tr.id && obj.cat !== 'b.use').length===0) {
-                const marked1 = tr.id + 'a.pinjam';
                 if(!id.includes(marked1) /*&& tr.start_date === yesterday*/) {
                     const data = {
                         tr_date: tr.start_date,
@@ -243,13 +224,13 @@
                         wo_id: '',
                         type: '',
                         qty_total: '',
-                        id_trans: tr.id
+                        id_trans: tr.id,
+                        count: 1,
                     }
                     id.push(marked1);
                     newLabor.push(data);
                 }
                     
-                const marked2 = tr.id + 'c.kembali';
                 if(!id.includes(marked2) && tr.end_date !== null && tr.end_date !=='' && tr.end_date !== '0000-00-00') {
                     const data = {
                         tr_date: tr.end_date,
@@ -261,17 +242,50 @@
                         wo_id: '',
                         type: '',
                         qty_total: '',
-                        id_trans: tr.id
+                        id_trans: tr.id,
+                        count: 1,
+                    }
+                    id.push(marked2);
+                    newLabor.push(data);
+                }
+            } else {
+                if(!id.includes(marked1) /*&& tr.start_date === yesterday*/) {
+                    const data = {
+                        tr_date: tr.start_date,
+                        jig: tr.item_jig,
+                        code: tr.code,
+                        cat: 'a.pinjam',
+                        loc: tr.loc,
+                        qty_pinjam: tr.qty,
+                        wo_id: '',
+                        type: '',
+                        qty_total: '',
+                        id_trans: tr.id,
+                        count: 0,
+                    }
+                    id.push(marked1);
+                    newLabor.push(data);
+                }
+                    
+                if(!id.includes(marked2) && tr.end_date !== null && tr.end_date !=='' && tr.end_date !== '0000-00-00') {
+                    const data = {
+                        tr_date: tr.end_date,
+                        jig: tr.item_jig,
+                        code: tr.code,
+                        cat: 'c.kembali',
+                        loc: tr.loc,
+                        qty_pinjam: tr.qty,
+                        wo_id: '',
+                        type: '',
+                        qty_total: '',
+                        id_trans: tr.id,
+                        count: 0,
                     }
                     id.push(marked2);
                     newLabor.push(data);
                 }
             }
         })
-        result_check([
-            {data_array: id, title:'cek ID'},
-            {data_array: newLabor, title:'newLabor adding data transaksi pinjam kembali'},
-        ]);
         
     /*===================================================================
     adding data penggunaan berdasarkan labor 
@@ -309,9 +323,6 @@
             if (a.cat !== b.cat) return a.cat.localeCompare(b.cat);
             return 0; // objects are equal
         })
-        result_check([
-            {data_array: newLabor, title:'newLabor adding data transaksi penggunaan'},
-        ]);
 
     /*===================================================================
     adding new data in newLabor
@@ -319,7 +330,7 @@
         for (let i=0; i<newLabor.length; i++) {
             const a = newLabor[i];
             const codeFilter = a.jig + a.loc;
-            a.count = 0;
+            if(!a.count) {a.count = 0;}
             a.code_count = 0;
             a.qty_jig = 0;
             a.qty_usage = 0;
@@ -331,48 +342,44 @@
             if(b) {
                 codeFilter2 = b.jig + b.loc;
             }
-            if( cek.filter(obj=> obj.id_trans === tr.id && obj.cat !== 'b.use').length===0) {
-                if( codeFilter2 ) {
-                    if(a.cat === 'a.pinjam') { 
-                        a.count = 1;
-                        if ( codeFilter === codeFilter2) {
-                            a.codeAll = b.codeAll + a.code;
-                            a.code_count += 1 + b.code_count;
-                            a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
-                        } else {
-                            a.codeAll = a.code ;
-                            a.code_count += 1 ;
-                            a.qty_jig = parseFloat(a.qty_pinjam);  
-                        }
+            if( codeFilter2 ) {
+                if(a.cat === 'a.pinjam') { 
+                    if ( codeFilter === codeFilter2) {
+                        a.codeAll = b.codeAll + a.code;
+                        a.code_count += 1 + b.code_count;
+                        a.qty_jig = parseFloat(a.qty_pinjam) + parseFloat(b.qty_jig);  
+                    } else {
+                        a.codeAll = a.code ;
+                        a.code_count += 1 ;
+                        a.qty_jig = parseFloat(a.qty_pinjam);  
                     }
-                    if(a.cat === 'c.kembali') { 
-                        a.count = 1;
-                        if ( codeFilter === codeFilter2) {
-                            a.codeAll = b.codeAll.replace((`${a.code}`),'');
-                            a.code_count = b.code_count - 1;
-                            a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
-                        } else {
-                            a.code_count = 0 ;
-                            a.codeAll = '';
-                            a.qty_jig = 0; 
-                        }
-                    } 
-                    if(a.cat === 'b.use') { 
-                        if ( codeFilter === codeFilter2) {
-                            if (b.code_count === 0) { a.count = 0;} else {a.count = b.count;}
-                            a.code_count = b.code_count;
-                            a.codeAll = b.codeAll;
-                            a.qty_jig = b.qty_jig;
-                            if (a.count === 0) {a.code = '';} else {a.code = b.code;}
-                            if (a.qty_jig === 0) {
-                                a.qty_usage = 0
-                            } else {
-                                a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
-                            }
-                        }
+                }
+                if(a.cat === 'c.kembali') { 
+                    if ( codeFilter === codeFilter2) {
+                        a.codeAll = b.codeAll.replace((`${a.code}`),'');
+                        a.code_count = b.code_count - 1;
+                        a.qty_jig = parseFloat(b.qty_jig) - parseFloat(a.qty_pinjam); 
+                    } else {
+                        a.code_count = 0 ;
+                        a.codeAll = '';
+                        a.qty_jig = 0; 
                     }
                 } 
-            }
+                if(a.cat === 'b.use') { 
+                    if ( codeFilter === codeFilter2) {
+                        if (b.code_count === 0) { a.count = 0;} else {a.count = 1;}
+                        a.code_count = b.code_count;
+                        a.codeAll = b.codeAll;
+                        a.qty_jig = b.qty_jig;
+                        if (a.count === 0) {a.code = '';} else {a.code = b.code;}
+                        if (a.qty_jig === 0) {
+                            a.qty_usage = 0
+                        } else {
+                            a.qty_usage =  Math.ceil(parseFloat(a.qty_total) / a.qty_jig);
+                        }
+                    }
+                }
+            } 
         }
         newLabor.sort((a,b) => {
             if (a.jig < b.jig) return -1;
@@ -420,7 +427,8 @@
                         qty_jig: a.qty_jig,
                         qty_usage: a.qty_usage,
                         codeAll: a.codeAll,
-                        id_trans: ''
+                        id_trans: '',
+                        data_date: currentDate('-')
                     }
                     arrInp.push(data);
                 }}
@@ -432,28 +440,40 @@
 
     /*===================================================================
     load data to databases
-    ===================================================================
-        const result = await api_access('insert','jig_usg_test', arrInp);
-        const end = performance.now();
-        const totalTime = (end - start) /1000;
-        console.log('total time = ' + totalTime);
+    ===================================================================*/
+        const check_last = await api_access2('fetch', 'jig_db', 'jig_usg', {data_date:currentDate("-")});
+        console.log(check_last);
+        if(check_last.length===0) {
+            const result = await api_access('insert','jig_usg', arrInp);
+            const end = performance.now();
+            const totalTime = (end - start) /1000;
+            console.log('total time = ' + totalTime);
 
-        const h1 = document.createElement('h1');
-        h1.setAttribute('class', 'text-xl font-bold')
-        body.appendChild(h1);
-        if(!result.includes('fail')) {
-            h1.textContent = `${arrInp.length} data successfully inserted to database after ${totalTime} seconds`;
+            const h1 = document.createElement('h1');
+            h1.setAttribute('class', 'text-xl font-bold')
+            body.appendChild(h1);
+            if(!result.includes('fail')) {
+                h1.textContent = `${arrInp.length} data successfully inserted to database after ${totalTime} seconds`;
+            } else {
+                h1.textContent = `something went wrong`;
+                const p = document.createElement('p');
+                p.innerHTML = `${result}`;
+                body.appendChild(p);
+            }
         } else {
-            h1.textContent = `something went wrong`;
-            const p = document.createElement('p');
-            p.innerHTML = `${result}`;
-            body.appendChild(p);
+            const h1 = document.createElement('h1');
+            h1.setAttribute('class', 'text-xl font-bold');
+            h1.textContent = `data sudah ada`;
+            body.appendChild(h1);
         }
-            */
+        /*
             const workbook = XLSX.utils.book_new();
             const worksheet = XLSX.utils.json_to_sheet(newLabor);
+            const worksheet2 = XLSX.utils.json_to_sheet(arrInp);
             XLSX.utils.book_append_sheet(workbook, worksheet, 'new labor');
+            XLSX.utils.book_append_sheet(workbook, worksheet2, 'array final');
             XLSX.writeFile(workbook, 'db_jig_Total.xlsx')
+        */
         const load = document.querySelector('#load');
         load.classList.add('hidden');
     </script>
