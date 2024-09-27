@@ -15,11 +15,14 @@ console.log(role);
 
 // get data from database
 // -------------------------------------------------------
-const loc = await api_access('get','loc_data_sb3','');
-const master = await api_access('get','master_data_sb3','');
-let dtl_func_data = await api_access('get','func_data_sb3', '');
+let [loc, master, dtl_func_data, item] = await Promise.all([
+  api_access('get','loc_data_sb3',''),
+  api_access('get','master_data_sb3',''),
+  api_access('get','func_data_sb3', ''),
+  api_access('get','qad_item','')
+])
+console.log({loc, master, dtl_func_data, item});
 let dtl_loc_show = [];
-let item =  await api_access('get','qad_item','');;
 let func = [];
 let func_show = [];
 let dtl_func = [];
@@ -30,18 +33,19 @@ let dtl_func_show = [];
 // -------------------------------------------------------
 let loc_sum = [];
 loc.forEach(dt=>{
-    const keys = Object.keys(dt)
-    let filter = '';
-    keys.forEach(d2=>{
-        filter += dt[d2] + '____';
-    })
-    dt['filter'] = filter;
-    let qty__unit = 0;
-    if(role === 'user') {
-      qty__unit = Math.floor(parseInt(dt.qty_per_unit) * (1-dt.toleransi/100));
-    } else {
-      qty__unit = parseInt(dt.qty_per_unit);
-    }
+  const keys = Object.keys(dt)
+  let filter = '';
+  keys.forEach(d2=>{
+      filter += dt[d2] + '____';
+  })
+  dt['filter'] = filter;
+  let qty__unit = 0;
+  if(role === 'user') {
+    qty__unit = Math.floor(parseInt(dt.qty_per_unit) * (1-dt.toleransi/100));
+  } else {
+    qty__unit = parseInt(dt.qty_per_unit);
+  }
+  if(dt['lokasi'] !== 'FGWH') {
     if(loc_sum[`${dt.item_jig}`]) {
       loc_sum[`${dt.item_jig}`]['qty_total'] += qty__unit;
     } else {
@@ -51,6 +55,17 @@ loc.forEach(dt=>{
       };
       loc_sum[`${dt.item_jig}`] = data; 
     }
+  } else {
+    if(loc_sum[`${dt.item_jig}`]) {
+      loc_sum[`${dt.item_jig}`]['qty_total'] += 0;
+    } else {
+      let data = {
+        ...dt,
+        qty_total: 0
+      };
+      loc_sum[`${dt.item_jig}`] = data; 
+    }
+  }
 })
 
 // process data master for qty total

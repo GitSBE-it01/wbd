@@ -5,7 +5,6 @@ require_once 'D:/xampp/htdocs/wbd/2.backend/middleware/index.php';
 require_once 'D:/xampp/htdocs/wbd/2.backend/model/index.php';
 
 require_once 'general.php';
-require_once 'jig_db.php';
 require_once 'new_type_report.php';
 require_once 'pick_now.php';
 require_once 'test.php';

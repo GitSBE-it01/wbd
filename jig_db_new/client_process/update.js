@@ -2,7 +2,6 @@ import {api_access, DOM, GeneralDOM, TableDOM, DtlistDOM, NavDOM, ButtonDOM, Inp
 import {auth2} from '../../3.utility/auth.js';
 import {data_switch} from './general.js';
 
-document.addEventListener('DOMContentLoaded', async()=>{
 /* ====================================================================
   Initialize page
 ==================================================================== */
@@ -74,18 +73,17 @@ InputDOM.submit_change_style_table('#stock_table', '#submit_stock');
 
 // edit button trigger change attribute and style
 //----------------------------------------------
-ButtonDOM.edit_form_button('#edit_detail','#submit_detail', '#detail_form', ['font-bold', 'bg-red-400','bg-gray-300', 'text-slate-200'],
-  ['text-white', 'bg-slate-600']
+ButtonDOM.edit_form_button('#edit_detail','#submit_detail', '#detail_form', ['font-bold', 'bg-red-400','bg-gray-300', 'text-slate-200'], ['text-white', 'bg-slate-600']
 )
 
 // add new button trigger new row inserted to table
 //----------------------------------------------
 let counter =0;
 if(document.querySelector('#add_new_stock') !== null) {
-  ButtonDOM.insert_row2('#add_new_stock','#stock_table_new', '#stock_table', counter, 'bot');
+  ButtonDOM.insert_row_sbmt_btn('#add_new_stock', '#submit_stock', '#stock_table_new', '#stock_table', counter, 'bot');
 }
 if(document.querySelector('#add_new_type') !== null) {
-  ButtonDOM.insert_row2('#add_new_type','#type_table_new', '#type_table', counter, 'bot');
+  ButtonDOM.insert_row_sbmt_btn('#add_new_type','#submit_type', '#type_table_new', '#type_table', counter, 'bot');
 }
 
 /* ====================================================================
@@ -156,14 +154,26 @@ document.addEventListener('click', async function(event) {
       })
     }
     loc_show = loc.filter(obj=>obj.item_jig === splt[0]);
+
     log_loc_show = log_loc.filter(obj=>obj.item_jig === splt[0]);
     console.log(log_loc_show);
     log_loc_show.sort((a,b)=>{
       if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.     trans_date);
     })
-    console.log({loc, log_loc, loc_show, log_loc_show});
+      console.log({loc, log_loc, loc_show, log_loc_show});
       TableDOM.parse_data('#stock_table', loc_show, 1);
-      TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code'])
+      if(loc_show.length === 0 ) {
+        const data = {
+          item_jig: splt[0],
+          code: `${splt[0]}--001`
+        };
+        loc_show.push(data);
+        TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code']);
+        loc_show = [];
+      } else {
+        TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code']);
+      }
+      console.log(loc_show);
       NavDOM.pgList_init('#stock_page', loc_show, '#stock_table');
       TableDOM.parse_onclick('#stock_table',  loc_show, 'data-group','stock_page');
       NavDOM.pgList_active('stock_page');
@@ -400,6 +410,37 @@ document.addEventListener('focusout', function(event){
 //----------------------------------------------
 ButtonDOM.submit_dataset_and_log_table('#submit_stock[data-method ="submit"]', '#stock_table', ['jig_loc', 'log_loc']);
 ButtonDOM.submit_dataset_and_log_table('#submit_type[data-method ="submit"]', '#type_table', ['jig_func', 'log_func']);
-ButtonDOM.submit_dataset_and_log_form('#submit_detail[data-method ="submit"]', '#detail_form', ['jig_mstr', 'log_mstr']);
+
+
+document.addEventListener('click', async(e)=>{
+  if(e.target.id === 'submit_detail' && e.target.getAttribute('data-method') === 'submit') {
+    DOM.rmv_class('#load',"hidden");
+    let frm = document.querySelector('#detail_form');
+    let update =[];
+    const name = frm.querySelectorAll('[name]');
+    let data ={};
+    name.forEach(dt=>{
+        data[dt.getAttribute('name')] = dt.value;
+    })
+    update.push(data);
+
+    console.log({update});
+    /*
+    let msg ='';
+    if(update.length>0) {
+        let result1 = await api_access('update',model, update);
+        if(result1.includes('fail')) {
+          msg += 'update data gagal';
+        } else {
+          let result2 = await api_access('insert',model[1], update);
+          msg += update.length + 'data di update';
+        }
+    }
+    alert (msg);
+    */
+    DOM.add_class('#load',"hidden");
+    //location.reload();
+    return;
+  }
 
 })

@@ -170,6 +170,10 @@ document.addEventListener('change', async(e) =>{
   if(e.target.getAttribute('name') === 'measure' ) {
     const val = e.target.value;
     code_data_hd_2 = code_data_hd_1+val;
+    const div_dtl = e.target.closest('[data-detail]');
+    const um = div_dtl.querySelector('[name = "um"]');
+    const val_all = reff.find(obj=>obj.type === val);
+    um.value = val_all.um;
     return;
   }
 
@@ -212,8 +216,6 @@ document.addEventListener('change', async(e) =>{
     }
     return;
   }
-  
-
 })
 
 
@@ -257,8 +259,15 @@ document.addEventListener('click', async(e) =>{
       return;
     }
     const counter_btn = e.target.id.split('__');
-    const dtl = main.querySelector(`#detail__${counter_btn[1]}`);
-    const dt_inp = main.querySelector(`#data_input__${counter_btn[1]}`);
+    let code_btn = '';
+    if(counter_btn.length > 2) {
+      code_btn = `${counter_btn[1]}__${counter_btn[2]}__${counter_btn[3]}__${counter_btn[4]}`;
+    } else {
+      code_btn = `${counter_btn[1]}`;
+    }
+    const dtl = main.querySelector(`#detail__${code_btn}`);
+    console.log({dtl,main, counter_btn, code_btn});
+    const dt_inp = main.querySelector(`#data_input__${code_btn}`);
     const field_dtl = dtl.querySelectorAll('[name]');
     let inp_hd = [];
     let inp_hd_data ={};
@@ -329,7 +338,6 @@ document.addEventListener('click', async(e) =>{
     const cont = e.target.closest('[data-detail]');
     console.log({cont});
     const disbl = cont.querySelectorAll('input[disabled], select[disabled]')
-    console.log(disbl);
     disbl.forEach(dt=>{
       if(dt.getAttribute('name') !== 'um') {
         dt.disabled =false;
@@ -374,14 +382,5 @@ document.addEventListener('click', async(e) =>{
     return;
   }
 
-  // autoset um
-  // ------------------------------------------------------
-  if(e.target.getAttribute('name')==='measure') {
-    const val = e.target.value;
-    const div_dtl = e.target.closest('[data-detail]');
-    const um = div_dtl.querySelector('[name = "um"]');
-    const val_all = reff.find(obj=>obj.type === val);
-    um.value = val_all.um;
-    return;
-  }
+
 })

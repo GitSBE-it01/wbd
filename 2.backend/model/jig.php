@@ -51,6 +51,17 @@ $model['jig_mstr'] = new Model('db_jig.jig_master',
 ],
 'item_jig::s');
 
+$model['jig_mstr2'] = new Model('db_jig.jig_master2',
+[
+    'item_jig::s',
+    'desc_jig::s',
+    'status_jig::s',
+    'material::s',
+    'type::s',
+    'drawing::s',
+],
+'id::i');
+
 $model['log_mstr'] = new Model('db_jig.log_master',
 [
     'item_jig::s',
@@ -61,6 +72,7 @@ $model['log_mstr'] = new Model('db_jig.log_master',
     'trans_date::s',
     'remark::s',
     'drawing::s',
+    'id::i'
 ],
 'id_log::i');
 
@@ -105,6 +117,7 @@ $model['jig_usg_test'] = new Model('db_jig_new.sb_usage_log',
     'qty_usage::i',
     'codeAll::s',
     'id_trans::s',
+    'data_date::s'
 ],
 'id::i');
 

@@ -404,34 +404,36 @@
                 const basicDt = {
                     ...a,
                     desc_jig: dJig.desc_jig,
+                    data_date: currentDate('-'),
                     count_dt: 1,
                 }
                 arrInp.push(basicDt);
                 if (a.cat === 'b.use') {
-                for (let i2=1; i2<a.code_count; i2++) {
-                    const len = a.code.length;
-                    const codeNew = a.codeAll.substring((len*(i2-1)),(len*i2));
-                    const data = {
-                        tr_date: a.tr_date,
-                        jig: a.jig,
-                        desc_jig: dJig.desc_jig,
-                        code: codeNew,
-                        cat: a.cat,
-                        loc: a.loc,
-                        qty_pinjam: a.qty_pinjam,
-                        wo_id: a.wo_id,
-                        type: a.type,
-                        qty_total: a.qty_total,
-                        count_dt: 1,
-                        code_count: a.code_count,
-                        qty_jig: a.qty_jig,
-                        qty_usage: a.qty_usage,
-                        codeAll: a.codeAll,
-                        id_trans: '',
-                        data_date: currentDate('-')
+                    for (let i2=1; i2<a.code_count; i2++) {
+                        const len = a.code.length;
+                        const codeNew = a.codeAll.substring((len*(i2-1)),(len*i2));
+                        const data = {
+                            tr_date: a.tr_date,
+                            jig: a.jig,
+                            desc_jig: dJig.desc_jig,
+                            code: codeNew,
+                            cat: a.cat,
+                            loc: a.loc,
+                            qty_pinjam: a.qty_pinjam,
+                            wo_id: a.wo_id,
+                            type: a.type,
+                            qty_total: a.qty_total,
+                            count_dt: 1,
+                            code_count: a.code_count,
+                            qty_jig: a.qty_jig,
+                            qty_usage: a.qty_usage,
+                            codeAll: a.codeAll,
+                            id_trans: '',
+                            data_date: currentDate('-')
+                        }
+                        arrInp.push(data);
                     }
-                    arrInp.push(data);
-                }}
+                }
             }
         }
         result_check([
@@ -442,7 +444,7 @@
     load data to databases
     ===================================================================*/
         const check_last = await api_access2('fetch', 'jig_db', 'jig_usg', {data_date:currentDate("-")});
-        console.log(check_last);
+        console.log({check_last});
         if(check_last.length===0) {
             const result = await api_access('insert','jig_usg', arrInp);
             const end = performance.now();

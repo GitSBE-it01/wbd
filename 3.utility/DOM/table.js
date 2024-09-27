@@ -278,9 +278,9 @@ export class TableDOM {
             const field_name = dt.getAttribute('name');
             if(array.includes(field_name)) {
                 if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
-                    dt.value = data[0][`${field_name}`];
+                    dt.value = data[0][`${field_name}`] ?? '';
                 } else {
-                    dt.textContent = data[`${field_name}`]
+                    dt.textContent = data[`${field_name}`] ?? '';
                 }
             }
         })

@@ -12,9 +12,16 @@ $detail_form = [
             ]
         ],
         [
+            'type'=>'hidden',
+            'input'=>['id'=>'id','name'=>'id', 'type_attr'=>'hidden'
+            ]
+        ],
+        [
             'type'=>'text',
-            'label'=>['for'=>'item_jig','class'=>'hidden'],
-            'input'=>['id'=>'item_jig','name'=>'item_jig','class'=>'hidden']
+            'label'=>['for'=>'item_jig','body'=>'Item Number'],
+            'input'=>['id'=>'item_jig','name'=>'item_jig',                'disable'=>'',
+            'class'=> 'rounded text-white bg-slate-600 px-2 h-full focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 shadow-md w-[50%]'
+        ]
         ],
         [
             'type'=>'text',

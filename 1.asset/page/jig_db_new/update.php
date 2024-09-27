@@ -231,6 +231,6 @@ createHTML([
     'body'=>$update, 
     'name'=>'update', 
     'title'=>"Update Data Jig",
-    'path'=>'jig_db_new3'
+    'path'=>'jig_db_new'
 ]);
 

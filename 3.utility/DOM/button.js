@@ -85,6 +85,60 @@ export class ButtonDOM {
         return;
     }
 
+    static insert_row_sbmt_btn(button, sbmtBtn, template_tbl, tbl, counter, post='') {
+        let btn = '';
+        if(button.nodeType) {
+            btn = button;
+        } else {
+            btn = document.querySelector(button);
+        }
+        let btn2 = '';
+        if(sbmtBtn.nodeType) {
+            btn2 = sbmtBtn;
+        } else {
+            btn2 = document.querySelector(sbmtBtn);
+        }
+        if(btn && btn2) {
+            btn.addEventListener('click', function() {
+                const target = document.querySelector(tbl);
+                const tbody = target.querySelector('tbody')
+                const table = document.querySelector(template_tbl);
+                const tbodyRow = table.querySelector('tbody');
+                const row_dt = tbodyRow.querySelector('tr');
+                const new_row = row_dt.cloneNode(true);
+                new_row.setAttribute('data-id', `new__${tbl}__${counter}`);
+                new_row.setAttribute('data-change', `new`);
+                const name = new_row.querySelectorAll('[name]');
+                name.forEach(dt=>{
+                    if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
+                        const name = dt.getAttribute('name');
+                        let td = '';
+                        if(dt.disabled) {dt.disabled = false;}
+                        if(dt.closest('td') !== null) {
+                            td = dt.closest('td');
+                            const label = td.querySelector('label');
+                            if(dt.hasAttribute('id')) {
+                                dt.id = `${name}__${target.id}__new__${counter}`;
+                                label.setAttribute('for', `${name}__${target.id}__new__${counter}`)
+                            }
+                        }
+                    }
+                })
+                DOM.add_class(btn2, 'font-bold', 'bg-red-400');
+                DOM.rmv_class(btn2, 'bg-gray-300', 'text-slate-200');
+                DOM.rmv_attr(btn2, 'disabled');
+                DOM.set_attr(btn2, 'data-method', 'submit');
+                if(post === '') {
+                    tbody.insertBefore(new_row,tbody.rows[0]);
+                } else {
+                    tbody.appendChild(new_row);
+                }
+                return;
+            })
+        }
+        return;
+    }
+
     static show_hidden(button, target) {
         let btn = '';
         if(button.nodeType) {

@@ -21,6 +21,7 @@ $model['wb_test'] = new Model('db_wbd.wbd_test',
     'comment::s',
 ],
 'id::i');
+require_once "jig_sb3.php";
 require_once "jig.php";
 require_once "new_type_report.php";
 require_once "ngvar.php";
