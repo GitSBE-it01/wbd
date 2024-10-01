@@ -445,7 +445,7 @@
     ===================================================================*/
         const check_last = await api_access2('fetch', 'jig_db', 'jig_usg', {data_date:currentDate("-")});
         console.log({check_last});
-        if(check_last.length===0) {
+        if(check_last.length===0 && arrInp.length > 0) {
             const result = await api_access('insert','jig_usg', arrInp);
             const end = performance.now();
             const totalTime = (end - start) /1000;

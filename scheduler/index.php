@@ -14,6 +14,7 @@ echo "testing</br>";
 echo "====================================================================</br>";
 $start_time = microtime(true);
 //test_odbc();
+test_error();
 echo "no testing currently";
 $end_time = microtime(true);
 $elapsed_time = $end_time - $start_time;

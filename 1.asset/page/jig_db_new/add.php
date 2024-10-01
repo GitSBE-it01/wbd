@@ -164,7 +164,7 @@ createHTML([
 'body'=>$add, 
 'name'=>'add_new', 
 'title'=>"Reference",
-'path'=>'jig_db_new3'
+'path'=>'jig_db_new'
 ]);
 
 

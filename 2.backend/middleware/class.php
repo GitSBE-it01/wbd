@@ -341,7 +341,13 @@ class DB {
                         $bindParams[] = &$data[$key];
                     }
                     array_unshift($bindParams, $types);
-                    call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                    try {
+                        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                    }  catch (Exception $e) {
+                        $errorMessage = $e->getMessage();
+                        $response = $errorMessage.'</br>';
+                        return;
+                    }
                 }
                 if (!$stmt->execute()) {
                     die("Execute failed: " . $stmt->error);
@@ -364,7 +370,13 @@ class DB {
                             $bindParams[] = &${'param' . $key};
                         }
                         array_unshift($bindParams, $types);
-                        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                        try {
+                            call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                        }  catch (Exception $e) {
+                            $errorMessage = $e->getMessage();
+                            $response = $errorMessage.'</br>';
+                            return;
+                        }
                         if (!$stmt->execute()) {
                             die("Execute failed: " . $stmt->error);
                         } else {
@@ -377,7 +389,13 @@ class DB {
                         $bindParams[] = &$data[$key];
                     }
                     array_unshift($bindParams, $types);
-                    call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                    try {
+                        call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                    }  catch (Exception $e) {
+                        $errorMessage = $e->getMessage();
+                        $response = $errorMessage.'</br>';
+                        return;
+                    }
                     if (!$stmt->execute()) {
                         die("Execute failed: " . $stmt->error);
                     } else {

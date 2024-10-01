@@ -72,7 +72,6 @@ $model['log_mstr'] = new Model('db_jig.log_master',
     'trans_date::s',
     'remark::s',
     'drawing::s',
-    'id::i'
 ],
 'id_log::i');
 

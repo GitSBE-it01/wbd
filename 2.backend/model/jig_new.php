@@ -1,22 +1,23 @@
 <?php
-$model['emp_data_sb3'] = new Model('db_jig_new.sb3_emp_data',
+$model['sb_emp_data'] = new Model('db_jig_new.sb_emp_data',
 [
     'emp_code::s',
     'loc_name::s',
 ],
 'emp_code::s');
 
-$model['func_data_sb3'] = new Model('db_jig_new.sb3_func_data',
+$model['sb_func_data'] = new Model('db_jig_new.sb_func_data',
 [
     'item_jig::s',
     'item_type::s',
     'opt_on::i',
     'opt_off::i',
     'status::s',
+    'id_fk::i'
 ],
 'id::i');
 
-$model['func_log_sb3'] = new Model('db_jig_new.sb3_func_log',
+$model['sb_func_log'] = new Model('db_jig_new.sb_func_log',
 [
     'item_jig::s',
     'item_type::s',
@@ -25,10 +26,12 @@ $model['func_log_sb3'] = new Model('db_jig_new.sb3_func_log',
     'status::s',
     'remark::s',
     'trans_date::s',
+    'id_fk::i'
 ],
 'id_log::i');
 
-$model['loc_data_sb3'] = new Model('db_jig_new.sb3_loc_data',
+
+$model['sb_loc_data'] = new Model('db_jig_new.sb_loc_data',
 [
     'item_jig::s',
     'qty_per_unit::i',
@@ -38,16 +41,11 @@ $model['loc_data_sb3'] = new Model('db_jig_new.sb3_loc_data',
     'urut::i',
     'toleransi::i',
     'code::s',
+    'id_fk::i'
 ],
 'id::i');
 
-$model['loc_list_sb3'] = new Model('db_jig_new.sb3_loc_list',
-[
-    'name::s',
-],
-'name::s');
-
-$model['loc_log_sb3'] = new Model('db_jig_new.sb3_loc_log',
+$model['sb_loc_log'] = new Model('db_jig_new.sb_loc_log',
 [
     'code::s',
     'item_jig::s',
@@ -61,10 +59,17 @@ $model['loc_log_sb3'] = new Model('db_jig_new.sb3_loc_log',
     'toleransi::i',
     'addSub::s',
     'qty_change::i',
+    'id_fk::i'
 ],
 'id_log::i');
 
-$model['master_data_sb3'] = new Model('db_jig_new.sb3_master_data',
+$model['sb_loc_list'] = new Model('db_jig_new.sb_loc_list',
+[
+    'name::s',
+],
+'name::s');
+
+$model['sb_master_data'] = new Model('db_jig_new.sb_master_data',
 [
     'item_jig::s',
     'desc_jig::s',
@@ -73,9 +78,9 @@ $model['master_data_sb3'] = new Model('db_jig_new.sb3_master_data',
     'type::s',
     'drawing::s',
 ],
-'item_jig::s');
+'id::i');
 
-$model['master_log_sb3'] = new Model('db_jig_new.sb3_master_log',
+$model['sb_master_log'] = new Model('db_jig_new.sb_master_log',
 [
     'item_jig::s',
     'desc_jig::s',
@@ -85,11 +90,21 @@ $model['master_log_sb3'] = new Model('db_jig_new.sb3_master_log',
     'trans_date::s',
     'remark::s',
     'drawing::s',
+    'id::i'
 ],
 'id_log::i');
 
 
-$model['trans_log_sb3'] = new Model('db_jig_new.sb3_trans_log',
+$model['sb_mtnc_list'] = new Model('db_jig_new.sb_mtnc_list',
+[
+    'type_jig::s',
+    'mtnc_std_lifetime::i',
+    'mtnc_by::s',
+    'lftm_unit::s',
+],
+'type_jig::s');
+
+$model['sb_trans_data'] = new Model('db_jig_new.sb_trans_data',
 [
     'code::s',
     'loc::s',
@@ -101,7 +116,7 @@ $model['trans_log_sb3'] = new Model('db_jig_new.sb3_trans_log',
 ],
 'id::i');
 
-$model['usage_log_sb3'] = new Model('db_jig_new.sb3_usage_log',
+$model['sb_usage_log'] = new Model('db_jig_new.sb_usage_log',
 [
     'tr_date::s',
     'jig::s',
@@ -119,17 +134,11 @@ $model['usage_log_sb3'] = new Model('db_jig_new.sb3_usage_log',
     'qty_usage::i',
     'codeAll::s',
     'id_trans::s',
+    'data_date::s'
 ],
 'id::i');
 
-$model['mtnc_data_sb3'] = new Model('db_jig_new.sb3_mtnc_data',
-[
-    'type_jig::s',
-    'mtnc_std_lifetime::i',
-    'mtnc_by::s',
-    'lftm_unit::s',
-],
-'type_jig::s');
+
 
 
 

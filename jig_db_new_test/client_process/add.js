@@ -264,7 +264,7 @@ document.addEventListener('click', async function(event) {
     DOM.rmv_class('#load',"hidden");
     const container = document.getElementById('jig_add');
     const data_mstr = container.querySelectorAll('#add_jig_form [name]');
-    let ins_mstr = [];
+    const ins_mstr = [];
     let dt_temp = {
       trans_date: currentDate("-"),
     };
@@ -277,7 +277,6 @@ document.addEventListener('click', async function(event) {
       }
     })
     ins_mstr.push(dt_temp);
-    console.log({dt_temp});
     if(ins_mstr.length >0) {
       const result = await api_access('insert', 'jig_mstr', ins_mstr) ;
       if(result.includes('fail')) {
@@ -304,7 +303,6 @@ document.addEventListener('click', async function(event) {
       })
       ins_loc.push(dt_temp);
     })
-    console.log({dt_temp});
     if(ins_loc.length >0) {
       const result = await api_access('insert', 'jig_loc', ins_loc) ;
       if(result.includes('fail')) {
@@ -330,7 +328,6 @@ document.addEventListener('click', async function(event) {
       })
       ins_type.push(dt_temp);
     })
-    console.log({dt_temp});
     if(ins_type.length >0) {
       const result = await api_access('insert', 'jig_func', ins_type) ;
       if(result.includes('fail')) {

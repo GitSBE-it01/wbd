@@ -163,7 +163,7 @@ createHTML([
     'body'=>$index, 
     'name'=>'index', 
     'title'=>"Jig Database",
-    'path'=>'jig_db_new3'
+    'path'=>'jig_db_new'
 ]);
 
 

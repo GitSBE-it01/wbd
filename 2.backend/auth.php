@@ -9,9 +9,18 @@ function auth() {
     global $db_conn;
     global $model;
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        $reff = explode("/",$_SERVER['HTTP_REFERER']);
         if(isset($_SESSION['nik'])) {
             $db_src = custom_handle($db_conn, [
                 'EmployeeID'=>$_SESSION['nik']], 'auth', 'auth_mstr', $model, 'auth_mstr');
+            $fix_dt = [];
+            foreach($db_src as $set) {
+                $check = str_replace("\r\n", "",$set['apps']);
+                if($check === $reff[4]) {
+                    $fix_dt[]=$set;
+                }
+            }
+            
             $data = array(
                 'name'=>$db_src[0]['Name'],
                 'dept'=>$db_src[0]['Department'],
@@ -19,7 +28,7 @@ function auth() {
                 'nik'=>$db_src[0]['EmployeeID'],
                 'jabatan'=>$db_src[0]['Position'],
                 'grade'=>$db_src[0]['Grade'],
-                'role'=>isset($db_src[0]['role']) ? $db_src[0]['role'] : 'user',
+                'role'=>isset($fix_dt[0]['role'])  ?  str_replace("\r\n", "",$fix_dt[0]['role']) : 'user',
             );
             if($data['dept'] === "INFORMATION TECHNOLOGY") { $data['role'] = 'super';}
             $response = $data;
