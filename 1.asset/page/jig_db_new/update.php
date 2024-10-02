@@ -105,12 +105,26 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                         'id'=>'type_div_search',
                         'class'=>'flex flex-row gap-4 h-full w-full items-center hidden',
                         'body'=>[
+                            Comp::select([
+                                'id'=>'select__type',
+                                'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[10vw]',
+                                'body'=>[
+                                    Comp::option([
+                                        'value'=>'Speaker',
+                                        'body'=>'Speaker'
+                                    ]),
+                                    Comp::option([
+                                        'value'=>'Jig',
+                                        'body'=>'Jig'
+                                    ])
+                                ]
+                            ]),
                             Comp::input([
                                 'id'=>'input__type',
                                 'placeholder'=>'input type disini',
                                 'autocomplete'=>'off',
                                 'list'=>'spk_list',
-                                'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[40vw]'
+                                'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[30vw]'
                             ]),
                             Comp::button([
                                 'id'=>'search_type',

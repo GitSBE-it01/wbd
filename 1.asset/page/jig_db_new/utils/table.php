@@ -680,17 +680,34 @@ $type_table_upd = [
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'id'],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'item_type'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'trans_date'],
         [
             'th'=>[
+                'body'=>'Item Number Speaker',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]'
+            ],
+            'type'=>'input',
+            'td'=>[
+                'data_attr'=>['field::item_type'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[15vw]'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'placeholder'=>'',
+                'name'=> 'item_type', 
+                'list'=>'jig_list',
+                'class'=>'w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'th'=>[
                 'body'=>'Item Number jig',
-                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::item_jig'],
-                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10 w-[18vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -703,12 +720,12 @@ $type_table_upd = [
         [
             'th'=>[
                 'body'=>'Deskripsi Jig',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::desc_jig'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -720,12 +737,12 @@ $type_table_upd = [
         [
             'th'=>[
                 'body'=>'Ops Put On',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::opt_on'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -737,12 +754,12 @@ $type_table_upd = [
         [
             'th'=>[
                 'body'=>'Ops Pull Out',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::opt_off'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -754,12 +771,12 @@ $type_table_upd = [
         [
             'th'=>[
                 'body'=>'Status',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::status'],
-                'class'=>'bg-slate-600 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+                'class'=>'bg-slate-600 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 
@@ -772,12 +789,12 @@ $type_table_upd = [
         [
             'th'=>[
                 'body'=>'Remark',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[18vw]'
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[15vw]'
             ],
             'type'=>'input',
             'td'=>[
                 'data_attr'=>['field::remark'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]'
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]'
             ],
             'inp'=>[
                 'type'=>'text', 

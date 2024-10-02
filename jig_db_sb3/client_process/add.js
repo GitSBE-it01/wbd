@@ -414,40 +414,39 @@ document.addEventListener('click', async function(event) {
 
 // submit data type jig
 //----------------------------------------------
-  if(event.target.getAttribute('data-method') === 'type_jig_submit') {
-    DOM.rmv_class('#load',"hidden");
-    const container = document.getElementById('type_jig_add');
-    const data_mstr = container.querySelectorAll('#add_jig_type_form [name]');
-    const ins_mstr = [];
-    let dt_temp = {
-      trans_date: currentDate("-"),
-      remark: 'data awal'
-    };
-    data_mstr.forEach(dt=>{
-      const field = dt.getAttribute('name');
-      if(!dt_temp.field) {
-        dt_temp[`${field}`] = dt.value;
-      } else {
-        console.log('error ', dt);
-      }
-      ins_mstr.push(dt_temp);
-    })
-    const cek = await api_access('fetch', 'mtnc_data_sb3', {name: ins_mstr[0]['type_jig']});
-    if(cek.length === 0 || cek === undefined ){
-      const result = await api_access('insert','mtnc_data_sb3',ins_mstr);
-      if(!result.includes('fail')) {
-        alert('data berhasil ditambahkan');
-      }
+if(event.target.getAttribute('data-method') === 'type_jig_submit') {
+  DOM.rmv_class('#load',"hidden");
+  const container = document.getElementById('type_jig_add');
+  const data_mstr = container.querySelectorAll('#add_jig_type_form [name]');
+  const ins_mstr = [];
+  const dt_temp = {};
+  data_mstr.forEach(dt=>{
+    const field = dt.getAttribute('name');
+    if(!dt_temp.field) {
+      dt_temp[`${field}`] = dt.value;
+    } else {
+      console.log('error ', dt);
+    }
+  })
+  ins_mstr.push(dt_temp);
+  console.log({ins_mstr});
+  const cek = await api_access('fetch', 'list_mtnc', {type_jig: ins_mstr[0]['type_jig']});
+  if(cek.length === 0 || cek === undefined ){
+    const result = await api_access('insert','list_mtnc',ins_mstr);
+    if(!result.includes('fail')) {
       data_mstr.forEach(dt=>{
         dt.value = '';
       })
-    } else {
-      alert('Type jig sudah ada');
+      DOM.add_class('#load',"hidden");
+      alert('data berhasil ditambahkan');
+      return;
     }
-    DOM.rmv_class('#load',"hidden");
+  } else {
+    DOM.add_class('#load',"hidden");
+    alert('Type jig sudah ada');
     return;
   }
-
+}
 // submit data users
 //----------------------------------------------
   if(event.target.getAttribute('data-method') === 'user_submit') {

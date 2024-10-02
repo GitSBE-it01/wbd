@@ -16,12 +16,15 @@ const check = window.location.href.split("/");
 let counter_row = 0;
 let urut = 1;
 let counter_loc = 1;
-const ls_loc = await api_access('get','list_loc','');
-const master = await api_access('get','jig_mstr','');
-const mtnc = await api_access('get','list_mtnc','');
-const role_cek = await api_access('fetch','role',{apps:`${check[4]}`});
-const users = await api_access('get','auth_mstr','');
-const item = await api_access('fetch_item__cache','qad_item','');
+const [ls_loc, master, mtnc, role_cek, users, item] = await Promise.all([
+  api_access('get','list_loc',''),
+  api_access('get','jig_mstr',''),
+  api_access('get','list_mtnc',''),
+  api_access('fetch','role',{apps:`${check[4]}`}),
+  api_access('get','auth_mstr',''),
+  api_access('fetch_item__cache','qad_item',''),
+])
+
 console.log({ls_loc
     ,master
     ,mtnc
@@ -35,8 +38,6 @@ console.log({ls_loc
 DtlistDOM.parse_opt("#jig_list","-",master,"item_jig", 'desc_jig');
 DtlistDOM.parse_opt("#type_list","-",item,"pt_part", 'pt_desc1', 'pt_desc2');
 DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
-DtlistDOM.parse_opt("#users","-",users,"Absensi", "Name");
-DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
 
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
@@ -80,12 +81,14 @@ let code_array = [
     }
     if(event.target.id === 'type_jig_switch') {
       data_switch('type_jig', code_array, target_array); 
+      DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'type_jig_submit');
       return;
     }
     if(event.target.id === 'user_switch') {
       data_switch('user', code_array, target_array); 
+      DtlistDOM.parse_opt("#users","-",users,"Absensi", "Name");
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'user_submit');
       return;
@@ -363,19 +366,22 @@ document.addEventListener('click', async function(event) {
       } else {
         console.log('error ', dt);
       }
-      ins_mstr.push(dt_temp);
     })
+    ins_mstr.push(dt_temp);
+    console.log(ins_mstr);
     const cek = await api_access('fetch', 'list_loc', {name: ins_mstr[0]['name']});
     if(cek.length === 0 || cek === undefined ){
       const result = await api_access('insert','list_loc',ins_mstr);
       if(!result.includes('fail')) {
         alert('data berhasil ditambahkan');
+        this.location.reload();
       }
       data_mstr.forEach(dt=>{
         dt.value = '';
       })
     } else {
       alert('Lokasi sudah ada');
+      this.location.reload();
     }
     DOM.rmv_class('#load',"hidden");
     return;
@@ -422,10 +428,7 @@ document.addEventListener('click', async function(event) {
     const container = document.getElementById('type_jig_add');
     const data_mstr = container.querySelectorAll('#add_jig_type_form [name]');
     const ins_mstr = [];
-    let dt_temp = {
-      trans_date: currentDate("-"),
-      remark: 'data awal'
-    };
+    const dt_temp = {};
     data_mstr.forEach(dt=>{
       const field = dt.getAttribute('name');
       if(!dt_temp.field) {
@@ -433,22 +436,25 @@ document.addEventListener('click', async function(event) {
       } else {
         console.log('error ', dt);
       }
-      ins_mstr.push(dt_temp);
     })
-    const cek = await api_access('fetch', 'list_mtnc', {name: ins_mstr[0]['type_jig']});
+    ins_mstr.push(dt_temp);
+    console.log({ins_mstr});
+    const cek = await api_access('fetch', 'list_mtnc', {type_jig: ins_mstr[0]['type_jig']});
     if(cek.length === 0 || cek === undefined ){
       const result = await api_access('insert','list_mtnc',ins_mstr);
       if(!result.includes('fail')) {
+        data_mstr.forEach(dt=>{
+          dt.value = '';
+        })
+        DOM.add_class('#load',"hidden");
         alert('data berhasil ditambahkan');
+        return;
       }
-      data_mstr.forEach(dt=>{
-        dt.value = '';
-      })
     } else {
+      DOM.add_class('#load',"hidden");
       alert('Type jig sudah ada');
+      return;
     }
-    DOM.rmv_class('#load',"hidden");
-    return;
   }
 
 // submit data users

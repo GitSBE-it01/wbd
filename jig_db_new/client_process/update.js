@@ -22,24 +22,17 @@ let detail_show = [];
 let log_detail = [];
 let log_detail_show = [];
 let start = performance.now();
-const ls_loc = await api_access('get','list_loc','');
-let end = performance.now();
-console.log('ls_loc ', (end-start)/1000, ' ms');
-start = performance.now();
-const master = await api_access('get','jig_mstr','');
-end = performance.now();
-console.log('master ', (end-start)/1000, ' ms');
-start = performance.now();
-const item = await api_access('fetch_item__cache','qad_item','');
-end = performance.now();
-console.log('item ', (end-start)/1000, ' ms');
+const [ls_loc, master, item] = await Promise.all([
+  api_access('get','list_loc',''),
+  api_access('get','jig_mstr',''),
+  api_access('fetch_item__cache','qad_item',''),
+])
 // datalist parsing option
 //----------------------------------------------
-start = performance.now();
 DtlistDOM.parse_opt("#jig_list","-",master,"item_jig", 'desc_jig');
 DtlistDOM.parse_opt("#spk_list","-",item,"pt_part", 'pt_desc1', 'pt_desc2');
 DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
-end = performance.now();
+let end = performance.now();
 console.log('datalist loaded data ', (end-start)/1000, ' ms');
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
@@ -206,50 +199,66 @@ document.addEventListener('click', async function(event) {
       return;
     }
     const value = src.value;
+    const check = src.getAttribute('list');
+    console.log({check});
     const splt = value.split('--')
-    if(func.find(obj=>obj.item_type === splt[0]) === undefined) {
-      let data = await api_access('fetch','jig_func',{item_type: splt[0]});
-      data.forEach(dt=>{
-        const desc = master.find(obj=>obj.item_jig === dt.item_jig);
-        if(desc !== undefined) {
-          dt['desc_jig'] = desc.desc_jig
-        }
-        func.push(dt);
-      })
-    }
-    if(log_func.find(obj=>obj.item_type === splt[0]) === undefined) {
-      let data = await api_access('fetch','log_func',{item_type: splt[0]});
-      console.log({data});
-      data.forEach(dt=>{
-        const desc = master.find(obj=>obj.item_jig === dt.item_jig);
-        if(desc !== undefined) {
-          dt['desc_jig'] = desc.desc_jig
-        }
-        log_func.push(dt);
-      })
-    }
-    func_show = func.filter(obj=>obj.item_type === splt[0]);
-    log_func_show = log_func.filter(obj=>obj.item_type === splt[0]);
-    log_func_show.sort((a,b)=>{
-      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
-    })
-    console.log({func, log_func, func_show, log_func_show});
-    if(func_show.length > 0 ) {
-      TableDOM.parse_data('#type_table', func_show, 1);
-      TableDOM.set_default_new_row('#type_table_new', func_show, ['item_type'])
-      NavDOM.pgList_init('#type_page', func_show, '#type_table');
-      TableDOM.parse_onclick('#type_table',  func_show, 'data-group','type_page');
-      NavDOM.pgList_active('type_page');
-      if(log_func_show.length> 0 ) {
-        TableDOM.parse_data('#type_table_hist', log_func_show, 1);
-        NavDOM.pgList_init('#type_hist_page', log_func_show, '#type_table_hist');
-        TableDOM.parse_onclick('#type_table_hist',  log_func_show, 'data-group','type_hist_page');
-        NavDOM.pgList_active('type_hist_page');
+    if(check === 'spk_list') {
+      if(func.find(obj=>obj.item_type === splt[0]) === undefined) {
+        let data = await api_access('fetch','jig_func',{item_type: splt[0]});
+        data.forEach(dt=>{
+          const desc = master.find(obj=>obj.item_jig === dt.item_jig);
+          if(desc !== undefined) {
+            dt['desc_jig'] = desc.desc_jig
+          }
+          func.push(dt);
+        })
       }
+      if(log_func.find(obj=>obj.item_type === splt[0]) === undefined) {
+        let data = await api_access('fetch','log_func',{item_type: splt[0]});
+        data.forEach(dt=>{
+          const desc = master.find(obj=>obj.item_jig === dt.item_jig);
+          if(desc !== undefined) {
+            dt['desc_jig'] = desc.desc_jig
+          }
+          log_func.push(dt);
+        })
+      }
+      func_show = func.filter(obj=>obj.item_type === splt[0]);
+      log_func_show = log_func.filter(obj=>obj.item_type === splt[0]);
+      log_func_show.sort((a,b)=>{
+        if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+      })
+    } else {
+      if(func.find(obj=>obj.item_jig === splt[0]) === undefined) {
+        let data = await api_access('fetch','jig_func',{item_jig: splt[0]});
+        data.forEach(dt=>{
+          const desc = master.find(obj=>obj.item_jig === dt.item_jig);
+          if(desc !== undefined) {
+            dt['desc_jig'] = desc.desc_jig
+          }
+          func.push(dt);
+        })
+      }
+      func_show = func.filter(obj=>obj.item_jig === splt[0]);
     }
-    event.target.disabled = false;
-    DOM.add_class('#load',"hidden");
-    return;
+
+      console.log({func, log_func, func_show, log_func_show});
+      if(func_show.length > 0 ) {
+        TableDOM.parse_data('#type_table', func_show, 1);
+        TableDOM.set_default_new_row('#type_table_new', func_show, ['item_type'])
+        NavDOM.pgList_init('#type_page', func_show, '#type_table');
+        TableDOM.parse_onclick('#type_table',  func_show, 'data-group','type_page');
+        NavDOM.pgList_active('type_page');
+        if(log_func_show.length> 0 ) {
+          TableDOM.parse_data('#type_table_hist', log_func_show, 1);
+          NavDOM.pgList_init('#type_hist_page', log_func_show, '#type_table_hist');
+          TableDOM.parse_onclick('#type_table_hist',  log_func_show, 'data-group','type_hist_page');
+          NavDOM.pgList_active('type_hist_page');
+        }
+      }
+      event.target.disabled = false;
+      DOM.add_class('#load',"hidden");
+      return;
   }
 
   // click search for detail
@@ -355,6 +364,20 @@ document.addEventListener('change', function(event) {
     }
     return;
   } 
+
+  // change data list utk type or jig saat update speaker usage
+  if(event.target.id === 'select__type') {
+    const val = event.target.value;
+    const inpt = document.querySelector('#input__type');
+    if(val === 'Speaker') {
+      inpt.placeholder = 'pilih type disini';
+      inpt.setAttribute('list', 'spk_list');
+    } else {
+      inpt.placeholder = 'pilih jig disini';
+      inpt.setAttribute('list', 'jig_list');
+    }
+    return;
+  } 
 })
 
 //----------------------------------------------
@@ -423,23 +446,20 @@ document.addEventListener('click', async(e)=>{
         data[dt.getAttribute('name')] = dt.value;
     })
     update.push(data);
-
     console.log({update});
-    /*
     let msg ='';
     if(update.length>0) {
-        let result1 = await api_access('update',model, update);
+        let result1 = await api_access('update','jig_mstr', update);
         if(result1.includes('fail')) {
           msg += 'update data gagal';
         } else {
-          let result2 = await api_access('insert',model[1], update);
+          let result2 = await api_access('insert', 'log_mstr', update);
           msg += update.length + 'data di update';
         }
     }
     alert (msg);
-    */
     DOM.add_class('#load',"hidden");
-    //location.reload();
+    location.reload();
     return;
   }
 

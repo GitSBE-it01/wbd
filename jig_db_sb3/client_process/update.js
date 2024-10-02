@@ -157,7 +157,18 @@ document.addEventListener('click', async function(event) {
     })
     console.log({loc, log_loc, loc_show, log_loc_show});
       TableDOM.parse_data('#stock_table', loc_show, 1);
-      TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code'])
+      if(loc_show.length === 0 ) {
+        const data = {
+          item_jig: splt[0],
+          code: `${splt[0]}--001`
+        };
+        loc_show.push(data);
+        TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code']);
+        loc_show = [];
+      } else {
+        TableDOM.set_default_new_row('#stock_table_new', loc_show, ['item_jig', 'code']);
+      }
+      console.log(loc_show);
       NavDOM.pgList_init('#stock_page', loc_show, '#stock_table');
       TableDOM.parse_onclick('#stock_table',  loc_show, 'data-group','stock_page');
       NavDOM.pgList_active('stock_page');
