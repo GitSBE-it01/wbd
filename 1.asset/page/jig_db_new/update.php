@@ -142,6 +142,12 @@ $update = Comp::dtlist(['id'=>'jig_list'])
                                 'body'=>'add new',
                                 'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200'
                             ]),
+                            Comp::button([
+                                'id'=>'del_type',
+                                'body'=>'delete',
+                                'disable'=>'',
+                                'class'=>'rounded text-slate-200 bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200'
+                            ]),
                         ]
                     ])
                 ]

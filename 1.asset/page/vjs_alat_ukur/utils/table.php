@@ -656,7 +656,7 @@ $point_table = [
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'piliihan'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'pilihan'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>''],
         [
             'type'=>'set_btn',
@@ -721,7 +721,7 @@ $point_new = [
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
-        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'piliihan'],
+        ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'pilihan'],
         ['type'=>'hidden', 'type_attr'=>'hidden', 'name'=>'status', 'value'=>''],
         [
             'type'=>'set_btn',

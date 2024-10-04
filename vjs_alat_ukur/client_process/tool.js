@@ -72,5 +72,60 @@ if(document.querySelector('#submit_form_btn') !== null) {
 }
 
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'vjs_alat', 'sn_id');
-ButtonDOM.submit_dataset_table('[data-method ="submit"]', '#tool_table', 'vjs_alat');
 ButtonDOM.enter_keydown('#search_btn', '#input__tool_search');
+
+document.addEventListener('click', async(e)=>{
+    if(e.target.getAttribute('data-method') === 'submit') {
+        const table = document.querySelector('#tool_table');
+        const tr = table.querySelectorAll('tbody tr');
+        console.log(tr);
+        let update = [];
+        let insert = [];
+        tr.forEach(dt=>{
+            if(dt.getAttribute('data-change') === 'change') {
+                let data = {};
+                const name = dt.querySelectorAll('[name]');
+                name.forEach(d2=>{
+                    data[d2.getAttribute('name')] = d2.value;
+                })
+                update.push(data);
+            };
+            if(dt.getAttribute('data-change') === 'new') {
+                let data = {};
+                const name = dt.querySelectorAll('[name]');
+                name.forEach(d2=>{
+                    if(d2.getAttribute('name') === 'sn_id') {
+                        data[d2.getAttribute('name')] = 'SN--'+d2.value;
+                    } else{
+                        data[d2.getAttribute('name')] = d2.value;
+                    }
+                })
+                insert.push(data);
+            };
+        }) 
+
+        console.log({update, insert});
+        let msg ='';
+        if(update.length>0) {
+            let result1 = await api_access('update','vjs_alat', update);
+            if(result1.includes('fail')) {
+                msg += 'update data gagal';
+            } else {
+                msg += update.length + 'data di update';
+            }
+        }
+
+        if(insert.length>0) {
+            let result2 = await api_access('insert','vjs_alat', insert);
+            if(result2.includes('fail')) {
+                msg += ' insert data gagal';
+            } else {
+                msg += insert.length + ' data di insert';
+            }
+        }
+        alert (msg);
+        DOM.add_class('#load',"hidden");
+        location.reload();
+        return;
+    }
+})

@@ -64,834 +64,1038 @@
         </button><button id='del_data' type='button' data-role='admin' class='rounded bg-gray-300 text-sm my-3 mx-2 px-4 border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >delete
         </button>
         </header>
-    <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><table id='point_table' class='w-screen' ><thead ><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Kategori
-            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Point Pengecekan
-            </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Standard
-            </th>
-            </tr>
-            </thead><tbody ><tr data-id='point_table0' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table0' data-field='new_cat' class='p-2 w-[30%]' >
+    <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><table id='point_table' class='w-screen' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20 w-[15vw]' >Kategori
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Point Pengecekan
+        </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10 w-[30vw]' >Standard
+        </th>
+        </tr>
+        </thead><tbody><tr data-id='point_table0' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table0' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table0' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table0' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table0' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table0' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table0' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table0' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table0' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table1' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table1' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table1' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table1' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table1' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table1' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table1' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table1' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table1' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table1' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table1' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table1' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table2' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table2' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table1' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table2' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table2' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table2' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table2' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table2' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table2' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table2' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table2' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table2' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table2' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table3' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table3' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table2' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table3' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table3' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table3' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table3' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table3' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table3' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table3' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table3' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table3' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table3' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table4' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table4' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table3' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table4' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table4' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table4' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table4' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table4' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table4' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table4' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table4' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table4' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table4' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table5' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table5' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table4' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table5' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table5' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table5' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table5' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table5' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table5' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table5' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table5' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table5' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table5' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table6' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table6' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table5' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table6' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table6' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table6' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table6' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table6' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table6' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table6' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table6' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table6' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table6' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table7' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table7' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table6' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table7' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table7' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table7' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table7' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table7' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table7' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table7' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table7' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table7' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table7' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table8' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table8' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table7' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table8' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table8' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table8' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table8' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table8' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table8' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table8' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table8' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table8' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table8' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table9' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table9' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table8' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table9' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table9' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table9' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table9' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table9' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table9' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table9' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table9' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table9' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table9' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table10' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table10' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table9' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table10' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table10' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table10' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table10' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table10' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table10' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table10' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table10' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table10' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table10' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table11' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table11' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table10' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table11' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table11' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table11' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table11' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table11' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table11' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table11' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table11' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table11' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table11' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table12' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table12' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table11' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table12' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table12' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table12' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table12' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table12' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table12' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table12' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table12' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table12' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table12' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table13' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table13' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table12' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table13' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table13' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table13' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table13' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table13' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table13' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table13' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table13' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table13' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table13' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table14' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table14' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table13' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table14' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table14' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table14' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table14' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table14' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table14' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table14' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table14' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table14' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table14' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table15' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table15' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table14' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table15' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table15' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table15' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table15' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table15' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table15' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table15' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table15' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table15' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table15' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table16' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table16' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table15' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table16' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table16' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table16' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table16' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table16' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table16' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table16' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table16' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table16' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table16' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table17' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table17' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table16' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table17' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table17' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table17' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table17' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table17' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table17' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table17' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table17' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table17' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table17' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table18' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table18' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table17' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table18' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table18' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table18' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table18' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table18' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table18' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table18' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table18' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table18' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table18' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table19' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table19' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table18' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table19' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table19' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table19' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table19' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table19' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table19' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table19' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table19' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table19' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table19' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table20' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table20' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table19' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table20' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table20' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table20' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table20' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table20' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table20' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table20' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table20' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table20' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table20' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table21' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table21' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table20' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table21' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table21' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table21' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table21' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table21' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table21' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table21' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table21' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table21' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table21' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table22' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table22' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table21' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table22' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table22' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table22' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table22' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table22' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table22' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table22' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table22' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table22' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table22' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table23' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table23' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table22' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table23' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table23' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table23' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table23' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table23' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table23' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table23' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table23' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table23' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table23' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table24' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table24' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table23' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table24' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table24' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table24' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table24' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table24' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table24' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table24' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table24' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table24' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table24' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table25' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table25' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table24' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table25' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table25' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table25' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table25' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table25' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table25' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table25' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table25' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table25' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table25' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table26' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table26' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table25' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table26' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table26' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table26' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table26' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table26' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table26' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table26' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table26' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table26' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table26' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table27' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table27' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table26' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table27' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table27' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table27' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table27' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table27' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table27' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table27' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table27' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table27' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table27' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table28' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table28' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table27' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table28' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table28' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table28' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table28' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table28' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table28' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table28' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table28' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table28' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table28' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table29' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table29' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table28' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table29' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table29' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table29' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table29' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table29' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table29' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table29' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table29' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table29' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table29' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table30' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table30' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table29' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table30' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table30' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table30' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table30' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table30' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table30' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table30' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table30' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table30' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table30' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table31' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table31' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table30' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table31' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table31' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table31' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table31' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table31' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table31' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table31' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table31' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table31' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table31' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table32' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table32' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table31' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table32' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table32' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table32' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table32' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table32' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table32' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table32' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table32' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table32' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table32' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table33' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table33' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table32' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table33' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table33' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table33' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table33' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table33' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table33' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table33' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table33' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table33' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table33' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table34' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table34' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table33' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table34' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table34' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table34' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table34' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table34' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table34' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table34' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table34' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table34' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table34' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table35' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table35' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table34' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table35' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table35' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table35' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table35' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table35' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table35' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table35' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table35' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table35' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table35' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table36' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table36' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table35' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table36' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table36' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table36' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table36' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table36' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table36' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table36' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table36' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table36' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table36' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table37' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table37' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table36' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table37' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table37' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table37' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table37' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table37' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table37' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table37' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table37' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table37' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table37' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table38' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table38' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table37' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table38' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table38' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table38' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table38' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table38' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table38' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table38' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table38' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table38' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table38' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table39' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table39' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table38' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table39' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table39' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table39' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table39' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table39' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table39' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table39' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table39' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table39' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table39' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table40' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table40' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table39' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table40' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table40' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table40' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table40' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table40' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table40' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table40' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table40' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table40' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table40' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table41' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table41' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table40' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table41' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table41' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table41' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table41' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table41' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table41' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table41' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table41' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table41' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table41' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table42' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table42' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table41' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table42' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table42' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table42' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table42' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table42' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table42' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table42' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table42' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table42' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table42' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table43' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table43' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table42' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table43' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table43' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table43' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table43' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table43' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table43' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table43' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table43' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table43' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table43' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table44' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table44' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table43' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table44' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table44' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table44' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table44' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table44' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table44' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table44' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table44' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table44' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table44' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table45' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table45' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table44' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table45' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table45' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table45' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table45' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table45' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table45' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table45' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table45' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table45' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table45' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table46' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table46' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table45' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table46' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table46' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table46' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table46' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table46' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table46' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table46' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table46' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table46' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table46' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table47' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table47' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table46' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table47' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table47' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table47' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table47' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table47' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table47' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table47' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table47' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table47' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table47' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table48' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table48' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table47' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table48' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table48' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table48' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table48' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table48' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table48' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table48' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table48' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table48' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table48' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr><tr data-id='point_table49' class='hidden' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table49' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table48' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr><tr data-id='point_table49' class='hidden' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_table49' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_table49' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' disabled >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table49' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_table49' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_table49' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table49' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_table49' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_table49' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table49' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr>
-            </tbody>
-            </table><table id='point_new' class='hidden' ><thead ><tr data-id='header' >
-            </tr>
-            </thead><tbody ><tr data-id='point_new0' class='bg-blue-200' ><input name='id' type='hidden' class='' >
-            <input name='alat' type='hidden' class='' >
-            <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_new0' data-field='new_cat' class='p-2 w-[30%]' >
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_table49' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr>
+        </tbody>
+        </table><table id='point_new' class='hidden' ><thead><tr data-id='header' >
+        </tr>
+        </thead><tbody><tr data-id='point_new0' class='bg-blue-200' ><input name='id' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='alat' type='hidden' 
+        autocomplete='off' class='' >
+        <td data-field='new_cat' class='bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10' ><label for='new_cat__point_new0' data-field='new_cat' class='p-2 w-[30%]' >
             </label><input id='new_cat__point_new0' name='new_cat' type='text' list='reff_list' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_new0' data-field='check_point' class='p-2 w-[30%]' >
+        </td><td data-field='check_point' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='check_point__point_new0' data-field='check_point' class='p-2 w-[30%]' >
             </label><input id='check_point__point_new0' name='check_point' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_new0' data-field='standard' class='p-2 w-[30%]' >
+        </td><td data-field='standard' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black' ><label for='standard__point_new0' data-field='standard' class='p-2 w-[30%]' >
             </label><input id='standard__point_new0' name='standard' type='text' placeholder='' class='w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden' >
             
-            </td><input name='piliihan' type='hidden' class='' >
-            <input name='status' type='hidden' value='' class='' >
-            <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_new0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
-            </button>
-            </td>
-            </tr>
-            </tbody>
-            </table>
+        </td><input name='pilihan' type='hidden' 
+        autocomplete='off' class='' >
+        <input name='status' type='hidden' value='' 
+        autocomplete='off' class='' >
+        <td data-field='data_group' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black hidden' ><button id='delete__point_new0' type='button' data-method='delete' data-role='admin' class='w-6 h-6 ml-2 minus' >
+        </button>
+        </td>
+        </tr>
+        </tbody>
+        </table>
         </main>
     <footer class='fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='point_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='point_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
             </button><button type='button' data-group='point_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2

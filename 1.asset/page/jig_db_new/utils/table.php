@@ -815,7 +815,7 @@ $type_table_upd = [
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete_list'],
                     'class'=>'w-6 h-6 minus'
                 ]
             ]
@@ -1111,7 +1111,7 @@ $type_table_new = [
             ],
             'button'=>[
                 [
-                    'data_attr'=>['method::delete'],
+                    'data_attr'=>['method::delete_list'],
                     'class'=>'w-6 h-6 minus'
                 ]
             ]

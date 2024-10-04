@@ -63,6 +63,7 @@
         <button id='search_type' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200' >search
         </button><button id='submit_type' type='button' class='rounded text-slate-200 bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200' disabled >submit
         </button><button id='add_new_type' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200' >add new
+        </button><button id='del_type' type='button' class='rounded text-slate-200 bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200' disabled >delete
         </button>
         </div>
         </div>
@@ -1718,7 +1719,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table0' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table0' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table0' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table0' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table1' class='hidden' ><input name='id' type='hidden' 
@@ -1746,7 +1747,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table1' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table1' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table1' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table1' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table2' class='hidden' ><input name='id' type='hidden' 
@@ -1774,7 +1775,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table2' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table2' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table2' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table2' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table3' class='hidden' ><input name='id' type='hidden' 
@@ -1802,7 +1803,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table3' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table3' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table3' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table3' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table4' class='hidden' ><input name='id' type='hidden' 
@@ -1830,7 +1831,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table4' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table4' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table4' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table4' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table5' class='hidden' ><input name='id' type='hidden' 
@@ -1858,7 +1859,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table5' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table5' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table5' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table5' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table6' class='hidden' ><input name='id' type='hidden' 
@@ -1886,7 +1887,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table6' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table6' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table6' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table6' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table7' class='hidden' ><input name='id' type='hidden' 
@@ -1914,7 +1915,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table7' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table7' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table7' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table7' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table8' class='hidden' ><input name='id' type='hidden' 
@@ -1942,7 +1943,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table8' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table8' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table8' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table8' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table9' class='hidden' ><input name='id' type='hidden' 
@@ -1970,7 +1971,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table9' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table9' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table9' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table9' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table10' class='hidden' ><input name='id' type='hidden' 
@@ -1998,7 +1999,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table10' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table10' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table10' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table10' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table11' class='hidden' ><input name='id' type='hidden' 
@@ -2026,7 +2027,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table11' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table11' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table11' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table11' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table12' class='hidden' ><input name='id' type='hidden' 
@@ -2054,7 +2055,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table12' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table12' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table12' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table12' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table13' class='hidden' ><input name='id' type='hidden' 
@@ -2082,7 +2083,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table13' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table13' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table13' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table13' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table14' class='hidden' ><input name='id' type='hidden' 
@@ -2110,7 +2111,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table14' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table14' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table14' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table14' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table15' class='hidden' ><input name='id' type='hidden' 
@@ -2138,7 +2139,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table15' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table15' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table15' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table15' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table16' class='hidden' ><input name='id' type='hidden' 
@@ -2166,7 +2167,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table16' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table16' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table16' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table16' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table17' class='hidden' ><input name='id' type='hidden' 
@@ -2194,7 +2195,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table17' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table17' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table17' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table17' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table18' class='hidden' ><input name='id' type='hidden' 
@@ -2222,7 +2223,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table18' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table18' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table18' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table18' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table19' class='hidden' ><input name='id' type='hidden' 
@@ -2250,7 +2251,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table19' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table19' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table19' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table19' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table20' class='hidden' ><input name='id' type='hidden' 
@@ -2278,7 +2279,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table20' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table20' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table20' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table20' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table21' class='hidden' ><input name='id' type='hidden' 
@@ -2306,7 +2307,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table21' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table21' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table21' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table21' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table22' class='hidden' ><input name='id' type='hidden' 
@@ -2334,7 +2335,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table22' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table22' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table22' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table22' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table23' class='hidden' ><input name='id' type='hidden' 
@@ -2362,7 +2363,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table23' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table23' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table23' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table23' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr><tr data-id='type_table24' class='hidden' ><input name='id' type='hidden' 
@@ -2390,7 +2391,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[15vw]' ><label for='remark__type_table24' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table24' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table24' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table24' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr>
@@ -2416,7 +2417,7 @@
         </td><td data-field='remark' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[18vw]' ><label for='remark__type_table_new0' data-field='remark' class='p-2 w-[30%]' >
             </label><input id='remark__type_table_new0' name='remark' type='text' placeholder='' class='w-full rounded h-full focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-slate-100 px-4 hidden' >
             
-        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete__type_table_new0' type='button' data-method='delete' class='w-6 h-6 minus' >
+        </td><td data-field='btn_set' class='bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black w-[10vw]' ><button id='delete_list__type_table_new0' type='button' data-method='delete_list' class='w-6 h-6 minus' >
         </button>
         </td>
         </tr>

@@ -21,6 +21,7 @@ let detail = [];
 let detail_show = [];
 let log_detail = [];
 let log_detail_show = [];
+let del_data = [];
 let start = performance.now();
 const [ls_loc, master, item] = await Promise.all([
   api_access('get','list_loc',''),
@@ -58,6 +59,7 @@ ButtonDOM.enter_keydown('#search_type', '#input__type');
 //----------------------------------------------
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'jig_loc', 'id');
 ButtonDOM.delete_data_table('[data-method ="delete"]', 'jig_func', 'id');
+
 
 // input change trigger submit button style and attribute
 //----------------------------------------------
@@ -312,6 +314,96 @@ document.addEventListener('click', async function(event) {
     DOM.add_class('#load',"hidden");
     return;
   }
+
+  /*
+  // click to add to delete list
+  //----------------------------------------------
+  if(event.target.getAttribute('data-method') === 'delete_list') {
+    const td = event.target.closest('td');
+    const tr = td.closest('tr');
+    if(tr.getAttribute('data-change') === 'new') {
+        tr.remove();
+        DOM.add_class('#load',"hidden");
+        return;
+    }
+    if(tr.querySelector(`[name ="id"]`) !== null) {
+      const val = tr.querySelector(`[name ="id"]`).value;
+      console.log(val);
+      if(del_data.includes(val)) {
+        const cek_index = del_data.indexOf(val);
+        del_data.splice(cek_index,1);
+        if(event.target.classList.contains('minus_red')) {
+          event.target.classList.toggle('minus_red');
+          event.target.classList.toggle('minus');
+        }
+      } else {
+        del_data.push(val);
+        if(!event.target.classList.contains('minus_red')) {
+          event.target.classList.toggle('minus_red');
+          event.target.classList.toggle('minus');
+        }
+      }
+      console.log(del_data);
+        /*
+        if(!result.includes('fail')) {
+            alert ('data deleted');
+            location.reload();
+        }
+      }
+
+  }
+
+  // click to delete data
+  //----------------------------------------------
+  if(event.target.id === 'search_detail') {
+    event.target.disabled = true;
+    let src = document.getElementById('input__detail');
+    let valid = src.checkValidity();
+    if(!valid) {
+      src.reportValidity();
+      event.target.disabled = false;
+        return;
+    }
+    DOM.rmv_class('#load',"hidden");
+    TableDOM.clear('#dtl_hist_table');
+    if(src.value === '') {
+      event.target.disabled = false;
+      DOM.add_class('#load',"hidden");
+      return;
+    }
+    const value = src.value;
+    const splt = value.split('--')
+    if(detail.find(obj=>obj.item_jig === splt[0]) === undefined) {
+      let data = await api_access('fetch','jig_mstr',{item_jig: splt[0]});
+      data.forEach(dt=>{
+        detail.push(dt);
+      })
+    }
+    if(log_detail.find(obj=>obj.item_jig === splt[0]) === undefined) {
+      let data = await api_access('fetch','log_mstr',{item_jig: splt[0]});
+      data.forEach(dt=>{
+        log_detail.push(dt);
+      })
+    }
+    detail_show = detail.filter(obj=>obj.item_jig === splt[0]);
+    log_detail_show = log_detail.filter(obj=>obj.item_jig === splt[0]);
+    log_detail_show.sort((a,b)=>{
+      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
+    })
+    console.log({detail, log_detail, detail_show, log_detail_show});
+    if(detail_show.length > 0 ) {
+      InputDOM.form_parse_data('#detail_form', detail_show);
+      if(log_detail_show.length> 0 ) {
+        TableDOM.parse_data('#dtl_hist_table', log_detail_show, 1);
+        NavDOM.pgList_init('#detail_hist_page', log_detail_show, '#dtl_hist_table');
+        TableDOM.parse_onclick('#dtl_hist_table',  log_detail_show, 'data-group','detail_hist_page');
+        NavDOM.pgList_active('detail_hist_page');
+      }
+    }
+    event.target.disabled = false;
+    DOM.add_class('#load',"hidden");
+    return;
+  }      */
 })
 
 //----------------------------------------------

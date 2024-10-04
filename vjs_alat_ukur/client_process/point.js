@@ -16,6 +16,9 @@ master.forEach(dt=>{
     })
     dt['filter'] = filter;
 })
+master.sort((a,b) => {
+    if (a.new_cat !== b.new_cat) return a.new_cat.localeCompare(b.new_cat);
+  })
 let show_data = master;
 console.log({master});
 DtlistDOM.parse_opt("#reff_list","-",rf_ls,"subcat");
