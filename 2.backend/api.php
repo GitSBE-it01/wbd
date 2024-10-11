@@ -7,7 +7,7 @@ require_once "model/index.php";
 
 session_start();
 cors();
-function routes($model, $db_conn) {
+function routes($model) {
     $data = json_decode(file_get_contents('php://input'), true);
     $dt = $data['Data'];
     $method = $_SERVER['REQUEST_METHOD'];
@@ -27,52 +27,52 @@ function routes($model, $db_conn) {
             if($cache === 'cache') {
                 if(!check_cache($routes, $param)) {
                     delete_cache($routes, $param);
-                    $response  = $db_conn->getQuery($action,$mdl);
+                    $response  = DB_access2::getQuery($action,$mdl);
                     cache_data($routes, $param, $response);
                 } else {
                     $response = get_cache($routes, $param);
                 }
             } else {
-                $response  = $db_conn->getQuery($action,$mdl);
+                $response  = DB_access2::getQuery($action,$mdl);
             }
             break;
         case "POST":
             $mdl = $model[$table];
             if($action === 'insert' || $action === 'insert2') {
-                $response  = $db_conn->insertQuery($action,$mdl, $dt);
+                $response  = DB_access2::insertQuery($action,$mdl, $dt);
             } else if($action === 'fetch' || $action=== 'fetch2') {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
                         delete_cache($routes, $param);
-                        $response  = $db_conn->fetchQuery($action,$mdl, $dt);
+                        $response  = DB_access2::fetchQuery($action,$mdl, $dt);
                         cache_data($routes, $param, $response);
                     } else {
                         $response = get_cache($routes, $param);
                     }
                 } else {
-                    $response  = $db_conn->fetchQuery($action,$mdl, $dt);
+                    $response  = DB_access2::fetchQuery($action,$mdl, $dt);
                 }
             } else {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
                         delete_cache($routes, $param);
-                        $response = custom_handle($db_conn, $dt, $routes, $action, $model, $table);
+                        $response = custom_handle($dt, $routes, $action, $model, $table);
                         cache_data($routes, $param, $response);
                     } else {
                         $response = get_cache($routes, $param);
                     }
                 } else {
-                    $response = custom_handle($db_conn, $dt, $routes, $action, $model, $table);
+                    $response = custom_handle($dt, $routes, $action, $model, $table);
                 }
             }
             break;
         case "PUT":
             $mdl = $model[$table];
-            $response  = $db_conn->updateQuery($action,$mdl, $dt);
+            $response  = DB_access2::updateQuery($action,$mdl, $dt);
             break;
         case "DELETE":
             $mdl = $model[$table];
-            $response  = $db_conn->deleteQuery($action,$mdl, $dt);
+            $response  = DB_access2::deleteQuery($action,$mdl, $dt);
             break;
         default: 
             $response = 'method not allowed';
@@ -83,5 +83,5 @@ function routes($model, $db_conn) {
     return;
 }
 
-routes($model, $db_conn);
+routes($model);
 ?>

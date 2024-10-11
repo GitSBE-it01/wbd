@@ -22,6 +22,7 @@ let detail_show = [];
 let log_detail = [];
 let log_detail_show = [];
 let del_data = [];
+let del_log_data = [];
 let start = performance.now();
 const [ls_loc, master, item] = await Promise.all([
   api_access('get','list_loc',''),
@@ -315,7 +316,6 @@ document.addEventListener('click', async function(event) {
     return;
   }
 
-  /*
   // click to add to delete list
   //----------------------------------------------
   if(event.target.getAttribute('data-method') === 'delete_list') {
@@ -328,7 +328,6 @@ document.addEventListener('click', async function(event) {
     }
     if(tr.querySelector(`[name ="id"]`) !== null) {
       const val = tr.querySelector(`[name ="id"]`).value;
-      console.log(val);
       if(del_data.includes(val)) {
         const cek_index = del_data.indexOf(val);
         del_data.splice(cek_index,1);
@@ -337,73 +336,60 @@ document.addEventListener('click', async function(event) {
           event.target.classList.toggle('minus');
         }
       } else {
-        del_data.push(val);
+        del_data.push({'id':val});
         if(!event.target.classList.contains('minus_red')) {
           event.target.classList.toggle('minus_red');
           event.target.classList.toggle('minus');
         }
       }
-      console.log(del_data);
-        /*
-        if(!result.includes('fail')) {
-            alert ('data deleted');
-            location.reload();
-        }
+      const td = tr.querySelectorAll('[name]');
+      const data={};
+      td.forEach(dt=>{
+        const key = dt.getAttribute('name');
+        data[key]=dt.value;
+      })
+      data['remark']='delete data';
+      data['trans_date']=currentDate("-");
+      del_log_data.push(data);
+      
+      const del_btn= document.querySelector('#del_type');
+      if(del_data.length>0 && del_btn.disabled === true) {
+          del_btn.disabled = false;
+          del_btn.setAttribute('class', "rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200"); 
+      } else {
+        del_btn.disabled = true;
+        del_btn.setAttribute('class', "rounded text-slate-200 bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200"); 
       }
-
+    }
+    DOM.add_class('#load',"hidden");
+    return;
   }
 
   // click to delete data
   //----------------------------------------------
-  if(event.target.id === 'search_detail') {
-    event.target.disabled = true;
-    let src = document.getElementById('input__detail');
-    let valid = src.checkValidity();
-    if(!valid) {
-      src.reportValidity();
-      event.target.disabled = false;
-        return;
-    }
+  if(event.target.id === 'del_type') {
     DOM.rmv_class('#load',"hidden");
-    TableDOM.clear('#dtl_hist_table');
-    if(src.value === '') {
-      event.target.disabled = false;
-      DOM.add_class('#load',"hidden");
-      return;
+    console.log('here');
+    let msg ='';
+    console.log(del_data);
+    console.log(del_data.length);
+    if(del_data.length>0) {
+        let result1 = await api_access('delete','jig_func', del_data);
+        if(result1.includes('fail')) {
+          msg += 'update data gagal';
+        } else {
+          let result2 = await api_access('insert', 'log_func', del_log_data);
+          if(!result2.includes('fail')) {
+            
+          }
+          msg += del_data.length + 'data di update';
+        }
     }
-    const value = src.value;
-    const splt = value.split('--')
-    if(detail.find(obj=>obj.item_jig === splt[0]) === undefined) {
-      let data = await api_access('fetch','jig_mstr',{item_jig: splt[0]});
-      data.forEach(dt=>{
-        detail.push(dt);
-      })
-    }
-    if(log_detail.find(obj=>obj.item_jig === splt[0]) === undefined) {
-      let data = await api_access('fetch','log_mstr',{item_jig: splt[0]});
-      data.forEach(dt=>{
-        log_detail.push(dt);
-      })
-    }
-    detail_show = detail.filter(obj=>obj.item_jig === splt[0]);
-    log_detail_show = log_detail.filter(obj=>obj.item_jig === splt[0]);
-    log_detail_show.sort((a,b)=>{
-      if (a.trans_date !== b.trans_date) return b.trans_date.localeCompare(a.trans_date);
-    })
-    console.log({detail, log_detail, detail_show, log_detail_show});
-    if(detail_show.length > 0 ) {
-      InputDOM.form_parse_data('#detail_form', detail_show);
-      if(log_detail_show.length> 0 ) {
-        TableDOM.parse_data('#dtl_hist_table', log_detail_show, 1);
-        NavDOM.pgList_init('#detail_hist_page', log_detail_show, '#dtl_hist_table');
-        TableDOM.parse_onclick('#dtl_hist_table',  log_detail_show, 'data-group','detail_hist_page');
-        NavDOM.pgList_active('detail_hist_page');
-      }
-    }
-    event.target.disabled = false;
+    alert (msg);
     DOM.add_class('#load',"hidden");
-    return;
-  }      */
+    location.reload();
+  }
+
 })
 
 //----------------------------------------------
@@ -454,6 +440,7 @@ document.addEventListener('change', function(event) {
       const date = form.querySelector('#trans_date');
       date.value =currentDate('-');
     }
+
     return;
   } 
 
@@ -506,6 +493,9 @@ document.addEventListener('focusout', function(event){
     const td = event.target.closest('td');
     const tr = td.closest('tr');
     const tbl = tr.closest('table');
+    const curr = event.target.value.split('--');
+    const fltr = master.find(obj=>obj.item_jig === curr[0]);
+    console.log({curr, fltr});
     if(tbl.id === 'type_table') {
       const val = event.target.value;
       const splt = val.split('--');
@@ -516,6 +506,19 @@ document.addEventListener('focusout', function(event){
       stat.value = 'active';
       const lbl_stat = tr.querySelector(`[for="${stat.id}"]`);
       lbl_stat.textContent = 'active';
+      const date = tr.querySelector('[name = "trans_date"]');
+      date.value =currentDate('-');
+      const rmrk = tr.querySelector('[name = "remark"]');
+      rmrk.value = 'data awal';
+      const td2 = rmrk.closest('td');
+      const lbl_rmrk = td2.querySelector('label');
+      lbl_rmrk.textContent = 'data awal';
+      const desc = tr.querySelector('[name = "desc_jig"]');
+      desc.value = fltr.desc_jig;
+      const td3 = desc.closest('td');
+      const lbl_desc = td3.querySelector('label');
+      lbl_desc.textContent = fltr.desc_jig;
+      
     }
   }
 })
@@ -554,5 +557,6 @@ document.addEventListener('click', async(e)=>{
     location.reload();
     return;
   }
+  
 
 })

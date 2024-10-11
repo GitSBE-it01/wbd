@@ -16,7 +16,7 @@ const check = window.location.href.split("/");
 let counter_row = 0;
 let urut = 1;
 let counter_loc = 1;
-const [ls_loc, master, mtnc, role_cek, users, item] = await Promise.all([
+let [ls_loc, master, mtnc, role_cek, users, item] = await Promise.all([
   api_access('get','list_loc',''),
   api_access('get','jig_mstr',''),
   api_access('get','list_mtnc',''),
@@ -38,6 +38,7 @@ console.log({ls_loc
 DtlistDOM.parse_opt("#jig_list","-",master,"item_jig", 'desc_jig');
 DtlistDOM.parse_opt("#type_list","-",item,"pt_part", 'pt_desc1', 'pt_desc2');
 DtlistDOM.parse_opt("#loc_list","-",ls_loc,"name");
+DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
 
 const user_detail = JSON.parse(sessionStorage.getItem('userData'));
 const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade']; // user_input atau approval_by
@@ -81,7 +82,6 @@ let code_array = [
     }
     if(event.target.id === 'type_jig_switch') {
       data_switch('type_jig', code_array, target_array); 
-      DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'type_jig_submit');
       return;
@@ -429,6 +429,8 @@ document.addEventListener('click', async function(event) {
     const data_mstr = container.querySelectorAll('#add_jig_type_form [name]');
     const ins_mstr = [];
     const dt_temp = {};
+    const dtlist_type = document.querySelector('#jig_type_list');
+    dtlist_type.innerHTML='';
     data_mstr.forEach(dt=>{
       const field = dt.getAttribute('name');
       if(!dt_temp.field) {
@@ -442,15 +444,18 @@ document.addEventListener('click', async function(event) {
     const cek = await api_access('fetch', 'list_mtnc', {type_jig: ins_mstr[0]['type_jig']});
     if(cek.length === 0 || cek === undefined ){
       const result = await api_access('insert','list_mtnc',ins_mstr);
+      mtnc = await api_access('get','list_mtnc','');
       if(!result.includes('fail')) {
         data_mstr.forEach(dt=>{
           dt.value = '';
         })
+        DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
         DOM.add_class('#load',"hidden");
         alert('data berhasil ditambahkan');
         return;
       }
     } else {
+      DtlistDOM.parse_opt("#jig_type_list","-",mtnc,"type_jig");
       DOM.add_class('#load',"hidden");
       alert('Type jig sudah ada');
       return;

@@ -41,6 +41,7 @@ master.forEach(dt=>{
   })
   dt['filter'] = filter;
 })
+
 //let show_data = master;
 let master_filter =[];
 start = performance.now();

@@ -6,12 +6,11 @@ require_once "api/index.php";
 session_start();
 cors();
 function auth() {
-    global $db_conn;
     global $model;
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $reff = explode("/",$_SERVER['HTTP_REFERER']);
         if(isset($_SESSION['nik'])) {
-            $db_src = custom_handle($db_conn, [
+            $db_src = custom_handle([
                 'EmployeeID'=>$_SESSION['nik']], 'auth', 'auth_mstr', $model, 'auth_mstr');
             $fix_dt = [];
             foreach($db_src as $set) {

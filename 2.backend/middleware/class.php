@@ -317,6 +317,279 @@ class DB_Access {
     }
 }
 
+class DB_Access2 {
+    static $db = 'db_wbd';
+
+    static function getQuery($action, $model) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($action === 'get2') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        $field = '';
+        foreach($model->field as $value) {
+            $field .= $value.', ';
+        }
+        $field = rtrim($field, ", ");
+        $query = 'SELECT '.$field.' FROM ' . $model->table;
+        try {
+            $stmt = $conn->prepare($query);
+            if (!empty($types) && !empty($bindParams)) {
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $response = array(); 
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row; 
+            }
+            $result->free();
+            $stmt->close();
+            $conn->close();
+            return $response;
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+
+    static function fetchQuery($action, $model, $data) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($action === 'fetch2') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        $param =  '';
+        $types = '';
+        $bindParams = array();
+        foreach($data as $key=>$value) {
+            if ($value === " ") {
+                $param .= "`$key` is NULL OR ";
+            } elseif ($value === 'IS NOT NULL') {
+                $param .= "`$key` IS NOT NULL OR ";
+            } else {
+                $param .= "`$key` = ? OR ";
+                $bindParams[] = &$data[$key];
+            }
+            $types .= $model->type[$key];
+        }
+        $param = rtrim($param, 'OR ');
+        $field = '';
+        foreach($model->field as $value) {
+            $field .= $value.', ';
+        }
+        $field = rtrim($field, ", ");
+        $query = 'SELECT '.$field.' FROM ' . $model->table;
+        if (!empty($param)) {
+            $query .= " WHERE ".$param;
+        }
+        try {
+            $stmt = $conn->prepare($query);
+            if (!empty($types) && !empty($bindParams)) {
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+            }
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $response = array(); 
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row; 
+            }
+            $result->free();
+            $stmt->close();
+            $conn->close();
+            return $response;
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+
+    static function insertQuery($action, $model, $data) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($action === 'insert2') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        $field ='';
+        $param = '';
+        $types = '';
+        $mdl = (array) $model->field;
+        sort($mdl);
+        foreach($mdl as $value) {
+            $field .= $value.", ";
+            $types .= $model->type[$value];
+            $param .= '?, ';
+        }
+        $field = rtrim($field, ', ');
+        $param = rtrim($param, ', ');
+
+        $query = "INSERT INTO ".$model->table." (".$field.") VALUES (".$param.")";
+        try {
+            $stmt = $conn->prepare($query);
+            set_time_limit(3600);
+            $result = "success";
+            foreach($data as $set) {
+                $bindParams = array();
+                ksort($set);
+                foreach($set as $key=>$value) {
+                    if(in_array($key,$mdl)) {
+                        ${'param' . $key} = $value;
+                        $bindParams[] = &${'param' . $key};
+                    }
+                }
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                if (!$stmt->execute()) {
+                    $result = "Failed to execute for set: " . json_encode($set) . ". Error: " . $stmt->error;
+                    break;
+                }
+            }
+            $stmt->close();
+            $conn->close();
+            return $result;
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+
+    static function updateQuery($action, $model, $data) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($action === 'update2') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        $field ='';
+        $types = '';
+        $pk = $model->primary_key;
+        $param = $pk['field']."=?";
+        $mdl = (array) $model->field;
+        sort($mdl);
+        foreach($mdl as $value) {
+            $field .= $value."=?, ";
+            $types .= $model->type[$value];
+        }
+        $field = rtrim($field, ', ');
+        $types .=$pk['type'];
+        
+        $query = "UPDATE ".$model->table." SET ".$field." WHERE ".$param;
+        try {
+            $stmt = $conn->prepare($query);
+            set_time_limit(3600);
+            $result = "success";
+            foreach($data as $set) {
+                $bindParams = array();
+                ksort($set);
+                foreach($set as $key=>$value) {
+                    if(in_array($key,$mdl)) {
+                        ${'param' . $key} = $value;
+                        $bindParams[] = &${'param' . $key};
+                    }
+                }
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                if (!$stmt->execute()) {
+                    $result = "Failed to execute for set: " . json_encode($set) . ". Error: " . $stmt->error;
+                    break;
+                }
+            }
+            $stmt->close();
+            $conn->close();
+            return $result;
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+
+    static function deleteQuery($action, $model, $data) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($action === 'delete2') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        $pk = $model->primary_key;
+        $param = $pk['field']."=?";
+        $types =$pk['type'];
+        $query = "DELETE FROM ".$model->table." WHERE ".$param;
+        try {
+            $stmt = $conn->prepare($query);
+            set_time_limit(3600);
+            $result = "success";
+            set_time_limit(3600);
+            foreach($data as $set) {
+                $bindParams = array();
+                ${'param'.$pk['field']} = $set[$pk['field']];
+                $bindParams[] = &${'param'.$pk['field']};
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                if (!$stmt->execute()) {
+                    die("Execute failed: " . $stmt->error);
+                } else {
+                    $result = "success ";
+                }
+            }
+            $stmt->close();
+            $conn->close();
+            return $result;
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+
+    static function customQuery($db, $query, $types, $data) {
+        $conn = connectToDatabase(DB_access2::$db);
+        if($db === 'new') {
+            $conn = connectToDatabaseNew(DB_access2::$db);
+        }
+        try {
+            $stmt = $conn->prepare($query);
+            set_time_limit(3600);
+            if($types !=='') {
+                $counter = 0;
+                $bindParams = array();
+                foreach($data as $set) {
+                    if(is_array($set)) {
+                        foreach($set as $value ){
+                            ${'param'.$counter} = $value;
+                            $bindParams[] = &${'param'.$counter};
+                            $counter++;
+                        }
+                    } else {
+                        ${'param'.$counter} = $set;
+                        $bindParams[] = &${'param'.$counter};
+                        $counter++;
+                    }
+                }
+                array_unshift($bindParams, $types);
+                call_user_func_array([$stmt, 'bind_param'], $bindParams);
+                if (!$stmt->execute()) {
+                    die("Execute failed: " . $stmt->error);
+                }
+            } else {
+                if (!$stmt->execute()) {
+                    die("Execute failed: " . $stmt->error);
+                }
+            }
+
+            if (substr($query,0, 6) === 'SELECT') {
+                $result = $stmt->get_result();
+                $json_data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $json_data[] = $row;
+                }
+                
+                $result->free();
+                $stmt->close();
+                $conn->close();
+                return $json_data;
+            } 
+            return 'success';
+        } catch (Exception $e) {
+            $errorMessage = $e->getMessage();
+            return $errorMessage . '</br>';
+        }
+    }
+}
+
 class DB {
     static $db = 'db_wbd';
     

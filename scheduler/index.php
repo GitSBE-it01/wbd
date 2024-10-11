@@ -13,9 +13,9 @@ echo "====================================================================</br>"
 echo "testing</br>";
 echo "====================================================================</br>";
 $start_time = microtime(true);
-//test_odbc();
-test_error();
-echo "no testing currently";
+//test_error();
+test_odbc();
+echo "no testing currently</br>";
 $end_time = microtime(true);
 $elapsed_time = $end_time - $start_time;
 echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
@@ -51,6 +51,4 @@ echo "Opening new tab for pick now scheduler</br>";
 </script>
 <?php 
 echo "********************************************************************</br></br>";
-
-
 ?>

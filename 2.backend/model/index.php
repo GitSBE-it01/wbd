@@ -26,6 +26,7 @@ require_once "jig_sb3.php";
 require_once "jig.php";
 require_once "new_type_report.php";
 require_once "ngvar.php";
+require_once "odbc.php";
 require_once "qad.php";
 require_once "sbe.php";
 require_once "vjs_alat_ukur.php";

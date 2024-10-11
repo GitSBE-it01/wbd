@@ -29,6 +29,7 @@ $model['qad_wo'] = new Model('dbqad_live.wo_mstr',
 ],
 'id::i');
 
+
 $model['qad_item'] = new Model('dbqad_live.pt_mstr',
 [
     'log::s',
