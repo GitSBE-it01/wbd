@@ -1,0 +1,33 @@
+list data retgoo yg terkait dengan QAD : 
+1. Routing
+2. labor
+3. work order
+4. SO 
+5. Intersite 
+
+===================================================
+General
+===================================================
+minta data JSON di webpage
+
+===================================================
+Labor
+===================================================
+labor lgsg : 
+Utk labor akan trial lgsg real time retgoo ke QAD 
+dari Indra akan di kirim files utk contoh XML connection to QAD qxtend
+
+utk labor multitask : 
+cek utk pembagian data std run time yg masuk ke mhrvar, cek dengan Jhon
+
+
+===================================================
+Routing
+===================================================
+juga sama dengan labor. 
+pergantian lgsg dr retgoo connect ke QAD
+
+
+===================================================
+Planning production
+===================================================

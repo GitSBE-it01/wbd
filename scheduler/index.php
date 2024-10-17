@@ -14,6 +14,7 @@ echo "testing</br>";
 echo "====================================================================</br>";
 $start_time = microtime(true);
 //test_error();
+//test_odbc2();
 test_odbc();
 echo "no testing currently</br>";
 $end_time = microtime(true);
@@ -51,4 +52,3 @@ echo "Opening new tab for pick now scheduler</br>";
 </script>
 <?php 
 echo "********************************************************************</br></br>";
-?>
