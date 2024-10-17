@@ -115,6 +115,7 @@ document.addEventListener('click', async function(event) {
     filter_dt.forEach(dt=>{
       let trans_dt = {};
       const cek = trans.find(obj=>obj.code === dt.code);
+      console.log({cek});
       trans_dt.code =  dt.code;
       trans_dt.item_jig =  dt.item_jig;
       trans_dt.lokasi = dt.lokasi;
@@ -125,7 +126,8 @@ document.addEventListener('click', async function(event) {
       trans_dt.start_date =  currentDate('-');
       trans_dt.end_date =  '';
       trans_dt.status = 'open';
-      if(cek !== undefined) {
+      if(cek !== undefined ) {
+        console.log('disinikah??')
         trans_dt.start_date =  cek.start_date;
         trans_dt.status = 'close';
         trans_dt.end_date =  currentDate("-");
@@ -135,6 +137,7 @@ document.addEventListener('click', async function(event) {
       }
       detail_show.push(trans_dt);
     })
+    console.log(detail_show);
     TableDOM.parse_data('#trans_detail_table', detail_show, 1);
     NavDOM.pgList_init('#trans_detail_page', detail_show, '#trans_detail_table');
     const tbl = document.querySelector('#trans_detail_table');

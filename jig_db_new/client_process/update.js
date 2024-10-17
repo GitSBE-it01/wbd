@@ -328,20 +328,20 @@ document.addEventListener('click', async function(event) {
     }
     if(tr.querySelector(`[name ="id"]`) !== null) {
       const val = tr.querySelector(`[name ="id"]`).value;
-      if(del_data.includes(val)) {
-        const cek_index = del_data.indexOf(val);
-        del_data.splice(cek_index,1);
-        if(event.target.classList.contains('minus_red')) {
-          event.target.classList.toggle('minus_red');
-          event.target.classList.toggle('minus');
-        }
-      } else {
-        del_data.push({'id':val});
-        if(!event.target.classList.contains('minus_red')) {
-          event.target.classList.toggle('minus_red');
-          event.target.classList.toggle('minus');
-        }
+      let valid =true;
+      for(let i=0; i<del_data.length; i++) {
+        let dt = del_data[i];
+        if(dt['id'] === val) {
+          del_data.splice(i,1);
+          valid = false;
+        } 
+      } 
+      if(valid) {
+        del_data.push({id:val});
       }
+      console.log({del_data});
+      event.target.classList.toggle('minus_red');
+      event.target.classList.toggle('minus');
       const td = tr.querySelectorAll('[name]');
       const data={};
       td.forEach(dt=>{
@@ -351,11 +351,10 @@ document.addEventListener('click', async function(event) {
       data['remark']='delete data';
       data['trans_date']=currentDate("-");
       del_log_data.push(data);
-      
       const del_btn= document.querySelector('#del_type');
-      if(del_data.length>0 && del_btn.disabled === true) {
-          del_btn.disabled = false;
-          del_btn.setAttribute('class', "rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200"); 
+      if(del_data.length>0) {
+        del_btn.disabled = false;
+        del_btn.setAttribute('class', "rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200"); 
       } else {
         del_btn.disabled = true;
         del_btn.setAttribute('class', "rounded text-slate-200 bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300 hover:bg-blue-200"); 
@@ -376,13 +375,13 @@ document.addEventListener('click', async function(event) {
     if(del_data.length>0) {
         let result1 = await api_access('delete','jig_func', del_data);
         if(result1.includes('fail')) {
-          msg += 'update data gagal';
+          msg += 'delete data gagal';
         } else {
           let result2 = await api_access('insert', 'log_func', del_log_data);
           if(!result2.includes('fail')) {
             
           }
-          msg += del_data.length + 'data di update';
+          msg += del_data.length + 'data di delete';
         }
     }
     alert (msg);

@@ -61,36 +61,36 @@ let code_array = [
     'add',
   ]
 
-  document.addEventListener('click', async function(event) {
+  document.addEventListener('click', (event)=>{
     if(event.target.id === 'jig_switch') {
-      data_switch('jig', code_array, target_array); 
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'jig_submit');
+      data_switch('jig', code_array, target_array); 
       return;
     }
     if(event.target.id === 'speaker_switch') {
-      data_switch('speaker', code_array, target_array); 
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'spk_submit');
+      data_switch('speaker', code_array, target_array); 
       return;
     }
     if(event.target.id === 'loc_switch') {
-      data_switch('loc', code_array, target_array); 
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'loc_submit');
+      data_switch('loc', code_array, target_array); 
       return;
     }
     if(event.target.id === 'type_jig_switch') {
-      data_switch('type_jig', code_array, target_array); 
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'type_jig_submit');
+      data_switch('type_jig', code_array, target_array); 
       return;
     }
     if(event.target.id === 'user_switch') {
-      data_switch('user', code_array, target_array); 
       DtlistDOM.parse_opt("#users","-",users,"Absensi", "Name");
       const sbmt_btn = document.getElementById('submit_button');
       sbmt_btn.setAttribute('data-method', 'user_submit');
+      data_switch('user', code_array, target_array); 
       return;
     }
   })
@@ -275,13 +275,12 @@ document.addEventListener('click', async function(event) {
       const field = dt.getAttribute('name');
       if(!dt_temp[`${field}`]) {
         dt_temp[`${field}`] = dt.value;
-      } else {
-        console.log('error ', dt);
       }
     })
     ins_mstr.push(dt_temp);
-    console.log({dt_temp});
+    console.log({ins_mstr});
     if(ins_mstr.length >0) {
+      console.log('here');
       const result = await api_access('insert', 'jig_mstr', ins_mstr) ;
       if(result.includes('fail')) {
         alert('proses data error');
@@ -442,7 +441,9 @@ document.addEventListener('click', async function(event) {
     ins_mstr.push(dt_temp);
     console.log({ins_mstr});
     const cek = await api_access('fetch', 'list_mtnc', {type_jig: ins_mstr[0]['type_jig']});
+    console.log({cek});
     if(cek.length === 0 || cek === undefined ){
+      console.log('test');
       const result = await api_access('insert','list_mtnc',ins_mstr);
       mtnc = await api_access('get','list_mtnc','');
       if(!result.includes('fail')) {

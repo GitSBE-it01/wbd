@@ -1,6 +1,7 @@
 <?php
 $model['jig_trans'] = new Model('db_jig.jig_trans',
 [
+    'id::i',
     'code::s',
     'loc::s',
     'qty::i',
@@ -20,6 +21,7 @@ $model['emp_code'] = new Model('db_jig.emp_code',
 
 $model['jig_func'] = new Model('db_jig.jig_function',
 [
+    'id::i',
     'item_jig::s',
     'item_type::s',
     'opt_on::i',
@@ -30,6 +32,7 @@ $model['jig_func'] = new Model('db_jig.jig_function',
 
 $model['log_func'] = new Model('db_jig.log_function',
 [
+    'id::i',
     'item_jig::s',
     'item_type::s',
     'opt_on::i',
@@ -38,7 +41,7 @@ $model['log_func'] = new Model('db_jig.log_function',
     'remark::s',
     'trans_date::s',
 ],
-'id_log::i');
+'id::i');
 
 $model['jig_mstr'] = new Model('db_jig.jig_master',
 [
@@ -64,6 +67,7 @@ $model['jig_mstr2'] = new Model('db_jig.jig_master2',
 
 $model['log_mstr'] = new Model('db_jig.log_master',
 [
+    'id::i',
     'item_jig::s',
     'desc_jig::s',
     'status_jig::s',
@@ -73,10 +77,11 @@ $model['log_mstr'] = new Model('db_jig.log_master',
     'remark::s',
     'drawing::s',
 ],
-'id_log::i');
+'id::i');
 
 $model['jig_usg'] = new Model('db_jig.jig_usage',
 [
+    'id::i',
     'tr_date::s',
     'jig::s',
     'desc_jig::s',
@@ -100,6 +105,7 @@ $model['jig_usg'] = new Model('db_jig.jig_usage',
 // testing usage 
 $model['jig_usg_test'] = new Model('db_jig_new.sb_usage_log',
 [
+    'id::i',
     'tr_date::s',
     'jig::s',
     'desc_jig::s',
@@ -122,6 +128,7 @@ $model['jig_usg_test'] = new Model('db_jig_new.sb_usage_log',
 
 $model['jig_loc'] = new Model('db_jig.jig_loc2',
 [
+    'id::i',
     'item_jig::s',
     'qty_per_unit::i',
     'unit::s',
@@ -135,6 +142,7 @@ $model['jig_loc'] = new Model('db_jig.jig_loc2',
 
 $model['log_loc'] = new Model('db_jig.log_location',
 [
+    'id::i',
     'code::s',
     'item_jig::s',
     'qty_per_unit::i',
@@ -148,10 +156,11 @@ $model['log_loc'] = new Model('db_jig.log_location',
     'addSub::s',
     'qty_change::i',
 ],
-'id_log::i');
+'id::i');
 
 $model['list_loc'] = new Model('db_jig.list_location',
 [
+    'id::i',
     'name::s',
 ],
 'id::i');

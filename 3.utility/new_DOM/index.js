@@ -12,6 +12,7 @@ export class DOM2 {
         this.userData = this.auth();
         this.separator = sprtr;
         this.dtbase = [];
+        this.dtshow = [];
         this.active_link();
         this.init(page_role);
         this.td_input_default();
@@ -51,13 +52,15 @@ export class DOM2 {
         } else {
             target = parent.querySelector(key);
         }
-        if(!attr.includes('::') && target.hasAttribute(attr)) {
-            target.removeAttribute(attr);
-        } 
-        if(attr.includes('::') && !target.hasAttribute(attr)) {
-            const atr = attr.split('::');
-            target.setAttribute(atr[0], atr[1]);
-        }
+        attr.forEach(dt=>{
+            if(!dt.includes('::') && target.hasAttribute(dt)) {
+                target.removeAttribute(dt);
+            } 
+            if(dt.includes('::') && !target.hasAttribute(dt)) {
+                const atr = dt.split('::');
+                target.setAttribute(atr[0], atr[1]);
+            }
+        })
         return;
     }
 
@@ -243,18 +246,47 @@ export class DOM2 {
         return;
     }
 
+    parse_input(key, data, parent=document) {
+        let target = '';
+        if(key.nodeType) {
+            target = key;
+        } else {
+            target = parent.querySelector(key);
+        }
+        if(target.tagName === 'TABLE') {
+            console.log('ada tr nya ');
+            const count = 0;
+            const id_tbl = target.id;
+            data.forEach(dt=>{
+                const inp_name = target.querySelector(`[data-id="${id_tbl}+${count}"]`);
+                DOM2.class_toggle(inp_name, ['hidden']);
+                inp_name.forEach(dt=>{
+                    const field = dt.getAttribute('name');
+                    dt.value = data[`${field}`] ? data[`${field}`] :'';
+                    if(target.querySelector(`[for = "${dt.id}"]`) !== null) {
+                        target.querySelector(`[for = "${dt.id}"]`).value = data[`${field}`] ? data[`${field}`] :'';
+                    }
+                })
+                count++;
+            })
+        } 
+        if(data.length === 1) { 
+            const inp_name = target.querySelectorAll('[name]');
+            inp_name.forEach(dt=>{
+                const field = dt.getAttribute('name');
+                dt.value = data[0][`${field}`] ? data[0][`${field}`] :'';
+                if(target.querySelector(`[for = "${dt.id}"]`) !== null) {
+                    target.querySelector(`[for = "${dt.id}"]`).value = data[0][`${field}`] ? data[0][`${field}`] :'';
+                }
+            })
+        }
+        return;
+    }
+
     func(type, selector, callback, parent=document) {
         parent.addEventListener(type, e=>{
             if(e.target.matches(selector)) {
                 callback(e);
-            }
-        })
-    }
-
-    asyncFunc(type, selector, callback, parent=document) {
-        parent.addEventListener(type, async(e)=>{
-            if(e.target.matches(selector)) {
-                await callback(e);
             }
         })
     }

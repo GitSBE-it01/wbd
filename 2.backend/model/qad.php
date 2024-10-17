@@ -32,6 +32,7 @@ $model['qad_wo'] = new Model('dbqad_live.wo_mstr',
 
 $model['qad_item'] = new Model('dbqad_live.pt_mstr',
 [
+    'id::i',
     'log::s',
     'pt_part::s',
     'pt_desc1::s',
@@ -86,6 +87,7 @@ $model['qad_item'] = new Model('dbqad_live.pt_mstr',
 
 $model['qad_rout'] = new Model('dbqad_live.ro_det',
 [
+    'id::i',
     'log::s',
     'ro_routing::s',
     'ro_op::s',
@@ -106,6 +108,7 @@ $model['qad_rout'] = new Model('dbqad_live.ro_det',
 
 $model['qad_wobb'] = new Model('dbqad_live.wod_det',
 [
+    'id::i',
     'log::s',
     'wod_lot::s',
     'wod_part::s',
@@ -115,6 +118,7 @@ $model['qad_wobb'] = new Model('dbqad_live.wod_det',
 
 $model['qad_loc'] = new Model('dbqad_live.ld_det',
 [
+    'id::i',
     'log::s',
     'ld_part::s',
     'ld_qty_oh::i',

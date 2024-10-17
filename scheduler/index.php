@@ -6,16 +6,18 @@ require_once 'D:/xampp/htdocs/wbd/2.backend/model/index.php';
 
 require_once 'general.php';
 require_once 'new_type_report.php';
+require_once 'otb.php';
 require_once 'pick_now.php';
 require_once 'test.php';
 
+/*
 echo "====================================================================</br>";
 echo "testing</br>";
 echo "====================================================================</br>";
 $start_time = microtime(true);
 //test_error();
 //test_odbc2();
-test_odbc();
+//test_odbc();
 echo "no testing currently</br>";
 $end_time = microtime(true);
 $elapsed_time = $end_time - $start_time;
@@ -52,3 +54,15 @@ echo "Opening new tab for pick now scheduler</br>";
 </script>
 <?php 
 echo "********************************************************************</br></br>";
+
+*/
+echo "====================================================================</br>";
+echo "otb data download</br>";
+echo "====================================================================</br>";
+$start_time = microtime(true);
+data_otb();
+$end_time = microtime(true);
+$elapsed_time = $end_time - $start_time;
+echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
+echo "********************************************************************</br></br>";
+?>

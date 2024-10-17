@@ -147,6 +147,9 @@ class DB_Access {
         $param = '';
         $types = '';
         $mdl = (array) $model->field;
+        if(isset($mdl['id'])) {
+            unset($mdl['id']);
+        }
         sort($mdl);
         foreach($mdl as $value) {
             $field .= $value.", ";
@@ -484,6 +487,8 @@ class DB_Access2 {
                         $bindParams[] = &${'param' . $key};
                     }
                 }
+                ${'param2' . $pk['field']} = $set[$pk['field']];
+                $bindParams[] = &${'param2' . $pk['field']};
                 array_unshift($bindParams, $types);
                 call_user_func_array([$stmt, 'bind_param'], $bindParams);
                 if (!$stmt->execute()) {
@@ -493,7 +498,7 @@ class DB_Access2 {
             }
             $stmt->close();
             $conn->close();
-            return $result;
+            return $bindParams;
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             return $errorMessage . '</br>';

@@ -1,9 +1,8 @@
 import {DOM2} from '../../3.utility/new_DOM/index.js';
-import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
+import {api_access} from '../../3.utility/index.js';
 
 const apps = new DOM2();
-const [user_list,
-   loc_list, master] = await Promise.all([
+const [user_list,loc_list, master] = await Promise.all([
   api_access('get','user',''),
   api_access('get','vjs_loc',''),
   api_access('get','vjs_alat', ''),
@@ -11,6 +10,7 @@ const [user_list,
 apps.dtbase['user_list'] = user_list;
 apps.dtbase['loc_list'] = loc_list;
 apps.dtbase['master'] = master;
+console.log(apps.dtbase);
 apps.parse_dtlist([
   {
     id_dtlist:"alat_list",
@@ -64,6 +64,22 @@ apps.func(
         break;
       }
     }
+    DOM2.class_toggle(e.target, ['hidden']);
+    DOM2.class_toggle('#load', ['hidden'], true);
+    return;
+  }
+)
+
+// toggle hidden and pick the first option value
+apps.func(
+  'change',
+  '#input__alat_search',
+  async(e)=>{
+    DOM2.class_toggle('#load', ['hidden']);
+    const split = e.target.value.split("//");
+    apps.dtshow['master'] = await apps.dtbase['master'].find(obj=>obj.sn_id === split[0]);
+    console.log(apps.dtshow['master']);
+    apps.parse_input('#table_index', apps.dtshow['master']);
     DOM2.class_toggle(e.target, ['hidden']);
     DOM2.class_toggle('#load', ['hidden'], true);
     return;

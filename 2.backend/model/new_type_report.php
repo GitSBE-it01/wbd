@@ -30,6 +30,7 @@ $model['nt_hd'] = new Model('db_wbd.ntr_hd',
 
 $model['nt_data'] = new Model('db_wbd.ntr_data',
 [
+    'id::i',
     'hd_code::s',
     'result::d',
     'no_repeat::i',

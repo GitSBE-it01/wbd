@@ -82,3 +82,28 @@ function cors2() {
     }
     return;
 }
+
+function cors_sbe4() {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type, Ori, Origin, Route, Req-Detail, cache-control,Req-Method');
+
+    $origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';
+    $allowedOrigins = [
+        'http://informationsystem.sbe.co.id:8080', 
+        'http://182.16.168.187:62898',
+        'http://182.16.168.187:8080',
+        'informationsystem.sbe.co.id:8080', 
+        '182.16.168.187:62898',
+        '182.16.168.187:8080',
+    ];
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        header('HTTP/1.1 200 OK');
+        exit();
+    }
+    if (!in_array($origin, $allowedOrigins)) {
+        http_response_code(403); 
+        exit(); 
+    }
+    return;
+}

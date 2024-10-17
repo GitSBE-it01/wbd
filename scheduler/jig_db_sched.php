@@ -407,6 +407,9 @@
                     data_date: currentDate('-'),
                     count_dt: 1,
                 }
+                if(basicDt.id_trans === undefined) {
+                    basicDt.id_trans = '';
+                };
                 arrInp.push(basicDt);
                 if (a.cat === 'b.use') {
                     for (let i2=1; i2<a.code_count; i2++) {
@@ -437,7 +440,7 @@
             }
         }
         result_check([
-            {data_array: arrInp, title:'data akhir utk masuk ke database'},
+            {data_array: arrInp, title:'data akhir (arrInp) utk masuk ke database'},
         ]);
 
     /*===================================================================
@@ -446,6 +449,7 @@
         const check_last = await api_access2('fetch', 'jig_db', 'jig_usg', {data_date:currentDate("-")});
         console.log({check_last});
         if(check_last.length===0 && arrInp.length > 0) {
+            console.log(arrInp);
             const result = await api_access('insert','jig_usg', arrInp);
             const end = performance.now();
             const totalTime = (end - start) /1000;

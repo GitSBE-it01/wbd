@@ -1,6 +1,7 @@
 <?php
 $model['vjs_log'] = new Model('dbvjs_online.new_vjs_log',
 [
+    'id::i',
     'data_group::s',
     'check_point::s',
     'standard::s',
@@ -31,6 +32,7 @@ $model['vjs_reff'] = new Model('dbvjs_online.new_reff',
 
 $model['vjs_point'] = new Model('dbvjs_online.new_master_point',
 [
+    'id::i',
     'new_cat::s',  //foreign key to vjs_reff
     'alat::s',
     'check_point::s',
