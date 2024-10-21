@@ -147,7 +147,7 @@ class DB_Access {
         $param = '';
         $types = '';
         $mdl = (array) $model->field;
-        if(isset($mdl['id'])) {
+        if(isset($mdl['id']) || $mdl['id'] !== '') {
             unset($mdl['id']);
         }
         sort($mdl);
@@ -164,13 +164,13 @@ class DB_Access {
         if (!$stmt) {
             die("Prepare failed: " . $conn->error);
         }
-
+        $testing = 'model = '.$mdl." query = ".$query;
         set_time_limit(3600);
         foreach($data as $set) {
             $bindParams = array();
             ksort($set);
             foreach($set as $key=>$value) {
-                if(in_array($key,$mdl)) {
+                if(in_array($key,$mdl) && $key !=='id') {
                     ${'param' . $key} = $value;
                     $bindParams[] = &${'param' . $key};
                 }
@@ -185,7 +185,7 @@ class DB_Access {
         }
         $stmt->close();
         $conn->close();
-        return $result;
+        return $testing;
     }
 
     public function updateQuery($action, $model, $data) {
@@ -418,13 +418,14 @@ class DB_Access2 {
         $mdl = (array) $model->field;
         sort($mdl);
         foreach($mdl as $value) {
-            $field .= $value.", ";
-            $types .= $model->type[$value];
-            $param .= '?, ';
+            if($value !=='id') {
+                $field .= $value.", ";
+                $types .= $model->type[$value];
+                $param .= '?, ';
+            }
         }
         $field = rtrim($field, ', ');
         $param = rtrim($param, ', ');
-
         $query = "INSERT INTO ".$model->table." (".$field.") VALUES (".$param.")";
         try {
             $stmt = $conn->prepare($query);
@@ -434,7 +435,7 @@ class DB_Access2 {
                 $bindParams = array();
                 ksort($set);
                 foreach($set as $key=>$value) {
-                    if(in_array($key,$mdl)) {
+                    if(in_array($key,$mdl) && $key !== 'id') {
                         ${'param' . $key} = $value;
                         $bindParams[] = &${'param' . $key};
                     }
@@ -453,6 +454,10 @@ class DB_Access2 {
             $errorMessage = $e->getMessage();
             return $errorMessage . '</br>';
         }
+        /*
+        $conn->close();
+        return $check;
+        */
     }
 
     static function updateQuery($action, $model, $data) {

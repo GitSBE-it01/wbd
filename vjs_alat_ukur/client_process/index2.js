@@ -10,6 +10,9 @@ const [user_list,loc_list, master] = await Promise.all([
 apps.dtbase['user_list'] = user_list;
 apps.dtbase['loc_list'] = loc_list;
 apps.dtbase['master'] = master;
+apps.dtbase['vjs_hd'] = [];
+apps.dtbase['vjs_log'] = [];
+
 console.log(apps.dtbase);
 apps.parse_dtlist([
   {
@@ -54,7 +57,7 @@ apps.func(
   'focusout',
   '#input__alat_search',
   e=>{
-    DOM2.class_toggle('#load', ['hidden']);
+    DOM2.class_toggle('#load', ['hidden'], false);
     const dtlist_id = e.target.getAttribute('list');
     const dtlist = document.querySelector(`#${dtlist_id}`);
     const option = dtlist.querySelectorAll('option');
@@ -65,7 +68,7 @@ apps.func(
       }
     }
     DOM2.class_toggle(e.target, ['hidden']);
-    DOM2.class_toggle('#load', ['hidden'], true);
+    DOM2.class_toggle('#load', ['hidden']);
     return;
   }
 )
@@ -75,13 +78,28 @@ apps.func(
   'change',
   '#input__alat_search',
   async(e)=>{
-    DOM2.class_toggle('#load', ['hidden']);
+    DOM2.class_toggle('#load', ['hidden'], false);
     const split = e.target.value.split("//");
-    apps.dtshow['master'] = await apps.dtbase['master'].find(obj=>obj.sn_id === split[0]);
-    console.log(apps.dtshow['master']);
-    apps.parse_input('#table_index', apps.dtshow['master']);
+    apps.dtshow['master'] = await apps.dtbase['master'].filter(obj=>obj.sn_id === split[0]);
+    apps.parse_input('#detail_form', apps.dtshow['master']);
+    const tbl = document.querySelector('#table_index');
+    const tr = tbl.querySelectorAll('tbody tr');
+    tr.forEach(dt=>{
+      if(!dt.classList.contains('hidden')) {
+        DOM2.class_toggle(dt, ['hidden']);
+      }
+    })
+    apps.dtshow['table_main'] = await apps.dtbase['vjs_hd'].filter(obj=>obj.sn_id === split[0]);
+    if(apps.dtshow['table_main'].length === 0) {
+      const data= await api_access('fetch','vjs_hd', {sn_id: split[0]});
+      data.forEach(dt=>{
+        apps.dtbase['vjs_hd'].push(dt);
+      })
+      apps.dtshow['table_main'] = await apps.dtbase['vjs_hd'].filter(obj=>obj.sn_id === split[0]);
+    }
+    apps.parse_input('#table_index', apps.dtshow['table_main']);
     DOM2.class_toggle(e.target, ['hidden']);
-    DOM2.class_toggle('#load', ['hidden'], true);
+    DOM2.class_toggle('#load', ['hidden']);
     return;
   }
 )

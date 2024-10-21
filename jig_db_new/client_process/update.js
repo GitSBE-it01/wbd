@@ -439,7 +439,6 @@ document.addEventListener('change', function(event) {
       const date = form.querySelector('#trans_date');
       date.value =currentDate('-');
     }
-
     return;
   } 
 
@@ -539,6 +538,7 @@ document.addEventListener('click', async(e)=>{
     name.forEach(dt=>{
         data[dt.getAttribute('name')] = dt.value;
     })
+    data['trans_date'] = currentDate('-');
     update.push(data);
     console.log({update});
     let msg ='';
@@ -553,6 +553,10 @@ document.addEventListener('click', async(e)=>{
     }
     alert (msg);
     DOM.add_class('#load',"hidden");
+    name.forEach(dt=>{
+      dt.value = '';
+      dt.disabled = true;
+    })
     location.reload();
     return;
   }

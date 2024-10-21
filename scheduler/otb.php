@@ -1,36 +1,209 @@
 <?php
 function data_otb() {
-    $query = "SELECT * FROM pub.op_hist WHERE op_trnbr BETWEEN 2939592 AND 3057958 AND (op_type='labor' OR op_type='down') WITH (NOLOCK, READPAST NOWAIT)";
-    $op_hist = odbc_qad::execQuery($query,'');
-    $full = [];
-    foreach($op_hist as $set) {
-        $data = [
-            'work_order'=>$set['op_wo_nbr'],
-            'tr_nbr'=>$set['op_trnbr'],
-            'item_number'=>$set['op_part'],
-            'id_wo'=>$set['op_wo_lot'],
-            'eff_date'=>$set['op_date'],
-            'tr_date'=>$set['op_tran_date'],
-            'operation'=>$set['op_wo_op'],
-            'act_run'=>$set['op_act_run'],
-            'act_setup'=>$set['op_act_setup'],
-            'std_unit'=>$set['op_std_units'],
-            'act_unit'=>$set['op_act_units'],
-            'wc'=>$set['op_wkctr'],
-            'dept'=>$set['op_dept'],
-            'emp'=>$set['op_emp'],
-            'type'=>$set['op_type'],
-            'qty_rwk'=>$set['op_qty_rwrk'],
-            'rework_reason'=>$set['op_rsn_rwrk'],
-            'qty_rjk'=>$set['op_qty_rjct'],
-            'rjc_rsn'=>$set['op_rsn_rjct'],
-            'comment'=>$set['op_comment'],
-            'trans_time'=>$set['op_time'],
-            'reason'=>$set['op_rsn'],
-            'user'=>$set['op_userid'],
-        ]; // 23
-        $full[]=$data;
+    $wo_dt =[];
+    $op_hist = [];
+    for($i=3256883; $i<3257959; $i+=251) {
+        $ii = $i+250;
+        $query = "SELECT * FROM db_wbd.otb_temp_data WHERE tr_nbr BETWEEN $i AND $ii";
+        $basic_dt = DB::execQuery($query,'');
+        foreach($basic_dt as $set) {
+            $data['tr_nbr']=$set['tr_nbr'];
+            $cek = array_filter($wo_dt, function($wo) use($set) {
+                return $wo['wo_lot'] === $set['id_wo'];
+            });
+            if(count($cek)===0) {
+                $query = "SELECT * FROM dbqad_live.wo_mstr WHERE wo_lot='".$set['id_wo']."'";
+                $wo__ = DB::execQuery($query,'');
+                $wo_dt[] = $wo__;
+                $cek = $wo__;
+            } 
+            if(count($cek)===1) {
+                foreach($cek as $st) {
+                    $data['order_date'] = $st['wo_ord_date'];
+                    $data['rel_date'] = $st['wo_rel_date'];
+                    $data['due_date'] = $st['wo_due_date'];
+                    $data['wo_close_date'] = $st['wo_stat_close_date'];
+                    $data['wo_stat'] = $st['wo_status'];
+                    $data['qty_ord'] = $st['wo_qty_ord'];
+                    $data['qty_compl'] = $st['wo_qty_comp'];
+                    $data['rmrks'] = $st['wo_rmks'];
+                    $data['sales_job'] = $st['wo_so_job'];
+                    $data['supplier'] = $st['wo_vend'];
+                }
+            } //10 total 37
+
+            $cek = array_filter($op_hist, function($op) use($set) {
+                return $op['op_trnbr'] === $set['tr_nbr'];
+            });
+            if(count($cek)===0) {
+                $query = "SELECT * FROM pub.op_hist WHERE op_trnbr BETWEEN $i AND $ii AND (op_type='labor' OR op_type='down') WITH (NOLOCK, READPAST NOWAIT)";
+                $op_hist = odbc_qad::execQuery($query,'');
+            }
+
+            if ($set['type'] === "MOVE") {
+                $data['qty'] = $set['op_qty_wip'];
+            } 
+
+            $data['std_run'] = $data['qty'] * $set['op_std_run'];
+
+            $data['down_time'] = $set['op_type'] === 'DOWN' ? $set['op_act_run'] : 0;
+        }
     }
+    return;
+}
+        /*
+fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    $query = "SELECT * FROM dbqad_live.rsn_ref";
+    $rsn_ref = DB::execQuery($query,'');
+    $query = "SELECT * FROM dbqad_live.pt_mstr";
+    $item = DB::execQuery($query,'');
+    $full = [];
+    for($i=3256883; $i<3257959; $i+=251) {
+        $ii = $i+250;
+        $query = "SELECT * FROM pub.op_hist WHERE op_trnbr BETWEEN $i AND $ii AND (op_type='labor' OR op_type='down') WITH (NOLOCK, READPAST NOWAIT)";
+        $op_hist = odbc_qad::execQuery($query,'');
+        if(count($op_hist)>0) {
+            foreach($op_hist as $set) {
+                $data = [
+                    'work_order'=>$set['op_wo_nbr'],
+                    'tr_nbr'=>$set['op_trnbr'],
+                    'item_number'=>$set['op_part'],
+                    'id_wo'=>$set['op_wo_lot'],
+                    'eff_date'=>$set['op_date'],
+                    'tr_date'=>$set['op_tran_date'],
+                    'operation'=>$set['op_wo_op'],
+                    'act_run'=>$set['op_act_run'],
+                    'act_setup'=>$set['op_act_setup'],
+                    'std_unit'=>$set['op_std_units'],
+                    'act_unit'=>$set['op_act_units'],
+                    'wc'=>$set['op_wkctr'],
+                    'dept'=>$set['op_dept'],
+                    'emp'=>$set['op_emp'],
+                    'type'=>$set['op_type'],
+                    'qty_rwk'=>$set['op_qty_rwrk'],
+                    'rework_reason'=>$set['op_rsn_rwrk'],
+                    'qty_rjk'=>$set['op_qty_rjct'],
+                    'rjc_rsn'=>$set['op_rsn_rjct'],
+                    'comment'=>$set['op_comment'],
+                    'trans_time'=>$set['op_time'],
+                    'reason'=>$set['op_rsn'],
+                    'user'=>$set['op_userid'],
+                ]; // 23
+                $cek = array_filter($item, function($itm) use ($set) {
+                    return $itm['pt_part'] === $set['op_part'];
+                });
+                if(count($cek)===1) {
+                    foreach($cek as $st) {  
+                        $data['desc1']= $st['pt_desc1'];
+                        $data['desc2']= $st['pt_desc2'];
+                        $data['pm']= $st['pt_pm_code'];
+                        $data['buyer']= $st['pt_buyer'];
+                    }
+                }
+
+                if(isset($set['op_rsn_rwrk'])) {
+                    $cek = array_filter($rsn_ref, function($rsn) use ($set) {
+                        return $rsn['rsn_code'] === $set['op_rsn_rwrk'];
+                    });
+                    if(count($rsn_ref)===1) {
+                        foreach($cek as $st) {  
+                            $data['rsn_type'] = $st['rsn_type'];
+                            $data['rsn_desc'] = $st['rsn_desc'];
+                        }
+                    } else {
+                        $data['rsn_type'] = '';
+                        $data['rsn_desc'] = '';
+                    }
+                } else {
+                    $data['rsn_type'] = '';
+                    $data['rsn_desc'] = '';
+                }
+                if(isset($data['item_number'])) {
+                    $full[]=$data;
+                }
+            }
+        }
+        echo "data full = ". count($full)."</br>";
+        echo "<pre>";
+        print_r(array_slice($full,0,4));
+        echo "</pre>";
+        $query = 'INSERT INTO `otb_temp_data`(
+                `work_order`,`tr_nbr`,`item_number`,`id_wo`,`eff_date`,`tr_date`,`operation`,`act_run`,`act_setup`,`std_unit`,`act_unit`,`wc`,`dept`,`emp`,`type`,`qty_rwk`,`rework_reason`,`qty_rjk`,`rjc_rsn`,`comment`,`trans_time`,`reason`,`user`,`desc1`,`desc2`,`pm`,`buyer`,`rsn_type`,`rsn_desc`
+            ) VALUES (
+                ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            )';
+        if(count($full)>0) {
+            $insert = DB::execQuery($query,"sissssiddssssssisississssssss",$full);
+            echo count($full).'data inserted '.$insert.'</br>';
+            $full = [];
+        }
+    }   
+fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+        `work_order`,
+        `tr_nbr`,
+        `item_number`,
+        `id_wo`,
+        `eff_date`,
+        `tr_date`,
+        `operation`,
+        `act_run`,
+        `act_setup`,
+        `std_unit`,
+        `act_unit`,
+        `wc`,
+        `dept`,
+        `emp`,
+        `type`,
+        `qty_rwk`,
+        `rework_reason`,
+        `qty_rjk`,
+        `rjc_rsn`,
+        `comment`,
+        `trans_time`,
+        `reason`,
+        `user`,
+        `desc1`,
+        `desc2`,
+        `pm`,
+        `buyer`,
+        `rsn_type`,
+        `rsn_desc`
+
+                (
+            [work_order] => 06050174
+            [tr_nbr] => 3127959
+            [item_number] => 2VDDTTTC1897
+            [id_wo] => 1191261
+            [eff_date] => 2023-09-15
+            [tr_date] => 2023-09-15
+            [operation] => 10
+            [act_run] => 10.0000000000
+            [act_setup] => .2330000000
+            [std_unit] => 0
+            [act_unit] => 0
+            [wc] => TWD
+            [dept] => P1.ASSY
+            [emp] => TWD-A1
+            [type] => LABOR
+            [qty_rwk] => 0.0000000000
+            [rework_reason] => 
+            [qty_rjk] => 0.0000000000
+            [rjc_rsn] => 
+            [comment] => 2o (QX-AL82C)
+            [trans_time] => 56895
+            [reason] => 
+            [user] => mfg
+            [desc1] => VC ASSY-SATORI TW29RN-B-
+            [desc2] => 8 (DIPROD)
+            [pm] => M
+            [buyer] => M-PLANER
+            [rsn_type] => 
+            [rsn_desc] => 
+
     echo count($full).'</br>';
     echo "<pre>";
     print_r(array_slice($full,0,5));
@@ -89,8 +262,8 @@ function data_otb() {
             $insert = DB::execQuery($query,"sissssiddssssssisississ",$full);
             echo count($full).'data inserted '.$insert.'</br>';
         }
-
-    /*
+}
+ /*
     $query = "SELECT * FROM db_wbd.otb_temp_data WHERE tr_nbr BETWEEN 2830658 AND 2830734";
     $basic_dt = DB::execQuery($query,'');
     
@@ -310,20 +483,18 @@ $query = 'UPDATE `otb_temp_data` SET
                 $data['pm']= $pt_mstr[0]['pt_pm_code'];
                 $data['buyer']= $pt_mstr[0]['pt_buyer'];
             } //27
-            $query = "SELECT * FROM dbqad_live.wo_mstr WHERE wo_lot='".$op_hist[0]['op_wo_lot']."'";
-            $wo_mstr = DB::execQuery($query,'');
-            if(count($wo_mstr)===1) {
-                $data['order_date'] = $wo_mstr[0]['wo_ord_date'];
-                $data['rel_date'] = $wo_mstr[0]['wo_rel_date'];
-                $data['due_date'] = $wo_mstr[0]['wo_due_date'];
-                $data['wo_close_date'] = $wo_mstr[0]['wo_stat_close_date'];
-                $data['wo_stat'] = $wo_mstr[0]['wo_status'];
-                $data['qty_ord'] = $wo_mstr[0]['wo_qty_ord'];
-                $data['qty_compl'] = $wo_mstr[0]['wo_qty_comp'];
-                $data['rmrks'] = $wo_mstr[0]['wo_rmks'];
-                $data['sales_job'] = $wo_mstr[0]['wo_so_job'];
-                $data['supplier'] = $wo_mstr[0]['wo_vend'];
-            } //10 total 37
+
+
+
+                         
+            $query = "SELECT * FROM pub.wr_route WHERE wr_lot='".$op_hist[0]['op_wo_lot']."' AND wr_op='".$op_hist[0]['op_wo_op']."'";
+            $wr_route = odbc_qad::execQuery($query,'');
+
+            if(count($wr_route)===1) {
+                $data['op_desc'] = $wr_route[0]['wr_desc'];
+                $data['run_crew'] = $wr_route[0]['wr_men_mch'];
+                $data['std_setup'] = $wr_route[0]['wr_setup'];
+            } // 3 Total 42
 
             if($op_hist[0]['op_rsn_rwrk'] ==="" ) {
                 $data['rsn_type'] = "";
@@ -337,26 +508,7 @@ $query = 'UPDATE `otb_temp_data` SET
                 } // 2 Total 39
             }
 
-            $query = "SELECT * FROM pub.wr_route WHERE wr_lot='".$op_hist[0]['op_wo_lot']."' AND wr_op='".$op_hist[0]['op_wo_op']."'";
-            $wr_route = odbc_qad::execQuery($query,'');
 
-            if(count($wr_route)===1) {
-                $data['op_desc'] = $wr_route[0]['wr_desc'];
-                $data['run_crew'] = $wr_route[0]['wr_men_mch'];
-                $data['std_setup'] = $wr_route[0]['wr_setup'];
-            } // 3 Total 42
-
-            if ($op_hist[0]['op_type'] === "MOVE") {
-                $data['qty'] = $op_hist[0]['op_qty_wip'];
-            } elseif ($op_hist[0]['op_type'] === "WOSCRAPI" || $op_hist[0]['op_type'] === "WOSCRAPO") {
-                $data['qty'] = $op_hist[0]['op_qty_scrap'];
-            } else {
-                $data['qty'] = $op_hist[0]['op_qty_comp']; 
-            } 
-
-            $data['std_run'] = $data['qty'] * $op_hist[0]['op_std_run'];
-
-            $data['down_time'] = $op_hist[0]['op_type'] === 'DOWN' ? $op_hist[0]['op_act_run'] : 0;
             echo '<pre>';
             print_r($data);
             echo '</pre>';
@@ -458,10 +610,6 @@ $query = 'UPDATE `otb_temp_data` SET
     }
     echo $count;
     */
-    return;
-}
-
-
 
 
 ?>

@@ -320,8 +320,9 @@ export class ButtonDOM {
                 }
                 if(btn && tbl) {
                     DOM.rmv_class('#load',"hidden");
-                    let update =[];
-                    let insert =[];
+                    let [update, insert, insert_log] =[
+                        [],[],[]
+                    ];
                     const tr = tbl.querySelectorAll('tr');
                     tr.forEach(dt=>{
                         if(dt.getAttribute('data-change') === 'change') {
@@ -331,6 +332,7 @@ export class ButtonDOM {
                                 data[d2.getAttribute('name')] = d2.value;
                             })
                             update.push(data);
+                            insert_log.push(data);
                         };
                         if(dt.getAttribute('data-change') === 'new') {
                             let data = {};
@@ -339,17 +341,19 @@ export class ButtonDOM {
                                 data[d2.getAttribute('name')] = d2.value;
                             })
                             insert.push(data);
+                            insert_log.push(data);
                         };
                     }) 
 
-                    console.log({update, insert});
+                    console.log({update, insert, insert_log, model});
                     let msg ='';
                     if(update.length>0) {
                         let result1 = await api_access('update',model[0], update);
                         if(result1.includes('fail')) {
                             msg += 'update data gagal';
                         } else {
-                            let result3 = await api_access('insert',model[1], update);
+                            let result3 = await api_access('insert',model[1], insert_log);
+                            console.log(result3);
                             msg += update.length + 'data di update';
                         }
                     }
@@ -359,7 +363,8 @@ export class ButtonDOM {
                         if(result2.includes('fail')) {
                             msg += ' insert data gagal';
                         } else {
-                            let result4 = await api_access('insert',model[1], insert);
+                            let result4 = await api_access('insert',model[1], insert_log);
+                            console.log(result4);
                             msg += insert.length + ' data di insert';
                         }
                     }

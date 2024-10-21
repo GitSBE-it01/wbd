@@ -1,7 +1,7 @@
 import { TableDOM2 } from "./table/table.js";
 
 export class DOM2 {
-    constructor (page_role='user', sprtr = '-') {
+    constructor (page_role='user', sprtr = '/') {
         this.body = document.querySelector('body');
         this.nav = this.body.querySelector('nav');
         this.header = this.body.querySelector('header');
@@ -246,7 +246,7 @@ export class DOM2 {
         return;
     }
 
-    parse_input(key, data, parent=document) {
+    parse_input(key, data, dsbl=false, parent=document) {
         let target = '';
         if(key.nodeType) {
             target = key;
@@ -254,29 +254,47 @@ export class DOM2 {
             target = parent.querySelector(key);
         }
         if(target.tagName === 'TABLE') {
-            console.log('ada tr nya ');
             const count = 0;
             const id_tbl = target.id;
             data.forEach(dt=>{
-                const inp_name = target.querySelector(`[data-id="${id_tbl}+${count}"]`);
-                DOM2.class_toggle(inp_name, ['hidden']);
-                inp_name.forEach(dt=>{
-                    const field = dt.getAttribute('name');
-                    dt.value = data[`${field}`] ? data[`${field}`] :'';
-                    if(target.querySelector(`[for = "${dt.id}"]`) !== null) {
-                        target.querySelector(`[for = "${dt.id}"]`).value = data[`${field}`] ? data[`${field}`] :'';
+                const tr = target.querySelector(`[data-id="${id_tbl}${count}"]`);
+                if(tr.classList.contains('hidden')) {
+                    DOM2.class_toggle(tr, ['hidden']);
+                }
+                DOM2.class_toggle(tr, ['hidden']);
+                const td = tr.querySelectorAll('[name]');
+                td.forEach(d2=>{
+                    const field = d2.getAttribute('name');
+                    const curr = d2.hasAttribute('disabled') ? true : false;
+                    d2.disabled = false;
+                    d2.value = dt[`${field}`] ? dt[`${field}`] :'';
+                    if(target.querySelector(`[for = "${d2.id}"]`) !== null) {
+                        target.querySelector(`[for = "${d2.id}"]`).value = dt[`${field}`] ? dt[`${field}`] :'';
+                    }
+                    if(dsbl) {
+                        d2.disabled = false;
+                    } else {
+                        d2.disabled = curr;
                     }
                 })
                 count++;
             })
+            return;
         } 
         if(data.length === 1) { 
             const inp_name = target.querySelectorAll('[name]');
             inp_name.forEach(dt=>{
                 const field = dt.getAttribute('name');
+                const curr = dt.hasAttribute('disabled') ? true : false;
+                dt.disabled = false;
                 dt.value = data[0][`${field}`] ? data[0][`${field}`] :'';
-                if(target.querySelector(`[for = "${dt.id}"]`) !== null) {
+                if(target.querySelector(`[for = "${dt.id}"]`) !== null && dt.classList.contains('hidden')) {
                     target.querySelector(`[for = "${dt.id}"]`).value = data[0][`${field}`] ? data[0][`${field}`] :'';
+                }
+                if(dsbl) {
+                    dt.disabled = false;
+                } else {
+                    dt.disabled = curr;
                 }
             })
         }
