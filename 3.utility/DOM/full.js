@@ -478,20 +478,26 @@ export class DOM {
                 if(dt.querySelectorAll('INPUT').length>0) {
                     const input = dt.querySelectorAll("INPUT");
                     for(let i=0; i<input.length; i++) {
-                        input[i].id = input[i].id+"__new";
+                        input[i].id = input[i].id+"__"+counter;
+                    }
+                }
+                if(dt.querySelectorAll('SELECT').length>0) {
+                    const sel = dt.querySelectorAll("SELECT");
+                    for(let i=0; i<sel.length; i++) {
+                        sel[i].id = sel[i].id+"__"+counter;
                     }
                 }
                 if(dt.querySelectorAll('LABEL').length>0) {
                     const label = dt.querySelectorAll("LABEL");
                     for(let i=0; i<label.length; i++) {
                         let old = label[i].getAttribute('for');
-                        label[i].setAttribute('for',old+"__new");
+                        label[i].setAttribute('for',old+"__"+counter);
                     }
                 }
                 if(dt.querySelectorAll('BUTTON').length>0) {
                     const button = dt.querySelectorAll("BUTTON");
                     for(let i=0; i<button.length; i++) {
-                        button[i].id = button[i].getAttribute('data-method')+"__"+counter+"__new";
+                        button[i].id = button[i].getAttribute('data-method')+"__"+counter;
                     }
                 }
             }

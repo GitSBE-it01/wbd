@@ -481,6 +481,7 @@
             XLSX.writeFile(workbook, 'db_jig_Total.xlsx')
         */
         const load = document.querySelector('#load');
+        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sbe4/intersite/index.php', '_blank');
         load.classList.add('hidden');
     </script>
     <script src='../1.asset/external_library/sheetjs/xlsx.full.min.js'></script>

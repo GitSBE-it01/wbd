@@ -11,6 +11,7 @@ $nav_array['title'] = 'Detail Tool';
 $index = $datalist->create(['id'=>'alat_list'])
     .Comp::dtlist(['id'=>'user_list'])
     .Comp::dtlist(['id'=>'loc_list'])
+    .Comp::dtlist(['id'=>'period_list'])
     .$load2."
     ".$div->create([
         'data_attr'=>['card::detail'],
@@ -67,6 +68,18 @@ $index = $datalist->create(['id'=>'alat_list'])
                 'id'=>'new__data',
                 'disable'=>'',
                 'class'=>'fixed z-20 right-2 top-[10vh] w-6 h-6 rounded bg-transparent opacity-50 plus'
+            ]),
+            Comp::input([
+                'id'=>'input__filter',
+                'list'=>'period_list',
+                'require'=>'',
+                'autocomplete'=>'off',
+                'class'=>'rounded hidden px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 fixed top-[15vh] z-30 duration-300 right-10 shadow-md w-[12vw]'
+            ]),
+            $button->create([
+                'id'=>'dl__data',
+                'disable'=>'',
+                'class'=>'fixed z-20 right-2 top-[15vh] w-6 h-6 rounded bg-white opacity-50 download'
             ])
         ]
     ])."

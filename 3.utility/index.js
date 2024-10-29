@@ -9,6 +9,7 @@ import {activeLink,
 import {inputEmptyRow,
         TableDOM,
         TableDOM2} from './DOM/table.js';
+import {pdf} from './utils/pdf.js';
 import {sort_array} from './utils/array.js';
 import {calculateMean,
         calculateStdDev,
@@ -36,6 +37,7 @@ export {
         TableDOM,
         TableDOM2,
         sort_array,
+        pdf,
         calculateMean,
         calculateStdDev,
         calculateCP,

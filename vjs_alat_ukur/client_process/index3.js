@@ -1,6 +1,7 @@
 import { ButtonDOM, currentDate,customPeriod} from "../../3.utility/index.js";
-import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM, pdf} from '../../3.utility/index.js';
+import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
 import {auth2} from '../../3.utility/auth.js';
+import { jsPDF } from "jspdf";
 
 await auth2();
 GeneralDOM.init('');
@@ -93,7 +94,6 @@ if (event.target.id === "new__data") {
         lbl.textContent = dflt_arr[key];
       }
     })
-
     counter++;
   }
   return;
@@ -121,6 +121,8 @@ if (event.target.getAttribute('data-method') === "open") {
   if(tr.getAttribute('data-id').includes('new_')) {
     await DOM.insert_data(tr, 'vjs_hd');
     btn_sbmt.setAttribute('data-method', 'insert');
+    const cls_btn = document.querySelector("#close_form_btn");
+    cls_btn.disabled = true;
     point_data = [];
     point_data = await api_access('fetch', 'vjs_point', {new_cat:master_filter.new_subcat});
     if(point_data.length > 0) {
@@ -158,7 +160,6 @@ if (event.target.getAttribute('data-method') === "open") {
           new_id.value = '';
         }
       })
-
     } else{
       alert('belum ada standard pengecekan, silahkan menghubungi kalibrasi');
     }
@@ -215,67 +216,61 @@ if (event.target.getAttribute('data-method') === "open") {
     return;
   }
 
-/* download to pdf
---------------------------------------------------------- */
-if (event.target.id === "dl__data") {
-  const inp_fltr = document.querySelector('#input__filter');
-  if(event.target.classList.contains('opacity-50')) {
-    inp_fltr.classList.toggle('hidden');
-  } else {
-    const fltr1 = document.querySelector('#input__alat_search').value.split('//');
-    const data = [
-      {
-        sn_id: fltr1[0],
-        period: inp_fltr.value
-      }
-    ]
-    await pdf(data);
-    location.reload(true);
+/* delete data
+--------------------------------------------------------- 
+  if(event.target.getAttribute('data-method') === 'delete'){
+    DOM.rmv_class('#load',"hidden");
+    const tr = event.target.closest('tr');
+    const result = await DOM.delete_data(tr, 'vjs_hd', 'data_group');
+    if(!result.includes('fail')) {
+      alert ('data deleted');
+      location.reload(true);
   }
-  return;
-}
+    DOM.add_class('#load',"hidden");
+    return;
+  }
 
 /* submit form 
 --------------------------------------------------------- */
-if (event.target.id === "submit_form_btn") {
-  DOM.rmv_class('#load',"hidden");
-  const trgt = document.querySelector('[data-card="detail"]');
-  const tbl = trgt.querySelector('#detail_table');
-  const dt_grp = tbl.querySelector('[name ="data_group"]');
-  const tr = tbl.querySelectorAll('[name ="result"]');
-  let data = [];
-  let result = '';
-  let msg = '';
-  let cek = 'OK';
-  for (let i=0; i<tr.length; i++) {
-    let dt=tr[i];
-    if(dt.value === "NG") {
-      cek = 'NG';
-    } 
-  }
-  if(event.target.getAttribute('data-method') === 'insert') {
-    result = await DOM.insert_dataset_table(trgt, 'vjs_log');
-    msg = 'data inserted';
-  } else {
-    result = await DOM.update_dataset_table(trgt, 'vjs_log');
-    msg = 'data updated';
-  }
-  if(result.includes('fail')) {
-    alert('data error tidak ')
-    DOM.add_class('#load',"hidden");
-    return;
-  } else {
-    const result2 = await api_access('fetch', 'vjs_hd', {data_group:dt_grp.value});
-    result2[0].decision = cek;
-    data = result2;
-    const result3 = await api_access('update', 'vjs_hd', data);
-    if(!result3.includes('fail')) {
-      alert (msg);
-      location.reload(true);
+  if (event.target.id === "submit_form_btn") {
+    DOM.rmv_class('#load',"hidden");
+    const trgt = document.querySelector('[data-card="detail"]');
+    const tbl = trgt.querySelector('#detail_table');
+    const dt_grp = tbl.querySelector('[name ="data_group"]');
+    const tr = tbl.querySelectorAll('[name ="result"]');
+    let data = [];
+    let result = '';
+    let msg = '';
+    let cek = 'OK';
+    for (let i=0; i<tr.length; i++) {
+      let dt=tr[i];
+      if(dt.value === "NG") {
+        cek = 'NG';
+      } 
     }
-    return;
+    if(event.target.getAttribute('data-method') === 'insert') {
+      result = await DOM.insert_dataset_table(trgt, 'vjs_log');
+      msg = 'data inserted';
+    } else {
+      result = await DOM.update_dataset_table(trgt, 'vjs_log');
+      msg = 'data updated';
+    }
+    if(result.includes('fail')) {
+      alert('data error tidak ')
+      DOM.add_class('#load',"hidden");
+      return;
+    } else {
+      const result2 = await api_access('fetch', 'vjs_hd', {data_group:dt_grp.value});
+      result2[0].decision = cek;
+      data = result2;
+      const result3 = await api_access('update', 'vjs_hd', data);
+      if(!result3.includes('fail')) {
+        alert (msg);
+        location.reload(true);
+      }
+      return;
+    }
   }
-}
 });
 
 /* ===============================================================================
@@ -289,6 +284,7 @@ document.addEventListener("change", async function (event) {
   if (event.target.id === "input__alat_search") {
     const split = event.target.value.split("//");
     master_filter = await master.find(obj=>obj.sn_id === split[0]);
+    console.log({master_filter});
     DOM.form_parse_data('#detail_form', master_filter);
     DOM.rmv_class('#load',"hidden");
     event.target.blur();
@@ -297,27 +293,11 @@ document.addEventListener("change", async function (event) {
     hd_data.sort((a,b) => {
       if (a.data_group !== b.data_group) return b.data_group.localeCompare(a.data_group);
     })
-    let mt_code = [];
-    hd_data.forEach(dt=>{
-      const cek = mt_code.filter(obj=>obj.period === dt.period);
-      if(cek.length === 0) {
-        const data = {period: dt.period}
-        mt_code.push(data);
-      }
-    })
-    const check_pr = document.querySelector('#period_list');
-    if(check_pr.firstChild !== null ) {
-      check_pr.innerHTML = '';
-    }
-    DtlistDOM.parse_opt("#period_list","-",mt_code,"period");
     if(DOM.rmv_attr('#new__data','disabled')) {
       DOM.rmv_attr('#new__data','disabled');
       if (!DOM.add_class('#new__data',"opacity-50")) {
         DOM.rmv_class('#new__data',"opacity-50");
       }
-    }
-    if(DOM.rmv_attr('#dl__data','disabled')) {
-      DOM.rmv_attr('#dl__data','disabled');
     }
     DOM.pgList_init('#main_page', hd_data, '#table_index');
     DOM.table_parse_data('#table_index', hd_data, page);
@@ -348,7 +328,6 @@ document.addEventListener("change", async function (event) {
     event.target.blur();
     return;
   }
-
 /* approval input
 --------------------------------------------------------- */
   if (event.target.hasAttribute('name') && event.target.tagName === 'SELECT' ) {
@@ -450,26 +429,4 @@ if (event.target.id === "input__alat_search") {
     }
     return;
   }
-
-/* period list valid
---------------------------------------------------------- */
-if (event.target.id === 'input__filter' ) {
-  let valid = false;
-  if(event.target.value === ''  || event.target === null) {
-    event.target.setCustomValidity("cannot empty");
-    event.target.reportValidity();
-  } else {
-    event.target.setCustomValidity("");
-    event.target.reportValidity();
-    valid = true;
-  }
-  const btn = document.querySelector('#dl__data');
-  if(valid && btn.classList.contains('opacity-50')) {
-      btn.classList.remove('opacity-50');
-  } 
-  if(!valid && !btn.classList.contains('opacity-50')) {
-      btn.classList.add('opacity-50');
-  } 
-  return;
-}
 })

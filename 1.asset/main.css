@@ -54,6 +54,12 @@
     cursor: pointer;
 }
 
+.download {
+    background-image: url('./symbol/download.svg');
+    background-size: cover;
+    cursor: pointer;
+}
+
 .hide {
     background-image: url('./symbol/hide_detail.svg');
     background-size: cover;
