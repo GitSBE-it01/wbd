@@ -686,6 +686,10 @@ class DB {
                     }
                 }
                 break;
+            case 'TRUNCATE':
+                $stmt->execute();
+                $response = 'success';
+                break;
             default:
                 echo "Query process not supported";
         }

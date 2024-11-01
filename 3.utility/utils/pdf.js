@@ -1,4 +1,4 @@
-export const pdf = async(data, file_name)=>{
+export const pdf = async({data=[], file_name='document', layout='p', left=8, right=8, top=12, btm=8, hd=4, ft=4})=>{
     try {
         const curr = window.location.href.split("/");
         let url =`http://${curr[2]}/${curr[3]}/2.backend/pdf.php`;
@@ -8,6 +8,13 @@ export const pdf = async(data, file_name)=>{
             headers: {
               'Content-Type': 'application/json',
               'Ori': ori,
+              'Orientation': layout,
+              'margin-left': left,
+              'margin-right': right,
+              'margin-top': top,
+              'margin-btm': btm,
+              'margin-hd': hd,
+              'margin-ft': ft
           },
           body: JSON.stringify({Data:data})
         });

@@ -20,6 +20,20 @@ let page = 1;
 const today = currentDate("-"); 
 let period = customPeriod(today);
 let counter = 0;
+const period_array = {
+  b01: 'Januari',
+  b02: 'Februari',
+  b03: 'Maret',
+  b04: 'April',
+  b05: 'Mei',
+  b06: 'Juni',
+  b07: 'Juli',
+  b08: 'Agustus',
+  b09: 'September',
+  b10: 'Oktober',
+  b11: 'November',
+  b12: 'Desember',
+};
 
 const user_list = await api_access('get','user','');
 let end = performance.now();
@@ -218,20 +232,27 @@ if (event.target.getAttribute('data-method') === "open") {
 /* download to pdf
 --------------------------------------------------------- */
 if (event.target.id === "dl__data") {
+  DOM.rmv_class('#load',"hidden");
   const inp_fltr = document.querySelector('#input__filter');
+  const prd = inp_fltr.value.split('.');
+  const real_prd = period_array[prd[1]];
+  const nama_alat = document.querySelector('#desc_alat').value;
+  const no_seri = document.querySelector('#seri').value.split('--');
   if(event.target.classList.contains('opacity-50')) {
     inp_fltr.classList.toggle('hidden');
   } else {
     const fltr1 = document.querySelector('#input__alat_search').value.split('//');
-    const data = [
-      {
+    const data = {
         sn_id: fltr1[0],
-        period: inp_fltr.value
+        period: inp_fltr.value,
+        month: real_prd,
+        year: prd[0],
+        nama_alat: nama_alat,
+        no_seri: no_seri[1]
       }
-    ]
-    await pdf(data);
-    location.reload(true);
+    await pdf({data: data, file_name: no_seri[1]+'__'+real_prd+prd[0], layout: 'L'});
   }
+  DOM.add_class('#load',"hidden");
   return;
 }
 
@@ -316,7 +337,7 @@ document.addEventListener("change", async function (event) {
         DOM.rmv_class('#new__data',"opacity-50");
       }
     }
-    if(DOM.rmv_attr('#dl__data','disabled')) {
+    if(document.querySelector('#dl_data') !== null && DOM.rmv_attr('#dl__data','disabled')) {
       DOM.rmv_attr('#dl__data','disabled');
     }
     DOM.pgList_init('#main_page', hd_data, '#table_index');
@@ -458,6 +479,7 @@ if (event.target.id === 'input__filter' ) {
   if(event.target.value === ''  || event.target === null) {
     event.target.setCustomValidity("cannot empty");
     event.target.reportValidity();
+    event.target.classList.toggle('hidden');
   } else {
     event.target.setCustomValidity("");
     event.target.reportValidity();

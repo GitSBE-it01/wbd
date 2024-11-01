@@ -50,6 +50,18 @@ echo "Opening new tab for pick now scheduler</br>";
 ?>
 <script>
     window.open('http://informationsystem.sbe.co.id:8080/wbd/pick_now/pick_now_sched.html', '_blank');
+    setTimeout(() => {
+        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sb4/routing/index.php', '_blank');
+    }, 3600000);
+    setTimeout(() => {
+        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sb4/wo/index.php', '_blank');
+    }, 3700000);
+    setTimeout(() => {
+        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sb4/so/index.php', '_blank');
+    }, 38500000);
+    setTimeout(() => {
+        window.open('http://informationsystem.sbe.co.id:8080/wbd/item_develop/index.php', '_blank');
+    }, 39500000);
 </script>
 <?php 
 echo "********************************************************************</br></br>";

@@ -10,6 +10,7 @@ import {inputEmptyRow,
         TableDOM,
         TableDOM2} from './DOM/table.js';
 import {pdf} from './utils/pdf.js';
+import {send_email} from './utils/mail.js';
 import {sort_array} from './utils/array.js';
 import {calculateMean,
         calculateStdDev,
@@ -38,6 +39,7 @@ export {
         TableDOM2,
         sort_array,
         pdf,
+        send_email,
         calculateMean,
         calculateStdDev,
         calculateCP,
