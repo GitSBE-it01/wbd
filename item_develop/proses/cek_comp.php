@@ -21,7 +21,8 @@
     WHERE pt.pt_status ="develop"
     GROUP BY pt.pt_part';
 */
-function item_develop() {
+
+function detail_item_dev() {
     $query = 'SELECT 
             distinct(pt.pt_part) as item_number,
             pt.pt_desc1 as desc1,
@@ -114,6 +115,7 @@ function item_develop() {
             body : link+fix
         });
     </script>';
+    unset($full);
     return;
 }
 
