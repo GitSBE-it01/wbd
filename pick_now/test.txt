@@ -1,3 +1,9 @@
+1497736
+1519118
+WO bill ada formula
+WO status report ada
+
+
 ps_comp = 
 ps_comp = '2BPS0016' OR
 ps_comp = '2CL1357' OR

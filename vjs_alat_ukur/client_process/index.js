@@ -1,5 +1,5 @@
 import { ButtonDOM, currentDate,customPeriod} from "../../3.utility/index.js";
-import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM, pdf} from '../../3.utility/index.js';
+import {api_access, DOM, GeneralDOM, DtlistDOM, NavDOM} from '../../3.utility/index.js';
 import {auth2} from '../../3.utility/auth.js';
 
 await auth2();
@@ -20,20 +20,6 @@ let page = 1;
 const today = currentDate("-"); 
 let period = customPeriod(today);
 let counter = 0;
-const period_array = {
-  b01: 'Januari',
-  b02: 'Februari',
-  b03: 'Maret',
-  b04: 'April',
-  b05: 'Mei',
-  b06: 'Juni',
-  b07: 'Juli',
-  b08: 'Agustus',
-  b09: 'September',
-  b10: 'Oktober',
-  b11: 'November',
-  b12: 'Desember',
-};
 
 const user_list = await api_access('get','user','');
 let end = performance.now();
@@ -229,32 +215,19 @@ if (event.target.getAttribute('data-method') === "open") {
     return;
   }
 
-/* download to pdf
---------------------------------------------------------- */
-if (event.target.id === "dl__data") {
-  DOM.rmv_class('#load',"hidden");
-  const inp_fltr = document.querySelector('#input__filter');
-  const prd = inp_fltr.value.split('.');
-  const real_prd = period_array[prd[1]];
-  const nama_alat = document.querySelector('#desc_alat').value;
-  const no_seri = document.querySelector('#seri').value.split('--');
-  if(event.target.classList.contains('opacity-50')) {
-    inp_fltr.classList.toggle('hidden');
-  } else {
-    const fltr1 = document.querySelector('#input__alat_search').value.split('//');
-    const data = {
-        sn_id: fltr1[0],
-        period: inp_fltr.value,
-        month: real_prd,
-        year: prd[0],
-        nama_alat: nama_alat,
-        no_seri: no_seri[1]
-      }
-    await pdf({data: data, file_name: no_seri[1]+'__'+real_prd+prd[0], layout: 'L'});
+/* delete data
+--------------------------------------------------------- 
+  if(event.target.getAttribute('data-method') === 'delete'){
+    DOM.rmv_class('#load',"hidden");
+    const tr = event.target.closest('tr');
+    const result = await DOM.delete_data(tr, 'vjs_hd', 'data_group');
+    if(!result.includes('fail')) {
+      alert ('data deleted');
+      location.reload(true);
   }
-  DOM.add_class('#load',"hidden");
-  return;
-}
+    DOM.add_class('#load',"hidden");
+    return;
+  }
 
 /* submit form 
 --------------------------------------------------------- */
@@ -310,6 +283,7 @@ document.addEventListener("change", async function (event) {
   if (event.target.id === "input__alat_search") {
     const split = event.target.value.split("//");
     master_filter = await master.find(obj=>obj.sn_id === split[0]);
+    console.log({master_filter});
     DOM.form_parse_data('#detail_form', master_filter);
     DOM.rmv_class('#load',"hidden");
     event.target.blur();
@@ -318,27 +292,11 @@ document.addEventListener("change", async function (event) {
     hd_data.sort((a,b) => {
       if (a.data_group !== b.data_group) return b.data_group.localeCompare(a.data_group);
     })
-    let mt_code = [];
-    hd_data.forEach(dt=>{
-      const cek = mt_code.filter(obj=>obj.period === dt.period);
-      if(cek.length === 0) {
-        const data = {period: dt.period}
-        mt_code.push(data);
-      }
-    })
-    const check_pr = document.querySelector('#period_list');
-    if(check_pr.firstChild !== null ) {
-      check_pr.innerHTML = '';
-    }
-    DtlistDOM.parse_opt("#period_list","-",mt_code,"period");
     if(DOM.rmv_attr('#new__data','disabled')) {
       DOM.rmv_attr('#new__data','disabled');
       if (!DOM.add_class('#new__data',"opacity-50")) {
         DOM.rmv_class('#new__data',"opacity-50");
       }
-    }
-    if(document.querySelector('#dl_data') !== null && DOM.rmv_attr('#dl__data','disabled')) {
-      DOM.rmv_attr('#dl__data','disabled');
     }
     DOM.pgList_init('#main_page', hd_data, '#table_index');
     DOM.table_parse_data('#table_index', hd_data, page);
@@ -369,7 +327,6 @@ document.addEventListener("change", async function (event) {
     event.target.blur();
     return;
   }
-
 /* approval input
 --------------------------------------------------------- */
   if (event.target.hasAttribute('name') && event.target.tagName === 'SELECT' ) {
@@ -471,27 +428,4 @@ if (event.target.id === "input__alat_search") {
     }
     return;
   }
-
-/* period list valid
---------------------------------------------------------- */
-if (event.target.id === 'input__filter' ) {
-  let valid = false;
-  if(event.target.value === ''  || event.target === null) {
-    event.target.setCustomValidity("cannot empty");
-    event.target.reportValidity();
-    event.target.classList.toggle('hidden');
-  } else {
-    event.target.setCustomValidity("");
-    event.target.reportValidity();
-    valid = true;
-  }
-  const btn = document.querySelector('#dl__data');
-  if(valid && btn.classList.contains('opacity-50')) {
-      btn.classList.remove('opacity-50');
-  } 
-  if(!valid && !btn.classList.contains('opacity-50')) {
-      btn.classList.add('opacity-50');
-  } 
-  return;
-}
 })

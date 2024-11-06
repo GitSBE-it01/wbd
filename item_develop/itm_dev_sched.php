@@ -33,15 +33,15 @@ echo "********************************************************************</br><
 
 <script>
     setTimeout(() => {
-        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sbe4/intersite/index.php', '_blank');
+        window.open('http://informationsystem.sbe.co.id:62898/wbd/data_sbe4/intersite/index.php', '_blank');
     }, 500);
     setTimeout(() => {
-        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sbe4/routing/index.php', '_blank');
+        window.open('http://informationsystem.sbe.co.id:62898/wbd/data_sbe4/routing/index.php', '_blank');
     }, 2000);
     setTimeout(() => {
-        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sbe4/so/index.php', '_blank');
+        window.open('http://informationsystem.sbe.co.id:62898/wbd/data_sbe4/so/index.php', '_blank');
     }, 3500);
     setTimeout(() => {
-        window.open('http://informationsystem.sbe.co.id:8080/wbd/data_sbe4/wo/index.php', '_blank');
+        window.open('http://informationsystem.sbe.co.id:62898/wbd/data_sbe4/wo/index.php', '_blank');
     }, 5000);
 </script>

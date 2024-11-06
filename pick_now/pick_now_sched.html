@@ -51,39 +51,44 @@
         }
     })
     console.log({rout_src, rout});
-    const demand = await wobb.dbProcess('get',''); // wod_det
-    const woR = await wo.dbProcess('fetch',{wo_status:"R"}); // wo_mstr
-    const cekDept = await dept.dbProcess('get','');
-    const item_mstr = await api_access('fetch_item__cache','qad_item', ''); // wo_mstr
+    const [demand, woR, cekDept, item_mstr] = await Promise.all([
+        api_access('get','qad_wobb', ''),
+        api_access('fetch','qad_wo', {wo_status:'R'}),
+        api_access('get','pn_dept', ''),
+        api_access('fetch_item__cache','qad_item', ''), 
+    ]);
     console.log('************************************************************');
     console.log('data raw utk demand dari WOBB dan WO yang R');
     console.log('------------------------------------------------------------');
     console.log({demand, woR, cekDept, item_mstr});
 
-
-    const pic = await pic_part.dbProcess('get',''); // wo_mstr
-    const oh = await ld.dbProcess('get',''); // ld_det
-    const cekLoc = await loc.dbProcess('get',''); //loc_mstr
+    const [pic, oh, cekLoc] = await Promise.all([
+        api_access('get','pn_pic_cat', ''),
+        api_access('get','qad_loc', ''),
+        api_access('get','pn_loc', ''),
+    ]);
     console.log('************************************************************');
     console.log('data raw utk OH dan list lokasi utk mendapatkan demand');
     console.log('------------------------------------------------------------');
     console.log({pic, oh, cekLoc});
 
 
-    const delete1 = await pickNow.dbProcess('delete',[{data_date: getCustomDate(-2)}]);
+    //const delete1 = await pickNow.dbProcess('delete',[{data_date: getCustomDate(-2)}]);
+    const delete1 = await api_access('fetch_del_res', 'pn_result',{data_date: getCustomDate(-2)});
     console.log(delete1);
     
     console.log('************************************************************');
     console.log('list WO release dari data penarikkan tgl sebelumnya');
     console.log('------------------------------------------------------------');
-    const cekNew = await pickNow.dbProcess('fetch',{data_date: getCustomDate(-1)});
+    const cekNew = await api_access('fetch', 'pn_result',{data_date: getCustomDate(-1)});
+    console.log({cekNew});
     const cekIDnewR = [];
     cekNew.forEach(dt=>{
         if(!cekIDnewR.includes(dt.lot__id)) {
             cekIDnewR.push(dt.lot__id);
         }
     })
-    console.log({cekNew, cekIDnewR});
+    console.log({cekIDnewR});
 
     console.log('************************************************************');
     const endInit = performance.now();
@@ -449,11 +454,12 @@
     console.log({inputArr});
 
     console.log('************************************************************');
-    const cek = await pickNow.dbProcess('fetch',{data_date: currentDate()}) ;
+    //const cek = await pickNow.dbProcess('fetch',{data_date: currentDate()}) ;
+    const cek = await api_access('fetch','pn_result', {data_date: currentDate()}) ;
     const report5 = document.createElement('h3');
 
     if (cek.length === 0) {
-        const result2 = await pickNow.dbProcess('insert',inputArr);
+        const result2 = await api_access('insert','pn_result',inputArr);
         if(!result2.includes('fail')) {
             report5.textContent = 'Pemasukan data pick now sebanyak ' + inputArr.length + ' data ke database selesai';
         } else {
@@ -489,7 +495,6 @@
     import {
         delete_cache, cache
     } from './utility/index.js';
-
     await delete_cache();
     const textContArr = [
         'P1.ASSY',
@@ -518,7 +523,7 @@
         });
         const cached = cache(dpt, dataTbl);
     })
-    window.open('http://informationsystem.sbe.co.id:8080/wbd/scheduler/jig_db_sched.php', '_blank');
+    window.open('http://informationsystem.sbe.co.id:62898/wbd/scheduler/jig_db_sched.php', '_blank');
     /*
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(finalResult);

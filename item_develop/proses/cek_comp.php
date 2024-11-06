@@ -108,7 +108,7 @@ function detail_item_dev() {
             fix += "<tr><td>"+dt.item_number+"</td><td>"+dt.desc1+"</td><td>"+dt.item_site+"</td><td>"+dt.item_status+"</td><td>"+dt.pm_code+"</td><td>"+dt.bom_cek+"</td><td>"+dt.rout_cek+"</td></tr>";
         })
         fix += "</table>";
-        const link = `download data : <a href="http://informationsystem.sbe.co.id:8080/wbd/item_develop/file_dl.html">http://informationsystem.sbe.co.id:8080/wbd/item_develop/file_dl.html</a></br>`;
+        const link = `download data : <a href="http://informationsystem.sbe.co.id:62898/wbd/item_develop/file_dl.html">http://informationsystem.sbe.co.id:62898/wbd/item_develop/file_dl.html</a></br>`;
         send_email({
             to: "mkt.yenny@sbe.co.id, it.robby@sbe.co.id", 
             subject: "Item Develop", 

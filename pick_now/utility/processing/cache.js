@@ -7,7 +7,7 @@ export const delete_cache = async() => {
             method: 'DELETE', 
             headers: {
                 'Content-Type': 'application/json',
-                'Origin': ori
+                'Ori': ori
             },
         });
         if (!response.ok) {
@@ -30,7 +30,7 @@ export const cache = async(name, data) => {
             method: 'PUT', 
             headers: {
                 'Content-Type': 'application/json',
-                'Origin': ori
+                'Ori': ori
             },
             body: JSON.stringify({parameters: name, data})
         });
@@ -55,9 +55,10 @@ export const get_cache = async(name) => {
             method: 'GET', 
             headers: {
                 'Content-Type': 'application/json',
-                'Origin': ori,
-                'App': 'cache',
-                'Param': name
+                'Ori': ori,
+                'Req-Detail': table,
+                'Req-Method': fix_action,
+                'Cache-Control': cache
             }
         });
         if (!response.ok) {

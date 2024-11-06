@@ -12,7 +12,7 @@
     <title>pick now</title>
 </head>
 <body class="font-[Poppins] h-[100vh] w-[100vw] bg-slate-300 flex-row custom_scroll">
-        <div class='loading z-20'></div>
+    <div class='loading z-20'></div>
 <script type="module">
     // all Import module
     import {
@@ -41,6 +41,7 @@
         pickNow, // class
     } from './utility/index.js';
     import {navArr} from './general.js';
+    import {api_access} from '../3.utility/index.js';
 
     // navigation
     navigation('Pick Now', navArr)

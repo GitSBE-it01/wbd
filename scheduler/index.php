@@ -47,13 +47,11 @@ echo "====================================================================</br>"
 echo "Pick Now sched</br>";
 echo "====================================================================</br>";
 echo "Opening new tab for pick now scheduler</br>";
-echo "
-<head>
-    <title>master scheduler</title>
-</head>
+?>
 <script>
-    window.open('http://informationsystem.sbe.co.id:8080/wbd/pick_now/pick_now_sched.html', '_blank');
-</script>";
+    window.open('http://informationsystem.sbe.co.id:62898/wbd/pick_now/pick_now_sched.html', '_blank');
+</script>
+<?php 
 echo "********************************************************************</br></br>";
 
 /*

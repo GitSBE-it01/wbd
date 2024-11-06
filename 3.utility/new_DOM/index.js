@@ -254,31 +254,35 @@ export class DOM2 {
             target = parent.querySelector(key);
         }
         if(target.tagName === 'TABLE') {
-            const count = 0;
+            let count = 0;
             const id_tbl = target.id;
-            data.forEach(dt=>{
-                const tr = target.querySelector(`[data-id="${id_tbl}${count}"]`);
-                if(tr.classList.contains('hidden')) {
+            const dt_cnt = data.length;
+            if(dt_cnt>50) {
+                for(let i=0; i<49; i++) {
+                    let dt = data[i];
+                    console.log(dt);
+                    const tr = target.querySelector(`[data-id="${id_tbl}__${count}"]`);
+                    if(tr.classList.contains('hidden')) {
+                        DOM2.class_toggle(tr, ['hidden']);
+                    }
                     DOM2.class_toggle(tr, ['hidden']);
-                }
-                DOM2.class_toggle(tr, ['hidden']);
-                const td = tr.querySelectorAll('[name]');
-                td.forEach(d2=>{
-                    const field = d2.getAttribute('name');
-                    const curr = d2.hasAttribute('disabled') ? true : false;
-                    d2.disabled = false;
-                    d2.value = dt[`${field}`] ? dt[`${field}`] :'';
-                    if(target.querySelector(`[for = "${d2.id}"]`) !== null) {
-                        target.querySelector(`[for = "${d2.id}"]`).value = dt[`${field}`] ? dt[`${field}`] :'';
-                    }
-                    if(dsbl) {
+                    const td = tr.querySelectorAll('[name]');
+                    td.forEach(d2=>{
+                        const field = d2.getAttribute('name');
+                        const curr = d2.hasAttribute('disabled') ? true : false;
                         d2.disabled = false;
-                    } else {
-                        d2.disabled = curr;
-                    }
-                })
-                count++;
-            })
+                        d2.value = dt[`${field}`] ? dt[`${field}`] :'';
+                        if(target.querySelector(`[for = "${d2.id}"]`) !== null) {
+                            target.querySelector(`[for = "${d2.id}"]`).value = dt[`${field}`] ? dt[`${field}`] :'';
+                        }
+                        if(dsbl) {
+                            d2.disabled = false;
+                        } else {
+                            d2.disabled = curr;
+                        }
+                    })
+                }
+            }
             return;
         } 
         if(data.length === 1) { 

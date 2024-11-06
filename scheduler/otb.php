@@ -123,7 +123,7 @@ op__dec01 as act_run_crew
 */
 
 function data_otb() {
-    for($i=3256063; $i<3257959; $i+=501) {
+    for($i=2876312; $i<2979199; $i+=501) {
         $start_time = microtime(true);
         $ii = $i + 500;
         $query = "SELECT 
