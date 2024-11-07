@@ -269,6 +269,7 @@ export class TableDOM {
         }
     }
     
+    
     static set_default_new_row(table_key, data, array) {
         const tbl = table_key.nodeType ? table_key : document.querySelector(table_key);
         const tbody = tbl.querySelector('tbody');

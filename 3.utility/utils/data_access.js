@@ -7,6 +7,7 @@ export const api_access = async(action, table, data) =>{
     else if(action.includes('insert')) {resp = await execute(url, table, action, "POST", data)}
     else if(action.includes('update')) {resp = await execute(url, table, action, "PUT", data)}
     else if(action.includes('delete')) {resp = await execute(url, table, action, "DELETE", data)}
+    else if(action.includes('patch')) {resp = await execute(url, table, action, "PATCH", data)}
     else {resp = await execute(url, table, action, "POST", data)}
     return resp;
 }
@@ -86,6 +87,7 @@ export const api_access2 = async(action, routes, table, data) =>{
     else if(action.includes('insert')) {resp = await execute2(url,routes, table, action, "POST", data)}
     else if(action.includes('update')) {resp = await execute2(url,routes, table, action, "PUT", data)}
     else if(action.includes('delete')) {resp = await execute2(url,routes, table, action, "DELETE", data)}
+    else if(action.includes('patch')) {resp = await execute2(url,routes, table, action, "PATCH", data)}
     else {resp = await execute2(url,routes, table, action, "POST", data)}
     return resp;
 }

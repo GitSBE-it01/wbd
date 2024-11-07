@@ -40,7 +40,8 @@ function routes($model) {
             $mdl = $model[$table];
             if($action === 'insert' || $action === 'insert2') {
                 $response  = DB_access2::insertQuery($action,$mdl, $dt);
-            } else if($action === 'fetch' || $action=== 'fetch2') {
+            }  
+            if($action === 'fetch' || $action=== 'fetch2') {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
                         delete_cache($routes, $param);
@@ -65,6 +66,13 @@ function routes($model) {
                     $response = custom_handle($dt, $routes, $action, $model, $table);
                 }
             }
+            break;
+        case "PATCH":
+            if(!check_cache($routes, $param)) {
+                delete_cache($routes, $param);
+                cache_data($routes, $param, $dt);
+            } 
+            $response = get_cache($routes, $param);
             break;
         case "PUT":
             $mdl = $model[$table];

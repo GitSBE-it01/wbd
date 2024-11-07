@@ -495,7 +495,6 @@
     import {
         delete_cache, cache
     } from './utility/index.js';
-    await delete_cache();
     const textContArr = [
         'P1.ASSY',
         'PROD1.VC',
@@ -507,7 +506,9 @@
         'SUBCON',
         'WOODWORK',
     ]
-    textContArr.forEach(dpt=> {
+
+    for (let i=0; i<textContArr.length; i++){
+        let dpt=textContArr[i];
         let dataTbl = []
         dataProcess.forEach(dt => {
             if(dt.depmnt === dpt) {dataTbl.push(dt)}
@@ -521,10 +522,10 @@
                 }
             }
         });
-        const cached = cache(dpt, dataTbl);
-    })
+        const cached = await api_access('patch_'+dpt, 'pn_fix' ,dataTbl);
+    }
     window.open('http://informationsystem.sbe.co.id:62898/wbd/scheduler/jig_db_sched.php', '_blank');
-    /*
+/*
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(finalResult);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'finalResult');

@@ -2,7 +2,7 @@
 
 function cors() {
     header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Ori, Origin, Route, Req-Detail, cache-control,Req-Method');
 
     $allowedOrigins = [
@@ -52,7 +52,7 @@ function cors2() {
         http_response_code(403); 
         exit(); 
     }
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Ori, Origin, Route, Req-Detail, cache-control,Req-Method');
 
     if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -61,7 +61,7 @@ function cors2() {
     }
 */
     header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Ori, Origin, Route, Req-Detail, cache-control,Req-Method');
 
     $origin = isset($_SERVER['HTTP_ORI']) ? $_SERVER['HTTP_ORI'] : '';

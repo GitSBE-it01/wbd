@@ -84,8 +84,6 @@ function parent_item_dev() {
         }
     }
     unset($parent);
-    /*
-
     $query = 'INSERT INTO db_wbd.id_dtl_parent(
 	    code,
 	    parent,
@@ -101,21 +99,69 @@ function parent_item_dev() {
 	    material,
 	    bom_release_date,
 	    age,
-        status)
+        status
+        )
        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     ';
-echo '<pre>';
-print_r(array_slice($result,0,5));
-echo '</pre>';
-    $insert = DB::execQuery($query,'sssssssssssssis', $result);
-    echo $insert;
-    if($insert === 'success'){
-        $msg = $insert." inserting ".count($result)." data utk tanggal ".date('Y-m-d').'</br>';
+    $query_update = 'UPDATE db_wbd.id_dtl_parent SET
+	    parent=?,
+	    parent_desc=?,
+	    comp=?,
+	    comp_desc=?,
+	    status_item_comp=?,
+	    buyer_planner=?,
+	    status_isir=?,
+	    need_isir=?,
+	    finishing=?,
+	    construction=?,
+	    material=?,
+	    bom_release_date=?,
+	    age=?,
+        status=?
+        WHERE 
+            code = ?
+    ';
+    echo '<pre>';
+    print_r(array_slice($result,0,5));
+    echo '</pre>';
+    $cek = DB::execQuery('SELECT * FROM db_wbd.id_dtl_parent WHERE status="open"', '');
+    $insert = [];
+    $update =[];
+    foreach($result as $set) {
+        $ck = array_filter($cek, function($cc) use($set) {
+            return $cc['code'] === $set['code'];
+        });
+        if(count($ck) === 0) {
+            $insert[] = $set;
+        }
     }
-    
-    echo $msg.'</br>jumlah data item dengan comp item develop = '.count($result);
-*/
+    foreach($cek as $set) {
+        $ck = array_filter($result, function($cc) use($set) {
+            return $cc['code'] === $set['code'];
+        });
+        if(count($ck) === 0) {
+            $dd = $set;
+            $dd['status'] ='close';
+            $update[] = $set;
+        }
+    }
 
+    $msg = '';
+    if(count($insert)>0) {
+        $run_ins = DB::execQuery($query,'sssssssssssssis', $insert);
+        echo $run_ins;
+        if($run_ins === 'success'){
+            $msg = $run_ins." inserting ".count($insert)." data utk tanggal ".date('Y-m-d').'</br>';
+        }
+    }
+    if(count($update)>0) {
+        $run_upd = DB::execQuery($query_update,'ssssssssssssiss', $update);
+        echo $run_upd;
+        if($run_upd === 'success'){
+            $msg = $run_upd." updateing ".count($update)." data utk tanggal ".date('Y-m-d').'</br>';
+        }
+    }
+    echo $msg.'</br>jumlah data item dengan comp item develop = '.count($result);
     echo "
     <head>
         <title>item develop</title>
@@ -125,13 +171,17 @@ echo '</pre>';
     <script>
         const result =".json_encode($result).";
         console.log(result);
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(result);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'item_dev');
-        XLSX.writeFile(workbook, 'data.xlsx')
+
     </script>
     </body>";
     unset($result);
     return;
 }
+
+/*
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(result);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'item_dev');
+    XLSX.writeFile(workbook, 'data.xlsx')
+*/
 ?>

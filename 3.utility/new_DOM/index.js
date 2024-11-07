@@ -12,7 +12,6 @@ export class DOM2 {
         this.userData = this.auth();
         this.separator = sprtr;
         this.dtbase = [];
-        this.dtshow = [];
         this.active_link();
         this.init(page_role);
         this.td_input_default();
@@ -20,6 +19,396 @@ export class DOM2 {
     
     load_toggle() {
         this.load.classList.toggle('hidden');
+    }
+
+    async view_init(type, main_id, data) {
+        if(!data.filter) {
+            data.forEach(dt=>{
+                const keys = Object.keys(dt);
+                let fltr = '';
+                keys.forEach(d2=>{
+                    fltr += dt[`${d2}`]+'--';
+                })
+                dt.filter = fltr;
+            })
+        }
+        if(type === 'table') {
+            this.dtbase[`detail__${main_id}`] = {
+                data: data,
+                show: data,
+                filter: `${main_id}_search`,
+                filter_btn: `${main_id}_search_btn`,
+                id: `${main_id}_table`,
+                page_id: `${main_id}_page`,
+                curr_page: 1
+            }
+            await this.table_parse(this.dtbase[`detail__${main_id}`]);
+            await this.pagination_init(this.dtbase[`detail__${main_id}`]);
+            await this.pagination_response(this.dtbase[`detail__${main_id}`]);
+            await this.filter_key(this.dtbase[`detail__${main_id}`]);
+            await this.filter_table(this.dtbase[`detail__${main_id}`]);
+        }
+    }
+
+    async filter_key(arr_dt, parent=document){
+        let search = parent.getElementById(arr_dt.filter);
+        let btn = parent.getElementById(arr_dt.filter_btn);
+        if(btn && search){
+            search.addEventListener('keyup', async(e)=>{
+                if(e.key === 'Enter') {
+                    btn.click();
+                }
+                return;
+            })
+        }
+    }
+
+    async filter_table(arr_dt, parent = document) {
+        let btn = parent.getElementById(arr_dt.filter_btn);
+        let search = parent.getElementById(arr_dt.filter);
+        if(btn && search) {
+            btn.addEventListener('click', async(e)=> {
+                if(search.value !== '') {
+                    arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
+                } else {
+                    arr_dt.show = arr_dt.data;
+                }
+                arr_dt.curr_page =1;
+                await this.table_parse(arr_dt);
+                await this.pagination_init(arr_dt);
+                return;
+            })
+        }
+    }
+
+    async table_parse(arr_dt, dsbl=false, parent=document) {
+        let table = parent.getElementById(arr_dt.id);
+        if(table) {
+            const tr = table.querySelectorAll('tbody tr');
+            const tr_cnt = tr.length - 1; // -1 utk template
+            let ii = arr_dt.curr_page ===1 ? 0 : (arr_dt.curr_page-1)* tr_cnt;
+            for(let i=0; i<tr_cnt; i++) {
+                let dt = arr_dt.show[ii];
+                if(dt) {
+                    const tr = table.querySelector(`[data-id="${arr_dt.id}__${i}"]`);
+                    tr.setAttribute('data-value', ii);
+                    if(tr.classList.contains('hidden')) {
+                        DOM2.class_toggle(tr, ['hidden'], false);
+                    }
+                    const td = tr.querySelectorAll('[name]');
+                    td.forEach(d2=>{
+                        const field = d2.getAttribute('name');
+                        const curr = d2.hasAttribute('disabled') ? true : false;
+                        d2.disabled = false;
+                        d2.value = dt[`${field}`] ? dt[`${field}`] :'';
+                        if(tr.querySelector(`[for = "${d2.id}"]`) !== null) {
+                            tr.querySelector(`[for = "${d2.id}"]`).textContent = dt[`${field}`] ? dt[`${field}`] :'';
+                        }
+                        if(dsbl) {
+                            d2.disabled = false;
+                        } else {
+                            d2.disabled = curr;
+                        }
+                    })
+                } else {
+                    const tr = table.querySelector(`[data-id="${arr_dt.id}__${i}"]`);
+                    tr.removeAttribute('data-value');
+                    if(!tr.classList.contains('hidden')) {
+                        DOM2.class_toggle(tr, ['hidden']);
+                    }
+                    const td = tr.querySelectorAll('[name]');
+                    td.forEach(d2=>{
+                        const curr = d2.hasAttribute('disabled') ? true : false;
+                        d2.disabled = false;
+                        d2.value ='';
+                        if(tr.querySelector(`[for = "${d2.id}"]`) !== null) {
+                            tr.querySelector(`[for = "${d2.id}"]`).textContent ='';
+                        }
+                        if(dsbl) {
+                            d2.disabled = false;
+                        } else {
+                            d2.disabled = curr;
+                        }
+                    })
+
+                }
+                ii++;
+            }
+        } 
+        return;
+    }
+
+    async pagination_init(arr_dt, parent=document) {
+        let mute = [
+            'hover:font-bold',
+            'hover:bg-blue-700',
+            'hover:text-white',
+            'hover:border-black',
+            'cursor-pointer'
+        ];
+        let dflt = 'border-2 border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200';
+        let active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
+
+        let table = parent.getElementById(arr_dt.id);
+        const dt_cnt = arr_dt.show.length;
+        const tr = table.querySelectorAll('tbody tr');
+        const tr_cnt = tr.length - 1; // -1 utk template
+        const max_page = Math.ceil(dt_cnt/tr_cnt);
+        const maxi = max_page +1 
+        let page_node = parent.getElementById(arr_dt.page_id);
+        const pagi = page_node.querySelectorAll('[data-group]');
+        pagi.forEach(dt=>{
+            const id_pg = dt.getAttribute('data-id');
+            dt.setAttribute('data-page', `${id_pg}`); 
+            dt.disabled = false;
+            dt.textContent = id_pg;
+            dt.setAttribute('class', dflt);
+            const pg = dt.getAttribute('data-page');
+            const pg_val = parseInt(pg);
+            if(id_pg === '1') {
+                dt.setAttribute('data-pagi','active');
+                active.forEach(cls=>{
+                    dt.classList.toggle(cls);   
+                })
+            }
+            if(!dt.classList.contains("hidden")) {
+                dt.classList.toggle('hidden');
+            }
+            if(max_page<8) {
+                if(pg_val < maxi) {
+                    dt.textContent = id_pg;
+                    if(dt.classList.contains('hidden')){
+                        dt.classList.toggle('hidden');
+                    }
+                }
+            } else {
+                if(pg==='6') {
+                    dt.disabled = true;
+                    dt.textContent="...";
+                    mute.forEach(cls=>{
+                        if(!dt.classList.contains(cls)) {
+                            dt.classList.toggle(cls);
+                        }
+                    })
+                };
+                if(pg==='7'){
+                    dt.setAttribute('data-page', `${max_page}`); 
+                    dt.textContent=max_page;
+                }
+                if(dt.classList.contains('hidden') ){
+                    dt.classList.toggle('hidden');
+                }
+            }
+        })
+        return;
+    }
+
+    
+    async pagination_response(arr_dt, parent=document) {
+        let mute = [
+            'hover:font-bold',
+            'hover:bg-blue-700',
+            'hover:text-white',
+            'hover:border-black',
+            'cursor-pointer'
+        ];
+        let active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
+        let page_node = parent.getElementById(arr_dt.page_id);
+        if(page_node) {
+            page_node.addEventListener('click', async (event) => {
+                if(event.target.getAttribute('data-group') === arr_dt.page_id) {
+                    arr_dt.curr_page = parseInt(event.target.getAttribute('data-page'));
+                    await this.table_parse(arr_dt);
+                    const div = event.target.closest('div');
+                    const pagi = div.querySelectorAll('[data-id]');
+                    const max = div.querySelector('[data-id = "7"]').getAttribute('data-page');
+
+                    pagi.forEach(dt=>{
+                        const id = dt.getAttribute('data-id');
+                        if(dt.hasAttribute('data-pagi')) {dt.removeAttribute('data-pagi')}
+                        if(!dt.disabled) {
+                            active.forEach(cls=>{
+                                if(cls !== 'bg-slate-200' && dt.classList.contains(cls)) {
+                                    dt.classList.toggle(cls);
+                                }
+                                if(cls === 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                    dt.classList.toggle(cls);
+                                }
+                            })
+                            mute.forEach(cls=>{
+                                if(!dt.classList.contains(cls)) {
+                                    dt.classList.toggle(cls);
+                                }
+                            })
+                        }
+                        if(id==="1") {
+                            if(arr_dt.curr_page === 1) {
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                        }
+                        if(id==="2"){
+                            if(arr_dt.curr_page === 2) {
+                                dt.disabled = false;
+                                dt.textContent="2";
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                            if(parseInt(max)>8) {
+                                if(arr_dt.curr_page<=4 && dt.textContent!=="2") {
+                                    dt.disabled = false;
+                                    dt.textContent="2";
+                                    dt.setAttribute('data-page', "2");
+                                }
+                                if(arr_dt.curr_page>4 && dt.textContent!=="...") {
+                                    dt.disabled = true;
+                                    dt.textContent = "...";
+                                    mute.forEach(cls=>{
+                                        if(dt.classList.contains(cls)) {
+                                            dt.classList.toggle(cls);
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                        if(id==="3"){
+                            if(arr_dt.curr_page === 3) {
+                                dt.textContent="3";
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                            if(arr_dt.curr_page >3 && arr_dt.curr_page<=(parseInt(max)-4)) {
+                                dt.setAttribute('data-page', `${arr_dt.curr_page-1}`);
+                                dt.textContent = arr_dt.curr_page-1;
+                            }
+                            if(arr_dt.curr_page>(parseInt(max)-4)) {
+                                dt.setAttribute('data-page', `${parseInt(max)-4}`);
+                                dt.textContent = parseInt(max)-4;
+                            }
+                            if(arr_dt.curr_page<5) {
+                                dt.setAttribute('data-page', "3");
+                                dt.textContent = 3;
+                            }
+                        }
+                        if(id==="4"){
+                            dt.setAttribute('data-pagi', 'active');
+                            if(arr_dt.curr_page<(parseInt(max)-2) && arr_dt.curr_page>3) {
+                                dt.textContent=arr_dt.curr_page;
+                                dt.setAttribute('data-page', `${arr_dt.curr_page}`);
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            } 
+                            if(arr_dt.curr_page<4) {
+                                dt.textContent=4;
+                                dt.setAttribute('data-page', "4");
+                            }
+                            if(arr_dt.curr_page>=(parseInt(max)-1) ) {
+                                const curPage = parseInt(max)-3;
+                                dt.textContent= curPage;
+                                dt.setAttribute('data-page', `${curPage}`);
+                            }
+                        }
+                        if(id==="5"){
+                            if(arr_dt.curr_page === parseInt(max)-2) {
+                                const curPage = parseInt(max)-2;
+                                dt.textContent = curPage;
+                                dt.setAttribute('data-page', `${curPage}`);
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                            if(arr_dt.curr_page<(parseInt(max)-2) && arr_dt.curr_page>4) {
+                                dt.setAttribute('data-page', `${parseInt(arr_dt.curr_page)+1}`);
+                                dt.textContent = parseInt(arr_dt.curr_page)+1;
+                            }
+                            if(arr_dt.curr_page>=(parseInt(max)-2)) {
+                                dt.setAttribute('data-page', `${parseInt(max)-2}`);
+                                dt.textContent = parseInt(max)-2;
+                            }
+                            if(arr_dt.curr_page<5) {
+                                dt.setAttribute('data-page', "5");
+                                dt.textContent = 5;
+                            }
+                        }
+                        if(id==="6"){
+                            if(arr_dt.curr_page === (parseInt(max)-1)) {
+                                dt.disabled = false;
+                                dt.textContent= arr_dt.curr_page;
+                                dt.setAttribute('data-page', `${arr_dt.curr_page}`);
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                            if(parseInt(max)>8) {
+                                if(arr_dt.curr_page<(parseInt(max)-3) && dt.textContent!=="...") {
+                                    dt.disabled = true;
+                                    dt.textContent = "...";
+                                    mute.forEach(cls=>{
+                                        if(dt.classList.contains(cls)) {
+                                            dt.classList.toggle(cls);
+                                        }
+                                    })
+                                }
+            
+                                if(arr_dt.curr_page>=(parseInt(max)-3)) {
+                                    dt.disabled = false;
+                                    const curPage = parseInt(max)-1;
+                                    dt.textContent= curPage;
+                                    dt.setAttribute('data-page', `${curPage}`);
+                                }
+                            }
+                        }
+                        if(id==="7") {
+                            if(arr_dt.curr_page === parseInt(max)) {
+                                active.forEach(cls=>{
+                                    if(cls === 'bg-slate-200'&& dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                    if(cls !== 'bg-slate-200' && !dt.classList.contains(cls)) {
+                                        dt.classList.toggle(cls);
+                                    }
+                                })
+                            }
+                        }
+                    })
+                    return;
+                }
+            })
+        }
     }
 
     static class_toggle(key, cls, check=true, parent=document) {
@@ -246,64 +635,7 @@ export class DOM2 {
         return;
     }
 
-    parse_input(key, data, dsbl=false, parent=document) {
-        let target = '';
-        if(key.nodeType) {
-            target = key;
-        } else {
-            target = parent.querySelector(key);
-        }
-        if(target.tagName === 'TABLE') {
-            let count = 0;
-            const id_tbl = target.id;
-            const dt_cnt = data.length;
-            if(dt_cnt>50) {
-                for(let i=0; i<49; i++) {
-                    let dt = data[i];
-                    console.log(dt);
-                    const tr = target.querySelector(`[data-id="${id_tbl}__${count}"]`);
-                    if(tr.classList.contains('hidden')) {
-                        DOM2.class_toggle(tr, ['hidden']);
-                    }
-                    DOM2.class_toggle(tr, ['hidden']);
-                    const td = tr.querySelectorAll('[name]');
-                    td.forEach(d2=>{
-                        const field = d2.getAttribute('name');
-                        const curr = d2.hasAttribute('disabled') ? true : false;
-                        d2.disabled = false;
-                        d2.value = dt[`${field}`] ? dt[`${field}`] :'';
-                        if(target.querySelector(`[for = "${d2.id}"]`) !== null) {
-                            target.querySelector(`[for = "${d2.id}"]`).value = dt[`${field}`] ? dt[`${field}`] :'';
-                        }
-                        if(dsbl) {
-                            d2.disabled = false;
-                        } else {
-                            d2.disabled = curr;
-                        }
-                    })
-                }
-            }
-            return;
-        } 
-        if(data.length === 1) { 
-            const inp_name = target.querySelectorAll('[name]');
-            inp_name.forEach(dt=>{
-                const field = dt.getAttribute('name');
-                const curr = dt.hasAttribute('disabled') ? true : false;
-                dt.disabled = false;
-                dt.value = data[0][`${field}`] ? data[0][`${field}`] :'';
-                if(target.querySelector(`[for = "${dt.id}"]`) !== null && dt.classList.contains('hidden')) {
-                    target.querySelector(`[for = "${dt.id}"]`).value = data[0][`${field}`] ? data[0][`${field}`] :'';
-                }
-                if(dsbl) {
-                    dt.disabled = false;
-                } else {
-                    dt.disabled = curr;
-                }
-            })
-        }
-        return;
-    }
+   
 
     func(type, selector, callback, parent=document) {
         parent.addEventListener(type, e=>{
@@ -312,4 +644,5 @@ export class DOM2 {
             }
         })
     }
-}
+
+    }

@@ -16,7 +16,7 @@ function navi($navArray) {
     $home = Comp::div([
         "class"=>'list-none flex justify-center items-center w-[7vw] h-full hover:pt-2 hover:bg-slate-700 duration-200 pt-2 ease-in-out hover:border-b-4 hover:border-blue-500',
         'body'=>Comp::link([
-            'href'=>'http://informationsystem.sbe.co.id:8080/sbe/index.php',
+            'href'=>'http://informationsystem.sbe.co.id:62898/sbe/index.php',
             'body'=>Comp::button([
                 'class'=>'home h-8 w-8 bg-transparent'
             ])
