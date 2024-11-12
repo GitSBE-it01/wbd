@@ -89,9 +89,9 @@ if(isset($_SERVER['CONTENT_TYPE']) && $_SERVER['CONTENT_TYPE'] === 'application/
 }
 
 /*
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(data_wo_sbe4);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'data_intersite');
-        XLSX.writeFile(workbook, 'data.xlsx')
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data_wo_sbe4);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'data_intersite');
+    XLSX.writeFile(workbook, 'data.xlsx')
 */
 ?>

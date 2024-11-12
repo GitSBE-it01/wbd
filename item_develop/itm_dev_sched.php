@@ -5,7 +5,6 @@ require_once 'D:/xampp/htdocs/wbd/2.backend/middleware/index.php';
 require_once 'D:/xampp/htdocs/wbd/2.backend/model/index.php';
 
 require_once 'proses/cek_comp.php';
-require_once 'proses/cek_ebom.php';
 require_once 'proses/cek_parent.php';
 
 echo "====================================================================</br>";

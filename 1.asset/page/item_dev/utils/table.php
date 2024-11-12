@@ -1,24 +1,25 @@
 <?php
 // index page
 $main_table = [
-    'id'=> 'pick_table', 
+    'id'=> 'idev_table', 
     'class'=>'w-full scrollable-y',
     'row_count' =>50,
     'tr'=>['class'=>'hidden'],
     'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden','name'=>'code'],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Komponen',
+                'body'=>'Parent',
                 'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
             ],
             'td'=>[
-                'data_attr'=>['field::komponen'],
+                'data_attr'=>['field::parent'],
                 'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
             ],
             'inp'=>[
                 'type_attr'=>'text', 
-                'name'=> 'komponen', 
+                'name'=> 'parent', 
                 'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
@@ -26,153 +27,599 @@ $main_table = [
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Deskripsi',
+                'body'=>'Parent Desc',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::_desc2'],
+                'data_attr'=>['field::parent_desc'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> '_desc2', 
+                'name'=> 'parent_desc', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Department',
+                'body'=>'Component',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::depmnt'],
+                'data_attr'=>['field::comp'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'depmnt', 
+                'name'=> 'comp', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Rel Date',
+                'body'=>'Comp Desc',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::release_date'],
+                'data_attr'=>['field::comp_desc'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'release_date', 
+                'name'=> 'comp_desc', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Due Date',
+                'body'=>'Status Item Comp',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::due_date'],
+                'data_attr'=>['field::status_item_comp'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'due_date', 
+                'name'=> 'status_item_comp', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Lokasi',
+                'body'=>'Buyer/Planner',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::lokasi'],
+                'data_attr'=>['field::buyer_planner'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'lokasi', 
+                'name'=> 'buyer_planner', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'ID / Lot',
+                'body'=>'Status ISIR',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::lot__id'],
+                'data_attr'=>['field::status_isir'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'lot__id', 
+                'name'=> 'status_isir', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Qty ID / Lot',
+                'body'=>'Need ISIR',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::qty'],
+                'data_attr'=>['field::need_isir'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'qty', 
+                'name'=> 'need_isir', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Nasehat',
+                'body'=>'Finishing',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::nasehat'],
+                'data_attr'=>['field::finishing'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'nasehat', 
+                'name'=> 'finishing', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
         [
             'type'=>'input',
             'th'=>[
-                'body'=>'Pick Now',
+                'body'=>'Construction',
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::pick_now'],
+                'data_attr'=>['field::construction'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> 'pick_now', 
+                'name'=> 'construction', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Material',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::material'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'material', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'BOM Rel Date',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::bom_release_date'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'bom_release_date', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Umur (hari)',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::age'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'age', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Status Item Dev',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::status'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'status', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Close Date',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::close_date'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'close_date', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+    ]
+];
+
+$main_table2 = [
+    'id'=> 'master_table', 
+    'class'=>'w-full scrollable-y hidden',
+    'row_count' =>50,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden','name'=>'id'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Item Number',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_number'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'item_number', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Description1',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::desc1'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'desc1', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Description2',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::desc2'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'desc2', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Item Site',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_site'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'item_site', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Item Status',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_status'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'item_status', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Prod Line',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::prod_line'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'prod_line', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'P/M Code',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::pm_code'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'pm_code', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Buyer / Planner',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::buyer'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'buyer', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Routing',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::rout_cek'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'rout_cek', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'BOM',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::bom_cek'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'bom_cek', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'added',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::added'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'added', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Status',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::status'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'status', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Close Date',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::close_date'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'close_date', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ]
+    ]
+];
+
+$tracker_table = [
+    'id'=> 'tracker_table', 
+    'class'=>'w-full scrollable-y',
+    'row_count' =>50,
+    'tr'=>['class'=>'hidden'],
+    'data_array'=> [
+        ['type'=>'hidden', 'type_attr'=>'hidden','name'=>'id'],
+        ['type'=>'hidden', 'type_attr'=>'hidden','name'=>'id_parent'],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Item Number',
+                'class'=>'bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20',
+            ],
+            'td'=>[
+                'data_attr'=>['field::item_number'],
+                'class'=>'bg-slate-400 whitespace-normal border-2 text-center text-sm font-semibold border-black p-2 sticky left-0 z-10'
+            ],
+            'inp'=>[
+                'type_attr'=>'text', 
+                'name'=> 'item_number', 
+                'disable'=>'',
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Site',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::site'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'site', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Problem',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::problem'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'problem', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Action',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::action'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'action', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'PIC',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::pic'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'pic', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'ETC',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::etc'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'etc', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'Status',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::status'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'disable'=>'',
+                'name'=> 'status', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -193,73 +640,6 @@ $main_table = [
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
-        [
-            'type'=>'input',
-            'th'=>[
-                'body'=>'Supplier / ID lama',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
-            ],
-            'td'=>[
-                'data_attr'=>['field::old_id'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
-            ],
-            'inp'=>[
-                'type'=>'text', 
-                'disable'=>'',
-                'name'=> 'old_id', 
-                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
-        ],
-        [
-            'type'=>'input',
-            'th'=>[
-                'body'=>'ID baru',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
-            ],
-            'td'=>[
-                'data_attr'=>['field::id_new'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
-            ],
-            'inp'=>[
-                'type'=>'text', 
-                'disable'=>'',
-                'name'=> 'id_new', 
-                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
-        ],
-        [
-            'type'=>'input',
-            'th'=>[
-                'body'=>'All Lot',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
-            ],
-            'td'=>[
-                'data_attr'=>['field::all_lot'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
-            ],
-            'inp'=>[
-                'type'=>'text', 
-                'disable'=>'',
-                'name'=> 'all_lot', 
-                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
-        ],
-        [
-            'type'=>'input',
-            'th'=>[
-                'body'=>'PIC WH',
-                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
-            ],
-            'td'=>[
-                'data_attr'=>['field::pic'],
-                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
-            ],
-            'inp'=>[
-                'type'=>'text', 
-                'disable'=>'',
-                'name'=> 'pic', 
-                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
-            ]
-        ],
+
     ]
 ];

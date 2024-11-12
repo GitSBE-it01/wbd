@@ -13,7 +13,7 @@ $nav_array = [
         [
             'link'=>[
                 'href'=> 'tracker.html', 
-                'body'=> 'Action Tracker Item Dev'
+                'body'=> 'Action Tracker'
             ]
         ],
     ]

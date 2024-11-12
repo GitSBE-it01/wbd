@@ -21,8 +21,8 @@ export class DOM2 {
         this.load.classList.toggle('hidden');
     }
 
-    async view_init(type, main_id, data) {
-        if(!data.filter) {
+    async view_init(type, main_id, data, filter='') {
+        if(!data[0]['filter']) {
             data.forEach(dt=>{
                 const keys = Object.keys(dt);
                 let fltr = '';
@@ -31,22 +31,41 @@ export class DOM2 {
                 })
                 dt.filter = fltr;
             })
+            console.log(data);
         }
         if(type === 'table') {
-            this.dtbase[`detail__${main_id}`] = {
-                data: data,
-                show: data,
-                filter: `${main_id}_search`,
-                filter_btn: `${main_id}_search_btn`,
-                id: `${main_id}_table`,
-                page_id: `${main_id}_page`,
-                curr_page: 1
+            if(filter === '') {
+                this.dtbase[`detail__${main_id}`] = {
+                    data: data,
+                    show: data,
+                    filter: `${main_id}_search`,
+                    filter_btn: `${main_id}_search_btn`,
+                    id: `${main_id}_table`,
+                    page_id: `${main_id}_page`,
+                    curr_page: 1
+                }
+                await this.table_parse(this.dtbase[`detail__${main_id}`]);
+                await this.pagination_init(this.dtbase[`detail__${main_id}`]);
+                await this.pagination_response(this.dtbase[`detail__${main_id}`]);
+                await this.filter_key(this.dtbase[`detail__${main_id}`]);
+                await this.filter_table(this.dtbase[`detail__${main_id}`]);
+            } else {
+                this.dtbase[`detail__${filter}`] = {
+                    data: data,
+                    show: data,
+                    filter: `${main_id}_search`,
+                    filter_btn: `${main_id}_search_btn`,
+                    id: `${main_id}_table`,
+                    page_id: `${main_id}_page`,
+                    curr_page: 1
+                }
+                await this.table_parse(this.dtbase[`detail__${filter}`]);
+                await this.pagination_init(this.dtbase[`detail__${filter}`]);
+                await this.pagination_response(this.dtbase[`detail__${filter}`]);
+                await this.filter_key(this.dtbase[`detail__${filter}`]);
+                await this.filter_table(this.dtbase[`detail__${filter}`]);
             }
-            await this.table_parse(this.dtbase[`detail__${main_id}`]);
-            await this.pagination_init(this.dtbase[`detail__${main_id}`]);
-            await this.pagination_response(this.dtbase[`detail__${main_id}`]);
-            await this.filter_key(this.dtbase[`detail__${main_id}`]);
-            await this.filter_table(this.dtbase[`detail__${main_id}`]);
+            return;
         }
     }
 
