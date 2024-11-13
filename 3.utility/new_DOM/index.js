@@ -12,6 +12,7 @@ export class DOM2 {
         this.userData = this.auth();
         this.separator = sprtr;
         this.dtbase = [];
+        this.counter = 0;
         this.active_link();
         this.init(page_role);
         this.td_input_default();
@@ -21,8 +22,8 @@ export class DOM2 {
         this.load.classList.toggle('hidden');
     }
 
-    async view_init(type, main_id, data, filter='') {
-        if(!data[0]['filter']) {
+    async view_init({type, main_id, data, filter='', dtlist_key=[], post='upper'}) {
+        if(data.length>0 && !data[0]['filter']) {
             data.forEach(dt=>{
                 const keys = Object.keys(dt);
                 let fltr = '';
@@ -31,40 +32,46 @@ export class DOM2 {
                 })
                 dt.filter = fltr;
             })
-            console.log(data);
+        }
+
+        let name_db = '';
+        if(filter === '') {
+            name_db = main_id;
+        } else {
+            name_db = filter
+        }
+
+        if(!this.dtbase[`detail__${name_db}`]) {
+            this.dtbase[`detail__${name_db}`] = {
+                data: data,
+                show: data,
+                filter: `${main_id}_search`,
+                filter_btn: `${main_id}_search_btn`,
+                table_id: `${main_id}_table`,
+                page_id: `${main_id}_page`,
+                dtlist_id: `${main_id}_list`,
+                dtlist: dtlist_key,
+                add_id: `${main_id}_add_btn`,
+                add_row: post,
+                curr_page: 1
+            }
+        } else {
+            if(!this.dtbase[`detail__${name_db}`]['dtlist'] || this.dtbase[`detail__${name_db}`]['dtlist']  !== dtlist_key) {
+                this.dtbase[`detail__${name_db}`]['dtlist']= dtlist_key;
+            }
         }
         if(type === 'table') {
-            if(filter === '') {
-                this.dtbase[`detail__${main_id}`] = {
-                    data: data,
-                    show: data,
-                    filter: `${main_id}_search`,
-                    filter_btn: `${main_id}_search_btn`,
-                    id: `${main_id}_table`,
-                    page_id: `${main_id}_page`,
-                    curr_page: 1
-                }
-                await this.table_parse(this.dtbase[`detail__${main_id}`]);
-                await this.pagination_init(this.dtbase[`detail__${main_id}`]);
-                await this.pagination_response(this.dtbase[`detail__${main_id}`]);
-                await this.filter_key(this.dtbase[`detail__${main_id}`]);
-                await this.filter_table(this.dtbase[`detail__${main_id}`]);
-            } else {
-                this.dtbase[`detail__${filter}`] = {
-                    data: data,
-                    show: data,
-                    filter: `${main_id}_search`,
-                    filter_btn: `${main_id}_search_btn`,
-                    id: `${main_id}_table`,
-                    page_id: `${main_id}_page`,
-                    curr_page: 1
-                }
-                await this.table_parse(this.dtbase[`detail__${filter}`]);
-                await this.pagination_init(this.dtbase[`detail__${filter}`]);
-                await this.pagination_response(this.dtbase[`detail__${filter}`]);
-                await this.filter_key(this.dtbase[`detail__${filter}`]);
-                await this.filter_table(this.dtbase[`detail__${filter}`]);
-            }
+            await this.table_parse(this.dtbase[`detail__${name_db}`]);
+            await this.pagination_init(this.dtbase[`detail__${name_db}`]);
+            await this.pagination_response(this.dtbase[`detail__${name_db}`]);
+            await this.filter_key(this.dtbase[`detail__${name_db}`]);
+            await this.filter_table(this.dtbase[`detail__${name_db}`]);
+            this.counter = 0;
+            await this.table_new_row(this.dtbase[`detail__${name_db}`]);
+            return;
+        }
+        if(type === 'datalist') {
+            await this.parse_dtlist(this.dtbase[`detail__${name_db}`]);
             return;
         }
     }
@@ -101,7 +108,7 @@ export class DOM2 {
     }
 
     async table_parse(arr_dt, dsbl=false, parent=document) {
-        let table = parent.getElementById(arr_dt.id);
+        let table = parent.getElementById(arr_dt.table_id);
         if(table) {
             const tr = table.querySelectorAll('tbody tr');
             const tr_cnt = tr.length - 1; // -1 utk template
@@ -109,7 +116,7 @@ export class DOM2 {
             for(let i=0; i<tr_cnt; i++) {
                 let dt = arr_dt.show[ii];
                 if(dt) {
-                    const tr = table.querySelector(`[data-id="${arr_dt.id}__${i}"]`);
+                    const tr = table.querySelector(`[data-id="${arr_dt.table_id}__${i}"]`);
                     tr.setAttribute('data-value', ii);
                     if(tr.classList.contains('hidden')) {
                         DOM2.class_toggle(tr, ['hidden'], false);
@@ -130,7 +137,7 @@ export class DOM2 {
                         }
                     })
                 } else {
-                    const tr = table.querySelector(`[data-id="${arr_dt.id}__${i}"]`);
+                    const tr = table.querySelector(`[data-id="${arr_dt.table_id}__${i}"]`);
                     tr.removeAttribute('data-value');
                     if(!tr.classList.contains('hidden')) {
                         DOM2.class_toggle(tr, ['hidden']);
@@ -168,7 +175,7 @@ export class DOM2 {
         let dflt = 'border-2 border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200';
         let active = ['text-white', 'font-bold', 'bg-blue-700', 'bg-slate-200'];
 
-        let table = parent.getElementById(arr_dt.id);
+        let table = parent.getElementById(arr_dt.table_id);
         const dt_cnt = arr_dt.show.length;
         const tr = table.querySelectorAll('tbody tr');
         const tr_cnt = tr.length - 1; // -1 utk template
@@ -488,43 +495,36 @@ export class DOM2 {
         return;
     }
 
-    async parse_dtlist(dbase) {
+    async parse_dtlist(arr_dt) {
         try{
-            for (let i=0; i<dbase.length; i++) {
-                let dt = dbase[i];
-                const dtlist = document.createElement('datalist');
-                dtlist.id = dt.id_dtlist;
-                this.dtbase[`${dt.db}`].forEach(dd=>{
-                    const key = Object.keys(dd);
-                    let defaultVal = '';
-                    let valu = '';
-                    if(key.length>0) {
-                        key.forEach(dt2=>{
-                            let cek = dd[dt2] ? dd[dt2].toString().trim() : "";
-                            defaultVal +=  cek + this.separator.repeat(2);
-                        })
-                        valu = defaultVal.replace(new RegExp(this.separator + "+$"), "");
-                    } else {
-                        valu = dd;
-                    }
-                    const option = document.createElement('option');
-                    if(!dt.keyPick || dt.keyPick === '') {
-                        option.value = valu;
-                        option.textContent = valu;
-                    } else {
-                        let val = ''
-                        dt.keyPick.forEach(dt2=>{
-                            let cek = dd[dt2] ? dd[dt2].toString().trim() : "";
-                            val += cek + this.separator.repeat(2);
-                        })
-                        val = val.replace(new RegExp(this.separator + "+$"), "");
-                        option.value = val;
-                        option.textContent = val;
-                    }
-                    dtlist.appendChild(option);
+            const dtlist = document.createElement('datalist');
+            dtlist.id = arr_dt.dtlist_id;
+            let key =[];
+            if(arr_dt['dtlist'].length >0) {
+                arr_dt['dtlist'].forEach(dt=>{
+                    key.push(dt);
                 })
-                this.body.appendChild(dtlist);
+            } else {
+                key = Object.keys(arr_dt['data'][0]);
             }
+            arr_dt.data.forEach(dd=>{
+                let defaultVal = '';
+                let valu = '';
+                if(key.length>0) {
+                    key.forEach(dt2=>{
+                        let cek = dd[dt2] ? dd[dt2].toString().trim() : "";
+                        defaultVal +=  cek + this.separator.repeat(2);
+                    })
+                    valu = defaultVal.replace(new RegExp(this.separator + "+$"), "");
+                } else {
+                    valu = dd;
+                }
+                const option = document.createElement('option');
+                option.value = valu;
+                option.textContent = valu;
+                dtlist.appendChild(option);
+            })
+            this.body.appendChild(dtlist);
             return;
         } catch(error){
             console.error('error ', error);
@@ -654,7 +654,69 @@ export class DOM2 {
         return;
     }
 
-   
+   async table_clear(arr_dt) {
+        const table = document.getElementById(arr_dt.table_id);
+        const all_tr = table.querySelectorAll('tbody tr');
+        all_tr.forEach(dt=>{
+            if(!dt.id.includes('template')) {
+                const td = dt.querySelectorAll('tr');
+                if(td.hasAttribute('data-value')) {
+                    td.removeAttribute('data-value');
+                    const inpt = td.querySelectorAll('input');
+                    inpt.forEach(dd=>{
+                        dd.value = '';
+                    })
+                    const label = td.querySelectorAll('label');
+                    label.forEach(dd=>{
+                        dd.textContent = '';
+                    })
+                    const sel = td.querySelectorAll('select');
+                    sel.forEach(dd=>{
+                        dd.value = '';
+                    })
+                    if(!td.classList.contains('hidden')) {
+                        td.classList.add('hidden');
+                    }
+                }
+            }
+        })
+        return;
+   }
+
+   async table_new_row(arr_dt) {
+        let btn = parent.getElementById(arr_dt.filter_btn);
+        if(btn) {
+            btn.addEventListener('click', async()=>{
+                const template = document.getElementById(arr_dt.table_id+'__template');
+                const new_row = template.cloneNode(true);
+                new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${arr_dt.counter}`);
+                new_row.setAttribute('data-change', `new`);
+                const name = new_row.querySelectorAll('[name]');
+                name.forEach(dt=>{
+                    if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
+                        const name = dt.getAttribute('name');
+                        let td = '';
+                        if(dt.disabled) {dt.disabled = false;}
+                        if(dt.closest('td') !== null) {
+                            td = dt.closest('td');
+                            const label = td.querySelector('label');
+                            if(dt.hasAttribute('id')) {
+                                dt.id = `${name}__${target.id}__new__${counter}`;
+                                label.setAttribute('for', `${name}__${target.id}__new__${counter}`)
+                            }
+                        }
+                    }
+                })
+                if(dt_arr.add_row === 'upper') {
+                    tbody.insertBefore(new_row,tbody.rows[0]);
+                } else {
+                    tbody.appendChild(new_row);
+                }
+                return;
+            })
+        }
+        return;
+   }
 
     func(type, selector, callback, parent=document) {
         parent.addEventListener(type, e=>{

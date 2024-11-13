@@ -5,7 +5,7 @@ import {currentDate} from '../../3.utility/index.js';
 const main = new DOM2();
 const mstr = await api_access('patch_P1.ASSY', 'pn_fix', '');
 let curr_dept = document.querySelector('#filter__dept_pick');
-main.view_init('table','pick', mstr, curr_dept.value);
+main.view_init({type:'table', main_id:'pick', data: mstr, filter:curr_dept.value});
 main.load_toggle();
 
 main.func(

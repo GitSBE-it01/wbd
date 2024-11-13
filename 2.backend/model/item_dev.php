@@ -2,13 +2,18 @@
 $model['id_tracker'] = new Model('db_wbd.id_tracker',
 [
     'id::i',
-	'item::s',
+    'id_parent::i',
+	'item_number::s',
+	'desc_::s',
+	'site::s',
 	'problem::s',
 	'action::d',
 	'pic::s',
 	'etc::s',
 	'status::s',
 	'remarks::s',
+	'added::s',
+	'last_mod::s',
 ],
 'id::i');
 

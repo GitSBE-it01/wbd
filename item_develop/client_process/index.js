@@ -15,7 +15,7 @@ dtl.forEach(dt=>{
         dt['age'] = cls_dt_int - rel_dt_int;
     }
 })
-main.view_init('table','idev', dtl);
+main.view_init({type:'table', main_id:'idev', data:dtl});
 main.load_toggle();
 
 main.func(
@@ -47,7 +47,7 @@ main.func(
             }
         })
         if(code === 'master') {
-            main.view_init('table','master', mstr);
+            main.view_init({type:'table', main_id:'master', data:mstr});
         }
         main.load_toggle();
         return;
