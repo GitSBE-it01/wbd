@@ -97,7 +97,7 @@ createHTML([
             ]
         ])."
         ".Comp::footer([
-            'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',
+            'class'=>'fixed bottom-0 bg-slate-700 w-screen h-[5vh]',
             'body'=>[
                 Comp::div([
                     'id'=>'idev_page_div',
@@ -112,7 +112,7 @@ createHTML([
             ]
         ])."
         <script type='module' src='./client_process/index.js';></script>
-        "
+    "
 ]);
 
 

@@ -9,6 +9,14 @@ echo "testing</br>";
 echo "====================================================================</br>";
 $start_time = microtime(true);
 set_time_limit(3600);
+echo "
+<head>
+    <title>data worb inan</title>
+</head>
+<body>
+<script src='../assets/template/library/sheetjs/xlsx.full.min.js'></script>
+";
+    $curDate = date('Y-m-d');
     $query = "SELECT 
        wo_part as item_number,
             pt_desc1 as desc1,
@@ -32,16 +40,27 @@ set_time_limit(3600);
             ro_men_mch as run_crew,
             ro_setup as setup
         FROM pub.wo_mstr wo
-        JOIN pub.pt_mstr pt 
-            ON wo.wo_part = pt.pt_part
         JOIN pub.ro_det ro 
             ON wo.wo_routing = ro.ro_routing 
+        JOIN pub.pt_mstr pt 
+            ON wo.wo_part = pt.pt_part
         WHERE 
-            (wo_status = 'R' OR wo_status = 'F')
-            AND ro_end > '2024-11-07'
+            (wo_status != 'C' OR wo_status != 'P')
+            AND ro_end > '$curDate'
         WITH (NOLOCK, READPAST NOWAIT)";
     $data = odbc_qad::execQuery($query,'');
     echo 'jumlah data = '.count($data);
+    echo "
+    <script>
+        const data =".json_encode($data).";
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
+        XLSX.writeFile(workbook, 'data.xlsx')
+    </script>
+    </body>";
+
+    /*
         $query = "SELECT 
             wo_part as item_number,
             pt_desc1 as desc1,
@@ -70,7 +89,7 @@ set_time_limit(3600);
                 JOIN pub.pt_mstr pt 
                     ON wo.wo_part = pt.pt_part
                 WHERE wo__chr03 ='YES' AND
-                    (wo_status = 'R' OR wo_status = 'F')
+                    (wo_status != 'C' OR wo_status != 'P')
                 WITH (NOLOCK, READPAST NOWAIT)";
         $data2 = odbc_qad::execQuery($query,'');
     echo '</br>jumlah data = '.count($data2);
@@ -125,20 +144,7 @@ set_time_limit(3600);
         XLSX.utils.book_append_sheet(workbook, worksheet2, 'data2');
         XLSX.writeFile(workbook, 'data.xlsx')
 */
- echo "
-    <head>
-        <title>data worb inan</title>
-    </head>
-    <body>
-    <script src='../assets/template/library/sheetjs/xlsx.full.min.js'></script>
-    <script>
-        const data =".json_encode($final).";
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(data);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
-        XLSX.writeFile(workbook, 'data.xlsx')
-    </script>
-    </body>";
+
 $end_time = microtime(true);
 $elapsed_time = $end_time - $start_time;
 echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";

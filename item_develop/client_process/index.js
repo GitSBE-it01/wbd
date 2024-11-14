@@ -33,7 +33,7 @@ main.func(
                 hd.classList.remove('hidden');
                 const tbl= document.querySelector(`#${dt}_table`);
                 tbl.classList.remove('hidden');
-                const pg = document.querySelector(`#${dt}_page`);
+                const pg = document.querySelector(`#${dt}_page_div`);
                 pg.classList.remove('hidden');
             } else {
                 const swtc = document.querySelector(`#${dt}`);
@@ -42,53 +42,13 @@ main.func(
                 hd.classList.add('hidden');
                 const tbl= document.querySelector(`#${dt}_table`);
                 tbl.classList.add('hidden');
-                const pg = document.querySelector(`#${dt}_page`);
+                const pg = document.querySelector(`#${dt}_page_div`);
                 pg.classList.add('hidden');
             }
         })
         if(code === 'master') {
             main.view_init({type:'table', main_id:'master', data:mstr});
         }
-        main.load_toggle();
-        return;
-    }
-)
-
-main.func(
-    'click',
-    '#idev_dl_btn',
-    async(e)=>{
-        main.load_toggle();
-        const id_ = e.target.id;
-        const val = id_.split('_');
-        const dat = main.dtbase[`detail__${val[0]}`]['show'];
-        dat.forEach(dt=>{
-            delete dt.filter;
-        })
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(dat);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'parent');
-        XLSX.writeFile(workbook, 'item_dev.xlsx')
-        main.load_toggle();
-        return;
-    }
-)
-
-main.func(
-    'click',
-    '#master_dl_btn',
-    async(e)=>{
-        main.load_toggle();
-        const id_ = e.target.id;
-        const val = id_.split('_');
-        const dat = main.dtbase[`detail__${val[0]}`]['show'];
-        dat.forEach(dt=>{
-            delete dt.filter;
-        })
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(dat);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'komponen');
-        XLSX.writeFile(workbook, 'item_dev.xlsx')
         main.load_toggle();
         return;
     }

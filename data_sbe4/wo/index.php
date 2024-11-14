@@ -53,7 +53,8 @@ if(!check_cache('data_sbe4', $param_wo_sbe4)) {
     FROM pub.wo_mstr wo 
     JOIN pub.pt_mstr pt ON wo.wo_part = pt.pt_part
     JOIN pub.ptp_det ptp ON wo.wo_part = ptp.ptp_part
-    WHERE wo_site = 'SOFTPART' AND ptp_site = 'softpart'
+    WHERE (wo_site = 'SOFTPART' OR wo_site = 'SoftPart' OR wo_site = 'softpart' ) 
+    AND (ptp_site = 'softpart' OR ptp_site = 'SOFTPART' OR ptp_site = 'SoftPart')
     WITH (NOLOCK, READPAST NOWAIT)",'');
     cache_data('data_sbe4', $param_wo_sbe4, $wo_sbe4);
 } else {

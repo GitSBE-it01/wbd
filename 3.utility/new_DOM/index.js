@@ -1,3 +1,4 @@
+import { currentDate } from "../utils/date.js";
 import { TableDOM2 } from "./table/table.js";
 
 export class DOM2 {
@@ -45,6 +46,7 @@ export class DOM2 {
             this.dtbase[`detail__${name_db}`] = {
                 data: data,
                 show: data,
+                main_id: main_id,
                 filter: `${main_id}_search`,
                 filter_btn: `${main_id}_search_btn`,
                 table_id: `${main_id}_table`,
@@ -52,6 +54,7 @@ export class DOM2 {
                 dtlist_id: `${main_id}_list`,
                 dtlist: dtlist_key,
                 add_id: `${main_id}_add_btn`,
+                dl_id: `${main_id}_dl_btn`,
                 add_row: post,
                 curr_page: 1
             }
@@ -68,6 +71,7 @@ export class DOM2 {
             await this.filter_table(this.dtbase[`detail__${name_db}`]);
             this.counter = 0;
             await this.table_new_row(this.dtbase[`detail__${name_db}`]);
+            await this.table_dl(this.dtbase[`detail__${name_db}`]);
             return;
         }
         if(type === 'datalist') {
@@ -654,36 +658,43 @@ export class DOM2 {
         return;
     }
 
-   async table_clear(arr_dt) {
-        const table = document.getElementById(arr_dt.table_id);
-        const all_tr = table.querySelectorAll('tbody tr');
-        all_tr.forEach(dt=>{
-            if(!dt.id.includes('template')) {
-                const td = dt.querySelectorAll('tr');
-                if(td.hasAttribute('data-value')) {
-                    td.removeAttribute('data-value');
-                    const inpt = td.querySelectorAll('input');
-                    inpt.forEach(dd=>{
-                        dd.value = '';
-                    })
-                    const label = td.querySelectorAll('label');
-                    label.forEach(dd=>{
-                        dd.textContent = '';
-                    })
-                    const sel = td.querySelectorAll('select');
-                    sel.forEach(dd=>{
-                        dd.value = '';
-                    })
-                    if(!td.classList.contains('hidden')) {
-                        td.classList.add('hidden');
+   async table_clear(main_id, parent=document) {
+        if(this.dtbase[`detail__${main_id}`]) {
+            const arr_dt = this.dtbase[`detail__${main_id}`];
+            const table = parent.getElementById(arr_dt.table_id);
+            const all_tr = table.querySelectorAll('tbody tr');
+            all_tr.forEach(dt=>{
+                if(!dt.id.includes('template')) {
+                    if(dt.hasAttribute('data-value')) {
+                        const td = dt.querySelectorAll('td');
+                        td.forEach(dd=>{
+                            dd.removeAttribute('data-value');
+                            const inpt = dd.querySelectorAll('input');
+                            inpt.forEach(dd=>{
+                                dd.value = '';
+                            })
+                            const label = dd.querySelectorAll('label');
+                            label.forEach(dd=>{
+                                dd.textContent = '';
+                            })
+                            const sel = dd.querySelectorAll('select');
+                            sel.forEach(dd=>{
+                                dd.value = '';
+                            })
+                            if(!dd.classList.contains('hidden')) {
+                                dd.classList.add('hidden');
+                            }
+                        })
                     }
                 }
-            }
-        })
-        return;
-   }
+            })
+            return;
+        } else {
+            console.log('database tidak ada ');
+        }
+    }
 
-   async table_new_row(arr_dt) {
+   async table_new_row(arr_dt, parent=document) {
         let btn = parent.getElementById(arr_dt.filter_btn);
         if(btn) {
             btn.addEventListener('click', async()=>{
@@ -716,7 +727,28 @@ export class DOM2 {
             })
         }
         return;
-   }
+    }
+
+    async table_dl(arr_dt, parent=document) {
+        const dl_btn = parent.getElementById(arr_dt.dl_id);
+        this.load_toggle();
+        if(dl_btn && arr_dt.show.length >0) {
+            dl_btn.addEventListener('click', async()=>{
+                let dl_dt = [];
+                arr_dt.show.forEach(dt=>{
+                    let dd = dt;
+                    delete dd.filter;
+                    dl_dt.push(dd);
+                })
+                const workbook = XLSX.utils.book_new();
+                const worksheet = XLSX.utils.json_to_sheet(dl_dt);
+                XLSX.utils.book_append_sheet(workbook, worksheet, arr_dt.main_id);
+                XLSX.writeFile(workbook, `${currentDate('_')}__${arr_dt.main_id}.xlsx`)
+            })
+        }
+        this.load_toggle();
+        return;
+    }
 
     func(type, selector, callback, parent=document) {
         parent.addEventListener(type, e=>{
@@ -726,4 +758,4 @@ export class DOM2 {
         })
     }
 
-    }
+}

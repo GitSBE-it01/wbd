@@ -35,12 +35,14 @@ createHTML([
                 Comp::button([
                     'id'=>'tracker_add_btn',
                     'body'=>'add new',
-                    'class'=>'flex rounded justify-center bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                    'disable'=>'',
+                    'class'=>'flex rounded justify-center bg-gray-300 w-[10vw] text-sm border-2 text-white border-slate-400 shadow-md duration-300'
                 ]),
                 Comp::button([
                     'id'=>'tracker_dl_btn',
                     'body'=>'download',
-                    'class'=>'flex rounded justify-center bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
+                    'disable'=>'',
+                    'class'=>'flex rounded justify-center bg-gray-300 w-[10vw] text-sm border-2 text-white border-slate-400 shadow-md duration-300'
                 ]),
                 Comp::div([
                     'class'=>'fixed flex flex-row block right-0 items-center',
