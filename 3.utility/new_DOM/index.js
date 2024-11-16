@@ -420,7 +420,7 @@ export class DOM2 {
                                     }
                                 })
                             }
-                            if(parseInt(max)>8) {
+                            if(parseInt(max)>7) {
                                 if(arr_dt.curr_page<(parseInt(max)-3) && dt.textContent!=="...") {
                                     dt.disabled = true;
                                     dt.textContent = "...";
