@@ -717,7 +717,9 @@ export class DOM2 {
         let tbody = table.querySelector('tbody');
         if(btn) {
             btn.addEventListener('click', async(e)=>{
+                console.log(e.target);
                 if(e.target.getAttribute('data-scope') === arr_dt.name_id) {
+                    console.log('here');
                     const template = table.querySelector(`${arr_dt.table_id}__template`);
                     const new_row = template.cloneNode(true);
                     new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${arr_dt.counter}`);
@@ -743,15 +745,16 @@ export class DOM2 {
                         tbody.appendChild(new_row);
                     }
                 }   
-            }
+            })
             return;
         }
+    }
         
     async table_dl(arr_dt, parent=document) {
         const dl_btn = parent.getElementById(arr_dt.dl_id);
         this.load_toggle();
         if(dl_btn && arr_dt.show.length >0) {
-            dl_btn.addEventListener('click', async()=>{
+            dl_btn.addEventListener('click', async(e)=>{
                 if((e.target.getAttribute('data-scope') === arr_dt.name_id)){
                     let dl_dt = [];
                     arr_dt.show.forEach(dt=>{
@@ -769,7 +772,6 @@ export class DOM2 {
         }
         this.load_toggle();
         return;
-    })
     }
 
     func(type, selector, callback, parent=document) {
