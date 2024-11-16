@@ -23,7 +23,7 @@ export class DOM2 {
         this.load.classList.toggle('hidden');
     }
 
-    async view_init({type, main_id, data, filter='', dtlist_key=[], post='upper'}) {
+    async view_init({type, main_id, data, filter='', dtlist_key=[], post='upper', parent=document}) {
         if(data.length>0 && !data[0]['filter']) {
             data.forEach(dt=>{
                 const keys = Object.keys(dt);
@@ -39,7 +39,7 @@ export class DOM2 {
         if(filter === '') {
             name_db = main_id;
         } else {
-            name_db = filter
+            name_db = main_id+'_'+filter;
         }
 
         if(!this.dtbase[`detail__${name_db}`]) {
@@ -47,6 +47,8 @@ export class DOM2 {
                 data: data,
                 show: data,
                 main_id: main_id,
+                name_id: name_db,
+                filter_id: filter,
                 filter: `${main_id}_search`,
                 filter_btn: `${main_id}_search_btn`,
                 table_id: `${main_id}_table`,
@@ -64,14 +66,27 @@ export class DOM2 {
             }
         }
         if(type === 'table') {
-            await this.table_parse(this.dtbase[`detail__${name_db}`]);
-            await this.pagination_init(this.dtbase[`detail__${name_db}`]);
-            await this.pagination_response(this.dtbase[`detail__${name_db}`]);
-            await this.filter_key(this.dtbase[`detail__${name_db}`]);
-            await this.filter_table(this.dtbase[`detail__${name_db}`]);
+            const arr_dt = this.dtbase[`detail__${name_db}`];
             this.counter = 0;
-            await this.table_new_row(this.dtbase[`detail__${name_db}`]);
-            await this.table_dl(this.dtbase[`detail__${name_db}`]);
+            let add_btn = parent.getElementById(arr_dt.add_id);
+            if(add_btn !== null) {
+                add_btn.setAttribute('data-scope', arr_dt.name_id)
+            }
+            let fltr_btn = parent.getElementById(arr_dt.filter_btn);
+            if(fltr_btn !== null) {
+                fltr_btn.setAttribute('data-scope', arr_dt.name_id)
+            }
+            let dl_btn = parent.getElementById(arr_dt.dl_id);
+            if(dl_btn !== null) {
+                dl_btn.setAttribute('data-scope', arr_dt.name_id)
+            }
+            await this.table_parse(arr_dt);
+            await this.pagination_init(arr_dt);
+            await this.pagination_response(arr_dt);
+            await this.filter_key(arr_dt);
+            await this.filter_table(arr_dt);
+            await this.table_new_row(arr_dt);
+            await this.table_dl(arr_dt);
             return;
         }
         if(type === 'datalist') {
@@ -98,14 +113,16 @@ export class DOM2 {
         let search = parent.getElementById(arr_dt.filter);
         if(btn && search) {
             btn.addEventListener('click', async(e)=> {
-                if(search.value !== '') {
-                    arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
-                } else {
-                    arr_dt.show = arr_dt.data;
+                if(e.target.getAttribute('data-scope' === arr_dt.name_id)) {
+                    if(search.value !== '') {
+                        arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
+                    } else {
+                        arr_dt.show = arr_dt.data;
+                    }
+                    arr_dt.curr_page =1;
+                    await this.table_parse(arr_dt);
+                    await this.pagination_init(arr_dt);
                 }
-                arr_dt.curr_page =1;
-                await this.table_parse(arr_dt);
-                await this.pagination_init(arr_dt);
                 return;
             })
         }
@@ -661,7 +678,6 @@ export class DOM2 {
    async table_clear(main_id, parent=document) {
         if(this.dtbase[`detail__${main_id}`]) {
             const arr_dt = this.dtbase[`detail__${main_id}`];
-            const table = parent.getElementById(arr_dt.table_id);
             const all_tr = table.querySelectorAll('tbody tr');
             all_tr.forEach(dt=>{
                 if(!dt.id.includes('template')) {
@@ -687,6 +703,7 @@ export class DOM2 {
                         })
                     }
                 }
+                    const table = parent.getElementById(arr_dt.table_id);
             })
             return;
         } else {
@@ -695,59 +712,64 @@ export class DOM2 {
     }
 
    async table_new_row(arr_dt, parent=document) {
-        let btn = parent.getElementById(arr_dt.filter_btn);
+        let btn = parent.getElementById(arr_dt.add_id);
+        let table = parent.getElementById(arr_dt.table_id);
+        let tbody = table.querySelector('tbody');
         if(btn) {
-            btn.addEventListener('click', async()=>{
-                const template = document.getElementById(arr_dt.table_id+'__template');
-                const new_row = template.cloneNode(true);
-                new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${arr_dt.counter}`);
-                new_row.setAttribute('data-change', `new`);
-                const name = new_row.querySelectorAll('[name]');
-                name.forEach(dt=>{
-                    if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
-                        const name = dt.getAttribute('name');
-                        let td = '';
-                        if(dt.disabled) {dt.disabled = false;}
-                        if(dt.closest('td') !== null) {
-                            td = dt.closest('td');
-                            const label = td.querySelector('label');
-                            if(dt.hasAttribute('id')) {
-                                dt.id = `${name}__${target.id}__new__${counter}`;
-                                label.setAttribute('for', `${name}__${target.id}__new__${counter}`)
+            btn.addEventListener('click', async(e)=>{
+                if(e.target.getAttribute('data-scope') === arr_dt.name_id) {
+                    const template = table.querySelector(`${arr_dt.table_id}__template`);
+                    const new_row = template.cloneNode(true);
+                    new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${arr_dt.counter}`);
+                    new_row.setAttribute('data-change', `new`);
+                    const name = new_row.querySelectorAll('[name]');
+                    name.forEach(dt=>{
+                        if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
+                            const name = dt.getAttribute('name');
+                            let td = '';
+                            if(dt.disabled) {dt.disabled = false;}
+                            if(dt.closest('td') !== null) {
+                                td = dt.closest('td');
+                                const label = td.querySelector('label');
+                                if(dt.hasAttribute('id')) {
+                                    label.setAttribute('for', `${name}__${arr_dt.table_id}__new__${this.counter}`)
+                                }
                             }
                         }
+                    })
+                    if(dt_arr.add_row === 'upper') {
+                        tbody.insertBefore(new_row,tbody.rows[0]);
+                    } else {
+                        tbody.appendChild(new_row);
                     }
-                })
-                if(dt_arr.add_row === 'upper') {
-                    tbody.insertBefore(new_row,tbody.rows[0]);
-                } else {
-                    tbody.appendChild(new_row);
-                }
-                return;
-            })
+                }   
+            }
+            return;
         }
-        return;
-    }
-
+        
     async table_dl(arr_dt, parent=document) {
         const dl_btn = parent.getElementById(arr_dt.dl_id);
         this.load_toggle();
         if(dl_btn && arr_dt.show.length >0) {
             dl_btn.addEventListener('click', async()=>{
-                let dl_dt = [];
-                arr_dt.show.forEach(dt=>{
-                    let dd = dt;
-                    delete dd.filter;
-                    dl_dt.push(dd);
-                })
-                const workbook = XLSX.utils.book_new();
-                const worksheet = XLSX.utils.json_to_sheet(dl_dt);
-                XLSX.utils.book_append_sheet(workbook, worksheet, arr_dt.main_id);
-                XLSX.writeFile(workbook, `${currentDate('_')}__${arr_dt.main_id}.xlsx`)
+                if((e.target.getAttribute('data-scope') === arr_dt.name_id)){
+                    let dl_dt = [];
+                    arr_dt.show.forEach(dt=>{
+                        let dd = dt;
+                        delete dd.filter;
+                        dt.id = `${name}__${arr_dt.table_id}__new__${this.counter}`;
+                        dl_dt.push(dd);
+                    })
+                    const workbook = XLSX.utils.book_new();
+                    const worksheet = XLSX.utils.json_to_sheet(dl_dt);
+                    XLSX.utils.book_append_sheet(workbook, worksheet, arr_dt.main_id);
+                    XLSX.writeFile(workbook, `${currentDate('_')}__${arr_dt.main_id}.xlsx`)
+                }
             })
         }
         this.load_toggle();
         return;
+    })
     }
 
     func(type, selector, callback, parent=document) {

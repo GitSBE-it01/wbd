@@ -16,12 +16,15 @@ echo "
 <body>
 <script src='../assets/template/library/sheetjs/xlsx.full.min.js'></script>
 ";
+
     $curDate = date('Y-m-d');
     $query = "SELECT 
        wo_part as item_number,
             pt_desc1 as desc1,
             pt_desc2 as desc2,
             wo_lot as ID,
+            wo_nbr as work_order,
+            wo_status as status_wo,
             wo_routing as routs, 
             wo__chr03 as fixed_r,
             ro_op as operation,
@@ -45,53 +48,46 @@ echo "
         JOIN pub.pt_mstr pt 
             ON wo.wo_part = pt.pt_part
         WHERE 
-            (wo_status != 'C' OR wo_status != 'P')
+            wo_status <> 'C' AND wo_status <> 'P'
             AND ro_end > '$curDate'
         WITH (NOLOCK, READPAST NOWAIT)";
     $data = odbc_qad::execQuery($query,'');
     echo 'jumlah data = '.count($data);
-    echo "
-    <script>
-        const data =".json_encode($data).";
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(data);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
-        XLSX.writeFile(workbook, 'data.xlsx')
-    </script>
-    </body>";
 
-    /*
-        $query = "SELECT 
-            wo_part as item_number,
-            pt_desc1 as desc1,
-            pt_desc2 as desc2,
-            wo_lot as ID,
-            wo_routing as routs, 
-            wo__chr03 as fixed_r,
-            wr_op as operation,
-            wr_desc as op_desc,
-            wr_wkctr as work_center,
-            wr__chr01 as work_center2,
-            wr_start as start_dt,
-            0 as end_dt,
-            wr_run as std_run,
-            (wr_run * wo_qty_ord) as total_run_time_mhr,
-            wo_qty_ord as qty_ord_wo,
-            wo_qty_comp as qty_complete_wo,
-            (wo_qty_ord-wo_qty_comp) as qty_open_wo,
-            wr_qty_ord  as qty_ord_ops,
-            (wr_qty_ord - (wr_qty_comp + wr_sub_comp)) as qty_open_ops,
-            wr_men_mch as run_crew,
-            wr_setup as setup
-                FROM pub.wo_mstr wo
-                JOIN pub.wr_route wr
-                    ON wo.wo_lot = wr.wr_lot
-                JOIN pub.pt_mstr pt 
-                    ON wo.wo_part = pt.pt_part
-                WHERE wo__chr03 ='YES' AND
-                    (wo_status != 'C' OR wo_status != 'P')
-                WITH (NOLOCK, READPAST NOWAIT)";
-        $data2 = odbc_qad::execQuery($query,'');
+
+    $query = "SELECT 
+        wo_part as item_number,
+        pt_desc1 as desc1,
+        pt_desc2 as desc2,
+        wo_lot as ID,
+        wo_nbr as work_order,
+        wo_status as status_wo,
+        wo_routing as routs, 
+        wo__chr03 as fixed_r,
+        wr_op as operation,
+        wr_desc as op_desc,
+        wr_wkctr as work_center,
+        wr__chr01 as work_center2,
+        wr_start as start_dt,
+        0 as end_dt,
+        wr_run as std_run,
+        (wr_run * wo_qty_ord) as total_run_time_mhr,
+        wo_qty_ord as qty_ord_wo,
+        wo_qty_comp as qty_complete_wo,
+        (wo_qty_ord-wo_qty_comp) as qty_open_wo,
+        wr_qty_ord  as qty_ord_ops,
+        (wr_qty_ord - (wr_qty_comp + wr_sub_comp)) as qty_open_ops,
+        wr_men_mch as run_crew,
+        wr_setup as setup
+            FROM pub.wo_mstr wo
+            JOIN pub.wr_route wr
+                ON wo.wo_lot = wr.wr_lot
+            JOIN pub.pt_mstr pt 
+                ON wo.wo_part = pt.pt_part
+            WHERE wo__chr03 ='YES' AND
+                (wo_status <> 'C' AND wo_status <> 'P')
+            WITH (NOLOCK, READPAST NOWAIT)";
+    $data2 = odbc_qad::execQuery($query,'');
     echo '</br>jumlah data = '.count($data2);
     echo '<pre>';
     print_r(array_slice($data,0,1));
@@ -114,6 +110,15 @@ echo "
         $final[]=$dt;
     }
     echo '</br>jumlah data final = '.count($final);
+    echo "
+    <script>
+        const data =".json_encode($final).";
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
+        XLSX.writeFile(workbook, 'data.xlsx')
+    </script>
+    </body>";
     echo '<pre>';
     print_r(array_slice($final,0,5));
     echo '</pre>';
