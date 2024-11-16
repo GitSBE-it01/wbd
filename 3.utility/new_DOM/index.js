@@ -113,7 +113,7 @@ export class DOM2 {
         let search = parent.getElementById(arr_dt.filter);
         if(btn && search) {
             btn.addEventListener('click', async(e)=> {
-                if(e.target.getAttribute('data-scope' === arr_dt.name_id)) {
+                if(e.target.getAttribute('data-scope') === arr_dt.name_id) {
                     if(search.value !== '') {
                         arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
                     } else {
@@ -678,6 +678,7 @@ export class DOM2 {
    async table_clear(main_id, parent=document) {
         if(this.dtbase[`detail__${main_id}`]) {
             const arr_dt = this.dtbase[`detail__${main_id}`];
+            const table = parent.getElementById(arr_dt.table_id);
             const all_tr = table.querySelectorAll('tbody tr');
             all_tr.forEach(dt=>{
                 if(!dt.id.includes('template')) {
@@ -697,13 +698,15 @@ export class DOM2 {
                             sel.forEach(dd=>{
                                 dd.value = '';
                             })
-                            if(!dd.classList.contains('hidden')) {
-                                dd.classList.add('hidden');
-                            }
                         })
+                        if(!dt.classList.contains('hidden')) {
+                            dt.classList.add('hidden');
+                        }
                     }
                 }
-                    const table = parent.getElementById(arr_dt.table_id);
+                if(dt.hasAttribute('data-change') && dt.getAttribute('data-change') === 'new') {
+                    dt.remove();
+                }
             })
             return;
         } else {
@@ -717,12 +720,13 @@ export class DOM2 {
         let tbody = table.querySelector('tbody');
         if(btn) {
             btn.addEventListener('click', async(e)=>{
-                console.log(e.target);
                 if(e.target.getAttribute('data-scope') === arr_dt.name_id) {
-                    console.log('here');
-                    const template = table.querySelector(`${arr_dt.table_id}__template`);
+                    const template = table.querySelector(`[data-id = "${arr_dt.table_id}__template"]`);
                     const new_row = template.cloneNode(true);
-                    new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${arr_dt.counter}`);
+                    new_row.setAttribute('data-id', `new__${arr_dt.table_id}__${this.counter}`);
+                    if(new_row.classList.contains('hidden')) {
+                        new_row.classList.remove('hidden');
+                    }
                     new_row.setAttribute('data-change', `new`);
                     const name = new_row.querySelectorAll('[name]');
                     name.forEach(dt=>{
@@ -734,17 +738,19 @@ export class DOM2 {
                                 td = dt.closest('td');
                                 const label = td.querySelector('label');
                                 if(dt.hasAttribute('id')) {
-                                    label.setAttribute('for', `${name}__${arr_dt.table_id}__new__${this.counter}`)
+                                    label.setAttribute('for', `${name}__${arr_dt.table_id}__new__${this.counter}`);
+                                    dt.id = `${name}__${arr_dt.table_id}__new__${this.counter}`;
                                 }
                             }
                         }
                     })
-                    if(dt_arr.add_row === 'upper') {
+                    if(arr_dt.add_row === 'upper') {
                         tbody.insertBefore(new_row,tbody.rows[0]);
                     } else {
                         tbody.appendChild(new_row);
                     }
-                }   
+                }  
+                this.counter++; 
             })
             return;
         }
@@ -760,7 +766,6 @@ export class DOM2 {
                     arr_dt.show.forEach(dt=>{
                         let dd = dt;
                         delete dd.filter;
-                        dt.id = `${name}__${arr_dt.table_id}__new__${this.counter}`;
                         dl_dt.push(dd);
                     })
                     const workbook = XLSX.utils.book_new();
