@@ -67,7 +67,6 @@ const execute = async(url, table, action, method, data)=>{
           body: JSON.stringify({Data:data})
         });
         if (!response.ok) {
-            console.log(response)
             throw new Error('Network response was not ok');
         }
         const result = await response.json();

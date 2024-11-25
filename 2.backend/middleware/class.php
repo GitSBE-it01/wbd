@@ -472,8 +472,10 @@ class DB_Access2 {
         $mdl = (array) $model->field;
         sort($mdl);
         foreach($mdl as $value) {
-            $field .= $value."=?, ";
-            $types .= $model->type[$value];
+            if($value !== 'id') {
+                $field .= $value."=?, ";
+                $types .= $model->type[$value];
+            }
         }
         $field = rtrim($field, ', ');
         $types .=$pk['type'];
@@ -487,7 +489,7 @@ class DB_Access2 {
                 $bindParams = array();
                 ksort($set);
                 foreach($set as $key=>$value) {
-                    if(in_array($key,$mdl)) {
+                    if(in_array($key,$mdl) && $key !== 'id') {
                         ${'param' . $key} = $value;
                         $bindParams[] = &${'param' . $key};
                     }
@@ -503,7 +505,7 @@ class DB_Access2 {
             }
             $stmt->close();
             $conn->close();
-            return $bindParams;
+            return $result;
         } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             return $errorMessage . '</br>';

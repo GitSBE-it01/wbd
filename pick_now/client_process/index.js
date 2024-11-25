@@ -15,7 +15,12 @@ main.func(
         main.load_toggle();
         const val = e.target.value;
         const data = await api_access('patch_'+val, 'pn_fix', '');
-        main.view_init('table','pick', data, curr_dept.value);
+        main.view_init({
+            type:'table',
+            main_id:'pick', 
+            data: data, 
+            filter: curr_dept.value
+        });
         console.log(main.dtbase);
         main.load_toggle();
         return;
@@ -28,7 +33,7 @@ main.func(
     async()=>{
         main.load_toggle();
         const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(main.dtbase[`detail__${curr_dept.value}`]['show']);
+        const worksheet = XLSX.utils.json_to_sheet(main.dtbase[`detail__pick_${curr_dept.value}`]['show']);
         XLSX.utils.book_append_sheet(workbook, worksheet, 'data');
         XLSX.writeFile(workbook, 'pick_now.xlsx')
         setTimeout(() => {

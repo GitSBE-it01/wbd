@@ -40,8 +40,7 @@ function routes($model) {
             $mdl = $model[$table];
             if($action === 'insert' || $action === 'insert2') {
                 $response  = DB_access2::insertQuery($action,$mdl, $dt);
-            }  
-            if($action === 'fetch' || $action=== 'fetch2') {
+            } elseif($action === 'fetch' || $action=== 'fetch2') {
                 if($cache === 'cache') {
                     if(!check_cache($routes, $param)) {
                         delete_cache($routes, $param);

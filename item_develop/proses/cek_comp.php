@@ -81,27 +81,35 @@ function detail_item_dev() {
     $curr_mstr = DB::execQuery($query, '');
 
     $insert = [];
-    $update = [];
+
     foreach($full as $set) {
         $cek = array_filter($curr_mstr, function($dt) use($set) {
-            return $dt['item_number'] === $set['item_number'] && $dt['item_site'] === $set['item_site']  ;
+            return $dt['item_number'] === $set['item_number'] && $dt['item_site'] === $set['item_site'];
         });
-        if(count($cek) >0) {
+
+        if(count($cek) === 0) {
             foreach($cek as $st) {
-                $cekkk = $st['item_number'].'--'.$st['desc1'].'--'.$st['desc2'].'--'.$st['item_site'].'--'.$st['item_status'].'--'.$st['prod_line'].'--'.$st['pm_code'].'--'.$st['buyer'].'--'.$st['rout_cek'].'--'.$st['bom_cek'];
-                if($cekkk !== $set['filter']) {
-                    $dd['status'] = 'close';
-                    $dd['close_date'] = date('Y-m-d');
-                    $dd['item_number'] = $st['item_number'];
-                    $update[] = $dd;
-                }
-            }
-        } else {
-            $dd = $set;
-            unset($dd['filter']);
-            $insert[]=$dd;
-        }
+                $dd = $set;
+                unset($dd['filter']);
+                $insert[]=$dd;
+             }
+        } 
     }
+
+    $update = [];
+    foreach($curr_mstr as $set) {
+        $cek = array_filter($full, function($dt) use($set) {
+            return $dt['item_number'] === $set['item_number'] && $dt['item_site'] === $set['item_site'];
+        });
+
+        if(count($cek) === 0) {
+            $dd['status'] = 'close';
+            $dd['close_date'] = date('Y-m-d');
+            $dd['item_number'] = $set['item_number'];
+            $update[] = $dd;
+        } 
+    }
+
     echo 'cek data insert ='.count($insert).'</br>';
     echo 'cek data update ='.count($update).'</br>';
     echo "<pre>";

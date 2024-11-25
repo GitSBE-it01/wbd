@@ -51,6 +51,7 @@ export class DOM2 {
                 filter_id: filter,
                 filter: `${main_id}_search`,
                 filter_btn: `${main_id}_search_btn`,
+                submit_btn: `${main_id}_submit_btn`,
                 table_id: `${main_id}_table`,
                 page_id: `${main_id}_page`,
                 dtlist_id: `${main_id}_list`,
@@ -83,7 +84,6 @@ export class DOM2 {
             await this.table_parse(arr_dt);
             await this.pagination_init(arr_dt);
             await this.pagination_response(arr_dt);
-            await this.filter_key(arr_dt);
             await this.filter_table(arr_dt);
             await this.table_new_row(arr_dt);
             await this.table_dl(arr_dt);
@@ -92,19 +92,6 @@ export class DOM2 {
         if(type === 'datalist') {
             await this.parse_dtlist(this.dtbase[`detail__${name_db}`]);
             return;
-        }
-    }
-
-    async filter_key(arr_dt, parent=document){
-        let search = parent.getElementById(arr_dt.filter);
-        let btn = parent.getElementById(arr_dt.filter_btn);
-        if(btn && search){
-            search.addEventListener('keyup', async(e)=>{
-                if(e.key === 'Enter') {
-                    btn.click();
-                }
-                return;
-            })
         }
     }
 
@@ -125,7 +112,21 @@ export class DOM2 {
                 }
                 return;
             })
+            search.addEventListener('keyup', async(e)=>{
+                if(e.key === 'Enter') {
+                    if(search.value !== '') {
+                        arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
+                    } else {
+                        arr_dt.show = arr_dt.data;
+                    }
+                    arr_dt.curr_page =1;
+                    await this.table_parse(arr_dt);
+                    await this.pagination_init(arr_dt);
+                }
+                return;
+            })
         }
+        return;
     }
 
     async table_parse(arr_dt, dsbl=false, parent=document) {
@@ -148,6 +149,7 @@ export class DOM2 {
                         const curr = d2.hasAttribute('disabled') ? true : false;
                         d2.disabled = false;
                         d2.value = dt[`${field}`] ? dt[`${field}`] :'';
+                        d2.setAttribute('data-current', dt[`${field}`] ? dt[`${field}`] :'');
                         if(tr.querySelector(`[for = "${d2.id}"]`) !== null) {
                             tr.querySelector(`[for = "${d2.id}"]`).textContent = dt[`${field}`] ? dt[`${field}`] :'';
                         }
@@ -663,11 +665,43 @@ export class DOM2 {
                 if(event.target.tagName === 'INPUT' || event.target.tagName === 'SELECT') {
                     const td = event.target.closest('td');
                     const tr = td.closest('tr');
+                    const table = tr.closest('table');
+                    const id = table.id.split('_');
+                    const sbmt_btn = document.getElementById(id[0]+'_submit_btn');
+                    let valid = false;
                     if(!tr.hasAttribute('data-change') && tr.getAttribute('data-change') !== 'new' && event.target.getAttribute('data-current') !== event.target.value) {
                         tr.setAttribute('data-change', 'change');
                     }
                     if(tr.hasAttribute('data-change') && event.target.getAttribute('data-current') === event.target.value) {
                         tr.removeAttribute('data-change');
+                    }
+                    const tr2 = table.querySelectorAll('tbody tr');
+                    tr2.forEach(dt=>{
+                        if(dt.hasAttribute('data-change')) {
+                            valid = true;
+                        }
+                    })
+                    if(valid) {
+                        if(sbmt_btn !== null) {
+                            if(sbmt_btn.disabled === true) {
+                                sbmt_btn.disabled = false; 
+                            }
+                            if(sbmt_btn.classList.contains('text-white')) {
+                                sbmt_btn.classList.remove('text-white')
+                                sbmt_btn.classList.add('font-bold');
+                            }
+                        }
+                    } else {
+                        if(sbmt_btn !== null) {
+                            if(sbmt_btn.disabled === false) {
+                                sbmt_btn.disabled = true; 
+                            }
+                            if(!sbmt_btn.classList.contains('text-white')) {
+                                sbmt_btn.classList.add('text-white')
+                                sbmt_btn.classList.remove('font-bold');
+                            }
+                        }
+
                     }
                 }
             }
@@ -675,10 +709,37 @@ export class DOM2 {
         return;
     }
 
+    async submit_check(arr_dt, parent = document){
+        const table = parent.getElementById(arr_dt.table_id);
+        if(table !== null) {
+            const tr = table.querySelectorAll('tbody tr');
+            let valid = false;
+            tr.forEach(dt=>{
+                if(dt.hasAttribute('data-change')) {
+                    valid = true;
+                }
+            })
+            if(valid) {
+                const sbmt_btn = document.getElementById(arr_dt.submit_btn);
+                if(sbmt_btn !== null) {
+                    if(sbmt_btn.disabled === true) {
+                        sbmt_btn.disabled = false; 
+                    }
+                    if(sbmt_btn.classList.contains('text-white')) {
+                        sbmt_btn.classList.remove('text-white')
+                        sbmt_btn.classList.add('font-bold');
+                    }
+                }
+            }
+        }
+        return;
+    }
+
    async table_clear(main_id, parent=document) {
         if(this.dtbase[`detail__${main_id}`]) {
             const arr_dt = this.dtbase[`detail__${main_id}`];
             const table = parent.getElementById(arr_dt.table_id);
+            const submit_btn = parent.getElementById(arr_dt.submit_btn);
             const all_tr = table.querySelectorAll('tbody tr');
             all_tr.forEach(dt=>{
                 if(!dt.id.includes('template')) {
@@ -704,8 +765,18 @@ export class DOM2 {
                         }
                     }
                 }
-                if(dt.hasAttribute('data-change') && dt.getAttribute('data-change') === 'new') {
-                    dt.remove();
+                if(dt.hasAttribute('data-change')){ 
+                    if(dt.getAttribute('data-change') === 'new') {
+                        dt.remove();
+                    }
+                    if(dt.getAttribute('data-change') === 'change') {
+                        dt.removeAttribute('data-change');
+                    }
+                    if(submit_btn) {
+                        submit_btn.disabled = true;
+                        submit_btn.classList.add('text-white');
+                        submit_btn.classList.remove('font-bold');
+                    }
                 }
             })
             return;
@@ -749,6 +820,7 @@ export class DOM2 {
                     } else {
                         tbody.appendChild(new_row);
                     }
+                    await this.submit_check(arr_dt);
                 }  
                 this.counter++; 
             })
@@ -776,6 +848,28 @@ export class DOM2 {
             })
         }
         this.load_toggle();
+        return;
+    }
+        
+    async new_row_default_value(array_value={}, arr_dt, parent=document) {
+        const table = parent.getElementById(arr_dt.table_id);
+        const temp = table.querySelector('[data-id *= "template"]');
+        if(temp !== null) {
+            const keys = Object.keys(array_value);
+            keys.forEach(dt=>{
+                const field = temp.querySelector(`[name ="${dt}"]`);
+                if(field.disabled === true) {
+                    field.disabled = false;
+                    field.value = array_value[`${dt}`];
+                    field.disabled = true;
+                }
+                field.value = array_value[`${dt}`];
+                const label = temp.querySelector(`[for="${field.id}"]`);
+                if(label !== null) {
+                    label.textContent = array_value[`${dt}`];
+                }
+            })
+        }
         return;
     }
 
