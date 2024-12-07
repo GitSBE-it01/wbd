@@ -1,0 +1,61 @@
+urn:services-qad-com:
+QADERP 
+urn:services-qad-com::
+QADERP 
+true urn:services-qad-com: 
+QAD domain 
+QAD scopeTransaction false 
+QAD version eB_4 
+QAD mnemonicsRaw false 
+QAD username S4-CPLAN 
+QAD password Sinarb351 
+QAD action 
+QAD entity 
+QAD email 
+QAD emailLevel A 09110164 1504702 1 1.000781 true 30 false false 2024-11-14 No Yes No 0.0000 2.0000 1OPT MSNS4,3 true true true 
+Errorurn:services-qad-com:urn:messages-qad-com:2024-12-02T15:26:31+0700urn:services-qad-com::
+QADERPClient.qdocVersionNotSupportedQDoc is not supported
+urn:services-qad-com: 
+QdocException: Qdoc is not supported 
+at com.qad.qxtend.qdocs.docDeploymentDescriptor.validateQdoc(QdocDeploymentDescriptor.java:538) 
+at com.qad.qxtend.qdocs.QdocRequest.isValidQdoc(QdocRequest.java:443) 
+at com.qad.qxtend.qdocs.QdocWebService.processQdocMessage(QdocWebService.java:146) 
+at sun.reflect.GeneratedMethodAccessor102.invoke(Unknown Source) 
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) 
+at java.lang.reflect.Method.invoke(Method.java:498) 
+at org.apache.axis.providers.java.MsgProvider.processMessage(MsgProvider.java:155) 
+at org.apache.axis.providers.java.JavaProvider.invoke(JavaProvider.java:323) 
+at org.apache.axis.strategies.InvocationStrategy.visit(InvocationStrategy.java:32) 
+at org.apache.axis.SimpleChain.doVisiting(SimpleChain.java:118) 
+at org.apache.axis.SimpleChain.invoke(SimpleChain.java:83) 
+at org.apache.axis.handlers.soap.SOAPService.invoke(SOAPService.java:454) 
+at org.apache.axis.server.AxisServer.invoke(AxisServer.java:281) 
+at org.apache.axis.transport.http.AxisServlet.doPost(AxisServlet.java:699) 
+at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) 
+at org.apache.axis.transport.http.AxisServletBase.service(AxisServletBase.java:327) 
+at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) 
+at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) 
+at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) 
+at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) 
+at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) 
+at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) 
+at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) 
+at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) 
+at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) 
+at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) 
+at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) 
+at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:687) 
+at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) 
+at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) 
+at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) 
+at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) 
+at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) 
+at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722) 
+at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) 
+at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) 
+at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) 
+at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) 
+at java.lang.Thread.run(Thread.java:750) 2024-12-02T15:26:31+0700QDoc is not supported0QdocException
+ex005
+false
+error

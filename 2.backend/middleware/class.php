@@ -454,10 +454,6 @@ class DB_Access2 {
             $errorMessage = $e->getMessage();
             return $errorMessage . '</br>';
         }
-        /*
-        $conn->close();
-        return $check;
-        */
     }
 
     static function updateQuery($action, $model, $data) {

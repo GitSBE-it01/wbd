@@ -83,7 +83,7 @@ main.func(
       let update = []
       tr.forEach(dt=>{
         if(dt.hasAttribute('data-change')){
-          const data = [];
+          const data = {};
           if(dt.getAttribute('data-change') === 'new') {
             const td = dt.querySelectorAll('[name]');
             td.forEach(dd=>{
