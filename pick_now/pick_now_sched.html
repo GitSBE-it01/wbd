@@ -297,7 +297,7 @@
     let tempVal = 0;
     let codeCek = '';
     let action = '';
-    gabCek.forEach(dt=>{
+    gabCek.forEach(dt=>{    
         if(codeCek !== dt.item+dt.dept) {
             tempVal = 0;
             codeCek = dt.item+dt.dept;
@@ -454,7 +454,6 @@
     console.log({inputArr});
 
     console.log('************************************************************');
-    //const cek = await pickNow.dbProcess('fetch',{data_date: currentDate()}) ;
     const cek = await api_access('fetch','pn_result', {data_date: currentDate()}) ;
     const report5 = document.createElement('h3');
 
@@ -524,13 +523,17 @@
         });
         const cached = await api_access('patch_'+dpt, 'pn_fix' ,dataTbl);
     }
-    window.open('http://informationsystem.sbe.co.id:62898/wbd/scheduler/jig_db_sched.php', '_blank');
-/*
+    //window.open('http://informationsystem.sbe.co.id:62898/wbd/scheduler/jig_db_sched.php', '_blank');
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(finalResult);
+    const worksheet2 = XLSX.utils.json_to_sheet(dmnd_new);
+    const worksheet3 = XLSX.utils.json_to_sheet(demand);
+    const worksheet4 = XLSX.utils.json_to_sheet(gabCek);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'finalResult');
+    XLSX.utils.book_append_sheet(workbook, worksheet2, 'dmnd_new');
+    XLSX.utils.book_append_sheet(workbook, worksheet3, 'demand');
+    XLSX.utils.book_append_sheet(workbook, worksheet4, 'gabCek');
     XLSX.writeFile(workbook, 'data.xlsx')
-*/
 
 
 </script>

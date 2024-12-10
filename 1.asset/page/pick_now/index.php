@@ -10,7 +10,7 @@ INDEX HTML
 $nav_array['title'] = 'pick now';
 
 createHTML([
-    'name'=>'index2', 
+    'name'=>'index', 
     'title'=>"pick now",
     'path'=>'pick_now',
     'body'=>

@@ -30,13 +30,13 @@ $main_table = [
                 'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
             ],
             'td'=>[
-                'data_attr'=>['field::_desc2'],
+                'data_attr'=>['field::_desc'],
                 'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
             ],
             'inp'=>[
                 'type'=>'text', 
                 'disable'=>'',
-                'name'=> '_desc2', 
+                'name'=> '_desc', 
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
