@@ -35,7 +35,7 @@ main.func(
             });
           main.view_init({type:'table',main_id:'tracker', data:dt_db, filter:splt[0]});
           const data_search = list_item_dev.find(obj=>obj.item_number === splt[1])
-            console.log({data_search});
+          console.log({data_search});
           main.new_row_default_value({
             id_parent: splt[0],
             item_number: splt[1],

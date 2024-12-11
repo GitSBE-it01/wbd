@@ -54,11 +54,11 @@ createHTML([
                     'class'=>'flex flex-row fixed items-center right-0 gap-4',
                     'body'=>[
                         Comp::input([
-                            'id'=>'search_input',
+                            'id'=>'pick_search',
                             'class'=>'rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[15vw]'
                         ]),
                         Comp::button([
-                            'id'=>'search_btn',
+                            'id'=>'pick_search_btn',
                             'body'=>'search',
                             'class'=>'rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300'
                         ]),
@@ -75,7 +75,7 @@ createHTML([
             'class'=>'fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y',
             'body'=>[
                 Comp::div([
-                    'id'=> 'primary',
+                    'id'=> 'pick',
                     'class'=>'w-full h-full ',
                     'body'=>[
                         table_create2($main_table)
@@ -85,7 +85,7 @@ createHTML([
         ])."
         ".Comp::footer([
             'class'=>'fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]',
-            'body'=>pagination_create('main_page', '')
+            'body'=>pagination_create('pick_page', '')
         ])."
         <script type='module' src='./client_process/index.js';></script>
         "

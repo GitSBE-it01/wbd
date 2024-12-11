@@ -56,14 +56,14 @@
         WWA
         </option>
         </select>
-        </div><div id='' class='flex flex-row fixed items-center right-0 gap-4' ><input id='search_input' type='text' 
+        </div><div id='' class='flex flex-row fixed items-center right-0 gap-4' ><input id='pick_search' type='text' 
         autocomplete='off' class='rounded px-2 text-sm h-[1.6rem] focus:ring focus:ring-blue-400 focus:ring-width-4 focus:outline focus:outline-blue-400 duration-300 right-10 shadow-md w-[15vw]' >
-        <button id='search_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >search
+        <button id='pick_search_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >search
         </button><button id='dl_btn' type='button' class='rounded bg-gray-300 w-[10vw] text-sm border-2 border-slate-400 shadow-md hover:font-semibold duration-300' >download
         </button>
         </div>
         </header>
-        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='primary' class='w-full h-full ' ><table id='pick_table' class='w-full scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Komponen
+        <main class='fixed flex flex-col top-[10vh] bg-slate-300 w-screen h-[85vh] scrollable-y' ><div id='pick' class='w-full h-full ' ><table id='pick_table' class='w-full scrollable-y' ><thead><tr data-id='header' ><th class='bg-blue-700 border-2 text-white uppercase border-black p-2 sticky left-0 top-0 z-20' >Komponen
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Deskripsi
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Department
         </th><th class='bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10' >Rel Date
@@ -2431,13 +2431,13 @@
         </table>
         </div>
         </main>
-        <footer class='fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='main_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='main_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
-            </button><button type='button' data-group='main_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
-            </button><button type='button' data-group='main_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
-            </button><button type='button' data-group='main_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
-            </button><button type='button' data-group='main_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
-            </button><button type='button' data-group='main_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
-            </button><button type='button' data-group='main_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
+        <footer class='fixed flex flex-row bottom-0 bg-slate-700 w-screen h-[5vh]' ><div id='pick_page' class='flex flex-row m-2 w-full items-center justify-center' ><button type='button' data-group='pick_page' data-page='1' data-id='1' data-pagi='active' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex text-white font-bold bg-blue-700' >1
+            </button><button type='button' data-group='pick_page' data-page='2' data-id='2' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >2
+            </button><button type='button' data-group='pick_page' data-page='3' data-id='3' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >3
+            </button><button type='button' data-group='pick_page' data-page='4' data-id='4' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >4
+            </button><button type='button' data-group='pick_page' data-page='5' data-id='5' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >5
+            </button><button type='button' data-group='pick_page' data-page='6' data-id='6' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >6
+            </button><button type='button' data-group='pick_page' data-page='7' data-id='7' class='hover:font-bold hidden hover:bg-blue-700 hover:text-white hover:border-black border-2 cursor-pointer border-slate-400 p-1 w-8 h-8 justify-center items-center duration-300 flex bg-slate-200' >7
             </button>
             </div>
         </footer>

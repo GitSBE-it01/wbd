@@ -102,7 +102,7 @@ export class DOM2 {
             btn.addEventListener('click', async(e)=> {
                 if(e.target.getAttribute('data-scope') === arr_dt.name_id) {
                     if(search.value !== '') {
-                        arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
+                        arr_dt.show = arr_dt.data.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
                     } else {
                         arr_dt.show = arr_dt.data;
                     }
@@ -115,7 +115,7 @@ export class DOM2 {
             search.addEventListener('keyup', async(e)=>{
                 if(e.key === 'Enter') {
                     if(search.value !== '') {
-                        arr_dt.show = arr_dt.show.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
+                        arr_dt.show = arr_dt.data.filter(obj=>obj.filter.toLowerCase().includes(search.value.toLowerCase()));
                     } else {
                         arr_dt.show = arr_dt.data;
                     }
