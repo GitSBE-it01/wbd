@@ -3,7 +3,11 @@ import {DOM2} from '../../3.utility/new_DOM/index.js';
 
 const main = new DOM2();
 const list_item_dev = await api_access('fetch', 'id_mstr', {status:'open'});
+const user_list = await api_access('get','user','');
+main.view_init({type:'datalist', main_id:'users', data:user_list, dtlist_key:['Absensi','Name','Departement']});
 main.view_init({type:'datalist',main_id:'tracker', data:list_item_dev, dtlist_key: ['id','item_number', 'desc1', 'desc2']});
+const user_detail = JSON.parse(sessionStorage.getItem('userData'));
+const user = user_detail['name'] + "--" + user_detail['jabatan']+'--'+ user_detail['grade'];
 main.load_toggle();
 
 main.func(
@@ -12,9 +16,10 @@ main.func(
     async()=>{
         main.load_toggle();
         main.table_clear('tracker');
+        const inp_val = document.querySelector('#main_track_search');
+        inp_val.disabled = true;
         const add_btn = document.querySelector('#tracker_add_btn');
         const dl_btn = document.querySelector('#tracker_dl_btn');
-        const inp_val = document.querySelector('#main_track_search');
         if(inp_val.value !=='') {
           if(add_btn.disabled === true) {
             add_btn.disabled = false;
@@ -35,12 +40,12 @@ main.func(
             });
           main.view_init({type:'table',main_id:'tracker', data:dt_db, filter:splt[0]});
           const data_search = list_item_dev.find(obj=>obj.item_number === splt[1])
-          console.log({data_search});
           main.new_row_default_value({
             id_parent: splt[0],
             item_number: splt[1],
             desc_: splt[2]+" "+splt[3],
             site: data_search['item_site'],
+            by_: user,
             added: currentDate('-'),
             last_mod: currentDate('-'),
           }, 
@@ -57,6 +62,7 @@ main.func(
             dl_btn.classList.add('text-white')
           }
         }
+        inp_val.disabled = false;
         main.load_toggle();
     }
 )

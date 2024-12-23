@@ -4,6 +4,7 @@ import {DOM2} from '../../3.utility/new_DOM/index.js';
 const main = new DOM2();
 const dtl = await api_access('fetch', 'id_dtl', {status:'open'});
 const mstr = await api_access('fetch', 'id_mstr', {status:'open'});
+
 dtl.forEach(dt=>{
     if(dt['bom_release_date'] === '' || dt['bom_release_date'] === '0000-00-00' || dt['bom_release_date'] === null) {
         dt['age'] = 0;
@@ -15,6 +16,7 @@ dtl.forEach(dt=>{
         dt['age'] = cls_dt_int - rel_dt_int;
     }
 })
+
 main.view_init({type:'table', main_id:'idev', data:dtl});
 main.load_toggle();
 

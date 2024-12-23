@@ -194,7 +194,7 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
         const input = document.getElementById('input1').value;
         const result2 = [];
         result.forEach(dt=> {
-            if(dt.part.includes(input)) {
+            if(dt['part'].toLocaleLowerCase().includes(input)) {
                 result2.push(dt);
             }
         })

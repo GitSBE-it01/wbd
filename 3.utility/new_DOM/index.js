@@ -579,6 +579,7 @@ export class DOM2 {
                 return;
             } else {
                 const result = JSON.stringify(data);
+                sessionStorage.setItem('userData', result);
                 return result;
             }
         } catch (error) {
@@ -728,6 +729,7 @@ export class DOM2 {
                     if(sbmt_btn.classList.contains('text-white')) {
                         sbmt_btn.classList.remove('text-white')
                         sbmt_btn.classList.add('font-bold');
+                        sbmt_btn.classList.add('bg-red-400');
                     }
                 }
             }
@@ -776,6 +778,7 @@ export class DOM2 {
                         submit_btn.disabled = true;
                         submit_btn.classList.add('text-white');
                         submit_btn.classList.remove('font-bold');
+                        submit_btn.classList.remove('bg-red-400');
                     }
                 }
             })
@@ -804,7 +807,11 @@ export class DOM2 {
                         if(dt.tagName === 'INPUT' || dt.tagName === 'SELECT') {
                             const name = dt.getAttribute('name');
                             let td = '';
-                            if(dt.disabled) {dt.disabled = false;}
+                            let curr = false;
+                            if(dt.disabled) {
+                                curr = dt.disabled;
+                                dt.disabled = false;
+                            }
                             if(dt.closest('td') !== null) {
                                 td = dt.closest('td');
                                 const label = td.querySelector('label');
@@ -813,6 +820,7 @@ export class DOM2 {
                                     dt.id = `${name}__${arr_dt.table_id}__new__${this.counter}`;
                                 }
                             }
+                            dt.disabled = curr;
                         }
                     })
                     if(arr_dt.add_row === 'upper') {
@@ -853,17 +861,16 @@ export class DOM2 {
         
     async new_row_default_value(array_value={}, arr_dt, parent=document) {
         const table = parent.getElementById(arr_dt.table_id);
-        const temp = table.querySelector('[data-id *= "template"]');
+        const temp = table.querySelector(`[data-id *= "template"]`);
         if(temp !== null) {
             const keys = Object.keys(array_value);
             keys.forEach(dt=>{
                 const field = temp.querySelector(`[name ="${dt}"]`);
-                if(field.disabled === true) {
+                if(field.disabled && field.disabled === true) {
                     field.disabled = false;
-                    field.value = array_value[`${dt}`];
-                    field.disabled = true;
                 }
                 field.value = array_value[`${dt}`];
+                field.disabled = true;
                 const label = temp.querySelector(`[for="${field.id}"]`);
                 if(label !== null) {
                     label.textContent = array_value[`${dt}`];

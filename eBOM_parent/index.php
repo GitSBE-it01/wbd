@@ -192,13 +192,14 @@ require_once "D:/xampp/htdocs/CONNECTION/config.php";
     dlExc.addEventListener('click', function(event) {
         const btn = event.target;
         btn.disabled = true;
-        const input = document.getElementById('input1').value;
+        const inpt = document.getElementById('input1').value;
         const result2 = [];
         result.forEach(dt=> {
-            if(dt.part.includes(input)) {
+            if(dt['part'].toLocaleLowerCase().includes(inpt)) {
                 result2.push(dt);
             }
         })
+        console.log({result2})
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.json_to_sheet(result2);
         XLSX.utils.book_append_sheet(workbook, worksheet, 'parent');

@@ -1,8 +1,16 @@
 <?php
+require_once "D:/xampp/htdocs/CONNECTION/config.php";
+require_once 'D:/xampp/htdocs/wbd/2.backend/data_process/cache_data.php';
+require_once 'D:/xampp/htdocs/wbd/2.backend/middleware/index.php';
+require_once 'D:/xampp/htdocs/wbd/2.backend/model/index.php';
+
+set_time_limit(3600);
+// SELECT tr_nbr, tr_date FROM `otb_full` WHERE tr_date < '2023-01-01'
 function data_otb() {
-    for($i=3807160; $i<3860239; $i+=501) {
+    $entry = [];
+    for($i=1870257; $i<1926867; $i+=101) {
         $start_time = microtime(true);
-        $ii = $i + 500;
+        $ii = $i + 100;
         $query = "SELECT 
             op_wo_nbr as work_order,
             wo_ord_date as order_date,
@@ -62,8 +70,65 @@ function data_otb() {
             AND (op_type='labor' OR op_type='down') 
         WITH (NOLOCK, READPAST NOWAIT)";
         $op_hist = odbc_qad::execQuery($query,'');
-        echo 'jumlah data op hist yg di db: '.count($op_hist)."</br>";
-
+        foreach($op_hist as $key=>$value) {
+            $entry[]=$value;
+        }
+        $op_hist = [];
+        echo 'jumlah data entry yg di db: '.count($entry)."</br>";
+        if(count($entry)>500) {
+            $query = 'INSERT INTO `otb_full`(
+                    `work_order`,
+                    `order_date`,
+                    `rel_date`,
+                    `due_date`,
+                    `wo_close_date`,
+                    `wo_stat`,
+                    `tr_nbr`,
+                    `item_number`,
+                    `desc1`,
+                    `desc2`,
+                    `pm`,
+                    `id_wo`,
+                    `eff_date`,
+                    `tr_date`,
+                    `operation`,
+                    `op_desc`,
+                    `std_run`,
+                    `run_crew`,
+                    `act_run`,
+                    `std_setup`,
+                    `act_setup`,
+                    `std_unit`,
+                    `act_unit`,
+                    `wc`,
+                    `dept`,
+                    `emp`,
+                    `type`,
+                    `qty_ord`,
+                    `qty_compl`,
+                    `qty`,
+                    `qty_rwk`,
+                    `rework_reason`,
+                    `qty_rjk`,
+                    `rjc_rsn`,
+                    `comment`,
+                    `trans_time`,
+                    `reason`,
+                    `down_time`,
+                    `user_id`,
+                    `rmrks`,
+                    `sales_job`,
+                    `supplier`,
+                    `buyer`
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+            $end_time = microtime(true);
+            $elapsed_time = $end_time - $start_time;
+            $insert = DB::execQuery($query,"ssssssisssssssssdidddssssssiidisissisdsssss",$entry);
+            echo count($entry).'data inserted '.$insert.' selama '.number_format($elapsed_time, 2).' detik</br>';
+            $entry = [];
+        }
+    }
+    if(count($entry) !== 0) {
         $query = 'INSERT INTO `otb_full`(
                 `work_order`,
                 `order_date`,
@@ -111,13 +176,23 @@ function data_otb() {
         ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
         $end_time = microtime(true);
         $elapsed_time = $end_time - $start_time;
-        if(count($op_hist)>0) {
-            $insert = DB::execQuery($query,"ssssssisssssssssdidddssssssiidisissisdsssss",$op_hist);
-            echo count($op_hist).'data inserted '.$insert.' selama '.number_format($elapsed_time, 2).' detik</br>';
-            $op_hist = [];
-        }
+        $insert = DB::execQuery($query,"ssssssisssssssssdidddssssssiidisissisdsssss",$entry);
+        echo count($entry).'data inserted '.$insert.' selama '.number_format($elapsed_time, 2).' detik</br>';
+        $entry = [];
     }
     return;
 }
+
+echo "====================================================================</br>";
+echo "otb data download</br>";
+echo "====================================================================</br>";
+$start_time = microtime(true);
+data_otb();
+$end_time = microtime(true);
+$elapsed_time = $end_time - $start_time;
+echo "Time of Process: " . number_format($elapsed_time, 2) . " seconds </br>";
+echo "********************************************************************</br></br>";
+
+
 
 ?>

@@ -519,6 +519,7 @@ $tracker_table = [
             'inp'=>[
                 'type_attr'=>'text', 
                 'name'=> 'item_number', 
+                'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -535,6 +536,7 @@ $tracker_table = [
             'inp'=>[
                 'type'=>'text', 
                 'name'=> 'desc_', 
+                'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -599,6 +601,7 @@ $tracker_table = [
             'inp'=>[
                 'type'=>'text', 
                 'name'=> 'pic', 
+                'list'=>'users_list',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
@@ -647,6 +650,23 @@ $tracker_table = [
             'inp'=>[
                 'type'=>'text', 
                 'name'=> 'remarks', 
+                'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
+            ]
+        ],
+        [
+            'type'=>'input',
+            'th'=>[
+                'body'=>'By',
+                'class'=>'bg-blue-600 border-2 text-white uppercase border-black p-2 sticky top-0 z-10'
+            ],
+            'td'=>[
+                'data_attr'=>['field::by_'],
+                'class'=>'bg-slate-300 whitespace-normal border-2 text-sm p-2 border-black'
+            ],
+            'inp'=>[
+                'type'=>'text', 
+                'name'=> 'by_', 
+                'disable'=>'',
                 'class'=>'w-full h-full flex justify-center items-center focus:ring focus:ring-blue-600 focus:ring-width-1 focus:outline focus:bg-slate-200 focus:outline-blue-600 bg-transparent px-4 hidden'
             ]
         ],
