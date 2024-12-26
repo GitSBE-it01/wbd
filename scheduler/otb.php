@@ -8,7 +8,7 @@ set_time_limit(3600);
 // SELECT tr_nbr, tr_date FROM `otb_full` WHERE tr_date < '2023-01-01'
 function data_otb() {
     $entry = [];
-    for($i=1870257; $i<1926867; $i+=101) {
+    for($i=2134029; $i<2142765; $i+=101) {
         $start_time = microtime(true);
         $ii = $i + 100;
         $query = "SELECT 
@@ -75,7 +75,7 @@ function data_otb() {
         }
         $op_hist = [];
         echo 'jumlah data entry yg di db: '.count($entry)."</br>";
-        if(count($entry)>500) {
+        if(count($entry)>100) {
             $query = 'INSERT INTO `otb_full`(
                     `work_order`,
                     `order_date`,

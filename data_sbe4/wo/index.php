@@ -51,10 +51,9 @@ if(!check_cache('data_sbe4', $param_wo_sbe4)) {
         wo__chr04 as assy_line,
         wo__chr03 as fixed_r
     FROM pub.wo_mstr wo 
-    JOIN pub.pt_mstr pt ON wo.wo_part = pt.pt_part
-    JOIN pub.ptp_det ptp ON wo.wo_part = ptp.ptp_part
+    LEFT JOIN pub.pt_mstr pt ON wo.wo_part = pt.pt_part
+    LEFT JOIN pub.ptp_det ptp ON wo.wo_part = ptp.ptp_part
     WHERE (wo_site = 'SOFTPART' OR wo_site = 'SoftPart' OR wo_site = 'softpart' ) 
-    AND (ptp_site = 'softpart' OR ptp_site = 'SOFTPART' OR ptp_site = 'SoftPart')
     WITH (NOLOCK, READPAST NOWAIT)",'');
     cache_data('data_sbe4', $param_wo_sbe4, $wo_sbe4);
 } else {
