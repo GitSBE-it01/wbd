@@ -8,7 +8,7 @@ set_time_limit(3600);
 // SELECT tr_nbr, tr_date FROM `otb_full` WHERE tr_date < '2023-01-01'
 function data_otb() {
     $entry = [];
-    for($i=2134029; $i<2142765; $i+=101) {
+    for($i=2406161; $i<2506160; $i+=101) {
         $start_time = microtime(true);
         $ii = $i + 100;
         $query = "SELECT 
